@@ -13,7 +13,7 @@ things, and only the owner merges. Everyone else:
 3. Make the change, with a test that fails without it.
 4. Run the gate until it is green (see below).
 5. Push the branch to your fork and open a pull request against `petar-stupar/9p-csharp:main`.
-   CI runs the same gate on Linux and macOS; a red run is not reviewed.
+   CI runs the same gate on Linux, macOS and Windows; a red run is not reviewed.
 
 Small, single-purpose pull requests are merged fastest. If a change is large or touches the public
 API, open an issue first so the shape can be agreed before the work is done.

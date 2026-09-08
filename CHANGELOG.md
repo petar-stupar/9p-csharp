@@ -6,6 +6,13 @@ All notable changes to this repository are recorded here. The format follows
 
 ## [Unreleased]
 
+### Continuous integration
+
+- Windows joins Linux and macOS in the CI matrix, so the packages are built, tested and
+  scratch-installed on all three; `.gitattributes` checks every text file out with LF everywhere.
+- The checkout, setup-dotnet and upload-artifact actions move to the majors that run on Node.js 24,
+  which ends the Node.js 20 deprecation warning on every job.
+
 ### Review remediation
 
 An independent four-persona review of 2026-09-08 raised 22 findings (15 Critical, 5 High,
