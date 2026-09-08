@@ -6,6 +6,14 @@ updates:
       interval: weekly
       day: monday
     open-pull-requests-limit: 10
+    ignore:
+      # The published packages keep these at their 8.x floors on purpose (ARCHITECTURE.md Decision
+      # Log, 2026-09-05 and IR-1): a net8.0 consumer chooses the version, and is not forced up.
+      # Patch and minor updates within the major are still proposed.
+      - dependency-name: "System.IO.Pipelines"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "Microsoft.Extensions.Logging.Abstractions"
+        update-types: ["version-update:semver-major"]
     groups:
       # Everything a package consumer never sees can move together.
       test-and-tooling:

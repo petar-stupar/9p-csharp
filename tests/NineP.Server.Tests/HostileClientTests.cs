@@ -496,7 +496,9 @@ public sealed class HostileClientTests
 
     private static async Task WaitForReadsAsync(MemoryFile file, int reads)
     {
-        for (int attempt = 0; attempt < 500 && file.ReadsStarted < reads; attempt++)
+        // Bounded by the per-test deadline rather than a fixed count: a loaded CI runner can take
+        // well over five seconds to schedule the handlers, and the deadline is the named failure.
+        while (file.ReadsStarted < reads)
         {
             await Task.Delay(10, Ct);
         }

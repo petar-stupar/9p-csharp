@@ -161,7 +161,7 @@ public sealed class BackpressureTests
 
     private static async Task WaitForReadsAsync(MemoryFile file, int reads)
     {
-        for (int attempt = 0; attempt < 500 && file.ReadsStarted < reads; attempt++)
+        while (file.ReadsStarted < reads)
         {
             await Task.Delay(10, TestDeadlines.Wrap(TestContext.Current.CancellationToken));
         }
