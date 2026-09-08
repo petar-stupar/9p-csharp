@@ -3,10 +3,11 @@ using System.Runtime.InteropServices;
 namespace NineP.Benchmarks;
 
 /// <summary>
-/// Peak resident set size of this process, read from <c>getrusage(RUSAGE_SELF)</c> (S-12).
-/// <see cref="System.Diagnostics.Process.PeakWorkingSet64"/> is <b>not</b> used: it reads 0 on
-/// macOS (E-5/E-6), and a benchmark that reports 0 bytes of peak memory is worse than one that
-/// reports nothing at all.
+/// Peak resident set size of this process, read from <c>getrusage(RUSAGE_SELF)</c> (S-12) on
+/// Linux, macOS and FreeBSD. <see cref="System.Diagnostics.Process.PeakWorkingSet64"/> is used
+/// on Windows only, where it is the kernel's own peak working set: it reads 0 on macOS
+/// (E-5/E-6), and a benchmark that reports 0 bytes of peak memory is worse than one that reports
+/// nothing at all.
 /// </summary>
 public static class RUsage
 {
@@ -20,9 +21,15 @@ public static class RUsage
     /// <exception cref="InvalidOperationException"><c>getrusage</c> failed.</exception>
     public static long PeakBytes()
     {
+        if (OperatingSystem.IsWindows())
+        {
+            using System.Diagnostics.Process self = System.Diagnostics.Process.GetCurrentProcess();
+            return self.PeakWorkingSet64;
+        }
+
         if (!OperatingSystem.IsMacOS() && !OperatingSystem.IsLinux() && !OperatingSystem.IsFreeBSD())
         {
-            throw new PlatformNotSupportedException("getrusage is a POSIX call; this repository's CI is Linux and macOS");
+            throw new PlatformNotSupportedException("getrusage is a POSIX call; this repository's CI is Linux, macOS and Windows");
         }
 
         if (Native.GetRUsage(RusageSelf, out Native.RUsageValue usage) != 0)

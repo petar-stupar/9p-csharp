@@ -1,3 +1,4 @@
+using System.Buffers;
 using System.Globalization;
 using System.Net.Http;
 using System.Net.WebSockets;
@@ -66,7 +67,25 @@ internal sealed class WebSocketConnection(
     /// <param name="reason">Why the connection is closing.</param>
     /// <param name="cancellationToken">Cancels the close handshake.</param>
     /// <returns>A task that completes when the close frame has been sent.</returns>
-    public async ValueTask CloseAsync(CloseReason reason, CancellationToken cancellationToken = default)
+    public ValueTask CloseAsync(CloseReason reason, CancellationToken cancellationToken = default) =>
+        CloseAsync(reason, drainPeer: false, cancellationToken);
+
+    /// <summary>
+    /// The close itself. A close the reader initiates in the middle of an incoming message — a
+    /// text frame, or a fragment that took the running total past the cap — sets
+    /// <paramref name="drainPeer"/>: the fragments still queued on the socket are read and
+    /// discarded, for a bounded moment, before the socket is disposed. Disposing a socket with
+    /// unread bytes makes Windows send a reset instead of a FIN, and the reset discards the
+    /// close frame this side just sent, so the peer would see an aborted connection and never
+    /// the 1009 or 1002 it was owed. Only the reader may drain: a second receive on a socket that
+    /// already has one outstanding is an error, and every other close comes from a caller that is
+    /// not the reader.
+    /// </summary>
+    /// <param name="reason">Why the connection is closing.</param>
+    /// <param name="drainPeer">True when the caller is the reader and the peer may still be mid-message.</param>
+    /// <param name="cancellationToken">Cancels the close handshake.</param>
+    /// <returns>A task that completes when the close frame has been sent.</returns>
+    private async ValueTask CloseAsync(CloseReason reason, bool drainPeer, CancellationToken cancellationToken)
     {
         if (Interlocked.Exchange(ref _closed, 1) != 0)
         {
@@ -82,6 +101,11 @@ internal sealed class WebSocketConnection(
                 await socket
                     .CloseOutputAsync(StatusFor(reason), reason.ToString(), cancellationToken)
                     .ConfigureAwait(false);
+            }
+
+            if (drainPeer)
+            {
+                await DrainPeerAsync().ConfigureAwait(false);
             }
         }
         catch (Exception failure) when (failure is WebSocketException or IOException
@@ -102,6 +126,38 @@ internal sealed class WebSocketConnection(
     /// <summary>Closes the connection normally if it is still open.</summary>
     /// <returns>A task that completes when the connection has closed.</returns>
     public ValueTask DisposeAsync() => CloseAsync(CloseReason.Normal);
+
+    /// <summary>
+    /// Reads and discards what the peer still has in flight until its close frame arrives or a
+    /// short grace runs out. The grace is what bounds a peer that keeps sending: once it is
+    /// spent the socket is disposed whatever is still queued, and a reset is then the peer's own
+    /// doing.
+    /// </summary>
+    /// <returns>A task that completes when the peer has closed or the grace is spent.</returns>
+    private async ValueTask DrainPeerAsync()
+    {
+        using CancellationTokenSource grace = new(TimeSpan.FromMilliseconds(250));
+        byte[] scratch = ArrayPool<byte>.Shared.Rent(ChunkSize);
+
+        try
+        {
+            while (socket.State == WebSocketState.CloseSent)
+            {
+                ValueWebSocketReceiveResult received = await socket
+                    .ReceiveAsync(scratch.AsMemory(), grace.Token)
+                    .ConfigureAwait(false);
+
+                if (received.MessageType == WebSocketMessageType.Close)
+                {
+                    return;
+                }
+            }
+        }
+        finally
+        {
+            ArrayPool<byte>.Shared.Return(scratch);
+        }
+    }
 
     /// <summary>The RFC 6455 status code a close reason travels as.</summary>
     /// <param name="reason">The close reason.</param>
@@ -178,7 +234,7 @@ internal sealed class WebSocketConnection(
 
             if (result.MessageType == WebSocketMessageType.Text)
             {
-                await CloseAsync(CloseReason.ProtocolViolation, CancellationToken.None).ConfigureAwait(false);
+                await CloseAsync(CloseReason.ProtocolViolation, drainPeer: true, CancellationToken.None).ConfigureAwait(false);
                 throw new NinePProtocolException(
                     ProtocolErrorKind.Type, "a 9P message never travels as a WebSocket text message");
             }
@@ -189,7 +245,7 @@ internal sealed class WebSocketConnection(
             // time the last fragment lands, a peer that meant to exhaust this side already has.
             if (total > maxMessageSize)
             {
-                await CloseAsync(CloseReason.MessageTooLarge, CancellationToken.None).ConfigureAwait(false);
+                await CloseAsync(CloseReason.MessageTooLarge, drainPeer: true, CancellationToken.None).ConfigureAwait(false);
                 throw new NinePProtocolException(
                     ProtocolErrorKind.Size,
                     string.Format(

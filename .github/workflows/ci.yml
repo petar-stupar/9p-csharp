@@ -22,7 +22,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest, macos-latest, windows-latest]
 
     steps:
       - name: Check out
@@ -49,12 +49,12 @@ jobs:
         shell: bash
         # The runner writes the TRX files to TestResults/ under the working directory, not under
         # each project's bin/, so the framework is read from the assembly path recorded inside
-        # each report rather than from the report's own path.
+        # each report rather than from the report's own path. Windows records it with backslashes.
         run: |
           set -euo pipefail
           missing=0
           for tfm in net8.0 net10.0; do
-            if ! grep -rlq --include='*.trx' "/bin/Release/$tfm/" .; then
+            if ! grep -rlqE --include='*.trx' "bin[/\\]Release[/\\]${tfm}[/\\]" .; then
               echo "no .trx report for $tfm"
               missing=1
             fi
@@ -90,6 +90,8 @@ jobs:
           feed="$PWD/artifacts"
           readme="$PWD/README.md"
           work="$(mktemp -d)"
+          # Git Bash on Windows: dotnet wants a Windows path for the feed.
+          if command -v cygpath > /dev/null; then feed="$(cygpath -w "$feed")"; fi
           # The program and its expected output come from README.md, between the
           # <!-- ci:snippet --> and <!-- ci:expected --> markers, so the README
           # cannot drift from what a reader would paste.
@@ -109,7 +111,8 @@ jobs:
           dotnet add package NineP.Client --version 0.1.0
           dotnet add package NineP.Server --version 0.1.0
           dotnet run > actual.txt
-          diff -u "$work/expected.txt" actual.txt
+          # Console output carries CRLF on Windows; the README's expected block is LF.
+          diff -u --strip-trailing-cr "$work/expected.txt" actual.txt
 
       - name: Dependency audit
         shell: bash

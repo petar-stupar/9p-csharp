@@ -44,7 +44,7 @@ start work that is not in a spec; outside the loop, follow [CONTRIBUTING.md](CON
 - **Zero-warning policy.** A warning is a failure; suppress only at the source with a reason.
 - **Control bytes:** before committing, scan touched files with `tr -d '\0' < f | cmp -s - f`
   and `LC_ALL=C grep -n '[[:cntrl:]]' f | grep -v $'\t'`; the repo's no-control-bytes test walks
-  every tracked file.
+  every tracked file except `*.png`, the package icon's format, which `.gitattributes` marks binary.
 - **Vendored docs are copies.** Never edit `docs/9p/*` here; changes go to the workspace and are
   re-vendored (`node scripts/9p-loop/setup-repo.mjs vendor csharp` from the workspace).
 - **Measured claims carry their measurement** (`docs/benchmarks.md`, `docs/interop.md`).

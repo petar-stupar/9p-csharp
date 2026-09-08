@@ -182,6 +182,11 @@ dialect-neutral and may enforce additional restrictions.
 
 Ordinary requests that cannot acquire both in-flight budgets receive `EAGAIN` immediately, while
 `Tflush` continues to be processed. This replaces the earlier promise of blocking without refusal.
+A budget is returned when the reply is queued, under the same gate that frees the tag and before
+the bytes can reach the wire, so a client that sends its next request the instant it has a reply is
+never refused for a window it has already been given back
+(`BackpressureTests.AWindowReusedTheInstantItsReplyArrivesIsNeverRefused`). A flushed request
+returns its budget when its cancelled handler unwinds: `Rflush` frees the tag, not the worker.
 The client must consume replies for transport progress; worker limits do not promise progress for a
 peer that never reads. Listener session bookkeeping holds active tasks only.
 

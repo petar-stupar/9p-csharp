@@ -32,6 +32,7 @@
     <!-- PublicApiAnalyzers includes the shipped/unshipped baselines itself. -->
     <None Include="$(_NinePRoot)README.md" Pack="true" PackagePath="/" Visible="false" />
     <None Include="$(_NinePRoot)LICENSE" Pack="true" PackagePath="/" Visible="false" />
+    <None Include="$(_NinePRoot)icon.png" Pack="true" PackagePath="/" Visible="false" />
   </ItemGroup>
 
 </Project>

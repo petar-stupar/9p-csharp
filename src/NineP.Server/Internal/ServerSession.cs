@@ -41,6 +41,7 @@ internal sealed class ServerSession : IAsyncDisposable
     private readonly SemaphoreSlim _listenerInFlight;
     private readonly SemaphoreSlim _general;
     private readonly SemaphoreSlim _flushSlots;
+    private readonly WorkerCounter _workers = new();
     private readonly SemaphoreSlim _replyGate = new(1, 1);
     private readonly CancellationTokenSource _stopping = new();
 
@@ -426,13 +427,17 @@ internal sealed class ServerSession : IAsyncDisposable
             return;
         }
 
+        pending.HoldBudget();
+
         // The frame is copied because the read loop advances the pipe past it before the worker
         // runs, and Twrite.Data is a view of the frame that the handler still holds.
         byte[] copy = ArrayPool<byte>.Shared.Rent(frame.Length);
         frame.CopyTo(copy);
 
         // Queue the fid lease in arrival order. Dispatcher yields after acquiring it, before
-        // invoking any handler, so synchronous handler work cannot block this read loop.
+        // invoking any handler, so synchronous handler work cannot block this read loop. The
+        // worker is counted before its task exists, so a drain that starts in between waits for it.
+        _workers.Enter();
         _ = WorkAsync(type, copy, frame.Length, pending, cancellationToken);
     }
 
@@ -472,8 +477,28 @@ internal sealed class ServerSession : IAsyncDisposable
             // The backstop: it releases by identity, so it cannot evict whatever has claimed the
             // tag since the reply was queued or the Tflush freed it, and it is where the request's
             // cancellation source is finally disposed -- the flush path leaves it alive precisely
-            // because this handler was still running under it.
+            // because this handler was still running under it. The budgets went back when the
+            // reply was queued; this returns them only for a request that never got one, which is
+            // a flushed request whose cancelled handler has now unwound.
             _tags.Release(pending);
+            ReleaseBudget(pending);
+            _workers.Exit();
+        }
+    }
+
+    /// <summary>
+    /// Returns the two in-flight budgets of reference §8 rule 8, once. It runs under the reply
+    /// gate as the reply is queued, for the same reason the tag is freed there: the gate does not
+    /// hold the write loop, so the reply can be on the wire before the worker's <c>finally</c>
+    /// runs, and a client that sends its next request the instant it has the reply would be
+    /// refused <c>EAGAIN</c> for a window it has already been given back. With a general window of
+    /// one, a fast peer saw exactly that.
+    /// </summary>
+    /// <param name="pending">The request whose budgets are returned.</param>
+    private void ReleaseBudget(PendingRequest pending)
+    {
+        if (pending.TryReleaseBudget())
+        {
             _listenerInFlight.Release();
             _general.Release();
         }
@@ -521,7 +546,9 @@ internal sealed class ServerSession : IAsyncDisposable
     /// <summary>
     /// Claims the right to answer a request and queues the reply in one step (§6.6). The tag is
     /// freed here, under the same gate, and not in the worker's <c>finally</c> — and it is freed
-    /// <b>before</b> the reply is queued, which is the whole point of the order below. A client
+    /// <b>before</b> the reply is queued, which is the whole point of the order below; the two
+    /// in-flight budgets go back at the same point and for the same reason
+    /// (<see cref="ReleaseBudget"/>). A client
     /// may reuse a tag the moment it has the reply (reference §5.3, and Linux v9fs does so on
     /// every request); the reply gate does not hold the write loop, so between an enqueue and a
     /// release the reply can already be on the wire and the client's next, legal request would
@@ -562,6 +589,7 @@ internal sealed class ServerSession : IAsyncDisposable
             {
                 pending.Reply = TMessage.Type;
                 _tags.Release(pending);
+                ReleaseBudget(pending);
                 queued = true;
                 await SendAsync(reply).ConfigureAwait(false);
             }
@@ -598,6 +626,7 @@ internal sealed class ServerSession : IAsyncDisposable
                 pending.Error = error;
                 _metrics.CountError(error);
                 _tags.Release(pending);
+                ReleaseBudget(pending);
                 queued = true;
                 await SendAsync(reply).ConfigureAwait(false);
             }
@@ -672,10 +701,16 @@ internal sealed class ServerSession : IAsyncDisposable
 
         try
         {
+            CancellationToken waiting = waitForHandlers ? CancellationToken.None : _stoppingToken;
+
             for (; taken < GeneralCapacity; taken++)
             {
-                await _general.WaitAsync(waitForHandlers ? CancellationToken.None : _stoppingToken).ConfigureAwait(false);
+                await _general.WaitAsync(waiting).ConfigureAwait(false);
             }
+
+            // Every slot held means nothing is unanswered and nothing new is admitted; the budgets
+            // go back when a reply is queued, though, so the workers are waited for separately.
+            await _workers.WhenIdleAsync().WaitAsync(waiting).ConfigureAwait(false);
         }
         catch (OperationCanceledException)
         {

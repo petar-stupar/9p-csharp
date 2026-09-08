@@ -1,0 +1,5 @@
+# Every text file checks out with LF on every platform: the hygiene suite rejects control bytes,
+# the fixtures are byte-compared, and .editorconfig says end_of_line = lf.
+* text=auto eol=lf
+# The package icon is the one binary file tracked here.
+*.png binary

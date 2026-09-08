@@ -3,6 +3,7 @@
   <PropertyGroup>
     <PackageId>NineP.Protocol</PackageId>
     <Description>9P2000, 9P2000.u and 9P2000.L messages, bounded codec, transports and authentication types shared by the NineP client and server.</Description>
+    <PackageTags>$(PackageTags);codec;transport;tcp;tls;websocket</PackageTags>
   </PropertyGroup>
 
   <ItemGroup Label="System.IO.Pipelines is inbox from net9.0 onward" Condition="'$(TargetFramework)' == 'net8.0'">

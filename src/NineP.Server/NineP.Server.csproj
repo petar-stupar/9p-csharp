@@ -3,6 +3,7 @@
   <PropertyGroup>
     <PackageId>NineP.Server</PackageId>
     <Description>A 9P server whose core owns the protocol and whose filesystems are written as per-file-type handlers.</Description>
+    <PackageTags>$(PackageTags);server;fileserver</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>

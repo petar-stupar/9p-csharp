@@ -36,9 +36,12 @@
 
   <PropertyGroup Label="package metadata">
     <Version>0.1.0</Version>
-    <Authors>petar-stupar</Authors>
+    <Authors>Petar Stupar</Authors>
+    <Copyright>Copyright (c) Petar Stupar 2026</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageReleaseNotes>https://github.com/petar-stupar/9p-csharp/blob/main/CHANGELOG.md</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/petar-stupar/9p-csharp</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
     <!-- PublishRepositoryUrl fills the <repository> element's branch and commit from the checkout,

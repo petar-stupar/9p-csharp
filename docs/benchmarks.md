@@ -81,9 +81,11 @@ Read with `getrusage(RUSAGE_SELF).ru_maxrss` from inside the **server** process
 own gibibyte of buffers is not part of what a server costs. `ru_maxrss` is bytes on macOS and
 kibibytes on Linux, and `RUsage.PeakBytes` normalises the two.
 
-`Process.PeakWorkingSet64` is **not** used anywhere in this repository: it returns 0 on this
-platform, and a benchmark that publishes zero bytes of peak memory is worse than one that publishes
-nothing. `BenchmarkRssTests.MaxRssIsNonZeroAndAtLeastWorkingSet` is what stops that regressing.
+`Process.PeakWorkingSet64` is used on Windows only, where it is the kernel's own peak working set
+and the nearest thing to `ru_maxrss`. It is **not** used on macOS: it returns 0 there, and a
+benchmark that publishes zero bytes of peak memory is worse than one that publishes nothing.
+`BenchmarkRssTests.MaxRssIsNonZeroAndAtLeastWorkingSet` is what stops that regressing, on every
+platform CI runs.
 
 ```text
 dotnet run -c Release --project tests/NineP.Benchmarks -- throughput --dialect 9P2000.L --msize 1048576 --bytes 1073741824

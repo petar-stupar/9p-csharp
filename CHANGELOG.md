@@ -6,6 +6,48 @@ All notable changes to this repository are recorded here. The format follows
 
 ## [Unreleased]
 
+### Fixed
+
+- Server: a request's in-flight budget (the per-connection window and the per-listener bound) is
+  returned when its reply is queued, under the same gate that frees the tag, and no longer when the
+  worker unwinds. The reply could be on the wire before the slot was back, so a client that sent
+  its next request the instant it had a reply could draw `EAGAIN` on a legal request; with a
+  window of one the macOS CI runner did exactly that. `Tversion` reset and close still wait for
+  every worker to unwind. Named test:
+  `BackpressureTests.AWindowReusedTheInstantItsReplyArrivesIsNeverRefused`; rule-index row 138.
+
+### Packaging
+
+- The three packages follow the NuGet package authoring best practices they did not yet: the
+  author's name rather than a handle, a copyright line, release notes pointing at this file, a
+  128×128 icon, and per-package tags on top of the shared ones. The README the packages carry links
+  with absolute URLs so that it renders on nuget.org as well as on GitHub. `PackagingTests` pins
+  every one of them in the nuspec.
+
+### Releasing
+
+- A `release` workflow publishes the three packages to nuget.org from a `v<version>` tag on
+  `main`, after checking the tag against `Directory.Build.props` and `CHANGELOG.md`, that the
+  version is not on nuget.org yet, and that the gate is green on that commit; it creates the
+  GitHub Release with the changelog section as its notes. Trusted Publishing by default, an API
+  key as the fallback. [docs/releasing.md](docs/releasing.md) documents it.
+
+### Continuous integration
+
+- Windows joins Linux and macOS in the CI matrix, so the packages are built, tested and
+  scratch-installed on all three; `.gitattributes` checks every text file out with LF everywhere.
+  The suite runs there too: the peak-RSS probe reads the kernel's peak working set on Windows
+  instead of throwing, the CLI harness compares stderr with one line ending, the fake OIDC issuer
+  aborts a response it cannot finish instead of closing it, and a WebSocket close the reader
+  initiates mid-message drains the peer's remaining frames for a bounded moment before the socket
+  is disposed, since disposing with unread bytes makes Windows reset the connection and the
+  peer never sees its 1009 or 1002.
+- The checkout, setup-dotnet and upload-artifact actions move to the majors that run on Node.js 24,
+  which ends the Node.js 20 deprecation warning on every job.
+- A `dependabot-locks` workflow regenerates every `packages.lock.json` on a Dependabot branch and
+  reruns `ci` on the result: Dependabot rewrites only the lock file of the project that references
+  the bumped package, and the locked-mode restore refused every dependent project's stale lock.
+
 ### Review remediation
 
 An independent four-persona review of 2026-09-08 raised 22 findings (15 Critical, 5 High,

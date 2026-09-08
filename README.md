@@ -4,8 +4,8 @@
 [![NuGet NineP.Protocol](https://img.shields.io/nuget/v/NineP.Protocol?label=NineP.Protocol)](https://www.nuget.org/packages/NineP.Protocol)
 [![NuGet NineP.Client](https://img.shields.io/nuget/v/NineP.Client?label=NineP.Client)](https://www.nuget.org/packages/NineP.Client)
 [![NuGet NineP.Server](https://img.shields.io/nuget/v/NineP.Server?label=NineP.Server)](https://www.nuget.org/packages/NineP.Server)
-[![.NET 8 | 10](https://img.shields.io/badge/.NET-8.0%20%7C%2010.0-512BD4)](global.json)
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![.NET 8 | 10](https://img.shields.io/badge/.NET-8.0%20%7C%2010.0-512BD4)](https://github.com/petar-stupar/9p-csharp/blob/main/global.json)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/petar-stupar/9p-csharp/blob/main/LICENSE)
 
 Three packages: a shared **protocol** package (typed messages for all 34 T/R pairs, a bounded
 zero-copy codec, TCP / TLS / WebSocket / in-memory / user-defined transports, and the
@@ -18,12 +18,12 @@ All three 9P2000 dialects are implemented and negotiated separately: **9P2000**,
 
 | Package | What it holds |
 | --- | --- |
-| [`NineP.Protocol`](src/NineP.Protocol) | messages, codec, dialects, the unified `Attr` model, transports, errors, auth interfaces |
-| [`NineP.Client`](src/NineP.Client) | `NinePClient`, `NinePSession`, `NinePFid`, the pipelined tag multiplexer |
-| [`NineP.Server`](src/NineP.Server) | `NinePServer`, the handler interfaces, fid and tag tables, dispatch, permissions |
+| [`NineP.Protocol`](https://github.com/petar-stupar/9p-csharp/tree/main/src/NineP.Protocol) | messages, codec, dialects, the unified `Attr` model, transports, errors, auth interfaces |
+| [`NineP.Client`](https://github.com/petar-stupar/9p-csharp/tree/main/src/NineP.Client) | `NinePClient`, `NinePSession`, `NinePFid`, the pipelined tag multiplexer |
+| [`NineP.Server`](https://github.com/petar-stupar/9p-csharp/tree/main/src/NineP.Server) | `NinePServer`, the handler interfaces, fid and tag tables, dispatch, permissions |
 
 Target frameworks `net8.0` and `net10.0`. MIT licensed. Version `0.1.0`; see
-[CHANGELOG.md](CHANGELOG.md).
+[CHANGELOG.md](https://github.com/petar-stupar/9p-csharp/blob/main/CHANGELOG.md).
 
 ## Install
 
@@ -188,7 +188,7 @@ static async Task<string> ReadHelloAsync(NinePAddress address)
 `RenameAsync`, `GetAttrAsync`, `SymlinkAsync` and `ReadlinkAsync` are the path-shaped API;
 `session.Messages` is the one-method-per-T-message API underneath it, and `NinePFid` is the handle
 in between. Reads and writes are chunked at `iounit` with four requests outstanding by default,
-which is where the throughput in [docs/benchmarks.md](docs/benchmarks.md) comes from.
+which is where the throughput in [docs/benchmarks.md](https://github.com/petar-stupar/9p-csharp/blob/main/docs/benchmarks.md) comes from.
 
 ## Both halves, in one program
 
@@ -331,7 +331,7 @@ hello, 9P
   `docs/9p/fixtures/wire-vectors.json` round-tripping byte-exactly.
 - **Transports**: `tcp://`, `tls://` (1.2 floor, 1.3 preferred, optional mutual TLS), `ws://` and
   `wss://` (RFC 6455, one 9P message per binary frame, origin allow-list), and `memory://` in
-  process. Implementing `ITransport` adds your own — see [docs/transports.md](docs/transports.md).
+  process. Implementing `ITransport` adds your own — see [docs/transports.md](https://github.com/petar-stupar/9p-csharp/blob/main/docs/transports.md).
 - **Authentication**: the `Tauth` afid exchange with `TokenAuthenticator` and
   `PasswordAuthenticator` (PBKDF2-HMAC-SHA-256, 600 000 iterations) out of the box,
   `TlsClientCertAuthenticator` for mutual TLS, and `IAuthenticator` for your own — the Keycloak
@@ -339,7 +339,7 @@ hello, 9P
   scope**: it is DES-based and is not production security.
 - **Resource caps** on everything a client controls: msize, the pre-negotiation frame size, fids,
   in-flight requests per connection and per listener, connections per listener, header timeouts,
-  and the size and duration of an afid exchange. See [docs/security.md](docs/security.md).
+  and the size and duration of an afid exchange. See [docs/security.md](https://github.com/petar-stupar/9p-csharp/blob/main/docs/security.md).
 
 ## Authentication
 
@@ -359,22 +359,23 @@ attach with `EACCES` / `"authentication failed"`. A server with no authenticator
 itself: `Rerror "authentication not required"` in 9P2000 and 9P2000.u, `Rlerror ECONNREFUSED` in
 9P2000.L.
 
-Full detail, including how a token is obtained: [docs/auth.md](docs/auth.md).
+Full detail, including how a token is obtained: [docs/auth.md](https://github.com/petar-stupar/9p-csharp/blob/main/docs/auth.md).
 
 ## Documentation
 
 | | |
 | --- | --- |
-| [docs/api.md](docs/api.md) | the complete public API, type by type and member by member |
-| [docs/protocol.md](docs/protocol.md) | the wire protocol and how it maps onto the C# types |
-| [docs/server.md](docs/server.md) | the handler table: every T-message to the handler method that serves it |
-| [docs/client.md](docs/client.md) | sessions, fids, pipelining, cancellation and the file API |
-| [docs/transports.md](docs/transports.md) | the addresses, the four shipped transports, and writing your own |
-| [docs/auth.md](docs/auth.md) | the afid exchange, the shipped authenticators, and OIDC |
-| [docs/examples.md](docs/examples.md) | `jsonfs`, `todofs` and the `ninep` cli |
-| [docs/security.md](docs/security.md) | the caps, the validation rules, and what is out of scope |
-| [docs/benchmarks.md](docs/benchmarks.md) | measured throughput, latency, peak RSS and codec ns/op |
-| [docs/interop.md](docs/interop.md) | what this implementation has been run against, and what it has not |
+| [docs/api.md](https://github.com/petar-stupar/9p-csharp/blob/main/docs/api.md) | the complete public API, type by type and member by member |
+| [docs/protocol.md](https://github.com/petar-stupar/9p-csharp/blob/main/docs/protocol.md) | the wire protocol and how it maps onto the C# types |
+| [docs/server.md](https://github.com/petar-stupar/9p-csharp/blob/main/docs/server.md) | the handler table: every T-message to the handler method that serves it |
+| [docs/client.md](https://github.com/petar-stupar/9p-csharp/blob/main/docs/client.md) | sessions, fids, pipelining, cancellation and the file API |
+| [docs/transports.md](https://github.com/petar-stupar/9p-csharp/blob/main/docs/transports.md) | the addresses, the four shipped transports, and writing your own |
+| [docs/auth.md](https://github.com/petar-stupar/9p-csharp/blob/main/docs/auth.md) | the afid exchange, the shipped authenticators, and OIDC |
+| [docs/examples.md](https://github.com/petar-stupar/9p-csharp/blob/main/docs/examples.md) | `jsonfs`, `todofs` and the `ninep` cli |
+| [docs/security.md](https://github.com/petar-stupar/9p-csharp/blob/main/docs/security.md) | the caps, the validation rules, and what is out of scope |
+| [docs/benchmarks.md](https://github.com/petar-stupar/9p-csharp/blob/main/docs/benchmarks.md) | measured throughput, latency, peak RSS and codec ns/op |
+| [docs/interop.md](https://github.com/petar-stupar/9p-csharp/blob/main/docs/interop.md) | what this implementation has been run against, and what it has not |
+| [docs/releasing.md](https://github.com/petar-stupar/9p-csharp/blob/main/docs/releasing.md) | how a version reaches nuget.org: tag, checks, Trusted Publishing |
 | `docs/api/` | the generated API reference (`dotnet tool restore && dotnet docfx metadata && dotnet docfx build`) |
 
 ## Building and testing
@@ -393,9 +394,9 @@ dialects over TCP, TLS, WebSocket and the in-memory transport, and diffs the res
 ## Contributing
 
 `main` is protected: nobody pushes to it, and only the owner merges. Fork the repository, branch
-from `main`, keep the gate above green, and open a pull request; [CONTRIBUTING.md](CONTRIBUTING.md)
+from `main`, keep the gate above green, and open a pull request; [CONTRIBUTING.md](https://github.com/petar-stupar/9p-csharp/blob/main/CONTRIBUTING.md)
 has the details, including the dependency and documentation rules a change must satisfy.
 
 ## Licence
 
-MIT. See [LICENSE](LICENSE).
+MIT. See [LICENSE](https://github.com/petar-stupar/9p-csharp/blob/main/LICENSE).
