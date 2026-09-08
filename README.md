@@ -7,51 +7,45 @@
 [![.NET 8 | 10](https://img.shields.io/badge/.NET-8.0%20%7C%2010.0-512BD4)](https://github.com/petar-stupar/9p-csharp/blob/main/global.json)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/petar-stupar/9p-csharp/blob/main/LICENSE)
 
-Three packages: a shared **protocol** package (typed messages for all 34 T/R pairs, a bounded
-zero-copy codec, TCP / TLS / WebSocket / in-memory / user-defined transports, and the
-authentication interfaces), a **client** package, and a **server** package driven by per-file-type
-handlers. Two example servers — `jsonfs` and `todofs` — and a conformance `cli` ship in the
-repository but are not published.
+**9P** is the file protocol of Plan 9: a client walks a tree of named files over a byte stream,
+and a server answers with whatever it chooses to present as files, from a real disk to a JSON
+document to a database. Linux mounts it as `v9fs`, QEMU and WSL share host directories over it,
+and it is the simplest sane way to give a program a filesystem-shaped API over a socket.
 
-All three 9P2000 dialects are implemented and negotiated separately: **9P2000**, **9P2000.u** and
-**9P2000.L**. The umbrella name "9P2000.uL" never goes on the wire.
+`ninep` is a complete, production-grade implementation for .NET of all three dialects in use
+today, **9P2000**, **9P2000.u** and **9P2000.L**, each negotiated separately and none invented.
+You write a client in a dozen lines, or a server as a tree of small handler classes, and the
+library owns the protocol: negotiation, fids and tags, `Tflush`, walks, open state, directory
+packing, permissions, and every one of the wire-level rules a hostile peer would test.
 
 | Package | What it holds |
 | --- | --- |
-| [`NineP.Protocol`](https://github.com/petar-stupar/9p-csharp/tree/main/src/NineP.Protocol) | messages, codec, dialects, the unified `Attr` model, transports, errors, auth interfaces |
-| [`NineP.Client`](https://github.com/petar-stupar/9p-csharp/tree/main/src/NineP.Client) | `NinePClient`, `NinePSession`, `NinePFid`, the pipelined tag multiplexer |
-| [`NineP.Server`](https://github.com/petar-stupar/9p-csharp/tree/main/src/NineP.Server) | `NinePServer`, the handler interfaces, fid and tag tables, dispatch, permissions |
+| [`NineP.Protocol`](https://github.com/petar-stupar/9p-csharp/tree/main/src/NineP.Protocol) | the typed messages of all 34 T/R pairs, a bounded zero-copy codec, the dialects and the unified `Attr` model, the TCP / TLS / WebSocket / in-memory transports, errors and the authentication interfaces |
+| [`NineP.Client`](https://github.com/petar-stupar/9p-csharp/tree/main/src/NineP.Client) | `NinePClient`, `NinePSession`, `NinePFid`: a pipelined client with a path-shaped file API and a one-method-per-message API underneath |
+| [`NineP.Server`](https://github.com/petar-stupar/9p-csharp/tree/main/src/NineP.Server) | `NinePServer` and the handler interfaces: you implement one class per file type and the server core does the rest |
 
-Target frameworks `net8.0` and `net10.0`. MIT licensed. Version `0.1.0`; see
-[CHANGELOG.md](https://github.com/petar-stupar/9p-csharp/blob/main/CHANGELOG.md).
+Targets `net8.0` and `net10.0`. MIT licensed. Version `0.1.0`; the history is in
+[CHANGELOG.md](https://github.com/petar-stupar/9p-csharp/blob/main/CHANGELOG.md). Two example servers, `jsonfs` and `todofs`, and a conformance
+`ninep` command-line tool live in the repository and are not published.
 
 ## Install
 
 ```text
-dotnet add package NineP.Client --version 0.1.0
-dotnet add package NineP.Server --version 0.1.0
+dotnet add package NineP.Client
+dotnet add package NineP.Server
 ```
 
-`NineP.Protocol` comes with either of them; add it directly only if you are writing a peer that is
-neither, such as a proxy or a transport.
+`NineP.Protocol` comes with either. Add it on its own only for a peer that is neither, such as a
+proxy or a transport.
 
-```text
-dotnet add package NineP.Protocol --version 0.1.0
-```
+The packages log through `Microsoft.Extensions.Logging.Abstractions` (`ILogger`, at the 8.0 floor
+so your application chooses the version) and, on `net8.0` only, use `System.IO.Pipelines`. That is
+the whole runtime dependency set.
 
-The packages log through `Microsoft.Extensions.Logging.Abstractions` 8.0.3 — `ILogger`, the
-abstraction your host already has — which brings `Microsoft.Extensions.DependencyInjection.Abstractions`
-8.0.2 with it. On `net8.0` add `System.IO.Pipelines` 8.0.0, which is inbox from `net9.0` onward. That
-is the whole runtime dependency set: three packages on `net8.0`, two on `net10.0`. The logging
-version is the lowest one carrying the `[LoggerMessage]` generator and is deliberately not raised,
-so your application chooses the version rather than being forced up by this one.
+## A server in sixty seconds
 
-## The 60-second server
-
-A filesystem is a tree of handlers. You implement `IFilesystem` plus one handler interface per file
-type; the server core owns version negotiation, the fid and tag tables, `Tflush`, walk semantics,
-open state, directory packing, `iounit`, permission checks and the dialect projection of every
-attribute — none of which appears below.
+A filesystem is a tree of handlers. Implement `IFilesystem` and one handler interface per file
+type; nothing below touches a message, a fid or a dialect.
 
 <!-- snippet:server -->
 ```csharp
@@ -68,7 +62,7 @@ static async Task<(NinePServer Server, Task Serving)> StartHelloServerAsync(Nine
 }
 ```
 
-The tree it serves is one read-only file:
+The tree behind it: one directory holding one read-only file.
 
 <!-- snippet:tree -->
 ```csharp
@@ -164,7 +158,11 @@ sealed class HelloFile(byte[] contents) : IFileHandler, IOpenFile
 }
 ```
 
-## The 60-second client
+Every T-message maps onto exactly one handler method; [docs/server.md](https://github.com/petar-stupar/9p-csharp/blob/main/docs/server.md) has the
+table. Optional capabilities such as locks, extended attributes, links and `statfs` are separate
+interfaces, and a handler that lacks one is answered `EOPNOTSUPP` rather than crashing.
+
+## A client in sixty seconds
 
 <!-- snippet:client -->
 ```csharp
@@ -184,16 +182,17 @@ static async Task<string> ReadHelloAsync(NinePAddress address)
 }
 ```
 
-`session.ReadDirAsync`, `ReadFileAsync`, `WriteFileAsync`, `MkdirAsync`, `RemoveAsync`,
-`RenameAsync`, `GetAttrAsync`, `SymlinkAsync` and `ReadlinkAsync` are the path-shaped API;
-`session.Messages` is the one-method-per-T-message API underneath it, and `NinePFid` is the handle
-in between. Reads and writes are chunked at `iounit` with four requests outstanding by default,
+`ReadDirAsync`, `ReadFileAsync`, `WriteFileAsync`, `MkdirAsync`, `RemoveAsync`, `RenameAsync`,
+`GetAttrAsync`, `SymlinkAsync` and `ReadlinkAsync` are the path-shaped API on `NinePSession`;
+`NinePFid` is the handle in between, and `session.Messages` is the one-method-per-T-message API
+underneath. Reads and writes are chunked at `iounit` with four requests in flight by default,
 which is where the throughput in [docs/benchmarks.md](https://github.com/petar-stupar/9p-csharp/blob/main/docs/benchmarks.md) comes from.
 
-## Both halves, in one program
+## Both halves in one program
 
-This is the program CI installs the packed packages into and runs, and its output is diffed against
-the block below it. `ReadmeSnippetTests` and `PackagingTests` run it too, so it cannot drift.
+Paste this into a console application that references `NineP.Client` and `NineP.Server`, and it
+prints the two lines below. CI installs the packed packages into exactly such a program and diffs
+its output, and the test suite runs it too, so it cannot drift from what ships.
 
 <!-- ci:snippet -->
 ```csharp
@@ -327,39 +326,34 @@ hello, 9P
 
 ## What is implemented
 
-- **Every message** of all three dialects: 34 T/R pairs, 66 records, all 77 golden vectors of
-  `docs/9p/fixtures/wire-vectors.json` round-tripping byte-exactly.
-- **Transports**: `tcp://`, `tls://` (1.2 floor, 1.3 preferred, optional mutual TLS), `ws://` and
-  `wss://` (RFC 6455, one 9P message per binary frame, origin allow-list), and `memory://` in
-  process. Implementing `ITransport` adds your own — see [docs/transports.md](https://github.com/petar-stupar/9p-csharp/blob/main/docs/transports.md).
-- **Authentication**: the `Tauth` afid exchange with `TokenAuthenticator` and
-  `PasswordAuthenticator` (PBKDF2-HMAC-SHA-256, 600 000 iterations) out of the box,
-  `TlsClientCertAuthenticator` for mutual TLS, and `IAuthenticator` for your own — the Keycloak
-  bearer-token authenticator in `todofs` is the worked example. Plan 9's `p9any`/`p9sk1` is **out of
-  scope**: it is DES-based and is not production security.
+- **Every message** of all three dialects: 34 T/R pairs, 66 records, and the 77 golden wire
+  vectors round-tripping byte-exactly.
+- **Transports**: `tcp://`, `tls://` (TLS 1.2 floor, 1.3 preferred, optional mutual TLS), `ws://`
+  and `wss://` (RFC 6455, one 9P message per binary frame, origin allow-list), and `memory://`
+  in process. Implementing `ITransport` adds your own; see
+  [docs/transports.md](https://github.com/petar-stupar/9p-csharp/blob/main/docs/transports.md).
+- **Authentication**: the `Tauth` afid exchange, with `TokenAuthenticator` and
+  `PasswordAuthenticator` (PBKDF2-HMAC-SHA-256, 600 000 iterations) shipped,
+  `TlsClientCertAuthenticator` for mutual TLS, and `IAuthenticator` for your own; the Keycloak
+  bearer-token authenticator in `todofs` is the worked example. Plan 9's `p9any`/`p9sk1` is out of
+  scope: it is DES-based and not production security.
 - **Resource caps** on everything a client controls: msize, the pre-negotiation frame size, fids,
   in-flight requests per connection and per listener, connections per listener, header timeouts,
   and the size and duration of an afid exchange. See [docs/security.md](https://github.com/petar-stupar/9p-csharp/blob/main/docs/security.md).
+- **Honest failure**: nothing silent maps to success. A request the negotiated dialect cannot
+  carry is refused rather than sent with a field dropped, and every framing violation closes the
+  connection with a logged reason.
 
-## Authentication
+## Before you expose a server
 
-A server authenticates through `ServerOptions.Authenticator`. When one is configured, a client
-runs the `Tauth` exchange over an afid and the session then runs as the identity the
-**authenticator** produced — never as the `uname` the client claimed. The afid is bound to the
-`(uname, n_uname, aname)` triple it was created with, so an afid obtained for one identity cannot
-be presented by an attach claiming another. The exchange itself is bounded by
-`Limits.MaxAuthBytes` (64 KiB per direction) and `Limits.AuthTimeout` (30 s).
-
-**With no authenticator configured, a `Tattach` carrying `afid = NOFID` is accepted and the
-session runs as the identity the client claimed.** That is the correct behaviour for a server
-behind an already-authenticated transport — a Unix socket, mutual TLS, or a private network — and
-it is the wrong behaviour anywhere else. A server reachable by an untrusted peer must set
-`ServerOptions.Authenticator`; an authenticator whose `IsRequired` is true refuses a `NOFID`
-attach with `EACCES` / `"authentication failed"`. A server with no authenticator refuses `Tauth`
-itself: `Rerror "authentication not required"` in 9P2000 and 9P2000.u, `Rlerror ECONNREFUSED` in
-9P2000.L.
-
-Full detail, including how a token is obtained: [docs/auth.md](https://github.com/petar-stupar/9p-csharp/blob/main/docs/auth.md).
+A server with no `ServerOptions.Authenticator` accepts a `Tattach` with `afid = NOFID` and runs
+the session as the identity the client **claimed**. That is right behind an already-authenticated
+transport, such as mutual TLS or a private network, and wrong anywhere else. A server an untrusted
+peer can reach must set an authenticator; one whose `IsRequired` is true refuses a `NOFID` attach
+with `EACCES`. When an authenticator is configured the session runs as the identity **it**
+produced, never the claimed `uname`, and the afid is bound to the `(uname, n_uname, aname)` it was
+created for. [docs/auth.md](https://github.com/petar-stupar/9p-csharp/blob/main/docs/auth.md) has the full picture, including how a token is
+obtained.
 
 ## Documentation
 
@@ -376,7 +370,7 @@ Full detail, including how a token is obtained: [docs/auth.md](https://github.co
 | [docs/benchmarks.md](https://github.com/petar-stupar/9p-csharp/blob/main/docs/benchmarks.md) | measured throughput, latency, peak RSS and codec ns/op |
 | [docs/interop.md](https://github.com/petar-stupar/9p-csharp/blob/main/docs/interop.md) | what this implementation has been run against, and what it has not |
 | [docs/releasing.md](https://github.com/petar-stupar/9p-csharp/blob/main/docs/releasing.md) | how a version reaches nuget.org: tag, checks, Trusted Publishing |
-| `docs/api/` | the generated API reference (`dotnet tool restore && dotnet docfx metadata && dotnet docfx build`) |
+| [`docs/api/`](https://github.com/petar-stupar/9p-csharp/tree/main/docs/api) | the generated API reference (`dotnet tool restore && dotnet docfx metadata && dotnet docfx build`) |
 
 ## Building and testing
 
@@ -386,16 +380,17 @@ dotnet run --project tests/NineP.Conformance -- self
 dotnet pack -c Release -o artifacts
 ```
 
-Warnings are build failures and suppressions carry a reason at the point of suppression. The
-conformance run drives this repository's own `jsonfs` and `ninep` as processes, in all three
-dialects over TCP, TLS, WebSocket and the in-memory transport, and diffs the result against
-`docs/9p/fixtures/sample.expected.txt`.
+Warnings are build failures and every suppression carries a reason. The conformance run drives
+the repository's own `jsonfs` and `ninep` as processes, in all three dialects over TCP, TLS,
+WebSocket and the in-memory transport, and diffs the result against a fixed expected output. CI
+runs the same gate on Linux, macOS and Windows.
 
 ## Contributing
 
 `main` is protected: nobody pushes to it, and only the owner merges. Fork the repository, branch
-from `main`, keep the gate above green, and open a pull request; [CONTRIBUTING.md](https://github.com/petar-stupar/9p-csharp/blob/main/CONTRIBUTING.md)
-has the details, including the dependency and documentation rules a change must satisfy.
+from `main`, keep the gate above green, and open a pull request.
+[CONTRIBUTING.md](https://github.com/petar-stupar/9p-csharp/blob/main/CONTRIBUTING.md) has the details, including the dependency and
+documentation rules a change must satisfy.
 
 ## Licence
 
