@@ -6,6 +6,12 @@ All notable changes to this repository are recorded here. The format follows
 
 ## [Unreleased]
 
+## [0.1.0] — 2026-09-08
+
+First release of `NineP.Protocol`, `NineP.Client` and `NineP.Server`, published to nuget.org from
+the `v0.1.0` tag. The sections down to "The initial build" record what changed between the
+initial build of 2026-09-06 and this release; that last section describes the build itself.
+
 ### Fixed
 
 - Server: a request's in-flight budget (the per-connection window and the per-listener bound) is
@@ -357,12 +363,12 @@ An independent four-persona review of 2026-09-08 raised 22 findings (15 Critical
   `CreateRequest.Perm`, `.Gid` and `.Flags`, and that `--jwks-cache` has a five-minute floor; the
   three example READMEs say the same where their flags are listed.
 
-## [0.1.0] — 2026-09-06
+### The initial build — 2026-09-06
 
-First release of `NineP.Protocol`, `NineP.Client` and `NineP.Server`. Nothing has been published to
-nuget.org; the packages are built by `dotnet pack -c Release` and installed from a local feed.
+The initial build, as it stood before the review and the changes above. Built by
+`dotnet pack -c Release` and installed from a local feed by the CI scratch step.
 
-### Added
+#### Added
 
 **Protocol (`NineP.Protocol`)**
 
@@ -436,7 +442,7 @@ nuget.org; the packages are built by `dotnet pack -c Release` and installed from
 - Benchmarks for the four measurements of ARCHITECTURE.md §9, with the numbers in
   [docs/benchmarks.md](docs/benchmarks.md).
 
-### Known limitations
+#### Known limitations
 
 - Plan 9's `p9any` and `p9sk1` are **out of scope**: `p9sk1` is DES-based and is not production
   security.
