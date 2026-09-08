@@ -8,7 +8,7 @@
   <ItemGroup Label="framing">
     <!-- System.IO.Pipelines is inbox from net9.0 onward; on net8.0 it is a package, and §6.1
          builds the frame reader on PipeReader. Referenced by NineP.Protocol for net8.0 only. -->
-    <PackageVersion Include="System.IO.Pipelines" Version="8.0.0" />
+    <PackageVersion Include="System.IO.Pipelines" Version="10.0.11" />
   </ItemGroup>
 
   <ItemGroup Label="logging">
