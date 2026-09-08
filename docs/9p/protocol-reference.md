@@ -727,6 +727,9 @@ Session state:
    reader behind an excess ordinary request. `Tflush` itself is not refused for worker overload.
    Replies remain bounded and a peer must read its replies to make transport progress. This
    replaces the former no-refusal backpressure promise (owner decision after review finding C09 of 2026-09-08).
+   A budget is returned when the reply is queued, before it can reach the wire, so a client that
+   reuses its window the instant it has a reply is never refused for it; a flushed request returns
+   its budget when its handler unwinds.
 9. A `Tversion` mid-session resets everything (§5.1). Before a dialect has been agreed — before the
    first `Tversion`, and after an `Rversion "unknown"` — the only message the connection accepts is
    a `Tversion`; any other message is answered with a **9P2000-shaped** `Rerror "version not

@@ -1,0 +1,60 @@
+name: dependabot-locks
+
+# Dependabot bumps the pin in Directory.Packages.props but regenerates only the lock file of the
+# project that references the package, and not always for every target framework; every dependent
+# project's packages.lock.json goes stale and `dotnet restore --locked-mode` in ci.yml refuses it.
+# This job regenerates every lock file on the Dependabot branch, pushes the result, and dispatches
+# ci.yml on the new head so the required checks run on the commit that will actually be merged
+# (a push made with GITHUB_TOKEN does not start workflows by itself; workflow_dispatch is the
+# documented exception). Only Dependabot branches are touched; workflow_dispatch exists for
+# trying the job by hand on a branch of your own.
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+env:
+  DOTNET_NOLOGO: "true"
+  DOTNET_CLI_TELEMETRY_OPTOUT: "true"
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "true"
+
+jobs:
+  refresh:
+    name: refresh lock files
+    if: github.event_name == 'workflow_dispatch' || github.actor == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the branch
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: global.json
+
+      - name: Regenerate every lock file
+        run: dotnet restore --force-evaluate
+
+      - name: Push the refreshed lock files and rerun ci on the new head
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BRANCH: ${{ github.head_ref || github.ref_name }}
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- '**/packages.lock.json'; then
+            echo "lock files already match; nothing to push"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- '**/packages.lock.json'
+          git commit -m "build(deps): regenerate packages.lock.json after the dependency bump"
+          git push origin "HEAD:$BRANCH"
+          gh workflow run ci.yml --ref "$BRANCH"

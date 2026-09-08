@@ -121,7 +121,11 @@ public sealed class RepoHygieneTests
         "DialectLegality", "WebSocketHandshake", "RawWebSocketListener",
     ];
 
-    /// <summary>No tracked file carries a control byte other than tab and newline.</summary>
+    /// <summary>
+    /// No tracked text file carries a control byte other than tab and newline. The package icon
+    /// is the one binary format tracked, declared <c>binary</c> in <c>.gitattributes</c>, and is
+    /// the one extension this walk skips.
+    /// </summary>
     [Fact]
     public void NoTrackedFileHasControlBytes()
     {
@@ -130,7 +134,7 @@ public sealed class RepoHygieneTests
         foreach (string relative in Git.TrackedFiles())
         {
             string path = RepoLayout.Path(relative.Replace('/', Path.DirectorySeparatorChar));
-            if (!File.Exists(path))
+            if (!File.Exists(path) || relative.EndsWith(".png", StringComparison.Ordinal))
             {
                 continue;
             }

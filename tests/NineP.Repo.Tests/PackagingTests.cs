@@ -39,6 +39,7 @@ public sealed class PackagingTests
 
             Assert.Contains("README.md", entries);
             Assert.Contains("LICENSE", entries);
+            Assert.Contains("icon.png", entries);
 
             foreach (string framework in new[] { "net8.0", "net10.0" })
             {
@@ -55,6 +56,13 @@ public sealed class PackagingTests
             Assert.Contains("<repository ", manifest, StringComparison.Ordinal);
             Assert.Contains("url=\"https://github.com/petar-stupar/9p-csharp.git\"", manifest, StringComparison.Ordinal);
             Assert.Contains("<license type=\"expression\">MIT</license>", manifest, StringComparison.Ordinal);
+            Assert.Contains("<authors>Petar Stupar</authors>", manifest, StringComparison.Ordinal);
+            Assert.Contains("<copyright>Copyright (c) Petar Stupar 2026</copyright>", manifest, StringComparison.Ordinal);
+            Assert.Contains("<icon>icon.png</icon>", manifest, StringComparison.Ordinal);
+            Assert.Contains("<readme>README.md</readme>", manifest, StringComparison.Ordinal);
+            Assert.Contains("<releaseNotes>https://github.com/petar-stupar/9p-csharp/blob/main/CHANGELOG.md</releaseNotes>", manifest, StringComparison.Ordinal);
+            Assert.Contains("<projectUrl>https://github.com/petar-stupar/9p-csharp</projectUrl>", manifest, StringComparison.Ordinal);
+            Assert.DoesNotContain("<iconUrl>", manifest, StringComparison.Ordinal);
             Assert.Contains($"<version>{Version}</version>", manifest, StringComparison.Ordinal);
         }
     }

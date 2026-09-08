@@ -40,6 +40,9 @@ Every runtime dependency has a row in the Decision Log of [ARCHITECTURE.md](ARCH
 its version pinned exactly, and a test compares the pin against `Directory.Packages.props`. Prefer
 the standard library. Dependabot opens pull requests for package and action updates; a bump of a
 runtime dependency needs its Decision Log row updated in the same pull request or the gate fails.
+Restore runs in locked mode, so a bump must carry every `packages.lock.json` it changes: run
+`dotnet restore --force-evaluate` and commit the result. On Dependabot branches the
+`dependabot-locks` workflow does that and reruns CI on the regenerated commit.
 
 ## Documentation
 

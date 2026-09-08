@@ -149,7 +149,9 @@ public sealed class DocsTests
                 continue;
             }
 
-            Assert.Contains("(" + path + ")", readme, StringComparison.Ordinal);
+            // The README links with absolute GitHub URLs so that the copy packed into every
+            // package renders on nuget.org too; what is pinned is the path each URL ends in.
+            Assert.Contains("/" + path + ")", readme, StringComparison.Ordinal);
         }
     }
 }

@@ -12,6 +12,7 @@ namespace NineP.Server.Internal;
 internal sealed class PendingRequest(ushort tag, MessageType type)
 {
     private int _state = (int)RequestState.Running;
+    private int _budget;
 
     /// <summary>The tag the request came in under.</summary>
     public ushort Tag => tag;
@@ -39,6 +40,17 @@ internal sealed class PendingRequest(ushort tag, MessageType type)
 
     /// <summary>Claims the right to send this request's reply.</summary>
     /// <returns>False when a <c>Tflush</c> already claimed it, or it was already answered.</returns>
+    /// <summary>
+    /// Marks the request as holding its two in-flight budgets (reference §8 rule 8). The budgets
+    /// are returned exactly once, by whichever of the reply path and the worker's backstop gets
+    /// there first; <see cref="TryReleaseBudget"/> is the CAS that decides it.
+    /// </summary>
+    public void HoldBudget() => Volatile.Write(ref _budget, 1);
+
+    /// <summary>Claims the right to return the budgets; true for exactly one caller.</summary>
+    /// <returns>True when this call is the one that returns them.</returns>
+    public bool TryReleaseBudget() => Interlocked.Exchange(ref _budget, 0) == 1;
+
     public bool TryComplete() =>
         Interlocked.CompareExchange(ref _state, (int)RequestState.Completed, (int)RequestState.Running)
             == (int)RequestState.Running;

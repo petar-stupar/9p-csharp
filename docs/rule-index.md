@@ -159,3 +159,4 @@ Reading the table:
 | 135 | Ref §8.31 | Moving outside a subtree attach cannot make dot-dot escape its root | `ServerLifecycleRegressionTests.RenameOutsideRestrictedAttachClampsParentWalkAndKeepsRemovalLocation` | review |
 | 136 | Ref §8.31 | A slow lookup does not block unrelated clients and revalidates when rename races it | `ServerLifecycleRegressionTests.SlowLookupDoesNotBlockOtherClientsAndRevalidatesAfterRename` | review |
 | 137 | Ref §8.28 | Shutdown retains gates and handlers until inline flush and the reader unwind | `SessionShutdownRegressionTests.ShutdownKeepsFlushGatesAndHandlersAliveUntilInlineReaderUnwinds` | review |
+| 138 | Ref §8.8 | A budget is returned when the reply is queued, so a window reused the instant its reply arrives is never refused | `BackpressureTests.AWindowReusedTheInstantItsReplyArrivesIsNeverRefused` | 31 |

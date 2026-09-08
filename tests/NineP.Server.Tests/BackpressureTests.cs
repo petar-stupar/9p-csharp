@@ -1,3 +1,4 @@
+using System.Globalization;
 using NineP.Protocol;
 using NineP.Protocol.Codec;
 using NineP.Protocol.Messages;
@@ -109,6 +110,62 @@ public sealed class BackpressureTests
 
             gated.ReadGate!.SetResult();
         }
+    }
+
+    /// <summary>
+    /// §8 rule 8: a budget is returned when the reply is queued, under the gate that frees the tag
+    /// and before the bytes can reach the wire. A client that sends its next request the instant
+    /// it has a reply is therefore never refused for a window it has already been given back.
+    /// <b>Mutation:</b> return the budget in the worker's <c>finally</c> only — the state this
+    /// repository shipped before this test — and with a general window of one, a fast peer draws
+    /// <c>EAGAIN</c> on a legal request.
+    /// </summary>
+    [Fact]
+    public async Task AWindowReusedTheInstantItsReplyArrivesIsNeverRefused()
+    {
+        const int connections = 8;
+        const int roundTrips = 1_500;
+
+        (ServerHarness harness, _) = await GatedAsync(general: 1, listener: 64);
+        await using (harness.ConfigureAwait(false))
+        {
+            string?[] refusals = await Task.WhenAll(Enumerable
+                .Range(0, connections)
+                .Select(_ => Task.Run(() => HammerAsync(harness, roundTrips), Ct)));
+
+            Assert.All(refusals, refusal => Assert.True(refusal is null, refusal));
+        }
+    }
+
+    private static async Task<string?> HammerAsync(ServerHarness harness, int roundTrips)
+    {
+        await using WireClient client = await WireClient.ConnectAsync(harness, Dialect.P9_2000_L, 8192, Ct);
+        await client.AttachAsync(1, Ct);
+
+        for (int trip = 0; trip < roundTrips; trip++)
+        {
+            ushort tag = (ushort)(1 + (trip % 1000));
+            await client.SendAsync(new Tgetattr(tag, 1, GetAttrMask.Basic), Ct);
+
+            byte[] reply = await client.ReceiveFrameAsync(Ct);
+            if (reply.Length == 0)
+            {
+                return "the server closed the connection";
+            }
+
+            MessageType type = MessageCodec.PeekType(reply);
+            if (type != MessageType.Rgetattr)
+            {
+                return string.Format(
+                    CultureInfo.InvariantCulture,
+                    "round trip {0} drew {1} (errno {2}), not Rgetattr",
+                    trip,
+                    type,
+                    type == MessageType.Rlerror ? MessageCodec.Decode<Rlerror>(reply, Dialect.P9_2000_L).Ecode : 0);
+            }
+        }
+
+        return null;
     }
 
     private static async Task<(ServerHarness Harness, MemoryFile Gated)> GatedAsync(

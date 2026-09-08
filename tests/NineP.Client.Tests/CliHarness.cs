@@ -210,7 +210,9 @@ internal sealed class CliHarness : IAsyncDisposable
         using MemoryStream stdout = new();
         Task<string> stderr = cli.StandardError.ReadToEndAsync(TestDeadlines.Wrap(TestContext.Current.CancellationToken));
         await cli.StandardOutput.BaseStream.CopyToAsync(stdout, TestDeadlines.Wrap(TestContext.Current.CancellationToken));
-        string errors = await stderr;
+        // stdout is bytes and is compared as such; stderr is Console.Error text, which ends its
+        // lines with CRLF on Windows and LF elsewhere, so it is compared with one line ending.
+        string errors = (await stderr).Replace("\r\n", "\n", StringComparison.Ordinal);
         await cli.WaitForExitAsync(TestDeadlines.Wrap(TestContext.Current.CancellationToken));
 
         return new CliRun(cli.ExitCode, stdout.ToArray(), errors);

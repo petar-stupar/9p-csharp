@@ -157,8 +157,11 @@ public sealed class FakeOidcIssuer : IDisposable
             catch (Exception)
 #pragma warning restore CA1031
             {
-                context.Response.StatusCode = 500;
-                context.Response.Close();
+                // Abort, not Close: a request that failed after its ContentLength64 was set has
+                // fewer bytes written than promised, and http.sys on Windows refuses to close such
+                // a response ("Cannot close stream until all bytes are written"). The managed
+                // listener on Linux and macOS is lenient, which is why this never showed there.
+                context.Response.Abort();
             }
         }
     }

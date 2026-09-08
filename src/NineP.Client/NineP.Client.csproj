@@ -3,6 +3,7 @@
   <PropertyGroup>
     <PackageId>NineP.Client</PackageId>
     <Description>A pipelined 9P client for 9P2000, 9P2000.u and 9P2000.L with exact flush semantics and a high-level file API.</Description>
+    <PackageTags>$(PackageTags);client</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
