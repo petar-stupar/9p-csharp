@@ -195,7 +195,7 @@ public sealed class ServerLifecycleRegressionTests
             await client.ReceiveAsync<Ropen>(Ct);
         }
 
-        for (int attempt = 0; attempt < 500 && file.Opens != 0; attempt++)
+        while (file.Opens != 0)
         {
             await Task.Delay(10, Ct);
         }
@@ -228,7 +228,7 @@ public sealed class ServerLifecycleRegressionTests
                     new ClientOptions { Dialects = [Dialect.P9_2000_L], Msize = 8192 }, Ct);
             }
 
-            for (int attempt = 0; attempt < 500 && context.ActiveSessionCount != 0; attempt++)
+            while (context.ActiveSessionCount != 0)
             {
                 await Task.Delay(10, Ct);
             }
@@ -273,7 +273,7 @@ public sealed class ServerLifecycleRegressionTests
             file.DeafReadGate.TrySetResult();
         }
 
-        for (int attempt = 0; attempt < 500 && file.Opens != 0; attempt++)
+        while (file.Opens != 0)
         {
             await Task.Delay(10, Ct);
         }
@@ -568,7 +568,7 @@ public sealed class ServerLifecycleRegressionTests
             await client.WalkAsync(3, 1, 3, ["ordinary"], Ct);
         }
 
-        for (int attempt = 0; attempt < 500 && harness.Server.Counters.ConnectionsOpen != 0; attempt++)
+        while (harness.Server.Counters.ConnectionsOpen != 0)
         {
             await Task.Delay(10, Ct);
         }

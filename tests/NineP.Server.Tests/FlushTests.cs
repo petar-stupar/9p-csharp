@@ -127,7 +127,7 @@ public sealed class FlushTests
 
     private static async Task WaitForReadAsync(MemoryFile file, int reads)
     {
-        for (int attempt = 0; attempt < 500 && file.ReadsStarted < reads; attempt++)
+        while (file.ReadsStarted < reads)
         {
             await Task.Delay(10, TestDeadlines.Wrap(TestContext.Current.CancellationToken));
         }

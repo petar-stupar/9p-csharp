@@ -47,11 +47,14 @@ jobs:
 
       - name: Assert both target frameworks ran
         shell: bash
+        # The runner writes the TRX files to TestResults/ under the working directory, not under
+        # each project's bin/, so the framework is read from the assembly path recorded inside
+        # each report rather than from the report's own path.
         run: |
           set -euo pipefail
           missing=0
           for tfm in net8.0 net10.0; do
-            if ! find . -path "*/bin/Release/$tfm/TestResults/*.trx" -print -quit | grep -q .; then
+            if ! grep -rlq --include='*.trx' "/bin/Release/$tfm/" .; then
               echo "no .trx report for $tfm"
               missing=1
             fi
