@@ -125,12 +125,18 @@ public sealed class ClientFlushTests
         Assert.Null(harness.Session.Multiplexer.Termination);
     }
 
-    /// <summary>A request that outlives its timeout is flushed exactly as a cancelled one is.</summary>
+    /// <summary>
+    /// A request that outlives its timeout is flushed exactly as a cancelled one is. The wait for
+    /// the <c>Rflush</c> carries the same timeout, so the budget is one a loaded runner's harness
+    /// round trip always meets: at 50 ms a slow net8.0 start missed it once, the client then kept
+    /// both tags on purpose and threw the other timeout, and the count below read two. The
+    /// message pins which timeout fired, so that case is a named failure and not a coincidence.
+    /// </summary>
     [Fact]
     public async Task ARequestTimeoutIsFlushedToo()
     {
         await using Harness harness = await Harness.StartAsync(
-            options => options with { RequestTimeout = TimeSpan.FromMilliseconds(50) });
+            options => options with { RequestTimeout = TimeSpan.FromSeconds(1) });
 
         Task<Rclunk> request = harness.Session.Messages.ClunkAsync(new Tclunk(0, 1), Ct).AsTask();
         Tclunk sent = await harness.Server.ReadAsync<Tclunk>(Ct);
@@ -141,7 +147,8 @@ public sealed class ClientFlushTests
 
         await harness.Server.WriteAsync(new Rflush(flush.Tag), Ct);
 
-        await Assert.ThrowsAsync<TimeoutException>(async () => await request);
+        TimeoutException timeout = await Assert.ThrowsAsync<TimeoutException>(async () => await request);
+        Assert.Contains("was flushed", timeout.Message, StringComparison.Ordinal);
         Assert.Equal(0, harness.Session.Multiplexer.TagsInUse);
     }
 
