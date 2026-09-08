@@ -1,0 +1,111 @@
+### YamlMime:ApiPage
+title: Struct Rversion
+body:
+- api1: Struct Rversion
+  id: NineP_Protocol_Messages_Rversion
+  metadata:
+    uid: NineP.Protocol.Messages.Rversion
+    commentId: T:NineP.Protocol.Messages.Rversion
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Messages
+      url: NineP.Protocol.Messages.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    Answers a Tversion with the dialect and size the server agrees to, or "unknown" (reference
+
+    §5.1). An "unknown" reply echoes the client's msize, never the server's.
+- code: 'public readonly record struct Rversion : IMessage, IEquatable<Rversion>'
+- h4: Implements
+- list:
+  - text: IMessage
+    url: NineP.Protocol.Messages.IMessage.html
+  - text: IEquatable<Rversion>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: Rversion(ushort, uint, string)
+  id: NineP_Protocol_Messages_Rversion__ctor_System_UInt16_System_UInt32_System_String_
+  metadata:
+    uid: NineP.Protocol.Messages.Rversion.#ctor(System.UInt16,System.UInt32,System.String)
+    commentId: M:NineP.Protocol.Messages.Rversion.#ctor(System.UInt16,System.UInt32,System.String)
+- markdown: >-
+    Answers a Tversion with the dialect and size the server agrees to, or "unknown" (reference
+
+    §5.1). An "unknown" reply echoes the client's msize, never the server's.
+- code: public Rversion(ushort Tag, uint Msize, string Version)
+- h4: Parameters
+- parameters:
+  - name: Tag
+    type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+    description: The message tag; NOTAG by convention, though any tag is accepted.
+  - name: Msize
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The agreed size; never larger than the client asked for.
+  - name: Version
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The agreed dialect string, or "unknown".
+- h2: Properties
+- api3: Msize
+  id: NineP_Protocol_Messages_Rversion_Msize
+  metadata:
+    uid: NineP.Protocol.Messages.Rversion.Msize
+    commentId: P:NineP.Protocol.Messages.Rversion.Msize
+- markdown: The agreed size; never larger than the client asked for.
+- code: public uint Msize { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Tag
+  id: NineP_Protocol_Messages_Rversion_Tag
+  metadata:
+    uid: NineP.Protocol.Messages.Rversion.Tag
+    commentId: P:NineP.Protocol.Messages.Rversion.Tag
+- markdown: The message tag; NOTAG by convention, though any tag is accepted.
+- code: public ushort Tag { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+- api3: Version
+  id: NineP_Protocol_Messages_Rversion_Version
+  metadata:
+    uid: NineP.Protocol.Messages.Rversion.Version
+    commentId: P:NineP.Protocol.Messages.Rversion.Version
+- markdown: The agreed dialect string, or "unknown".
+- code: public string Version { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+languageId: csharp
+metadata:
+  description: >-
+    Answers a Tversion with the dialect and size the server agrees to, or "unknown" (reference
+
+    §5.1). An "unknown" reply echoes the client's msize, never the server's.

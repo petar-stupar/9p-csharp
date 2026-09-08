@@ -1,0 +1,64 @@
+### YamlMime:ApiPage
+title: Interface INinePListener
+body:
+- api1: Interface INinePListener
+  id: NineP_Protocol_Transports_INinePListener
+  metadata:
+    uid: NineP.Protocol.Transports.INinePListener
+    commentId: T:NineP.Protocol.Transports.INinePListener
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Transports
+      url: NineP.Protocol.Transports.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: A listening endpoint that accepts 9P connections.
+- code: 'public interface INinePListener : IAsyncDisposable'
+- h4: Implements
+- list:
+  - text: IAsyncDisposable
+    url: https://learn.microsoft.com/dotnet/api/system.iasyncdisposable
+- h2: Properties
+- api3: LocalAddress
+  id: NineP_Protocol_Transports_INinePListener_LocalAddress
+  metadata:
+    uid: NineP.Protocol.Transports.INinePListener.LocalAddress
+    commentId: P:NineP.Protocol.Transports.INinePListener.LocalAddress
+- markdown: The address actually bound, carrying the real port when 0 was requested.
+- code: NinePAddress LocalAddress { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: NinePAddress
+      url: NineP.Protocol.Transports.NinePAddress.html
+- h2: Methods
+- api3: AcceptAsync(CancellationToken)
+  id: NineP_Protocol_Transports_INinePListener_AcceptAsync_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Protocol.Transports.INinePListener.AcceptAsync(System.Threading.CancellationToken)
+    commentId: M:NineP.Protocol.Transports.INinePListener.AcceptAsync(System.Threading.CancellationToken)
+- markdown: Accepts the next connection.
+- code: ValueTask<INinePConnection?> AcceptAsync(CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the wait.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: INinePConnection
+      url: NineP.Protocol.Transports.INinePConnection.html
+    - '?'
+    - '>'
+    description: The connection, or null once the listener has been disposed.
+languageId: csharp
+metadata:
+  description: A listening endpoint that accepts 9P connections.

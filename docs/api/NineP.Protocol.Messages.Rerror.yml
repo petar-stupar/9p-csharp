@@ -1,0 +1,117 @@
+### YamlMime:ApiPage
+title: Struct Rerror
+body:
+- api1: Struct Rerror
+  id: NineP_Protocol_Messages_Rerror
+  metadata:
+    uid: NineP.Protocol.Messages.Rerror
+    commentId: T:NineP.Protocol.Messages.Rerror
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Messages
+      url: NineP.Protocol.Messages.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    The error reply of 9P2000 and 9P2000.u (reference §3.1). A .L session never carries one; it
+
+    carries Rlerror instead.
+- code: 'public readonly record struct Rerror : IMessage, IEquatable<Rerror>'
+- h4: Implements
+- list:
+  - text: IMessage
+    url: NineP.Protocol.Messages.IMessage.html
+  - text: IEquatable<Rerror>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: Rerror(ushort, string, int)
+  id: NineP_Protocol_Messages_Rerror__ctor_System_UInt16_System_String_System_Int32_
+  metadata:
+    uid: NineP.Protocol.Messages.Rerror.#ctor(System.UInt16,System.String,System.Int32)
+    commentId: M:NineP.Protocol.Messages.Rerror.#ctor(System.UInt16,System.String,System.Int32)
+- markdown: >-
+    The error reply of 9P2000 and 9P2000.u (reference §3.1). A .L session never carries one; it
+
+    carries Rlerror instead.
+- code: public Rerror(ushort Tag, string Ename, int Errno)
+- h4: Parameters
+- parameters:
+  - name: Tag
+    type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+    description: The message tag, which pairs this message with its partner.
+  - name: Ename
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The Plan 9 error text, at most ERRMAX - 1 bytes.
+  - name: Errno
+    type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+    description: >-
+      The Linux errno; 0 means none, which is what a 9P2000 reply carries. On the
+          wire in .u only, where the encoder refuses a negative value and the decoder rejects one above
+          <code>int.MaxValue</code> as <xref href="NineP.Protocol.ProtocolErrorKind.Overflow" data-throw-if-not-resolved="false"></xref>.
+- h2: Properties
+- api3: Ename
+  id: NineP_Protocol_Messages_Rerror_Ename
+  metadata:
+    uid: NineP.Protocol.Messages.Rerror.Ename
+    commentId: P:NineP.Protocol.Messages.Rerror.Ename
+- markdown: The Plan 9 error text, at most ERRMAX - 1 bytes.
+- code: public string Ename { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: Errno
+  id: NineP_Protocol_Messages_Rerror_Errno
+  metadata:
+    uid: NineP.Protocol.Messages.Rerror.Errno
+    commentId: P:NineP.Protocol.Messages.Rerror.Errno
+- markdown: >-
+    The Linux errno; 0 means none, which is what a 9P2000 reply carries. On the
+        wire in .u only, where the encoder refuses a negative value and the decoder rejects one above
+        <code>int.MaxValue</code> as <xref href="NineP.Protocol.ProtocolErrorKind.Overflow" data-throw-if-not-resolved="false"></xref>.
+- code: public int Errno { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: Tag
+  id: NineP_Protocol_Messages_Rerror_Tag
+  metadata:
+    uid: NineP.Protocol.Messages.Rerror.Tag
+    commentId: P:NineP.Protocol.Messages.Rerror.Tag
+- markdown: The message tag, which pairs this message with its partner.
+- code: public ushort Tag { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+languageId: csharp
+metadata:
+  description: >-
+    The error reply of 9P2000 and 9P2000.u (reference §3.1). A .L session never carries one; it
+
+    carries Rlerror instead.

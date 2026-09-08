@@ -1,0 +1,209 @@
+### YamlMime:ApiPage
+title: Class SetAttr
+body:
+- api1: Class SetAttr
+  id: NineP_Protocol_SetAttr
+  metadata:
+    uid: NineP.Protocol.SetAttr
+    commentId: T:NineP.Protocol.SetAttr
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol
+      url: NineP.Protocol.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    A partial attribute update; a null member means "do not touch" (reference §7). One type carries
+
+    both a <code>Twstat</code> and a <code>Tsetattr</code>, so a handler never learns which dialect asked.
+- code: 'public sealed record SetAttr : IEquatable<SetAttr>'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: SetAttr
+    url: NineP.Protocol.SetAttr.html
+- h4: Implements
+- list:
+  - text: IEquatable<SetAttr>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Properties
+- api3: ATime
+  id: NineP_Protocol_SetAttr_ATime
+  metadata:
+    uid: NineP.Protocol.SetAttr.ATime
+    commentId: P:NineP.Protocol.SetAttr.ATime
+- markdown: A new access time; null with <xref href="NineP.Protocol.SetAttr.ATimeToNow" data-throw-if-not-resolved="false"></xref> true means "use the server's clock".
+- code: public TimeSpec? ATime { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: TimeSpec
+      url: NineP.Protocol.TimeSpec.html
+    - '?'
+- api3: ATimeToNow
+  id: NineP_Protocol_SetAttr_ATimeToNow
+  metadata:
+    uid: NineP.Protocol.SetAttr.ATimeToNow
+    commentId: P:NineP.Protocol.SetAttr.ATimeToNow
+- markdown: "True when the client asked for atime without _SET: use the server's clock (reference §4.6)."
+- code: public bool ATimeToNow { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: bool
+      url: https://learn.microsoft.com/dotnet/api/system.boolean
+- api3: CTimeToNow
+  id: NineP_Protocol_SetAttr_CTimeToNow
+  metadata:
+    uid: NineP.Protocol.SetAttr.CTimeToNow
+    commentId: P:NineP.Protocol.SetAttr.CTimeToNow
+- markdown: "True when the client asked for ctime: use the server's clock."
+- code: public bool CTimeToNow { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: bool
+      url: https://learn.microsoft.com/dotnet/api/system.boolean
+- api3: Gid
+  id: NineP_Protocol_SetAttr_Gid
+  metadata:
+    uid: NineP.Protocol.SetAttr.Gid
+    commentId: P:NineP.Protocol.SetAttr.Gid
+- markdown: A new numeric group.
+- code: public uint? Gid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    - '?'
+- api3: GroupName
+  id: NineP_Protocol_SetAttr_GroupName
+  metadata:
+    uid: NineP.Protocol.SetAttr.GroupName
+    commentId: P:NineP.Protocol.SetAttr.GroupName
+- markdown: A new textual group (<code>Twstat</code>).
+- code: public string? GroupName { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+- api3: IsFsyncRequest
+  id: NineP_Protocol_SetAttr_IsFsyncRequest
+  metadata:
+    uid: NineP.Protocol.SetAttr.IsFsyncRequest
+    commentId: P:NineP.Protocol.SetAttr.IsFsyncRequest
+- markdown: >-
+    True when every field is "don't touch": a <code>Twstat</code> that means commit this file to
+
+    stable storage rather than change it (reference §4.2), never a no-op.
+- code: public bool IsFsyncRequest { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: bool
+      url: https://learn.microsoft.com/dotnet/api/system.boolean
+- api3: MTime
+  id: NineP_Protocol_SetAttr_MTime
+  metadata:
+    uid: NineP.Protocol.SetAttr.MTime
+    commentId: P:NineP.Protocol.SetAttr.MTime
+- markdown: >-
+    A new modification time; null with <xref href="NineP.Protocol.SetAttr.MTimeToNow" data-throw-if-not-resolved="false"></xref> true means "use the server's
+
+    clock".
+- code: public TimeSpec? MTime { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: TimeSpec
+      url: NineP.Protocol.TimeSpec.html
+    - '?'
+- api3: MTimeToNow
+  id: NineP_Protocol_SetAttr_MTimeToNow
+  metadata:
+    uid: NineP.Protocol.SetAttr.MTimeToNow
+    commentId: P:NineP.Protocol.SetAttr.MTimeToNow
+- markdown: "True when the client asked for mtime without _SET: use the server's clock."
+- code: public bool MTimeToNow { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: bool
+      url: https://learn.microsoft.com/dotnet/api/system.boolean
+- api3: Name
+  id: NineP_Protocol_SetAttr_Name
+  metadata:
+    uid: NineP.Protocol.SetAttr.Name
+    commentId: P:NineP.Protocol.SetAttr.Name
+- markdown: A new name (<code>Twstat</code> only; a rename within the same directory).
+- code: public string? Name { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+- api3: Perm
+  id: NineP_Protocol_SetAttr_Perm
+  metadata:
+    uid: NineP.Protocol.SetAttr.Perm
+    commentId: P:NineP.Protocol.SetAttr.Perm
+- markdown: New permission bits (the 07777 mask).
+- code: public uint? Perm { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    - '?'
+- api3: Size
+  id: NineP_Protocol_SetAttr_Size
+  metadata:
+    uid: NineP.Protocol.SetAttr.Size
+    commentId: P:NineP.Protocol.SetAttr.Size
+- markdown: 'A new length: truncation or extension.'
+- code: public ulong? Size { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+    - '?'
+- api3: Uid
+  id: NineP_Protocol_SetAttr_Uid
+  metadata:
+    uid: NineP.Protocol.SetAttr.Uid
+    commentId: P:NineP.Protocol.SetAttr.Uid
+- markdown: A new numeric owner (<code>Tsetattr</code> only; a <code>Twstat</code> may never change it).
+- code: public uint? Uid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    - '?'
+languageId: csharp
+metadata:
+  description: >-
+    A partial attribute update; a null member means "do not touch" (reference §7). One type carries
+
+    both a Twstat and a Tsetattr, so a handler never learns which dialect asked.

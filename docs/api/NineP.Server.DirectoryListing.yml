@@ -1,0 +1,117 @@
+### YamlMime:ApiPage
+title: Struct DirectoryListing
+body:
+- api1: Struct DirectoryListing
+  id: NineP_Server_DirectoryListing
+  metadata:
+    uid: NineP.Server.DirectoryListing
+    commentId: T:NineP.Server.DirectoryListing
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Server
+      url: NineP.Server.html
+  - name: Assembly
+    value: NineP.Server.dll
+- markdown: >-
+    A page of directory entries (architecture §4). The handler decides how many it can produce; the
+
+    core decides how many fit the reply, and never splits one across replies (reference §6.7).
+- code: 'public readonly record struct DirectoryListing : IEquatable<DirectoryListing>'
+- h4: Implements
+- list:
+  - text: IEquatable<DirectoryListing>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: DirectoryListing(IReadOnlyList<DirEntry>, ulong, bool)
+  id: NineP_Server_DirectoryListing__ctor_System_Collections_Generic_IReadOnlyList_NineP_Protocol_DirEntry__System_UInt64_System_Boolean_
+  metadata:
+    uid: NineP.Server.DirectoryListing.#ctor(System.Collections.Generic.IReadOnlyList{NineP.Protocol.DirEntry},System.UInt64,System.Boolean)
+    commentId: M:NineP.Server.DirectoryListing.#ctor(System.Collections.Generic.IReadOnlyList{NineP.Protocol.DirEntry},System.UInt64,System.Boolean)
+- markdown: >-
+    A page of directory entries (architecture §4). The handler decides how many it can produce; the
+
+    core decides how many fit the reply, and never splits one across replies (reference §6.7).
+- code: public DirectoryListing(IReadOnlyList<DirEntry> Entries, ulong NextCursor, bool EndOfDirectory)
+- h4: Parameters
+- parameters:
+  - name: Entries
+    type:
+    - text: IReadOnlyList
+      url: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+    - <
+    - text: DirEntry
+      url: NineP.Protocol.DirEntry.html
+    - '>'
+    description: The entries, in listing order, without "." or ".." (S-27).
+  - name: NextCursor
+    type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+    description: The cursor that continues after the last entry.
+  - name: EndOfDirectory
+    type:
+    - text: bool
+      url: https://learn.microsoft.com/dotnet/api/system.boolean
+    description: True when there is nothing after these entries.
+- h2: Properties
+- api3: EndOfDirectory
+  id: NineP_Server_DirectoryListing_EndOfDirectory
+  metadata:
+    uid: NineP.Server.DirectoryListing.EndOfDirectory
+    commentId: P:NineP.Server.DirectoryListing.EndOfDirectory
+- markdown: True when there is nothing after these entries.
+- code: public bool EndOfDirectory { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: bool
+      url: https://learn.microsoft.com/dotnet/api/system.boolean
+- api3: Entries
+  id: NineP_Server_DirectoryListing_Entries
+  metadata:
+    uid: NineP.Server.DirectoryListing.Entries
+    commentId: P:NineP.Server.DirectoryListing.Entries
+- markdown: The entries, in listing order, without "." or ".." (S-27).
+- code: public IReadOnlyList<DirEntry> Entries { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: IReadOnlyList
+      url: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+    - <
+    - text: DirEntry
+      url: NineP.Protocol.DirEntry.html
+    - '>'
+- api3: NextCursor
+  id: NineP_Server_DirectoryListing_NextCursor
+  metadata:
+    uid: NineP.Server.DirectoryListing.NextCursor
+    commentId: P:NineP.Server.DirectoryListing.NextCursor
+- markdown: The cursor that continues after the last entry.
+- code: public ulong NextCursor { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+languageId: csharp
+metadata:
+  description: >-
+    A page of directory entries (architecture §4). The handler decides how many it can produce; the
+
+    core decides how many fit the reply, and never splits one across replies (reference §6.7).

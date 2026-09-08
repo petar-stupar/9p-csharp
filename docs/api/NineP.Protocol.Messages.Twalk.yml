@@ -1,0 +1,136 @@
+### YamlMime:ApiPage
+title: Struct Twalk
+body:
+- api1: Struct Twalk
+  id: NineP_Protocol_Messages_Twalk
+  metadata:
+    uid: NineP.Protocol.Messages.Twalk
+    commentId: T:NineP.Protocol.Messages.Twalk
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Messages
+      url: NineP.Protocol.Messages.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    Moves a fid through the tree one element at a time (reference §5.4). At most MAXWELEM (16)
+
+    elements per message.
+- code: 'public readonly record struct Twalk : IMessage, IEquatable<Twalk>'
+- h4: Implements
+- list:
+  - text: IMessage
+    url: NineP.Protocol.Messages.IMessage.html
+  - text: IEquatable<Twalk>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: Twalk(ushort, uint, uint, IReadOnlyList<string>)
+  id: NineP_Protocol_Messages_Twalk__ctor_System_UInt16_System_UInt32_System_UInt32_System_Collections_Generic_IReadOnlyList_System_String__
+  metadata:
+    uid: NineP.Protocol.Messages.Twalk.#ctor(System.UInt16,System.UInt32,System.UInt32,System.Collections.Generic.IReadOnlyList{System.String})
+    commentId: M:NineP.Protocol.Messages.Twalk.#ctor(System.UInt16,System.UInt32,System.UInt32,System.Collections.Generic.IReadOnlyList{System.String})
+- markdown: >-
+    Moves a fid through the tree one element at a time (reference §5.4). At most MAXWELEM (16)
+
+    elements per message.
+- code: public Twalk(ushort Tag, uint Fid, uint NewFid, IReadOnlyList<string> Wnames)
+- h4: Parameters
+- parameters:
+  - name: Tag
+    type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+    description: The message tag, which pairs this message with its partner.
+  - name: Fid
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The fid to walk from; it must not be open.
+  - name: NewFid
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The fid to bind to the result; it may equal Fid.
+  - name: Wnames
+    type:
+    - text: IReadOnlyList
+      url: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+    - <
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '>'
+    description: The path elements, at most 16; ".." is legal here and nowhere else.
+- h2: Properties
+- api3: Fid
+  id: NineP_Protocol_Messages_Twalk_Fid
+  metadata:
+    uid: NineP.Protocol.Messages.Twalk.Fid
+    commentId: P:NineP.Protocol.Messages.Twalk.Fid
+- markdown: The fid to walk from; it must not be open.
+- code: public uint Fid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: NewFid
+  id: NineP_Protocol_Messages_Twalk_NewFid
+  metadata:
+    uid: NineP.Protocol.Messages.Twalk.NewFid
+    commentId: P:NineP.Protocol.Messages.Twalk.NewFid
+- markdown: The fid to bind to the result; it may equal Fid.
+- code: public uint NewFid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Tag
+  id: NineP_Protocol_Messages_Twalk_Tag
+  metadata:
+    uid: NineP.Protocol.Messages.Twalk.Tag
+    commentId: P:NineP.Protocol.Messages.Twalk.Tag
+- markdown: The message tag, which pairs this message with its partner.
+- code: public ushort Tag { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+- api3: Wnames
+  id: NineP_Protocol_Messages_Twalk_Wnames
+  metadata:
+    uid: NineP.Protocol.Messages.Twalk.Wnames
+    commentId: P:NineP.Protocol.Messages.Twalk.Wnames
+- markdown: The path elements, at most 16; ".." is legal here and nowhere else.
+- code: public IReadOnlyList<string> Wnames { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: IReadOnlyList
+      url: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+    - <
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '>'
+languageId: csharp
+metadata:
+  description: >-
+    Moves a fid through the tree one element at a time (reference §5.4). At most MAXWELEM (16)
+
+    elements per message.

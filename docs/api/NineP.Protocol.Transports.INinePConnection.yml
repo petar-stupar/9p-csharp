@@ -1,0 +1,147 @@
+### YamlMime:ApiPage
+title: Interface INinePConnection
+body:
+- api1: Interface INinePConnection
+  id: NineP_Protocol_Transports_INinePConnection
+  metadata:
+    uid: NineP.Protocol.Transports.INinePConnection
+    commentId: T:NineP.Protocol.Transports.INinePConnection
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Transports
+      url: NineP.Protocol.Transports.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    One bidirectional 9P byte stream. <xref href="NineP.Protocol.Transports.INinePConnection.WriteAsync(System.ReadOnlyMemory%7bSystem.Byte%7d%2cSystem.Threading.CancellationToken)" data-throw-if-not-resolved="false"></xref> is called once per complete 9P
+
+    message, so a message-oriented transport can put each message in one frame of its own.
+- code: 'public interface INinePConnection : IAsyncDisposable'
+- h4: Implements
+- list:
+  - text: IAsyncDisposable
+    url: https://learn.microsoft.com/dotnet/api/system.iasyncdisposable
+- h2: Properties
+- api3: PeerIdentity
+  id: NineP_Protocol_Transports_INinePConnection_PeerIdentity
+  metadata:
+    uid: NineP.Protocol.Transports.INinePConnection.PeerIdentity
+    commentId: P:NineP.Protocol.Transports.INinePConnection.PeerIdentity
+- markdown: What the transport learned about the peer during the handshake; null when nothing.
+- code: PeerIdentity? PeerIdentity { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: PeerIdentity
+      url: NineP.Protocol.Transports.PeerIdentity.html
+    - '?'
+- api3: RemoteAddress
+  id: NineP_Protocol_Transports_INinePConnection_RemoteAddress
+  metadata:
+    uid: NineP.Protocol.Transports.INinePConnection.RemoteAddress
+    commentId: P:NineP.Protocol.Transports.INinePConnection.RemoteAddress
+- markdown: The address of the peer.
+- code: NinePAddress RemoteAddress { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: NinePAddress
+      url: NineP.Protocol.Transports.NinePAddress.html
+- h2: Methods
+- api3: CloseAsync(CloseReason, CancellationToken)
+  id: NineP_Protocol_Transports_INinePConnection_CloseAsync_NineP_Protocol_Transports_CloseReason_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Protocol.Transports.INinePConnection.CloseAsync(NineP.Protocol.Transports.CloseReason,System.Threading.CancellationToken)
+    commentId: M:NineP.Protocol.Transports.INinePConnection.CloseAsync(NineP.Protocol.Transports.CloseReason,System.Threading.CancellationToken)
+- markdown: Closes with a reason; the reason reaches the peer where the transport can express it.
+- code: ValueTask CloseAsync(CloseReason reason, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: reason
+    type:
+    - text: CloseReason
+      url: NineP.Protocol.Transports.CloseReason.html
+    description: Why the connection is closing.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the close handshake.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask
+    description: A task that completes when the close has been sent.
+- api3: ReadAsync(Memory<byte>, CancellationToken)
+  id: NineP_Protocol_Transports_INinePConnection_ReadAsync_System_Memory_System_Byte__System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Protocol.Transports.INinePConnection.ReadAsync(System.Memory{System.Byte},System.Threading.CancellationToken)
+    commentId: M:NineP.Protocol.Transports.INinePConnection.ReadAsync(System.Memory{System.Byte},System.Threading.CancellationToken)
+- markdown: Reads up to <code>buffer.Length</code> bytes.
+- code: ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: buffer
+    type:
+    - text: Memory
+      url: https://learn.microsoft.com/dotnet/api/system.memory-1
+    - <
+    - text: byte
+      url: https://learn.microsoft.com/dotnet/api/system.byte
+    - '>'
+    description: Where the bytes go.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the read.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+    - '>'
+    description: The number of bytes read; zero at the end of the stream.
+- api3: WriteAsync(ReadOnlyMemory<byte>, CancellationToken)
+  id: NineP_Protocol_Transports_INinePConnection_WriteAsync_System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Protocol.Transports.INinePConnection.WriteAsync(System.ReadOnlyMemory{System.Byte},System.Threading.CancellationToken)
+    commentId: M:NineP.Protocol.Transports.INinePConnection.WriteAsync(System.ReadOnlyMemory{System.Byte},System.Threading.CancellationToken)
+- markdown: Writes exactly one complete 9P message.
+- code: ValueTask WriteAsync(ReadOnlyMemory<byte> message, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: message
+    type:
+    - text: ReadOnlyMemory
+      url: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+    - <
+    - text: byte
+      url: https://learn.microsoft.com/dotnet/api/system.byte
+    - '>'
+    description: The frame, <code>size[4]</code> included.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the write.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask
+    description: A task that completes when the message has been handed to the transport.
+languageId: csharp
+metadata:
+  description: >-
+    One bidirectional 9P byte stream.  is called once per complete 9P
+
+    message, so a message-oriented transport can put each message in one frame of its own.

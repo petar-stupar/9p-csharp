@@ -1,0 +1,119 @@
+### YamlMime:ApiPage
+title: Struct Tlink
+body:
+- api1: Struct Tlink
+  id: NineP_Protocol_Messages_Tlink
+  metadata:
+    uid: NineP.Protocol.Messages.Tlink
+    commentId: T:NineP.Protocol.Messages.Tlink
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Messages
+      url: NineP.Protocol.Messages.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: Creates a hard link (reference §3.4).
+- code: 'public readonly record struct Tlink : IMessage, IEquatable<Tlink>'
+- h4: Implements
+- list:
+  - text: IMessage
+    url: NineP.Protocol.Messages.IMessage.html
+  - text: IEquatable<Tlink>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: Tlink(ushort, uint, uint, string)
+  id: NineP_Protocol_Messages_Tlink__ctor_System_UInt16_System_UInt32_System_UInt32_System_String_
+  metadata:
+    uid: NineP.Protocol.Messages.Tlink.#ctor(System.UInt16,System.UInt32,System.UInt32,System.String)
+    commentId: M:NineP.Protocol.Messages.Tlink.#ctor(System.UInt16,System.UInt32,System.UInt32,System.String)
+- markdown: Creates a hard link (reference §3.4).
+- code: public Tlink(ushort Tag, uint Dfid, uint Fid, string Name)
+- h4: Parameters
+- parameters:
+  - name: Tag
+    type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+    description: The message tag, which pairs this message with its partner.
+  - name: Dfid
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The fid naming the directory to create the link in.
+  - name: Fid
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The fid naming the file to link to.
+  - name: Name
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The name of the new link.
+- h2: Properties
+- api3: Dfid
+  id: NineP_Protocol_Messages_Tlink_Dfid
+  metadata:
+    uid: NineP.Protocol.Messages.Tlink.Dfid
+    commentId: P:NineP.Protocol.Messages.Tlink.Dfid
+- markdown: The fid naming the directory to create the link in.
+- code: public uint Dfid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Fid
+  id: NineP_Protocol_Messages_Tlink_Fid
+  metadata:
+    uid: NineP.Protocol.Messages.Tlink.Fid
+    commentId: P:NineP.Protocol.Messages.Tlink.Fid
+- markdown: The fid naming the file to link to.
+- code: public uint Fid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Name
+  id: NineP_Protocol_Messages_Tlink_Name
+  metadata:
+    uid: NineP.Protocol.Messages.Tlink.Name
+    commentId: P:NineP.Protocol.Messages.Tlink.Name
+- markdown: The name of the new link.
+- code: public string Name { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: Tag
+  id: NineP_Protocol_Messages_Tlink_Tag
+  metadata:
+    uid: NineP.Protocol.Messages.Tlink.Tag
+    commentId: P:NineP.Protocol.Messages.Tlink.Tag
+- markdown: The message tag, which pairs this message with its partner.
+- code: public ushort Tag { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+languageId: csharp
+metadata:
+  description: Creates a hard link (reference §3.4).

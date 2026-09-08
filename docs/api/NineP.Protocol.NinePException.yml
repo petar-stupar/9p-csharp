@@ -1,0 +1,156 @@
+### YamlMime:ApiPage
+title: Class NinePException
+body:
+- api1: Class NinePException
+  id: NineP_Protocol_NinePException
+  metadata:
+    uid: NineP.Protocol.NinePException
+    commentId: T:NineP.Protocol.NinePException
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol
+      url: NineP.Protocol.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    The base of every exception this library throws, carrying the 9P error value the core projects
+
+    onto the wire. Nothing else escapes a public method except the <xref href="System.ArgumentException" data-throw-if-not-resolved="false"></xref>
+
+    family, <xref href="System.ObjectDisposedException" data-throw-if-not-resolved="false"></xref> and <xref href="System.OperationCanceledException" data-throw-if-not-resolved="false"></xref>.
+- code: 'public class NinePException : Exception, ISerializable'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: Exception
+    url: https://learn.microsoft.com/dotnet/api/system.exception
+  - text: NinePException
+    url: NineP.Protocol.NinePException.html
+- h4: Derived
+- list:
+  - text: NinePProtocolException
+    url: NineP.Protocol.NinePProtocolException.html
+  - text: NinePVersionException
+    url: NineP.Protocol.NinePVersionException.html
+- h4: Implements
+- list:
+  - text: ISerializable
+    url: https://learn.microsoft.com/dotnet/api/system.runtime.serialization.iserializable
+- h4: Inherited Members
+- list:
+  - text: Exception.GetBaseException()
+    url: https://learn.microsoft.com/dotnet/api/system.exception.getbaseexception
+  - text: Exception.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.exception.gettype
+  - text: Exception.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.exception.tostring
+  - text: Exception.Data
+    url: https://learn.microsoft.com/dotnet/api/system.exception.data
+  - text: Exception.HelpLink
+    url: https://learn.microsoft.com/dotnet/api/system.exception.helplink
+  - text: Exception.HResult
+    url: https://learn.microsoft.com/dotnet/api/system.exception.hresult
+  - text: Exception.InnerException
+    url: https://learn.microsoft.com/dotnet/api/system.exception.innerexception
+  - text: Exception.Message
+    url: https://learn.microsoft.com/dotnet/api/system.exception.message
+  - text: Exception.Source
+    url: https://learn.microsoft.com/dotnet/api/system.exception.source
+  - text: Exception.StackTrace
+    url: https://learn.microsoft.com/dotnet/api/system.exception.stacktrace
+  - text: Exception.TargetSite
+    url: https://learn.microsoft.com/dotnet/api/system.exception.targetsite
+  - text: Exception.SerializeObjectState
+    url: https://learn.microsoft.com/dotnet/api/system.exception.serializeobjectstate
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: NinePException()
+  id: NineP_Protocol_NinePException__ctor
+  metadata:
+    uid: NineP.Protocol.NinePException.#ctor
+    commentId: M:NineP.Protocol.NinePException.#ctor
+- markdown: Creates an exception carrying the generic I/O error.
+- code: public NinePException()
+- api3: NinePException(string)
+  id: NineP_Protocol_NinePException__ctor_System_String_
+  metadata:
+    uid: NineP.Protocol.NinePException.#ctor(System.String)
+    commentId: M:NineP.Protocol.NinePException.#ctor(System.String)
+- markdown: Creates an exception with a message and the generic I/O error.
+- code: public NinePException(string message)
+- h4: Parameters
+- parameters:
+  - name: message
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The message for the developer, never for the wire.
+- api3: NinePException(string, Exception)
+  id: NineP_Protocol_NinePException__ctor_System_String_System_Exception_
+  metadata:
+    uid: NineP.Protocol.NinePException.#ctor(System.String,System.Exception)
+    commentId: M:NineP.Protocol.NinePException.#ctor(System.String,System.Exception)
+- markdown: Creates an exception with a message and the failure that caused it.
+- code: public NinePException(string message, Exception innerException)
+- h4: Parameters
+- parameters:
+  - name: message
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The message for the developer, never for the wire.
+  - name: innerException
+    type:
+    - text: Exception
+      url: https://learn.microsoft.com/dotnet/api/system.exception
+    description: The failure being wrapped.
+- api3: NinePException(NinePError)
+  id: NineP_Protocol_NinePException__ctor_NineP_Protocol_NinePError_
+  metadata:
+    uid: NineP.Protocol.NinePException.#ctor(NineP.Protocol.NinePError)
+    commentId: M:NineP.Protocol.NinePException.#ctor(NineP.Protocol.NinePError)
+- markdown: Creates an exception carrying a specific 9P error value.
+- code: public NinePException(NinePError error)
+- h4: Parameters
+- parameters:
+  - name: error
+    type:
+    - text: NinePError
+      url: NineP.Protocol.NinePError.html
+    description: The error the peer will be told about.
+- h2: Properties
+- api3: Error
+  id: NineP_Protocol_NinePException_Error
+  metadata:
+    uid: NineP.Protocol.NinePException.Error
+    commentId: P:NineP.Protocol.NinePException.Error
+- markdown: The 9P error this exception projects to on the wire.
+- code: public NinePError Error { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: NinePError
+      url: NineP.Protocol.NinePError.html
+languageId: csharp
+metadata:
+  description: >-
+    The base of every exception this library throws, carrying the 9P error value the core projects
+
+    onto the wire. Nothing else escapes a public method except the 
+
+    family,  and .

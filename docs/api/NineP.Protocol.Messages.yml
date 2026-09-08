@@ -1,0 +1,357 @@
+### YamlMime:ApiPage
+title: Namespace NineP.Protocol.Messages
+body:
+- api1: Namespace NineP.Protocol.Messages
+  id: NineP_Protocol_Messages
+  metadata:
+    uid: NineP.Protocol.Messages
+    commentId: N:NineP.Protocol.Messages
+- h3: Structs
+- parameters:
+  - type:
+      text: Rattach
+      url: NineP.Protocol.Messages.Rattach.html
+    description: Answers a Tattach with the qid of the root of the tree (reference §5.2).
+  - type:
+      text: Rauth
+      url: NineP.Protocol.Messages.Rauth.html
+    description: Accepts an authentication exchange and names the file behind the afid (reference §5.2).
+  - type:
+      text: Rclunk
+      url: NineP.Protocol.Messages.Rclunk.html
+    description: Confirms that a fid has been forgotten (reference §5.7).
+  - type:
+      text: Rcreate
+      url: NineP.Protocol.Messages.Rcreate.html
+    description: Answers a Tcreate with the qid of the new file and the iounit (reference §5.5).
+  - type:
+      text: Rerror
+      url: NineP.Protocol.Messages.Rerror.html
+    description: >-
+      The error reply of 9P2000 and 9P2000.u (reference §3.1). A .L session never carries one; it
+
+      carries Rlerror instead.
+  - type:
+      text: Rflush
+      url: NineP.Protocol.Messages.Rflush.html
+    description: >-
+      Confirms that a request has been abandoned; the client may reuse the old tag only now (reference
+
+      §8 rule 14).
+  - type:
+      text: Rfsync
+      url: NineP.Protocol.Messages.Rfsync.html
+    description: Confirms that a file has been committed (reference §3.4).
+  - type:
+      text: Rgetattr
+      url: NineP.Protocol.Messages.Rgetattr.html
+    description: >-
+      Answers a Tgetattr; the frame is always 160 bytes and fields not marked valid carry zero
+
+      (reference §4.6).
+  - type:
+      text: Rgetlock
+      url: NineP.Protocol.Messages.Rgetlock.html
+    description: Answers a Tgetlock; a type of Unlock means nothing conflicts (reference §4.8).
+  - type:
+      text: Rlcreate
+      url: NineP.Protocol.Messages.Rlcreate.html
+    description: Answers a Tlcreate with the qid of the new file and the iounit (reference §3.4).
+  - type:
+      text: Rlerror
+      url: NineP.Protocol.Messages.Rlerror.html
+    description: 'The error reply of 9P2000.L: an errno and nothing else (reference §3.1).'
+  - type:
+      text: Rlink
+      url: NineP.Protocol.Messages.Rlink.html
+    description: Confirms that a hard link has been created (reference §3.4).
+  - type:
+      text: Rlock
+      url: NineP.Protocol.Messages.Rlock.html
+    description: Answers a Tlock with the outcome; BLOCKED asks the client to retry (reference §4.8).
+  - type:
+      text: Rlopen
+      url: NineP.Protocol.Messages.Rlopen.html
+    description: Answers a Tlopen with the qid and the iounit (reference §3.4).
+  - type:
+      text: Rmkdir
+      url: NineP.Protocol.Messages.Rmkdir.html
+    description: Answers a Tmkdir with the qid of the new directory (reference §3.4).
+  - type:
+      text: Rmknod
+      url: NineP.Protocol.Messages.Rmknod.html
+    description: Answers a Tmknod with the qid of the new node (reference §3.4).
+  - type:
+      text: Ropen
+      url: NineP.Protocol.Messages.Ropen.html
+    description: Answers a Topen with the qid and the iounit the server will honour (reference §5.5).
+  - type:
+      text: Rread
+      url: NineP.Protocol.Messages.Rread.html
+    description: Answers a Tread with the bytes that were read; a short reply is not an error (reference §5.6).
+  - type:
+      text: Rreaddir
+      url: NineP.Protocol.Messages.Rreaddir.html
+    description: Answers a Treaddir with whole directory entries; a count of 0 means the end (reference §4.3).
+  - type:
+      text: Rreadlink
+      url: NineP.Protocol.Messages.Rreadlink.html
+    description: Answers a Treadlink with the link's target (reference §3.4).
+  - type:
+      text: Rremove
+      url: NineP.Protocol.Messages.Rremove.html
+    description: Confirms that a file has been removed (reference §5.7).
+  - type:
+      text: Rrename
+      url: NineP.Protocol.Messages.Rrename.html
+    description: Confirms a rename (reference §3.4).
+  - type:
+      text: Rrenameat
+      url: NineP.Protocol.Messages.Rrenameat.html
+    description: Confirms a rename (reference §3.4).
+  - type:
+      text: Rsetattr
+      url: NineP.Protocol.Messages.Rsetattr.html
+    description: Confirms an attribute change (reference §4.6).
+  - type:
+      text: Rstat
+      url: NineP.Protocol.Messages.Rstat.html
+    description: >-
+      Answers a Tstat with one stat record (reference §4.2). The record's size appears twice on the
+
+      wire.
+  - type:
+      text: Rstatfs
+      url: NineP.Protocol.Messages.Rstatfs.html
+    description: Answers a Tstatfs (reference §4.9).
+  - type:
+      text: Rsymlink
+      url: NineP.Protocol.Messages.Rsymlink.html
+    description: Answers a Tsymlink with the qid of the new link (reference §3.4).
+  - type:
+      text: Runlinkat
+      url: NineP.Protocol.Messages.Runlinkat.html
+    description: Confirms a removal (reference §3.4).
+  - type:
+      text: Rversion
+      url: NineP.Protocol.Messages.Rversion.html
+    description: >-
+      Answers a Tversion with the dialect and size the server agrees to, or "unknown" (reference
+
+      §5.1). An "unknown" reply echoes the client's msize, never the server's.
+  - type:
+      text: Rwalk
+      url: NineP.Protocol.Messages.Rwalk.html
+    description: >-
+      Answers a Twalk with one qid per element that was walked (reference §5.4). Fewer qids than names
+
+      is a partial walk, and NewFid is not bound.
+  - type:
+      text: Rwrite
+      url: NineP.Protocol.Messages.Rwrite.html
+    description: >-
+      Answers a Twrite with how many bytes were written; fewer than asked is a short write, not an
+
+      error (reference §5.6).
+  - type:
+      text: Rwstat
+      url: NineP.Protocol.Messages.Rwstat.html
+    description: Confirms that a file has been changed (reference §5.8).
+  - type:
+      text: Rxattrcreate
+      url: NineP.Protocol.Messages.Rxattrcreate.html
+    description: Confirms that a fid is ready to take an attribute's bytes (reference §5.9).
+  - type:
+      text: Rxattrwalk
+      url: NineP.Protocol.Messages.Rxattrwalk.html
+    description: Answers a Txattrwalk with the size of the attribute (reference §5.9).
+  - type:
+      text: StatRecord
+      url: NineP.Protocol.Messages.StatRecord.html
+    description: >-
+      A 9P2000 / 9P2000.u stat record (reference §4.2). In a 9P2000 session <xref href="NineP.Protocol.Messages.StatRecord.Extension" data-throw-if-not-resolved="false"></xref>
+
+      is null and the three numeric ids are <xref href="NineP.Protocol.Constants.NONUNAME" data-throw-if-not-resolved="false"></xref>: which fields are on
+
+      the wire is decided by the session dialect, never by sniffing bytes.
+  - type:
+      text: Tattach
+      url: NineP.Protocol.Messages.Tattach.html
+    description: Introduces a fid to the root of a tree, as the user the afid authenticated (reference §5.2).
+  - type:
+      text: Tauth
+      url: NineP.Protocol.Messages.Tauth.html
+    description: >-
+      Opens an afid for the authentication exchange (reference §5.2). What flows over the afid is not
+
+      9P's business.
+  - type:
+      text: Tclunk
+      url: NineP.Protocol.Messages.Tclunk.html
+    description: Forgets a fid (reference §5.7). The fid is gone whatever the reply says.
+  - type:
+      text: Tcreate
+      url: NineP.Protocol.Messages.Tcreate.html
+    description: Creates a file in the directory a fid names and opens the fid onto it (reference §5.5).
+  - type:
+      text: Tflush
+      url: NineP.Protocol.Messages.Tflush.html
+    description: Abandons an outstanding request (reference §5.3).
+  - type:
+      text: Tfsync
+      url: NineP.Protocol.Messages.Tfsync.html
+    description: >-
+      Commits a file to stable storage (reference §3.4). Encoders always emit datasync[4]; decoders
+
+      also accept the 11-byte form hugelgupf/p9 sends.
+  - type:
+      text: Tgetattr
+      url: NineP.Protocol.Messages.Tgetattr.html
+    description: Asks for the attributes of a file (reference §4.6).
+  - type:
+      text: Tgetlock
+      url: NineP.Protocol.Messages.Tgetlock.html
+    description: Asks which lock, if any, conflicts with a range (reference §4.8).
+  - type:
+      text: Tlcreate
+      url: NineP.Protocol.Messages.Tlcreate.html
+    description: Creates a file in the directory a fid names and opens the fid onto it (reference §3.4).
+  - type:
+      text: Tlink
+      url: NineP.Protocol.Messages.Tlink.html
+    description: Creates a hard link (reference §3.4).
+  - type:
+      text: Tlock
+      url: NineP.Protocol.Messages.Tlock.html
+    description: Acquires or releases a byte-range lock (reference §4.8).
+  - type:
+      text: Tlopen
+      url: NineP.Protocol.Messages.Tlopen.html
+    description: Opens an existing file with Linux open(2) flags (reference §3.4).
+  - type:
+      text: Tmkdir
+      url: NineP.Protocol.Messages.Tmkdir.html
+    description: Creates a directory (reference §3.4).
+  - type:
+      text: Tmknod
+      url: NineP.Protocol.Messages.Tmknod.html
+    description: Creates a device, socket or named pipe (reference §3.4).
+  - type:
+      text: Topen
+      url: NineP.Protocol.Messages.Topen.html
+    description: >-
+      Opens an existing file (reference §5.5). The access mode is the low two bits of Mode; OAPPEND is
+
+      a flag.
+  - type:
+      text: Tread
+      url: NineP.Protocol.Messages.Tread.html
+    description: Reads bytes from an open fid (reference §5.6).
+  - type:
+      text: Treaddir
+      url: NineP.Protocol.Messages.Treaddir.html
+    description: Reads packed directory entries (reference §4.3). In .L this is the only way to read a directory.
+  - type:
+      text: Treadlink
+      url: NineP.Protocol.Messages.Treadlink.html
+    description: Reads the target of a symbolic link (reference §3.4).
+  - type:
+      text: Tremove
+      url: NineP.Protocol.Messages.Tremove.html
+    description: >-
+      Removes the file a fid names and forgets the fid (reference §5.7). The fid is forgotten even
+
+      when the removal fails.
+  - type:
+      text: Trename
+      url: NineP.Protocol.Messages.Trename.html
+    description: Renames a file into another directory (reference §3.4).
+  - type:
+      text: Trenameat
+      url: NineP.Protocol.Messages.Trenameat.html
+    description: Renames by directory fid and name, without a fid on the file itself (reference §3.4).
+  - type:
+      text: Tsetattr
+      url: NineP.Protocol.Messages.Tsetattr.html
+    description: >-
+      Changes the attributes of a file (reference §4.6). A time bit without its _SET twin means "use
+
+      the server's clock".
+  - type:
+      text: Tstat
+      url: NineP.Protocol.Messages.Tstat.html
+    description: Asks for the stat record of the file a fid names (reference §5.8).
+  - type:
+      text: Tstatfs
+      url: NineP.Protocol.Messages.Tstatfs.html
+    description: Asks for statistics about the filesystem behind a fid (reference §4.9).
+  - type:
+      text: Tsymlink
+      url: NineP.Protocol.Messages.Tsymlink.html
+    description: Creates a symbolic link (reference §3.4).
+  - type:
+      text: Tunlinkat
+      url: NineP.Protocol.Messages.Tunlinkat.html
+    description: Removes by directory fid and name (reference §3.4).
+  - type:
+      text: Tversion
+      url: NineP.Protocol.Messages.Tversion.html
+    description: >-
+      Proposes a dialect and a message size (reference §3.1). It resets the session: every fid is
+
+      clunked and every outstanding request is abandoned.
+  - type:
+      text: Twalk
+      url: NineP.Protocol.Messages.Twalk.html
+    description: >-
+      Moves a fid through the tree one element at a time (reference §5.4). At most MAXWELEM (16)
+
+      elements per message.
+  - type:
+      text: Twrite
+      url: NineP.Protocol.Messages.Twrite.html
+    description: >-
+      Writes bytes to an open fid (reference §5.6). The count must equal size - 23 (reference §8 rule
+
+      4).
+  - type:
+      text: Twstat
+      url: NineP.Protocol.Messages.Twstat.html
+    description: >-
+      Changes a file through a stat record (reference §5.8). The change is atomic: all of it or none.
+
+      A record whose every field is "don't touch" is an fsync request.
+  - type:
+      text: Txattrcreate
+      url: NineP.Protocol.Messages.Txattrcreate.html
+    description: Prepares a fid to write an extended attribute (reference §5.9).
+  - type:
+      text: Txattrwalk
+      url: NineP.Protocol.Messages.Txattrwalk.html
+    description: Walks a fid onto an extended attribute, or onto the attribute list (reference §5.9).
+- h3: Interfaces
+- parameters:
+  - type:
+      text: IMessage
+      url: NineP.Protocol.Messages.IMessage.html
+    description: >-
+      Implemented by every wire-legal message record, tying a record to its type number. The type is
+
+      a static abstract member so that the codec can be generic over the record without boxing it.
+- h3: Enums
+- parameters:
+  - type:
+      text: GetAttrMask
+      url: NineP.Protocol.Messages.GetAttrMask.html
+    description: >-
+      The <code>Tgetattr.request_mask</code> and <code>Rgetattr.valid</code> bits (reference §4.6). A server
+
+      always sends the full 160-byte reply; fields it did not mark valid carry zero.
+  - type:
+      text: SetAttrMask
+      url: NineP.Protocol.Messages.SetAttrMask.html
+    description: >-
+      The <code>Tsetattr.valid</code> bits (reference §4.6). A time bit without its <code>_SET</code> twin means
+
+      "use the server's current time"; with it, use the value the client supplied.
+languageId: csharp

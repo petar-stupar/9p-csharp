@@ -1,0 +1,113 @@
+### YamlMime:ApiPage
+title: Struct Qid
+body:
+- api1: Struct Qid
+  id: NineP_Protocol_Qid
+  metadata:
+    uid: NineP.Protocol.Qid
+    commentId: T:NineP.Protocol.Qid
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol
+      url: NineP.Protocol.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: 'A 9P qid: <code>type[1] version[4] path[8]</code> (reference §4.1).'
+- code: 'public readonly record struct Qid : IEquatable<Qid>'
+- h4: Implements
+- list:
+  - text: IEquatable<Qid>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: Qid(QidType, uint, ulong)
+  id: NineP_Protocol_Qid__ctor_NineP_Protocol_QidType_System_UInt32_System_UInt64_
+  metadata:
+    uid: NineP.Protocol.Qid.#ctor(NineP.Protocol.QidType,System.UInt32,System.UInt64)
+    commentId: M:NineP.Protocol.Qid.#ctor(NineP.Protocol.QidType,System.UInt32,System.UInt64)
+- markdown: 'A 9P qid: <code>type[1] version[4] path[8]</code> (reference §4.1).'
+- code: public Qid(QidType Type, uint Version, ulong Path)
+- h4: Parameters
+- parameters:
+  - name: Type
+    type:
+    - text: QidType
+      url: NineP.Protocol.QidType.html
+    description: The type bits, which mirror the high 8 bits of the file's mode word.
+  - name: Version
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: A number that changes whenever the file changes.
+  - name: Path
+    type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+    description: The identity of the file within the server, unique for the server's life.
+- h2: Fields
+- api3: WireSize
+  id: NineP_Protocol_Qid_WireSize
+  metadata:
+    uid: NineP.Protocol.Qid.WireSize
+    commentId: F:NineP.Protocol.Qid.WireSize
+- markdown: The 13 bytes this qid occupies on the wire.
+- code: public const int WireSize = 13
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- h2: Properties
+- api3: Path
+  id: NineP_Protocol_Qid_Path
+  metadata:
+    uid: NineP.Protocol.Qid.Path
+    commentId: P:NineP.Protocol.Qid.Path
+- markdown: The identity of the file within the server, unique for the server's life.
+- code: public ulong Path { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+- api3: Type
+  id: NineP_Protocol_Qid_Type
+  metadata:
+    uid: NineP.Protocol.Qid.Type
+    commentId: P:NineP.Protocol.Qid.Type
+- markdown: The type bits, which mirror the high 8 bits of the file's mode word.
+- code: public QidType Type { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: QidType
+      url: NineP.Protocol.QidType.html
+- api3: Version
+  id: NineP_Protocol_Qid_Version
+  metadata:
+    uid: NineP.Protocol.Qid.Version
+    commentId: P:NineP.Protocol.Qid.Version
+- markdown: A number that changes whenever the file changes.
+- code: public uint Version { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+languageId: csharp
+metadata:
+  description: 'A 9P qid: type[1] version[4] path[8] (reference §4.1).'

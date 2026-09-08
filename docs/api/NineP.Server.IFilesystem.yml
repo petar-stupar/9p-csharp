@@ -1,0 +1,72 @@
+### YamlMime:ApiPage
+title: Interface IFilesystem
+body:
+- api1: Interface IFilesystem
+  id: NineP_Server_IFilesystem
+  metadata:
+    uid: NineP.Server.IFilesystem
+    commentId: T:NineP.Server.IFilesystem
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Server
+      url: NineP.Server.html
+  - name: Assembly
+    value: NineP.Server.dll
+- markdown: >-
+    The tree a server serves (architecture §4): one root directory per authenticated attach. This
+
+    is the only interface a developer must implement, and it is handed the identity the
+
+    authenticator produced, never the <code>uname</code> the client claimed.
+- code: public interface IFilesystem
+- h2: Methods
+- api3: AttachAsync(Identity, string, CancellationToken)
+  id: NineP_Server_IFilesystem_AttachAsync_NineP_Protocol_Auth_Identity_System_String_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Server.IFilesystem.AttachAsync(NineP.Protocol.Auth.Identity,System.String,System.Threading.CancellationToken)
+    commentId: M:NineP.Server.IFilesystem.AttachAsync(NineP.Protocol.Auth.Identity,System.String,System.Threading.CancellationToken)
+- markdown: Returns the root directory for this identity and tree name.
+- code: ValueTask<IDirectoryHandler> AttachAsync(Identity identity, string aname, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: identity
+    type:
+    - text: Identity
+      url: NineP.Protocol.Auth.Identity.html
+    description: Who the session runs as.
+  - name: aname
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The tree the client asked for; "" is the default tree.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the attach.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: IDirectoryHandler
+      url: NineP.Server.IDirectoryHandler.html
+    - '>'
+    description: The root directory handler.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: This identity may not attach to this tree.
+languageId: csharp
+metadata:
+  description: >-
+    The tree a server serves (architecture §4): one root directory per authenticated attach. This
+
+    is the only interface a developer must implement, and it is handed the identity the
+
+    authenticator produced, never the uname the client claimed.

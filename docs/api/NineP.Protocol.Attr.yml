@@ -1,0 +1,321 @@
+### YamlMime:ApiPage
+title: Class Attr
+body:
+- api1: Class Attr
+  id: NineP_Protocol_Attr
+  metadata:
+    uid: NineP.Protocol.Attr
+    commentId: T:NineP.Protocol.Attr
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol
+      url: NineP.Protocol.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    The dialect-neutral attributes of one file (reference §7). A handler produces exactly one of
+
+    these and the protocol layer projects it into a 9P2000 stat record, a 9P2000.u stat record or
+
+    an <code>Rgetattr</code>; no handler ever writes a dialect-specific shape itself.
+- code: 'public sealed record Attr : IEquatable<Attr>'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: Attr
+    url: NineP.Protocol.Attr.html
+- h4: Implements
+- list:
+  - text: IEquatable<Attr>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Properties
+- api3: ATime
+  id: NineP_Protocol_Attr_ATime
+  metadata:
+    uid: NineP.Protocol.Attr.ATime
+    commentId: P:NineP.Protocol.Attr.ATime
+- markdown: The last access time.
+- code: public TimeSpec ATime { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: TimeSpec
+      url: NineP.Protocol.TimeSpec.html
+- api3: BTime
+  id: NineP_Protocol_Attr_BTime
+  metadata:
+    uid: NineP.Protocol.Attr.BTime
+    commentId: P:NineP.Protocol.Attr.BTime
+- markdown: The creation time (.L only; zero when unknown).
+- code: public TimeSpec BTime { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: TimeSpec
+      url: NineP.Protocol.TimeSpec.html
+- api3: BlockSize
+  id: NineP_Protocol_Attr_BlockSize
+  metadata:
+    uid: NineP.Protocol.Attr.BlockSize
+    commentId: P:NineP.Protocol.Attr.BlockSize
+- markdown: The preferred I/O block size an <code>Rgetattr</code> reports.
+- code: public ulong BlockSize { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+- api3: Blocks
+  id: NineP_Protocol_Attr_Blocks
+  metadata:
+    uid: NineP.Protocol.Attr.Blocks
+    commentId: P:NineP.Protocol.Attr.Blocks
+- markdown: The allocated 512-byte block count an <code>Rgetattr</code> reports.
+- code: public ulong Blocks { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+- api3: CTime
+  id: NineP_Protocol_Attr_CTime
+  metadata:
+    uid: NineP.Protocol.Attr.CTime
+    commentId: P:NineP.Protocol.Attr.CTime
+- markdown: The last status-change time (.L only).
+- code: public TimeSpec CTime { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: TimeSpec
+      url: NineP.Protocol.TimeSpec.html
+- api3: DataVersion
+  id: NineP_Protocol_Attr_DataVersion
+  metadata:
+    uid: NineP.Protocol.Attr.DataVersion
+    commentId: P:NineP.Protocol.Attr.DataVersion
+- markdown: The data version (.L only).
+- code: public ulong DataVersion { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+- api3: Flags
+  id: NineP_Protocol_Attr_Flags
+  metadata:
+    uid: NineP.Protocol.Attr.Flags
+    commentId: P:NineP.Protocol.Attr.Flags
+- markdown: 'Non-permission mode bits: append, exclusive, temporary, auth.'
+- code: public FileFlags Flags { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: FileFlags
+      url: NineP.Protocol.FileFlags.html
+- api3: Gen
+  id: NineP_Protocol_Attr_Gen
+  metadata:
+    uid: NineP.Protocol.Attr.Gen
+    commentId: P:NineP.Protocol.Attr.Gen
+- markdown: The generation number (.L only).
+- code: public ulong Gen { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+- api3: Gid
+  id: NineP_Protocol_Attr_Gid
+  metadata:
+    uid: NineP.Protocol.Attr.Gid
+    commentId: P:NineP.Protocol.Attr.Gid
+- markdown: The numeric group (.u <code>n_gid</code>, .L <code>gid</code>); NONUNAME when unknown.
+- code: public uint Gid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: GroupName
+  id: NineP_Protocol_Attr_GroupName
+  metadata:
+    uid: NineP.Protocol.Attr.GroupName
+    commentId: P:NineP.Protocol.Attr.GroupName
+- markdown: The textual group, which is the 9P2000 stat record's <code>gid</code>.
+- code: public string GroupName { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: Kind
+  id: NineP_Protocol_Attr_Kind
+  metadata:
+    uid: NineP.Protocol.Attr.Kind
+    commentId: P:NineP.Protocol.Attr.Kind
+- markdown: The file type (reference §7).
+- code: public required FileKind Kind { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: FileKind
+      url: NineP.Protocol.FileKind.html
+- api3: MTime
+  id: NineP_Protocol_Attr_MTime
+  metadata:
+    uid: NineP.Protocol.Attr.MTime
+    commentId: P:NineP.Protocol.Attr.MTime
+- markdown: The last modification time.
+- code: public TimeSpec MTime { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: TimeSpec
+      url: NineP.Protocol.TimeSpec.html
+- api3: ModifierName
+  id: NineP_Protocol_Attr_ModifierName
+  metadata:
+    uid: NineP.Protocol.Attr.ModifierName
+    commentId: P:NineP.Protocol.Attr.ModifierName
+- markdown: The textual last modifier, which is the 9P2000 stat record's <code>muid</code>.
+- code: public string ModifierName { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: ModifierUid
+  id: NineP_Protocol_Attr_ModifierUid
+  metadata:
+    uid: NineP.Protocol.Attr.ModifierUid
+    commentId: P:NineP.Protocol.Attr.ModifierUid
+- markdown: The numeric last modifier (.u <code>n_muid</code>); NONUNAME when unknown.
+- code: public uint ModifierUid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: NLink
+  id: NineP_Protocol_Attr_NLink
+  metadata:
+    uid: NineP.Protocol.Attr.NLink
+    commentId: P:NineP.Protocol.Attr.NLink
+- markdown: The hard-link count; 1 for a synthetic file.
+- code: public ulong NLink { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+- api3: Perm
+  id: NineP_Protocol_Attr_Perm
+  metadata:
+    uid: NineP.Protocol.Attr.Perm
+    commentId: P:NineP.Protocol.Attr.Perm
+- markdown: 'Permission bits only: 0777 plus setuid, setgid and sticky (the 07777 mask).'
+- code: public required uint Perm { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Qid
+  id: NineP_Protocol_Attr_Qid
+  metadata:
+    uid: NineP.Protocol.Attr.Qid
+    commentId: P:NineP.Protocol.Attr.Qid
+- markdown: The file's qid; its type byte must agree with <xref href="NineP.Protocol.Attr.Kind" data-throw-if-not-resolved="false"></xref> and <xref href="NineP.Protocol.Attr.Flags" data-throw-if-not-resolved="false"></xref>.
+- code: public required Qid Qid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: Qid
+      url: NineP.Protocol.Qid.html
+- api3: Rdev
+  id: NineP_Protocol_Attr_Rdev
+  metadata:
+    uid: NineP.Protocol.Attr.Rdev
+    commentId: P:NineP.Protocol.Attr.Rdev
+- markdown: The device numbers of a character or block device; null for anything else.
+- code: public DeviceId? Rdev { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: DeviceId
+      url: NineP.Protocol.DeviceId.html
+    - '?'
+- api3: Size
+  id: NineP_Protocol_Attr_Size
+  metadata:
+    uid: NineP.Protocol.Attr.Size
+    commentId: P:NineP.Protocol.Attr.Size
+- markdown: The file length in bytes; the projection reports 0 for a directory (reference §4.2).
+- code: public ulong Size { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+- api3: SymlinkTarget
+  id: NineP_Protocol_Attr_SymlinkTarget
+  metadata:
+    uid: NineP.Protocol.Attr.SymlinkTarget
+    commentId: P:NineP.Protocol.Attr.SymlinkTarget
+- markdown: The target of a <xref href="NineP.Protocol.FileKind.Symlink" data-throw-if-not-resolved="false"></xref>; null for anything else.
+- code: public string? SymlinkTarget { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+- api3: Uid
+  id: NineP_Protocol_Attr_Uid
+  metadata:
+    uid: NineP.Protocol.Attr.Uid
+    commentId: P:NineP.Protocol.Attr.Uid
+- markdown: The numeric owner (.u <code>n_uid</code>, .L <code>uid</code>); NONUNAME when unknown.
+- code: public uint Uid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: UserName
+  id: NineP_Protocol_Attr_UserName
+  metadata:
+    uid: NineP.Protocol.Attr.UserName
+    commentId: P:NineP.Protocol.Attr.UserName
+- markdown: The textual owner, which is the 9P2000 stat record's <code>uid</code>.
+- code: public string UserName { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+languageId: csharp
+metadata:
+  description: >-
+    The dialect-neutral attributes of one file (reference §7). A handler produces exactly one of
+
+    these and the protocol layer projects it into a 9P2000 stat record, a 9P2000.u stat record or
+
+    an Rgetattr; no handler ever writes a dialect-specific shape itself.

@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>NineP.Server</PackageId>
+    <Description>A 9P server whose core owns the protocol and whose filesystems are written as per-file-type handlers.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../NineP.Protocol/NineP.Protocol.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Label="the logging abstraction of IR-1">
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+  </ItemGroup>
+
+  <ItemGroup Label="tests see the internals of §5.9">
+    <InternalsVisibleTo Include="NineP.Protocol.Tests" />
+    <InternalsVisibleTo Include="NineP.Client.Tests" />
+    <InternalsVisibleTo Include="NineP.Server.Tests" />
+    <InternalsVisibleTo Include="NineP.TestSupport" />
+    <InternalsVisibleTo Include="NineP.Fuzz" />
+    <InternalsVisibleTo Include="NineP.Benchmarks" />
+  </ItemGroup>
+
+</Project>

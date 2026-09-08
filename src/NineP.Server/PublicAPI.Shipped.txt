@@ -1,0 +1,160 @@
+#nullable enable
+NineP.Server.CreateRequest
+NineP.Server.CreateRequest.<Clone>$() -> NineP.Server.CreateRequest!
+NineP.Server.CreateRequest.CreateRequest() -> void
+NineP.Server.CreateRequest.Equals(NineP.Server.CreateRequest? other) -> bool
+NineP.Server.CreateRequest.Flags.get -> NineP.Protocol.OpenFlags
+NineP.Server.CreateRequest.Flags.init -> void
+NineP.Server.CreateRequest.Gid.get -> uint
+NineP.Server.CreateRequest.Gid.init -> void
+NineP.Server.CreateRequest.Identity.get -> NineP.Protocol.Auth.Identity!
+NineP.Server.CreateRequest.Identity.init -> void
+NineP.Server.CreateRequest.Kind.get -> NineP.Protocol.FileKind
+NineP.Server.CreateRequest.Kind.init -> void
+NineP.Server.CreateRequest.Mode.get -> NineP.Protocol.OpenMode
+NineP.Server.CreateRequest.Mode.init -> void
+NineP.Server.CreateRequest.Name.get -> string!
+NineP.Server.CreateRequest.Name.init -> void
+NineP.Server.CreateRequest.Perm.get -> uint
+NineP.Server.CreateRequest.Perm.init -> void
+NineP.Server.CreateRequest.Rdev.get -> NineP.Protocol.DeviceId?
+NineP.Server.CreateRequest.Rdev.init -> void
+NineP.Server.CreateRequest.Target.get -> string?
+NineP.Server.CreateRequest.Target.init -> void
+NineP.Server.DirectoryListing
+NineP.Server.DirectoryListing.Deconstruct(out System.Collections.Generic.IReadOnlyList<NineP.Protocol.DirEntry>! Entries, out ulong NextCursor, out bool EndOfDirectory) -> void
+NineP.Server.DirectoryListing.DirectoryListing() -> void
+NineP.Server.DirectoryListing.DirectoryListing(System.Collections.Generic.IReadOnlyList<NineP.Protocol.DirEntry>! Entries, ulong NextCursor, bool EndOfDirectory) -> void
+NineP.Server.DirectoryListing.EndOfDirectory.get -> bool
+NineP.Server.DirectoryListing.EndOfDirectory.init -> void
+NineP.Server.DirectoryListing.Entries.get -> System.Collections.Generic.IReadOnlyList<NineP.Protocol.DirEntry>!
+NineP.Server.DirectoryListing.Entries.init -> void
+NineP.Server.DirectoryListing.Equals(NineP.Server.DirectoryListing other) -> bool
+NineP.Server.DirectoryListing.NextCursor.get -> ulong
+NineP.Server.DirectoryListing.NextCursor.init -> void
+NineP.Server.IDirectoryHandler
+NineP.Server.IDirectoryHandler.CreateAsync(NineP.Server.CreateRequest! request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Server.IHandler!>
+NineP.Server.IDirectoryHandler.LookupAsync(string! name, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Server.IHandler?>
+NineP.Server.IDirectoryHandler.ReadDirAsync(ulong cursor, int max, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Server.DirectoryListing>
+NineP.Server.IDirectoryHandler.RemoveAsync(string! name, NineP.Protocol.FileKind kind, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask
+NineP.Server.IDirectoryHandler.RenameAsync(string! oldName, NineP.Server.IDirectoryHandler! newParent, string! newName, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask
+NineP.Server.IFileHandler
+NineP.Server.IFileHandler.OpenAsync(NineP.Protocol.OpenMode mode, NineP.Protocol.OpenFlags flags, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Server.IOpenFile!>
+NineP.Server.IFilesystem
+NineP.Server.IFilesystem.AttachAsync(NineP.Protocol.Auth.Identity! identity, string! aname, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Server.IDirectoryHandler!>
+NineP.Server.IHandler
+NineP.Server.IHandler.ClunkAsync(bool wasOpen, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask
+NineP.Server.IHandler.FsyncAsync(bool dataOnly, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask
+NineP.Server.IHandler.GetAttrAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Attr!>
+NineP.Server.IHandler.Qid.get -> NineP.Protocol.Qid
+NineP.Server.IHandler.SetAttrAsync(NineP.Protocol.SetAttr! update, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask
+NineP.Server.ILinkCapability
+NineP.Server.ILinkCapability.LinkAsync(string! name, NineP.Server.IHandler! target, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask
+NineP.Server.ILockCapability
+NineP.Server.ILockCapability.GetLockAsync(NineP.Protocol.LockRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.LockQueryResult>
+NineP.Server.ILockCapability.LockAsync(NineP.Protocol.LockRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.LockStatus>
+NineP.Server.IOpenFile
+NineP.Server.IOpenFile.GetSizeAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<ulong>
+NineP.Server.IOpenFile.ReadAsync(ulong offset, System.Memory<byte> buffer, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<int>
+NineP.Server.IOpenFile.WriteAsync(ulong offset, System.ReadOnlyMemory<byte> data, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<int>
+NineP.Server.IRequestLogSink
+NineP.Server.IRequestLogSink.Record(in NineP.Server.RequestLogEntry entry) -> void
+NineP.Server.IStatFsCapability
+NineP.Server.IStatFsCapability.StatFsAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.StatFs>
+NineP.Server.ISymlinkHandler
+NineP.Server.ISymlinkHandler.ReadlinkAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<string!>
+NineP.Server.IXattrHandler
+NineP.Server.IXattrHandler.GetXattrAsync(string! name, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<System.ReadOnlyMemory<byte>>
+NineP.Server.IXattrHandler.ListXattrAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<System.ReadOnlyMemory<byte>>
+NineP.Server.IXattrHandler.RemoveXattrAsync(string! name, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask
+NineP.Server.IXattrHandler.SetXattrAsync(string! name, System.ReadOnlyMemory<byte> value, NineP.Protocol.XattrFlags flags, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask
+NineP.Server.NinePServer
+NineP.Server.NinePServer.Counters.get -> NineP.Server.ServerCounters!
+NineP.Server.NinePServer.DisposeAsync() -> System.Threading.Tasks.ValueTask
+NineP.Server.NinePServer.Endpoints.get -> System.Collections.Generic.IReadOnlyList<NineP.Protocol.Transports.NinePAddress>!
+NineP.Server.NinePServer.ListeningAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask
+NineP.Server.NinePServer.NinePServer(NineP.Server.ServerOptions! options) -> void
+NineP.Server.NinePServer.ServeAsync(NineP.Server.IFilesystem! filesystem, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task!
+NineP.Server.NinePServer.StopAsync(System.TimeSpan graceful, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask
+NineP.Server.RequestLogEntry
+NineP.Server.RequestLogEntry.Deconstruct(out NineP.Protocol.Auth.Identity? Identity, out NineP.Protocol.MessageType Request, out string! Summary, out NineP.Protocol.MessageType Reply, out NineP.Protocol.NinePError? Error, out System.TimeSpan Duration) -> void
+NineP.Server.RequestLogEntry.Duration.get -> System.TimeSpan
+NineP.Server.RequestLogEntry.Duration.init -> void
+NineP.Server.RequestLogEntry.Equals(NineP.Server.RequestLogEntry other) -> bool
+NineP.Server.RequestLogEntry.Error.get -> NineP.Protocol.NinePError?
+NineP.Server.RequestLogEntry.Error.init -> void
+NineP.Server.RequestLogEntry.Identity.get -> NineP.Protocol.Auth.Identity?
+NineP.Server.RequestLogEntry.Identity.init -> void
+NineP.Server.RequestLogEntry.Reply.get -> NineP.Protocol.MessageType
+NineP.Server.RequestLogEntry.Reply.init -> void
+NineP.Server.RequestLogEntry.Request.get -> NineP.Protocol.MessageType
+NineP.Server.RequestLogEntry.Request.init -> void
+NineP.Server.RequestLogEntry.RequestLogEntry() -> void
+NineP.Server.RequestLogEntry.RequestLogEntry(NineP.Protocol.Auth.Identity? Identity, NineP.Protocol.MessageType Request, string! Summary, NineP.Protocol.MessageType Reply, NineP.Protocol.NinePError? Error, System.TimeSpan Duration) -> void
+NineP.Server.RequestLogEntry.Summary.get -> string!
+NineP.Server.RequestLogEntry.Summary.init -> void
+NineP.Server.ServerCounters
+NineP.Server.ServerCounters.<Clone>$() -> NineP.Server.ServerCounters!
+NineP.Server.ServerCounters.BytesRead.get -> long
+NineP.Server.ServerCounters.BytesRead.init -> void
+NineP.Server.ServerCounters.BytesWritten.get -> long
+NineP.Server.ServerCounters.BytesWritten.init -> void
+NineP.Server.ServerCounters.ConnectionsAccepted.get -> long
+NineP.Server.ServerCounters.ConnectionsAccepted.init -> void
+NineP.Server.ServerCounters.ConnectionsOpen.get -> long
+NineP.Server.ServerCounters.ConnectionsOpen.init -> void
+NineP.Server.ServerCounters.ConnectionsRefused.get -> long
+NineP.Server.ServerCounters.ConnectionsRefused.init -> void
+NineP.Server.ServerCounters.Equals(NineP.Server.ServerCounters? other) -> bool
+NineP.Server.ServerCounters.ErrorsByErrno.get -> System.Collections.Generic.IReadOnlyDictionary<int, long>!
+NineP.Server.ServerCounters.ErrorsByErrno.init -> void
+NineP.Server.ServerCounters.MessagesByType.get -> System.Collections.Generic.IReadOnlyDictionary<NineP.Protocol.MessageType, long>!
+NineP.Server.ServerCounters.MessagesByType.init -> void
+NineP.Server.ServerCounters.ProtocolErrorsByKind.get -> System.Collections.Generic.IReadOnlyDictionary<NineP.Protocol.ProtocolErrorKind, long>!
+NineP.Server.ServerCounters.ProtocolErrorsByKind.init -> void
+NineP.Server.ServerCounters.ServerCounters() -> void
+NineP.Server.ServerOptions
+NineP.Server.ServerOptions.<Clone>$() -> NineP.Server.ServerOptions!
+NineP.Server.ServerOptions.Authenticator.get -> NineP.Protocol.Auth.IAuthenticator?
+NineP.Server.ServerOptions.Authenticator.init -> void
+NineP.Server.ServerOptions.Dialects.get -> System.Collections.Generic.IReadOnlySet<NineP.Protocol.Dialect>!
+NineP.Server.ServerOptions.Dialects.init -> void
+NineP.Server.ServerOptions.Equals(NineP.Server.ServerOptions? other) -> bool
+NineP.Server.ServerOptions.Limits.get -> NineP.Protocol.Limits!
+NineP.Server.ServerOptions.Limits.init -> void
+NineP.Server.ServerOptions.Listen.get -> System.Collections.Generic.IReadOnlyList<NineP.Protocol.Transports.NinePAddress>!
+NineP.Server.ServerOptions.Listen.init -> void
+NineP.Server.ServerOptions.Logger.get -> Microsoft.Extensions.Logging.ILogger!
+NineP.Server.ServerOptions.Logger.init -> void
+NineP.Server.ServerOptions.RequestLog.get -> NineP.Server.IRequestLogSink?
+NineP.Server.ServerOptions.RequestLog.init -> void
+NineP.Server.ServerOptions.ServerOptions() -> void
+NineP.Server.ServerOptions.TimeProvider.get -> System.TimeProvider!
+NineP.Server.ServerOptions.TimeProvider.init -> void
+NineP.Server.ServerOptions.Transports.get -> System.Collections.Generic.IReadOnlyList<NineP.Protocol.Transports.ITransport!>!
+NineP.Server.ServerOptions.Transports.init -> void
+override NineP.Server.CreateRequest.Equals(object? obj) -> bool
+override NineP.Server.CreateRequest.GetHashCode() -> int
+override NineP.Server.CreateRequest.ToString() -> string!
+override NineP.Server.DirectoryListing.GetHashCode() -> int
+override NineP.Server.RequestLogEntry.GetHashCode() -> int
+override NineP.Server.ServerCounters.Equals(object? obj) -> bool
+override NineP.Server.ServerCounters.GetHashCode() -> int
+override NineP.Server.ServerCounters.ToString() -> string!
+override NineP.Server.ServerOptions.Equals(object? obj) -> bool
+override NineP.Server.ServerOptions.GetHashCode() -> int
+override NineP.Server.ServerOptions.ToString() -> string!
+static NineP.Server.CreateRequest.operator !=(NineP.Server.CreateRequest? left, NineP.Server.CreateRequest? right) -> bool
+static NineP.Server.CreateRequest.operator ==(NineP.Server.CreateRequest? left, NineP.Server.CreateRequest? right) -> bool
+static NineP.Server.DirectoryListing.operator !=(NineP.Server.DirectoryListing left, NineP.Server.DirectoryListing right) -> bool
+static NineP.Server.DirectoryListing.operator ==(NineP.Server.DirectoryListing left, NineP.Server.DirectoryListing right) -> bool
+static NineP.Server.RequestLogEntry.operator !=(NineP.Server.RequestLogEntry left, NineP.Server.RequestLogEntry right) -> bool
+static NineP.Server.RequestLogEntry.operator ==(NineP.Server.RequestLogEntry left, NineP.Server.RequestLogEntry right) -> bool
+static NineP.Server.ServerCounters.operator !=(NineP.Server.ServerCounters? left, NineP.Server.ServerCounters? right) -> bool
+static NineP.Server.ServerCounters.operator ==(NineP.Server.ServerCounters? left, NineP.Server.ServerCounters? right) -> bool
+static NineP.Server.ServerOptions.operator !=(NineP.Server.ServerOptions? left, NineP.Server.ServerOptions? right) -> bool
+static NineP.Server.ServerOptions.operator ==(NineP.Server.ServerOptions? left, NineP.Server.ServerOptions? right) -> bool
+~override NineP.Server.DirectoryListing.Equals(object obj) -> bool
+~override NineP.Server.DirectoryListing.ToString() -> string
+~override NineP.Server.RequestLogEntry.Equals(object obj) -> bool
+~override NineP.Server.RequestLogEntry.ToString() -> string

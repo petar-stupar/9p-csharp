@@ -1,0 +1,102 @@
+### YamlMime:ApiPage
+title: Struct Tlopen
+body:
+- api1: Struct Tlopen
+  id: NineP_Protocol_Messages_Tlopen
+  metadata:
+    uid: NineP.Protocol.Messages.Tlopen
+    commentId: T:NineP.Protocol.Messages.Tlopen
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Messages
+      url: NineP.Protocol.Messages.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: Opens an existing file with Linux open(2) flags (reference §3.4).
+- code: 'public readonly record struct Tlopen : IMessage, IEquatable<Tlopen>'
+- h4: Implements
+- list:
+  - text: IMessage
+    url: NineP.Protocol.Messages.IMessage.html
+  - text: IEquatable<Tlopen>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: Tlopen(ushort, uint, uint)
+  id: NineP_Protocol_Messages_Tlopen__ctor_System_UInt16_System_UInt32_System_UInt32_
+  metadata:
+    uid: NineP.Protocol.Messages.Tlopen.#ctor(System.UInt16,System.UInt32,System.UInt32)
+    commentId: M:NineP.Protocol.Messages.Tlopen.#ctor(System.UInt16,System.UInt32,System.UInt32)
+- markdown: Opens an existing file with Linux open(2) flags (reference §3.4).
+- code: public Tlopen(ushort Tag, uint Fid, uint Flags)
+- h4: Parameters
+- parameters:
+  - name: Tag
+    type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+    description: The message tag, which pairs this message with its partner.
+  - name: Fid
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The fid naming the file to open.
+  - name: Flags
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: Linux open(2) flags in their generic (x86) values.
+- h2: Properties
+- api3: Fid
+  id: NineP_Protocol_Messages_Tlopen_Fid
+  metadata:
+    uid: NineP.Protocol.Messages.Tlopen.Fid
+    commentId: P:NineP.Protocol.Messages.Tlopen.Fid
+- markdown: The fid naming the file to open.
+- code: public uint Fid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Flags
+  id: NineP_Protocol_Messages_Tlopen_Flags
+  metadata:
+    uid: NineP.Protocol.Messages.Tlopen.Flags
+    commentId: P:NineP.Protocol.Messages.Tlopen.Flags
+- markdown: Linux open(2) flags in their generic (x86) values.
+- code: public uint Flags { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Tag
+  id: NineP_Protocol_Messages_Tlopen_Tag
+  metadata:
+    uid: NineP.Protocol.Messages.Tlopen.Tag
+    commentId: P:NineP.Protocol.Messages.Tlopen.Tag
+- markdown: The message tag, which pairs this message with its partner.
+- code: public ushort Tag { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+languageId: csharp
+metadata:
+  description: Opens an existing file with Linux open(2) flags (reference §3.4).

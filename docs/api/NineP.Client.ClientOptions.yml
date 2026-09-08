@@ -1,0 +1,277 @@
+### YamlMime:ApiPage
+title: Class ClientOptions
+body:
+- api1: Class ClientOptions
+  id: NineP_Client_ClientOptions
+  metadata:
+    uid: NineP.Client.ClientOptions
+    commentId: T:NineP.Client.ClientOptions
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Client
+      url: NineP.Client.html
+  - name: Assembly
+    value: NineP.Client.dll
+- markdown: Everything a client session needs; init-only, with the defaults of the architecture §6.
+- code: 'public sealed record ClientOptions : IEquatable<ClientOptions>'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: ClientOptions
+    url: NineP.Client.ClientOptions.html
+- h4: Implements
+- list:
+  - text: IEquatable<ClientOptions>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Fields
+- api3: DefaultLegacyMsize
+  id: NineP_Client_ClientOptions_DefaultLegacyMsize
+  metadata:
+    uid: NineP.Client.ClientOptions.DefaultLegacyMsize
+    commentId: F:NineP.Client.ClientOptions.DefaultLegacyMsize
+- markdown: 'The msize a 9P2000 or .u session asks for by default: 128 KiB.'
+- code: public const uint DefaultLegacyMsize = 131072
+- h4: Field Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: DefaultLinuxMsize
+  id: NineP_Client_ClientOptions_DefaultLinuxMsize
+  metadata:
+    uid: NineP.Client.ClientOptions.DefaultLinuxMsize
+    commentId: F:NineP.Client.ClientOptions.DefaultLinuxMsize
+- markdown: 'The msize a .L session asks for by default: 1 MiB (reference §5.1).'
+- code: public const uint DefaultLinuxMsize = 1048576
+- h4: Field Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- h2: Properties
+- api3: Aname
+  id: NineP_Client_ClientOptions_Aname
+  metadata:
+    uid: NineP.Client.ClientOptions.Aname
+    commentId: P:NineP.Client.ClientOptions.Aname
+- markdown: The tree name sent in <code>Tauth</code> and <code>Tattach</code>. Default "".
+- code: public string Aname { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: ConnectTimeout
+  id: NineP_Client_ClientOptions_ConnectTimeout
+  metadata:
+    uid: NineP.Client.ClientOptions.ConnectTimeout
+    commentId: P:NineP.Client.ClientOptions.ConnectTimeout
+- markdown: How long <code>ConnectAsync</code> may take, handshake and Tversion included. Default 30 s.
+- code: public TimeSpan ConnectTimeout { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: TimeSpan
+      url: https://learn.microsoft.com/dotnet/api/system.timespan
+- api3: Credential
+  id: NineP_Client_ClientOptions_Credential
+  metadata:
+    uid: NineP.Client.ClientOptions.Credential
+    commentId: P:NineP.Client.ClientOptions.Credential
+- markdown: The credential driving the afid exchange; a null one attaches with NOFID.
+- code: public ICredential? Credential { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ICredential
+      url: NineP.Protocol.Auth.ICredential.html
+    - '?'
+- api3: Dialects
+  id: NineP_Client_ClientOptions_Dialects
+  metadata:
+    uid: NineP.Client.ClientOptions.Dialects
+    commentId: P:NineP.Client.ClientOptions.Dialects
+- markdown: >-
+    Dialects to offer, most preferred first. Default: .L, .u, 9P2000. The list is walked: an
+
+    <code>Rversion "unknown"</code> refuses the version that was offered and not the connection
+
+    (reference §5.1), so the next entry gets its turn.
+- code: public IReadOnlyList<Dialect> Dialects { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: IReadOnlyList
+      url: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+    - <
+    - text: Dialect
+      url: NineP.Protocol.Dialect.html
+    - '>'
+- api3: DisposeTimeout
+  id: NineP_Client_ClientOptions_DisposeTimeout
+  metadata:
+    uid: NineP.Client.ClientOptions.DisposeTimeout
+    commentId: P:NineP.Client.ClientOptions.DisposeTimeout
+- markdown: >-
+    How long <xref href="NineP.Client.NinePSession.DisposeAsync" data-throw-if-not-resolved="false"></xref> may spend clunking the fids that are
+
+    still open, in total rather than per fid. Default 5 s. The clunks are issued together and
+
+    the effective bound is the smaller of this and <xref href="NineP.Client.ClientOptions.RequestTimeout" data-throw-if-not-resolved="false"></xref>; whatever has
+
+    not been answered by then is abandoned, because closing the transport makes the server
+
+    forget those fids anyway. Zero means no bound, as it does everywhere else here.
+- code: public TimeSpan DisposeTimeout { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: TimeSpan
+      url: https://learn.microsoft.com/dotnet/api/system.timespan
+- api3: InFlightWindow
+  id: NineP_Client_ClientOptions_InFlightWindow
+  metadata:
+    uid: NineP.Client.ClientOptions.InFlightWindow
+    commentId: P:NineP.Client.ClientOptions.InFlightWindow
+- markdown: Requests kept outstanding during a chunked transfer. Default 4.
+- code: public int InFlightWindow { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- h4: Remarks
+- markdown: Must be at least 1; invalid values are rejected before dialing or negotiation.
+- api3: Limits
+  id: NineP_Client_ClientOptions_Limits
+  metadata:
+    uid: NineP.Client.ClientOptions.Limits
+    commentId: P:NineP.Client.ClientOptions.Limits
+- markdown: The bounds this side enforces on incoming frames. Default <xref href="NineP.Protocol.Limits.Default" data-throw-if-not-resolved="false"></xref>.
+- code: public Limits Limits { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: Limits
+      url: NineP.Protocol.Limits.html
+- api3: Logger
+  id: NineP_Client_ClientOptions_Logger
+  metadata:
+    uid: NineP.Client.ClientOptions.Logger
+    commentId: P:NineP.Client.ClientOptions.Logger
+- markdown: Where the session logs. Default <xref href="Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance" data-throw-if-not-resolved="false"></xref>.
+- code: public ILogger Logger { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ILogger
+      url: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger
+- api3: MaxReadAll
+  id: NineP_Client_ClientOptions_MaxReadAll
+  metadata:
+    uid: NineP.Client.ClientOptions.MaxReadAll
+    commentId: P:NineP.Client.ClientOptions.MaxReadAll
+- markdown: Maximum bytes returned by a whole-file or xattr read. Default 256 MiB; zero permits only empty values.
+- code: public int MaxReadAll { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- h4: Remarks
+- markdown: Checked against metadata before reading and against actual bytes as they arrive.
+- api3: MinDialect
+  id: NineP_Client_ClientOptions_MinDialect
+  metadata:
+    uid: NineP.Client.ClientOptions.MinDialect
+    commentId: P:NineP.Client.ClientOptions.MinDialect
+- markdown: >-
+    The least dialect the caller accepts. It gates exactly one answer: the plain
+
+    <code>"9P2000"</code> that version(5) lets a server give to a suffixed offer, which is the only
+
+    downgrade there is (reference §8 rule 18). Below this floor that answer throws
+
+    <xref href="NineP.Protocol.NinePVersionException" data-throw-if-not-resolved="false"></xref> rather than silently degrading the session. Every other
+
+    mismatch — a dialect that is neither the one offered nor the base version, a dialect higher
+
+    than was offered, an unknown string — is a <xref href="NineP.Protocol.NinePVersionException" data-throw-if-not-resolved="false"></xref> whatever
+
+    this is set to; a floor of <xref href="NineP.Protocol.Dialect.P9_2000" data-throw-if-not-resolved="false"></xref> is not permission to accept
+
+    anything at all.
+- code: public Dialect MinDialect { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: Dialect
+      url: NineP.Protocol.Dialect.html
+- api3: Msize
+  id: NineP_Client_ClientOptions_Msize
+  metadata:
+    uid: NineP.Client.ClientOptions.Msize
+    commentId: P:NineP.Client.ClientOptions.Msize
+- markdown: The msize to request; the dialect's default when null.
+- code: public uint? Msize { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    - '?'
+- api3: NUname
+  id: NineP_Client_ClientOptions_NUname
+  metadata:
+    uid: NineP.Client.ClientOptions.NUname
+    commentId: P:NineP.Client.ClientOptions.NUname
+- markdown: The numeric user id sent in .u and .L. Default NONUNAME.
+- code: public uint NUname { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: RequestTimeout
+  id: NineP_Client_ClientOptions_RequestTimeout
+  metadata:
+    uid: NineP.Client.ClientOptions.RequestTimeout
+    commentId: P:NineP.Client.ClientOptions.RequestTimeout
+- markdown: How long one request may take before it is flushed and cancelled. Default 60 s.
+- code: public TimeSpan RequestTimeout { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: TimeSpan
+      url: https://learn.microsoft.com/dotnet/api/system.timespan
+- api3: Uname
+  id: NineP_Client_ClientOptions_Uname
+  metadata:
+    uid: NineP.Client.ClientOptions.Uname
+    commentId: P:NineP.Client.ClientOptions.Uname
+- markdown: The textual user name sent in <code>Tauth</code> and <code>Tattach</code>. Default "".
+- code: public string Uname { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+languageId: csharp
+metadata:
+  description: Everything a client session needs; init-only, with the defaults of the architecture §6.

@@ -1,0 +1,90 @@
+### YamlMime:ApiPage
+title: Class ConstantTime
+body:
+- api1: Class ConstantTime
+  id: NineP_Protocol_Auth_ConstantTime
+  metadata:
+    uid: NineP.Protocol.Auth.ConstantTime
+    commentId: T:NineP.Protocol.Auth.ConstantTime
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Auth
+      url: NineP.Protocol.Auth.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    Constant-time comparison. This is the <b>only</b> byte-comparison path for secrets in this
+
+    library (workspace architecture §8.3), and a test greps the authentication sources to keep it
+
+    that way: a comparison that returns early on the first differing byte leaks the secret one byte
+
+    at a time to anyone who can measure the answer.
+- code: public static class ConstantTime
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: ConstantTime
+    url: NineP.Protocol.Auth.ConstantTime.html
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Methods
+- api3: Equals(ReadOnlySpan<byte>, ReadOnlySpan<byte>)
+  id: NineP_Protocol_Auth_ConstantTime_Equals_System_ReadOnlySpan_System_Byte__System_ReadOnlySpan_System_Byte__
+  metadata:
+    uid: NineP.Protocol.Auth.ConstantTime.Equals(System.ReadOnlySpan{System.Byte},System.ReadOnlySpan{System.Byte})
+    commentId: M:NineP.Protocol.Auth.ConstantTime.Equals(System.ReadOnlySpan{System.Byte},System.ReadOnlySpan{System.Byte})
+- markdown: True when both spans are equal, in time independent of where they differ.
+- code: public static bool Equals(ReadOnlySpan<byte> left, ReadOnlySpan<byte> right)
+- h4: Parameters
+- parameters:
+  - name: left
+    type:
+    - text: ReadOnlySpan
+      url: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+    - <
+    - text: byte
+      url: https://learn.microsoft.com/dotnet/api/system.byte
+    - '>'
+    description: One secret.
+  - name: right
+    type:
+    - text: ReadOnlySpan
+      url: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+    - <
+    - text: byte
+      url: https://learn.microsoft.com/dotnet/api/system.byte
+    - '>'
+    description: The other.
+- h4: Returns
+- parameters:
+  - type:
+    - text: bool
+      url: https://learn.microsoft.com/dotnet/api/system.boolean
+    description: True when they are byte-for-byte equal.
+languageId: csharp
+metadata:
+  description: >-
+    Constant-time comparison. This is the only byte-comparison path for secrets in this
+
+    library (workspace architecture §8.3), and a test greps the authentication sources to keep it
+
+    that way: a comparison that returns early on the first differing byte leaks the secret one byte
+
+    at a time to anyone who can measure the answer.

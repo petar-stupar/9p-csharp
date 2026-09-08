@@ -1,0 +1,129 @@
+### YamlMime:ApiPage
+title: Struct NegotiationResult
+body:
+- api1: Struct NegotiationResult
+  id: NineP_Protocol_Negotiation_NegotiationResult
+  metadata:
+    uid: NineP.Protocol.Negotiation.NegotiationResult
+    commentId: T:NineP.Protocol.Negotiation.NegotiationResult
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Negotiation
+      url: NineP.Protocol.Negotiation.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    The outcome of reference §5.1: the string to answer with, the msize, and the dialect it
+
+    selects. A result whose version is "unknown" carries no dialect and echoes the client's msize —
+
+    a server may never answer with a larger one.
+- code: 'public readonly record struct NegotiationResult : IEquatable<NegotiationResult>'
+- h4: Implements
+- list:
+  - text: IEquatable<NegotiationResult>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: NegotiationResult(string, uint, Dialect?)
+  id: NineP_Protocol_Negotiation_NegotiationResult__ctor_System_String_System_UInt32_System_Nullable_NineP_Protocol_Dialect__
+  metadata:
+    uid: NineP.Protocol.Negotiation.NegotiationResult.#ctor(System.String,System.UInt32,System.Nullable{NineP.Protocol.Dialect})
+    commentId: M:NineP.Protocol.Negotiation.NegotiationResult.#ctor(System.String,System.UInt32,System.Nullable{NineP.Protocol.Dialect})
+- markdown: >-
+    The outcome of reference §5.1: the string to answer with, the msize, and the dialect it
+
+    selects. A result whose version is "unknown" carries no dialect and echoes the client's msize —
+
+    a server may never answer with a larger one.
+- code: public NegotiationResult(string Version, uint Msize, Dialect? Dialect)
+- h4: Parameters
+- parameters:
+  - name: Version
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The version string to put in the <code>Rversion</code>.
+  - name: Msize
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The msize to put in the <code>Rversion</code>; never larger than the client's.
+  - name: Dialect
+    type:
+    - text: Dialect
+      url: NineP.Protocol.Dialect.html
+    - '?'
+    description: The dialect the answer selects, or null when none was agreed.
+- h2: Properties
+- api3: Dialect
+  id: NineP_Protocol_Negotiation_NegotiationResult_Dialect
+  metadata:
+    uid: NineP.Protocol.Negotiation.NegotiationResult.Dialect
+    commentId: P:NineP.Protocol.Negotiation.NegotiationResult.Dialect
+- markdown: The dialect the answer selects, or null when none was agreed.
+- code: public Dialect? Dialect { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: Dialect
+      url: NineP.Protocol.Dialect.html
+    - '?'
+- api3: IsUnknown
+  id: NineP_Protocol_Negotiation_NegotiationResult_IsUnknown
+  metadata:
+    uid: NineP.Protocol.Negotiation.NegotiationResult.IsUnknown
+    commentId: P:NineP.Protocol.Negotiation.NegotiationResult.IsUnknown
+- markdown: 'True when Version is "unknown": no dialect was agreed.'
+- code: public bool IsUnknown { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: bool
+      url: https://learn.microsoft.com/dotnet/api/system.boolean
+- api3: Msize
+  id: NineP_Protocol_Negotiation_NegotiationResult_Msize
+  metadata:
+    uid: NineP.Protocol.Negotiation.NegotiationResult.Msize
+    commentId: P:NineP.Protocol.Negotiation.NegotiationResult.Msize
+- markdown: The msize to put in the <code>Rversion</code>; never larger than the client's.
+- code: public uint Msize { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Version
+  id: NineP_Protocol_Negotiation_NegotiationResult_Version
+  metadata:
+    uid: NineP.Protocol.Negotiation.NegotiationResult.Version
+    commentId: P:NineP.Protocol.Negotiation.NegotiationResult.Version
+- markdown: The version string to put in the <code>Rversion</code>.
+- code: public string Version { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+languageId: csharp
+metadata:
+  description: >-
+    The outcome of reference §5.1: the string to answer with, the msize, and the dialect it
+
+    selects. A result whose version is "unknown" carries no dialect and echoes the client's msize —
+
+    a server may never answer with a larger one.

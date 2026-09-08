@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="../../src/NineP.Protocol/NineP.Protocol.csproj" />
+    <ProjectReference Include="../../src/NineP.Client/NineP.Client.csproj" />
+    <ProjectReference Include="../../src/NineP.Server/NineP.Server.csproj" />
+  </ItemGroup>
+
+</Project>

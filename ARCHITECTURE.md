@@ -1,0 +1,127 @@
+# ninep for C# / .NET — Architecture
+
+@docs/9p/ARCHITECTURE.md
+
+The workspace architecture imported above is binding for this repository, together with
+[docs/9p/protocol-reference.md](docs/9p/protocol-reference.md). This file records only what is
+specific to the C# / .NET implementation: the module map, the language-level choices, and this
+repository's Decision Log. The sections marked *(spec)* were filled from the spec of the ticket that delivered them; qode keeps
+that spec under `.qode/contexts/` on the machine that ran the loop.
+
+## Module map
+
+Solution `NineP.sln` (classic `.sln`; SDK 10 defaults to `.slnx`, so it is created with
+`dotnet new sln -f sln`). Fifteen projects. The three `src/*` projects are the only packable ones;
+`InternalsVisibleTo` grants test assemblies access; the protocol package also grants its client
+and server consumers access to its internal framing and projection helpers.
+
+| Layer | Path | Package / artefact |
+| --- | --- | --- |
+| protocol | `src/NineP.Protocol/` | `NineP.Protocol` 0.1.0 — `net8.0;net10.0` |
+| client | `src/NineP.Client/` | `NineP.Client` 0.1.0 — `net8.0;net10.0`, references protocol |
+| server | `src/NineP.Server/` | `NineP.Server` 0.1.0 — `net8.0;net10.0`, references protocol |
+| examples | `examples/NineP.JsonFs/`, `examples/NineP.TodoFs/`, `examples/NineP.Cli/` | jsonfs, todofs, cli (unpublished, `net10.0`) |
+| tests | `tests/NineP.TestSupport/`, `tests/NineP.{Protocol,Client,Server}.Tests/` | shared harness and the three suites (`net8.0;net10.0`) |
+| tests | `tests/NineP.{Repo,Docs}.Tests/`, `tests/NineP.{Conformance,Benchmarks}/` | hygiene, README, conformance driver, benchmarks (`net10.0`) |
+| tests | `tests/NineP.Fuzz/` | SharpFuzz libFuzzer target (`net8.0`) |
+
+Inside a package, a directory holds surface or implementation, never both: every `internal` type
+lives under an `Internal/` directory whose namespace follows it — `NineP.Protocol.Codec.Internal`,
+`NineP.Protocol.Transports.Internal`, `NineP.Protocol.Auth.Internal`, and one `Internal/` per
+project for what belongs to no single area.
+`RepoHygieneTests.ImplementationTypesLiveUnderAnInternalDirectory` enforces it. The three example
+programs declare **no** public type at all; the test projects that drive them are named in each
+example's `InternalsVisibleTo`, exactly as the `src` packages name theirs.
+
+The three shared test projects multi-target `net8.0;net10.0` deliberately: `CultureInfo.CurrentCulture`
+differs between the two frameworks on the development machine, so a single-framework run would not
+see the formatting divergence the conformance output depends on.
+
+## Language-level choices
+
+- **Async / concurrency model:** `ValueTask` / `ValueTask<T>` on every awaiting public member, each
+  ending in `Async` and taking a trailing `CancellationToken cancellationToken = default`. One
+  reader task and one writer task per connection; replies serialised through a bounded
+  `System.Threading.Channels.Channel<T>`; in-flight budgets and per-fid serialisation with
+  `SemaphoreSlim`. `Task.Run` per request is banned in `BannedSymbols.txt`. Every clock read goes
+  through an injected `System.TimeProvider`; `DateTime.UtcNow` appears nowhere in `src/` or
+  `examples/`.
+- **Buffer strategy (zero-copy framing, pooling):** `System.IO.Pipelines` under the transport seam
+  (inbox from `net9.0`; on `net8.0` it is the pinned `System.IO.Pipelines` 8.0.0 package, an additional runtime dependency only for that target framework).
+  A single-segment frame is decoded in place from the pipe's memory; a multi-segment frame is
+  copied **once** into a rental from a per-server `ArrayPool<byte>.Create(maxMsize, …)` owned by a
+  frame lease. `Twrite.Data` and `Rread.Data` are `ReadOnlyMemory<byte>` views of that lease, valid
+  for the handler call. Integers go through `System.Buffers.Binary.BinaryPrimitives`;
+  `System.BitConverter` is banned. Strings use a private
+  `UTF8Encoding(false, throwOnInvalidBytes: true)`; `System.Text.Encoding.UTF8` is banned because
+  it substitutes U+FFFD.
+- **TLS stack:** `System.Net.Security.SslStream` from the BCL. TLS 1.2 floor, 1.3 preferred;
+  certificate chain and host name verified by default; optional mutual TLS with the client
+  certificate exposed as the connection's peer identity.
+- **WebSocket stack:** server = a raw `Socket` listener (plus `SslStream` for `wss://`), a
+  hand-written RFC 6455 handshake and
+  `System.Net.WebSockets.WebSocket.CreateFromStream(stream, isServer: true, …)`. `HttpListener` is
+  not used: an `https://` prefix starts on macOS but its TLS handshake is reset by the peer, and
+  only the raw path exposes the request headers the origin allow-list and the peer identity need.
+  Client = `ClientWebSocket`. One 9P message per binary WebSocket message.
+- **SQLite and JWT/JWKS libraries (todofs):** `Microsoft.Data.Sqlite` 10.0.11,
+  `Microsoft.IdentityModel.JsonWebTokens` 8.22.0 and
+  `Microsoft.IdentityModel.Protocols.OpenIdConnect` 8.22.0 — all three referenced by
+  `examples/NineP.TodoFs` only.
+- **Logging (all three published packages):** `Microsoft.Extensions.Logging.Abstractions` 8.0.3,
+  which brings `Microsoft.Extensions.DependencyInjection.Abstractions` 8.0.2 transitively on both
+  target frameworks. With `System.IO.Pipelines` on `net8.0` that makes three runtime dependencies
+  on `net8.0` and two on `net10.0`. Records are emitted through source-generated
+  `[LoggerMessage]` partial methods — `AnalysisLevel=latest-all` makes `CA1848` a build error, and
+  the generated delegates are what keeps a structured sink's fields intact. Event ids are 1xxx in
+  the protocol package, 2xxx in the client and 3xxx in the server.
+- **NLog (examples):** `NLog` 6.2.0 and `NLog.Extensions.Logging` 6.2.0, referenced by
+  `examples/NineP.JsonFs` and `examples/NineP.TodoFs` only — the concrete sink behind `--log`, and
+  in no published package.
+- **Fuzzing / property testing:** `SharpFuzz` 2.3.0 as a libFuzzer target over the decoder, corpus
+  seeded from `docs/9p/fixtures/wire-vectors.json`; `FsCheck` 3.4.0 with `FsCheck.Xunit` for
+  properties; `xunit.v3` 4.0.0 on Microsoft.Testing.Platform for everything else. Plain xUnit
+  `Assert` only — no fluent assertion library.
+- **Packaging and publishing:** `dotnet pack -c Release` produces three `.nupkg` plus `.snupkg`
+  symbol packages at version `0.1.0`, MIT, with `README.md` and `LICENSE` embedded. SourceLink
+  comes from the SDK (`PublishRepositoryUrl`, `EmbedUntrackedSources`, `ContinuousIntegrationBuild`,
+  `DebugType=portable`); no `Microsoft.SourceLink.GitHub` package reference. Package versions are
+  managed centrally in `Directory.Packages.props` with exact pins, a `packages.lock.json` per
+  project and `--locked-mode` in CI. Nothing is published to nuget.org under this ticket.
+
+## Decision Log
+
+| Date | Decision | Notes |
+| --- | --- | --- |
+| 2026-09-08 | Implement approved additional edge cases E1–E19/F1–F30 and `ClientOptions.MaxReadAll` | Shared `fixtures/conformance.md` defines semantics; generated process-isolated scale tests use fixed memory budgets and two runtime processors. Whole-document JSON quota validation rolls mutations back in place. |
+| 2026-09-05 | Repository created from the workspace templates; toolchain floor .NET 8 (built with SDK 10) | Ticket 001 |
+| 2026-09-05 | Runtime dependency `System.IO.Pipelines` 8.0.0, referenced by `NineP.Protocol` for `net8.0` only | Spec §6.1 builds `FrameReader` on `PipeReader`; the assembly is inbox in the `net10.0` reference pack and is a package on `net8.0`. Microsoft-owned, no install scripts, pinned exactly, in `packages.lock.json`. |
+| 2026-09-06 | Runtime dependency `Microsoft.Data.Sqlite` 10.0.11, referenced by `examples/NineP.TodoFs` only | Spec §7.1 gives todofs a SQLite store; this is the provider the schema, WAL and the parameterised statements are written against. Microsoft-owned, pinned exactly, in `packages.lock.json`, and in no published package. |
+| 2026-09-06 | Runtime dependencies `Microsoft.IdentityModel.JsonWebTokens` 8.22.0 and `Microsoft.IdentityModel.Protocols.OpenIdConnect` 8.22.0, referenced by `examples/NineP.TodoFs` only | Spec §8.3 validates a Keycloak access token: `JsonWebTokenHandler` for the token, `ConfigurationManager<OpenIdConnectConfiguration>` for the realm's discovery document and JWKS with its refresh rate limit. Hand-rolling JWS verification and JWKS rotation is exactly the code nobody should hand-roll. Microsoft-owned, pinned exactly, in `packages.lock.json`, and in no published package (S-30). |
+| 2026-09-06 | **S-1 / S-2** — the WebSocket server is a raw `Socket` listener with a hand-written RFC 6455 handshake and `WebSocket.CreateFromStream(isServer: true)`, not `HttpListener`; the client is `ClientWebSocket` | `HttpListener` accepts an `https://` prefix on macOS but its TLS handshake is reset by the peer, and it does not expose the request headers the origin allow-list and `PeerIdentity` need. One 9P message per binary WebSocket message; a text message closes 1002, an oversize one 1009, and the cap is enforced during accumulation. |
+| 2026-09-06 | **S-3** — one error value, `NinePError { Ename, Errno }`, projected by dialect in the codec; handlers raise `NinePException` and never choose a wire shape | 9P2000 carries only the ename, `.u` carries both and `.L` only the errno, so only a row of the fixed `ErrorTable` round-trips identically in both directions. A per-dialect error type above the codec would have leaked the dialect into every handler, which arch §2 forbids. |
+| 2026-09-06 | **S-12** — peak RSS is read with `getrusage(RUSAGE_SELF).ru_maxrss` through one `[DllImport("libc")]`, normalised from bytes on the BSDs and kibibytes on Linux; `Process.PeakWorkingSet64` is used nowhere | Measured: `PeakWorkingSet64` returns **0** on this platform (E-5/E-6), and a benchmark that publishes zero bytes of peak memory is worse than one that publishes nothing. Cross-checked against `/usr/bin/time -l` within 0.4 %; `BenchmarkRssTests.MaxRssIsNonZeroAndAtLeastWorkingSet` keeps it honest. |
+| 2026-09-06 | **S-15** — `PasswordAuthenticator` hashes with PBKDF2-HMAC-SHA-256 at **600 000** iterations minimum, checked on load as well as on write | Arch §5 prefers argon2id "where the ecosystem has a vetted implementation". The BCL has none, and a hand-rolled argon2id guarding passwords is exactly the code nobody should hand-roll, so the documented fallback is taken and its floor is enforced rather than trusted. |
+| 2026-09-06 | **S-16** — logging is this repository's own `INinePLogger` / `NinePLogLevel` / `NinePLogger`, defined in `NineP.Protocol`, not `Microsoft.Extensions.Logging.Abstractions` | The published packages take **no** runtime dependency beyond `System.IO.Pipelines` on `net8.0`, and arch §4 asks only for "an injected logger, never a global". A logging abstraction package would have been the second dependency, in all three packages, for one interface. |
+| 2026-09-06 | **S-18** — `MessageDecoder` and `MessageWriter` are `internal`; the public codec is the `MessageCodec` façade | Their own signatures carry `ReadOnlySequence<byte>`, `PipeReader`/`PipeWriter` and `ArrayPool<byte>`, which §5.0 rule 4 keeps out of every public signature. The façade — `Decode`, `TryDecode`, `Encode`, `GetEncodedSize`, `PeekSize`/`PeekType`/`PeekTag` — is what a third-party peer needs and leaks none of them. |
+| 2026-09-06 | Packaging: `dotnet pack -c Release` produces three `.nupkg` plus `.snupkg` at `0.1.0`, with README, LICENSE, XML docs and SourceLink metadata from the SDK; `RepositoryUrl` is stated explicitly | `PublishRepositoryUrl` fills the `<repository>` element's branch and commit from the checkout but can only fill its url from a configured remote, so a clone without one would pack a repository element with no url. No `Microsoft.SourceLink.GitHub` package is taken: SourceLink ships in the SDK from .NET 8. |
+| 2026-09-07 | **IR-1, superseding S-16** — logging is `Microsoft.Extensions.Logging.Abstractions` 8.0.3 through `ILogger`; `INinePLogger`, `NinePLogLevel` and `NinePLogger` are deleted, and `NineP.Protocol/Logging.cs` with them | Owner decision (improvement request IR-1). S-16 bought a zero-dependency package at the cost of a bespoke interface every consumer had to adapt to, and of structured logging: `INinePLogger.Log` took an already-formatted string, so message templates, event ids and scopes died at the library boundary. 8.0.3 is the lowest version carrying the `[LoggerMessage]` generator and is deliberately not raised, so a consumer chooses the version rather than being forced up. The zero-dependency claim is withdrawn from the README, not quietly left standing. |
+| 2026-09-07 | **IR-1** — the rule 11 sanitiser survives the logger as `NineP.Protocol.UntrustedText.Sanitize` | It was never a logging function: four of its call sites build `NinePProtocolException` / `NinePVersionException` messages and `PeerIdentity` metadata, which is reference §8 rule **10**, not rule 11. Structured logging does not retire it either — a JSON sink escapes newlines in argument values, but NLog's default console layout renders them into a plain-text line where a peer-supplied `\n` forges a record, the layout is the consumer's choice, and nothing downstream applies the 256-byte cap. It was public when this landed, because `NinePLogger.Sanitize` had been; IR-3 made it internal the same day, so it is `NineP.Protocol.Internal.UntrustedText` — a type of its own rather than members bolted onto `NinePText`, whose concerns are decoding rather than escaping for output. |
+| 2026-09-07 | **IR-1** — a logger that throws during live operations takes the connection with it | Post-close cleanup is the exception added for review finding C08: a failing sink cannot abandon remaining resource release. The former `INinePLogger` contract said an implementation must not throw and the library trusted it. `ILogger` makes no such promise, and the decision is to let it through rather than wrap every call: a misconfigured sink is an operator error that should be loud, not one that degrades into silent log loss. |
+| 2026-09-07 | Runtime dependencies `NLog` 6.2.0 and `NLog.Extensions.Logging` 6.2.0, referenced by `examples/NineP.JsonFs` and `examples/NineP.TodoFs` only | IR-1 gives the examples a concrete sink so that they demonstrate the wiring a consumer actually writes. Configured in code rather than from `NLog.config`, so the whole path from `--log` to stderr is visible in one place. In no published package (S-30). |
+| 2026-09-07 | **IR-2** — under `src/` and `examples/`, one file declares one top-level type and is named after it; enforced by `RepoHygieneTests.EverySourceFileHoldsOneTypeNamedAfterIt`, not StyleCop | Owner decision (improvement request IR-2): the C# convention, which the other languages of the workspace loop do not share. 44 files were split. `StyleCop.Analyzers` would have given SA1402/SA1649 as build errors but arrives with roughly two hundred other rules each needing a severity decision; a case in the hygiene suite costs no dependency and joins the repository-wide checks already there. `tests/` is exempt by directory and deliberately — a test class with one fake beside it is idiomatic xUnit — as are `Program.cs` and the `Type.Aspect.cs` half of a partial. `Messages/` stays flat at 66 files: every directory here maps to a namespace segment, so a subdirectory per dialect would break the shipped namespace for shorter listings, and dialect is not a clean partition of the message set anyway. |
+| 2026-09-07 | **IR-3** — `UntrustedText` is `internal`, in `NineP.Protocol.Internal` | Nothing needs it public. All sixteen call sites are in `NineP.Protocol`, `NineP.Client` or `NineP.Server`, and the first grants `InternalsVisibleTo` to the other two. It was public only because `NinePLogger.Sanitize` had been. Rule 11 is an obligation on what these packages log and they discharge it at every outward boundary — an `IRequestLogSink` receives a summary already sanitised — so a consumer never needs to call it. Publishing later is additive; unpublishing would be breaking, so it starts internal. `NineP.Protocol` drops from 134 public types to 133. |
+| 2026-09-07 | **IR-3** — every `internal` type lives under an `Internal/` directory, with the namespace to match: `Codec/Internal`, `Transports/Internal`, `Auth/Internal` | IR-2 caused this: types like `TlsListener`, `WireReader` and `X509CertificateLoader2` used to be nested inside the public type's file and became files of their own, leaving `Codec/` at 14 implementation files against 1 public one. Namespace changes are free here because every moved type is internal — no `PublicAPI.Shipped.txt` line changes. `AcceptPolicy`, `RawWebSocketListener`, `WebSocketHandshake` and `HandshakeRequest` moved down from the project-wide `Internal/` to `Transports/Internal/` for the same reason. Per-area rather than one flat `Internal/` per project: 33 files in one directory is the navigability problem IR-2 set out to fix, relocated. |
+| 2026-09-07 | **IR-3** — the examples declare no public type; `CA1515` is no longer suppressed for them | The suppression's stated reason — "The examples are single-assembly programs; nothing is consumed from outside" — was false: `NineP.Client.Tests`, `NineP.Server.Tests` and `NineP.Conformance` reference all three examples, and 26 of the 58 public types existed only for that. `InternalsVisibleTo` is the mechanism `src` already uses for exactly this, so the examples now use it too and all 58 types are internal. With nothing public left, the analyzer suppression could be deleted rather than re-justified, and the build proves it: `CA1515` is live and green. |
+| 2026-09-08 | **IR-9** — a request naming something the negotiated dialect, the wire or the handler model cannot carry is refused, never sent or answered with the part dropped; protocol-reference §8 rules 15–27, one named test each, `docs/rule-index.md` rows 78 onward | Owner decision after the audit of 2026-09-08 (improvement request IR-9). The refusal for an untranslatable open flag or attribute field lives in the projector (`ModeBits`, `AttrProjector`), one rule shared by every call site and still reached before a message is built; the projector's decode directions stay permissive, because the rules govern what this side sends and believes, not what it accepts from other implementations. |
+| 2026-09-08 | **IR-9** — `MinDialect` gates exactly one answer, version(5)'s suffix-stripping downgrade to `9P2000`; every other `Rversion` that is not the offer is a version error | A floor of `9P2000` is not permission to accept an arbitrary dialect: a server answering a `9P2000` offer with `9P2000.L` was accepted, and the client then spoke a dialect it never proposed. |
+| 2026-09-08 | **IR-9** — an `Rgetattr` field that `valid` does not mark restores the `Attr` record's own default (`BlockSize` 4096, `NLink` 1, ids `NONUNAME`), and `blksize` travels under `BLOCKS` | One definition of "unknown", the one `Attr` documents, rather than a hand-written zero per field; `blksize` has no mask bit of its own and is read exactly as `ToGetattr` sends it. |
+| 2026-09-08 | **IR-9** — a `.u` `Tcreate` of a symlink, fifo or socket succeeds and leaves the fid **not open**; opening such a fid, or one that names an existing symlink or device, is `ELOOP` / `ENXIO` | Reference §5.5 requires those creates to work (v9fs's `symlink(2)` / `mknod(2)` on a `.u` mount send `OREAD` and clunk). Rule 23 forbids the fake-open fid whose reads answered zero bytes for ever, which is what was removed; refusing the create would land after the object exists. |
+| 2026-09-08 | **IR-9** — `DMAPPEND` / `DMEXCL` / `DMTMP` on `Tcreate.perm` and a `Twstat` that changes them are refused with `EPERM`; `SetAttr` and `CreateRequest` gain no flags member | stat(5) and create(5) let a client set them and the shared handler model (workspace architecture §12) cannot carry them. Refusing is honest and changes no shape across fourteen ports; adding `flags` to both shapes is an open follow-up in the workspace Decision Log. The two enames are in `ErrorTable`, so 9P2000 peers recover `EPERM`. |
+| 2026-09-08 | **IR-9** — a handler's clunk-time error is the reply and the fid is freed regardless; the mass clunk of a mid-session `Tversion` or a closing connection is the one place it is dropped | clunk(5) frees the fid whatever the reply says and permits an error reply; `FidTable` used to swallow it under a comment claiming the caller would report it, which nothing did. The mass clunk has no reply to carry the error and must not abandon the fids after it. |
+| 2026-09-08 | **IR-9** — `Errno.ENXIO` (6) joins the errno set, with an `ErrorTable` row, for rule 23's device refusal; `AT_REMOVEDIR` lives in the server's `Internal/LinuxAbi.cs` | Reference §5.9's errno list does not name `ENXIO`; without a table row a 9P2000 peer saw `"i/o error"` for it. `AT_REMOVEDIR` is a `Tunlinkat` flag, not a mode bit, so it does not belong in `ModeBits`. |
+| 2026-09-08 | **IR-9** — todofs performs an `OTRUNC` truncation at the open (free-text fields become empty, `status` becomes `open`), refuses a `wstat` length of zero where the file has no zero-length value, and answers a truncating open of `/users/ctl` with success while changing nothing: the one documented deviation from rule 27's letter | The core hands `OTRUNC` to the handler's open, not to `SetAttr`, so the two are different requests. `NinePSession.WriteFileAsync` always opens with truncate, so refusing the open on `status` or `ctl` would break `ninep write` and the README walk-through; `ctl` keeps no bytes of its own, so there is nothing a truncation could remove. Pinned by `TodoFsSetAttrTests.ATruncatingOpenOfTheControlFileKeepsTheUsers` and stated in `docs/examples.md`. |
+| 2026-09-08 | The test projects host the **Microsoft.Testing.Platform** runner (`UseMicrosoftTestingPlatformRunner`, `TestingPlatformDotnetTestSupport` in `Directory.Build.targets`, `*.Tests` only); the same-tag stress regression runs in every `dotnet test` at a five-second `NINEP_TAG_STRESS_SECONDS` budget and once more at 45 s in CI | `global.json` already named the platform runner and the build props already passed it `--timeout 20m`, but nothing had asked xunit.v3 to host it, so the assemblies ran the in-process runner and answered every platform option with "unknown option": `dotnet test` with any pass-through reported zero tests, and CI's `--report-trx` step could never have produced a report. TRX comes from xunit's own `--report-xunit-trx`. The stress test's five-second budget was measured: the defect it guards failed 3 of 3 runs within 0.9 s. Process-wide measurements (`ReadPathTests`) run alone, because the runner streams every finished test to `dotnet test` and that traffic is allocation. |
+| 2026-09-08 | **Review finding M01** — example-only NLog and NLog.Extensions.Logging updated together to 6.2.0 | NLog 6.2 requires Microsoft.Extensions.Logging 10.0.0. Nonpublished application/test hosts therefore resolve Microsoft.Extensions.Logging.Abstractions 10.0.11; the three published packages retain their compatible 8.0.3 dependency floor. Central pins and lock files record both contexts. |
+| 2026-09-08 | **Review findings C01–C15 and H01–H05** — adopt workspace reference rules 28–36 and revised overload rule 8 | Fids have operation lifetimes, finalization is shared by all close paths, append operations synchronize by file, walks retain ancestry, and transport handshakes run independently inside the existing TCP cap. Test/benchmark gates now fail incomplete evidence. Generated API pages are regenerated from current code. |
+| 2026-09-08 | **Review finding C12** — live ancestry aliases follow protocol rename operations across connections, with each attach root preserved | The path registry owns only live fid/traversal state. Mutations coordinate affected paths and walks revalidate raced lookups, avoiding a global lock across handler calls. No public handler callback or per-Qid history is added. |

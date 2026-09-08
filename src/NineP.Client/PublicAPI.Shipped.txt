@@ -1,0 +1,123 @@
+#nullable enable
+NineP.Client.ClientOptions
+NineP.Client.ClientOptions.<Clone>$() -> NineP.Client.ClientOptions!
+NineP.Client.ClientOptions.Aname.get -> string!
+NineP.Client.ClientOptions.Aname.init -> void
+NineP.Client.ClientOptions.ClientOptions() -> void
+NineP.Client.ClientOptions.ConnectTimeout.get -> System.TimeSpan
+NineP.Client.ClientOptions.ConnectTimeout.init -> void
+NineP.Client.ClientOptions.Credential.get -> NineP.Protocol.Auth.ICredential?
+NineP.Client.ClientOptions.Credential.init -> void
+NineP.Client.ClientOptions.Dialects.get -> System.Collections.Generic.IReadOnlyList<NineP.Protocol.Dialect>!
+NineP.Client.ClientOptions.Dialects.init -> void
+NineP.Client.ClientOptions.DisposeTimeout.get -> System.TimeSpan
+NineP.Client.ClientOptions.DisposeTimeout.init -> void
+NineP.Client.ClientOptions.Equals(NineP.Client.ClientOptions? other) -> bool
+NineP.Client.ClientOptions.InFlightWindow.get -> int
+NineP.Client.ClientOptions.InFlightWindow.init -> void
+NineP.Client.ClientOptions.Limits.get -> NineP.Protocol.Limits!
+NineP.Client.ClientOptions.Limits.init -> void
+NineP.Client.ClientOptions.Logger.get -> Microsoft.Extensions.Logging.ILogger!
+NineP.Client.ClientOptions.Logger.init -> void
+NineP.Client.ClientOptions.MaxReadAll.get -> int
+NineP.Client.ClientOptions.MaxReadAll.init -> void
+NineP.Client.ClientOptions.MinDialect.get -> NineP.Protocol.Dialect
+NineP.Client.ClientOptions.MinDialect.init -> void
+NineP.Client.ClientOptions.Msize.get -> uint?
+NineP.Client.ClientOptions.Msize.init -> void
+NineP.Client.ClientOptions.NUname.get -> uint
+NineP.Client.ClientOptions.NUname.init -> void
+NineP.Client.ClientOptions.RequestTimeout.get -> System.TimeSpan
+NineP.Client.ClientOptions.RequestTimeout.init -> void
+NineP.Client.ClientOptions.Uname.get -> string!
+NineP.Client.ClientOptions.Uname.init -> void
+NineP.Client.INinePMessages
+NineP.Client.INinePMessages.AttachAsync(NineP.Protocol.Messages.Tattach request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Messages.Rattach>
+NineP.Client.INinePMessages.AuthAsync(NineP.Protocol.Messages.Tauth request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Messages.Rauth>
+NineP.Client.INinePMessages.ClunkAsync(NineP.Protocol.Messages.Tclunk request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Messages.Rclunk>
+NineP.Client.INinePMessages.CreateAsync(NineP.Protocol.Messages.Tcreate request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Messages.Rcreate>
+NineP.Client.INinePMessages.FlushAsync(NineP.Protocol.Messages.Tflush request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Messages.Rflush>
+NineP.Client.INinePMessages.FsyncAsync(NineP.Protocol.Messages.Tfsync request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Messages.Rfsync>
+NineP.Client.INinePMessages.GetattrAsync(NineP.Protocol.Messages.Tgetattr request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Messages.Rgetattr>
+NineP.Client.INinePMessages.GetlockAsync(NineP.Protocol.Messages.Tgetlock request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Messages.Rgetlock>
+NineP.Client.INinePMessages.LcreateAsync(NineP.Protocol.Messages.Tlcreate request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Messages.Rlcreate>
+NineP.Client.INinePMessages.LinkAsync(NineP.Protocol.Messages.Tlink request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Messages.Rlink>
+NineP.Client.INinePMessages.LockAsync(NineP.Protocol.Messages.Tlock request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Messages.Rlock>
+NineP.Client.INinePMessages.LopenAsync(NineP.Protocol.Messages.Tlopen request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Messages.Rlopen>
+NineP.Client.INinePMessages.MkdirAsync(NineP.Protocol.Messages.Tmkdir request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Messages.Rmkdir>
+NineP.Client.INinePMessages.MknodAsync(NineP.Protocol.Messages.Tmknod request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Messages.Rmknod>
+NineP.Client.INinePMessages.OpenAsync(NineP.Protocol.Messages.Topen request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Messages.Ropen>
+NineP.Client.INinePMessages.ReadAsync(NineP.Protocol.Messages.Tread request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Messages.Rread>
+NineP.Client.INinePMessages.ReaddirAsync(NineP.Protocol.Messages.Treaddir request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Messages.Rreaddir>
+NineP.Client.INinePMessages.ReadlinkAsync(NineP.Protocol.Messages.Treadlink request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Messages.Rreadlink>
+NineP.Client.INinePMessages.RemoveAsync(NineP.Protocol.Messages.Tremove request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Messages.Rremove>
+NineP.Client.INinePMessages.RenameAsync(NineP.Protocol.Messages.Trename request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Messages.Rrename>
+NineP.Client.INinePMessages.RenameatAsync(NineP.Protocol.Messages.Trenameat request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Messages.Rrenameat>
+NineP.Client.INinePMessages.SetattrAsync(NineP.Protocol.Messages.Tsetattr request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Messages.Rsetattr>
+NineP.Client.INinePMessages.StatAsync(NineP.Protocol.Messages.Tstat request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Messages.Rstat>
+NineP.Client.INinePMessages.StatfsAsync(NineP.Protocol.Messages.Tstatfs request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Messages.Rstatfs>
+NineP.Client.INinePMessages.SymlinkAsync(NineP.Protocol.Messages.Tsymlink request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Messages.Rsymlink>
+NineP.Client.INinePMessages.UnlinkatAsync(NineP.Protocol.Messages.Tunlinkat request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Messages.Runlinkat>
+NineP.Client.INinePMessages.VersionAsync(NineP.Protocol.Messages.Tversion request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Messages.Rversion>
+NineP.Client.INinePMessages.WalkAsync(NineP.Protocol.Messages.Twalk request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Messages.Rwalk>
+NineP.Client.INinePMessages.WriteAsync(NineP.Protocol.Messages.Twrite request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Messages.Rwrite>
+NineP.Client.INinePMessages.WstatAsync(NineP.Protocol.Messages.Twstat request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Messages.Rwstat>
+NineP.Client.INinePMessages.XattrcreateAsync(NineP.Protocol.Messages.Txattrcreate request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Messages.Rxattrcreate>
+NineP.Client.INinePMessages.XattrwalkAsync(NineP.Protocol.Messages.Txattrwalk request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Messages.Rxattrwalk>
+NineP.Client.NinePClient
+NineP.Client.NinePFid
+NineP.Client.NinePFid.CloneAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Client.NinePFid!>
+NineP.Client.NinePFid.CreateAsync(string! name, uint perm, NineP.Protocol.OpenMode mode, NineP.Protocol.OpenFlags flags = NineP.Protocol.OpenFlags.None, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask
+NineP.Client.NinePFid.DisposeAsync() -> System.Threading.Tasks.ValueTask
+NineP.Client.NinePFid.Fid.get -> uint
+NineP.Client.NinePFid.FsyncAsync(bool dataOnly = false, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask
+NineP.Client.NinePFid.GetAttrAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Attr!>
+NineP.Client.NinePFid.GetLockAsync(NineP.Protocol.LockRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.LockQueryResult>
+NineP.Client.NinePFid.GetXattrAsync(string! name, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<byte[]!>
+NineP.Client.NinePFid.Iounit.get -> int
+NineP.Client.NinePFid.IsOpen.get -> bool
+NineP.Client.NinePFid.LockAsync(NineP.Protocol.LockRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.LockStatus>
+NineP.Client.NinePFid.OpenAsync(NineP.Protocol.OpenMode mode, NineP.Protocol.OpenFlags flags = NineP.Protocol.OpenFlags.None, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask
+NineP.Client.NinePFid.Qid.get -> NineP.Protocol.Qid
+NineP.Client.NinePFid.ReadAllAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<byte[]!>
+NineP.Client.NinePFid.ReadAsync(ulong offset, System.Memory<byte> buffer, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<int>
+NineP.Client.NinePFid.ReadDirAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Collections.Generic.IAsyncEnumerable<NineP.Protocol.DirEntry>!
+NineP.Client.NinePFid.RemoveAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask
+NineP.Client.NinePFid.SetAttrAsync(NineP.Protocol.SetAttr! update, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask
+NineP.Client.NinePFid.SetXattrAsync(string! name, System.ReadOnlyMemory<byte> value, NineP.Protocol.XattrFlags flags = NineP.Protocol.XattrFlags.None, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask
+NineP.Client.NinePFid.WalkAsync(System.Collections.Generic.IReadOnlyList<string!>! names, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Client.NinePFid!>
+NineP.Client.NinePFid.WriteAllAsync(System.ReadOnlyMemory<byte> data, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask
+NineP.Client.NinePFid.WriteAsync(ulong offset, System.ReadOnlyMemory<byte> data, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<int>
+NineP.Client.NinePSession
+NineP.Client.NinePSession.AttachAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Client.NinePFid!>
+NineP.Client.NinePSession.AttachAsync(string! uname, string! aname, NineP.Protocol.Auth.ICredential? credential = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Client.NinePFid!>
+NineP.Client.NinePSession.CreateFileAsync(string! path, uint perm = 420, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Client.NinePFid!>
+NineP.Client.NinePSession.Dialect.get -> NineP.Protocol.Dialect
+NineP.Client.NinePSession.DisposeAsync() -> System.Threading.Tasks.ValueTask
+NineP.Client.NinePSession.GetAttrAsync(string! path, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Attr!>
+NineP.Client.NinePSession.MaxPayload.get -> int
+NineP.Client.NinePSession.Messages.get -> NineP.Client.INinePMessages!
+NineP.Client.NinePSession.MkdirAsync(string! path, uint perm = 493, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask
+NineP.Client.NinePSession.Msize.get -> uint
+NineP.Client.NinePSession.OpenFileAsync(string! path, NineP.Protocol.OpenMode mode, NineP.Protocol.OpenFlags flags = NineP.Protocol.OpenFlags.None, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Client.NinePFid!>
+NineP.Client.NinePSession.ReadDirAsync(string! path, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<System.Collections.Generic.IReadOnlyList<NineP.Protocol.DirEntry>!>
+NineP.Client.NinePSession.ReadFileAsync(string! path, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<byte[]!>
+NineP.Client.NinePSession.ReadlinkAsync(string! path, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<string!>
+NineP.Client.NinePSession.RemoveAsync(string! path, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask
+NineP.Client.NinePSession.RenameAsync(string! oldPath, string! newPath, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask
+NineP.Client.NinePSession.Root.get -> NineP.Client.NinePFid!
+NineP.Client.NinePSession.SetAttrAsync(string! path, NineP.Protocol.SetAttr! update, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask
+NineP.Client.NinePSession.StatFsAsync(string! path, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.StatFs>
+NineP.Client.NinePSession.SymlinkAsync(string! path, string! target, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask
+NineP.Client.NinePSession.WalkAsync(string! path, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Client.NinePFid!>
+NineP.Client.NinePSession.WriteFileAsync(string! path, System.ReadOnlyMemory<byte> data, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask
+const NineP.Client.ClientOptions.DefaultLegacyMsize = 131072 -> uint
+const NineP.Client.ClientOptions.DefaultLinuxMsize = 1048576 -> uint
+override NineP.Client.ClientOptions.Equals(object? obj) -> bool
+override NineP.Client.ClientOptions.GetHashCode() -> int
+override NineP.Client.ClientOptions.ToString() -> string!
+static NineP.Client.ClientOptions.operator !=(NineP.Client.ClientOptions? left, NineP.Client.ClientOptions? right) -> bool
+static NineP.Client.ClientOptions.operator ==(NineP.Client.ClientOptions? left, NineP.Client.ClientOptions? right) -> bool
+static NineP.Client.NinePClient.ConnectAsync(NineP.Protocol.Transports.INinePConnection! connection, NineP.Client.ClientOptions! options, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Client.NinePSession!>
+static NineP.Client.NinePClient.ConnectAsync(NineP.Protocol.Transports.ITransport! transport, NineP.Protocol.Transports.NinePAddress address, NineP.Client.ClientOptions! options, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Client.NinePSession!>
+static NineP.Client.NinePClient.ConnectAsync(NineP.Protocol.Transports.NinePAddress address, NineP.Client.ClientOptions! options, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Client.NinePSession!>

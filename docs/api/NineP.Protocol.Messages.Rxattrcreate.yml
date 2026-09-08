@@ -1,0 +1,68 @@
+### YamlMime:ApiPage
+title: Struct Rxattrcreate
+body:
+- api1: Struct Rxattrcreate
+  id: NineP_Protocol_Messages_Rxattrcreate
+  metadata:
+    uid: NineP.Protocol.Messages.Rxattrcreate
+    commentId: T:NineP.Protocol.Messages.Rxattrcreate
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Messages
+      url: NineP.Protocol.Messages.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: Confirms that a fid is ready to take an attribute's bytes (reference §5.9).
+- code: 'public readonly record struct Rxattrcreate : IMessage, IEquatable<Rxattrcreate>'
+- h4: Implements
+- list:
+  - text: IMessage
+    url: NineP.Protocol.Messages.IMessage.html
+  - text: IEquatable<Rxattrcreate>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: Rxattrcreate(ushort)
+  id: NineP_Protocol_Messages_Rxattrcreate__ctor_System_UInt16_
+  metadata:
+    uid: NineP.Protocol.Messages.Rxattrcreate.#ctor(System.UInt16)
+    commentId: M:NineP.Protocol.Messages.Rxattrcreate.#ctor(System.UInt16)
+- markdown: Confirms that a fid is ready to take an attribute's bytes (reference §5.9).
+- code: public Rxattrcreate(ushort Tag)
+- h4: Parameters
+- parameters:
+  - name: Tag
+    type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+    description: The message tag, which pairs this message with its partner.
+- h2: Properties
+- api3: Tag
+  id: NineP_Protocol_Messages_Rxattrcreate_Tag
+  metadata:
+    uid: NineP.Protocol.Messages.Rxattrcreate.Tag
+    commentId: P:NineP.Protocol.Messages.Rxattrcreate.Tag
+- markdown: The message tag, which pairs this message with its partner.
+- code: public ushort Tag { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+languageId: csharp
+metadata:
+  description: Confirms that a fid is ready to take an attribute's bytes (reference §5.9).

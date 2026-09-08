@@ -1,0 +1,168 @@
+### YamlMime:ApiPage
+title: Class NinePVersionException
+body:
+- api1: Class NinePVersionException
+  id: NineP_Protocol_NinePVersionException
+  metadata:
+    uid: NineP.Protocol.NinePVersionException
+    commentId: T:NineP.Protocol.NinePVersionException
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol
+      url: NineP.Protocol.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    Version negotiation failed: the server answered "unknown", or it offered a dialect below the
+
+    client's floor. The client never silently downgrades (reference §5.1).
+- code: 'public sealed class NinePVersionException : NinePException, ISerializable'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: Exception
+    url: https://learn.microsoft.com/dotnet/api/system.exception
+  - text: NinePException
+    url: NineP.Protocol.NinePException.html
+  - text: NinePVersionException
+    url: NineP.Protocol.NinePVersionException.html
+- h4: Implements
+- list:
+  - text: ISerializable
+    url: https://learn.microsoft.com/dotnet/api/system.runtime.serialization.iserializable
+- h4: Inherited Members
+- list:
+  - text: NinePException.Error
+    url: NineP.Protocol.NinePException.html#NineP_Protocol_NinePException_Error
+  - text: Exception.GetBaseException()
+    url: https://learn.microsoft.com/dotnet/api/system.exception.getbaseexception
+  - text: Exception.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.exception.gettype
+  - text: Exception.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.exception.tostring
+  - text: Exception.Data
+    url: https://learn.microsoft.com/dotnet/api/system.exception.data
+  - text: Exception.HelpLink
+    url: https://learn.microsoft.com/dotnet/api/system.exception.helplink
+  - text: Exception.HResult
+    url: https://learn.microsoft.com/dotnet/api/system.exception.hresult
+  - text: Exception.InnerException
+    url: https://learn.microsoft.com/dotnet/api/system.exception.innerexception
+  - text: Exception.Message
+    url: https://learn.microsoft.com/dotnet/api/system.exception.message
+  - text: Exception.Source
+    url: https://learn.microsoft.com/dotnet/api/system.exception.source
+  - text: Exception.StackTrace
+    url: https://learn.microsoft.com/dotnet/api/system.exception.stacktrace
+  - text: Exception.TargetSite
+    url: https://learn.microsoft.com/dotnet/api/system.exception.targetsite
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: NinePVersionException()
+  id: NineP_Protocol_NinePVersionException__ctor
+  metadata:
+    uid: NineP.Protocol.NinePVersionException.#ctor
+    commentId: M:NineP.Protocol.NinePVersionException.#ctor
+- markdown: Creates a version exception with no recorded server answer.
+- code: public NinePVersionException()
+- api3: NinePVersionException(string)
+  id: NineP_Protocol_NinePVersionException__ctor_System_String_
+  metadata:
+    uid: NineP.Protocol.NinePVersionException.#ctor(System.String)
+    commentId: M:NineP.Protocol.NinePVersionException.#ctor(System.String)
+- markdown: Creates a version exception with a message.
+- code: public NinePVersionException(string message)
+- h4: Parameters
+- parameters:
+  - name: message
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The message for the developer.
+- api3: NinePVersionException(string, Exception)
+  id: NineP_Protocol_NinePVersionException__ctor_System_String_System_Exception_
+  metadata:
+    uid: NineP.Protocol.NinePVersionException.#ctor(System.String,System.Exception)
+    commentId: M:NineP.Protocol.NinePVersionException.#ctor(System.String,System.Exception)
+- markdown: Creates a version exception with a message and the failure that caused it.
+- code: public NinePVersionException(string message, Exception innerException)
+- h4: Parameters
+- parameters:
+  - name: message
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The message for the developer.
+  - name: innerException
+    type:
+    - text: Exception
+      url: https://learn.microsoft.com/dotnet/api/system.exception
+    description: The failure being wrapped.
+- api3: NinePVersionException(string, string, uint)
+  id: NineP_Protocol_NinePVersionException__ctor_System_String_System_String_System_UInt32_
+  metadata:
+    uid: NineP.Protocol.NinePVersionException.#ctor(System.String,System.String,System.UInt32)
+    commentId: M:NineP.Protocol.NinePVersionException.#ctor(System.String,System.String,System.UInt32)
+- markdown: Creates a version exception recording what the server answered.
+- code: public NinePVersionException(string message, string serverVersion, uint serverMsize)
+- h4: Parameters
+- parameters:
+  - name: message
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The message for the developer.
+  - name: serverVersion
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The version string the server replied with.
+  - name: serverMsize
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The msize the server replied with.
+- h2: Properties
+- api3: ServerMsize
+  id: NineP_Protocol_NinePVersionException_ServerMsize
+  metadata:
+    uid: NineP.Protocol.NinePVersionException.ServerMsize
+    commentId: P:NineP.Protocol.NinePVersionException.ServerMsize
+- markdown: The msize the server replied with.
+- code: public uint ServerMsize { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: ServerVersion
+  id: NineP_Protocol_NinePVersionException_ServerVersion
+  metadata:
+    uid: NineP.Protocol.NinePVersionException.ServerVersion
+    commentId: P:NineP.Protocol.NinePVersionException.ServerVersion
+- markdown: The version string the server replied with, for example "unknown".
+- code: public string ServerVersion { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+languageId: csharp
+metadata:
+  description: >-
+    Version negotiation failed: the server answered "unknown", or it offered a dialect below the
+
+    client's floor. The client never silently downgrades (reference §5.1).

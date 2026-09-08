@@ -1,0 +1,165 @@
+### YamlMime:ApiPage
+title: Struct DirEntry
+body:
+- api1: Struct DirEntry
+  id: NineP_Protocol_DirEntry
+  metadata:
+    uid: NineP.Protocol.DirEntry
+    commentId: T:NineP.Protocol.DirEntry
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol
+      url: NineP.Protocol.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    One directory entry, unified over 9P2000 stat records and .L dirents (reference §4.3). The
+
+    server's directory packer and the client's <code>ReadDir</code> both speak it, so a listing looks the
+
+    same to a caller whichever record format the session negotiated.
+- code: 'public readonly record struct DirEntry : IEquatable<DirEntry>'
+- h4: Implements
+- list:
+  - text: IEquatable<DirEntry>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: DirEntry(string, Qid, FileKind, ulong)
+  id: NineP_Protocol_DirEntry__ctor_System_String_NineP_Protocol_Qid_NineP_Protocol_FileKind_System_UInt64_
+  metadata:
+    uid: NineP.Protocol.DirEntry.#ctor(System.String,NineP.Protocol.Qid,NineP.Protocol.FileKind,System.UInt64)
+    commentId: M:NineP.Protocol.DirEntry.#ctor(System.String,NineP.Protocol.Qid,NineP.Protocol.FileKind,System.UInt64)
+- markdown: >-
+    One directory entry, unified over 9P2000 stat records and .L dirents (reference §4.3). The
+
+    server's directory packer and the client's <code>ReadDir</code> both speak it, so a listing looks the
+
+    same to a caller whichever record format the session negotiated.
+- code: public DirEntry(string Name, Qid Qid, FileKind Kind, ulong Cursor)
+- h4: Parameters
+- parameters:
+  - name: Name
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The entry's name, which never contains '/'.
+  - name: Qid
+    type:
+    - text: Qid
+      url: NineP.Protocol.Qid.html
+    description: The qid of the file the entry names.
+  - name: Kind
+    type:
+    - text: FileKind
+      url: NineP.Protocol.FileKind.html
+    description: The file type, which becomes the POSIX <code>d_type</code> byte in a dirent.
+  - name: Cursor
+    type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+    description: The cookie a <code>Treaddir</code> passes to continue after this entry.
+- h2: Properties
+- api3: Cursor
+  id: NineP_Protocol_DirEntry_Cursor
+  metadata:
+    uid: NineP.Protocol.DirEntry.Cursor
+    commentId: P:NineP.Protocol.DirEntry.Cursor
+- markdown: The cookie a <code>Treaddir</code> passes to continue after this entry.
+- code: public ulong Cursor { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+- api3: DirentType
+  id: NineP_Protocol_DirEntry_DirentType
+  metadata:
+    uid: NineP.Protocol.DirEntry.DirentType
+    commentId: P:NineP.Protocol.DirEntry.DirentType
+- markdown: The POSIX <code>d_type</code> byte this entry carries in an <code>Rreaddir</code> record.
+- code: public byte DirentType { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: byte
+      url: https://learn.microsoft.com/dotnet/api/system.byte
+- api3: Kind
+  id: NineP_Protocol_DirEntry_Kind
+  metadata:
+    uid: NineP.Protocol.DirEntry.Kind
+    commentId: P:NineP.Protocol.DirEntry.Kind
+- markdown: The file type, which becomes the POSIX <code>d_type</code> byte in a dirent.
+- code: public FileKind Kind { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: FileKind
+      url: NineP.Protocol.FileKind.html
+- api3: Name
+  id: NineP_Protocol_DirEntry_Name
+  metadata:
+    uid: NineP.Protocol.DirEntry.Name
+    commentId: P:NineP.Protocol.DirEntry.Name
+- markdown: The entry's name, which never contains '/'.
+- code: public string Name { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: Qid
+  id: NineP_Protocol_DirEntry_Qid
+  metadata:
+    uid: NineP.Protocol.DirEntry.Qid
+    commentId: P:NineP.Protocol.DirEntry.Qid
+- markdown: The qid of the file the entry names.
+- code: public Qid Qid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: Qid
+      url: NineP.Protocol.Qid.html
+- h2: Methods
+- api3: KindOf(byte)
+  id: NineP_Protocol_DirEntry_KindOf_System_Byte_
+  metadata:
+    uid: NineP.Protocol.DirEntry.KindOf(System.Byte)
+    commentId: M:NineP.Protocol.DirEntry.KindOf(System.Byte)
+- markdown: The file kind a POSIX <code>d_type</code> byte names; anything unknown reads as a file.
+- code: public static FileKind KindOf(byte direntType)
+- h4: Parameters
+- parameters:
+  - name: direntType
+    type:
+    - text: byte
+      url: https://learn.microsoft.com/dotnet/api/system.byte
+    description: The <code>d_type</code> byte from an <code>Rreaddir</code> record.
+- h4: Returns
+- parameters:
+  - type:
+    - text: FileKind
+      url: NineP.Protocol.FileKind.html
+    description: The dialect-neutral file kind.
+languageId: csharp
+metadata:
+  description: >-
+    One directory entry, unified over 9P2000 stat records and .L dirents (reference §4.3). The
+
+    server's directory packer and the client's ReadDir both speak it, so a listing looks the
+
+    same to a caller whichever record format the session negotiated.

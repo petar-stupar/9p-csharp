@@ -1,0 +1,164 @@
+### YamlMime:ApiPage
+title: Struct RequestLogEntry
+body:
+- api1: Struct RequestLogEntry
+  id: NineP_Server_RequestLogEntry
+  metadata:
+    uid: NineP.Server.RequestLogEntry
+    commentId: T:NineP.Server.RequestLogEntry
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Server
+      url: NineP.Server.html
+  - name: Assembly
+    value: NineP.Server.dll
+- markdown: >-
+    One completed request, for auditing (architecture §4). Every string in it has already been
+
+    escaped and capped by the core (reference §8 rule 11), so a sink may write it out as it is.
+- code: 'public readonly record struct RequestLogEntry : IEquatable<RequestLogEntry>'
+- h4: Implements
+- list:
+  - text: IEquatable<RequestLogEntry>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: RequestLogEntry(Identity?, MessageType, string, MessageType, NinePError?, TimeSpan)
+  id: NineP_Server_RequestLogEntry__ctor_NineP_Protocol_Auth_Identity_NineP_Protocol_MessageType_System_String_NineP_Protocol_MessageType_System_Nullable_NineP_Protocol_NinePError__System_TimeSpan_
+  metadata:
+    uid: NineP.Server.RequestLogEntry.#ctor(NineP.Protocol.Auth.Identity,NineP.Protocol.MessageType,System.String,NineP.Protocol.MessageType,System.Nullable{NineP.Protocol.NinePError},System.TimeSpan)
+    commentId: M:NineP.Server.RequestLogEntry.#ctor(NineP.Protocol.Auth.Identity,NineP.Protocol.MessageType,System.String,NineP.Protocol.MessageType,System.Nullable{NineP.Protocol.NinePError},System.TimeSpan)
+- markdown: >-
+    One completed request, for auditing (architecture §4). Every string in it has already been
+
+    escaped and capped by the core (reference §8 rule 11), so a sink may write it out as it is.
+- code: public RequestLogEntry(Identity? Identity, MessageType Request, string Summary, MessageType Reply, NinePError? Error, TimeSpan Duration)
+- h4: Parameters
+- parameters:
+  - name: Identity
+    type:
+    - text: Identity
+      url: NineP.Protocol.Auth.Identity.html
+    - '?'
+    description: Who the request ran as, or null before an attach.
+  - name: Request
+    type:
+    - text: MessageType
+      url: NineP.Protocol.MessageType.html
+    description: The T-message type.
+  - name: Summary
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: A short, sanitised description of what was asked.
+  - name: Reply
+    type:
+    - text: MessageType
+      url: NineP.Protocol.MessageType.html
+    description: The R-message type that answered it.
+  - name: Error
+    type:
+    - text: NinePError
+      url: NineP.Protocol.NinePError.html
+    - '?'
+    description: The error value when the reply was an error.
+  - name: Duration
+    type:
+    - text: TimeSpan
+      url: https://learn.microsoft.com/dotnet/api/system.timespan
+    description: How long the request took.
+- h2: Properties
+- api3: Duration
+  id: NineP_Server_RequestLogEntry_Duration
+  metadata:
+    uid: NineP.Server.RequestLogEntry.Duration
+    commentId: P:NineP.Server.RequestLogEntry.Duration
+- markdown: How long the request took.
+- code: public TimeSpan Duration { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: TimeSpan
+      url: https://learn.microsoft.com/dotnet/api/system.timespan
+- api3: Error
+  id: NineP_Server_RequestLogEntry_Error
+  metadata:
+    uid: NineP.Server.RequestLogEntry.Error
+    commentId: P:NineP.Server.RequestLogEntry.Error
+- markdown: The error value when the reply was an error.
+- code: public NinePError? Error { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: NinePError
+      url: NineP.Protocol.NinePError.html
+    - '?'
+- api3: Identity
+  id: NineP_Server_RequestLogEntry_Identity
+  metadata:
+    uid: NineP.Server.RequestLogEntry.Identity
+    commentId: P:NineP.Server.RequestLogEntry.Identity
+- markdown: Who the request ran as, or null before an attach.
+- code: public Identity? Identity { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: Identity
+      url: NineP.Protocol.Auth.Identity.html
+    - '?'
+- api3: Reply
+  id: NineP_Server_RequestLogEntry_Reply
+  metadata:
+    uid: NineP.Server.RequestLogEntry.Reply
+    commentId: P:NineP.Server.RequestLogEntry.Reply
+- markdown: The R-message type that answered it.
+- code: public MessageType Reply { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: MessageType
+      url: NineP.Protocol.MessageType.html
+- api3: Request
+  id: NineP_Server_RequestLogEntry_Request
+  metadata:
+    uid: NineP.Server.RequestLogEntry.Request
+    commentId: P:NineP.Server.RequestLogEntry.Request
+- markdown: The T-message type.
+- code: public MessageType Request { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: MessageType
+      url: NineP.Protocol.MessageType.html
+- api3: Summary
+  id: NineP_Server_RequestLogEntry_Summary
+  metadata:
+    uid: NineP.Server.RequestLogEntry.Summary
+    commentId: P:NineP.Server.RequestLogEntry.Summary
+- markdown: A short, sanitised description of what was asked.
+- code: public string Summary { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+languageId: csharp
+metadata:
+  description: >-
+    One completed request, for auditing (architecture §4). Every string in it has already been
+
+    escaped and capped by the core (reference §8 rule 11), so a sink may write it out as it is.

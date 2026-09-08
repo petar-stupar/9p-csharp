@@ -1,0 +1,213 @@
+### YamlMime:ApiPage
+title: Struct Tsetattr
+body:
+- api1: Struct Tsetattr
+  id: NineP_Protocol_Messages_Tsetattr
+  metadata:
+    uid: NineP.Protocol.Messages.Tsetattr
+    commentId: T:NineP.Protocol.Messages.Tsetattr
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Messages
+      url: NineP.Protocol.Messages.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    Changes the attributes of a file (reference §4.6). A time bit without its _SET twin means "use
+
+    the server's clock".
+- code: 'public readonly record struct Tsetattr : IMessage, IEquatable<Tsetattr>'
+- h4: Implements
+- list:
+  - text: IMessage
+    url: NineP.Protocol.Messages.IMessage.html
+  - text: IEquatable<Tsetattr>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: Tsetattr(ushort, uint, SetAttrMask, uint, uint, uint, ulong, TimeSpec, TimeSpec)
+  id: NineP_Protocol_Messages_Tsetattr__ctor_System_UInt16_System_UInt32_NineP_Protocol_Messages_SetAttrMask_System_UInt32_System_UInt32_System_UInt32_System_UInt64_NineP_Protocol_TimeSpec_NineP_Protocol_TimeSpec_
+  metadata:
+    uid: NineP.Protocol.Messages.Tsetattr.#ctor(System.UInt16,System.UInt32,NineP.Protocol.Messages.SetAttrMask,System.UInt32,System.UInt32,System.UInt32,System.UInt64,NineP.Protocol.TimeSpec,NineP.Protocol.TimeSpec)
+    commentId: M:NineP.Protocol.Messages.Tsetattr.#ctor(System.UInt16,System.UInt32,NineP.Protocol.Messages.SetAttrMask,System.UInt32,System.UInt32,System.UInt32,System.UInt64,NineP.Protocol.TimeSpec,NineP.Protocol.TimeSpec)
+- markdown: >-
+    Changes the attributes of a file (reference §4.6). A time bit without its _SET twin means "use
+
+    the server's clock".
+- code: public Tsetattr(ushort Tag, uint Fid, SetAttrMask Valid, uint Mode, uint Uid, uint Gid, ulong Size, TimeSpec ATime, TimeSpec MTime)
+- h4: Parameters
+- parameters:
+  - name: Tag
+    type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+    description: The message tag, which pairs this message with its partner.
+  - name: Fid
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The fid naming the file.
+  - name: Valid
+    type:
+    - text: SetAttrMask
+      url: NineP.Protocol.Messages.SetAttrMask.html
+    description: Which of the fields below the client is changing.
+  - name: Mode
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The new permission bits.
+  - name: Uid
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The new numeric owner.
+  - name: Gid
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The new numeric group.
+  - name: Size
+    type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+    description: 'The new length: truncate or extend.'
+  - name: ATime
+    type:
+    - text: TimeSpec
+      url: NineP.Protocol.TimeSpec.html
+    description: The new access time.
+  - name: MTime
+    type:
+    - text: TimeSpec
+      url: NineP.Protocol.TimeSpec.html
+    description: The new modification time.
+- h2: Properties
+- api3: ATime
+  id: NineP_Protocol_Messages_Tsetattr_ATime
+  metadata:
+    uid: NineP.Protocol.Messages.Tsetattr.ATime
+    commentId: P:NineP.Protocol.Messages.Tsetattr.ATime
+- markdown: The new access time.
+- code: public TimeSpec ATime { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: TimeSpec
+      url: NineP.Protocol.TimeSpec.html
+- api3: Fid
+  id: NineP_Protocol_Messages_Tsetattr_Fid
+  metadata:
+    uid: NineP.Protocol.Messages.Tsetattr.Fid
+    commentId: P:NineP.Protocol.Messages.Tsetattr.Fid
+- markdown: The fid naming the file.
+- code: public uint Fid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Gid
+  id: NineP_Protocol_Messages_Tsetattr_Gid
+  metadata:
+    uid: NineP.Protocol.Messages.Tsetattr.Gid
+    commentId: P:NineP.Protocol.Messages.Tsetattr.Gid
+- markdown: The new numeric group.
+- code: public uint Gid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: MTime
+  id: NineP_Protocol_Messages_Tsetattr_MTime
+  metadata:
+    uid: NineP.Protocol.Messages.Tsetattr.MTime
+    commentId: P:NineP.Protocol.Messages.Tsetattr.MTime
+- markdown: The new modification time.
+- code: public TimeSpec MTime { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: TimeSpec
+      url: NineP.Protocol.TimeSpec.html
+- api3: Mode
+  id: NineP_Protocol_Messages_Tsetattr_Mode
+  metadata:
+    uid: NineP.Protocol.Messages.Tsetattr.Mode
+    commentId: P:NineP.Protocol.Messages.Tsetattr.Mode
+- markdown: The new permission bits.
+- code: public uint Mode { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Size
+  id: NineP_Protocol_Messages_Tsetattr_Size
+  metadata:
+    uid: NineP.Protocol.Messages.Tsetattr.Size
+    commentId: P:NineP.Protocol.Messages.Tsetattr.Size
+- markdown: 'The new length: truncate or extend.'
+- code: public ulong Size { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+- api3: Tag
+  id: NineP_Protocol_Messages_Tsetattr_Tag
+  metadata:
+    uid: NineP.Protocol.Messages.Tsetattr.Tag
+    commentId: P:NineP.Protocol.Messages.Tsetattr.Tag
+- markdown: The message tag, which pairs this message with its partner.
+- code: public ushort Tag { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+- api3: Uid
+  id: NineP_Protocol_Messages_Tsetattr_Uid
+  metadata:
+    uid: NineP.Protocol.Messages.Tsetattr.Uid
+    commentId: P:NineP.Protocol.Messages.Tsetattr.Uid
+- markdown: The new numeric owner.
+- code: public uint Uid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Valid
+  id: NineP_Protocol_Messages_Tsetattr_Valid
+  metadata:
+    uid: NineP.Protocol.Messages.Tsetattr.Valid
+    commentId: P:NineP.Protocol.Messages.Tsetattr.Valid
+- markdown: Which of the fields below the client is changing.
+- code: public SetAttrMask Valid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: SetAttrMask
+      url: NineP.Protocol.Messages.SetAttrMask.html
+languageId: csharp
+metadata:
+  description: >-
+    Changes the attributes of a file (reference §4.6). A time bit without its _SET twin means "use
+
+    the server's clock".

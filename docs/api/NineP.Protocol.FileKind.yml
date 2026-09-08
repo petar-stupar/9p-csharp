@@ -1,0 +1,57 @@
+### YamlMime:ApiPage
+title: Enum FileKind
+body:
+- api1: Enum FileKind
+  id: NineP_Protocol_FileKind
+  metadata:
+    uid: NineP.Protocol.FileKind
+    commentId: T:NineP.Protocol.FileKind
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol
+      url: NineP.Protocol.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: The dialect-neutral file type a handler declares (reference §7).
+- code: public enum FileKind
+- h2: Fields
+- parameters:
+  - name: BlockDevice
+    default: "6"
+    description: >+
+      A block device.
+
+  - name: CharDevice
+    default: "5"
+    description: >+
+      A character device.
+
+  - name: Directory
+    default: "1"
+    description: >+
+      A directory.
+
+  - name: Fifo
+    default: "3"
+    description: >+
+      A named pipe.
+
+  - name: File
+    default: "0"
+    description: >+
+      A regular file.
+
+  - name: Socket
+    default: "4"
+    description: >+
+      A Unix domain socket.
+
+  - name: Symlink
+    default: "2"
+    description: >+
+      A symbolic link; only .u and .L can represent one.
+
+languageId: csharp
+metadata:
+  description: The dialect-neutral file type a handler declares (reference §7).

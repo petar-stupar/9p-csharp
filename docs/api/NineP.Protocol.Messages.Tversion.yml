@@ -1,0 +1,111 @@
+### YamlMime:ApiPage
+title: Struct Tversion
+body:
+- api1: Struct Tversion
+  id: NineP_Protocol_Messages_Tversion
+  metadata:
+    uid: NineP.Protocol.Messages.Tversion
+    commentId: T:NineP.Protocol.Messages.Tversion
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Messages
+      url: NineP.Protocol.Messages.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    Proposes a dialect and a message size (reference §3.1). It resets the session: every fid is
+
+    clunked and every outstanding request is abandoned.
+- code: 'public readonly record struct Tversion : IMessage, IEquatable<Tversion>'
+- h4: Implements
+- list:
+  - text: IMessage
+    url: NineP.Protocol.Messages.IMessage.html
+  - text: IEquatable<Tversion>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: Tversion(ushort, uint, string)
+  id: NineP_Protocol_Messages_Tversion__ctor_System_UInt16_System_UInt32_System_String_
+  metadata:
+    uid: NineP.Protocol.Messages.Tversion.#ctor(System.UInt16,System.UInt32,System.String)
+    commentId: M:NineP.Protocol.Messages.Tversion.#ctor(System.UInt16,System.UInt32,System.String)
+- markdown: >-
+    Proposes a dialect and a message size (reference §3.1). It resets the session: every fid is
+
+    clunked and every outstanding request is abandoned.
+- code: public Tversion(ushort Tag, uint Msize, string Version)
+- h4: Parameters
+- parameters:
+  - name: Tag
+    type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+    description: The message tag; NOTAG by convention, though any tag is accepted.
+  - name: Msize
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The largest frame the client is willing to handle.
+  - name: Version
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The dialect string the client prefers, for example "9P2000.L".
+- h2: Properties
+- api3: Msize
+  id: NineP_Protocol_Messages_Tversion_Msize
+  metadata:
+    uid: NineP.Protocol.Messages.Tversion.Msize
+    commentId: P:NineP.Protocol.Messages.Tversion.Msize
+- markdown: The largest frame the client is willing to handle.
+- code: public uint Msize { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Tag
+  id: NineP_Protocol_Messages_Tversion_Tag
+  metadata:
+    uid: NineP.Protocol.Messages.Tversion.Tag
+    commentId: P:NineP.Protocol.Messages.Tversion.Tag
+- markdown: The message tag; NOTAG by convention, though any tag is accepted.
+- code: public ushort Tag { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+- api3: Version
+  id: NineP_Protocol_Messages_Tversion_Version
+  metadata:
+    uid: NineP.Protocol.Messages.Tversion.Version
+    commentId: P:NineP.Protocol.Messages.Tversion.Version
+- markdown: The dialect string the client prefers, for example "9P2000.L".
+- code: public string Version { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+languageId: csharp
+metadata:
+  description: >-
+    Proposes a dialect and a message size (reference §3.1). It resets the session: every fid is
+
+    clunked and every outstanding request is abandoned.

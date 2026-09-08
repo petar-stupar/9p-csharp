@@ -1,0 +1,85 @@
+### YamlMime:ApiPage
+title: Struct Rxattrwalk
+body:
+- api1: Struct Rxattrwalk
+  id: NineP_Protocol_Messages_Rxattrwalk
+  metadata:
+    uid: NineP.Protocol.Messages.Rxattrwalk
+    commentId: T:NineP.Protocol.Messages.Rxattrwalk
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Messages
+      url: NineP.Protocol.Messages.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: Answers a Txattrwalk with the size of the attribute (reference §5.9).
+- code: 'public readonly record struct Rxattrwalk : IMessage, IEquatable<Rxattrwalk>'
+- h4: Implements
+- list:
+  - text: IMessage
+    url: NineP.Protocol.Messages.IMessage.html
+  - text: IEquatable<Rxattrwalk>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: Rxattrwalk(ushort, ulong)
+  id: NineP_Protocol_Messages_Rxattrwalk__ctor_System_UInt16_System_UInt64_
+  metadata:
+    uid: NineP.Protocol.Messages.Rxattrwalk.#ctor(System.UInt16,System.UInt64)
+    commentId: M:NineP.Protocol.Messages.Rxattrwalk.#ctor(System.UInt16,System.UInt64)
+- markdown: Answers a Txattrwalk with the size of the attribute (reference §5.9).
+- code: public Rxattrwalk(ushort Tag, ulong Size)
+- h4: Parameters
+- parameters:
+  - name: Tag
+    type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+    description: The message tag, which pairs this message with its partner.
+  - name: Size
+    type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+    description: The number of bytes the attribute holds.
+- h2: Properties
+- api3: Size
+  id: NineP_Protocol_Messages_Rxattrwalk_Size
+  metadata:
+    uid: NineP.Protocol.Messages.Rxattrwalk.Size
+    commentId: P:NineP.Protocol.Messages.Rxattrwalk.Size
+- markdown: The number of bytes the attribute holds.
+- code: public ulong Size { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+- api3: Tag
+  id: NineP_Protocol_Messages_Rxattrwalk_Tag
+  metadata:
+    uid: NineP.Protocol.Messages.Rxattrwalk.Tag
+    commentId: P:NineP.Protocol.Messages.Rxattrwalk.Tag
+- markdown: The message tag, which pairs this message with its partner.
+- code: public ushort Tag { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+languageId: csharp
+metadata:
+  description: Answers a Txattrwalk with the size of the attribute (reference §5.9).

@@ -1,0 +1,151 @@
+### YamlMime:ApiPage
+title: Struct LockRequest
+body:
+- api1: Struct LockRequest
+  id: NineP_Protocol_LockRequest
+  metadata:
+    uid: NineP.Protocol.LockRequest
+    commentId: T:NineP.Protocol.LockRequest
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol
+      url: NineP.Protocol.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: A byte-range lock request; a <code>Length</code> of 0 means "to the end of the file".
+- code: 'public readonly record struct LockRequest : IEquatable<LockRequest>'
+- h4: Implements
+- list:
+  - text: IEquatable<LockRequest>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: LockRequest(LockType, LockFlags, ulong, ulong, uint, string)
+  id: NineP_Protocol_LockRequest__ctor_NineP_Protocol_LockType_NineP_Protocol_LockFlags_System_UInt64_System_UInt64_System_UInt32_System_String_
+  metadata:
+    uid: NineP.Protocol.LockRequest.#ctor(NineP.Protocol.LockType,NineP.Protocol.LockFlags,System.UInt64,System.UInt64,System.UInt32,System.String)
+    commentId: M:NineP.Protocol.LockRequest.#ctor(NineP.Protocol.LockType,NineP.Protocol.LockFlags,System.UInt64,System.UInt64,System.UInt32,System.String)
+- markdown: A byte-range lock request; a <code>Length</code> of 0 means "to the end of the file".
+- code: public LockRequest(LockType Type, LockFlags Flags, ulong Start, ulong Length, uint ProcId, string ClientId)
+- h4: Parameters
+- parameters:
+  - name: Type
+    type:
+    - text: LockType
+      url: NineP.Protocol.LockType.html
+    description: Read, write, or unlock.
+  - name: Flags
+    type:
+    - text: LockFlags
+      url: NineP.Protocol.LockFlags.html
+    description: Whether the client will retry on BLOCKED.
+  - name: Start
+    type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+    description: The first byte of the range.
+  - name: Length
+    type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+    description: The length of the range, or 0 for "to the end of the file".
+  - name: ProcId
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The client's process identifier, which owns the lock.
+  - name: ClientId
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The client's identifier, which scopes <code class="paramref">ProcId</code>.
+- h2: Properties
+- api3: ClientId
+  id: NineP_Protocol_LockRequest_ClientId
+  metadata:
+    uid: NineP.Protocol.LockRequest.ClientId
+    commentId: P:NineP.Protocol.LockRequest.ClientId
+- markdown: The client's identifier, which scopes <code class="paramref">ProcId</code>.
+- code: public string ClientId { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: Flags
+  id: NineP_Protocol_LockRequest_Flags
+  metadata:
+    uid: NineP.Protocol.LockRequest.Flags
+    commentId: P:NineP.Protocol.LockRequest.Flags
+- markdown: Whether the client will retry on BLOCKED.
+- code: public LockFlags Flags { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: LockFlags
+      url: NineP.Protocol.LockFlags.html
+- api3: Length
+  id: NineP_Protocol_LockRequest_Length
+  metadata:
+    uid: NineP.Protocol.LockRequest.Length
+    commentId: P:NineP.Protocol.LockRequest.Length
+- markdown: The length of the range, or 0 for "to the end of the file".
+- code: public ulong Length { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+- api3: ProcId
+  id: NineP_Protocol_LockRequest_ProcId
+  metadata:
+    uid: NineP.Protocol.LockRequest.ProcId
+    commentId: P:NineP.Protocol.LockRequest.ProcId
+- markdown: The client's process identifier, which owns the lock.
+- code: public uint ProcId { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Start
+  id: NineP_Protocol_LockRequest_Start
+  metadata:
+    uid: NineP.Protocol.LockRequest.Start
+    commentId: P:NineP.Protocol.LockRequest.Start
+- markdown: The first byte of the range.
+- code: public ulong Start { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+- api3: Type
+  id: NineP_Protocol_LockRequest_Type
+  metadata:
+    uid: NineP.Protocol.LockRequest.Type
+    commentId: P:NineP.Protocol.LockRequest.Type
+- markdown: Read, write, or unlock.
+- code: public LockType Type { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: LockType
+      url: NineP.Protocol.LockType.html
+languageId: csharp
+metadata:
+  description: A byte-range lock request; a Length of 0 means "to the end of the file".

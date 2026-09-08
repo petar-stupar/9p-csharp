@@ -1,0 +1,51 @@
+### YamlMime:ApiPage
+title: Interface IMessage
+body:
+- api1: Interface IMessage
+  id: NineP_Protocol_Messages_IMessage
+  metadata:
+    uid: NineP.Protocol.Messages.IMessage
+    commentId: T:NineP.Protocol.Messages.IMessage
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Messages
+      url: NineP.Protocol.Messages.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    Implemented by every wire-legal message record, tying a record to its type number. The type is
+
+    a static abstract member so that the codec can be generic over the record without boxing it.
+- code: public interface IMessage
+- h2: Properties
+- api3: Tag
+  id: NineP_Protocol_Messages_IMessage_Tag
+  metadata:
+    uid: NineP.Protocol.Messages.IMessage.Tag
+    commentId: P:NineP.Protocol.Messages.IMessage.Tag
+- markdown: The message tag; <code>NOTAG</code> for <code>Tversion</code> and <code>Rversion</code>.
+- code: ushort Tag { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+- api3: Type
+  id: NineP_Protocol_Messages_IMessage_Type
+  metadata:
+    uid: NineP.Protocol.Messages.IMessage.Type
+    commentId: P:NineP.Protocol.Messages.IMessage.Type
+- markdown: The type number this record encodes to.
+- code: public static abstract MessageType Type { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: MessageType
+      url: NineP.Protocol.MessageType.html
+languageId: csharp
+metadata:
+  description: >-
+    Implemented by every wire-legal message record, tying a record to its type number. The type is
+
+    a static abstract member so that the codec can be generic over the record without boxing it.

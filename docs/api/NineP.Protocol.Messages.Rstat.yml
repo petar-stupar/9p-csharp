@@ -1,0 +1,94 @@
+### YamlMime:ApiPage
+title: Struct Rstat
+body:
+- api1: Struct Rstat
+  id: NineP_Protocol_Messages_Rstat
+  metadata:
+    uid: NineP.Protocol.Messages.Rstat
+    commentId: T:NineP.Protocol.Messages.Rstat
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Messages
+      url: NineP.Protocol.Messages.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    Answers a Tstat with one stat record (reference §4.2). The record's size appears twice on the
+
+    wire.
+- code: 'public readonly record struct Rstat : IMessage, IEquatable<Rstat>'
+- h4: Implements
+- list:
+  - text: IMessage
+    url: NineP.Protocol.Messages.IMessage.html
+  - text: IEquatable<Rstat>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: Rstat(ushort, StatRecord)
+  id: NineP_Protocol_Messages_Rstat__ctor_System_UInt16_NineP_Protocol_Messages_StatRecord_
+  metadata:
+    uid: NineP.Protocol.Messages.Rstat.#ctor(System.UInt16,NineP.Protocol.Messages.StatRecord)
+    commentId: M:NineP.Protocol.Messages.Rstat.#ctor(System.UInt16,NineP.Protocol.Messages.StatRecord)
+- markdown: >-
+    Answers a Tstat with one stat record (reference §4.2). The record's size appears twice on the
+
+    wire.
+- code: public Rstat(ushort Tag, StatRecord Stat)
+- h4: Parameters
+- parameters:
+  - name: Tag
+    type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+    description: The message tag, which pairs this message with its partner.
+  - name: Stat
+    type:
+    - text: StatRecord
+      url: NineP.Protocol.Messages.StatRecord.html
+    description: The stat record describing the file.
+- h2: Properties
+- api3: Stat
+  id: NineP_Protocol_Messages_Rstat_Stat
+  metadata:
+    uid: NineP.Protocol.Messages.Rstat.Stat
+    commentId: P:NineP.Protocol.Messages.Rstat.Stat
+- markdown: The stat record describing the file.
+- code: public StatRecord Stat { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: StatRecord
+      url: NineP.Protocol.Messages.StatRecord.html
+- api3: Tag
+  id: NineP_Protocol_Messages_Rstat_Tag
+  metadata:
+    uid: NineP.Protocol.Messages.Rstat.Tag
+    commentId: P:NineP.Protocol.Messages.Rstat.Tag
+- markdown: The message tag, which pairs this message with its partner.
+- code: public ushort Tag { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+languageId: csharp
+metadata:
+  description: >-
+    Answers a Tstat with one stat record (reference §4.2). The record's size appears twice on the
+
+    wire.

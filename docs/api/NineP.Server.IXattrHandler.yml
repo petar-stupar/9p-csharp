@@ -1,0 +1,162 @@
+### YamlMime:ApiPage
+title: Interface IXattrHandler
+body:
+- api1: Interface IXattrHandler
+  id: NineP_Server_IXattrHandler
+  metadata:
+    uid: NineP.Server.IXattrHandler
+    commentId: T:NineP.Server.IXattrHandler
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Server
+      url: NineP.Server.html
+  - name: Assembly
+    value: NineP.Server.dll
+- markdown: 'Optional: extended attributes (.L). Absent means <code>EOPNOTSUPP</code>.'
+- code: public interface IXattrHandler
+- h2: Methods
+- api3: GetXattrAsync(string, CancellationToken)
+  id: NineP_Server_IXattrHandler_GetXattrAsync_System_String_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Server.IXattrHandler.GetXattrAsync(System.String,System.Threading.CancellationToken)
+    commentId: M:NineP.Server.IXattrHandler.GetXattrAsync(System.String,System.Threading.CancellationToken)
+- markdown: Reads one attribute.
+- code: ValueTask<ReadOnlyMemory<byte>> GetXattrAsync(string name, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: name
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The attribute's name.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: ReadOnlyMemory
+      url: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+    - <
+    - text: byte
+      url: https://learn.microsoft.com/dotnet/api/system.byte
+    - '>'
+    - '>'
+    description: The attribute's bytes.
+- api3: ListXattrAsync(CancellationToken)
+  id: NineP_Server_IXattrHandler_ListXattrAsync_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Server.IXattrHandler.ListXattrAsync(System.Threading.CancellationToken)
+    commentId: M:NineP.Server.IXattrHandler.ListXattrAsync(System.Threading.CancellationToken)
+- markdown: The NUL-separated name list a <code>Txattrwalk</code> with an empty name returns.
+- code: ValueTask<ReadOnlyMemory<byte>> ListXattrAsync(CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: ReadOnlyMemory
+      url: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+    - <
+    - text: byte
+      url: https://learn.microsoft.com/dotnet/api/system.byte
+    - '>'
+    - '>'
+    description: The packed list of attribute names.
+- api3: RemoveXattrAsync(string, CancellationToken)
+  id: NineP_Server_IXattrHandler_RemoveXattrAsync_System_String_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Server.IXattrHandler.RemoveXattrAsync(System.String,System.Threading.CancellationToken)
+    commentId: M:NineP.Server.IXattrHandler.RemoveXattrAsync(System.String,System.Threading.CancellationToken)
+- markdown: >-
+    Removes one attribute. The core calls this when a <code>Txattrcreate</code> fid whose
+
+    <code>attr_size</code> was zero is clunked: that is how v9fs and diod spell <code>removexattr(2)</code>
+
+    on the wire, and reference §8 rule 21 makes it a removal rather than an empty value.
+
+    Removing an attribute that is not there is not an error.
+- code: ValueTask RemoveXattrAsync(string name, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: name
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The attribute's name.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask
+    description: A task that completes when the attribute is gone.
+- api3: SetXattrAsync(string, ReadOnlyMemory<byte>, XattrFlags, CancellationToken)
+  id: NineP_Server_IXattrHandler_SetXattrAsync_System_String_System_ReadOnlyMemory_System_Byte__NineP_Protocol_XattrFlags_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Server.IXattrHandler.SetXattrAsync(System.String,System.ReadOnlyMemory{System.Byte},NineP.Protocol.XattrFlags,System.Threading.CancellationToken)
+    commentId: M:NineP.Server.IXattrHandler.SetXattrAsync(System.String,System.ReadOnlyMemory{System.Byte},NineP.Protocol.XattrFlags,System.Threading.CancellationToken)
+- markdown: >-
+    Writes one attribute. The core calls this when a <code>Txattrcreate</code> fid is clunked and the
+
+    <code>attr_size</code> it promised was non-zero; a zero-length value never reaches here, because
+
+    that request is a removal (see <xref href="NineP.Server.IXattrHandler.RemoveXattrAsync(System.String%2cSystem.Threading.CancellationToken)" data-throw-if-not-resolved="false"></xref>).
+- code: ValueTask SetXattrAsync(string name, ReadOnlyMemory<byte> value, XattrFlags flags, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: name
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The attribute's name.
+  - name: value
+    type:
+    - text: ReadOnlyMemory
+      url: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+    - <
+    - text: byte
+      url: https://learn.microsoft.com/dotnet/api/system.byte
+    - '>'
+    description: The bytes to store; never empty.
+  - name: flags
+    type:
+    - text: XattrFlags
+      url: NineP.Protocol.XattrFlags.html
+    description: Whether the attribute must or must not already exist.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask
+    description: A task that completes when the attribute has been stored.
+languageId: csharp
+metadata:
+  description: 'Optional: extended attributes (.L). Absent means EOPNOTSUPP.'

@@ -1,0 +1,116 @@
+### YamlMime:ApiPage
+title: Enum GetAttrMask
+body:
+- api1: Enum GetAttrMask
+  id: NineP_Protocol_Messages_GetAttrMask
+  metadata:
+    uid: NineP.Protocol.Messages.GetAttrMask
+    commentId: T:NineP.Protocol.Messages.GetAttrMask
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Messages
+      url: NineP.Protocol.Messages.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    The <code>Tgetattr.request_mask</code> and <code>Rgetattr.valid</code> bits (reference §4.6). A server
+
+    always sends the full 160-byte reply; fields it did not mark valid carry zero.
+- code: >-
+    [Flags]
+
+    public enum GetAttrMask : ulong
+- h2: Fields
+- parameters:
+  - name: ATime
+    default: "32"
+    description: >+
+      The last access time.
+
+  - name: All
+    default: "16383"
+    description: >+
+      Every defined bit.
+
+  - name: BTime
+    default: "2048"
+    description: >+
+      The creation time.
+
+  - name: Basic
+    default: "2047"
+    description: >+
+      Everything through <xref href="NineP.Protocol.Messages.GetAttrMask.Blocks" data-throw-if-not-resolved="false"></xref>: what a stat(2) needs.
+
+  - name: Blocks
+    default: "1024"
+    description: >+
+      The allocated 512-byte block count.
+
+  - name: CTime
+    default: "128"
+    description: >+
+      The last status-change time.
+
+  - name: DataVersion
+    default: "8192"
+    description: >+
+      The data version.
+
+  - name: Gen
+    default: "4096"
+    description: >+
+      The generation number.
+
+  - name: Gid
+    default: "8"
+    description: >+
+      The numeric group.
+
+  - name: Ino
+    default: "256"
+    description: >+
+      The inode number, which 9P carries as the qid path.
+
+  - name: MTime
+    default: "64"
+    description: >+
+      The last modification time.
+
+  - name: Mode
+    default: "1"
+    description: >+
+      The POSIX mode word.
+
+  - name: NLink
+    default: "2"
+    description: >+
+      The hard-link count.
+
+  - name: None
+    default: "0"
+    description: >+
+      Nothing is requested or valid.
+
+  - name: Rdev
+    default: "16"
+    description: >+
+      The device numbers of a device node.
+
+  - name: Size
+    default: "512"
+    description: >+
+      The file length.
+
+  - name: Uid
+    default: "4"
+    description: >+
+      The numeric owner.
+
+languageId: csharp
+metadata:
+  description: >-
+    The Tgetattr.request_mask and Rgetattr.valid bits (reference §4.6). A server
+
+    always sends the full 160-byte reply; fields it did not mark valid carry zero.

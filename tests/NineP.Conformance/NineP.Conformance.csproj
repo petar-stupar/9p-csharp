@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- Single-target so that the driver runs with no framework switch; CI step 5 invokes it
+         through "dotnet run" with a bare "self" verb. -->
+    <TargetFramework>net10.0</TargetFramework>
+    <TargetFrameworks />
+    <OutputType>Exe</OutputType>
+    <RootNamespace>NineP.Conformance</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../src/NineP.Client/NineP.Client.csproj" />
+    <ProjectReference Include="../NineP.TestSupport/NineP.TestSupport.csproj" />
+
+    <!-- The driver spawns the built examples as processes and, for the memory transport, drives
+         their code in process; both references also guarantee they are built first. -->
+    <ProjectReference Include="../../examples/NineP.Cli/NineP.Cli.csproj" />
+    <ProjectReference Include="../../examples/NineP.JsonFs/NineP.JsonFs.csproj" />
+  </ItemGroup>
+
+</Project>

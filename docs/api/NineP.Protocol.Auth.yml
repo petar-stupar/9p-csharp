@@ -1,0 +1,129 @@
+### YamlMime:ApiPage
+title: Namespace NineP.Protocol.Auth
+body:
+- api1: Namespace NineP.Protocol.Auth
+  id: NineP_Protocol_Auth
+  metadata:
+    uid: NineP.Protocol.Auth
+    commentId: N:NineP.Protocol.Auth
+- h3: Classes
+- parameters:
+  - type:
+      text: BearerTokenCredential
+      url: NineP.Protocol.Auth.BearerTokenCredential.html
+    description: >-
+      Writes an OIDC access token the caller already holds (S-30). The packages never perform a
+
+      login: acquiring a token is the cli's job, and a library that could log in would need to hold
+
+      a client secret.
+  - type:
+      text: CallbackCredential
+      url: NineP.Protocol.Auth.CallbackCredential.html
+    description: 'An arbitrary exchange written by the caller: the client-side extension point.'
+  - type:
+      text: ConstantTime
+      url: NineP.Protocol.Auth.ConstantTime.html
+    description: >-
+      Constant-time comparison. This is the <b>only</b> byte-comparison path for secrets in this
+
+      library (workspace architecture §8.3), and a test greps the authentication sources to keep it
+
+      that way: a comparison that returns early on the first differing byte leaks the secret one byte
+
+      at a time to anyone who can measure the answer.
+  - type:
+      text: Identity
+      url: NineP.Protocol.Auth.Identity.html
+    description: >-
+      Who a session runs as. It is produced by the authenticator and never by the client's claim
+
+      (workspace architecture §5): a <code>Tattach</code> may say any <code>uname</code> it likes, and the server
+
+      still runs the session as whoever the afid exchange proved.
+  - type:
+      text: PasswordAuthenticator
+      url: NineP.Protocol.Auth.PasswordAuthenticator.html
+    description: 'Default authentication: <code>user\npassword\n</code> over the afid, verified against a hashed store.'
+  - type:
+      text: PasswordCredential
+      url: NineP.Protocol.Auth.PasswordCredential.html
+    description: Writes <code>user\npassword\n</code> to the afid (mirror of <xref href="NineP.Protocol.Auth.PasswordAuthenticator" data-throw-if-not-resolved="false"></xref>).
+  - type:
+      text: PasswordFileStore
+      url: NineP.Protocol.Auth.PasswordFileStore.html
+    description: >-
+      A password file of <code>user:pbkdf2-sha256$iterations$salt$hash</code> lines (S-15). The BCL has no
+
+      argon2id and no vetted .NET package for it exists, so the architecture's stated fallback —
+
+      PBKDF2-HMAC-SHA-256 at 600 000 iterations — is what ships.
+  - type:
+      text: TlsClientCertAuthenticator
+      url: NineP.Protocol.Auth.TlsClientCertAuthenticator.html
+    description: >-
+      Derives the identity from the peer's TLS client certificate (workspace architecture §5). There
+
+      is nothing to exchange over the afid: mutual TLS already proved who the peer is before the first
+
+      9P byte, so the session is authenticated the moment it begins — and an attach that claims a
+
+      different <code>uname</code> is refused rather than quietly renamed.
+  - type:
+      text: TokenAuthenticator
+      url: NineP.Protocol.Auth.TokenAuthenticator.html
+    description: >-
+      Default authentication: the client writes an opaque token to the afid once, the server compares
+
+      it in constant time and answers <code>ok\n</code> (workspace architecture §5). Plan 9's
+
+      <code>p9any</code>/<code>p9sk1</code> is deliberately out of scope: it is DES-based and is not production
+
+      security.
+  - type:
+      text: TokenCredential
+      url: NineP.Protocol.Auth.TokenCredential.html
+    description: Writes an opaque token to the afid and expects <code>ok\n</code> (mirror of <xref href="NineP.Protocol.Auth.TokenAuthenticator" data-throw-if-not-resolved="false"></xref>).
+- h3: Structs
+- parameters:
+  - type:
+      text: AuthRequest
+      url: NineP.Protocol.Auth.AuthRequest.html
+    description: >-
+      The triple a <code>Tauth</code> binds an afid to (reference §5.2, S-22). Binding on
+
+      <code>uname</code> and <code>aname</code> alone would let an afid opened for one numeric user satisfy an
+
+      attach claiming another in a .u or .L session.
+- h3: Interfaces
+- parameters:
+  - type:
+      text: IAuthChannel
+      url: NineP.Protocol.Auth.IAuthChannel.html
+    description: The client's read/write view of an afid during <code>AttachAsync</code>.
+  - type:
+      text: IAuthSession
+      url: NineP.Protocol.Auth.IAuthSession.html
+    description: >-
+      One in-progress afid exchange. The core bounds it at 64 KiB and 30 s (workspace architecture
+
+      §5); what flows over it is this workspace's business, not 9P's.
+  - type:
+      text: IAuthenticator
+      url: NineP.Protocol.Auth.IAuthenticator.html
+    description: >-
+      Server-side authentication (workspace architecture §5). Returning null from
+
+      <xref href="NineP.Protocol.Auth.IAuthenticator.BeginAsync(NineP.Protocol.Auth.AuthRequest%2cNineP.Protocol.Transports.PeerIdentity%2cSystem.Threading.CancellationToken)" data-throw-if-not-resolved="false"></xref> refuses the <code>Tauth</code> outright.
+  - type:
+      text: ICredential
+      url: NineP.Protocol.Auth.ICredential.html
+    description: >-
+      Client-side credential: it drives the afid exchange from inside <code>AttachAsync</code>, so a caller
+
+      never writes protocol code to authenticate (workspace architecture §5).
+  - type:
+      text: IPasswordStore
+      url: NineP.Protocol.Auth.IPasswordStore.html
+    description: A store of hashed credentials for <xref href="NineP.Protocol.Auth.PasswordAuthenticator" data-throw-if-not-resolved="false"></xref>.
+languageId: csharp

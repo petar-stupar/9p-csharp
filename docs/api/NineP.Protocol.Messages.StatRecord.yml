@@ -1,0 +1,287 @@
+### YamlMime:ApiPage
+title: Struct StatRecord
+body:
+- api1: Struct StatRecord
+  id: NineP_Protocol_Messages_StatRecord
+  metadata:
+    uid: NineP.Protocol.Messages.StatRecord
+    commentId: T:NineP.Protocol.Messages.StatRecord
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Messages
+      url: NineP.Protocol.Messages.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    A 9P2000 / 9P2000.u stat record (reference §4.2). In a 9P2000 session <xref href="NineP.Protocol.Messages.StatRecord.Extension" data-throw-if-not-resolved="false"></xref>
+
+    is null and the three numeric ids are <xref href="NineP.Protocol.Constants.NONUNAME" data-throw-if-not-resolved="false"></xref>: which fields are on
+
+    the wire is decided by the session dialect, never by sniffing bytes.
+- code: 'public readonly record struct StatRecord : IEquatable<StatRecord>'
+- h4: Implements
+- list:
+  - text: IEquatable<StatRecord>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Properties
+- api3: ATime
+  id: NineP_Protocol_Messages_StatRecord_ATime
+  metadata:
+    uid: NineP.Protocol.Messages.StatRecord.ATime
+    commentId: P:NineP.Protocol.Messages.StatRecord.ATime
+- markdown: The last access time, in whole seconds since the Unix epoch.
+- code: public uint ATime { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Dev
+  id: NineP_Protocol_Messages_StatRecord_Dev
+  metadata:
+    uid: NineP.Protocol.Messages.StatRecord.Dev
+    commentId: P:NineP.Protocol.Messages.StatRecord.Dev
+- markdown: For kernel use; a server that does not care sends zero.
+- code: public uint Dev { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: DontTouch
+  id: NineP_Protocol_Messages_StatRecord_DontTouch
+  metadata:
+    uid: NineP.Protocol.Messages.StatRecord.DontTouch
+    commentId: P:NineP.Protocol.Messages.StatRecord.DontTouch
+- markdown: >-
+    A record whose every integer field is the "don't touch" value of its width and whose every
+
+    string is empty: the shape a <code>Twstat</code> takes when it means fsync (reference §4.2).
+- code: public static StatRecord DontTouch { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: StatRecord
+      url: NineP.Protocol.Messages.StatRecord.html
+- api3: Extension
+  id: NineP_Protocol_Messages_StatRecord_Extension
+  metadata:
+    uid: NineP.Protocol.Messages.StatRecord.Extension
+    commentId: P:NineP.Protocol.Messages.StatRecord.Extension
+- markdown: >-
+    The .u extension: a symlink target, or "b maj min" / "c maj min" for a device. Null in a
+
+    9P2000 session, where the field is not on the wire at all.
+- code: public string? Extension { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+- api3: Gid
+  id: NineP_Protocol_Messages_StatRecord_Gid
+  metadata:
+    uid: NineP.Protocol.Messages.StatRecord.Gid
+    commentId: P:NineP.Protocol.Messages.StatRecord.Gid
+- markdown: The textual group.
+- code: public string Gid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: IsAllDontTouch
+  id: NineP_Protocol_Messages_StatRecord_IsAllDontTouch
+  metadata:
+    uid: NineP.Protocol.Messages.StatRecord.IsAllDontTouch
+    commentId: P:NineP.Protocol.Messages.StatRecord.IsAllDontTouch
+- markdown: >-
+    True when every field carries its "don't touch" value, which makes a <code>Twstat</code> a
+
+    request to commit the file to stable storage rather than to change it (reference §4.2).
+- code: public bool IsAllDontTouch { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: bool
+      url: https://learn.microsoft.com/dotnet/api/system.boolean
+- api3: Length
+  id: NineP_Protocol_Messages_StatRecord_Length
+  metadata:
+    uid: NineP.Protocol.Messages.StatRecord.Length
+    commentId: P:NineP.Protocol.Messages.StatRecord.Length
+- markdown: The file length in bytes; zero for a directory.
+- code: public ulong Length { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+- api3: MTime
+  id: NineP_Protocol_Messages_StatRecord_MTime
+  metadata:
+    uid: NineP.Protocol.Messages.StatRecord.MTime
+    commentId: P:NineP.Protocol.Messages.StatRecord.MTime
+- markdown: The last modification time, in whole seconds since the Unix epoch.
+- code: public uint MTime { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Mode
+  id: NineP_Protocol_Messages_StatRecord_Mode
+  metadata:
+    uid: NineP.Protocol.Messages.StatRecord.Mode
+    commentId: P:NineP.Protocol.Messages.StatRecord.Mode
+- markdown: The permission and type bits of reference §4.4.
+- code: public uint Mode { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Muid
+  id: NineP_Protocol_Messages_StatRecord_Muid
+  metadata:
+    uid: NineP.Protocol.Messages.StatRecord.Muid
+    commentId: P:NineP.Protocol.Messages.StatRecord.Muid
+- markdown: The textual name of the last user to modify the file.
+- code: public string Muid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: NGid
+  id: NineP_Protocol_Messages_StatRecord_NGid
+  metadata:
+    uid: NineP.Protocol.Messages.StatRecord.NGid
+    commentId: P:NineP.Protocol.Messages.StatRecord.NGid
+- markdown: The numeric group (.u); NONUNAME when absent, as in every 9P2000 session.
+- code: public uint NGid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: NMuid
+  id: NineP_Protocol_Messages_StatRecord_NMuid
+  metadata:
+    uid: NineP.Protocol.Messages.StatRecord.NMuid
+    commentId: P:NineP.Protocol.Messages.StatRecord.NMuid
+- markdown: The numeric last modifier (.u); NONUNAME when absent, as in every 9P2000 session.
+- code: public uint NMuid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: NUid
+  id: NineP_Protocol_Messages_StatRecord_NUid
+  metadata:
+    uid: NineP.Protocol.Messages.StatRecord.NUid
+    commentId: P:NineP.Protocol.Messages.StatRecord.NUid
+- markdown: The numeric owner (.u); NONUNAME when absent, as in every 9P2000 session.
+- code: public uint NUid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Name
+  id: NineP_Protocol_Messages_StatRecord_Name
+  metadata:
+    uid: NineP.Protocol.Messages.StatRecord.Name
+    commentId: P:NineP.Protocol.Messages.StatRecord.Name
+- markdown: The file's name; "/" for the root of a served tree.
+- code: public string Name { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: Qid
+  id: NineP_Protocol_Messages_StatRecord_Qid
+  metadata:
+    uid: NineP.Protocol.Messages.StatRecord.Qid
+    commentId: P:NineP.Protocol.Messages.StatRecord.Qid
+- markdown: The qid of the file this record describes.
+- code: public Qid Qid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: Qid
+      url: NineP.Protocol.Qid.html
+- api3: Type
+  id: NineP_Protocol_Messages_StatRecord_Type
+  metadata:
+    uid: NineP.Protocol.Messages.StatRecord.Type
+    commentId: P:NineP.Protocol.Messages.StatRecord.Type
+- markdown: For kernel use; a server that does not care sends zero.
+- code: public ushort Type { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+- api3: Uid
+  id: NineP_Protocol_Messages_StatRecord_Uid
+  metadata:
+    uid: NineP.Protocol.Messages.StatRecord.Uid
+    commentId: P:NineP.Protocol.Messages.StatRecord.Uid
+- markdown: The textual owner.
+- code: public string Uid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- h2: Methods
+- api3: GetEncodedSize(Dialect)
+  id: NineP_Protocol_Messages_StatRecord_GetEncodedSize_NineP_Protocol_Dialect_
+  metadata:
+    uid: NineP.Protocol.Messages.StatRecord.GetEncodedSize(NineP.Protocol.Dialect)
+    commentId: M:NineP.Protocol.Messages.StatRecord.GetEncodedSize(NineP.Protocol.Dialect)
+- markdown: >-
+    The number of bytes this record occupies after its own leading <code>size[2]</code>, which is the
+
+    value that leading field carries.
+- code: public int GetEncodedSize(Dialect dialect)
+- h4: Parameters
+- parameters:
+  - name: dialect
+    type:
+    - text: Dialect
+      url: NineP.Protocol.Dialect.html
+    description: The session dialect, which decides whether the .u fields are present.
+- h4: Returns
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+    description: The encoded length in bytes.
+languageId: csharp
+metadata:
+  description: >-
+    A 9P2000 / 9P2000.u stat record (reference §4.2). In a 9P2000 session 
+
+    is null and the three numeric ids are : which fields are on
+
+    the wire is decided by the session dialect, never by sniffing bytes.

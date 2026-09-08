@@ -1,0 +1,153 @@
+### YamlMime:ApiPage
+title: Struct Tlcreate
+body:
+- api1: Struct Tlcreate
+  id: NineP_Protocol_Messages_Tlcreate
+  metadata:
+    uid: NineP.Protocol.Messages.Tlcreate
+    commentId: T:NineP.Protocol.Messages.Tlcreate
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Messages
+      url: NineP.Protocol.Messages.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: Creates a file in the directory a fid names and opens the fid onto it (reference §3.4).
+- code: 'public readonly record struct Tlcreate : IMessage, IEquatable<Tlcreate>'
+- h4: Implements
+- list:
+  - text: IMessage
+    url: NineP.Protocol.Messages.IMessage.html
+  - text: IEquatable<Tlcreate>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: Tlcreate(ushort, uint, string, uint, uint, uint)
+  id: NineP_Protocol_Messages_Tlcreate__ctor_System_UInt16_System_UInt32_System_String_System_UInt32_System_UInt32_System_UInt32_
+  metadata:
+    uid: NineP.Protocol.Messages.Tlcreate.#ctor(System.UInt16,System.UInt32,System.String,System.UInt32,System.UInt32,System.UInt32)
+    commentId: M:NineP.Protocol.Messages.Tlcreate.#ctor(System.UInt16,System.UInt32,System.String,System.UInt32,System.UInt32,System.UInt32)
+- markdown: Creates a file in the directory a fid names and opens the fid onto it (reference §3.4).
+- code: public Tlcreate(ushort Tag, uint Fid, string Name, uint Flags, uint Mode, uint Gid)
+- h4: Parameters
+- parameters:
+  - name: Tag
+    type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+    description: The message tag, which pairs this message with its partner.
+  - name: Fid
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The fid naming the directory; it becomes the new file.
+  - name: Name
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The name of the new file.
+  - name: Flags
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: Linux open(2) flags for the new fid.
+  - name: Mode
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The POSIX mode; servers mask it with 07777.
+  - name: Gid
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The numeric group the new file belongs to.
+- h2: Properties
+- api3: Fid
+  id: NineP_Protocol_Messages_Tlcreate_Fid
+  metadata:
+    uid: NineP.Protocol.Messages.Tlcreate.Fid
+    commentId: P:NineP.Protocol.Messages.Tlcreate.Fid
+- markdown: The fid naming the directory; it becomes the new file.
+- code: public uint Fid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Flags
+  id: NineP_Protocol_Messages_Tlcreate_Flags
+  metadata:
+    uid: NineP.Protocol.Messages.Tlcreate.Flags
+    commentId: P:NineP.Protocol.Messages.Tlcreate.Flags
+- markdown: Linux open(2) flags for the new fid.
+- code: public uint Flags { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Gid
+  id: NineP_Protocol_Messages_Tlcreate_Gid
+  metadata:
+    uid: NineP.Protocol.Messages.Tlcreate.Gid
+    commentId: P:NineP.Protocol.Messages.Tlcreate.Gid
+- markdown: The numeric group the new file belongs to.
+- code: public uint Gid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Mode
+  id: NineP_Protocol_Messages_Tlcreate_Mode
+  metadata:
+    uid: NineP.Protocol.Messages.Tlcreate.Mode
+    commentId: P:NineP.Protocol.Messages.Tlcreate.Mode
+- markdown: The POSIX mode; servers mask it with 07777.
+- code: public uint Mode { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Name
+  id: NineP_Protocol_Messages_Tlcreate_Name
+  metadata:
+    uid: NineP.Protocol.Messages.Tlcreate.Name
+    commentId: P:NineP.Protocol.Messages.Tlcreate.Name
+- markdown: The name of the new file.
+- code: public string Name { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: Tag
+  id: NineP_Protocol_Messages_Tlcreate_Tag
+  metadata:
+    uid: NineP.Protocol.Messages.Tlcreate.Tag
+    commentId: P:NineP.Protocol.Messages.Tlcreate.Tag
+- markdown: The message tag, which pairs this message with its partner.
+- code: public ushort Tag { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+languageId: csharp
+metadata:
+  description: Creates a file in the directory a fid names and opens the fid onto it (reference §3.4).

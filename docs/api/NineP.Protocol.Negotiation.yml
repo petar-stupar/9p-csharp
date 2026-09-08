@@ -1,0 +1,35 @@
+### YamlMime:ApiPage
+title: Namespace NineP.Protocol.Negotiation
+body:
+- api1: Namespace NineP.Protocol.Negotiation
+  id: NineP_Protocol_Negotiation
+  metadata:
+    uid: NineP.Protocol.Negotiation
+    commentId: N:NineP.Protocol.Negotiation
+- h3: Classes
+- parameters:
+  - type:
+      text: Negotiator
+      url: NineP.Protocol.Negotiation.Negotiator.html
+    description: >-
+      The version negotiation function of reference §5.1, conditioned on the configured dialect set.
+
+      Every step is gated on that set: a dialect the server was told not to speak is never answered
+
+      with, however the client asks (R-2). The refusals are all <code>Rversion "unknown"</code> because
+
+      version(5) forbids <code>Rerror</code> for <code>Tversion</code> and forbids answering with an msize larger
+
+      than the client's, which rules out replying with the floor.
+- h3: Structs
+- parameters:
+  - type:
+      text: NegotiationResult
+      url: NineP.Protocol.Negotiation.NegotiationResult.html
+    description: >-
+      The outcome of reference §5.1: the string to answer with, the msize, and the dialect it
+
+      selects. A result whose version is "unknown" carries no dialect and echoes the client's msize —
+
+      a server may never answer with a larger one.
+languageId: csharp

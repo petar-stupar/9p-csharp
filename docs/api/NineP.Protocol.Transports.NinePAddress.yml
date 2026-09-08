@@ -1,0 +1,214 @@
+### YamlMime:ApiPage
+title: Struct NinePAddress
+body:
+- api1: Struct NinePAddress
+  id: NineP_Protocol_Transports_NinePAddress
+  metadata:
+    uid: NineP.Protocol.Transports.NinePAddress
+    commentId: T:NineP.Protocol.Transports.NinePAddress
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Transports
+      url: NineP.Protocol.Transports.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    A 9P endpoint URL: <code>tcp://host:port</code>, <code>tls://host:port</code>, <code>ws://host:port/path</code>,
+
+    <code>wss://host:port/path</code>, <code>unix:///path</code>, <code>memory://name</code>. Parsing is exact — an
+
+    address this type cannot render back is not an address it accepts.
+- code: 'public readonly record struct NinePAddress : IEquatable<NinePAddress>'
+- h4: Implements
+- list:
+  - text: IEquatable<NinePAddress>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: NinePAddress(NinePScheme, string, int, string)
+  id: NineP_Protocol_Transports_NinePAddress__ctor_NineP_Protocol_Transports_NinePScheme_System_String_System_Int32_System_String_
+  metadata:
+    uid: NineP.Protocol.Transports.NinePAddress.#ctor(NineP.Protocol.Transports.NinePScheme,System.String,System.Int32,System.String)
+    commentId: M:NineP.Protocol.Transports.NinePAddress.#ctor(NineP.Protocol.Transports.NinePScheme,System.String,System.Int32,System.String)
+- markdown: >-
+    A 9P endpoint URL: <code>tcp://host:port</code>, <code>tls://host:port</code>, <code>ws://host:port/path</code>,
+
+    <code>wss://host:port/path</code>, <code>unix:///path</code>, <code>memory://name</code>. Parsing is exact — an
+
+    address this type cannot render back is not an address it accepts.
+- code: public NinePAddress(NinePScheme Scheme, string Host, int Port, string Path)
+- h4: Parameters
+- parameters:
+  - name: Scheme
+    type:
+    - text: NinePScheme
+      url: NineP.Protocol.Transports.NinePScheme.html
+    description: Which transport owns the endpoint.
+  - name: Host
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The host name or IP literal; the endpoint's name for <code>memory</code>; empty for <code>unix</code>.
+  - name: Port
+    type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+    description: >-
+      The TCP port; 0 asks a listener for whatever port the kernel picks, and is
+          what <code>unix</code> and <code>memory</code> always carry.
+  - name: Path
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The WebSocket path or the socket path; empty otherwise.
+- h2: Properties
+- api3: Host
+  id: NineP_Protocol_Transports_NinePAddress_Host
+  metadata:
+    uid: NineP.Protocol.Transports.NinePAddress.Host
+    commentId: P:NineP.Protocol.Transports.NinePAddress.Host
+- markdown: The host name or IP literal; the endpoint's name for <code>memory</code>; empty for <code>unix</code>.
+- code: public string Host { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: IsSecure
+  id: NineP_Protocol_Transports_NinePAddress_IsSecure
+  metadata:
+    uid: NineP.Protocol.Transports.NinePAddress.IsSecure
+    commentId: P:NineP.Protocol.Transports.NinePAddress.IsSecure
+- markdown: 'True when the scheme carries TLS: <code>tls</code> or <code>wss</code>.'
+- code: public bool IsSecure { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: bool
+      url: https://learn.microsoft.com/dotnet/api/system.boolean
+- api3: Path
+  id: NineP_Protocol_Transports_NinePAddress_Path
+  metadata:
+    uid: NineP.Protocol.Transports.NinePAddress.Path
+    commentId: P:NineP.Protocol.Transports.NinePAddress.Path
+- markdown: The WebSocket path or the socket path; empty otherwise.
+- code: public string Path { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: Port
+  id: NineP_Protocol_Transports_NinePAddress_Port
+  metadata:
+    uid: NineP.Protocol.Transports.NinePAddress.Port
+    commentId: P:NineP.Protocol.Transports.NinePAddress.Port
+- markdown: >-
+    The TCP port; 0 asks a listener for whatever port the kernel picks, and is
+        what <code>unix</code> and <code>memory</code> always carry.
+- code: public int Port { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: Scheme
+  id: NineP_Protocol_Transports_NinePAddress_Scheme
+  metadata:
+    uid: NineP.Protocol.Transports.NinePAddress.Scheme
+    commentId: P:NineP.Protocol.Transports.NinePAddress.Scheme
+- markdown: Which transport owns the endpoint.
+- code: public NinePScheme Scheme { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: NinePScheme
+      url: NineP.Protocol.Transports.NinePScheme.html
+- h2: Methods
+- api3: Parse(string)
+  id: NineP_Protocol_Transports_NinePAddress_Parse_System_String_
+  metadata:
+    uid: NineP.Protocol.Transports.NinePAddress.Parse(System.String)
+    commentId: M:NineP.Protocol.Transports.NinePAddress.Parse(System.String)
+- markdown: Parses an address URL.
+- code: public static NinePAddress Parse(string value)
+- h4: Parameters
+- parameters:
+  - name: value
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The URL text.
+- h4: Returns
+- parameters:
+  - type:
+    - text: NinePAddress
+      url: NineP.Protocol.Transports.NinePAddress.html
+    description: The address.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: FormatException
+      url: https://learn.microsoft.com/dotnet/api/system.formatexception
+    description: The text is not an address this workspace speaks.
+- api3: ToString()
+  id: NineP_Protocol_Transports_NinePAddress_ToString
+  metadata:
+    uid: NineP.Protocol.Transports.NinePAddress.ToString
+    commentId: M:NineP.Protocol.Transports.NinePAddress.ToString
+- markdown: The canonical URL form of this address.
+- code: public override string ToString()
+- h4: Returns
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The text <xref href="NineP.Protocol.Transports.NinePAddress.Parse(System.String)" data-throw-if-not-resolved="false"></xref> accepts and returns this address for.
+- api3: TryParse(string?, out NinePAddress)
+  id: NineP_Protocol_Transports_NinePAddress_TryParse_System_String_NineP_Protocol_Transports_NinePAddress__
+  metadata:
+    uid: NineP.Protocol.Transports.NinePAddress.TryParse(System.String,NineP.Protocol.Transports.NinePAddress@)
+    commentId: M:NineP.Protocol.Transports.NinePAddress.TryParse(System.String,NineP.Protocol.Transports.NinePAddress@)
+- markdown: Parses an address URL, returning false instead of throwing.
+- code: public static bool TryParse(string? value, out NinePAddress address)
+- h4: Parameters
+- parameters:
+  - name: value
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+    description: The URL text.
+  - name: address
+    type:
+    - text: NinePAddress
+      url: NineP.Protocol.Transports.NinePAddress.html
+    description: The address when the text parses; the default otherwise.
+- h4: Returns
+- parameters:
+  - type:
+    - text: bool
+      url: https://learn.microsoft.com/dotnet/api/system.boolean
+    description: True when the text is a legal address.
+languageId: csharp
+metadata:
+  description: >-
+    A 9P endpoint URL: tcp://host:port, tls://host:port, ws://host:port/path,
+
+    wss://host:port/path, unix:///path, memory://name. Parsing is exact — an
+
+    address this type cannot render back is not an address it accepts.

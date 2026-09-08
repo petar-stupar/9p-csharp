@@ -1,0 +1,175 @@
+### YamlMime:ApiPage
+title: Class ServerCounters
+body:
+- api1: Class ServerCounters
+  id: NineP_Server_ServerCounters
+  metadata:
+    uid: NineP.Server.ServerCounters
+    commentId: T:NineP.Server.ServerCounters
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Server
+      url: NineP.Server.html
+  - name: Assembly
+    value: NineP.Server.dll
+- markdown: >-
+    A snapshot of what the server has done, for metrics scraping (architecture §4). It is a record
+
+    rather than a set of live counters so that a scrape sees one consistent moment rather than a
+
+    mixture of two.
+- code: 'public sealed record ServerCounters : IEquatable<ServerCounters>'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: ServerCounters
+    url: NineP.Server.ServerCounters.html
+- h4: Implements
+- list:
+  - text: IEquatable<ServerCounters>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Properties
+- api3: BytesRead
+  id: NineP_Server_ServerCounters_BytesRead
+  metadata:
+    uid: NineP.Server.ServerCounters.BytesRead
+    commentId: P:NineP.Server.ServerCounters.BytesRead
+- markdown: Bytes read from transports.
+- code: public long BytesRead { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: long
+      url: https://learn.microsoft.com/dotnet/api/system.int64
+- api3: BytesWritten
+  id: NineP_Server_ServerCounters_BytesWritten
+  metadata:
+    uid: NineP.Server.ServerCounters.BytesWritten
+    commentId: P:NineP.Server.ServerCounters.BytesWritten
+- markdown: Bytes written to transports.
+- code: public long BytesWritten { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: long
+      url: https://learn.microsoft.com/dotnet/api/system.int64
+- api3: ConnectionsAccepted
+  id: NineP_Server_ServerCounters_ConnectionsAccepted
+  metadata:
+    uid: NineP.Server.ServerCounters.ConnectionsAccepted
+    commentId: P:NineP.Server.ServerCounters.ConnectionsAccepted
+- markdown: Connections accepted since the server started.
+- code: public long ConnectionsAccepted { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: long
+      url: https://learn.microsoft.com/dotnet/api/system.int64
+- api3: ConnectionsOpen
+  id: NineP_Server_ServerCounters_ConnectionsOpen
+  metadata:
+    uid: NineP.Server.ServerCounters.ConnectionsOpen
+    commentId: P:NineP.Server.ServerCounters.ConnectionsOpen
+- markdown: Connections currently open.
+- code: public long ConnectionsOpen { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: long
+      url: https://learn.microsoft.com/dotnet/api/system.int64
+- api3: ConnectionsRefused
+  id: NineP_Server_ServerCounters_ConnectionsRefused
+  metadata:
+    uid: NineP.Server.ServerCounters.ConnectionsRefused
+    commentId: P:NineP.Server.ServerCounters.ConnectionsRefused
+- markdown: Connections closed because a limit was reached.
+- code: public long ConnectionsRefused { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: long
+      url: https://learn.microsoft.com/dotnet/api/system.int64
+- api3: ErrorsByErrno
+  id: NineP_Server_ServerCounters_ErrorsByErrno
+  metadata:
+    uid: NineP.Server.ServerCounters.ErrorsByErrno
+    commentId: P:NineP.Server.ServerCounters.ErrorsByErrno
+- markdown: Errors answered per errno.
+- code: public IReadOnlyDictionary<int, long> ErrorsByErrno { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: IReadOnlyDictionary
+      url: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2
+    - <
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+    - ','
+    - " "
+    - text: long
+      url: https://learn.microsoft.com/dotnet/api/system.int64
+    - '>'
+- api3: MessagesByType
+  id: NineP_Server_ServerCounters_MessagesByType
+  metadata:
+    uid: NineP.Server.ServerCounters.MessagesByType
+    commentId: P:NineP.Server.ServerCounters.MessagesByType
+- markdown: Messages received per type.
+- code: public IReadOnlyDictionary<MessageType, long> MessagesByType { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: IReadOnlyDictionary
+      url: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2
+    - <
+    - text: MessageType
+      url: NineP.Protocol.MessageType.html
+    - ','
+    - " "
+    - text: long
+      url: https://learn.microsoft.com/dotnet/api/system.int64
+    - '>'
+- api3: ProtocolErrorsByKind
+  id: NineP_Server_ServerCounters_ProtocolErrorsByKind
+  metadata:
+    uid: NineP.Server.ServerCounters.ProtocolErrorsByKind
+    commentId: P:NineP.Server.ServerCounters.ProtocolErrorsByKind
+- markdown: Errors answered per protocol error kind.
+- code: public IReadOnlyDictionary<ProtocolErrorKind, long> ProtocolErrorsByKind { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: IReadOnlyDictionary
+      url: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2
+    - <
+    - text: ProtocolErrorKind
+      url: NineP.Protocol.ProtocolErrorKind.html
+    - ','
+    - " "
+    - text: long
+      url: https://learn.microsoft.com/dotnet/api/system.int64
+    - '>'
+languageId: csharp
+metadata:
+  description: >-
+    A snapshot of what the server has done, for metrics scraping (architecture §4). It is a record
+
+    rather than a set of live counters so that a scrape sees one consistent moment rather than a
+
+    mixture of two.

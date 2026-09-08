@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>NineP.Protocol</PackageId>
+    <Description>9P2000, 9P2000.u and 9P2000.L messages, bounded codec, transports and authentication types shared by the NineP client and server.</Description>
+  </PropertyGroup>
+
+  <ItemGroup Label="System.IO.Pipelines is inbox from net9.0 onward" Condition="'$(TargetFramework)' == 'net8.0'">
+    <PackageReference Include="System.IO.Pipelines" />
+  </ItemGroup>
+
+  <ItemGroup Label="the logging abstraction of IR-1">
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+  </ItemGroup>
+
+  <ItemGroup Label="the sibling packages and the tests see the internals of §5.9">
+    <!-- NineP.Client and NineP.Server are the protocol layer's own consumers: they build on the
+         bounded FrameReader/FrameWriter, the dialect legality bitmap and the error projector,
+         none of which §5.0 rule 4 allows to be public. -->
+    <InternalsVisibleTo Include="NineP.Client" />
+    <InternalsVisibleTo Include="NineP.Server" />
+    <InternalsVisibleTo Include="NineP.Protocol.Tests" />
+    <InternalsVisibleTo Include="NineP.Client.Tests" />
+    <InternalsVisibleTo Include="NineP.Server.Tests" />
+    <InternalsVisibleTo Include="NineP.TestSupport" />
+    <InternalsVisibleTo Include="NineP.Fuzz" />
+    <InternalsVisibleTo Include="NineP.Benchmarks" />
+  </ItemGroup>
+
+</Project>

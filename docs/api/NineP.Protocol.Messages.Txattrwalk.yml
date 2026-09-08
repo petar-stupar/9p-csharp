@@ -1,0 +1,119 @@
+### YamlMime:ApiPage
+title: Struct Txattrwalk
+body:
+- api1: Struct Txattrwalk
+  id: NineP_Protocol_Messages_Txattrwalk
+  metadata:
+    uid: NineP.Protocol.Messages.Txattrwalk
+    commentId: T:NineP.Protocol.Messages.Txattrwalk
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Messages
+      url: NineP.Protocol.Messages.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: Walks a fid onto an extended attribute, or onto the attribute list (reference §5.9).
+- code: 'public readonly record struct Txattrwalk : IMessage, IEquatable<Txattrwalk>'
+- h4: Implements
+- list:
+  - text: IMessage
+    url: NineP.Protocol.Messages.IMessage.html
+  - text: IEquatable<Txattrwalk>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: Txattrwalk(ushort, uint, uint, string)
+  id: NineP_Protocol_Messages_Txattrwalk__ctor_System_UInt16_System_UInt32_System_UInt32_System_String_
+  metadata:
+    uid: NineP.Protocol.Messages.Txattrwalk.#ctor(System.UInt16,System.UInt32,System.UInt32,System.String)
+    commentId: M:NineP.Protocol.Messages.Txattrwalk.#ctor(System.UInt16,System.UInt32,System.UInt32,System.String)
+- markdown: Walks a fid onto an extended attribute, or onto the attribute list (reference §5.9).
+- code: public Txattrwalk(ushort Tag, uint Fid, uint NewFid, string Name)
+- h4: Parameters
+- parameters:
+  - name: Tag
+    type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+    description: The message tag, which pairs this message with its partner.
+  - name: Fid
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The fid naming the file.
+  - name: NewFid
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The fid to bind to the attribute.
+  - name: Name
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The attribute's name, or the empty string for the list of names.
+- h2: Properties
+- api3: Fid
+  id: NineP_Protocol_Messages_Txattrwalk_Fid
+  metadata:
+    uid: NineP.Protocol.Messages.Txattrwalk.Fid
+    commentId: P:NineP.Protocol.Messages.Txattrwalk.Fid
+- markdown: The fid naming the file.
+- code: public uint Fid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Name
+  id: NineP_Protocol_Messages_Txattrwalk_Name
+  metadata:
+    uid: NineP.Protocol.Messages.Txattrwalk.Name
+    commentId: P:NineP.Protocol.Messages.Txattrwalk.Name
+- markdown: The attribute's name, or the empty string for the list of names.
+- code: public string Name { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: NewFid
+  id: NineP_Protocol_Messages_Txattrwalk_NewFid
+  metadata:
+    uid: NineP.Protocol.Messages.Txattrwalk.NewFid
+    commentId: P:NineP.Protocol.Messages.Txattrwalk.NewFid
+- markdown: The fid to bind to the attribute.
+- code: public uint NewFid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Tag
+  id: NineP_Protocol_Messages_Txattrwalk_Tag
+  metadata:
+    uid: NineP.Protocol.Messages.Txattrwalk.Tag
+    commentId: P:NineP.Protocol.Messages.Txattrwalk.Tag
+- markdown: The message tag, which pairs this message with its partner.
+- code: public ushort Tag { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+languageId: csharp
+metadata:
+  description: Walks a fid onto an extended attribute, or onto the attribute list (reference §5.9).

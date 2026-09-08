@@ -1,0 +1,170 @@
+### YamlMime:ApiPage
+title: Struct Tgetlock
+body:
+- api1: Struct Tgetlock
+  id: NineP_Protocol_Messages_Tgetlock
+  metadata:
+    uid: NineP.Protocol.Messages.Tgetlock
+    commentId: T:NineP.Protocol.Messages.Tgetlock
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Messages
+      url: NineP.Protocol.Messages.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: Asks which lock, if any, conflicts with a range (reference §4.8).
+- code: 'public readonly record struct Tgetlock : IMessage, IEquatable<Tgetlock>'
+- h4: Implements
+- list:
+  - text: IMessage
+    url: NineP.Protocol.Messages.IMessage.html
+  - text: IEquatable<Tgetlock>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: Tgetlock(ushort, uint, LockType, ulong, ulong, uint, string)
+  id: NineP_Protocol_Messages_Tgetlock__ctor_System_UInt16_System_UInt32_NineP_Protocol_LockType_System_UInt64_System_UInt64_System_UInt32_System_String_
+  metadata:
+    uid: NineP.Protocol.Messages.Tgetlock.#ctor(System.UInt16,System.UInt32,NineP.Protocol.LockType,System.UInt64,System.UInt64,System.UInt32,System.String)
+    commentId: M:NineP.Protocol.Messages.Tgetlock.#ctor(System.UInt16,System.UInt32,NineP.Protocol.LockType,System.UInt64,System.UInt64,System.UInt32,System.String)
+- markdown: Asks which lock, if any, conflicts with a range (reference §4.8).
+- code: public Tgetlock(ushort Tag, uint Fid, LockType Type, ulong Start, ulong Length, uint ProcId, string ClientId)
+- h4: Parameters
+- parameters:
+  - name: Tag
+    type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+    description: The message tag, which pairs this message with its partner.
+  - name: Fid
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The open fid to query.
+  - name: Type
+    type:
+    - text: LockType
+      url: NineP.Protocol.LockType.html
+    description: The lock type the client would like to take.
+  - name: Start
+    type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+    description: The first byte of the range.
+  - name: Length
+    type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+    description: The length of the range, or 0 for "to the end of the file".
+  - name: ProcId
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The client's process identifier.
+  - name: ClientId
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The client's identifier.
+- h2: Properties
+- api3: ClientId
+  id: NineP_Protocol_Messages_Tgetlock_ClientId
+  metadata:
+    uid: NineP.Protocol.Messages.Tgetlock.ClientId
+    commentId: P:NineP.Protocol.Messages.Tgetlock.ClientId
+- markdown: The client's identifier.
+- code: public string ClientId { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: Fid
+  id: NineP_Protocol_Messages_Tgetlock_Fid
+  metadata:
+    uid: NineP.Protocol.Messages.Tgetlock.Fid
+    commentId: P:NineP.Protocol.Messages.Tgetlock.Fid
+- markdown: The open fid to query.
+- code: public uint Fid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Length
+  id: NineP_Protocol_Messages_Tgetlock_Length
+  metadata:
+    uid: NineP.Protocol.Messages.Tgetlock.Length
+    commentId: P:NineP.Protocol.Messages.Tgetlock.Length
+- markdown: The length of the range, or 0 for "to the end of the file".
+- code: public ulong Length { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+- api3: ProcId
+  id: NineP_Protocol_Messages_Tgetlock_ProcId
+  metadata:
+    uid: NineP.Protocol.Messages.Tgetlock.ProcId
+    commentId: P:NineP.Protocol.Messages.Tgetlock.ProcId
+- markdown: The client's process identifier.
+- code: public uint ProcId { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Start
+  id: NineP_Protocol_Messages_Tgetlock_Start
+  metadata:
+    uid: NineP.Protocol.Messages.Tgetlock.Start
+    commentId: P:NineP.Protocol.Messages.Tgetlock.Start
+- markdown: The first byte of the range.
+- code: public ulong Start { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+- api3: Tag
+  id: NineP_Protocol_Messages_Tgetlock_Tag
+  metadata:
+    uid: NineP.Protocol.Messages.Tgetlock.Tag
+    commentId: P:NineP.Protocol.Messages.Tgetlock.Tag
+- markdown: The message tag, which pairs this message with its partner.
+- code: public ushort Tag { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+- api3: Type
+  id: NineP_Protocol_Messages_Tgetlock_Type
+  metadata:
+    uid: NineP.Protocol.Messages.Tgetlock.Type
+    commentId: P:NineP.Protocol.Messages.Tgetlock.Type
+- markdown: The lock type the client would like to take.
+- code: public LockType Type { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: LockType
+      url: NineP.Protocol.LockType.html
+languageId: csharp
+metadata:
+  description: Asks which lock, if any, conflicts with a range (reference §4.8).

@@ -1,0 +1,75 @@
+### YamlMime:ApiPage
+title: Namespace NineP.Client
+body:
+- api1: Namespace NineP.Client
+  id: NineP_Client
+  metadata:
+    uid: NineP.Client
+    commentId: N:NineP.Client
+- h3: Classes
+- parameters:
+  - type:
+      text: ClientOptions
+      url: NineP.Client.ClientOptions.html
+    description: Everything a client session needs; init-only, with the defaults of the architecture §6.
+  - type:
+      text: NinePClient
+      url: NineP.Client.NinePClient.html
+    description: >-
+      The entry point: connect a transport, negotiate a dialect, and return a session
+
+      (architecture §6). Negotiation is one <code>Tversion</code> with <code>NOTAG</code> per dialect on
+
+      <xref href="NineP.Client.ClientOptions.Dialects" data-throw-if-not-resolved="false"></xref>, and the answer is judged against the offer that drew it
+
+      (reference §8 rule 18): the client accepts the dialect it just offered, or the plain
+
+      <code>"9P2000"</code> that version(5) lets a server answer a suffixed offer with — and that one
+
+      downgrade only as far down as <xref href="NineP.Client.ClientOptions.MinDialect" data-throw-if-not-resolved="false"></xref>. Every other answer is a
+
+      <xref href="NineP.Protocol.NinePVersionException" data-throw-if-not-resolved="false"></xref>, a dialect <em>higher</em> than the one offered included:
+
+      nothing is accepted silently, and "less than it asked for" is accepted only where the caller
+
+      said so.
+  - type:
+      text: NinePFid
+      url: NineP.Client.NinePFid.html
+    description: >-
+      A client fid: the handle a session holds on one file (architecture §6). Disposing it clunks the
+
+      fid, which is what makes the release deterministic — a fid that is only collected when a
+
+      finaliser runs is a fid the server still holds a handler open for. Once removal or disposal
+
+      begins, operations throw <xref href="System.ObjectDisposedException" data-throw-if-not-resolved="false"></xref>. Closing waits for previously
+
+      started operations before freeing the number. Directory enumerators guard each wire request;
+
+      a resumed enumeration may throw after disposal, while already buffered entries remain readable.
+  - type:
+      text: NinePSession
+      url: NineP.Client.NinePSession.html
+    description: >-
+      A negotiated 9P session: the tag multiplexer, the attach root and the high-level file API.
+
+      Every request is pipelined — the session never waits for one reply before writing the next —
+
+      and every fid it hands out is released deterministically, by disposal rather than by collection.
+- h3: Interfaces
+- parameters:
+  - type:
+      text: INinePMessages
+      url: NineP.Client.INinePMessages.html
+    description: >-
+      One method per legal T-message: the low-level API (workspace architecture §6). The tag is
+
+      chosen by the multiplexer, so the request a caller builds may leave it at zero. A method whose
+
+      message is illegal for the session dialect throws
+
+      <xref href="NineP.Protocol.NinePProtocolException" data-throw-if-not-resolved="false"></xref> with <xref href="NineP.Protocol.ProtocolErrorKind.Type" data-throw-if-not-resolved="false"></xref> <b>before</b>
+
+      anything reaches the wire.
+languageId: csharp

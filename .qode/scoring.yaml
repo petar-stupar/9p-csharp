@@ -1,0 +1,90 @@
+rubrics:
+    refine:
+        dimensions:
+            - name: Problem Understanding
+              weight: 5
+              description: Correct restatement of the language ticket and _common.md, all ambiguities resolved against docs/9p/ARCHITECTURE.md and protocol-reference.md, the three dialects, three packages, two examples and the cli placed correctly
+              levels:
+                - '5: Perfect restatement; every open point resolved by citing the Decision Log or the reference section that settles it; nothing invented'
+                - '4: Good understanding, minor gaps'
+                - '3: Adequate but surface-level; dialect or package placement vague'
+                - '2: Partial understanding, significant gaps'
+                - '1: Mostly incorrect or too vague'
+                - '0: Missing or completely wrong'
+            - name: Technical Analysis
+              weight: 5
+              description: Names every layer (protocol / client / server / examples), the language's async model, I/O and buffer strategy, TLS and WebSocket stack, SQLite and JWT libraries, packaging, and how zero-copy framing and pipelining will be achieved in this language
+              levels:
+                - '5: Every layer mapped to concrete modules/paths; dependency direction respected (examples → client|server → protocol); each runtime dependency justified; the codec, transport and handler seams are specific to this language'
+                - '4: Mostly correct, minor omissions'
+                - '3: Covers the main layers, misses transport or packaging detail'
+                - '2: Shallow analysis, important components missed'
+                - '1: Mostly incorrect or generic'
+                - '0: Missing'
+            - name: Risk & Edge Cases
+              weight: 5
+              description: Protocol-reference §5 and §8 rules (flush ordering, partial walk, msize clamping, dir-read offsets, fid/tag limits, decoder bounds), dialect projection pitfalls, TLS/WS failure modes, todofs isolation, cross-language interop
+              levels:
+                - '5: Comprehensive, each risk tied to the reference rule and a named test or mutation that will pin it'
+                - '4: Good coverage, minor gaps'
+                - '3: Some risks identified, misses important ones'
+                - '2: Superficial'
+                - '1: Generic or incorrect'
+                - '0: Missing'
+            - name: Completeness
+              weight: 5
+              description: All exit criteria of ARCHITECTURE.md §10 and the ticket captured, implicit requirements identified, non-goals stated, docs listed
+              levels:
+                - '5: Every exit criterion mapped to work; implicit requirements (benchmarks, fuzzing, interop.md, no-control-bytes test) present; out-of-scope explicit'
+                - '4: Nearly complete, minor omissions'
+                - '3: Main requirements captured, gaps exist'
+                - '2: Significant gaps'
+                - '1: Incomplete'
+                - '0: Missing'
+            - name: Actionability
+              weight: 5
+              description: Concrete tasks against real paths, correct order (reference doc → scaffold → protocol → transports → client → server → examples → interop → docs), prerequisites, each task one commit with its verification
+              levels:
+                - '5: Clear concrete tasks, correct order, each one commit that states how it is verified (vector round-trip, mutation, conformance part, interop run)'
+                - '4: Mostly actionable, minor improvements possible'
+                - '3: Tasks defined but too coarse or unclear'
+                - '2: Hard to act on'
+                - '1: Very vague'
+                - '0: Missing'
+    review:
+        dimensions:
+            - name: Correctness & Protocol Conformance
+              weight: 2
+              description: Implements the spec; every message layout and rule in docs/9p/protocol-reference.md holds (golden vectors byte-exact, partial walk, flush, msize clamp, dir offsets, dialect projection); no logic bugs
+            - name: Code Quality
+              weight: 2
+              description: Readable, maintainable, idiomatic for the language; small single-responsibility units; no dead abstraction; public API named after the protocol
+            - name: Architecture & Layering
+              weight: 2
+              description: examples → client|server → protocol only; transports in protocol; handlers see the unified Attr model, never dialect types; the core owns fids/tags/flush/open state
+            - name: Error Handling & Failure Semantics
+              weight: 2
+              description: Every error path explicit and typed (ProtocolError kinds, NinePError with errno+ename); nothing silent maps to success; connection closed on unrecoverable framing errors; cancellation honoured
+            - name: Testing
+              weight: 2
+              description: Vector round-trips and the mutation matrix, decoder fuzzing, hostile-client tests, conformance scenario over every transport and dialect, interop.md honest, mutation-tested security controls
+            - name: Performance & Memory
+              weight: 2
+              description: Zero-copy framing, pooled buffers, no payload copies in the hot path, pipelined client window, bounded per-connection memory, docs/benchmarks.md with measured numbers
+    security:
+        dimensions:
+            - name: Decoder Bounds & Input Validation
+              weight: 2
+              description: Size/msize checks before allocation, every counted field bounds-checked, UTF-8/NUL/slash/name-length validation, nwname ≤ 16, count clamps, overflow checks, typed errors without panics
+            - name: Auth & AuthZ
+              weight: 2
+              description: afid binding to uname/aname, no attach without a verified afid when auth is required, constant-time secret comparison, JWT validation (signature via JWKS, iss, aud, exp, nbf, alg=none rejected), todofs per-user isolation and admin-only ctl, permission checks before handler calls
+            - name: Transport Security
+              weight: 2
+              description: TLS 1.2+ with verification on by default, correct hostname/chain checks, optional mTLS identity, WebSocket binary-only/size-capped/origin-checked, no downgrade without an explicit option
+            - name: Resource Limits & DoS
+              weight: 2
+              description: Fid, tag, connection, in-flight and msize caps enforced and tested with a hostile client; header timeouts; backpressure instead of unbounded queues; afid exchange bounded
+            - name: Secrets, SQL & Dependency Safety
+              weight: 2
+              description: No secrets in logs/errors, untrusted strings escaped and capped in logs, SQL only parameterised and only in the store module, dependencies pinned and audited, no known CVEs

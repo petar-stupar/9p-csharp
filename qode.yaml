@@ -1,0 +1,17 @@
+qode_version: 0.3.4-beta+50
+review:
+    min_code_score: 10
+    min_security_score: 8
+scoring:
+    strict: true
+ide:
+    cursor:
+        enabled: false
+    claude_code:
+        enabled: true
+    codex:
+        enabled: false
+knowledge:
+    path: .qode/knowledge
+diff:
+    command: git diff --merge-base main -- :(exclude).qode/

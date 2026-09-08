@@ -1,0 +1,52 @@
+### YamlMime:ApiPage
+title: Enum NinePScheme
+body:
+- api1: Enum NinePScheme
+  id: NineP_Protocol_Transports_NinePScheme
+  metadata:
+    uid: NineP.Protocol.Transports.NinePScheme
+    commentId: T:NineP.Protocol.Transports.NinePScheme
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Transports
+      url: NineP.Protocol.Transports.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: The address schemes a <xref href="NineP.Protocol.Transports.NinePAddress" data-throw-if-not-resolved="false"></xref> may carry (workspace architecture §3).
+- code: public enum NinePScheme
+- h2: Fields
+- parameters:
+  - name: Memory
+    default: "5"
+    description: >+
+      The in-process transport, whose "host" is the endpoint's name.
+
+  - name: Tcp
+    default: "0"
+    description: >+
+      Plain TCP.
+
+  - name: Tls
+    default: "1"
+    description: >+
+      TLS over TCP.
+
+  - name: Unix
+    default: "4"
+    description: >+
+      A Unix domain socket, where the platform has them.
+
+  - name: Ws
+    default: "2"
+    description: >+
+      A WebSocket over plain HTTP.
+
+  - name: Wss
+    default: "3"
+    description: >+
+      A WebSocket over TLS.
+
+languageId: csharp
+metadata:
+  description: The address schemes a  may carry (workspace architecture §3).

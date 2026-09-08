@@ -1,0 +1,114 @@
+### YamlMime:ApiPage
+title: Class PeerIdentity
+body:
+- api1: Class PeerIdentity
+  id: NineP_Protocol_Transports_PeerIdentity
+  metadata:
+    uid: NineP.Protocol.Transports.PeerIdentity
+    commentId: T:NineP.Protocol.Transports.PeerIdentity
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Transports
+      url: NineP.Protocol.Transports.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    What the transport learned about the peer during its handshake: a TLS client certificate, the
+
+    headers of a WebSocket upgrade. It is evidence the transport gathered, never a claim the peer
+
+    made in a 9P message — the session's identity still comes from the authenticator.
+- code: 'public sealed record PeerIdentity : IEquatable<PeerIdentity>'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: PeerIdentity
+    url: NineP.Protocol.Transports.PeerIdentity.html
+- h4: Implements
+- list:
+  - text: IEquatable<PeerIdentity>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Properties
+- api3: ClientCertificate
+  id: NineP_Protocol_Transports_PeerIdentity_ClientCertificate
+  metadata:
+    uid: NineP.Protocol.Transports.PeerIdentity.ClientCertificate
+    commentId: P:NineP.Protocol.Transports.PeerIdentity.ClientCertificate
+- markdown: The peer's TLS client certificate when mutual TLS was used; null otherwise.
+- code: public X509Certificate2? ClientCertificate { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: X509Certificate2
+      url: https://learn.microsoft.com/dotnet/api/system.security.cryptography.x509certificates.x509certificate2
+    - '?'
+- api3: Headers
+  id: NineP_Protocol_Transports_PeerIdentity_Headers
+  metadata:
+    uid: NineP.Protocol.Transports.PeerIdentity.Headers
+    commentId: P:NineP.Protocol.Transports.PeerIdentity.Headers
+- markdown: Selected headers of a WebSocket upgrade, with lower-cased keys; empty otherwise.
+- code: public IReadOnlyDictionary<string, string> Headers { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: IReadOnlyDictionary
+      url: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2
+    - <
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - ','
+    - " "
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '>'
+- api3: Origin
+  id: NineP_Protocol_Transports_PeerIdentity_Origin
+  metadata:
+    uid: NineP.Protocol.Transports.PeerIdentity.Origin
+    commentId: P:NineP.Protocol.Transports.PeerIdentity.Origin
+- markdown: The <code>Origin</code> header of a WebSocket upgrade; null for other transports.
+- code: public string? Origin { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+- api3: RemoteAddress
+  id: NineP_Protocol_Transports_PeerIdentity_RemoteAddress
+  metadata:
+    uid: NineP.Protocol.Transports.PeerIdentity.RemoteAddress
+    commentId: P:NineP.Protocol.Transports.PeerIdentity.RemoteAddress
+- markdown: The peer's network address as text, for logging.
+- code: public string? RemoteAddress { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+languageId: csharp
+metadata:
+  description: >-
+    What the transport learned about the peer during its handshake: a TLS client certificate, the
+
+    headers of a WebSocket upgrade. It is evidence the transport gathered, never a claim the peer
+
+    made in a 9P message — the session's identity still comes from the authenticator.

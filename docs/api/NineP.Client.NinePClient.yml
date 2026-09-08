@@ -1,0 +1,221 @@
+### YamlMime:ApiPage
+title: Class NinePClient
+body:
+- api1: Class NinePClient
+  id: NineP_Client_NinePClient
+  metadata:
+    uid: NineP.Client.NinePClient
+    commentId: T:NineP.Client.NinePClient
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Client
+      url: NineP.Client.html
+  - name: Assembly
+    value: NineP.Client.dll
+- markdown: >-
+    The entry point: connect a transport, negotiate a dialect, and return a session
+
+    (architecture §6). Negotiation is one <code>Tversion</code> with <code>NOTAG</code> per dialect on
+
+    <xref href="NineP.Client.ClientOptions.Dialects" data-throw-if-not-resolved="false"></xref>, and the answer is judged against the offer that drew it
+
+    (reference §8 rule 18): the client accepts the dialect it just offered, or the plain
+
+    <code>"9P2000"</code> that version(5) lets a server answer a suffixed offer with — and that one
+
+    downgrade only as far down as <xref href="NineP.Client.ClientOptions.MinDialect" data-throw-if-not-resolved="false"></xref>. Every other answer is a
+
+    <xref href="NineP.Protocol.NinePVersionException" data-throw-if-not-resolved="false"></xref>, a dialect <em>higher</em> than the one offered included:
+
+    nothing is accepted silently, and "less than it asked for" is accepted only where the caller
+
+    said so.
+- code: public static class NinePClient
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: NinePClient
+    url: NineP.Client.NinePClient.html
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Methods
+- api3: ConnectAsync(NinePAddress, ClientOptions, CancellationToken)
+  id: NineP_Client_NinePClient_ConnectAsync_NineP_Protocol_Transports_NinePAddress_NineP_Client_ClientOptions_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.NinePClient.ConnectAsync(NineP.Protocol.Transports.NinePAddress,NineP.Client.ClientOptions,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.NinePClient.ConnectAsync(NineP.Protocol.Transports.NinePAddress,NineP.Client.ClientOptions,System.Threading.CancellationToken)
+- markdown: Connects to an address using the transport that owns its scheme, then negotiates.
+- code: public static ValueTask<NinePSession> ConnectAsync(NinePAddress address, ClientOptions options, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: address
+    type:
+    - text: NinePAddress
+      url: NineP.Protocol.Transports.NinePAddress.html
+    description: Where to connect.
+  - name: options
+    type:
+    - text: ClientOptions
+      url: NineP.Client.ClientOptions.html
+    description: The session configuration.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the dial and the negotiation.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: NinePSession
+      url: NineP.Client.NinePSession.html
+    - '>'
+    description: The negotiated session.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: ArgumentException
+      url: https://learn.microsoft.com/dotnet/api/system.argumentexception
+    description: No shipped transport owns the address's scheme.
+  - type:
+    - text: NinePVersionException
+      url: NineP.Protocol.NinePVersionException.html
+    description: The server refused, or offered too little.
+  - type:
+    - text: ArgumentOutOfRangeException
+      url: https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception
+    description: The transfer window is less than 1.
+- api3: ConnectAsync(ITransport, NinePAddress, ClientOptions, CancellationToken)
+  id: NineP_Client_NinePClient_ConnectAsync_NineP_Protocol_Transports_ITransport_NineP_Protocol_Transports_NinePAddress_NineP_Client_ClientOptions_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.NinePClient.ConnectAsync(NineP.Protocol.Transports.ITransport,NineP.Protocol.Transports.NinePAddress,NineP.Client.ClientOptions,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.NinePClient.ConnectAsync(NineP.Protocol.Transports.ITransport,NineP.Protocol.Transports.NinePAddress,NineP.Client.ClientOptions,System.Threading.CancellationToken)
+- markdown: 'Connects over a caller-supplied transport: the user-defined-transport seam.'
+- code: public static ValueTask<NinePSession> ConnectAsync(ITransport transport, NinePAddress address, ClientOptions options, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: transport
+    type:
+    - text: ITransport
+      url: NineP.Protocol.Transports.ITransport.html
+    description: The transport to dial with.
+  - name: address
+    type:
+    - text: NinePAddress
+      url: NineP.Protocol.Transports.NinePAddress.html
+    description: Where to connect.
+  - name: options
+    type:
+    - text: ClientOptions
+      url: NineP.Client.ClientOptions.html
+    description: The session configuration.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the dial and the negotiation.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: NinePSession
+      url: NineP.Client.NinePSession.html
+    - '>'
+    description: The negotiated session.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePVersionException
+      url: NineP.Protocol.NinePVersionException.html
+    description: The server refused, or offered too little.
+  - type:
+    - text: ArgumentOutOfRangeException
+      url: https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception
+    description: The transfer window is less than 1.
+- api3: ConnectAsync(INinePConnection, ClientOptions, CancellationToken)
+  id: NineP_Client_NinePClient_ConnectAsync_NineP_Protocol_Transports_INinePConnection_NineP_Client_ClientOptions_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.NinePClient.ConnectAsync(NineP.Protocol.Transports.INinePConnection,NineP.Client.ClientOptions,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.NinePClient.ConnectAsync(NineP.Protocol.Transports.INinePConnection,NineP.Client.ClientOptions,System.Threading.CancellationToken)
+- markdown: Negotiates over a connection the caller already established.
+- code: public static ValueTask<NinePSession> ConnectAsync(INinePConnection connection, ClientOptions options, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: connection
+    type:
+    - text: INinePConnection
+      url: NineP.Protocol.Transports.INinePConnection.html
+    description: The connected transport; the session owns it from here.
+  - name: options
+    type:
+    - text: ClientOptions
+      url: NineP.Client.ClientOptions.html
+    description: The session configuration.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the negotiation.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: NinePSession
+      url: NineP.Client.NinePSession.html
+    - '>'
+    description: The negotiated session.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePVersionException
+      url: NineP.Protocol.NinePVersionException.html
+    description: The server refused, or offered too little.
+  - type:
+    - text: ArgumentOutOfRangeException
+      url: https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception
+    description: The transfer window is less than 1.
+languageId: csharp
+metadata:
+  description: >-
+    The entry point: connect a transport, negotiate a dialect, and return a session
+
+    (architecture §6). Negotiation is one Tversion with NOTAG per dialect on
+
+    , and the answer is judged against the offer that drew it
+
+    (reference §8 rule 18): the client accepts the dialect it just offered, or the plain
+
+    "9P2000" that version(5) lets a server answer a suffixed offer with — and that one
+
+    downgrade only as far down as . Every other answer is a
+
+    , a dialect higher than the one offered included:
+
+    nothing is accepted silently, and "less than it asked for" is accepted only where the caller
+
+    said so.

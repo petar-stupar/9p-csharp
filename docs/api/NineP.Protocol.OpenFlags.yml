@@ -1,0 +1,66 @@
+### YamlMime:ApiPage
+title: Enum OpenFlags
+body:
+- api1: Enum OpenFlags
+  id: NineP_Protocol_OpenFlags
+  metadata:
+    uid: NineP.Protocol.OpenFlags
+    commentId: T:NineP.Protocol.OpenFlags
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol
+      url: NineP.Protocol.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    Flags that modify an open without changing its access mode (reference §4.5). OAPPEND is one of
+
+    these, not an access mode: OREAD plus OAPPEND stays a read open.
+- code: >-
+    [Flags]
+
+    public enum OpenFlags
+- h2: Fields
+- parameters:
+  - name: Append
+    default: "4"
+    description: >+
+      Writes on this fid go to the end of the file.
+
+  - name: Directory
+    default: "16"
+    description: >+
+      Fail the open unless the file is a directory (.L O_DIRECTORY).
+
+  - name: Exclusive
+    default: "8"
+    description: >+
+      Fail the open if the file already exists (.L O_EXCL on create).
+
+  - name: NoFollow
+    default: "32"
+    description: >+
+      Fail the open if the final component is a symbolic link (.L O_NOFOLLOW).
+
+  - name: None
+    default: "0"
+    description: >+
+      No flag is set.
+
+  - name: RemoveOnClose
+    default: "2"
+    description: >+
+      Remove the file when the fid is clunked; needs remove permission in the parent.
+
+  - name: Truncate
+    default: "1"
+    description: >+
+      Truncate the file first; needs write permission.
+
+languageId: csharp
+metadata:
+  description: >-
+    Flags that modify an open without changing its access mode (reference §4.5). OAPPEND is one of
+
+    these, not an access mode: OREAD plus OAPPEND stays a read open.

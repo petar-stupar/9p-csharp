@@ -1,0 +1,85 @@
+### YamlMime:ApiPage
+title: Struct Rgetlock
+body:
+- api1: Struct Rgetlock
+  id: NineP_Protocol_Messages_Rgetlock
+  metadata:
+    uid: NineP.Protocol.Messages.Rgetlock
+    commentId: T:NineP.Protocol.Messages.Rgetlock
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Messages
+      url: NineP.Protocol.Messages.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: Answers a Tgetlock; a type of Unlock means nothing conflicts (reference §4.8).
+- code: 'public readonly record struct Rgetlock : IMessage, IEquatable<Rgetlock>'
+- h4: Implements
+- list:
+  - text: IMessage
+    url: NineP.Protocol.Messages.IMessage.html
+  - text: IEquatable<Rgetlock>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: Rgetlock(ushort, LockQueryResult)
+  id: NineP_Protocol_Messages_Rgetlock__ctor_System_UInt16_NineP_Protocol_LockQueryResult_
+  metadata:
+    uid: NineP.Protocol.Messages.Rgetlock.#ctor(System.UInt16,NineP.Protocol.LockQueryResult)
+    commentId: M:NineP.Protocol.Messages.Rgetlock.#ctor(System.UInt16,NineP.Protocol.LockQueryResult)
+- markdown: Answers a Tgetlock; a type of Unlock means nothing conflicts (reference §4.8).
+- code: public Rgetlock(ushort Tag, LockQueryResult Result)
+- h4: Parameters
+- parameters:
+  - name: Tag
+    type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+    description: The message tag, which pairs this message with its partner.
+  - name: Result
+    type:
+    - text: LockQueryResult
+      url: NineP.Protocol.LockQueryResult.html
+    description: The conflicting lock, or Unlock when there is none.
+- h2: Properties
+- api3: Result
+  id: NineP_Protocol_Messages_Rgetlock_Result
+  metadata:
+    uid: NineP.Protocol.Messages.Rgetlock.Result
+    commentId: P:NineP.Protocol.Messages.Rgetlock.Result
+- markdown: The conflicting lock, or Unlock when there is none.
+- code: public LockQueryResult Result { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: LockQueryResult
+      url: NineP.Protocol.LockQueryResult.html
+- api3: Tag
+  id: NineP_Protocol_Messages_Rgetlock_Tag
+  metadata:
+    uid: NineP.Protocol.Messages.Rgetlock.Tag
+    commentId: P:NineP.Protocol.Messages.Rgetlock.Tag
+- markdown: The message tag, which pairs this message with its partner.
+- code: public ushort Tag { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+languageId: csharp
+metadata:
+  description: Answers a Tgetlock; a type of Unlock means nothing conflicts (reference §4.8).

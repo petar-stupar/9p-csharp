@@ -1,0 +1,171 @@
+### YamlMime:ApiPage
+title: Class Identity
+body:
+- api1: Class Identity
+  id: NineP_Protocol_Auth_Identity
+  metadata:
+    uid: NineP.Protocol.Auth.Identity
+    commentId: T:NineP.Protocol.Auth.Identity
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Auth
+      url: NineP.Protocol.Auth.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    Who a session runs as. It is produced by the authenticator and never by the client's claim
+
+    (workspace architecture §5): a <code>Tattach</code> may say any <code>uname</code> it likes, and the server
+
+    still runs the session as whoever the afid exchange proved.
+- code: 'public sealed record Identity : IEquatable<Identity>'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: Identity
+    url: NineP.Protocol.Auth.Identity.html
+- h4: Implements
+- list:
+  - text: IEquatable<Identity>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Properties
+- api3: Claims
+  id: NineP_Protocol_Auth_Identity_Claims
+  metadata:
+    uid: NineP.Protocol.Auth.Identity.Claims
+    commentId: P:NineP.Protocol.Auth.Identity.Claims
+- markdown: >-
+    Authenticator-specific claims, for example OIDC token claims. It never contains the raw
+
+    token: a claim map is logged and echoed, and a bearer token must be neither.
+- code: public IReadOnlyDictionary<string, string> Claims { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: IReadOnlyDictionary
+      url: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2
+    - <
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - ','
+    - " "
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '>'
+- api3: Groups
+  id: NineP_Protocol_Auth_Identity_Groups
+  metadata:
+    uid: NineP.Protocol.Auth.Identity.Groups
+    commentId: P:NineP.Protocol.Auth.Identity.Groups
+- markdown: Group names this identity belongs to.
+- code: public IReadOnlyList<string> Groups { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: IReadOnlyList
+      url: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+    - <
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '>'
+- api3: IsAuthenticated
+  id: NineP_Protocol_Auth_Identity_IsAuthenticated
+  metadata:
+    uid: NineP.Protocol.Auth.Identity.IsAuthenticated
+    commentId: P:NineP.Protocol.Auth.Identity.IsAuthenticated
+- markdown: >-
+    False when nothing was proved and <xref href="NineP.Protocol.Auth.Identity.User" data-throw-if-not-resolved="false"></xref> is only what the client claimed — the
+
+    identity of a <code>Tattach</code> with <code>afid = NOFID</code>. A filesystem that scopes anything by
+
+    the user name must read this first: a server that allows unauthenticated attaches at all
+
+    will otherwise hand out a named user's tree to whoever asks for it by name. Only
+
+    <xref href="NineP.Protocol.Auth.Identity.Anonymous(System.String%2cSystem.UInt32)" data-throw-if-not-resolved="false"></xref> produces false, so an identity an authenticator built is
+
+    authenticated by construction.
+- code: public bool IsAuthenticated { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: bool
+      url: https://learn.microsoft.com/dotnet/api/system.boolean
+- api3: Uid
+  id: NineP_Protocol_Auth_Identity_Uid
+  metadata:
+    uid: NineP.Protocol.Auth.Identity.Uid
+    commentId: P:NineP.Protocol.Auth.Identity.Uid
+- markdown: >-
+    The numeric uid when one is known; <xref href="NineP.Protocol.Constants.NONUNAME" data-throw-if-not-resolved="false"></xref> otherwise. The wire
+
+    sentinel rather than a nullable, as for every optional id (workspace architecture §12).
+- code: public uint Uid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: User
+  id: NineP_Protocol_Auth_Identity_User
+  metadata:
+    uid: NineP.Protocol.Auth.Identity.User
+    commentId: P:NineP.Protocol.Auth.Identity.User
+- markdown: The user name the session runs as.
+- code: public required string User { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- h2: Methods
+- api3: Anonymous(string, uint)
+  id: NineP_Protocol_Auth_Identity_Anonymous_System_String_System_UInt32_
+  metadata:
+    uid: NineP.Protocol.Auth.Identity.Anonymous(System.String,System.UInt32)
+    commentId: M:NineP.Protocol.Auth.Identity.Anonymous(System.String,System.UInt32)
+- markdown: 'The identity of an unauthenticated attach: the uname as claimed, with no groups.'
+- code: public static Identity Anonymous(string user, uint uid = 4294967295)
+- h4: Parameters
+- parameters:
+  - name: user
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The name the client claimed.
+  - name: uid
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The numeric id the client claimed; NONUNAME when it claimed none.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Identity
+      url: NineP.Protocol.Auth.Identity.html
+    description: The identity, which is only as trustworthy as the transport under it.
+languageId: csharp
+metadata:
+  description: >-
+    Who a session runs as. It is produced by the authenticator and never by the client's claim
+
+    (workspace architecture §5): a Tattach may say any uname it likes, and the server
+
+    still runs the session as whoever the afid exchange proved.

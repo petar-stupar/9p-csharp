@@ -1,0 +1,130 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  CI: "true"
+  DOTNET_NOLOGO: "true"
+  DOTNET_CLI_TELEMETRY_OPTOUT: "true"
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "true"
+
+jobs:
+  build:
+    name: build (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+
+      - name: Restore with locked mode
+        run: dotnet restore --locked-mode
+
+      - name: Build
+        run: dotnet build -warnaserror -c Release --no-restore
+
+      - name: Test
+        # The test projects host the Microsoft.Testing.Platform runner (Directory.Build.targets),
+        # and the TRX report is xunit's own: `--report-trx` is the platform's TrxReport extension,
+        # which is not referenced, and the runner answers it with its help text and zero tests.
+        run: dotnet test -c Release --no-build -- --report-xunit-trx
+
+      - name: Assert both target frameworks ran
+        shell: bash
+        run: |
+          set -euo pipefail
+          missing=0
+          for tfm in net8.0 net10.0; do
+            if ! find . -path "*/bin/Release/$tfm/TestResults/*.trx" -print -quit | grep -q .; then
+              echo "no .trx report for $tfm"
+              missing=1
+            fi
+          done
+          exit "$missing"
+
+      - name: Same-tag stress regression, 45 s
+        # The ordinary `dotnet test` above already ran this at its five-second default; this is
+        # the long run. It reuses one tag across sixteen connections and asserts that not one
+        # legal request is refused (ServerSession.CompleteAsync frees the tag before it queues
+        # the reply). One target framework: two concurrent runs would share the machine and
+        # dilute the race each is looking for.
+        env:
+          NINEP_TAG_STRESS_SECONDS: "45"
+        run: dotnet test --project tests/NineP.Server.Tests -f net10.0 -c Release --no-build -- --filter-method NineP.Server.Tests.TagReuseStressTests.ATagReusedTheInstantItsReplyArrivesIsNeverRefused
+
+      - name: Lint
+        run: dotnet format --verify-no-changes
+
+      # ConformanceTests already runs the complete 145-outcome self scenario during Test.
+
+      - name: Fuzz smoke
+        if: runner.os == 'Linux'
+        run: dotnet run --project tests/NineP.Fuzz -c Release -- -max_total_time=60
+
+      - name: Pack
+        run: dotnet pack -c Release --no-build -o artifacts
+
+      - name: Scratch install of the packed packages
+        shell: bash
+        run: |
+          set -euo pipefail
+          feed="$PWD/artifacts"
+          readme="$PWD/README.md"
+          work="$(mktemp -d)"
+          # The program and its expected output come from README.md, between the
+          # <!-- ci:snippet --> and <!-- ci:expected --> markers, so the README
+          # cannot drift from what a reader would paste.
+          awk '/<!-- ci:snippet -->/{f=1;next} /<!-- ci:expected -->/{f=0} f' "$readme" \
+            | sed -n '/^```csharp$/,/^```$/p' | sed '1d;$d' > "$work/Program.cs"
+          awk '/<!-- ci:expected -->/{f=1;next} /<!-- ci:end -->/{f=0} f' "$readme" \
+            | sed -n '/^```text$/,/^```$/p' | sed '1d;$d' > "$work/expected.txt"
+          test -s "$work/Program.cs" || { echo "README.md has no ci:snippet block"; exit 1; }
+          test -s "$work/expected.txt" || { echo "README.md has no ci:expected block"; exit 1; }
+          dotnet new console -o "$work/scratch" -f net10.0
+          rm -f "$work/scratch/Program.cs"
+          mv "$work/Program.cs" "$work/scratch/Program.cs"
+          cd "$work/scratch"
+          # `dotnet nuget add source --configfile` refuses a file that does not exist yet.
+          dotnet new nugetconfig > /dev/null
+          dotnet nuget add source "$feed" --name ninep-local --configfile ./nuget.config
+          dotnet add package NineP.Client --version 0.1.0
+          dotnet add package NineP.Server --version 0.1.0
+          dotnet run > actual.txt
+          diff -u "$work/expected.txt" actual.txt
+
+      - name: Dependency audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          # dotnet list package --vulnerable exits 0 even when it finds something,
+          # so the severity words are what the step actually fails on.
+          dotnet list package --vulnerable --include-transitive > audit.txt 2>&1
+          cat audit.txt
+          if grep -Eq '(Critical|High|Moderate|Low)' audit.txt; then
+            echo "vulnerable packages reported above"
+            exit 1
+          fi
+
+      - name: Upload packages
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: packages-${{ matrix.os }}
+          path: artifacts/*.*nupkg
+          if-no-files-found: ignore

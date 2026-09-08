@@ -1,0 +1,83 @@
+### YamlMime:ApiPage
+title: Struct DeviceId
+body:
+- api1: Struct DeviceId
+  id: NineP_Protocol_DeviceId
+  metadata:
+    uid: NineP.Protocol.DeviceId
+    commentId: T:NineP.Protocol.DeviceId
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol
+      url: NineP.Protocol.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: A device major/minor pair for character and block devices (reference §4.7).
+- code: 'public readonly record struct DeviceId : IEquatable<DeviceId>'
+- h4: Implements
+- list:
+  - text: IEquatable<DeviceId>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: DeviceId(uint, uint)
+  id: NineP_Protocol_DeviceId__ctor_System_UInt32_System_UInt32_
+  metadata:
+    uid: NineP.Protocol.DeviceId.#ctor(System.UInt32,System.UInt32)
+    commentId: M:NineP.Protocol.DeviceId.#ctor(System.UInt32,System.UInt32)
+- markdown: A device major/minor pair for character and block devices (reference §4.7).
+- code: public DeviceId(uint Major, uint Minor)
+- h4: Parameters
+- parameters:
+  - name: Major
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The major device number.
+  - name: Minor
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The minor device number.
+- h2: Properties
+- api3: Major
+  id: NineP_Protocol_DeviceId_Major
+  metadata:
+    uid: NineP.Protocol.DeviceId.Major
+    commentId: P:NineP.Protocol.DeviceId.Major
+- markdown: The major device number.
+- code: public uint Major { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Minor
+  id: NineP_Protocol_DeviceId_Minor
+  metadata:
+    uid: NineP.Protocol.DeviceId.Minor
+    commentId: P:NineP.Protocol.DeviceId.Minor
+- markdown: The minor device number.
+- code: public uint Minor { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+languageId: csharp
+metadata:
+  description: A device major/minor pair for character and block devices (reference §4.7).

@@ -1,0 +1,111 @@
+### YamlMime:ApiPage
+title: Struct Topen
+body:
+- api1: Struct Topen
+  id: NineP_Protocol_Messages_Topen
+  metadata:
+    uid: NineP.Protocol.Messages.Topen
+    commentId: T:NineP.Protocol.Messages.Topen
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Messages
+      url: NineP.Protocol.Messages.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    Opens an existing file (reference §5.5). The access mode is the low two bits of Mode; OAPPEND is
+
+    a flag.
+- code: 'public readonly record struct Topen : IMessage, IEquatable<Topen>'
+- h4: Implements
+- list:
+  - text: IMessage
+    url: NineP.Protocol.Messages.IMessage.html
+  - text: IEquatable<Topen>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: Topen(ushort, uint, byte)
+  id: NineP_Protocol_Messages_Topen__ctor_System_UInt16_System_UInt32_System_Byte_
+  metadata:
+    uid: NineP.Protocol.Messages.Topen.#ctor(System.UInt16,System.UInt32,System.Byte)
+    commentId: M:NineP.Protocol.Messages.Topen.#ctor(System.UInt16,System.UInt32,System.Byte)
+- markdown: >-
+    Opens an existing file (reference §5.5). The access mode is the low two bits of Mode; OAPPEND is
+
+    a flag.
+- code: public Topen(ushort Tag, uint Fid, byte Mode)
+- h4: Parameters
+- parameters:
+  - name: Tag
+    type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+    description: The message tag, which pairs this message with its partner.
+  - name: Fid
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The fid naming the file to open.
+  - name: Mode
+    type:
+    - text: byte
+      url: https://learn.microsoft.com/dotnet/api/system.byte
+    description: The open mode of reference §4.5.
+- h2: Properties
+- api3: Fid
+  id: NineP_Protocol_Messages_Topen_Fid
+  metadata:
+    uid: NineP.Protocol.Messages.Topen.Fid
+    commentId: P:NineP.Protocol.Messages.Topen.Fid
+- markdown: The fid naming the file to open.
+- code: public uint Fid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Mode
+  id: NineP_Protocol_Messages_Topen_Mode
+  metadata:
+    uid: NineP.Protocol.Messages.Topen.Mode
+    commentId: P:NineP.Protocol.Messages.Topen.Mode
+- markdown: The open mode of reference §4.5.
+- code: public byte Mode { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: byte
+      url: https://learn.microsoft.com/dotnet/api/system.byte
+- api3: Tag
+  id: NineP_Protocol_Messages_Topen_Tag
+  metadata:
+    uid: NineP.Protocol.Messages.Topen.Tag
+    commentId: P:NineP.Protocol.Messages.Topen.Tag
+- markdown: The message tag, which pairs this message with its partner.
+- code: public ushort Tag { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+languageId: csharp
+metadata:
+  description: >-
+    Opens an existing file (reference §5.5). The access mode is the low two bits of Mode; OAPPEND is
+
+    a flag.

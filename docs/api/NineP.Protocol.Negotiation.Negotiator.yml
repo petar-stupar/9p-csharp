@@ -1,0 +1,157 @@
+### YamlMime:ApiPage
+title: Class Negotiator
+body:
+- api1: Class Negotiator
+  id: NineP_Protocol_Negotiation_Negotiator
+  metadata:
+    uid: NineP.Protocol.Negotiation.Negotiator
+    commentId: T:NineP.Protocol.Negotiation.Negotiator
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Negotiation
+      url: NineP.Protocol.Negotiation.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    The version negotiation function of reference §5.1, conditioned on the configured dialect set.
+
+    Every step is gated on that set: a dialect the server was told not to speak is never answered
+
+    with, however the client asks (R-2). The refusals are all <code>Rversion "unknown"</code> because
+
+    version(5) forbids <code>Rerror</code> for <code>Tversion</code> and forbids answering with an msize larger
+
+    than the client's, which rules out replying with the floor.
+- code: public static class Negotiator
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: Negotiator
+    url: NineP.Protocol.Negotiation.Negotiator.html
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Methods
+- api3: Negotiate(IReadOnlySet<Dialect>, string, uint, Limits)
+  id: NineP_Protocol_Negotiation_Negotiator_Negotiate_System_Collections_Generic_IReadOnlySet_NineP_Protocol_Dialect__System_String_System_UInt32_NineP_Protocol_Limits_
+  metadata:
+    uid: NineP.Protocol.Negotiation.Negotiator.Negotiate(System.Collections.Generic.IReadOnlySet{NineP.Protocol.Dialect},System.String,System.UInt32,NineP.Protocol.Limits)
+    commentId: M:NineP.Protocol.Negotiation.Negotiator.Negotiate(System.Collections.Generic.IReadOnlySet{NineP.Protocol.Dialect},System.String,System.UInt32,NineP.Protocol.Limits)
+- markdown: 'Answers a Tversion: every step is gated on the configured set (reference §5.1, R-2).'
+- code: public static NegotiationResult Negotiate(IReadOnlySet<Dialect> configured, string clientVersion, uint clientMsize, Limits limits)
+- h4: Parameters
+- parameters:
+  - name: configured
+    type:
+    - text: IReadOnlySet
+      url: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlyset-1
+    - <
+    - text: Dialect
+      url: NineP.Protocol.Dialect.html
+    - '>'
+    description: The dialects this side was configured to speak.
+  - name: clientVersion
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The version string the client sent.
+  - name: clientMsize
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The msize the client sent.
+  - name: limits
+    type:
+    - text: Limits
+      url: NineP.Protocol.Limits.html
+    description: The bounds this side was configured with.
+- h4: Returns
+- parameters:
+  - type:
+    - text: NegotiationResult
+      url: NineP.Protocol.Negotiation.NegotiationResult.html
+    description: What the <code>Rversion</code> must carry.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: ArgumentNullException
+      url: https://learn.microsoft.com/dotnet/api/system.argumentnullexception
+    description: An argument is null.
+- api3: TryParseVersion(string, out Dialect)
+  id: NineP_Protocol_Negotiation_Negotiator_TryParseVersion_System_String_NineP_Protocol_Dialect__
+  metadata:
+    uid: NineP.Protocol.Negotiation.Negotiator.TryParseVersion(System.String,NineP.Protocol.Dialect@)
+    commentId: M:NineP.Protocol.Negotiation.Negotiator.TryParseVersion(System.String,NineP.Protocol.Dialect@)
+- markdown: Parses an exact dialect string; false for anything else, including "unknown".
+- code: public static bool TryParseVersion(string version, out Dialect dialect)
+- h4: Parameters
+- parameters:
+  - name: version
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The string from the wire.
+  - name: dialect
+    type:
+    - text: Dialect
+      url: NineP.Protocol.Dialect.html
+    description: The dialect it names, when it names one.
+- h4: Returns
+- parameters:
+  - type:
+    - text: bool
+      url: https://learn.microsoft.com/dotnet/api/system.boolean
+    description: True only for an exact match on one of the three strings.
+- api3: VersionString(Dialect)
+  id: NineP_Protocol_Negotiation_Negotiator_VersionString_NineP_Protocol_Dialect_
+  metadata:
+    uid: NineP.Protocol.Negotiation.Negotiator.VersionString(NineP.Protocol.Dialect)
+    commentId: M:NineP.Protocol.Negotiation.Negotiator.VersionString(NineP.Protocol.Dialect)
+- markdown: The wire string for a dialect ("9P2000", "9P2000.u", "9P2000.L").
+- code: public static string VersionString(Dialect dialect)
+- h4: Parameters
+- parameters:
+  - name: dialect
+    type:
+    - text: Dialect
+      url: NineP.Protocol.Dialect.html
+    description: The dialect to name.
+- h4: Returns
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The string that goes on the wire.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: ArgumentOutOfRangeException
+      url: https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception
+    description: The value is not a dialect.
+languageId: csharp
+metadata:
+  description: >-
+    The version negotiation function of reference §5.1, conditioned on the configured dialect set.
+
+    Every step is gated on that set: a dialect the server was told not to speak is never answered
+
+    with, however the client asks (R-2). The refusals are all Rversion "unknown" because
+
+    version(5) forbids Rerror for Tversion and forbids answering with an msize larger
+
+    than the client's, which rules out replying with the floor.

@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../src/NineP.Client/NineP.Client.csproj" />
+    <ProjectReference Include="../../src/NineP.Server/NineP.Server.csproj" />
+    <ProjectReference Include="../NineP.TestSupport/NineP.TestSupport.csproj" />
+
+    <!-- The examples target net10.0 only (spec §3.2), so the tests that spawn them are compiled
+         under net10.0 only; the files themselves are guarded with NET10_0_OR_GREATER. The
+         reference is what guarantees both examples are built before these tests run. -->
+    <ProjectReference Include="../../examples/NineP.Cli/NineP.Cli.csproj"
+                      Condition="'$(TargetFramework)' == 'net10.0'" />
+    <ProjectReference Include="../../examples/NineP.JsonFs/NineP.JsonFs.csproj"
+                      Condition="'$(TargetFramework)' == 'net10.0'" />
+    <ProjectReference Include="../../examples/NineP.TodoFs/NineP.TodoFs.csproj"
+                      Condition="'$(TargetFramework)' == 'net10.0'" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="xunit.v3" />
+    <PackageReference Include="xunit.runner.visualstudio" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+  </ItemGroup>
+
+</Project>

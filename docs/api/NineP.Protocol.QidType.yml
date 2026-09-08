@@ -1,0 +1,76 @@
+### YamlMime:ApiPage
+title: Enum QidType
+body:
+- api1: Enum QidType
+  id: NineP_Protocol_QidType
+  metadata:
+    uid: NineP.Protocol.QidType
+    commentId: T:NineP.Protocol.QidType
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol
+      url: NineP.Protocol.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    Qid type bits (reference §4.1). The two low bits follow Linux, not the 9P2000.u draft:
+
+    every .u and .L peer this workspace interoperates with is Linux-derived.
+- code: >-
+    [Flags]
+
+    public enum QidType : byte
+- h2: Fields
+- parameters:
+  - name: QTAPPEND
+    default: "64"
+    description: >+
+      Append only: writes ignore the offset.
+
+  - name: QTAUTH
+    default: "8"
+    description: >+
+      An authentication file, the file an afid names.
+
+  - name: QTDIR
+    default: "128"
+    description: >+
+      A directory.
+
+  - name: QTEXCL
+    default: "32"
+    description: >+
+      Exclusive use: one open fid at a time.
+
+  - name: QTFILE
+    default: "0"
+    description: >+
+      A plain file.
+
+  - name: QTLINK
+    default: "1"
+    description: >+
+      A hard link (.u, Linux).
+
+  - name: QTMOUNT
+    default: "16"
+    description: >+
+      A mounted channel.
+
+  - name: QTSYMLINK
+    default: "2"
+    description: >+
+      A symbolic link (.u, Linux).
+
+  - name: QTTMP
+    default: "4"
+    description: >+
+      Not backed up.
+
+languageId: csharp
+metadata:
+  description: >-
+    Qid type bits (reference §4.1). The two low bits follow Linux, not the 9P2000.u draft:
+
+    every .u and .L peer this workspace interoperates with is Linux-derived.

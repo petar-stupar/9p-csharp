@@ -1,0 +1,304 @@
+### YamlMime:ApiPage
+title: Class MessageCodec
+body:
+- api1: Class MessageCodec
+  id: NineP_Protocol_Codec_MessageCodec
+  metadata:
+    uid: NineP.Protocol.Codec.MessageCodec
+    commentId: T:NineP.Protocol.Codec.MessageCodec
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Codec
+      url: NineP.Protocol.Codec.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    Encodes and decodes single 9P frames. This is the whole public surface of the codec: the
+
+    streaming frame reader and writer, the pooled leases and the per-primitive readers are
+
+    internal, because no public member of this library exposes a pipe, a sequence or a pool.
+- code: public static class MessageCodec
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: MessageCodec
+    url: NineP.Protocol.Codec.MessageCodec.html
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Methods
+- api3: Decode<TMessage>(ReadOnlyMemory<byte>, Dialect)
+  id: NineP_Protocol_Codec_MessageCodec_Decode__1_System_ReadOnlyMemory_System_Byte__NineP_Protocol_Dialect_
+  metadata:
+    uid: NineP.Protocol.Codec.MessageCodec.Decode``1(System.ReadOnlyMemory{System.Byte},NineP.Protocol.Dialect)
+    commentId: M:NineP.Protocol.Codec.MessageCodec.Decode``1(System.ReadOnlyMemory{System.Byte},NineP.Protocol.Dialect)
+- markdown: Decodes one complete frame into its record.
+- code: 'public static TMessage Decode<TMessage>(ReadOnlyMemory<byte> frame, Dialect dialect) where TMessage : struct, IMessage'
+- h4: Parameters
+- parameters:
+  - name: frame
+    type:
+    - text: ReadOnlyMemory
+      url: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+    - <
+    - text: byte
+      url: https://learn.microsoft.com/dotnet/api/system.byte
+    - '>'
+    description: One complete frame, <code>size[4]</code> included.
+  - name: dialect
+    type:
+    - text: Dialect
+      url: NineP.Protocol.Dialect.html
+    description: The dialect the session negotiated.
+- h4: Returns
+- parameters:
+  - type:
+    - TMessage
+    description: The decoded record.
+- h4: Type Parameters
+- parameters:
+  - name: TMessage
+    description: The record the caller expects; its type number must match.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePProtocolException
+      url: NineP.Protocol.NinePProtocolException.html
+    description: The frame is malformed or illegal.
+- api3: Encode<TMessage>(IBufferWriter<byte>, in TMessage, Dialect)
+  id: NineP_Protocol_Codec_MessageCodec_Encode__1_System_Buffers_IBufferWriter_System_Byte____0__NineP_Protocol_Dialect_
+  metadata:
+    uid: NineP.Protocol.Codec.MessageCodec.Encode``1(System.Buffers.IBufferWriter{System.Byte},``0@,NineP.Protocol.Dialect)
+    commentId: M:NineP.Protocol.Codec.MessageCodec.Encode``1(System.Buffers.IBufferWriter{System.Byte},``0@,NineP.Protocol.Dialect)
+- markdown: Encodes one message, <code>size[4]</code> included, into a buffer writer.
+- code: 'public static int Encode<TMessage>(IBufferWriter<byte> writer, in TMessage message, Dialect dialect) where TMessage : struct, IMessage'
+- h4: Parameters
+- parameters:
+  - name: writer
+    type:
+    - text: IBufferWriter
+      url: https://learn.microsoft.com/dotnet/api/system.buffers.ibufferwriter-1
+    - <
+    - text: byte
+      url: https://learn.microsoft.com/dotnet/api/system.byte
+    - '>'
+    description: The destination; exactly one frame is written and advanced over.
+  - name: message
+    type:
+    - TMessage
+    description: The message.
+  - name: dialect
+    type:
+    - text: Dialect
+      url: NineP.Protocol.Dialect.html
+    description: The dialect the session negotiated.
+- h4: Returns
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+    description: The number of bytes written.
+- h4: Type Parameters
+- parameters:
+  - name: TMessage
+    description: The record being written.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: ArgumentNullException
+      url: https://learn.microsoft.com/dotnet/api/system.argumentnullexception
+    description: The writer is null.
+  - type:
+    - text: ArgumentException
+      url: https://learn.microsoft.com/dotnet/api/system.argumentexception
+    description: The message cannot be encoded in this dialect.
+- api3: GetEncodedSize<TMessage>(in TMessage, Dialect)
+  id: NineP_Protocol_Codec_MessageCodec_GetEncodedSize__1___0__NineP_Protocol_Dialect_
+  metadata:
+    uid: NineP.Protocol.Codec.MessageCodec.GetEncodedSize``1(``0@,NineP.Protocol.Dialect)
+    commentId: M:NineP.Protocol.Codec.MessageCodec.GetEncodedSize``1(``0@,NineP.Protocol.Dialect)
+- markdown: The exact encoded length of a message, so a caller can size a buffer for it.
+- code: 'public static int GetEncodedSize<TMessage>(in TMessage message, Dialect dialect) where TMessage : struct, IMessage'
+- h4: Parameters
+- parameters:
+  - name: message
+    type:
+    - TMessage
+    description: The message.
+  - name: dialect
+    type:
+    - text: Dialect
+      url: NineP.Protocol.Dialect.html
+    description: The dialect the session negotiated.
+- h4: Returns
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+    description: The frame length, <code>size[4]</code> included.
+- h4: Type Parameters
+- parameters:
+  - name: TMessage
+    description: The record being measured.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: ArgumentException
+      url: https://learn.microsoft.com/dotnet/api/system.argumentexception
+    description: The message cannot be encoded in this dialect.
+- api3: PeekSize(ReadOnlySpan<byte>)
+  id: NineP_Protocol_Codec_MessageCodec_PeekSize_System_ReadOnlySpan_System_Byte__
+  metadata:
+    uid: NineP.Protocol.Codec.MessageCodec.PeekSize(System.ReadOnlySpan{System.Byte})
+    commentId: M:NineP.Protocol.Codec.MessageCodec.PeekSize(System.ReadOnlySpan{System.Byte})
+- markdown: Reads <code>size[4]</code> from a frame without decoding it.
+- code: public static uint PeekSize(ReadOnlySpan<byte> frame)
+- h4: Parameters
+- parameters:
+  - name: frame
+    type:
+    - text: ReadOnlySpan
+      url: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+    - <
+    - text: byte
+      url: https://learn.microsoft.com/dotnet/api/system.byte
+    - '>'
+    description: At least the first four bytes of a frame.
+- h4: Returns
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The size the frame claims, which includes those four bytes.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: ArgumentException
+      url: https://learn.microsoft.com/dotnet/api/system.argumentexception
+    description: Fewer than four bytes were supplied.
+- api3: PeekTag(ReadOnlySpan<byte>)
+  id: NineP_Protocol_Codec_MessageCodec_PeekTag_System_ReadOnlySpan_System_Byte__
+  metadata:
+    uid: NineP.Protocol.Codec.MessageCodec.PeekTag(System.ReadOnlySpan{System.Byte})
+    commentId: M:NineP.Protocol.Codec.MessageCodec.PeekTag(System.ReadOnlySpan{System.Byte})
+- markdown: Reads <code>tag[2]</code> from a frame without decoding it, for the flush reserve.
+- code: public static ushort PeekTag(ReadOnlySpan<byte> frame)
+- h4: Parameters
+- parameters:
+  - name: frame
+    type:
+    - text: ReadOnlySpan
+      url: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+    - <
+    - text: byte
+      url: https://learn.microsoft.com/dotnet/api/system.byte
+    - '>'
+    description: At least the header of a frame.
+- h4: Returns
+- parameters:
+  - type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+    description: The tag the frame carries.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: ArgumentException
+      url: https://learn.microsoft.com/dotnet/api/system.argumentexception
+    description: The header is not there.
+- api3: PeekType(ReadOnlySpan<byte>)
+  id: NineP_Protocol_Codec_MessageCodec_PeekType_System_ReadOnlySpan_System_Byte__
+  metadata:
+    uid: NineP.Protocol.Codec.MessageCodec.PeekType(System.ReadOnlySpan{System.Byte})
+    commentId: M:NineP.Protocol.Codec.MessageCodec.PeekType(System.ReadOnlySpan{System.Byte})
+- markdown: Reads <code>type[1]</code> from a frame without decoding it, for the legality check.
+- code: public static MessageType PeekType(ReadOnlySpan<byte> frame)
+- h4: Parameters
+- parameters:
+  - name: frame
+    type:
+    - text: ReadOnlySpan
+      url: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+    - <
+    - text: byte
+      url: https://learn.microsoft.com/dotnet/api/system.byte
+    - '>'
+    description: At least the header of a frame.
+- h4: Returns
+- parameters:
+  - type:
+    - text: MessageType
+      url: NineP.Protocol.MessageType.html
+    description: The type number, which may be one the protocol does not define.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: ArgumentException
+      url: https://learn.microsoft.com/dotnet/api/system.argumentexception
+    description: The header is not there.
+- api3: TryDecode<TMessage>(ReadOnlyMemory<byte>, Dialect, out TMessage, out ProtocolErrorKind)
+  id: NineP_Protocol_Codec_MessageCodec_TryDecode__1_System_ReadOnlyMemory_System_Byte__NineP_Protocol_Dialect___0__NineP_Protocol_ProtocolErrorKind__
+  metadata:
+    uid: NineP.Protocol.Codec.MessageCodec.TryDecode``1(System.ReadOnlyMemory{System.Byte},NineP.Protocol.Dialect,``0@,NineP.Protocol.ProtocolErrorKind@)
+    commentId: M:NineP.Protocol.Codec.MessageCodec.TryDecode``1(System.ReadOnlyMemory{System.Byte},NineP.Protocol.Dialect,``0@,NineP.Protocol.ProtocolErrorKind@)
+- markdown: Decodes one complete frame, reporting the failure kind instead of throwing.
+- code: 'public static bool TryDecode<TMessage>(ReadOnlyMemory<byte> frame, Dialect dialect, out TMessage message, out ProtocolErrorKind failure) where TMessage : struct, IMessage'
+- h4: Parameters
+- parameters:
+  - name: frame
+    type:
+    - text: ReadOnlyMemory
+      url: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+    - <
+    - text: byte
+      url: https://learn.microsoft.com/dotnet/api/system.byte
+    - '>'
+    description: One complete frame, <code>size[4]</code> included.
+  - name: dialect
+    type:
+    - text: Dialect
+      url: NineP.Protocol.Dialect.html
+    description: The dialect the session negotiated.
+  - name: message
+    type:
+    - TMessage
+    description: The decoded record, or the default on failure.
+  - name: failure
+    type:
+    - text: ProtocolErrorKind
+      url: NineP.Protocol.ProtocolErrorKind.html
+    description: What was wrong when the result is false.
+- h4: Returns
+- parameters:
+  - type:
+    - text: bool
+      url: https://learn.microsoft.com/dotnet/api/system.boolean
+    description: True when the frame decoded cleanly.
+- h4: Type Parameters
+- parameters:
+  - name: TMessage
+    description: The record the caller expects; its type number must match.
+languageId: csharp
+metadata:
+  description: >-
+    Encodes and decodes single 9P frames. This is the whole public surface of the codec: the
+
+    streaming frame reader and writer, the pooled leases and the per-primitive readers are
+
+    internal, because no public member of this library exposes a pipe, a sequence or a pool.

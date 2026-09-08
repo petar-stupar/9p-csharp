@@ -1,0 +1,108 @@
+### YamlMime:ApiPage
+title: Interface ITransport
+body:
+- api1: Interface ITransport
+  id: NineP_Protocol_Transports_ITransport
+  metadata:
+    uid: NineP.Protocol.Transports.ITransport
+    commentId: T:NineP.Protocol.Transports.ITransport
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Transports
+      url: NineP.Protocol.Transports.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    The user-defined-transport seam (workspace architecture §3): dial and listen. Implementing this
+
+    interface is the extension point, and <xref href="NineP.Protocol.Transports.MemoryTransport" data-throw-if-not-resolved="false"></xref> is the proof that the seam
+
+    is real — every test that can run over it does.
+- code: public interface ITransport
+- h2: Properties
+- api3: Schemes
+  id: NineP_Protocol_Transports_ITransport_Schemes
+  metadata:
+    uid: NineP.Protocol.Transports.ITransport.Schemes
+    commentId: P:NineP.Protocol.Transports.ITransport.Schemes
+- markdown: The schemes this transport can dial and bind.
+- code: IReadOnlyCollection<NinePScheme> Schemes { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: IReadOnlyCollection
+      url: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1
+    - <
+    - text: NinePScheme
+      url: NineP.Protocol.Transports.NinePScheme.html
+    - '>'
+- h2: Methods
+- api3: ConnectAsync(NinePAddress, CancellationToken)
+  id: NineP_Protocol_Transports_ITransport_ConnectAsync_NineP_Protocol_Transports_NinePAddress_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Protocol.Transports.ITransport.ConnectAsync(NineP.Protocol.Transports.NinePAddress,System.Threading.CancellationToken)
+    commentId: M:NineP.Protocol.Transports.ITransport.ConnectAsync(NineP.Protocol.Transports.NinePAddress,System.Threading.CancellationToken)
+- markdown: Dials an address.
+- code: ValueTask<INinePConnection> ConnectAsync(NinePAddress address, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: address
+    type:
+    - text: NinePAddress
+      url: NineP.Protocol.Transports.NinePAddress.html
+    description: Where to connect.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the dial.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: INinePConnection
+      url: NineP.Protocol.Transports.INinePConnection.html
+    - '>'
+    description: The connected connection; the caller disposes it.
+- api3: ListenAsync(NinePAddress, CancellationToken)
+  id: NineP_Protocol_Transports_ITransport_ListenAsync_NineP_Protocol_Transports_NinePAddress_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Protocol.Transports.ITransport.ListenAsync(NineP.Protocol.Transports.NinePAddress,System.Threading.CancellationToken)
+    commentId: M:NineP.Protocol.Transports.ITransport.ListenAsync(NineP.Protocol.Transports.NinePAddress,System.Threading.CancellationToken)
+- markdown: Binds an address.
+- code: ValueTask<INinePListener> ListenAsync(NinePAddress address, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: address
+    type:
+    - text: NinePAddress
+      url: NineP.Protocol.Transports.NinePAddress.html
+    description: Where to listen.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the bind.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: INinePListener
+      url: NineP.Protocol.Transports.INinePListener.html
+    - '>'
+    description: The listener; the caller disposes it.
+languageId: csharp
+metadata:
+  description: >-
+    The user-defined-transport seam (workspace architecture §3): dial and listen. Implementing this
+
+    interface is the extension point, and  is the proof that the seam
+
+    is real — every test that can run over it does.

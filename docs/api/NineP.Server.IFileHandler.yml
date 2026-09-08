@@ -1,0 +1,66 @@
+### YamlMime:ApiPage
+title: Interface IFileHandler
+body:
+- api1: Interface IFileHandler
+  id: NineP_Server_IFileHandler
+  metadata:
+    uid: NineP.Server.IFileHandler
+    commentId: T:NineP.Server.IFileHandler
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Server
+      url: NineP.Server.html
+  - name: Assembly
+    value: NineP.Server.dll
+- markdown: A regular file (architecture §4).
+- code: 'public interface IFileHandler : IHandler'
+- h4: Implements
+- list:
+  - text: IHandler
+    url: NineP.Server.IHandler.html
+- h2: Methods
+- api3: OpenAsync(OpenMode, OpenFlags, CancellationToken)
+  id: NineP_Server_IFileHandler_OpenAsync_NineP_Protocol_OpenMode_NineP_Protocol_OpenFlags_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Server.IFileHandler.OpenAsync(NineP.Protocol.OpenMode,NineP.Protocol.OpenFlags,System.Threading.CancellationToken)
+    commentId: M:NineP.Server.IFileHandler.OpenAsync(NineP.Protocol.OpenMode,NineP.Protocol.OpenFlags,System.Threading.CancellationToken)
+- markdown: Opens the file; the core has already checked permissions and the open state.
+- code: ValueTask<IOpenFile> OpenAsync(OpenMode mode, OpenFlags flags, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: mode
+    type:
+    - text: OpenMode
+      url: NineP.Protocol.OpenMode.html
+    description: The access mode, taken from the low two bits of the request.
+  - name: flags
+    type:
+    - text: OpenFlags
+      url: NineP.Protocol.OpenFlags.html
+    description: The flags accompanying the open.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the open.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: IOpenFile
+      url: NineP.Server.IOpenFile.html
+    - '>'
+    description: The open instance; the core disposes it when the fid is clunked.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: The file could not be opened.
+languageId: csharp
+metadata:
+  description: A regular file (architecture §4).

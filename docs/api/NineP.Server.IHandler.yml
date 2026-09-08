@@ -1,0 +1,153 @@
+### YamlMime:ApiPage
+title: Interface IHandler
+body:
+- api1: Interface IHandler
+  id: NineP_Server_IHandler
+  metadata:
+    uid: NineP.Server.IHandler
+    commentId: T:NineP.Server.IHandler
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Server
+      url: NineP.Server.html
+  - name: Assembly
+    value: NineP.Server.dll
+- markdown: >-
+    The operations every file type answers (architecture §4). A handler never sees a T-message, a
+
+    tag, a fid, a dialect or an error shape: the core owns all of that, which is what keeps one
+
+    handler correct in all three dialects.
+- code: public interface IHandler
+- h2: Properties
+- api3: Qid
+  id: NineP_Server_IHandler_Qid
+  metadata:
+    uid: NineP.Server.IHandler.Qid
+    commentId: P:NineP.Server.IHandler.Qid
+- markdown: The qid of this file; stable for the life of the file (reference §4.1).
+- code: Qid Qid { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: Qid
+      url: NineP.Protocol.Qid.html
+- h2: Methods
+- api3: ClunkAsync(bool, CancellationToken)
+  id: NineP_Server_IHandler_ClunkAsync_System_Boolean_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Server.IHandler.ClunkAsync(System.Boolean,System.Threading.CancellationToken)
+    commentId: M:NineP.Server.IHandler.ClunkAsync(System.Boolean,System.Threading.CancellationToken)
+- markdown: Notifies the handler when one fid is clunked; other fids may still reference it.
+- code: ValueTask ClunkAsync(bool wasOpen, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: wasOpen
+    type:
+    - text: bool
+      url: https://learn.microsoft.com/dotnet/api/system.boolean
+    description: True when this fid had been opened.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask
+    description: A task that completes when the handler has been released.
+- api3: FsyncAsync(bool, CancellationToken)
+  id: NineP_Server_IHandler_FsyncAsync_System_Boolean_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Server.IHandler.FsyncAsync(System.Boolean,System.Threading.CancellationToken)
+    commentId: M:NineP.Server.IHandler.FsyncAsync(System.Boolean,System.Threading.CancellationToken)
+- markdown: Flushes to stable storage.
+- code: ValueTask FsyncAsync(bool dataOnly, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: dataOnly
+    type:
+    - text: bool
+      url: https://learn.microsoft.com/dotnet/api/system.boolean
+    description: True to commit data without metadata, mirroring <code>Tfsync.datasync</code>.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask
+    description: A task that completes when the data is on stable storage.
+- api3: GetAttrAsync(CancellationToken)
+  id: NineP_Server_IHandler_GetAttrAsync_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Server.IHandler.GetAttrAsync(System.Threading.CancellationToken)
+    commentId: M:NineP.Server.IHandler.GetAttrAsync(System.Threading.CancellationToken)
+- markdown: The unified attributes; the core projects them into the dialect's shape.
+- code: ValueTask<Attr> GetAttrAsync(CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: Attr
+      url: NineP.Protocol.Attr.html
+    - '>'
+    description: The attributes.
+- api3: SetAttrAsync(SetAttr, CancellationToken)
+  id: NineP_Server_IHandler_SetAttrAsync_NineP_Protocol_SetAttr_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Server.IHandler.SetAttrAsync(NineP.Protocol.SetAttr,System.Threading.CancellationToken)
+    commentId: M:NineP.Server.IHandler.SetAttrAsync(NineP.Protocol.SetAttr,System.Threading.CancellationToken)
+- markdown: Applies a partial update; a field this handler cannot change throws EOPNOTSUPP.
+- code: ValueTask SetAttrAsync(SetAttr update, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: update
+    type:
+    - text: SetAttr
+      url: NineP.Protocol.SetAttr.html
+    description: The fields to change; a null member is "do not touch".
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask
+    description: A task that completes when the change has been made.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: The update names something this handler cannot change.
+languageId: csharp
+metadata:
+  description: >-
+    The operations every file type answers (architecture §4). A handler never sees a T-message, a
+
+    tag, a fid, a dialect or an error shape: the core owns all of that, which is what keeps one
+
+    handler correct in all three dialects.

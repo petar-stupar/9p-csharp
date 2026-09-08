@@ -1,0 +1,216 @@
+### YamlMime:ApiPage
+title: Interface IDirectoryHandler
+body:
+- api1: Interface IDirectoryHandler
+  id: NineP_Server_IDirectoryHandler
+  metadata:
+    uid: NineP.Server.IDirectoryHandler
+    commentId: T:NineP.Server.IDirectoryHandler
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Server
+      url: NineP.Server.html
+  - name: Assembly
+    value: NineP.Server.dll
+- markdown: >-
+    A directory (architecture §4). Every name reaching these methods has already been validated
+
+    against reference §8 rule 3 by the core, so a handler never has to defend against "..", "/" or
+
+    a NUL byte in a name.
+- code: 'public interface IDirectoryHandler : IHandler'
+- h4: Implements
+- list:
+  - text: IHandler
+    url: NineP.Server.IHandler.html
+- h2: Methods
+- api3: CreateAsync(CreateRequest, CancellationToken)
+  id: NineP_Server_IDirectoryHandler_CreateAsync_NineP_Server_CreateRequest_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Server.IDirectoryHandler.CreateAsync(NineP.Server.CreateRequest,System.Threading.CancellationToken)
+    commentId: M:NineP.Server.IDirectoryHandler.CreateAsync(NineP.Server.CreateRequest,System.Threading.CancellationToken)
+- markdown: Creates a child of any kind (reference §5.5).
+- code: ValueTask<IHandler> CreateAsync(CreateRequest request, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: request
+    type:
+    - text: CreateRequest
+      url: NineP.Server.CreateRequest.html
+    description: Everything the five create messages carry, unified.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the create.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: IHandler
+      url: NineP.Server.IHandler.html
+    - '>'
+    description: The new child's handler.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: The child could not be created.
+- api3: LookupAsync(string, CancellationToken)
+  id: NineP_Server_IDirectoryHandler_LookupAsync_System_String_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Server.IDirectoryHandler.LookupAsync(System.String,System.Threading.CancellationToken)
+    commentId: M:NineP.Server.IDirectoryHandler.LookupAsync(System.String,System.Threading.CancellationToken)
+- markdown: Resolves one path element.
+- code: ValueTask<IHandler?> LookupAsync(string name, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: name
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The element; never ".", ".." or a name containing '/'.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the lookup.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: IHandler
+      url: NineP.Server.IHandler.html
+    - '?'
+    - '>'
+    description: The child's handler, or null when the name does not exist.
+- api3: ReadDirAsync(ulong, int, CancellationToken)
+  id: NineP_Server_IDirectoryHandler_ReadDirAsync_System_UInt64_System_Int32_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Server.IDirectoryHandler.ReadDirAsync(System.UInt64,System.Int32,System.Threading.CancellationToken)
+    commentId: M:NineP.Server.IDirectoryHandler.ReadDirAsync(System.UInt64,System.Int32,System.Threading.CancellationToken)
+- markdown: Returns a page of entries starting at a cursor.
+- code: ValueTask<DirectoryListing> ReadDirAsync(ulong cursor, int max, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: cursor
+    type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+    description: Where to resume; 0 starts the listing.
+  - name: max
+    type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+    description: The most entries the core can use.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the listing.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: DirectoryListing
+      url: NineP.Server.DirectoryListing.html
+    - '>'
+    description: The entries, the cursor after them, and whether the directory ended.
+- api3: RemoveAsync(string, FileKind, CancellationToken)
+  id: NineP_Server_IDirectoryHandler_RemoveAsync_System_String_NineP_Protocol_FileKind_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Server.IDirectoryHandler.RemoveAsync(System.String,NineP.Protocol.FileKind,System.Threading.CancellationToken)
+    commentId: M:NineP.Server.IDirectoryHandler.RemoveAsync(System.String,NineP.Protocol.FileKind,System.Threading.CancellationToken)
+- markdown: Removes a child.
+- code: ValueTask RemoveAsync(string name, FileKind kind, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: name
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The child's name.
+  - name: kind
+    type:
+    - text: FileKind
+      url: NineP.Protocol.FileKind.html
+    description: What the core resolved the child to.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the removal.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask
+    description: A task that completes when the child is gone.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: The child could not be removed.
+- api3: RenameAsync(string, IDirectoryHandler, string, CancellationToken)
+  id: NineP_Server_IDirectoryHandler_RenameAsync_System_String_NineP_Server_IDirectoryHandler_System_String_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Server.IDirectoryHandler.RenameAsync(System.String,NineP.Server.IDirectoryHandler,System.String,System.Threading.CancellationToken)
+    commentId: M:NineP.Server.IDirectoryHandler.RenameAsync(System.String,NineP.Server.IDirectoryHandler,System.String,System.Threading.CancellationToken)
+- markdown: Renames a child into another directory of the same filesystem.
+- code: ValueTask RenameAsync(string oldName, IDirectoryHandler newParent, string newName, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: oldName
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The child's name here.
+  - name: newParent
+    type:
+    - text: IDirectoryHandler
+      url: NineP.Server.IDirectoryHandler.html
+    description: The directory to move it into; may be this one.
+  - name: newName
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The name it takes there.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the rename.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask
+    description: A task that completes when the child has moved.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: The rename could not be performed.
+languageId: csharp
+metadata:
+  description: >-
+    A directory (architecture §4). Every name reaching these methods has already been validated
+
+    against reference §8 rule 3 by the core, so a handler never has to defend against "..", "/" or
+
+    a NUL byte in a name.

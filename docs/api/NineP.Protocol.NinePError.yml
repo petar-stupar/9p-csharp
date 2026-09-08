@@ -1,0 +1,154 @@
+### YamlMime:ApiPage
+title: Struct NinePError
+body:
+- api1: Struct NinePError
+  id: NineP_Protocol_NinePError
+  metadata:
+    uid: NineP.Protocol.NinePError
+    commentId: T:NineP.Protocol.NinePError
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol
+      url: NineP.Protocol.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    The 9P error value: a Plan 9 ename plus a Linux errno (workspace architecture §3). One value,
+
+    three wire shapes — <code>Rerror</code>, <code>Rerror</code> with <code>errno[4]</code>, and <code>Rlerror</code> —
+
+    chosen by the session dialect, never by the code that raised it.
+- code: 'public readonly record struct NinePError : IEquatable<NinePError>'
+- h4: Implements
+- list:
+  - text: IEquatable<NinePError>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: NinePError(string, int)
+  id: NineP_Protocol_NinePError__ctor_System_String_System_Int32_
+  metadata:
+    uid: NineP.Protocol.NinePError.#ctor(System.String,System.Int32)
+    commentId: M:NineP.Protocol.NinePError.#ctor(System.String,System.Int32)
+- markdown: >-
+    The 9P error value: a Plan 9 ename plus a Linux errno (workspace architecture §3). One value,
+
+    three wire shapes — <code>Rerror</code>, <code>Rerror</code> with <code>errno[4]</code>, and <code>Rlerror</code> —
+
+    chosen by the session dialect, never by the code that raised it.
+- code: public NinePError(string Ename, int Errno)
+- h4: Parameters
+- parameters:
+  - name: Ename
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The Plan 9 error text a 9P2000 or 9P2000.u peer is told.
+  - name: Errno
+    type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+    description: The Linux errno a 9P2000.L peer is told.
+- h2: Properties
+- api3: Ename
+  id: NineP_Protocol_NinePError_Ename
+  metadata:
+    uid: NineP.Protocol.NinePError.Ename
+    commentId: P:NineP.Protocol.NinePError.Ename
+- markdown: The Plan 9 error text a 9P2000 or 9P2000.u peer is told.
+- code: public string Ename { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: Errno
+  id: NineP_Protocol_NinePError_Errno
+  metadata:
+    uid: NineP.Protocol.NinePError.Errno
+    commentId: P:NineP.Protocol.NinePError.Errno
+- markdown: The Linux errno a 9P2000.L peer is told.
+- code: public int Errno { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: TruncatedEname
+  id: NineP_Protocol_NinePError_TruncatedEname
+  metadata:
+    uid: NineP.Protocol.NinePError.TruncatedEname
+    commentId: P:NineP.Protocol.NinePError.TruncatedEname
+- markdown: >-
+    The ename truncated to <code>ERRMAX - 1</code> bytes on a UTF-8 rune boundary, so a long error
+
+    never overruns the conventional cap and never splits a character (reference §8 rule 10).
+- code: public string TruncatedEname { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- h2: Methods
+- api3: FromEname(string)
+  id: NineP_Protocol_NinePError_FromEname_System_String_
+  metadata:
+    uid: NineP.Protocol.NinePError.FromEname(System.String)
+    commentId: M:NineP.Protocol.NinePError.FromEname(System.String)
+- markdown: Builds an error from an ename, taking the errno from <xref href="NineP.Protocol.ErrorTable" data-throw-if-not-resolved="false"></xref>.
+- code: public static NinePError FromEname(string ename)
+- h4: Parameters
+- parameters:
+  - name: ename
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The Plan 9 error text; an unknown one maps to <code>EIO</code>.
+- h4: Returns
+- parameters:
+  - type:
+    - text: NinePError
+      url: NineP.Protocol.NinePError.html
+    description: The error value carrying both projections.
+- api3: FromErrno(int)
+  id: NineP_Protocol_NinePError_FromErrno_System_Int32_
+  metadata:
+    uid: NineP.Protocol.NinePError.FromErrno(System.Int32)
+    commentId: M:NineP.Protocol.NinePError.FromErrno(System.Int32)
+- markdown: Builds an error from an errno, taking the ename from <xref href="NineP.Protocol.ErrorTable" data-throw-if-not-resolved="false"></xref>.
+- code: public static NinePError FromErrno(int errno)
+- h4: Parameters
+- parameters:
+  - name: errno
+    type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+    description: The Linux errno.
+- h4: Returns
+- parameters:
+  - type:
+    - text: NinePError
+      url: NineP.Protocol.NinePError.html
+    description: The error value carrying both projections.
+languageId: csharp
+metadata:
+  description: >-
+    The 9P error value: a Plan 9 ename plus a Linux errno (workspace architecture §3). One value,
+
+    three wire shapes — Rerror, Rerror with errno[4], and Rlerror —
+
+    chosen by the session dialect, never by the code that raised it.

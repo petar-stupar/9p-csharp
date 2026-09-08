@@ -1,0 +1,220 @@
+### YamlMime:ApiPage
+title: Class NinePServer
+body:
+- api1: Class NinePServer
+  id: NineP_Server_NinePServer
+  metadata:
+    uid: NineP.Server.NinePServer
+    commentId: T:NineP.Server.NinePServer
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Server
+      url: NineP.Server.html
+  - name: Assembly
+    value: NineP.Server.dll
+- markdown: >-
+    A 9P server: listeners, dialects, authenticator, limits, logger and clock (architecture §4).
+
+    The developer supplies an <xref href="NineP.Server.IFilesystem" data-throw-if-not-resolved="false"></xref> of typed handlers; everything in reference
+
+    §5 and §8 — negotiation, fids, tags, flush, packing, permissions — belongs to this package.
+- code: 'public sealed class NinePServer : IAsyncDisposable'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: NinePServer
+    url: NineP.Server.NinePServer.html
+- h4: Implements
+- list:
+  - text: IAsyncDisposable
+    url: https://learn.microsoft.com/dotnet/api/system.iasyncdisposable
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: NinePServer(ServerOptions)
+  id: NineP_Server_NinePServer__ctor_NineP_Server_ServerOptions_
+  metadata:
+    uid: NineP.Server.NinePServer.#ctor(NineP.Server.ServerOptions)
+    commentId: M:NineP.Server.NinePServer.#ctor(NineP.Server.ServerOptions)
+- markdown: Creates a server from a validated configuration.
+- code: public NinePServer(ServerOptions options)
+- h4: Parameters
+- parameters:
+  - name: options
+    type:
+    - text: ServerOptions
+      url: NineP.Server.ServerOptions.html
+    description: What to listen on and how to behave.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: ArgumentNullException
+      url: https://learn.microsoft.com/dotnet/api/system.argumentnullexception
+    description: The options are null.
+  - type:
+    - text: ArgumentException
+      url: https://learn.microsoft.com/dotnet/api/system.argumentexception
+    description: No address was configured.
+  - type:
+    - text: ArgumentOutOfRangeException
+      url: https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception
+    description: The limits contradict one another.
+- h2: Properties
+- api3: Counters
+  id: NineP_Server_NinePServer_Counters
+  metadata:
+    uid: NineP.Server.NinePServer.Counters
+    commentId: P:NineP.Server.NinePServer.Counters
+- markdown: Counters for messages, errors, bytes and connections (architecture §4).
+- code: public ServerCounters Counters { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ServerCounters
+      url: NineP.Server.ServerCounters.html
+- api3: Endpoints
+  id: NineP_Server_NinePServer_Endpoints
+  metadata:
+    uid: NineP.Server.NinePServer.Endpoints
+    commentId: P:NineP.Server.NinePServer.Endpoints
+- markdown: Addresses actually bound, with real ports; valid once serving has started.
+- code: public IReadOnlyList<NinePAddress> Endpoints { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: IReadOnlyList
+      url: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+    - <
+    - text: NinePAddress
+      url: NineP.Protocol.Transports.NinePAddress.html
+    - '>'
+- h2: Methods
+- api3: DisposeAsync()
+  id: NineP_Server_NinePServer_DisposeAsync
+  metadata:
+    uid: NineP.Server.NinePServer.DisposeAsync
+    commentId: M:NineP.Server.NinePServer.DisposeAsync
+- markdown: Stops immediately and releases every listener and connection.
+- code: public ValueTask DisposeAsync()
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask
+    description: A task that completes when everything has closed.
+- api3: ListeningAsync(CancellationToken)
+  id: NineP_Server_NinePServer_ListeningAsync_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Server.NinePServer.ListeningAsync(System.Threading.CancellationToken)
+    commentId: M:NineP.Server.NinePServer.ListeningAsync(System.Threading.CancellationToken)
+- markdown: >-
+    Waits until every configured address is bound, after which <xref href="NineP.Server.NinePServer.Endpoints" data-throw-if-not-resolved="false"></xref> carries
+
+    the real ports. <xref href="NineP.Server.NinePServer.ServeAsync(NineP.Server.IFilesystem%2cSystem.Threading.CancellationToken)" data-throw-if-not-resolved="false"></xref> runs until the server stops, so a caller that wants
+
+    the bound address starts it, awaits this, and reads <xref href="NineP.Server.NinePServer.Endpoints" data-throw-if-not-resolved="false"></xref>.
+- code: public ValueTask ListeningAsync(CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Stops waiting; the server is unaffected.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask
+    description: A task that completes when every listener is bound.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: ArgumentException
+      url: https://learn.microsoft.com/dotnet/api/system.argumentexception
+    description: A configured address could not be bound.
+- api3: ServeAsync(IFilesystem, CancellationToken)
+  id: NineP_Server_NinePServer_ServeAsync_NineP_Server_IFilesystem_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Server.NinePServer.ServeAsync(NineP.Server.IFilesystem,System.Threading.CancellationToken)
+    commentId: M:NineP.Server.NinePServer.ServeAsync(NineP.Server.IFilesystem,System.Threading.CancellationToken)
+- markdown: Binds every configured listener and serves until the token fires or StopAsync.
+- code: public Task ServeAsync(IFilesystem filesystem, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: filesystem
+    type:
+    - text: IFilesystem
+      url: NineP.Server.IFilesystem.html
+    description: The tree to serve.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Stops the server.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: Task
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task
+    description: A task that completes when every accept loop has stopped.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: ArgumentNullException
+      url: https://learn.microsoft.com/dotnet/api/system.argumentnullexception
+    description: The filesystem is null.
+  - type:
+    - text: ArgumentException
+      url: https://learn.microsoft.com/dotnet/api/system.argumentexception
+    description: No transport owns a configured address's scheme.
+- api3: StopAsync(TimeSpan, CancellationToken)
+  id: NineP_Server_NinePServer_StopAsync_System_TimeSpan_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Server.NinePServer.StopAsync(System.TimeSpan,System.Threading.CancellationToken)
+    commentId: M:NineP.Server.NinePServer.StopAsync(System.TimeSpan,System.Threading.CancellationToken)
+- markdown: Stops accepting, lets in-flight requests finish within the deadline, then closes.
+- code: public ValueTask StopAsync(TimeSpan graceful, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: graceful
+    type:
+    - text: TimeSpan
+      url: https://learn.microsoft.com/dotnet/api/system.timespan
+    description: How long in-flight requests may take to finish.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cuts the wait short.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask
+    description: A task that completes when everything has closed.
+languageId: csharp
+metadata:
+  description: >-
+    A 9P server: listeners, dialects, authenticator, limits, logger and clock (architecture §4).
+
+    The developer supplies an  of typed handlers; everything in reference
+
+    §5 and §8 — negotiation, fids, tags, flush, packing, permissions — belongs to this package.

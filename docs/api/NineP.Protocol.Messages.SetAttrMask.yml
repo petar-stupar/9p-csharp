@@ -1,0 +1,81 @@
+### YamlMime:ApiPage
+title: Enum SetAttrMask
+body:
+- api1: Enum SetAttrMask
+  id: NineP_Protocol_Messages_SetAttrMask
+  metadata:
+    uid: NineP.Protocol.Messages.SetAttrMask
+    commentId: T:NineP.Protocol.Messages.SetAttrMask
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Messages
+      url: NineP.Protocol.Messages.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    The <code>Tsetattr.valid</code> bits (reference §4.6). A time bit without its <code>_SET</code> twin means
+
+    "use the server's current time"; with it, use the value the client supplied.
+- code: >-
+    [Flags]
+
+    public enum SetAttrMask : uint
+- h2: Fields
+- parameters:
+  - name: ATime
+    default: "16"
+    description: >+
+      Change the access time.
+
+  - name: ATimeSet
+    default: "128"
+    description: >+
+      The access time in the message is the one to use.
+
+  - name: CTime
+    default: "64"
+    description: >+
+      Change the status-change time to the server's clock.
+
+  - name: Gid
+    default: "4"
+    description: >+
+      Change the numeric group.
+
+  - name: MTime
+    default: "32"
+    description: >+
+      Change the modification time.
+
+  - name: MTimeSet
+    default: "256"
+    description: >+
+      The modification time in the message is the one to use.
+
+  - name: Mode
+    default: "1"
+    description: >+
+      Change the permission bits.
+
+  - name: None
+    default: "0"
+    description: >+
+      Nothing is being changed.
+
+  - name: Size
+    default: "8"
+    description: >+
+      Change the length: truncate or extend.
+
+  - name: Uid
+    default: "2"
+    description: >+
+      Change the numeric owner.
+
+languageId: csharp
+metadata:
+  description: >-
+    The Tsetattr.valid bits (reference §4.6). A time bit without its _SET twin means
+
+    "use the server's current time"; with it, use the value the client supplied.

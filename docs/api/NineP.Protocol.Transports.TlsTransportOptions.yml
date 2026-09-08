@@ -1,0 +1,209 @@
+### YamlMime:ApiPage
+title: Class TlsTransportOptions
+body:
+- api1: Class TlsTransportOptions
+  id: NineP_Protocol_Transports_TlsTransportOptions
+  metadata:
+    uid: NineP.Protocol.Transports.TlsTransportOptions
+    commentId: T:NineP.Protocol.Transports.TlsTransportOptions
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Transports
+      url: NineP.Protocol.Transports.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    TLS configuration. Verification is on by default; the insecure opt-out is a separate, explicit
+
+    option and it is logged on every connect (workspace architecture §8.4), so a deployment that
+
+    turned it on cannot forget that it did.
+- code: 'public sealed record TlsTransportOptions : IEquatable<TlsTransportOptions>'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: TlsTransportOptions
+    url: NineP.Protocol.Transports.TlsTransportOptions.html
+- h4: Implements
+- list:
+  - text: IEquatable<TlsTransportOptions>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Properties
+- api3: AdditionalPeerCheck
+  id: NineP_Protocol_Transports_TlsTransportOptions_AdditionalPeerCheck
+  metadata:
+    uid: NineP.Protocol.Transports.TlsTransportOptions.AdditionalPeerCheck
+    commentId: P:NineP.Protocol.Transports.TlsTransportOptions.AdditionalPeerCheck
+- markdown: >-
+    A callback that may only <b>add</b> checks: it is consulted after the chain and the host
+
+    name have been verified, so returning true never rescues a certificate that failed them.
+- code: public Func<X509Certificate2, bool>? AdditionalPeerCheck { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: Func
+      url: https://learn.microsoft.com/dotnet/api/system.func-2
+    - <
+    - text: X509Certificate2
+      url: https://learn.microsoft.com/dotnet/api/system.security.cryptography.x509certificates.x509certificate2
+    - ','
+    - " "
+    - text: bool
+      url: https://learn.microsoft.com/dotnet/api/system.boolean
+    - '>'
+    - '?'
+- api3: AllowInsecureCertificates
+  id: NineP_Protocol_Transports_TlsTransportOptions_AllowInsecureCertificates
+  metadata:
+    uid: NineP.Protocol.Transports.TlsTransportOptions.AllowInsecureCertificates
+    commentId: P:NineP.Protocol.Transports.TlsTransportOptions.AllowInsecureCertificates
+- markdown: >-
+    Disables chain and host-name verification <b>when dialling</b>, and logs a warning on every
+
+    connect. Default false, and there is no way to reach it by accident: it is not implied by
+
+    any other setting. It is deliberately client-side only — a listener with
+
+    <xref href="NineP.Protocol.Transports.TlsTransportOptions.RequireClientCertificate" data-throw-if-not-resolved="false"></xref> still verifies the certificate a client presents,
+
+    because otherwise a flag about the server's certificate would silently turn a client
+
+    certificate into no authentication at all. A listener configured with it logs that it is
+
+    being ignored.
+- code: public bool AllowInsecureCertificates { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: bool
+      url: https://learn.microsoft.com/dotnet/api/system.boolean
+- api3: ClientCertificates
+  id: NineP_Protocol_Transports_TlsTransportOptions_ClientCertificates
+  metadata:
+    uid: NineP.Protocol.Transports.TlsTransportOptions.ClientCertificates
+    commentId: P:NineP.Protocol.Transports.TlsTransportOptions.ClientCertificates
+- markdown: Client certificates offered when dialling; supplying them enables mutual TLS.
+- code: public X509Certificate2Collection? ClientCertificates { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: X509Certificate2Collection
+      url: https://learn.microsoft.com/dotnet/api/system.security.cryptography.x509certificates.x509certificate2collection
+    - '?'
+- api3: HandshakeTimeout
+  id: NineP_Protocol_Transports_TlsTransportOptions_HandshakeTimeout
+  metadata:
+    uid: NineP.Protocol.Transports.TlsTransportOptions.HandshakeTimeout
+    commentId: P:NineP.Protocol.Transports.TlsTransportOptions.HandshakeTimeout
+- markdown: The handshake timeout. Default 30 s.
+- code: public TimeSpan HandshakeTimeout { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: TimeSpan
+      url: https://learn.microsoft.com/dotnet/api/system.timespan
+- api3: Logger
+  id: NineP_Protocol_Transports_TlsTransportOptions_Logger
+  metadata:
+    uid: NineP.Protocol.Transports.TlsTransportOptions.Logger
+    commentId: P:NineP.Protocol.Transports.TlsTransportOptions.Logger
+- markdown: Where the insecure-mode warning goes; <xref href="Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance" data-throw-if-not-resolved="false"></xref> when null.
+- code: public ILogger? Logger { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ILogger
+      url: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger
+    - '?'
+- api3: RequireClientCertificate
+  id: NineP_Protocol_Transports_TlsTransportOptions_RequireClientCertificate
+  metadata:
+    uid: NineP.Protocol.Transports.TlsTransportOptions.RequireClientCertificate
+    commentId: P:NineP.Protocol.Transports.TlsTransportOptions.RequireClientCertificate
+- markdown: >-
+    Require a client certificate when listening; it becomes
+
+    <xref href="NineP.Protocol.Transports.PeerIdentity.ClientCertificate" data-throw-if-not-resolved="false"></xref>.
+- code: public bool RequireClientCertificate { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: bool
+      url: https://learn.microsoft.com/dotnet/api/system.boolean
+- api3: ServerCertificate
+  id: NineP_Protocol_Transports_TlsTransportOptions_ServerCertificate
+  metadata:
+    uid: NineP.Protocol.Transports.TlsTransportOptions.ServerCertificate
+    commentId: P:NineP.Protocol.Transports.TlsTransportOptions.ServerCertificate
+- markdown: The server certificate with its private key; required in order to listen.
+- code: public X509Certificate2? ServerCertificate { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: X509Certificate2
+      url: https://learn.microsoft.com/dotnet/api/system.security.cryptography.x509certificates.x509certificate2
+    - '?'
+- api3: TargetHost
+  id: NineP_Protocol_Transports_TlsTransportOptions_TargetHost
+  metadata:
+    uid: NineP.Protocol.Transports.TlsTransportOptions.TargetHost
+    commentId: P:NineP.Protocol.Transports.TlsTransportOptions.TargetHost
+- markdown: The host name verified against the server certificate; the dialled host when null.
+- code: public string? TargetHost { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+- api3: Tcp
+  id: NineP_Protocol_Transports_TlsTransportOptions_Tcp
+  metadata:
+    uid: NineP.Protocol.Transports.TlsTransportOptions.Tcp
+    commentId: P:NineP.Protocol.Transports.TlsTransportOptions.Tcp
+- markdown: The transport used underneath; a default <xref href="NineP.Protocol.Transports.TcpTransport" data-throw-if-not-resolved="false"></xref> when null.
+- code: public TcpTransportOptions? Tcp { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: TcpTransportOptions
+      url: NineP.Protocol.Transports.TcpTransportOptions.html
+    - '?'
+- api3: TrustedRoots
+  id: NineP_Protocol_Transports_TlsTransportOptions_TrustedRoots
+  metadata:
+    uid: NineP.Protocol.Transports.TlsTransportOptions.TrustedRoots
+    commentId: P:NineP.Protocol.Transports.TlsTransportOptions.TrustedRoots
+- markdown: Extra roots used to validate the peer's chain; the platform store is used when null.
+- code: public X509Certificate2Collection? TrustedRoots { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: X509Certificate2Collection
+      url: https://learn.microsoft.com/dotnet/api/system.security.cryptography.x509certificates.x509certificate2collection
+    - '?'
+languageId: csharp
+metadata:
+  description: >-
+    TLS configuration. Verification is on by default; the insecure opt-out is a separate, explicit
+
+    option and it is logged on every connect (workspace architecture §8.4), so a deployment that
+
+    turned it on cannot forget that it did.

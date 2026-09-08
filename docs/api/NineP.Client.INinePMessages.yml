@@ -1,0 +1,1189 @@
+### YamlMime:ApiPage
+title: Interface INinePMessages
+body:
+- api1: Interface INinePMessages
+  id: NineP_Client_INinePMessages
+  metadata:
+    uid: NineP.Client.INinePMessages
+    commentId: T:NineP.Client.INinePMessages
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Client
+      url: NineP.Client.html
+  - name: Assembly
+    value: NineP.Client.dll
+- markdown: >-
+    One method per legal T-message: the low-level API (workspace architecture §6). The tag is
+
+    chosen by the multiplexer, so the request a caller builds may leave it at zero. A method whose
+
+    message is illegal for the session dialect throws
+
+    <xref href="NineP.Protocol.NinePProtocolException" data-throw-if-not-resolved="false"></xref> with <xref href="NineP.Protocol.ProtocolErrorKind.Type" data-throw-if-not-resolved="false"></xref> <b>before</b>
+
+    anything reaches the wire.
+- code: public interface INinePMessages
+- h2: Methods
+- api3: AttachAsync(Tattach, CancellationToken)
+  id: NineP_Client_INinePMessages_AttachAsync_NineP_Protocol_Messages_Tattach_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.INinePMessages.AttachAsync(NineP.Protocol.Messages.Tattach,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.INinePMessages.AttachAsync(NineP.Protocol.Messages.Tattach,System.Threading.CancellationToken)
+- markdown: Sends a <code>Tattach</code> and returns the <code>Rattach</code> the server answered with.
+- code: ValueTask<Rattach> AttachAsync(Tattach request, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: request
+    type:
+    - text: Tattach
+      url: NineP.Protocol.Messages.Tattach.html
+    description: The request; its tag is replaced by the multiplexer's.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request, which sends a <code>Tflush</code>.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: Rattach
+      url: NineP.Protocol.Messages.Rattach.html
+    - '>'
+    description: The reply.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: The server answered with an error.
+- api3: AuthAsync(Tauth, CancellationToken)
+  id: NineP_Client_INinePMessages_AuthAsync_NineP_Protocol_Messages_Tauth_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.INinePMessages.AuthAsync(NineP.Protocol.Messages.Tauth,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.INinePMessages.AuthAsync(NineP.Protocol.Messages.Tauth,System.Threading.CancellationToken)
+- markdown: Sends a <code>Tauth</code> and returns the <code>Rauth</code> the server answered with.
+- code: ValueTask<Rauth> AuthAsync(Tauth request, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: request
+    type:
+    - text: Tauth
+      url: NineP.Protocol.Messages.Tauth.html
+    description: The request; its tag is replaced by the multiplexer's.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request, which sends a <code>Tflush</code>.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: Rauth
+      url: NineP.Protocol.Messages.Rauth.html
+    - '>'
+    description: The reply.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: The server answered with an error.
+- api3: ClunkAsync(Tclunk, CancellationToken)
+  id: NineP_Client_INinePMessages_ClunkAsync_NineP_Protocol_Messages_Tclunk_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.INinePMessages.ClunkAsync(NineP.Protocol.Messages.Tclunk,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.INinePMessages.ClunkAsync(NineP.Protocol.Messages.Tclunk,System.Threading.CancellationToken)
+- markdown: Sends a <code>Tclunk</code> and returns the <code>Rclunk</code> the server answered with.
+- code: ValueTask<Rclunk> ClunkAsync(Tclunk request, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: request
+    type:
+    - text: Tclunk
+      url: NineP.Protocol.Messages.Tclunk.html
+    description: The request; its tag is replaced by the multiplexer's.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request, which sends a <code>Tflush</code>.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: Rclunk
+      url: NineP.Protocol.Messages.Rclunk.html
+    - '>'
+    description: The reply.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: The server answered with an error.
+- api3: CreateAsync(Tcreate, CancellationToken)
+  id: NineP_Client_INinePMessages_CreateAsync_NineP_Protocol_Messages_Tcreate_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.INinePMessages.CreateAsync(NineP.Protocol.Messages.Tcreate,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.INinePMessages.CreateAsync(NineP.Protocol.Messages.Tcreate,System.Threading.CancellationToken)
+- markdown: Sends a <code>Tcreate</code> and returns the <code>Rcreate</code> the server answered with.
+- code: ValueTask<Rcreate> CreateAsync(Tcreate request, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: request
+    type:
+    - text: Tcreate
+      url: NineP.Protocol.Messages.Tcreate.html
+    description: The request; its tag is replaced by the multiplexer's.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request, which sends a <code>Tflush</code>.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: Rcreate
+      url: NineP.Protocol.Messages.Rcreate.html
+    - '>'
+    description: The reply.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: The server answered with an error.
+- api3: FlushAsync(Tflush, CancellationToken)
+  id: NineP_Client_INinePMessages_FlushAsync_NineP_Protocol_Messages_Tflush_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.INinePMessages.FlushAsync(NineP.Protocol.Messages.Tflush,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.INinePMessages.FlushAsync(NineP.Protocol.Messages.Tflush,System.Threading.CancellationToken)
+- markdown: Sends a <code>Tflush</code> and returns the <code>Rflush</code> the server answered with.
+- code: ValueTask<Rflush> FlushAsync(Tflush request, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: request
+    type:
+    - text: Tflush
+      url: NineP.Protocol.Messages.Tflush.html
+    description: The request; its tag is replaced by the multiplexer's.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request, which sends a <code>Tflush</code>.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: Rflush
+      url: NineP.Protocol.Messages.Rflush.html
+    - '>'
+    description: The reply.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: The server answered with an error.
+- api3: FsyncAsync(Tfsync, CancellationToken)
+  id: NineP_Client_INinePMessages_FsyncAsync_NineP_Protocol_Messages_Tfsync_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.INinePMessages.FsyncAsync(NineP.Protocol.Messages.Tfsync,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.INinePMessages.FsyncAsync(NineP.Protocol.Messages.Tfsync,System.Threading.CancellationToken)
+- markdown: Sends a <code>Tfsync</code> and returns the <code>Rfsync</code> the server answered with.
+- code: ValueTask<Rfsync> FsyncAsync(Tfsync request, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: request
+    type:
+    - text: Tfsync
+      url: NineP.Protocol.Messages.Tfsync.html
+    description: The request; its tag is replaced by the multiplexer's.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request, which sends a <code>Tflush</code>.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: Rfsync
+      url: NineP.Protocol.Messages.Rfsync.html
+    - '>'
+    description: The reply.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: The server answered with an error.
+- api3: GetattrAsync(Tgetattr, CancellationToken)
+  id: NineP_Client_INinePMessages_GetattrAsync_NineP_Protocol_Messages_Tgetattr_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.INinePMessages.GetattrAsync(NineP.Protocol.Messages.Tgetattr,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.INinePMessages.GetattrAsync(NineP.Protocol.Messages.Tgetattr,System.Threading.CancellationToken)
+- markdown: Sends a <code>Tgetattr</code> and returns the <code>Rgetattr</code> the server answered with.
+- code: ValueTask<Rgetattr> GetattrAsync(Tgetattr request, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: request
+    type:
+    - text: Tgetattr
+      url: NineP.Protocol.Messages.Tgetattr.html
+    description: The request; its tag is replaced by the multiplexer's.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request, which sends a <code>Tflush</code>.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: Rgetattr
+      url: NineP.Protocol.Messages.Rgetattr.html
+    - '>'
+    description: The reply.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: The server answered with an error.
+- api3: GetlockAsync(Tgetlock, CancellationToken)
+  id: NineP_Client_INinePMessages_GetlockAsync_NineP_Protocol_Messages_Tgetlock_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.INinePMessages.GetlockAsync(NineP.Protocol.Messages.Tgetlock,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.INinePMessages.GetlockAsync(NineP.Protocol.Messages.Tgetlock,System.Threading.CancellationToken)
+- markdown: Sends a <code>Tgetlock</code> and returns the <code>Rgetlock</code> the server answered with.
+- code: ValueTask<Rgetlock> GetlockAsync(Tgetlock request, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: request
+    type:
+    - text: Tgetlock
+      url: NineP.Protocol.Messages.Tgetlock.html
+    description: The request; its tag is replaced by the multiplexer's.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request, which sends a <code>Tflush</code>.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: Rgetlock
+      url: NineP.Protocol.Messages.Rgetlock.html
+    - '>'
+    description: The reply.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: The server answered with an error.
+- api3: LcreateAsync(Tlcreate, CancellationToken)
+  id: NineP_Client_INinePMessages_LcreateAsync_NineP_Protocol_Messages_Tlcreate_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.INinePMessages.LcreateAsync(NineP.Protocol.Messages.Tlcreate,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.INinePMessages.LcreateAsync(NineP.Protocol.Messages.Tlcreate,System.Threading.CancellationToken)
+- markdown: Sends a <code>Tlcreate</code> and returns the <code>Rlcreate</code> the server answered with.
+- code: ValueTask<Rlcreate> LcreateAsync(Tlcreate request, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: request
+    type:
+    - text: Tlcreate
+      url: NineP.Protocol.Messages.Tlcreate.html
+    description: The request; its tag is replaced by the multiplexer's.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request, which sends a <code>Tflush</code>.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: Rlcreate
+      url: NineP.Protocol.Messages.Rlcreate.html
+    - '>'
+    description: The reply.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: The server answered with an error.
+- api3: LinkAsync(Tlink, CancellationToken)
+  id: NineP_Client_INinePMessages_LinkAsync_NineP_Protocol_Messages_Tlink_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.INinePMessages.LinkAsync(NineP.Protocol.Messages.Tlink,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.INinePMessages.LinkAsync(NineP.Protocol.Messages.Tlink,System.Threading.CancellationToken)
+- markdown: Sends a <code>Tlink</code> and returns the <code>Rlink</code> the server answered with.
+- code: ValueTask<Rlink> LinkAsync(Tlink request, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: request
+    type:
+    - text: Tlink
+      url: NineP.Protocol.Messages.Tlink.html
+    description: The request; its tag is replaced by the multiplexer's.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request, which sends a <code>Tflush</code>.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: Rlink
+      url: NineP.Protocol.Messages.Rlink.html
+    - '>'
+    description: The reply.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: The server answered with an error.
+- api3: LockAsync(Tlock, CancellationToken)
+  id: NineP_Client_INinePMessages_LockAsync_NineP_Protocol_Messages_Tlock_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.INinePMessages.LockAsync(NineP.Protocol.Messages.Tlock,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.INinePMessages.LockAsync(NineP.Protocol.Messages.Tlock,System.Threading.CancellationToken)
+- markdown: Sends a <code>Tlock</code> and returns the <code>Rlock</code> the server answered with.
+- code: ValueTask<Rlock> LockAsync(Tlock request, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: request
+    type:
+    - text: Tlock
+      url: NineP.Protocol.Messages.Tlock.html
+    description: The request; its tag is replaced by the multiplexer's.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request, which sends a <code>Tflush</code>.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: Rlock
+      url: NineP.Protocol.Messages.Rlock.html
+    - '>'
+    description: The reply.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: The server answered with an error.
+- api3: LopenAsync(Tlopen, CancellationToken)
+  id: NineP_Client_INinePMessages_LopenAsync_NineP_Protocol_Messages_Tlopen_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.INinePMessages.LopenAsync(NineP.Protocol.Messages.Tlopen,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.INinePMessages.LopenAsync(NineP.Protocol.Messages.Tlopen,System.Threading.CancellationToken)
+- markdown: Sends a <code>Tlopen</code> and returns the <code>Rlopen</code> the server answered with.
+- code: ValueTask<Rlopen> LopenAsync(Tlopen request, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: request
+    type:
+    - text: Tlopen
+      url: NineP.Protocol.Messages.Tlopen.html
+    description: The request; its tag is replaced by the multiplexer's.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request, which sends a <code>Tflush</code>.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: Rlopen
+      url: NineP.Protocol.Messages.Rlopen.html
+    - '>'
+    description: The reply.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: The server answered with an error.
+- api3: MkdirAsync(Tmkdir, CancellationToken)
+  id: NineP_Client_INinePMessages_MkdirAsync_NineP_Protocol_Messages_Tmkdir_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.INinePMessages.MkdirAsync(NineP.Protocol.Messages.Tmkdir,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.INinePMessages.MkdirAsync(NineP.Protocol.Messages.Tmkdir,System.Threading.CancellationToken)
+- markdown: Sends a <code>Tmkdir</code> and returns the <code>Rmkdir</code> the server answered with.
+- code: ValueTask<Rmkdir> MkdirAsync(Tmkdir request, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: request
+    type:
+    - text: Tmkdir
+      url: NineP.Protocol.Messages.Tmkdir.html
+    description: The request; its tag is replaced by the multiplexer's.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request, which sends a <code>Tflush</code>.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: Rmkdir
+      url: NineP.Protocol.Messages.Rmkdir.html
+    - '>'
+    description: The reply.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: The server answered with an error.
+- api3: MknodAsync(Tmknod, CancellationToken)
+  id: NineP_Client_INinePMessages_MknodAsync_NineP_Protocol_Messages_Tmknod_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.INinePMessages.MknodAsync(NineP.Protocol.Messages.Tmknod,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.INinePMessages.MknodAsync(NineP.Protocol.Messages.Tmknod,System.Threading.CancellationToken)
+- markdown: Sends a <code>Tmknod</code> and returns the <code>Rmknod</code> the server answered with.
+- code: ValueTask<Rmknod> MknodAsync(Tmknod request, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: request
+    type:
+    - text: Tmknod
+      url: NineP.Protocol.Messages.Tmknod.html
+    description: The request; its tag is replaced by the multiplexer's.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request, which sends a <code>Tflush</code>.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: Rmknod
+      url: NineP.Protocol.Messages.Rmknod.html
+    - '>'
+    description: The reply.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: The server answered with an error.
+- api3: OpenAsync(Topen, CancellationToken)
+  id: NineP_Client_INinePMessages_OpenAsync_NineP_Protocol_Messages_Topen_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.INinePMessages.OpenAsync(NineP.Protocol.Messages.Topen,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.INinePMessages.OpenAsync(NineP.Protocol.Messages.Topen,System.Threading.CancellationToken)
+- markdown: Sends a <code>Topen</code> and returns the <code>Ropen</code> the server answered with.
+- code: ValueTask<Ropen> OpenAsync(Topen request, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: request
+    type:
+    - text: Topen
+      url: NineP.Protocol.Messages.Topen.html
+    description: The request; its tag is replaced by the multiplexer's.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request, which sends a <code>Tflush</code>.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: Ropen
+      url: NineP.Protocol.Messages.Ropen.html
+    - '>'
+    description: The reply.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: The server answered with an error.
+- api3: ReadAsync(Tread, CancellationToken)
+  id: NineP_Client_INinePMessages_ReadAsync_NineP_Protocol_Messages_Tread_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.INinePMessages.ReadAsync(NineP.Protocol.Messages.Tread,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.INinePMessages.ReadAsync(NineP.Protocol.Messages.Tread,System.Threading.CancellationToken)
+- markdown: Sends a <code>Tread</code> and returns the <code>Rread</code> the server answered with.
+- code: ValueTask<Rread> ReadAsync(Tread request, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: request
+    type:
+    - text: Tread
+      url: NineP.Protocol.Messages.Tread.html
+    description: The request; its tag is replaced by the multiplexer's.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request, which sends a <code>Tflush</code>.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: Rread
+      url: NineP.Protocol.Messages.Rread.html
+    - '>'
+    description: The reply.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: The server answered with an error.
+- api3: ReaddirAsync(Treaddir, CancellationToken)
+  id: NineP_Client_INinePMessages_ReaddirAsync_NineP_Protocol_Messages_Treaddir_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.INinePMessages.ReaddirAsync(NineP.Protocol.Messages.Treaddir,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.INinePMessages.ReaddirAsync(NineP.Protocol.Messages.Treaddir,System.Threading.CancellationToken)
+- markdown: Sends a <code>Treaddir</code> and returns the <code>Rreaddir</code> the server answered with.
+- code: ValueTask<Rreaddir> ReaddirAsync(Treaddir request, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: request
+    type:
+    - text: Treaddir
+      url: NineP.Protocol.Messages.Treaddir.html
+    description: The request; its tag is replaced by the multiplexer's.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request, which sends a <code>Tflush</code>.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: Rreaddir
+      url: NineP.Protocol.Messages.Rreaddir.html
+    - '>'
+    description: The reply.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: The server answered with an error.
+- api3: ReadlinkAsync(Treadlink, CancellationToken)
+  id: NineP_Client_INinePMessages_ReadlinkAsync_NineP_Protocol_Messages_Treadlink_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.INinePMessages.ReadlinkAsync(NineP.Protocol.Messages.Treadlink,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.INinePMessages.ReadlinkAsync(NineP.Protocol.Messages.Treadlink,System.Threading.CancellationToken)
+- markdown: Sends a <code>Treadlink</code> and returns the <code>Rreadlink</code> the server answered with.
+- code: ValueTask<Rreadlink> ReadlinkAsync(Treadlink request, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: request
+    type:
+    - text: Treadlink
+      url: NineP.Protocol.Messages.Treadlink.html
+    description: The request; its tag is replaced by the multiplexer's.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request, which sends a <code>Tflush</code>.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: Rreadlink
+      url: NineP.Protocol.Messages.Rreadlink.html
+    - '>'
+    description: The reply.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: The server answered with an error.
+- api3: RemoveAsync(Tremove, CancellationToken)
+  id: NineP_Client_INinePMessages_RemoveAsync_NineP_Protocol_Messages_Tremove_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.INinePMessages.RemoveAsync(NineP.Protocol.Messages.Tremove,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.INinePMessages.RemoveAsync(NineP.Protocol.Messages.Tremove,System.Threading.CancellationToken)
+- markdown: Sends a <code>Tremove</code> and returns the <code>Rremove</code> the server answered with.
+- code: ValueTask<Rremove> RemoveAsync(Tremove request, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: request
+    type:
+    - text: Tremove
+      url: NineP.Protocol.Messages.Tremove.html
+    description: The request; its tag is replaced by the multiplexer's.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request, which sends a <code>Tflush</code>.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: Rremove
+      url: NineP.Protocol.Messages.Rremove.html
+    - '>'
+    description: The reply.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: The server answered with an error.
+- api3: RenameAsync(Trename, CancellationToken)
+  id: NineP_Client_INinePMessages_RenameAsync_NineP_Protocol_Messages_Trename_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.INinePMessages.RenameAsync(NineP.Protocol.Messages.Trename,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.INinePMessages.RenameAsync(NineP.Protocol.Messages.Trename,System.Threading.CancellationToken)
+- markdown: Sends a <code>Trename</code> and returns the <code>Rrename</code> the server answered with.
+- code: ValueTask<Rrename> RenameAsync(Trename request, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: request
+    type:
+    - text: Trename
+      url: NineP.Protocol.Messages.Trename.html
+    description: The request; its tag is replaced by the multiplexer's.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request, which sends a <code>Tflush</code>.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: Rrename
+      url: NineP.Protocol.Messages.Rrename.html
+    - '>'
+    description: The reply.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: The server answered with an error.
+- api3: RenameatAsync(Trenameat, CancellationToken)
+  id: NineP_Client_INinePMessages_RenameatAsync_NineP_Protocol_Messages_Trenameat_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.INinePMessages.RenameatAsync(NineP.Protocol.Messages.Trenameat,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.INinePMessages.RenameatAsync(NineP.Protocol.Messages.Trenameat,System.Threading.CancellationToken)
+- markdown: Sends a <code>Trenameat</code> and returns the <code>Rrenameat</code> the server answered with.
+- code: ValueTask<Rrenameat> RenameatAsync(Trenameat request, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: request
+    type:
+    - text: Trenameat
+      url: NineP.Protocol.Messages.Trenameat.html
+    description: The request; its tag is replaced by the multiplexer's.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request, which sends a <code>Tflush</code>.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: Rrenameat
+      url: NineP.Protocol.Messages.Rrenameat.html
+    - '>'
+    description: The reply.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: The server answered with an error.
+- api3: SetattrAsync(Tsetattr, CancellationToken)
+  id: NineP_Client_INinePMessages_SetattrAsync_NineP_Protocol_Messages_Tsetattr_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.INinePMessages.SetattrAsync(NineP.Protocol.Messages.Tsetattr,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.INinePMessages.SetattrAsync(NineP.Protocol.Messages.Tsetattr,System.Threading.CancellationToken)
+- markdown: Sends a <code>Tsetattr</code> and returns the <code>Rsetattr</code> the server answered with.
+- code: ValueTask<Rsetattr> SetattrAsync(Tsetattr request, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: request
+    type:
+    - text: Tsetattr
+      url: NineP.Protocol.Messages.Tsetattr.html
+    description: The request; its tag is replaced by the multiplexer's.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request, which sends a <code>Tflush</code>.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: Rsetattr
+      url: NineP.Protocol.Messages.Rsetattr.html
+    - '>'
+    description: The reply.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: The server answered with an error.
+- api3: StatAsync(Tstat, CancellationToken)
+  id: NineP_Client_INinePMessages_StatAsync_NineP_Protocol_Messages_Tstat_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.INinePMessages.StatAsync(NineP.Protocol.Messages.Tstat,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.INinePMessages.StatAsync(NineP.Protocol.Messages.Tstat,System.Threading.CancellationToken)
+- markdown: Sends a <code>Tstat</code> and returns the <code>Rstat</code> the server answered with.
+- code: ValueTask<Rstat> StatAsync(Tstat request, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: request
+    type:
+    - text: Tstat
+      url: NineP.Protocol.Messages.Tstat.html
+    description: The request; its tag is replaced by the multiplexer's.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request, which sends a <code>Tflush</code>.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: Rstat
+      url: NineP.Protocol.Messages.Rstat.html
+    - '>'
+    description: The reply.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: The server answered with an error.
+- api3: StatfsAsync(Tstatfs, CancellationToken)
+  id: NineP_Client_INinePMessages_StatfsAsync_NineP_Protocol_Messages_Tstatfs_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.INinePMessages.StatfsAsync(NineP.Protocol.Messages.Tstatfs,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.INinePMessages.StatfsAsync(NineP.Protocol.Messages.Tstatfs,System.Threading.CancellationToken)
+- markdown: Sends a <code>Tstatfs</code> and returns the <code>Rstatfs</code> the server answered with.
+- code: ValueTask<Rstatfs> StatfsAsync(Tstatfs request, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: request
+    type:
+    - text: Tstatfs
+      url: NineP.Protocol.Messages.Tstatfs.html
+    description: The request; its tag is replaced by the multiplexer's.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request, which sends a <code>Tflush</code>.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: Rstatfs
+      url: NineP.Protocol.Messages.Rstatfs.html
+    - '>'
+    description: The reply.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: The server answered with an error.
+- api3: SymlinkAsync(Tsymlink, CancellationToken)
+  id: NineP_Client_INinePMessages_SymlinkAsync_NineP_Protocol_Messages_Tsymlink_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.INinePMessages.SymlinkAsync(NineP.Protocol.Messages.Tsymlink,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.INinePMessages.SymlinkAsync(NineP.Protocol.Messages.Tsymlink,System.Threading.CancellationToken)
+- markdown: Sends a <code>Tsymlink</code> and returns the <code>Rsymlink</code> the server answered with.
+- code: ValueTask<Rsymlink> SymlinkAsync(Tsymlink request, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: request
+    type:
+    - text: Tsymlink
+      url: NineP.Protocol.Messages.Tsymlink.html
+    description: The request; its tag is replaced by the multiplexer's.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request, which sends a <code>Tflush</code>.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: Rsymlink
+      url: NineP.Protocol.Messages.Rsymlink.html
+    - '>'
+    description: The reply.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: The server answered with an error.
+- api3: UnlinkatAsync(Tunlinkat, CancellationToken)
+  id: NineP_Client_INinePMessages_UnlinkatAsync_NineP_Protocol_Messages_Tunlinkat_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.INinePMessages.UnlinkatAsync(NineP.Protocol.Messages.Tunlinkat,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.INinePMessages.UnlinkatAsync(NineP.Protocol.Messages.Tunlinkat,System.Threading.CancellationToken)
+- markdown: Sends a <code>Tunlinkat</code> and returns the <code>Runlinkat</code> the server answered with.
+- code: ValueTask<Runlinkat> UnlinkatAsync(Tunlinkat request, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: request
+    type:
+    - text: Tunlinkat
+      url: NineP.Protocol.Messages.Tunlinkat.html
+    description: The request; its tag is replaced by the multiplexer's.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request, which sends a <code>Tflush</code>.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: Runlinkat
+      url: NineP.Protocol.Messages.Runlinkat.html
+    - '>'
+    description: The reply.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: The server answered with an error.
+- api3: VersionAsync(Tversion, CancellationToken)
+  id: NineP_Client_INinePMessages_VersionAsync_NineP_Protocol_Messages_Tversion_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.INinePMessages.VersionAsync(NineP.Protocol.Messages.Tversion,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.INinePMessages.VersionAsync(NineP.Protocol.Messages.Tversion,System.Threading.CancellationToken)
+- markdown: Sends a <code>Tversion</code> and returns the <code>Rversion</code> the server answered with.
+- code: ValueTask<Rversion> VersionAsync(Tversion request, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: request
+    type:
+    - text: Tversion
+      url: NineP.Protocol.Messages.Tversion.html
+    description: The request; its tag is replaced by the multiplexer's.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request, which sends a <code>Tflush</code>.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: Rversion
+      url: NineP.Protocol.Messages.Rversion.html
+    - '>'
+    description: The reply.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: The server answered with an error.
+- api3: WalkAsync(Twalk, CancellationToken)
+  id: NineP_Client_INinePMessages_WalkAsync_NineP_Protocol_Messages_Twalk_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.INinePMessages.WalkAsync(NineP.Protocol.Messages.Twalk,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.INinePMessages.WalkAsync(NineP.Protocol.Messages.Twalk,System.Threading.CancellationToken)
+- markdown: Sends a <code>Twalk</code> and returns the <code>Rwalk</code> the server answered with.
+- code: ValueTask<Rwalk> WalkAsync(Twalk request, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: request
+    type:
+    - text: Twalk
+      url: NineP.Protocol.Messages.Twalk.html
+    description: The request; its tag is replaced by the multiplexer's.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request, which sends a <code>Tflush</code>.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: Rwalk
+      url: NineP.Protocol.Messages.Rwalk.html
+    - '>'
+    description: The reply.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: The server answered with an error.
+- api3: WriteAsync(Twrite, CancellationToken)
+  id: NineP_Client_INinePMessages_WriteAsync_NineP_Protocol_Messages_Twrite_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.INinePMessages.WriteAsync(NineP.Protocol.Messages.Twrite,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.INinePMessages.WriteAsync(NineP.Protocol.Messages.Twrite,System.Threading.CancellationToken)
+- markdown: Sends a <code>Twrite</code> and returns the <code>Rwrite</code> the server answered with.
+- code: ValueTask<Rwrite> WriteAsync(Twrite request, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: request
+    type:
+    - text: Twrite
+      url: NineP.Protocol.Messages.Twrite.html
+    description: The request; its tag is replaced by the multiplexer's.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request, which sends a <code>Tflush</code>.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: Rwrite
+      url: NineP.Protocol.Messages.Rwrite.html
+    - '>'
+    description: The reply.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: The server answered with an error.
+- api3: WstatAsync(Twstat, CancellationToken)
+  id: NineP_Client_INinePMessages_WstatAsync_NineP_Protocol_Messages_Twstat_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.INinePMessages.WstatAsync(NineP.Protocol.Messages.Twstat,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.INinePMessages.WstatAsync(NineP.Protocol.Messages.Twstat,System.Threading.CancellationToken)
+- markdown: Sends a <code>Twstat</code> and returns the <code>Rwstat</code> the server answered with.
+- code: ValueTask<Rwstat> WstatAsync(Twstat request, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: request
+    type:
+    - text: Twstat
+      url: NineP.Protocol.Messages.Twstat.html
+    description: The request; its tag is replaced by the multiplexer's.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request, which sends a <code>Tflush</code>.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: Rwstat
+      url: NineP.Protocol.Messages.Rwstat.html
+    - '>'
+    description: The reply.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: The server answered with an error.
+- api3: XattrcreateAsync(Txattrcreate, CancellationToken)
+  id: NineP_Client_INinePMessages_XattrcreateAsync_NineP_Protocol_Messages_Txattrcreate_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.INinePMessages.XattrcreateAsync(NineP.Protocol.Messages.Txattrcreate,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.INinePMessages.XattrcreateAsync(NineP.Protocol.Messages.Txattrcreate,System.Threading.CancellationToken)
+- markdown: Sends a <code>Txattrcreate</code> and returns the <code>Rxattrcreate</code> the server answered with.
+- code: ValueTask<Rxattrcreate> XattrcreateAsync(Txattrcreate request, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: request
+    type:
+    - text: Txattrcreate
+      url: NineP.Protocol.Messages.Txattrcreate.html
+    description: The request; its tag is replaced by the multiplexer's.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request, which sends a <code>Tflush</code>.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: Rxattrcreate
+      url: NineP.Protocol.Messages.Rxattrcreate.html
+    - '>'
+    description: The reply.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: The server answered with an error.
+- api3: XattrwalkAsync(Txattrwalk, CancellationToken)
+  id: NineP_Client_INinePMessages_XattrwalkAsync_NineP_Protocol_Messages_Txattrwalk_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.INinePMessages.XattrwalkAsync(NineP.Protocol.Messages.Txattrwalk,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.INinePMessages.XattrwalkAsync(NineP.Protocol.Messages.Txattrwalk,System.Threading.CancellationToken)
+- markdown: Sends a <code>Txattrwalk</code> and returns the <code>Rxattrwalk</code> the server answered with.
+- code: ValueTask<Rxattrwalk> XattrwalkAsync(Txattrwalk request, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: request
+    type:
+    - text: Txattrwalk
+      url: NineP.Protocol.Messages.Txattrwalk.html
+    description: The request; its tag is replaced by the multiplexer's.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request, which sends a <code>Tflush</code>.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: Rxattrwalk
+      url: NineP.Protocol.Messages.Rxattrwalk.html
+    - '>'
+    description: The reply.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: The server answered with an error.
+languageId: csharp
+metadata:
+  description: >-
+    One method per legal T-message: the low-level API (workspace architecture §6). The tag is
+
+    chosen by the multiplexer, so the request a caller builds may leave it at zero. A method whose
+
+    message is illegal for the session dialect throws
+     with  before
+    anything reaches the wire.

@@ -1,0 +1,94 @@
+### YamlMime:ApiPage
+title: Struct Rwrite
+body:
+- api1: Struct Rwrite
+  id: NineP_Protocol_Messages_Rwrite
+  metadata:
+    uid: NineP.Protocol.Messages.Rwrite
+    commentId: T:NineP.Protocol.Messages.Rwrite
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Messages
+      url: NineP.Protocol.Messages.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    Answers a Twrite with how many bytes were written; fewer than asked is a short write, not an
+
+    error (reference §5.6).
+- code: 'public readonly record struct Rwrite : IMessage, IEquatable<Rwrite>'
+- h4: Implements
+- list:
+  - text: IMessage
+    url: NineP.Protocol.Messages.IMessage.html
+  - text: IEquatable<Rwrite>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: Rwrite(ushort, uint)
+  id: NineP_Protocol_Messages_Rwrite__ctor_System_UInt16_System_UInt32_
+  metadata:
+    uid: NineP.Protocol.Messages.Rwrite.#ctor(System.UInt16,System.UInt32)
+    commentId: M:NineP.Protocol.Messages.Rwrite.#ctor(System.UInt16,System.UInt32)
+- markdown: >-
+    Answers a Twrite with how many bytes were written; fewer than asked is a short write, not an
+
+    error (reference §5.6).
+- code: public Rwrite(ushort Tag, uint Count)
+- h4: Parameters
+- parameters:
+  - name: Tag
+    type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+    description: The message tag, which pairs this message with its partner.
+  - name: Count
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The number of bytes written.
+- h2: Properties
+- api3: Count
+  id: NineP_Protocol_Messages_Rwrite_Count
+  metadata:
+    uid: NineP.Protocol.Messages.Rwrite.Count
+    commentId: P:NineP.Protocol.Messages.Rwrite.Count
+- markdown: The number of bytes written.
+- code: public uint Count { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Tag
+  id: NineP_Protocol_Messages_Rwrite_Tag
+  metadata:
+    uid: NineP.Protocol.Messages.Rwrite.Tag
+    commentId: P:NineP.Protocol.Messages.Rwrite.Tag
+- markdown: The message tag, which pairs this message with its partner.
+- code: public ushort Tag { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+languageId: csharp
+metadata:
+  description: >-
+    Answers a Twrite with how many bytes were written; fewer than asked is a short write, not an
+
+    error (reference §5.6).

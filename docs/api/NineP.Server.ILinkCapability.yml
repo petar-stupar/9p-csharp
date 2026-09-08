@@ -1,0 +1,52 @@
+### YamlMime:ApiPage
+title: Interface ILinkCapability
+body:
+- api1: Interface ILinkCapability
+  id: NineP_Server_ILinkCapability
+  metadata:
+    uid: NineP.Server.ILinkCapability
+    commentId: T:NineP.Server.ILinkCapability
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Server
+      url: NineP.Server.html
+  - name: Assembly
+    value: NineP.Server.dll
+- markdown: 'Optional: hard links (.L <code>Tlink</code>), implemented on the directory that receives the link.'
+- code: public interface ILinkCapability
+- h2: Methods
+- api3: LinkAsync(string, IHandler, CancellationToken)
+  id: NineP_Server_ILinkCapability_LinkAsync_System_String_NineP_Server_IHandler_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Server.ILinkCapability.LinkAsync(System.String,NineP.Server.IHandler,System.Threading.CancellationToken)
+    commentId: M:NineP.Server.ILinkCapability.LinkAsync(System.String,NineP.Server.IHandler,System.Threading.CancellationToken)
+- markdown: Creates a hard link to an existing file in this directory.
+- code: ValueTask LinkAsync(string name, IHandler target, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: name
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The name the link takes.
+  - name: target
+    type:
+    - text: IHandler
+      url: NineP.Server.IHandler.html
+    description: The file being linked to.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask
+    description: A task that completes when the link exists.
+languageId: csharp
+metadata:
+  description: 'Optional: hard links (.L Tlink), implemented on the directory that receives the link.'

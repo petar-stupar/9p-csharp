@@ -1,0 +1,40 @@
+### YamlMime:ApiPage
+title: Enum XattrFlags
+body:
+- api1: Enum XattrFlags
+  id: NineP_Protocol_XattrFlags
+  metadata:
+    uid: NineP.Protocol.XattrFlags
+    commentId: T:NineP.Protocol.XattrFlags
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol
+      url: NineP.Protocol.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: <code>Txattrcreate</code> flags (reference §5.9).
+- code: >-
+    [Flags]
+
+    public enum XattrFlags
+- h2: Fields
+- parameters:
+  - name: Create
+    default: "1"
+    description: >+
+      Fail if the attribute already exists.
+
+  - name: None
+    default: "0"
+    description: >+
+      No flag is set: create the attribute or replace it.
+
+  - name: Replace
+    default: "2"
+    description: >+
+      Fail if the attribute does not already exist.
+
+languageId: csharp
+metadata:
+  description: Txattrcreate flags (reference §5.9).

@@ -1,0 +1,154 @@
+ls /
+big number
+dir/
+empty
+emptyarr/
+emptyobj/
+enabled
+greeting
+list/
+name
+names/
+negative
+nothing
+ratio
+unicode
+version
+
+cat /name
+size 11
+sha256 6c1d6cedf276ea3fd7486a212fd62b32fbb9ecaa4dea70545486737199dd24ed
+
+cat /version
+size 1
+sha256 6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b
+
+cat /enabled
+size 4
+sha256 b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b
+
+cat /ratio
+size 3
+sha256 b8736b999909049671d0ea075a42b308a5fbe2df1854899123fe09eb0ee9de61
+
+cat /negative
+size 2
+sha256 615bdd17c2556f82f384392ea8557f8cc88b03501c759e23093ab0b2a9b5cd48
+
+cat /big number
+size 10
+sha256 c775e7b757ede630cd0aa1113bd102661ab38829ca52a6422ab782862f268646
+
+cat /nothing
+size 0
+sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+
+cat /greeting
+size 10
+sha256 593d8b0eb6334b08d05108c0f0f3b01924307e1b66f66bc0fc20b03e8e543e2b
+
+cat /unicode
+size 22
+sha256 e1d8c8cf024875532241f1f1037829ee7239ed7180d1971d2f46a00707b98b5e
+
+cat /empty
+size 0
+sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+
+ls /list
+0
+1
+2
+3
+4/
+5/
+
+cat /list/0
+size 4
+sha256 f9194e73f9e9459e3450ea10a179cdf77aafa695beecd3b9344a98d111622243
+
+cat /list/1
+size 1
+sha256 6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b
+
+cat /list/2
+size 5
+sha256 fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa
+
+cat /list/3
+size 0
+sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+
+ls /list/4
+k
+
+cat /list/4/k
+size 1
+sha256 4c94485e0c21ae6c41ce1dfe7b6bfaceea5ab68e40a2476f50208e526f506080
+
+ls /list/5
+0
+
+cat /list/5/0
+size 6
+sha256 233562de1a0288b139c4fa40b7d189f806e906eeb048517aeb67f34ac0e2faf1
+
+ls /dir
+a b
+big
+file.txt
+sub/
+
+ls /dir/sub
+deep/
+
+ls /dir/sub/deep
+leaf
+
+cat /dir/sub/deep/leaf
+size 6
+sha256 be9b7607e070383c083b082c9c32d5509931bf9b297caf90bfdb7a692424c158
+
+cat /dir/file.txt
+size 19
+sha256 218f96e0ce62c921268e55248b8219c1d789df327401d0714dbf13816126f26a
+
+cat /dir/a b
+size 15
+sha256 750082971b3e0fe9c61a3b461d5677bb6671da1747942fc89ab8d114c5ed0f6e
+
+cat /dir/big
+size 100
+sha256 9cfe7faff7054298ca87557e15a10262de8d3eee77827417fbdfea1c41b9ec23
+
+ls /names
+.hidden
+héllo wörld
+世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世
+Ａ
+🚀
+
+cat /names/.hidden
+size 3
+sha256 e392dad8b08599f74d4819cd291feef81ab4389e0a6fae2b1286f99411b0c7ca
+
+cat /names/héllo wörld
+size 7
+sha256 2fcf76a4c3c75b1fb5288d83d62dd114dc556d16fba206ab35d38bfe294a2857
+
+cat /names/Ａ
+size 9
+sha256 39ecd459f143d7522ebfbb82080d3cc071c2fb5cf88763738cbc74f9f541142b
+
+cat /names/🚀
+size 6
+sha256 2e9f768344ff39ac7c1e41218b0a488a0fb666992777f7bfe03d09450df4f5b1
+
+cat /names/世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世
+size 9
+sha256 b2a7325d43d00bc6175d2de4860e44b77d959e4a54d76b2c0a5d42954ecf11b4
+
+ls /emptyobj
+
+ls /emptyarr
+

@@ -1,0 +1,42 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dotnet/docfx/main/schemas/docfx.schema.json",
+  "metadata": [
+    {
+      "src": [
+        {
+          "src": "src",
+          "files": [
+            "NineP.Protocol/NineP.Protocol.csproj",
+            "NineP.Client/NineP.Client.csproj",
+            "NineP.Server/NineP.Server.csproj"
+          ]
+        }
+      ],
+      "dest": "docs/api",
+      "properties": {
+        "TargetFramework": "net10.0",
+        "Configuration": "Release"
+      },
+      "outputFormat": "apiPage",
+      "memberLayout": "samePage",
+      "namespaceLayout": "flattened"
+    }
+  ],
+  "build": {
+    "content": [
+      {
+        "src": "docs/api",
+        "files": ["**/*.{md,yml}"],
+        "dest": "api"
+      }
+    ],
+    "output": "artifacts/docs",
+    "template": ["default", "modern"],
+    "globalMetadata": {
+      "_appName": "ninep for C# / .NET",
+      "_appTitle": "NineP.Protocol, NineP.Client, NineP.Server",
+      "_enableSearch": true,
+      "_disableContribution": true
+    }
+  }
+}

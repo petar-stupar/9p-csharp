@@ -1,0 +1,107 @@
+### YamlMime:ApiPage
+title: Struct Rread
+body:
+- api1: Struct Rread
+  id: NineP_Protocol_Messages_Rread
+  metadata:
+    uid: NineP.Protocol.Messages.Rread
+    commentId: T:NineP.Protocol.Messages.Rread
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Messages
+      url: NineP.Protocol.Messages.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: Answers a Tread with the bytes that were read; a short reply is not an error (reference §5.6).
+- code: 'public readonly record struct Rread : IMessage, IEquatable<Rread>'
+- h4: Implements
+- list:
+  - text: IMessage
+    url: NineP.Protocol.Messages.IMessage.html
+  - text: IEquatable<Rread>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: Rread(ushort, ReadOnlyMemory<byte>)
+  id: NineP_Protocol_Messages_Rread__ctor_System_UInt16_System_ReadOnlyMemory_System_Byte__
+  metadata:
+    uid: NineP.Protocol.Messages.Rread.#ctor(System.UInt16,System.ReadOnlyMemory{System.Byte})
+    commentId: M:NineP.Protocol.Messages.Rread.#ctor(System.UInt16,System.ReadOnlyMemory{System.Byte})
+- markdown: Answers a Tread with the bytes that were read; a short reply is not an error (reference §5.6).
+- code: public Rread(ushort Tag, ReadOnlyMemory<byte> Data)
+- h4: Parameters
+- parameters:
+  - name: Tag
+    type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+    description: The message tag, which pairs this message with its partner.
+  - name: Data
+    type:
+    - text: ReadOnlyMemory
+      url: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+    - <
+    - text: byte
+      url: https://learn.microsoft.com/dotnet/api/system.byte
+    - '>'
+    description: >-
+      The bytes read; the wire <code>count</code> is its length. The memory <b>aliases the decoded
+
+      frame</b> and is valid only until that frame is released — for a server, the end of the
+
+      handler call; for a client, the return of the transaction that produced it. A caller who
+
+      keeps it copies (workspace architecture §12 rule 5).
+- h2: Properties
+- api3: Data
+  id: NineP_Protocol_Messages_Rread_Data
+  metadata:
+    uid: NineP.Protocol.Messages.Rread.Data
+    commentId: P:NineP.Protocol.Messages.Rread.Data
+- markdown: >-
+    The bytes read; the wire <code>count</code> is its length. The memory <b>aliases the decoded
+
+    frame</b> and is valid only until that frame is released — for a server, the end of the
+
+    handler call; for a client, the return of the transaction that produced it. A caller who
+
+    keeps it copies (workspace architecture §12 rule 5).
+- code: public ReadOnlyMemory<byte> Data { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ReadOnlyMemory
+      url: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+    - <
+    - text: byte
+      url: https://learn.microsoft.com/dotnet/api/system.byte
+    - '>'
+- api3: Tag
+  id: NineP_Protocol_Messages_Rread_Tag
+  metadata:
+    uid: NineP.Protocol.Messages.Rread.Tag
+    commentId: P:NineP.Protocol.Messages.Rread.Tag
+- markdown: The message tag, which pairs this message with its partner.
+- code: public ushort Tag { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+languageId: csharp
+metadata:
+  description: Answers a Tread with the bytes that were read; a short reply is not an error (reference §5.6).

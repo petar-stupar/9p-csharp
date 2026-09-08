@@ -1,0 +1,52 @@
+### YamlMime:ApiPage
+title: Interface IStatFsCapability
+body:
+- api1: Interface IStatFsCapability
+  id: NineP_Server_IStatFsCapability
+  metadata:
+    uid: NineP.Server.IStatFsCapability
+    commentId: T:NineP.Server.IStatFsCapability
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Server
+      url: NineP.Server.html
+  - name: Assembly
+    value: NineP.Server.dll
+- markdown: >-
+    Optional: filesystem statistics (.L <code>Tstatfs</code>), implemented on the filesystem or on a
+
+    handler.
+- code: public interface IStatFsCapability
+- h2: Methods
+- api3: StatFsAsync(CancellationToken)
+  id: NineP_Server_IStatFsCapability_StatFsAsync_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Server.IStatFsCapability.StatFsAsync(System.Threading.CancellationToken)
+    commentId: M:NineP.Server.IStatFsCapability.StatFsAsync(System.Threading.CancellationToken)
+- markdown: The statistics of the filesystem behind this object.
+- code: ValueTask<StatFs> StatFsAsync(CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: StatFs
+      url: NineP.Protocol.StatFs.html
+    - '>'
+    description: The statistics.
+languageId: csharp
+metadata:
+  description: >-
+    Optional: filesystem statistics (.L Tstatfs), implemented on the filesystem or on a
+
+    handler.

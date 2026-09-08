@@ -1,0 +1,41 @@
+### YamlMime:ApiPage
+title: Interface IRequestLogSink
+body:
+- api1: Interface IRequestLogSink
+  id: NineP_Server_IRequestLogSink
+  metadata:
+    uid: NineP.Server.IRequestLogSink
+    commentId: T:NineP.Server.IRequestLogSink
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Server
+      url: NineP.Server.html
+  - name: Assembly
+    value: NineP.Server.dll
+- markdown: >-
+    Receives one entry per completed request. An implementation must not throw and must not block:
+
+    it is called from the connection's own loop, and a slow sink is backpressure on the session.
+- code: public interface IRequestLogSink
+- h2: Methods
+- api3: Record(in RequestLogEntry)
+  id: NineP_Server_IRequestLogSink_Record_NineP_Server_RequestLogEntry__
+  metadata:
+    uid: NineP.Server.IRequestLogSink.Record(NineP.Server.RequestLogEntry@)
+    commentId: M:NineP.Server.IRequestLogSink.Record(NineP.Server.RequestLogEntry@)
+- markdown: Records one completed request.
+- code: void Record(in RequestLogEntry entry)
+- h4: Parameters
+- parameters:
+  - name: entry
+    type:
+    - text: RequestLogEntry
+      url: NineP.Server.RequestLogEntry.html
+    description: What happened.
+languageId: csharp
+metadata:
+  description: >-
+    Receives one entry per completed request. An implementation must not throw and must not block:
+
+    it is called from the connection's own loop, and a slow sink is backpressure on the session.

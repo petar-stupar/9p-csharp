@@ -1,0 +1,109 @@
+### YamlMime:ApiPage
+title: Class ErrorTable
+body:
+- api1: Class ErrorTable
+  id: NineP_Protocol_ErrorTable
+  metadata:
+    uid: NineP.Protocol.ErrorTable
+    commentId: T:NineP.Protocol.ErrorTable
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol
+      url: NineP.Protocol.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    The errno to ename projection table (workspace architecture §3): Plan 9 wording where one
+
+    exists, so a 9P2000 client and a 9P2000.L client are told the same thing in their own terms.
+- code: public static class ErrorTable
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: ErrorTable
+    url: NineP.Protocol.ErrorTable.html
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Properties
+- api3: All
+  id: NineP_Protocol_ErrorTable_All
+  metadata:
+    uid: NineP.Protocol.ErrorTable.All
+    commentId: P:NineP.Protocol.ErrorTable.All
+- markdown: Every (errno, ename) pair of the table, for documentation and tests.
+- code: public static IReadOnlyList<NinePError> All { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: IReadOnlyList
+      url: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+    - <
+    - text: NinePError
+      url: NineP.Protocol.NinePError.html
+    - '>'
+- h2: Methods
+- api3: EnameFor(int)
+  id: NineP_Protocol_ErrorTable_EnameFor_System_Int32_
+  metadata:
+    uid: NineP.Protocol.ErrorTable.EnameFor(System.Int32)
+    commentId: M:NineP.Protocol.ErrorTable.EnameFor(System.Int32)
+- markdown: >-
+    The Plan 9 ename for an errno, for example <code>ENOENT</code> to "file not found". An errno the
+
+    table does not carry projects to "i/o error", the same place an unknown failure goes.
+- code: public static string EnameFor(int errno)
+- h4: Parameters
+- parameters:
+  - name: errno
+    type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+    description: The Linux errno to project.
+- h4: Returns
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The ename a 9P2000 or 9P2000.u peer is told.
+- api3: ErrnoFor(string)
+  id: NineP_Protocol_ErrorTable_ErrnoFor_System_String_
+  metadata:
+    uid: NineP.Protocol.ErrorTable.ErrnoFor(System.String)
+    commentId: M:NineP.Protocol.ErrorTable.ErrnoFor(System.String)
+- markdown: The errno for a known ename, covering both the table and the enames a server writes itself.
+- code: public static int ErrnoFor(string ename)
+- h4: Parameters
+- parameters:
+  - name: ename
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The ename to map back.
+- h4: Returns
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+    description: The Linux errno, or <code>EIO</code> when the ename is not one of ours.
+languageId: csharp
+metadata:
+  description: >-
+    The errno to ename projection table (workspace architecture §3): Plan 9 wording where one
+
+    exists, so a 9P2000 client and a 9P2000.L client are told the same thing in their own terms.

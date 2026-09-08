@@ -1,0 +1,370 @@
+### YamlMime:ApiPage
+title: Class Errno
+body:
+- api1: Class Errno
+  id: NineP_Protocol_Errno
+  metadata:
+    uid: NineP.Protocol.Errno
+    commentId: T:NineP.Protocol.Errno
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol
+      url: NineP.Protocol.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: The Linux errno values this workspace's servers use (reference §5.9).
+- code: public static class Errno
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: Errno
+    url: NineP.Protocol.Errno.html
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Fields
+- api3: EACCES
+  id: NineP_Protocol_Errno_EACCES
+  metadata:
+    uid: NineP.Protocol.Errno.EACCES
+    commentId: F:NineP.Protocol.Errno.EACCES
+- markdown: Permission denied.
+- code: public const int EACCES = 13
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: EAGAIN
+  id: NineP_Protocol_Errno_EAGAIN
+  metadata:
+    uid: NineP.Protocol.Errno.EAGAIN
+    commentId: F:NineP.Protocol.Errno.EAGAIN
+- markdown: Resource temporarily unavailable.
+- code: public const int EAGAIN = 11
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: EBADF
+  id: NineP_Protocol_Errno_EBADF
+  metadata:
+    uid: NineP.Protocol.Errno.EBADF
+    commentId: F:NineP.Protocol.Errno.EBADF
+- markdown: 'Bad file descriptor: in 9P, an unknown fid.'
+- code: public const int EBADF = 9
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: ECONNREFUSED
+  id: NineP_Protocol_Errno_ECONNREFUSED
+  metadata:
+    uid: NineP.Protocol.Errno.ECONNREFUSED
+    commentId: F:NineP.Protocol.Errno.ECONNREFUSED
+- markdown: 'Connection refused: in 9P, authentication is not required.'
+- code: public const int ECONNREFUSED = 111
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: EEXIST
+  id: NineP_Protocol_Errno_EEXIST
+  metadata:
+    uid: NineP.Protocol.Errno.EEXIST
+    commentId: F:NineP.Protocol.Errno.EEXIST
+- markdown: File exists.
+- code: public const int EEXIST = 17
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: EFBIG
+  id: NineP_Protocol_Errno_EFBIG
+  metadata:
+    uid: NineP.Protocol.Errno.EFBIG
+    commentId: F:NineP.Protocol.Errno.EFBIG
+- markdown: File too large.
+- code: public const int EFBIG = 27
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: EINVAL
+  id: NineP_Protocol_Errno_EINVAL
+  metadata:
+    uid: NineP.Protocol.Errno.EINVAL
+    commentId: F:NineP.Protocol.Errno.EINVAL
+- markdown: Invalid argument.
+- code: public const int EINVAL = 22
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: EIO
+  id: NineP_Protocol_Errno_EIO
+  metadata:
+    uid: NineP.Protocol.Errno.EIO
+    commentId: F:NineP.Protocol.Errno.EIO
+- markdown: Input/output error.
+- code: public const int EIO = 5
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: EISDIR
+  id: NineP_Protocol_Errno_EISDIR
+  metadata:
+    uid: NineP.Protocol.Errno.EISDIR
+    commentId: F:NineP.Protocol.Errno.EISDIR
+- markdown: Is a directory.
+- code: public const int EISDIR = 21
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: ELOOP
+  id: NineP_Protocol_Errno_ELOOP
+  metadata:
+    uid: NineP.Protocol.Errno.ELOOP
+    commentId: F:NineP.Protocol.Errno.ELOOP
+- markdown: Too many levels of symbolic links.
+- code: public const int ELOOP = 40
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: ENAMETOOLONG
+  id: NineP_Protocol_Errno_ENAMETOOLONG
+  metadata:
+    uid: NineP.Protocol.Errno.ENAMETOOLONG
+    commentId: F:NineP.Protocol.Errno.ENAMETOOLONG
+- markdown: File name too long.
+- code: public const int ENAMETOOLONG = 36
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: ENFILE
+  id: NineP_Protocol_Errno_ENFILE
+  metadata:
+    uid: NineP.Protocol.Errno.ENFILE
+    commentId: F:NineP.Protocol.Errno.ENFILE
+- markdown: 'Too many open files in the system: in 9P, the fid cap.'
+- code: public const int ENFILE = 23
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: ENODATA
+  id: NineP_Protocol_Errno_ENODATA
+  metadata:
+    uid: NineP.Protocol.Errno.ENODATA
+    commentId: F:NineP.Protocol.Errno.ENODATA
+- markdown: 'No data available: no such extended attribute.'
+- code: public const int ENODATA = 61
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: ENOENT
+  id: NineP_Protocol_Errno_ENOENT
+  metadata:
+    uid: NineP.Protocol.Errno.ENOENT
+    commentId: F:NineP.Protocol.Errno.ENOENT
+- markdown: No such file or directory.
+- code: public const int ENOENT = 2
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: ENOLCK
+  id: NineP_Protocol_Errno_ENOLCK
+  metadata:
+    uid: NineP.Protocol.Errno.ENOLCK
+    commentId: F:NineP.Protocol.Errno.ENOLCK
+- markdown: No locks available.
+- code: public const int ENOLCK = 37
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: ENOMEM
+  id: NineP_Protocol_Errno_ENOMEM
+  metadata:
+    uid: NineP.Protocol.Errno.ENOMEM
+    commentId: F:NineP.Protocol.Errno.ENOMEM
+- markdown: Out of memory.
+- code: public const int ENOMEM = 12
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: ENOSPC
+  id: NineP_Protocol_Errno_ENOSPC
+  metadata:
+    uid: NineP.Protocol.Errno.ENOSPC
+    commentId: F:NineP.Protocol.Errno.ENOSPC
+- markdown: No space left on device.
+- code: public const int ENOSPC = 28
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: ENOSYS
+  id: NineP_Protocol_Errno_ENOSYS
+  metadata:
+    uid: NineP.Protocol.Errno.ENOSYS
+    commentId: F:NineP.Protocol.Errno.ENOSYS
+- markdown: Function not implemented.
+- code: public const int ENOSYS = 38
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: ENOTDIR
+  id: NineP_Protocol_Errno_ENOTDIR
+  metadata:
+    uid: NineP.Protocol.Errno.ENOTDIR
+    commentId: F:NineP.Protocol.Errno.ENOTDIR
+- markdown: Not a directory.
+- code: public const int ENOTDIR = 20
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: ENOTEMPTY
+  id: NineP_Protocol_Errno_ENOTEMPTY
+  metadata:
+    uid: NineP.Protocol.Errno.ENOTEMPTY
+    commentId: F:NineP.Protocol.Errno.ENOTEMPTY
+- markdown: Directory not empty.
+- code: public const int ENOTEMPTY = 39
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: ENXIO
+  id: NineP_Protocol_Errno_ENXIO
+  metadata:
+    uid: NineP.Protocol.Errno.ENXIO
+    commentId: F:NineP.Protocol.Errno.ENXIO
+- markdown: >-
+    No such device or address: a <code>Tlopen</code> of a fifo, socket or device the server cannot
+
+    open (reference §8 rule 23).
+- code: public const int ENXIO = 6
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: EOPNOTSUPP
+  id: NineP_Protocol_Errno_EOPNOTSUPP
+  metadata:
+    uid: NineP.Protocol.Errno.EOPNOTSUPP
+    commentId: F:NineP.Protocol.Errno.EOPNOTSUPP
+- markdown: Operation not supported.
+- code: public const int EOPNOTSUPP = 95
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: EOVERFLOW
+  id: NineP_Protocol_Errno_EOVERFLOW
+  metadata:
+    uid: NineP.Protocol.Errno.EOVERFLOW
+    commentId: F:NineP.Protocol.Errno.EOVERFLOW
+- markdown: Value too large for its type.
+- code: public const int EOVERFLOW = 75
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: EPERM
+  id: NineP_Protocol_Errno_EPERM
+  metadata:
+    uid: NineP.Protocol.Errno.EPERM
+    commentId: F:NineP.Protocol.Errno.EPERM
+- markdown: Operation not permitted.
+- code: public const int EPERM = 1
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: EPROTO
+  id: NineP_Protocol_Errno_EPROTO
+  metadata:
+    uid: NineP.Protocol.Errno.EPROTO
+    commentId: F:NineP.Protocol.Errno.EPROTO
+- markdown: 'Protocol error: a malformed 9P message.'
+- code: public const int EPROTO = 71
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: ERANGE
+  id: NineP_Protocol_Errno_ERANGE
+  metadata:
+    uid: NineP.Protocol.Errno.ERANGE
+    commentId: F:NineP.Protocol.Errno.ERANGE
+- markdown: Result too large.
+- code: public const int ERANGE = 34
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: EROFS
+  id: NineP_Protocol_Errno_EROFS
+  metadata:
+    uid: NineP.Protocol.Errno.EROFS
+    commentId: F:NineP.Protocol.Errno.EROFS
+- markdown: Read-only filesystem.
+- code: public const int EROFS = 30
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+languageId: csharp
+metadata:
+  description: The Linux errno values this workspace's servers use (reference §5.9).

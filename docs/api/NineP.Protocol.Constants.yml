@@ -1,0 +1,247 @@
+### YamlMime:ApiPage
+title: Class Constants
+body:
+- api1: Class Constants
+  id: NineP_Protocol_Constants
+  metadata:
+    uid: NineP.Protocol.Constants
+    commentId: T:NineP.Protocol.Constants
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol
+      url: NineP.Protocol.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: The protocol constants of reference §1, under their <code>fcall.h</code> / <code>linux-9p.h</code> names.
+- code: public static class Constants
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: Constants
+    url: NineP.Protocol.Constants.html
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Fields
+- api3: ERRMAX
+  id: NineP_Protocol_Constants_ERRMAX
+  metadata:
+    uid: NineP.Protocol.Constants.ERRMAX
+    commentId: F:NineP.Protocol.Constants.ERRMAX
+- markdown: The conventional cap on the length of an <code>ename</code> (reference §8 rule 10).
+- code: public const int ERRMAX = 128
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: HDRSZ
+  id: NineP_Protocol_Constants_HDRSZ
+  metadata:
+    uid: NineP.Protocol.Constants.HDRSZ
+    commentId: F:NineP.Protocol.Constants.HDRSZ
+- markdown: The bytes every message spends on <code>size[4] type[1] tag[2]</code>.
+- code: public const int HDRSZ = 7
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: IOHDRSZ
+  id: NineP_Protocol_Constants_IOHDRSZ
+  metadata:
+    uid: NineP.Protocol.Constants.IOHDRSZ
+    commentId: F:NineP.Protocol.Constants.IOHDRSZ
+- markdown: 'The header room reserved for I/O: the largest payload is <code>msize - IOHDRSZ</code>.'
+- code: public const int IOHDRSZ = 24
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: MAXWELEM
+  id: NineP_Protocol_Constants_MAXWELEM
+  metadata:
+    uid: NineP.Protocol.Constants.MAXWELEM
+    commentId: F:NineP.Protocol.Constants.MAXWELEM
+- markdown: The largest <code>nwname</code> or <code>nwqid</code> one walk may carry (reference §8 rule 2).
+- code: public const int MAXWELEM = 16
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: MaxNameLength
+  id: NineP_Protocol_Constants_MaxNameLength
+  metadata:
+    uid: NineP.Protocol.Constants.MaxNameLength
+    commentId: F:NineP.Protocol.Constants.MaxNameLength
+- markdown: The longest legal file-name component, in bytes (reference §8 rule 3).
+- code: public const int MaxNameLength = 255
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: NOFID
+  id: NineP_Protocol_Constants_NOFID
+  metadata:
+    uid: NineP.Protocol.Constants.NOFID
+    commentId: F:NineP.Protocol.Constants.NOFID
+- markdown: "\"No fid\": the <code>afid</code> of a <code>Tattach</code> that does not authenticate."
+- code: public const uint NOFID = 4294967295
+- h4: Field Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: NONUNAME
+  id: NineP_Protocol_Constants_NONUNAME
+  metadata:
+    uid: NineP.Protocol.Constants.NONUNAME
+    commentId: F:NineP.Protocol.Constants.NONUNAME
+- markdown: The .u and .L <code>n_uname</code> value meaning "unspecified".
+- code: public const uint NONUNAME = 4294967295
+- h4: Field Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: NOTAG
+  id: NineP_Protocol_Constants_NOTAG
+  metadata:
+    uid: NineP.Protocol.Constants.NOTAG
+    commentId: F:NineP.Protocol.Constants.NOTAG
+- markdown: The tag <code>Tversion</code> and <code>Rversion</code> carry (reference §1).
+- code: public const ushort NOTAG = 65535
+- h4: Field Value
+- parameters:
+  - type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+- api3: READDIRHDRSZ
+  id: NineP_Protocol_Constants_READDIRHDRSZ
+  metadata:
+    uid: NineP.Protocol.Constants.READDIRHDRSZ
+    commentId: F:NineP.Protocol.Constants.READDIRHDRSZ
+- markdown: The same allowance for <code>Rreaddir</code> (reference §1).
+- code: public const int READDIRHDRSZ = 24
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: RreadHeaderSize
+  id: NineP_Protocol_Constants_RreadHeaderSize
+  metadata:
+    uid: NineP.Protocol.Constants.RreadHeaderSize
+    commentId: F:NineP.Protocol.Constants.RreadHeaderSize
+- markdown: 'The <code>Rread</code> header: <code>size[4] type[1] tag[2] count[4]</code>.'
+- code: public const int RreadHeaderSize = 11
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: STATFIXLEN
+  id: NineP_Protocol_Constants_STATFIXLEN
+  metadata:
+    uid: NineP.Protocol.Constants.STATFIXLEN
+    commentId: F:NineP.Protocol.Constants.STATFIXLEN
+- markdown: The fixed part of a 9P2000 stat record, including its leading <code>size[2]</code>.
+- code: public const int STATFIXLEN = 49
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: TwriteHeaderSize
+  id: NineP_Protocol_Constants_TwriteHeaderSize
+  metadata:
+    uid: NineP.Protocol.Constants.TwriteHeaderSize
+    commentId: F:NineP.Protocol.Constants.TwriteHeaderSize
+- markdown: 'The <code>Twrite</code> header: <code>size[4] type[1] tag[2] fid[4] offset[8] count[4]</code>.'
+- code: public const int TwriteHeaderSize = 23
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: Version9P2000
+  id: NineP_Protocol_Constants_Version9P2000
+  metadata:
+    uid: NineP.Protocol.Constants.Version9P2000
+    commentId: F:NineP.Protocol.Constants.Version9P2000
+- markdown: The wire string of the base dialect.
+- code: public const string Version9P2000 = "9P2000"
+- h4: Field Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: Version9P2000L
+  id: NineP_Protocol_Constants_Version9P2000L
+  metadata:
+    uid: NineP.Protocol.Constants.Version9P2000L
+    commentId: F:NineP.Protocol.Constants.Version9P2000L
+- markdown: The wire string of the Linux dialect.
+- code: public const string Version9P2000L = "9P2000.L"
+- h4: Field Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: Version9P2000u
+  id: NineP_Protocol_Constants_Version9P2000u
+  metadata:
+    uid: NineP.Protocol.Constants.Version9P2000u
+    commentId: F:NineP.Protocol.Constants.Version9P2000u
+- markdown: The wire string of the Unix extension.
+- code: public const string Version9P2000u = "9P2000.u"
+- h4: Field Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: VersionUnknown
+  id: NineP_Protocol_Constants_VersionUnknown
+  metadata:
+    uid: NineP.Protocol.Constants.VersionUnknown
+    commentId: F:NineP.Protocol.Constants.VersionUnknown
+- markdown: The reply that means "no dialect was agreed" (reference §5.1).
+- code: public const string VersionUnknown = "unknown"
+- h4: Field Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: WebSocketSubprotocol
+  id: NineP_Protocol_Constants_WebSocketSubprotocol
+  metadata:
+    uid: NineP.Protocol.Constants.WebSocketSubprotocol
+    commentId: F:NineP.Protocol.Constants.WebSocketSubprotocol
+- markdown: The optional WebSocket subprotocol name a 9P endpoint offers.
+- code: public const string WebSocketSubprotocol = "9p"
+- h4: Field Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+languageId: csharp
+metadata:
+  description: The protocol constants of reference §1, under their fcall.h / linux-9p.h names.

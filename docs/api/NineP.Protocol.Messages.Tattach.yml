@@ -1,0 +1,161 @@
+### YamlMime:ApiPage
+title: Struct Tattach
+body:
+- api1: Struct Tattach
+  id: NineP_Protocol_Messages_Tattach
+  metadata:
+    uid: NineP.Protocol.Messages.Tattach
+    commentId: T:NineP.Protocol.Messages.Tattach
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Messages
+      url: NineP.Protocol.Messages.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: Introduces a fid to the root of a tree, as the user the afid authenticated (reference §5.2).
+- code: 'public readonly record struct Tattach : IMessage, IEquatable<Tattach>'
+- h4: Implements
+- list:
+  - text: IMessage
+    url: NineP.Protocol.Messages.IMessage.html
+  - text: IEquatable<Tattach>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: Tattach(ushort, uint, uint, string, string, uint)
+  id: NineP_Protocol_Messages_Tattach__ctor_System_UInt16_System_UInt32_System_UInt32_System_String_System_String_System_UInt32_
+  metadata:
+    uid: NineP.Protocol.Messages.Tattach.#ctor(System.UInt16,System.UInt32,System.UInt32,System.String,System.String,System.UInt32)
+    commentId: M:NineP.Protocol.Messages.Tattach.#ctor(System.UInt16,System.UInt32,System.UInt32,System.String,System.String,System.UInt32)
+- markdown: Introduces a fid to the root of a tree, as the user the afid authenticated (reference §5.2).
+- code: public Tattach(ushort Tag, uint Fid, uint Afid, string Uname, string Aname, uint NUname)
+- h4: Parameters
+- parameters:
+  - name: Tag
+    type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+    description: The message tag, which pairs this message with its partner.
+  - name: Fid
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The fid to bind to the root of the tree.
+  - name: Afid
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The afid from a completed Tauth, or NOFID when not authenticating.
+  - name: Uname
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: >-
+      The user name the client claims; the session identity comes from the
+          authenticator.
+  - name: Aname
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The tree to attach to.
+  - name: NUname
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: >-
+      The numeric user id; NONUNAME when unspecified. On the wire in .u and .L
+          only: a 9P2000 frame encodes nothing and decodes as NONUNAME.
+- h2: Properties
+- api3: Afid
+  id: NineP_Protocol_Messages_Tattach_Afid
+  metadata:
+    uid: NineP.Protocol.Messages.Tattach.Afid
+    commentId: P:NineP.Protocol.Messages.Tattach.Afid
+- markdown: The afid from a completed Tauth, or NOFID when not authenticating.
+- code: public uint Afid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Aname
+  id: NineP_Protocol_Messages_Tattach_Aname
+  metadata:
+    uid: NineP.Protocol.Messages.Tattach.Aname
+    commentId: P:NineP.Protocol.Messages.Tattach.Aname
+- markdown: The tree to attach to.
+- code: public string Aname { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: Fid
+  id: NineP_Protocol_Messages_Tattach_Fid
+  metadata:
+    uid: NineP.Protocol.Messages.Tattach.Fid
+    commentId: P:NineP.Protocol.Messages.Tattach.Fid
+- markdown: The fid to bind to the root of the tree.
+- code: public uint Fid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: NUname
+  id: NineP_Protocol_Messages_Tattach_NUname
+  metadata:
+    uid: NineP.Protocol.Messages.Tattach.NUname
+    commentId: P:NineP.Protocol.Messages.Tattach.NUname
+- markdown: >-
+    The numeric user id; NONUNAME when unspecified. On the wire in .u and .L
+        only: a 9P2000 frame encodes nothing and decodes as NONUNAME.
+- code: public uint NUname { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Tag
+  id: NineP_Protocol_Messages_Tattach_Tag
+  metadata:
+    uid: NineP.Protocol.Messages.Tattach.Tag
+    commentId: P:NineP.Protocol.Messages.Tattach.Tag
+- markdown: The message tag, which pairs this message with its partner.
+- code: public ushort Tag { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+- api3: Uname
+  id: NineP_Protocol_Messages_Tattach_Uname
+  metadata:
+    uid: NineP.Protocol.Messages.Tattach.Uname
+    commentId: P:NineP.Protocol.Messages.Tattach.Uname
+- markdown: >-
+    The user name the client claims; the session identity comes from the
+        authenticator.
+- code: public string Uname { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+languageId: csharp
+metadata:
+  description: Introduces a fid to the root of a tree, as the user the afid authenticated (reference §5.2).

@@ -1,0 +1,102 @@
+### YamlMime:ApiPage
+title: Struct Rlcreate
+body:
+- api1: Struct Rlcreate
+  id: NineP_Protocol_Messages_Rlcreate
+  metadata:
+    uid: NineP.Protocol.Messages.Rlcreate
+    commentId: T:NineP.Protocol.Messages.Rlcreate
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Messages
+      url: NineP.Protocol.Messages.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: Answers a Tlcreate with the qid of the new file and the iounit (reference §3.4).
+- code: 'public readonly record struct Rlcreate : IMessage, IEquatable<Rlcreate>'
+- h4: Implements
+- list:
+  - text: IMessage
+    url: NineP.Protocol.Messages.IMessage.html
+  - text: IEquatable<Rlcreate>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: Rlcreate(ushort, Qid, uint)
+  id: NineP_Protocol_Messages_Rlcreate__ctor_System_UInt16_NineP_Protocol_Qid_System_UInt32_
+  metadata:
+    uid: NineP.Protocol.Messages.Rlcreate.#ctor(System.UInt16,NineP.Protocol.Qid,System.UInt32)
+    commentId: M:NineP.Protocol.Messages.Rlcreate.#ctor(System.UInt16,NineP.Protocol.Qid,System.UInt32)
+- markdown: Answers a Tlcreate with the qid of the new file and the iounit (reference §3.4).
+- code: public Rlcreate(ushort Tag, Qid Qid, uint Iounit)
+- h4: Parameters
+- parameters:
+  - name: Tag
+    type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+    description: The message tag, which pairs this message with its partner.
+  - name: Qid
+    type:
+    - text: Qid
+      url: NineP.Protocol.Qid.html
+    description: The qid of the file that was created.
+  - name: Iounit
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The largest payload the server guarantees to move in one message.
+- h2: Properties
+- api3: Iounit
+  id: NineP_Protocol_Messages_Rlcreate_Iounit
+  metadata:
+    uid: NineP.Protocol.Messages.Rlcreate.Iounit
+    commentId: P:NineP.Protocol.Messages.Rlcreate.Iounit
+- markdown: The largest payload the server guarantees to move in one message.
+- code: public uint Iounit { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Qid
+  id: NineP_Protocol_Messages_Rlcreate_Qid
+  metadata:
+    uid: NineP.Protocol.Messages.Rlcreate.Qid
+    commentId: P:NineP.Protocol.Messages.Rlcreate.Qid
+- markdown: The qid of the file that was created.
+- code: public Qid Qid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: Qid
+      url: NineP.Protocol.Qid.html
+- api3: Tag
+  id: NineP_Protocol_Messages_Rlcreate_Tag
+  metadata:
+    uid: NineP.Protocol.Messages.Rlcreate.Tag
+    commentId: P:NineP.Protocol.Messages.Rlcreate.Tag
+- markdown: The message tag, which pairs this message with its partner.
+- code: public ushort Tag { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+languageId: csharp
+metadata:
+  description: Answers a Tlcreate with the qid of the new file and the iounit (reference §3.4).

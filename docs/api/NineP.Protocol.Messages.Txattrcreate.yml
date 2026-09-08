@@ -1,0 +1,136 @@
+### YamlMime:ApiPage
+title: Struct Txattrcreate
+body:
+- api1: Struct Txattrcreate
+  id: NineP_Protocol_Messages_Txattrcreate
+  metadata:
+    uid: NineP.Protocol.Messages.Txattrcreate
+    commentId: T:NineP.Protocol.Messages.Txattrcreate
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Messages
+      url: NineP.Protocol.Messages.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: Prepares a fid to write an extended attribute (reference §5.9).
+- code: 'public readonly record struct Txattrcreate : IMessage, IEquatable<Txattrcreate>'
+- h4: Implements
+- list:
+  - text: IMessage
+    url: NineP.Protocol.Messages.IMessage.html
+  - text: IEquatable<Txattrcreate>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: Txattrcreate(ushort, uint, string, ulong, XattrFlags)
+  id: NineP_Protocol_Messages_Txattrcreate__ctor_System_UInt16_System_UInt32_System_String_System_UInt64_NineP_Protocol_XattrFlags_
+  metadata:
+    uid: NineP.Protocol.Messages.Txattrcreate.#ctor(System.UInt16,System.UInt32,System.String,System.UInt64,NineP.Protocol.XattrFlags)
+    commentId: M:NineP.Protocol.Messages.Txattrcreate.#ctor(System.UInt16,System.UInt32,System.String,System.UInt64,NineP.Protocol.XattrFlags)
+- markdown: Prepares a fid to write an extended attribute (reference §5.9).
+- code: public Txattrcreate(ushort Tag, uint Fid, string Name, ulong AttrSize, XattrFlags Flags)
+- h4: Parameters
+- parameters:
+  - name: Tag
+    type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+    description: The message tag, which pairs this message with its partner.
+  - name: Fid
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The fid naming the file; it becomes the attribute.
+  - name: Name
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The attribute's name.
+  - name: AttrSize
+    type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+    description: How many bytes the client will write.
+  - name: Flags
+    type:
+    - text: XattrFlags
+      url: NineP.Protocol.XattrFlags.html
+    description: Whether the attribute must or must not already exist.
+- h2: Properties
+- api3: AttrSize
+  id: NineP_Protocol_Messages_Txattrcreate_AttrSize
+  metadata:
+    uid: NineP.Protocol.Messages.Txattrcreate.AttrSize
+    commentId: P:NineP.Protocol.Messages.Txattrcreate.AttrSize
+- markdown: How many bytes the client will write.
+- code: public ulong AttrSize { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+- api3: Fid
+  id: NineP_Protocol_Messages_Txattrcreate_Fid
+  metadata:
+    uid: NineP.Protocol.Messages.Txattrcreate.Fid
+    commentId: P:NineP.Protocol.Messages.Txattrcreate.Fid
+- markdown: The fid naming the file; it becomes the attribute.
+- code: public uint Fid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Flags
+  id: NineP_Protocol_Messages_Txattrcreate_Flags
+  metadata:
+    uid: NineP.Protocol.Messages.Txattrcreate.Flags
+    commentId: P:NineP.Protocol.Messages.Txattrcreate.Flags
+- markdown: Whether the attribute must or must not already exist.
+- code: public XattrFlags Flags { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: XattrFlags
+      url: NineP.Protocol.XattrFlags.html
+- api3: Name
+  id: NineP_Protocol_Messages_Txattrcreate_Name
+  metadata:
+    uid: NineP.Protocol.Messages.Txattrcreate.Name
+    commentId: P:NineP.Protocol.Messages.Txattrcreate.Name
+- markdown: The attribute's name.
+- code: public string Name { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: Tag
+  id: NineP_Protocol_Messages_Txattrcreate_Tag
+  metadata:
+    uid: NineP.Protocol.Messages.Txattrcreate.Tag
+    commentId: P:NineP.Protocol.Messages.Txattrcreate.Tag
+- markdown: The message tag, which pairs this message with its partner.
+- code: public ushort Tag { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+languageId: csharp
+metadata:
+  description: Prepares a fid to write an extended attribute (reference §5.9).

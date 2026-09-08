@@ -1,0 +1,175 @@
+### YamlMime:ApiPage
+title: Class TcpTransport
+body:
+- api1: Class TcpTransport
+  id: NineP_Protocol_Transports_TcpTransport
+  metadata:
+    uid: NineP.Protocol.Transports.TcpTransport
+    commentId: T:NineP.Protocol.Transports.TcpTransport
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Transports
+      url: NineP.Protocol.Transports.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    TCP with <code>TCP_NODELAY</code> and keep-alive on, an accept backlog and a per-listener connection
+
+    cap. The cap <b>stops accepting</b>: a connection over the limit waits in the kernel's backlog
+
+    and is served when a slot frees, rather than being accepted and reset, which a client cannot
+
+    tell from a crash.
+- code: 'public sealed class TcpTransport : ITransport'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: TcpTransport
+    url: NineP.Protocol.Transports.TcpTransport.html
+- h4: Implements
+- list:
+  - text: ITransport
+    url: NineP.Protocol.Transports.ITransport.html
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: TcpTransport(TcpTransportOptions?)
+  id: NineP_Protocol_Transports_TcpTransport__ctor_NineP_Protocol_Transports_TcpTransportOptions_
+  metadata:
+    uid: NineP.Protocol.Transports.TcpTransport.#ctor(NineP.Protocol.Transports.TcpTransportOptions)
+    commentId: M:NineP.Protocol.Transports.TcpTransport.#ctor(NineP.Protocol.Transports.TcpTransportOptions)
+- markdown: Creates a TCP transport.
+- code: public TcpTransport(TcpTransportOptions? options = null)
+- h4: Parameters
+- parameters:
+  - name: options
+    type:
+    - text: TcpTransportOptions
+      url: NineP.Protocol.Transports.TcpTransportOptions.html
+    - '?'
+    description: The tuning; the defaults of §5.5 when null.
+    optional: true
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: ArgumentOutOfRangeException
+      url: https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception
+    description: A bound in the options is not positive.
+- h2: Properties
+- api3: Schemes
+  id: NineP_Protocol_Transports_TcpTransport_Schemes
+  metadata:
+    uid: NineP.Protocol.Transports.TcpTransport.Schemes
+    commentId: P:NineP.Protocol.Transports.TcpTransport.Schemes
+- markdown: The schemes this transport can dial and bind.
+- code: public IReadOnlyCollection<NinePScheme> Schemes { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: IReadOnlyCollection
+      url: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1
+    - <
+    - text: NinePScheme
+      url: NineP.Protocol.Transports.NinePScheme.html
+    - '>'
+- h2: Methods
+- api3: ConnectAsync(NinePAddress, CancellationToken)
+  id: NineP_Protocol_Transports_TcpTransport_ConnectAsync_NineP_Protocol_Transports_NinePAddress_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Protocol.Transports.TcpTransport.ConnectAsync(NineP.Protocol.Transports.NinePAddress,System.Threading.CancellationToken)
+    commentId: M:NineP.Protocol.Transports.TcpTransport.ConnectAsync(NineP.Protocol.Transports.NinePAddress,System.Threading.CancellationToken)
+- markdown: Dials a TCP endpoint.
+- code: public ValueTask<INinePConnection> ConnectAsync(NinePAddress address, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: address
+    type:
+    - text: NinePAddress
+      url: NineP.Protocol.Transports.NinePAddress.html
+    description: The <code>tcp://host:port</code> endpoint.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the dial.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: INinePConnection
+      url: NineP.Protocol.Transports.INinePConnection.html
+    - '>'
+    description: The connected connection; the caller disposes it.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: ArgumentException
+      url: https://learn.microsoft.com/dotnet/api/system.argumentexception
+    description: The address is not a TCP address.
+  - type:
+    - text: TimeoutException
+      url: https://learn.microsoft.com/dotnet/api/system.timeoutexception
+    description: The dial did not complete within the configured budget.
+- api3: ListenAsync(NinePAddress, CancellationToken)
+  id: NineP_Protocol_Transports_TcpTransport_ListenAsync_NineP_Protocol_Transports_NinePAddress_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Protocol.Transports.TcpTransport.ListenAsync(NineP.Protocol.Transports.NinePAddress,System.Threading.CancellationToken)
+    commentId: M:NineP.Protocol.Transports.TcpTransport.ListenAsync(NineP.Protocol.Transports.NinePAddress,System.Threading.CancellationToken)
+- markdown: Binds a TCP endpoint.
+- code: public ValueTask<INinePListener> ListenAsync(NinePAddress address, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: address
+    type:
+    - text: NinePAddress
+      url: NineP.Protocol.Transports.NinePAddress.html
+    description: The <code>tcp://host:port</code> endpoint; port 0 lets the kernel choose.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the bind.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: INinePListener
+      url: NineP.Protocol.Transports.INinePListener.html
+    - '>'
+    description: The listener, carrying the port that was actually bound.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: ArgumentException
+      url: https://learn.microsoft.com/dotnet/api/system.argumentexception
+    description: The address is not a TCP address.
+languageId: csharp
+metadata:
+  description: >-
+    TCP with TCP_NODELAY and keep-alive on, an accept backlog and a per-listener connection
+
+    cap. The cap stops accepting: a connection over the limit waits in the kernel's backlog
+
+    and is served when a slot frees, rather than being accepted and reset, which a client cannot
+
+    tell from a crash.

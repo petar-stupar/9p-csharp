@@ -1,0 +1,368 @@
+### YamlMime:ApiPage
+title: Enum MessageType
+body:
+- api1: Enum MessageType
+  id: NineP_Protocol_MessageType
+  metadata:
+    uid: NineP.Protocol.MessageType
+    commentId: T:NineP.Protocol.MessageType
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol
+      url: NineP.Protocol.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    Every 9P message type number of reference §2: 34 T/R pairs, 68 members, R == T + 1.
+
+    <code>Terror</code> (106) and <code>Tlerror</code> (6) are illegal on the wire and carry no record.
+- code: 'public enum MessageType : byte'
+- h2: Fields
+- parameters:
+  - name: Rattach
+    default: "105"
+    description: >+
+      The reply to <xref href="NineP.Protocol.MessageType.Tattach" data-throw-if-not-resolved="false"></xref> (all).
+
+  - name: Rauth
+    default: "103"
+    description: >+
+      The reply to <xref href="NineP.Protocol.MessageType.Tauth" data-throw-if-not-resolved="false"></xref> (all).
+
+  - name: Rclunk
+    default: "121"
+    description: >+
+      The reply to <xref href="NineP.Protocol.MessageType.Tclunk" data-throw-if-not-resolved="false"></xref> (all).
+
+  - name: Rcreate
+    default: "115"
+    description: >+
+      The reply to <xref href="NineP.Protocol.MessageType.Tcreate" data-throw-if-not-resolved="false"></xref> (9P2000 and .u).
+
+  - name: Rerror
+    default: "107"
+    description: >+
+      The reply to <xref href="NineP.Protocol.MessageType.Terror" data-throw-if-not-resolved="false"></xref> (9P2000 and .u).
+
+  - name: Rflush
+    default: "109"
+    description: >+
+      The reply to <xref href="NineP.Protocol.MessageType.Tflush" data-throw-if-not-resolved="false"></xref> (all).
+
+  - name: Rfsync
+    default: "51"
+    description: >+
+      The reply to <xref href="NineP.Protocol.MessageType.Tfsync" data-throw-if-not-resolved="false"></xref> (.L).
+
+  - name: Rgetattr
+    default: "25"
+    description: >+
+      The reply to <xref href="NineP.Protocol.MessageType.Tgetattr" data-throw-if-not-resolved="false"></xref> (.L).
+
+  - name: Rgetlock
+    default: "55"
+    description: >+
+      The reply to <xref href="NineP.Protocol.MessageType.Tgetlock" data-throw-if-not-resolved="false"></xref> (.L).
+
+  - name: Rlcreate
+    default: "15"
+    description: >+
+      The reply to <xref href="NineP.Protocol.MessageType.Tlcreate" data-throw-if-not-resolved="false"></xref> (.L).
+
+  - name: Rlerror
+    default: "7"
+    description: >+
+      The reply to <xref href="NineP.Protocol.MessageType.Tlerror" data-throw-if-not-resolved="false"></xref> (.L).
+
+  - name: Rlink
+    default: "71"
+    description: >+
+      The reply to <xref href="NineP.Protocol.MessageType.Tlink" data-throw-if-not-resolved="false"></xref> (.L).
+
+  - name: Rlock
+    default: "53"
+    description: >+
+      The reply to <xref href="NineP.Protocol.MessageType.Tlock" data-throw-if-not-resolved="false"></xref> (.L).
+
+  - name: Rlopen
+    default: "13"
+    description: >+
+      The reply to <xref href="NineP.Protocol.MessageType.Tlopen" data-throw-if-not-resolved="false"></xref> (.L).
+
+  - name: Rmkdir
+    default: "73"
+    description: >+
+      The reply to <xref href="NineP.Protocol.MessageType.Tmkdir" data-throw-if-not-resolved="false"></xref> (.L).
+
+  - name: Rmknod
+    default: "19"
+    description: >+
+      The reply to <xref href="NineP.Protocol.MessageType.Tmknod" data-throw-if-not-resolved="false"></xref> (.L).
+
+  - name: Ropen
+    default: "113"
+    description: >+
+      The reply to <xref href="NineP.Protocol.MessageType.Topen" data-throw-if-not-resolved="false"></xref> (9P2000 and .u).
+
+  - name: Rread
+    default: "117"
+    description: >+
+      The reply to <xref href="NineP.Protocol.MessageType.Tread" data-throw-if-not-resolved="false"></xref> (all).
+
+  - name: Rreaddir
+    default: "41"
+    description: >+
+      The reply to <xref href="NineP.Protocol.MessageType.Treaddir" data-throw-if-not-resolved="false"></xref> (.L).
+
+  - name: Rreadlink
+    default: "23"
+    description: >+
+      The reply to <xref href="NineP.Protocol.MessageType.Treadlink" data-throw-if-not-resolved="false"></xref> (.L).
+
+  - name: Rremove
+    default: "123"
+    description: >+
+      The reply to <xref href="NineP.Protocol.MessageType.Tremove" data-throw-if-not-resolved="false"></xref> (all).
+
+  - name: Rrename
+    default: "21"
+    description: >+
+      The reply to <xref href="NineP.Protocol.MessageType.Trename" data-throw-if-not-resolved="false"></xref> (.L).
+
+  - name: Rrenameat
+    default: "75"
+    description: >+
+      The reply to <xref href="NineP.Protocol.MessageType.Trenameat" data-throw-if-not-resolved="false"></xref> (.L).
+
+  - name: Rsetattr
+    default: "27"
+    description: >+
+      The reply to <xref href="NineP.Protocol.MessageType.Tsetattr" data-throw-if-not-resolved="false"></xref> (.L).
+
+  - name: Rstat
+    default: "125"
+    description: >+
+      The reply to <xref href="NineP.Protocol.MessageType.Tstat" data-throw-if-not-resolved="false"></xref> (9P2000 and .u).
+
+  - name: Rstatfs
+    default: "9"
+    description: >+
+      The reply to <xref href="NineP.Protocol.MessageType.Tstatfs" data-throw-if-not-resolved="false"></xref> (.L).
+
+  - name: Rsymlink
+    default: "17"
+    description: >+
+      The reply to <xref href="NineP.Protocol.MessageType.Tsymlink" data-throw-if-not-resolved="false"></xref> (.L).
+
+  - name: Runlinkat
+    default: "77"
+    description: >+
+      The reply to <xref href="NineP.Protocol.MessageType.Tunlinkat" data-throw-if-not-resolved="false"></xref> (.L).
+
+  - name: Rversion
+    default: "101"
+    description: >+
+      The reply to <xref href="NineP.Protocol.MessageType.Tversion" data-throw-if-not-resolved="false"></xref> (all).
+
+  - name: Rwalk
+    default: "111"
+    description: >+
+      The reply to <xref href="NineP.Protocol.MessageType.Twalk" data-throw-if-not-resolved="false"></xref> (all).
+
+  - name: Rwrite
+    default: "119"
+    description: >+
+      The reply to <xref href="NineP.Protocol.MessageType.Twrite" data-throw-if-not-resolved="false"></xref> (all).
+
+  - name: Rwstat
+    default: "127"
+    description: >+
+      The reply to <xref href="NineP.Protocol.MessageType.Twstat" data-throw-if-not-resolved="false"></xref> (9P2000 and .u).
+
+  - name: Rxattrcreate
+    default: "33"
+    description: >+
+      The reply to <xref href="NineP.Protocol.MessageType.Txattrcreate" data-throw-if-not-resolved="false"></xref> (.L).
+
+  - name: Rxattrwalk
+    default: "31"
+    description: >+
+      The reply to <xref href="NineP.Protocol.MessageType.Txattrwalk" data-throw-if-not-resolved="false"></xref> (.L).
+
+  - name: Tattach
+    default: "104"
+    description: >+
+      Introduce a fid to the root of a tree (all).
+
+  - name: Tauth
+    default: "102"
+    description: >+
+      Open an afid for the authentication exchange (all).
+
+  - name: Tclunk
+    default: "120"
+    description: >+
+      Forget a fid (all).
+
+  - name: Tcreate
+    default: "114"
+    description: >+
+      Create a file and open the fid onto it (9P2000 and .u).
+
+  - name: Terror
+    default: "106"
+    description: >+
+      An error reply carrying an ename; the T form is illegal on the wire (9P2000 and .u).
+
+  - name: Tflush
+    default: "108"
+    description: >+
+      Abandon an outstanding request (all).
+
+  - name: Tfsync
+    default: "50"
+    description: >+
+      Commit a file to stable storage (.L).
+
+  - name: Tgetattr
+    default: "24"
+    description: >+
+      Read the attributes of a file (.L).
+
+  - name: Tgetlock
+    default: "54"
+    description: >+
+      Query a byte-range lock (.L).
+
+  - name: Tlcreate
+    default: "14"
+    description: >+
+      Create a file and open the fid onto it (.L).
+
+  - name: Tlerror
+    default: "6"
+    description: >+
+      An error reply carrying only a Linux errno; the T form is illegal on the wire (.L).
+
+  - name: Tlink
+    default: "70"
+    description: >+
+      Create a hard link (.L).
+
+  - name: Tlock
+    default: "52"
+    description: >+
+      Acquire or release a byte-range lock (.L).
+
+  - name: Tlopen
+    default: "12"
+    description: >+
+      Open an existing file with Linux open(2) flags (.L).
+
+  - name: Tmkdir
+    default: "72"
+    description: >+
+      Create a directory (.L).
+
+  - name: Tmknod
+    default: "18"
+    description: >+
+      Create a device, socket or named pipe (.L).
+
+  - name: Topen
+    default: "112"
+    description: >+
+      Open an existing file (9P2000 and .u).
+
+  - name: Tread
+    default: "116"
+    description: >+
+      Read bytes from an open fid (all).
+
+  - name: Treaddir
+    default: "40"
+    description: >+
+      Read packed directory entries (.L).
+
+  - name: Treadlink
+    default: "22"
+    description: >+
+      Read the target of a symbolic link (.L).
+
+  - name: Tremove
+    default: "122"
+    description: >+
+      Remove the file a fid names and forget the fid (all).
+
+  - name: Trename
+    default: "20"
+    description: >+
+      Rename a file into another directory (.L).
+
+  - name: Trenameat
+    default: "74"
+    description: >+
+      Rename by directory fid and name (.L).
+
+  - name: Tsetattr
+    default: "26"
+    description: >+
+      Change the attributes of a file (.L).
+
+  - name: Tstat
+    default: "124"
+    description: >+
+      Read a stat record (9P2000 and .u).
+
+  - name: Tstatfs
+    default: "8"
+    description: >+
+      Ask for statistics about the filesystem behind a fid (.L).
+
+  - name: Tsymlink
+    default: "16"
+    description: >+
+      Create a symbolic link (.L).
+
+  - name: Tunlinkat
+    default: "76"
+    description: >+
+      Remove by directory fid and name (.L).
+
+  - name: Tversion
+    default: "100"
+    description: >+
+      Negotiate the dialect and the message size (all).
+
+  - name: Twalk
+    default: "110"
+    description: >+
+      Move a fid through the tree, element by element (all).
+
+  - name: Twrite
+    default: "118"
+    description: >+
+      Write bytes to an open fid (all).
+
+  - name: Twstat
+    default: "126"
+    description: >+
+      Change a file through a stat record (9P2000 and .u).
+
+  - name: Txattrcreate
+    default: "32"
+    description: >+
+      Prepare a fid to write an extended attribute (.L).
+
+  - name: Txattrwalk
+    default: "30"
+    description: >+
+      Walk a fid onto an extended attribute (.L).
+
+languageId: csharp
+metadata:
+  description: >-
+    Every 9P message type number of reference §2: 34 T/R pairs, 68 members, R == T + 1.
+
+    Terror (106) and Tlerror (6) are illegal on the wire and carry no record.

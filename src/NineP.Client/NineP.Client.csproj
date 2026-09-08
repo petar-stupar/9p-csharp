@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>NineP.Client</PackageId>
+    <Description>A pipelined 9P client for 9P2000, 9P2000.u and 9P2000.L with exact flush semantics and a high-level file API.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../NineP.Protocol/NineP.Protocol.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Label="the logging abstraction of IR-1">
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+  </ItemGroup>
+
+  <ItemGroup Label="tests see the internals of §5.9">
+    <InternalsVisibleTo Include="NineP.Protocol.Tests" />
+    <InternalsVisibleTo Include="NineP.Client.Tests" />
+    <InternalsVisibleTo Include="NineP.Server.Tests" />
+    <InternalsVisibleTo Include="NineP.TestSupport" />
+    <InternalsVisibleTo Include="NineP.Fuzz" />
+    <InternalsVisibleTo Include="NineP.Benchmarks" />
+  </ItemGroup>
+
+</Project>

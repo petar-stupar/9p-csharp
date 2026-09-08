@@ -1,0 +1,179 @@
+### YamlMime:ApiPage
+title: Class TlsTransport
+body:
+- api1: Class TlsTransport
+  id: NineP_Protocol_Transports_TlsTransport
+  metadata:
+    uid: NineP.Protocol.Transports.TlsTransport
+    commentId: T:NineP.Protocol.Transports.TlsTransport
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Transports
+      url: NineP.Protocol.Transports.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    TLS 1.2 / 1.3 over TCP, with chain and host-name verification on by default and optional mutual
+
+    TLS. The insecure opt-out is a separate explicit option that logs on every connect, and
+
+    <xref href="NineP.Protocol.Transports.TlsTransportOptions.AdditionalPeerCheck" data-throw-if-not-resolved="false"></xref> can only ever <b>add</b> a check: it runs
+
+    after verification has already passed, so no callback can turn a bad certificate into a good
+
+    one. Closing sends <code>close_notify</code> before the socket goes away (RK-57).
+- code: 'public sealed class TlsTransport : ITransport'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: TlsTransport
+    url: NineP.Protocol.Transports.TlsTransport.html
+- h4: Implements
+- list:
+  - text: ITransport
+    url: NineP.Protocol.Transports.ITransport.html
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: TlsTransport(TlsTransportOptions)
+  id: NineP_Protocol_Transports_TlsTransport__ctor_NineP_Protocol_Transports_TlsTransportOptions_
+  metadata:
+    uid: NineP.Protocol.Transports.TlsTransport.#ctor(NineP.Protocol.Transports.TlsTransportOptions)
+    commentId: M:NineP.Protocol.Transports.TlsTransport.#ctor(NineP.Protocol.Transports.TlsTransportOptions)
+- markdown: Creates a TLS transport.
+- code: public TlsTransport(TlsTransportOptions options)
+- h4: Parameters
+- parameters:
+  - name: options
+    type:
+    - text: TlsTransportOptions
+      url: NineP.Protocol.Transports.TlsTransportOptions.html
+    description: The TLS configuration; a server certificate is needed to listen.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: ArgumentNullException
+      url: https://learn.microsoft.com/dotnet/api/system.argumentnullexception
+    description: The options are null.
+- h2: Properties
+- api3: Schemes
+  id: NineP_Protocol_Transports_TlsTransport_Schemes
+  metadata:
+    uid: NineP.Protocol.Transports.TlsTransport.Schemes
+    commentId: P:NineP.Protocol.Transports.TlsTransport.Schemes
+- markdown: The schemes this transport can dial and bind.
+- code: public IReadOnlyCollection<NinePScheme> Schemes { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: IReadOnlyCollection
+      url: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1
+    - <
+    - text: NinePScheme
+      url: NineP.Protocol.Transports.NinePScheme.html
+    - '>'
+- h2: Methods
+- api3: ConnectAsync(NinePAddress, CancellationToken)
+  id: NineP_Protocol_Transports_TlsTransport_ConnectAsync_NineP_Protocol_Transports_NinePAddress_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Protocol.Transports.TlsTransport.ConnectAsync(NineP.Protocol.Transports.NinePAddress,System.Threading.CancellationToken)
+    commentId: M:NineP.Protocol.Transports.TlsTransport.ConnectAsync(NineP.Protocol.Transports.NinePAddress,System.Threading.CancellationToken)
+- markdown: Dials a TLS endpoint and completes the handshake before returning.
+- code: public ValueTask<INinePConnection> ConnectAsync(NinePAddress address, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: address
+    type:
+    - text: NinePAddress
+      url: NineP.Protocol.Transports.NinePAddress.html
+    description: The <code>tls://host:port</code> endpoint.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the dial and the handshake.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: INinePConnection
+      url: NineP.Protocol.Transports.INinePConnection.html
+    - '>'
+    description: The authenticated connection; the caller disposes it.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: ArgumentException
+      url: https://learn.microsoft.com/dotnet/api/system.argumentexception
+    description: The address is not a TLS address.
+  - type:
+    - text: AuthenticationException
+      url: https://learn.microsoft.com/dotnet/api/system.security.authentication.authenticationexception
+    description: The peer's certificate was not accepted.
+- api3: ListenAsync(NinePAddress, CancellationToken)
+  id: NineP_Protocol_Transports_TlsTransport_ListenAsync_NineP_Protocol_Transports_NinePAddress_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Protocol.Transports.TlsTransport.ListenAsync(NineP.Protocol.Transports.NinePAddress,System.Threading.CancellationToken)
+    commentId: M:NineP.Protocol.Transports.TlsTransport.ListenAsync(NineP.Protocol.Transports.NinePAddress,System.Threading.CancellationToken)
+- markdown: Binds a TLS endpoint.
+- code: public ValueTask<INinePListener> ListenAsync(NinePAddress address, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: address
+    type:
+    - text: NinePAddress
+      url: NineP.Protocol.Transports.NinePAddress.html
+    description: The <code>tls://host:port</code> endpoint; port 0 lets the kernel choose.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the bind.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: INinePListener
+      url: NineP.Protocol.Transports.INinePListener.html
+    - '>'
+    description: The listener, carrying the port that was actually bound.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: ArgumentException
+      url: https://learn.microsoft.com/dotnet/api/system.argumentexception
+    description: The address is not a TLS address.
+  - type:
+    - text: InvalidOperationException
+      url: https://learn.microsoft.com/dotnet/api/system.invalidoperationexception
+    description: No server certificate was configured.
+languageId: csharp
+metadata:
+  description: >-
+    TLS 1.2 / 1.3 over TCP, with chain and host-name verification on by default and optional mutual
+
+    TLS. The insecure opt-out is a separate explicit option that logs on every connect, and
+     can only ever add a check: it runs
+    after verification has already passed, so no callback can turn a bad certificate into a good
+
+    one. Closing sends close_notify before the socket goes away (RK-57).

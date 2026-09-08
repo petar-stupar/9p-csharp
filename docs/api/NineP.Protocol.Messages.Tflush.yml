@@ -1,0 +1,85 @@
+### YamlMime:ApiPage
+title: Struct Tflush
+body:
+- api1: Struct Tflush
+  id: NineP_Protocol_Messages_Tflush
+  metadata:
+    uid: NineP.Protocol.Messages.Tflush
+    commentId: T:NineP.Protocol.Messages.Tflush
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Messages
+      url: NineP.Protocol.Messages.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: Abandons an outstanding request (reference §5.3).
+- code: 'public readonly record struct Tflush : IMessage, IEquatable<Tflush>'
+- h4: Implements
+- list:
+  - text: IMessage
+    url: NineP.Protocol.Messages.IMessage.html
+  - text: IEquatable<Tflush>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: Tflush(ushort, ushort)
+  id: NineP_Protocol_Messages_Tflush__ctor_System_UInt16_System_UInt16_
+  metadata:
+    uid: NineP.Protocol.Messages.Tflush.#ctor(System.UInt16,System.UInt16)
+    commentId: M:NineP.Protocol.Messages.Tflush.#ctor(System.UInt16,System.UInt16)
+- markdown: Abandons an outstanding request (reference §5.3).
+- code: public Tflush(ushort Tag, ushort OldTag)
+- h4: Parameters
+- parameters:
+  - name: Tag
+    type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+    description: The message tag, which pairs this message with its partner.
+  - name: OldTag
+    type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+    description: The tag of the request being abandoned.
+- h2: Properties
+- api3: OldTag
+  id: NineP_Protocol_Messages_Tflush_OldTag
+  metadata:
+    uid: NineP.Protocol.Messages.Tflush.OldTag
+    commentId: P:NineP.Protocol.Messages.Tflush.OldTag
+- markdown: The tag of the request being abandoned.
+- code: public ushort OldTag { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+- api3: Tag
+  id: NineP_Protocol_Messages_Tflush_Tag
+  metadata:
+    uid: NineP.Protocol.Messages.Tflush.Tag
+    commentId: P:NineP.Protocol.Messages.Tflush.Tag
+- markdown: The message tag, which pairs this message with its partner.
+- code: public ushort Tag { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+languageId: csharp
+metadata:
+  description: Abandons an outstanding request (reference §5.3).

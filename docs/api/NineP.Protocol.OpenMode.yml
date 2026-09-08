@@ -1,0 +1,42 @@
+### YamlMime:ApiPage
+title: Enum OpenMode
+body:
+- api1: Enum OpenMode
+  id: NineP_Protocol_OpenMode
+  metadata:
+    uid: NineP.Protocol.OpenMode
+    commentId: T:NineP.Protocol.OpenMode
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol
+      url: NineP.Protocol.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: 'The access mode of an open fid: the low two bits of reference §4.5, unified across dialects.'
+- code: public enum OpenMode
+- h2: Fields
+- parameters:
+  - name: Exec
+    default: "3"
+    description: >+
+      Open for execution: a read that also checks execute permission.
+
+  - name: Read
+    default: "0"
+    description: >+
+      Open for reading.
+
+  - name: ReadWrite
+    default: "2"
+    description: >+
+      Open for reading and writing.
+
+  - name: Write
+    default: "1"
+    description: >+
+      Open for writing.
+
+languageId: csharp
+metadata:
+  description: 'The access mode of an open fid: the low two bits of reference §4.5, unified across dialects.'

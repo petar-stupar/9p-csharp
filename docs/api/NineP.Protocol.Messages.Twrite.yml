@@ -1,0 +1,146 @@
+### YamlMime:ApiPage
+title: Struct Twrite
+body:
+- api1: Struct Twrite
+  id: NineP_Protocol_Messages_Twrite
+  metadata:
+    uid: NineP.Protocol.Messages.Twrite
+    commentId: T:NineP.Protocol.Messages.Twrite
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Messages
+      url: NineP.Protocol.Messages.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    Writes bytes to an open fid (reference §5.6). The count must equal size - 23 (reference §8 rule
+
+    4).
+- code: 'public readonly record struct Twrite : IMessage, IEquatable<Twrite>'
+- h4: Implements
+- list:
+  - text: IMessage
+    url: NineP.Protocol.Messages.IMessage.html
+  - text: IEquatable<Twrite>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: Twrite(ushort, uint, ulong, ReadOnlyMemory<byte>)
+  id: NineP_Protocol_Messages_Twrite__ctor_System_UInt16_System_UInt32_System_UInt64_System_ReadOnlyMemory_System_Byte__
+  metadata:
+    uid: NineP.Protocol.Messages.Twrite.#ctor(System.UInt16,System.UInt32,System.UInt64,System.ReadOnlyMemory{System.Byte})
+    commentId: M:NineP.Protocol.Messages.Twrite.#ctor(System.UInt16,System.UInt32,System.UInt64,System.ReadOnlyMemory{System.Byte})
+- markdown: >-
+    Writes bytes to an open fid (reference §5.6). The count must equal size - 23 (reference §8 rule
+
+    4).
+- code: public Twrite(ushort Tag, uint Fid, ulong Offset, ReadOnlyMemory<byte> Data)
+- h4: Parameters
+- parameters:
+  - name: Tag
+    type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+    description: The message tag, which pairs this message with its partner.
+  - name: Fid
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The open fid to write to.
+  - name: Offset
+    type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+    description: The byte offset to write at; ignored on an append-only file.
+  - name: Data
+    type:
+    - text: ReadOnlyMemory
+      url: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+    - <
+    - text: byte
+      url: https://learn.microsoft.com/dotnet/api/system.byte
+    - '>'
+    description: >-
+      The bytes to write; the wire <code>count</code> is its length. On the receiving side the memory
+
+      <b>aliases the decoded frame</b> and is valid only until that frame is released — the end of
+
+      the handler call. A caller who keeps it copies (workspace architecture §12 rule 5).
+- h2: Properties
+- api3: Data
+  id: NineP_Protocol_Messages_Twrite_Data
+  metadata:
+    uid: NineP.Protocol.Messages.Twrite.Data
+    commentId: P:NineP.Protocol.Messages.Twrite.Data
+- markdown: >-
+    The bytes to write; the wire <code>count</code> is its length. On the receiving side the memory
+
+    <b>aliases the decoded frame</b> and is valid only until that frame is released — the end of
+
+    the handler call. A caller who keeps it copies (workspace architecture §12 rule 5).
+- code: public ReadOnlyMemory<byte> Data { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ReadOnlyMemory
+      url: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+    - <
+    - text: byte
+      url: https://learn.microsoft.com/dotnet/api/system.byte
+    - '>'
+- api3: Fid
+  id: NineP_Protocol_Messages_Twrite_Fid
+  metadata:
+    uid: NineP.Protocol.Messages.Twrite.Fid
+    commentId: P:NineP.Protocol.Messages.Twrite.Fid
+- markdown: The open fid to write to.
+- code: public uint Fid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Offset
+  id: NineP_Protocol_Messages_Twrite_Offset
+  metadata:
+    uid: NineP.Protocol.Messages.Twrite.Offset
+    commentId: P:NineP.Protocol.Messages.Twrite.Offset
+- markdown: The byte offset to write at; ignored on an append-only file.
+- code: public ulong Offset { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+- api3: Tag
+  id: NineP_Protocol_Messages_Twrite_Tag
+  metadata:
+    uid: NineP.Protocol.Messages.Twrite.Tag
+    commentId: P:NineP.Protocol.Messages.Twrite.Tag
+- markdown: The message tag, which pairs this message with its partner.
+- code: public ushort Tag { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+languageId: csharp
+metadata:
+  description: >-
+    Writes bytes to an open fid (reference §5.6). The count must equal size - 23 (reference §8 rule
+
+    4).

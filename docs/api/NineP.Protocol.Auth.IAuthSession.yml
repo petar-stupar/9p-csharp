@@ -1,0 +1,111 @@
+### YamlMime:ApiPage
+title: Interface IAuthSession
+body:
+- api1: Interface IAuthSession
+  id: NineP_Protocol_Auth_IAuthSession
+  metadata:
+    uid: NineP.Protocol.Auth.IAuthSession
+    commentId: T:NineP.Protocol.Auth.IAuthSession
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Auth
+      url: NineP.Protocol.Auth.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    One in-progress afid exchange. The core bounds it at 64 KiB and 30 s (workspace architecture
+
+    §5); what flows over it is this workspace's business, not 9P's.
+- code: 'public interface IAuthSession : IAsyncDisposable'
+- h4: Implements
+- list:
+  - text: IAsyncDisposable
+    url: https://learn.microsoft.com/dotnet/api/system.iasyncdisposable
+- h2: Properties
+- api3: Identity
+  id: NineP_Protocol_Auth_IAuthSession_Identity
+  metadata:
+    uid: NineP.Protocol.Auth.IAuthSession.Identity
+    commentId: P:NineP.Protocol.Auth.IAuthSession.Identity
+- markdown: >-
+    The identity once the exchange has succeeded; null until then, and an attach presenting
+        an afid whose session is still null fails EACCES.
+- code: Identity? Identity { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: Identity
+      url: NineP.Protocol.Auth.Identity.html
+    - '?'
+- h2: Methods
+- api3: ReadAsync(int, CancellationToken)
+  id: NineP_Protocol_Auth_IAuthSession_ReadAsync_System_Int32_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Protocol.Auth.IAuthSession.ReadAsync(System.Int32,System.Threading.CancellationToken)
+    commentId: M:NineP.Protocol.Auth.IAuthSession.ReadAsync(System.Int32,System.Threading.CancellationToken)
+- markdown: Produces bytes for the client to read from the afid.
+- code: ValueTask<ReadOnlyMemory<byte>> ReadAsync(int maxBytes, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: maxBytes
+    type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+    description: The most the client asked for.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the exchange.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: ReadOnlyMemory
+      url: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+    - <
+    - text: byte
+      url: https://learn.microsoft.com/dotnet/api/system.byte
+    - '>'
+    - '>'
+    description: The bytes to send; empty means the end of the exchange.
+- api3: WriteAsync(ReadOnlyMemory<byte>, CancellationToken)
+  id: NineP_Protocol_Auth_IAuthSession_WriteAsync_System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Protocol.Auth.IAuthSession.WriteAsync(System.ReadOnlyMemory{System.Byte},System.Threading.CancellationToken)
+    commentId: M:NineP.Protocol.Auth.IAuthSession.WriteAsync(System.ReadOnlyMemory{System.Byte},System.Threading.CancellationToken)
+- markdown: Receives bytes the client wrote to the afid.
+- code: ValueTask WriteAsync(ReadOnlyMemory<byte> data, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: data
+    type:
+    - text: ReadOnlyMemory
+      url: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+    - <
+    - text: byte
+      url: https://learn.microsoft.com/dotnet/api/system.byte
+    - '>'
+    description: The bytes from one <code>Twrite</code>.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the exchange.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask
+    description: A task that completes when the bytes have been consumed.
+languageId: csharp
+metadata:
+  description: >-
+    One in-progress afid exchange. The core bounds it at 64 KiB and 30 s (workspace architecture
+
+    §5); what flows over it is this workspace's business, not 9P's.

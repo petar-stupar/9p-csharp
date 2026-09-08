@@ -1,0 +1,722 @@
+### YamlMime:ApiPage
+title: Class NinePSession
+body:
+- api1: Class NinePSession
+  id: NineP_Client_NinePSession
+  metadata:
+    uid: NineP.Client.NinePSession
+    commentId: T:NineP.Client.NinePSession
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Client
+      url: NineP.Client.html
+  - name: Assembly
+    value: NineP.Client.dll
+- markdown: >-
+    A negotiated 9P session: the tag multiplexer, the attach root and the high-level file API.
+
+    Every request is pipelined — the session never waits for one reply before writing the next —
+
+    and every fid it hands out is released deterministically, by disposal rather than by collection.
+- code: 'public sealed class NinePSession : IAsyncDisposable'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: NinePSession
+    url: NineP.Client.NinePSession.html
+- h4: Implements
+- list:
+  - text: IAsyncDisposable
+    url: https://learn.microsoft.com/dotnet/api/system.iasyncdisposable
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Properties
+- api3: Dialect
+  id: NineP_Client_NinePSession_Dialect
+  metadata:
+    uid: NineP.Client.NinePSession.Dialect
+    commentId: P:NineP.Client.NinePSession.Dialect
+- markdown: The dialect that was negotiated.
+- code: public Dialect Dialect { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: Dialect
+      url: NineP.Protocol.Dialect.html
+- api3: MaxPayload
+  id: NineP_Client_NinePSession_MaxPayload
+  metadata:
+    uid: NineP.Client.NinePSession.MaxPayload
+    commentId: P:NineP.Client.NinePSession.MaxPayload
+- markdown: 'The largest payload one <code>Tread</code> or <code>Twrite</code> carries: msize - IOHDRSZ.'
+- code: public int MaxPayload { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: Messages
+  id: NineP_Client_NinePSession_Messages
+  metadata:
+    uid: NineP.Client.NinePSession.Messages
+    commentId: P:NineP.Client.NinePSession.Messages
+- markdown: The typed one-method-per-T-message API, for callers that want the wire directly.
+- code: public INinePMessages Messages { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: INinePMessages
+      url: NineP.Client.INinePMessages.html
+- api3: Msize
+  id: NineP_Client_NinePSession_Msize
+  metadata:
+    uid: NineP.Client.NinePSession.Msize
+    commentId: P:NineP.Client.NinePSession.Msize
+- markdown: The msize both sides agreed on.
+- code: public uint Msize { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Root
+  id: NineP_Client_NinePSession_Root
+  metadata:
+    uid: NineP.Client.NinePSession.Root
+    commentId: P:NineP.Client.NinePSession.Root
+- markdown: The root the first attach on this session bound, whichever overload made it.
+- code: public NinePFid Root { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: NinePFid
+      url: NineP.Client.NinePFid.html
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: InvalidOperationException
+      url: https://learn.microsoft.com/dotnet/api/system.invalidoperationexception
+    description: Nothing has attached on this session yet.
+- h2: Methods
+- api3: AttachAsync(CancellationToken)
+  id: NineP_Client_NinePSession_AttachAsync_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.NinePSession.AttachAsync(System.Threading.CancellationToken)
+    commentId: M:NineP.Client.NinePSession.AttachAsync(System.Threading.CancellationToken)
+- markdown: >-
+    Runs the afid exchange from <xref href="NineP.Client.ClientOptions.Credential" data-throw-if-not-resolved="false"></xref>, attaches, and returns
+
+    the root fid, which is also published as <xref href="NineP.Client.NinePSession.Root" data-throw-if-not-resolved="false"></xref>.
+- code: public ValueTask<NinePFid> AttachAsync(CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the attach.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: NinePFid
+      url: NineP.Client.NinePFid.html
+    - '>'
+    description: The root fid; the session clunks it on disposal.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: The server refused the auth or the attach.
+- api3: AttachAsync(string, string, ICredential?, CancellationToken)
+  id: NineP_Client_NinePSession_AttachAsync_System_String_System_String_NineP_Protocol_Auth_ICredential_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.NinePSession.AttachAsync(System.String,System.String,NineP.Protocol.Auth.ICredential,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.NinePSession.AttachAsync(System.String,System.String,NineP.Protocol.Auth.ICredential,System.Threading.CancellationToken)
+- markdown: >-
+    Attaches a tree, and publishes the fid as <xref href="NineP.Client.NinePSession.Root" data-throw-if-not-resolved="false"></xref> if this session has none yet.
+
+    A second attach on the same session is a second tree or a second user and leaves the first
+
+    root where it is; the exchange below is what makes both true of the one method.
+- code: public ValueTask<NinePFid> AttachAsync(string uname, string aname, ICredential? credential = null, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: uname
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The user name to claim; the identity still comes from the authenticator.
+  - name: aname
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The tree to attach to.
+  - name: credential
+    type:
+    - text: ICredential
+      url: NineP.Protocol.Auth.ICredential.html
+    - '?'
+    description: The credential to run over an afid; null attaches with NOFID.
+    optional: true
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the attach.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: NinePFid
+      url: NineP.Client.NinePFid.html
+    - '>'
+    description: The fid bound to the root of that tree; the caller disposes it.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: The server refused the auth or the attach.
+- api3: CreateFileAsync(string, uint, CancellationToken)
+  id: NineP_Client_NinePSession_CreateFileAsync_System_String_System_UInt32_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.NinePSession.CreateFileAsync(System.String,System.UInt32,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.NinePSession.CreateFileAsync(System.String,System.UInt32,System.Threading.CancellationToken)
+- markdown: Creates an empty regular file and returns it open for writing.
+- code: public ValueTask<NinePFid> CreateFileAsync(string path, uint perm = 420, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: path
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The file to create; its parent must exist.
+  - name: perm
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The permission bits.
+    optional: true
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: NinePFid
+      url: NineP.Client.NinePFid.html
+    - '>'
+    description: The new file, open for writing; the caller disposes it.
+- api3: DisposeAsync()
+  id: NineP_Client_NinePSession_DisposeAsync
+  metadata:
+    uid: NineP.Client.NinePSession.DisposeAsync
+    commentId: M:NineP.Client.NinePSession.DisposeAsync
+- markdown: >-
+    Clunks every outstanding fid and closes the transport. The clunks go out <b>together</b>
+
+    and share one deadline — <xref href="NineP.Client.ClientOptions.DisposeTimeout" data-throw-if-not-resolved="false"></xref>, or
+
+    <xref href="NineP.Client.ClientOptions.RequestTimeout" data-throw-if-not-resolved="false"></xref> when that is shorter — rather than being tried
+
+    one after another. Sequentially, a peer that is connected but silent costs
+
+    <code>2 × RequestTimeout</code> per fid (the clunk, then the <code>Tflush</code> that cancels it), so
+
+    disposal grew with the number of open fids: twelve minutes at the defaults with five fids.
+
+    Whatever the peer has not answered when the deadline passes is abandoned, which loses
+
+    nothing: the transport close below makes the server forget every fid on the connection.
+- code: public ValueTask DisposeAsync()
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask
+    description: A task that completes when the connection has closed.
+- api3: GetAttrAsync(string, CancellationToken)
+  id: NineP_Client_NinePSession_GetAttrAsync_System_String_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.NinePSession.GetAttrAsync(System.String,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.NinePSession.GetAttrAsync(System.String,System.Threading.CancellationToken)
+- markdown: Fetches the unified attributes of a path.
+- code: public ValueTask<Attr> GetAttrAsync(string path, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: path
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The path to stat.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: Attr
+      url: NineP.Protocol.Attr.html
+    - '>'
+    description: The attributes.
+- api3: MkdirAsync(string, uint, CancellationToken)
+  id: NineP_Client_NinePSession_MkdirAsync_System_String_System_UInt32_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.NinePSession.MkdirAsync(System.String,System.UInt32,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.NinePSession.MkdirAsync(System.String,System.UInt32,System.Threading.CancellationToken)
+- markdown: Creates a directory.
+- code: public ValueTask MkdirAsync(string path, uint perm = 493, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: path
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The directory to create; its parent must exist.
+  - name: perm
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The permission bits.
+    optional: true
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask
+    description: A task that completes when the directory exists.
+- api3: OpenFileAsync(string, OpenMode, OpenFlags, CancellationToken)
+  id: NineP_Client_NinePSession_OpenFileAsync_System_String_NineP_Protocol_OpenMode_NineP_Protocol_OpenFlags_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.NinePSession.OpenFileAsync(System.String,NineP.Protocol.OpenMode,NineP.Protocol.OpenFlags,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.NinePSession.OpenFileAsync(System.String,NineP.Protocol.OpenMode,NineP.Protocol.OpenFlags,System.Threading.CancellationToken)
+- markdown: Opens a file by path and returns an open fid.
+- code: public ValueTask<NinePFid> OpenFileAsync(string path, OpenMode mode, OpenFlags flags = OpenFlags.None, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: path
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The path to open.
+  - name: mode
+    type:
+    - text: OpenMode
+      url: NineP.Protocol.OpenMode.html
+    description: The access mode.
+  - name: flags
+    type:
+    - text: OpenFlags
+      url: NineP.Protocol.OpenFlags.html
+    description: Flags that modify the open.
+    optional: true
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the open.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: NinePFid
+      url: NineP.Client.NinePFid.html
+    - '>'
+    description: The open fid; the caller disposes it.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: The path did not resolve, or the open was refused.
+- api3: ReadDirAsync(string, CancellationToken)
+  id: NineP_Client_NinePSession_ReadDirAsync_System_String_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.NinePSession.ReadDirAsync(System.String,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.NinePSession.ReadDirAsync(System.String,System.Threading.CancellationToken)
+- markdown: Lists a directory as unified entries, in both dialect record formats.
+- code: public ValueTask<IReadOnlyList<DirEntry>> ReadDirAsync(string path, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: path
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The directory to list.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the listing.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: IReadOnlyList
+      url: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+    - <
+    - text: DirEntry
+      url: NineP.Protocol.DirEntry.html
+    - '>'
+    - '>'
+    description: The entries, in the order the server packed them.
+- api3: ReadFileAsync(string, CancellationToken)
+  id: NineP_Client_NinePSession_ReadFileAsync_System_String_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.NinePSession.ReadFileAsync(System.String,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.NinePSession.ReadFileAsync(System.String,System.Threading.CancellationToken)
+- markdown: Reads a whole file, chunked at the payload maximum with the in-flight window.
+- code: public ValueTask<byte[]> ReadFileAsync(string path, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: path
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The path to read.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the transfer.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: byte
+      url: https://learn.microsoft.com/dotnet/api/system.byte
+    - '['
+    - ']'
+    - '>'
+    description: Everything the file held.
+- api3: ReadlinkAsync(string, CancellationToken)
+  id: NineP_Client_NinePSession_ReadlinkAsync_System_String_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.NinePSession.ReadlinkAsync(System.String,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.NinePSession.ReadlinkAsync(System.String,System.Threading.CancellationToken)
+- markdown: "Reads a symbolic link's target: <code>Treadlink</code> in .L, the stat extension in .u."
+- code: public ValueTask<string> ReadlinkAsync(string path, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: path
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The link to read.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '>'
+    description: The text the link points at.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: The session is 9P2000, which cannot represent a link.
+- api3: RemoveAsync(string, CancellationToken)
+  id: NineP_Client_NinePSession_RemoveAsync_System_String_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.NinePSession.RemoveAsync(System.String,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.NinePSession.RemoveAsync(System.String,System.Threading.CancellationToken)
+- markdown: Removes a file or an empty directory.
+- code: public ValueTask RemoveAsync(string path, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: path
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The path to remove.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask
+    description: A task that completes when the server answered.
+- api3: RenameAsync(string, string, CancellationToken)
+  id: NineP_Client_NinePSession_RenameAsync_System_String_System_String_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.NinePSession.RenameAsync(System.String,System.String,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.NinePSession.RenameAsync(System.String,System.String,System.Threading.CancellationToken)
+- markdown: 'Renames or moves a path: <code>Trenameat</code> in .L, <code>Twstat.name</code> otherwise.'
+- code: public ValueTask RenameAsync(string oldPath, string newPath, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: oldPath
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The path as it is now.
+  - name: newPath
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The path it should have.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask
+    description: A task that completes when the server answered.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: A 9P2000 or .u session was asked to move across directories.
+- api3: SetAttrAsync(string, SetAttr, CancellationToken)
+  id: NineP_Client_NinePSession_SetAttrAsync_System_String_NineP_Protocol_SetAttr_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.NinePSession.SetAttrAsync(System.String,NineP.Protocol.SetAttr,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.NinePSession.SetAttrAsync(System.String,NineP.Protocol.SetAttr,System.Threading.CancellationToken)
+- markdown: Applies a partial attribute update to a path.
+- code: public ValueTask SetAttrAsync(string path, SetAttr update, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: path
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The path to change.
+  - name: update
+    type:
+    - text: SetAttr
+      url: NineP.Protocol.SetAttr.html
+    description: The fields to change.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask
+    description: A task that completes when the server answered.
+- api3: StatFsAsync(string, CancellationToken)
+  id: NineP_Client_NinePSession_StatFsAsync_System_String_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.NinePSession.StatFsAsync(System.String,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.NinePSession.StatFsAsync(System.String,System.Threading.CancellationToken)
+- markdown: Filesystem statistics (.L only).
+- code: public ValueTask<StatFs> StatFsAsync(string path, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: path
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: Any path on the filesystem being asked about.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: StatFs
+      url: NineP.Protocol.StatFs.html
+    - '>'
+    description: The statistics.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: The session is not .L.
+- api3: SymlinkAsync(string, string, CancellationToken)
+  id: NineP_Client_NinePSession_SymlinkAsync_System_String_System_String_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.NinePSession.SymlinkAsync(System.String,System.String,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.NinePSession.SymlinkAsync(System.String,System.String,System.Threading.CancellationToken)
+- markdown: Creates a symbolic link (.L only).
+- code: public ValueTask SymlinkAsync(string path, string target, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: path
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The link to create.
+  - name: target
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The text the link points at.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask
+    description: A task that completes when the link exists.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: The session is not .L.
+- api3: WalkAsync(string, CancellationToken)
+  id: NineP_Client_NinePSession_WalkAsync_System_String_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.NinePSession.WalkAsync(System.String,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.NinePSession.WalkAsync(System.String,System.Threading.CancellationToken)
+- markdown: Walks a slash-separated path from the root and returns the fid.
+- code: public ValueTask<NinePFid> WalkAsync(string path, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: path
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The path, for example "a/b/c"; "" and "/" name the root.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the walk.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: NinePFid
+      url: NineP.Client.NinePFid.html
+    - '>'
+    description: The fid the path names; the caller disposes it.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: The path did not resolve.
+- api3: WriteFileAsync(string, ReadOnlyMemory<byte>, CancellationToken)
+  id: NineP_Client_NinePSession_WriteFileAsync_System_String_System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Client.NinePSession.WriteFileAsync(System.String,System.ReadOnlyMemory{System.Byte},System.Threading.CancellationToken)
+    commentId: M:NineP.Client.NinePSession.WriteFileAsync(System.String,System.ReadOnlyMemory{System.Byte},System.Threading.CancellationToken)
+- markdown: Replaces a file's contents, truncating first.
+- code: public ValueTask WriteFileAsync(string path, ReadOnlyMemory<byte> data, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: path
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The path to write.
+  - name: data
+    type:
+    - text: ReadOnlyMemory
+      url: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+    - <
+    - text: byte
+      url: https://learn.microsoft.com/dotnet/api/system.byte
+    - '>'
+    description: The new contents.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the transfer.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask
+    description: A task that completes when every byte has been acknowledged.
+languageId: csharp
+metadata:
+  description: >-
+    A negotiated 9P session: the tag multiplexer, the attach root and the high-level file API.
+
+    Every request is pipelined — the session never waits for one reply before writing the next —
+
+    and every fid it hands out is released deterministically, by disposal rather than by collection.

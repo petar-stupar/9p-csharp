@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net10.0</TargetFrameworks>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup Label="the three packable assemblies, for the surface tests of task 45">
+    <ProjectReference Include="../../src/NineP.Protocol/NineP.Protocol.csproj" />
+    <ProjectReference Include="../../src/NineP.Client/NineP.Client.csproj" />
+    <ProjectReference Include="../../src/NineP.Server/NineP.Server.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Label="build the test assemblies indexed by the specification gate">
+    <ProjectReference Include="../NineP.Protocol.Tests/NineP.Protocol.Tests.csproj" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="../NineP.Client.Tests/NineP.Client.Tests.csproj" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="../NineP.Server.Tests/NineP.Server.Tests.csproj" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="../NineP.Docs.Tests/NineP.Docs.Tests.csproj" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="xunit.v3" />
+    <PackageReference Include="xunit.runner.visualstudio" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+  </ItemGroup>
+
+</Project>

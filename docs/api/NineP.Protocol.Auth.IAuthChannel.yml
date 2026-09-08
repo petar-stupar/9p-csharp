@@ -1,0 +1,85 @@
+### YamlMime:ApiPage
+title: Interface IAuthChannel
+body:
+- api1: Interface IAuthChannel
+  id: NineP_Protocol_Auth_IAuthChannel
+  metadata:
+    uid: NineP.Protocol.Auth.IAuthChannel
+    commentId: T:NineP.Protocol.Auth.IAuthChannel
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Auth
+      url: NineP.Protocol.Auth.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: The client's read/write view of an afid during <code>AttachAsync</code>.
+- code: public interface IAuthChannel
+- h2: Methods
+- api3: ReadAsync(int, CancellationToken)
+  id: NineP_Protocol_Auth_IAuthChannel_ReadAsync_System_Int32_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Protocol.Auth.IAuthChannel.ReadAsync(System.Int32,System.Threading.CancellationToken)
+    commentId: M:NineP.Protocol.Auth.IAuthChannel.ReadAsync(System.Int32,System.Threading.CancellationToken)
+- markdown: Reads the server's answer from the afid.
+- code: ValueTask<ReadOnlyMemory<byte>> ReadAsync(int maxBytes, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: maxBytes
+    type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+    description: The most to ask for.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the exchange.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: ReadOnlyMemory
+      url: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+    - <
+    - text: byte
+      url: https://learn.microsoft.com/dotnet/api/system.byte
+    - '>'
+    - '>'
+    description: The bytes the server produced; empty at the end of the exchange.
+- api3: WriteAsync(ReadOnlyMemory<byte>, CancellationToken)
+  id: NineP_Protocol_Auth_IAuthChannel_WriteAsync_System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Protocol.Auth.IAuthChannel.WriteAsync(System.ReadOnlyMemory{System.Byte},System.Threading.CancellationToken)
+    commentId: M:NineP.Protocol.Auth.IAuthChannel.WriteAsync(System.ReadOnlyMemory{System.Byte},System.Threading.CancellationToken)
+- markdown: Writes credential bytes to the afid.
+- code: ValueTask WriteAsync(ReadOnlyMemory<byte> data, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: data
+    type:
+    - text: ReadOnlyMemory
+      url: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+    - <
+    - text: byte
+      url: https://learn.microsoft.com/dotnet/api/system.byte
+    - '>'
+    description: The bytes to write.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the exchange.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask
+    description: A task that completes when the bytes have been written.
+languageId: csharp
+metadata:
+  description: The client's read/write view of an afid during AttachAsync.

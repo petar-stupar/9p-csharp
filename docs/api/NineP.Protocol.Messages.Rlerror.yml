@@ -1,0 +1,91 @@
+### YamlMime:ApiPage
+title: Struct Rlerror
+body:
+- api1: Struct Rlerror
+  id: NineP_Protocol_Messages_Rlerror
+  metadata:
+    uid: NineP.Protocol.Messages.Rlerror
+    commentId: T:NineP.Protocol.Messages.Rlerror
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Messages
+      url: NineP.Protocol.Messages.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: 'The error reply of 9P2000.L: an errno and nothing else (reference §3.1).'
+- code: 'public readonly record struct Rlerror : IMessage, IEquatable<Rlerror>'
+- h4: Implements
+- list:
+  - text: IMessage
+    url: NineP.Protocol.Messages.IMessage.html
+  - text: IEquatable<Rlerror>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: Rlerror(ushort, int)
+  id: NineP_Protocol_Messages_Rlerror__ctor_System_UInt16_System_Int32_
+  metadata:
+    uid: NineP.Protocol.Messages.Rlerror.#ctor(System.UInt16,System.Int32)
+    commentId: M:NineP.Protocol.Messages.Rlerror.#ctor(System.UInt16,System.Int32)
+- markdown: 'The error reply of 9P2000.L: an errno and nothing else (reference §3.1).'
+- code: public Rlerror(ushort Tag, int Ecode)
+- h4: Parameters
+- parameters:
+  - name: Tag
+    type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+    description: The message tag, which pairs this message with its partner.
+  - name: Ecode
+    type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+    description: >-
+      The Linux errno, signed like every errno in this API. The encoder refuses
+          a negative value and the decoder rejects one above <code>int.MaxValue</code> as
+          <xref href="NineP.Protocol.ProtocolErrorKind.Overflow" data-throw-if-not-resolved="false"></xref>.
+- h2: Properties
+- api3: Ecode
+  id: NineP_Protocol_Messages_Rlerror_Ecode
+  metadata:
+    uid: NineP.Protocol.Messages.Rlerror.Ecode
+    commentId: P:NineP.Protocol.Messages.Rlerror.Ecode
+- markdown: >-
+    The Linux errno, signed like every errno in this API. The encoder refuses
+        a negative value and the decoder rejects one above <code>int.MaxValue</code> as
+        <xref href="NineP.Protocol.ProtocolErrorKind.Overflow" data-throw-if-not-resolved="false"></xref>.
+- code: public int Ecode { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: Tag
+  id: NineP_Protocol_Messages_Rlerror_Tag
+  metadata:
+    uid: NineP.Protocol.Messages.Rlerror.Tag
+    commentId: P:NineP.Protocol.Messages.Rlerror.Tag
+- markdown: The message tag, which pairs this message with its partner.
+- code: public ushort Tag { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+languageId: csharp
+metadata:
+  description: 'The error reply of 9P2000.L: an errno and nothing else (reference §3.1).'

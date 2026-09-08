@@ -1,0 +1,1916 @@
+#nullable enable
+NineP.Protocol.Attr
+NineP.Protocol.Attr.<Clone>$() -> NineP.Protocol.Attr!
+NineP.Protocol.Attr.ATime.get -> NineP.Protocol.TimeSpec
+NineP.Protocol.Attr.ATime.init -> void
+NineP.Protocol.Attr.Attr() -> void
+NineP.Protocol.Attr.BTime.get -> NineP.Protocol.TimeSpec
+NineP.Protocol.Attr.BTime.init -> void
+NineP.Protocol.Attr.BlockSize.get -> ulong
+NineP.Protocol.Attr.BlockSize.init -> void
+NineP.Protocol.Attr.Blocks.get -> ulong
+NineP.Protocol.Attr.Blocks.init -> void
+NineP.Protocol.Attr.CTime.get -> NineP.Protocol.TimeSpec
+NineP.Protocol.Attr.CTime.init -> void
+NineP.Protocol.Attr.DataVersion.get -> ulong
+NineP.Protocol.Attr.DataVersion.init -> void
+NineP.Protocol.Attr.Equals(NineP.Protocol.Attr? other) -> bool
+NineP.Protocol.Attr.Flags.get -> NineP.Protocol.FileFlags
+NineP.Protocol.Attr.Flags.init -> void
+NineP.Protocol.Attr.Gen.get -> ulong
+NineP.Protocol.Attr.Gen.init -> void
+NineP.Protocol.Attr.Gid.get -> uint
+NineP.Protocol.Attr.Gid.init -> void
+NineP.Protocol.Attr.GroupName.get -> string!
+NineP.Protocol.Attr.GroupName.init -> void
+NineP.Protocol.Attr.Kind.get -> NineP.Protocol.FileKind
+NineP.Protocol.Attr.Kind.init -> void
+NineP.Protocol.Attr.MTime.get -> NineP.Protocol.TimeSpec
+NineP.Protocol.Attr.MTime.init -> void
+NineP.Protocol.Attr.ModifierName.get -> string!
+NineP.Protocol.Attr.ModifierName.init -> void
+NineP.Protocol.Attr.ModifierUid.get -> uint
+NineP.Protocol.Attr.ModifierUid.init -> void
+NineP.Protocol.Attr.NLink.get -> ulong
+NineP.Protocol.Attr.NLink.init -> void
+NineP.Protocol.Attr.Perm.get -> uint
+NineP.Protocol.Attr.Perm.init -> void
+NineP.Protocol.Attr.Qid.get -> NineP.Protocol.Qid
+NineP.Protocol.Attr.Qid.init -> void
+NineP.Protocol.Attr.Rdev.get -> NineP.Protocol.DeviceId?
+NineP.Protocol.Attr.Rdev.init -> void
+NineP.Protocol.Attr.Size.get -> ulong
+NineP.Protocol.Attr.Size.init -> void
+NineP.Protocol.Attr.SymlinkTarget.get -> string?
+NineP.Protocol.Attr.SymlinkTarget.init -> void
+NineP.Protocol.Attr.Uid.get -> uint
+NineP.Protocol.Attr.Uid.init -> void
+NineP.Protocol.Attr.UserName.get -> string!
+NineP.Protocol.Attr.UserName.init -> void
+NineP.Protocol.Auth.AuthRequest
+NineP.Protocol.Auth.AuthRequest.Aname.get -> string!
+NineP.Protocol.Auth.AuthRequest.Aname.init -> void
+NineP.Protocol.Auth.AuthRequest.AuthRequest() -> void
+NineP.Protocol.Auth.AuthRequest.AuthRequest(string! Uname, uint NUname, string! Aname) -> void
+NineP.Protocol.Auth.AuthRequest.Deconstruct(out string! Uname, out uint NUname, out string! Aname) -> void
+NineP.Protocol.Auth.AuthRequest.Equals(NineP.Protocol.Auth.AuthRequest other) -> bool
+NineP.Protocol.Auth.AuthRequest.NUname.get -> uint
+NineP.Protocol.Auth.AuthRequest.NUname.init -> void
+NineP.Protocol.Auth.AuthRequest.Uname.get -> string!
+NineP.Protocol.Auth.AuthRequest.Uname.init -> void
+NineP.Protocol.Auth.BearerTokenCredential
+NineP.Protocol.Auth.BearerTokenCredential.AuthenticateAsync(NineP.Protocol.Auth.IAuthChannel! channel, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask
+NineP.Protocol.Auth.BearerTokenCredential.BearerTokenCredential(System.Func<System.Threading.CancellationToken, System.Threading.Tasks.ValueTask<string!>>! tokenProvider) -> void
+NineP.Protocol.Auth.BearerTokenCredential.BearerTokenCredential(string! accessToken) -> void
+NineP.Protocol.Auth.CallbackCredential
+NineP.Protocol.Auth.CallbackCredential.AuthenticateAsync(NineP.Protocol.Auth.IAuthChannel! channel, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask
+NineP.Protocol.Auth.CallbackCredential.CallbackCredential(System.Func<NineP.Protocol.Auth.IAuthChannel!, System.Threading.CancellationToken, System.Threading.Tasks.ValueTask>! exchange) -> void
+NineP.Protocol.Auth.ConstantTime
+NineP.Protocol.Auth.IAuthChannel
+NineP.Protocol.Auth.IAuthChannel.ReadAsync(int maxBytes, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<System.ReadOnlyMemory<byte>>
+NineP.Protocol.Auth.IAuthChannel.WriteAsync(System.ReadOnlyMemory<byte> data, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask
+NineP.Protocol.Auth.IAuthSession
+NineP.Protocol.Auth.IAuthSession.Identity.get -> NineP.Protocol.Auth.Identity?
+NineP.Protocol.Auth.IAuthSession.ReadAsync(int maxBytes, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<System.ReadOnlyMemory<byte>>
+NineP.Protocol.Auth.IAuthSession.WriteAsync(System.ReadOnlyMemory<byte> data, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask
+NineP.Protocol.Auth.IAuthenticator
+NineP.Protocol.Auth.IAuthenticator.BeginAsync(NineP.Protocol.Auth.AuthRequest request, NineP.Protocol.Transports.PeerIdentity? peer, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Auth.IAuthSession?>
+NineP.Protocol.Auth.IAuthenticator.IsRequired.get -> bool
+NineP.Protocol.Auth.ICredential
+NineP.Protocol.Auth.ICredential.AuthenticateAsync(NineP.Protocol.Auth.IAuthChannel! channel, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask
+NineP.Protocol.Auth.IPasswordStore
+NineP.Protocol.Auth.IPasswordStore.VerifyAsync(string! user, System.ReadOnlyMemory<byte> password, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Auth.Identity?>
+NineP.Protocol.Auth.Identity
+NineP.Protocol.Auth.Identity.<Clone>$() -> NineP.Protocol.Auth.Identity!
+NineP.Protocol.Auth.Identity.Claims.get -> System.Collections.Generic.IReadOnlyDictionary<string!, string!>!
+NineP.Protocol.Auth.Identity.Claims.init -> void
+NineP.Protocol.Auth.Identity.Equals(NineP.Protocol.Auth.Identity? other) -> bool
+NineP.Protocol.Auth.Identity.Groups.get -> System.Collections.Generic.IReadOnlyList<string!>!
+NineP.Protocol.Auth.Identity.Groups.init -> void
+NineP.Protocol.Auth.Identity.Identity() -> void
+NineP.Protocol.Auth.Identity.IsAuthenticated.get -> bool
+NineP.Protocol.Auth.Identity.Uid.get -> uint
+NineP.Protocol.Auth.Identity.Uid.init -> void
+NineP.Protocol.Auth.Identity.User.get -> string!
+NineP.Protocol.Auth.Identity.User.init -> void
+NineP.Protocol.Auth.PasswordAuthenticator
+NineP.Protocol.Auth.PasswordAuthenticator.BeginAsync(NineP.Protocol.Auth.AuthRequest request, NineP.Protocol.Transports.PeerIdentity? peer, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Auth.IAuthSession?>
+NineP.Protocol.Auth.PasswordAuthenticator.IsRequired.get -> bool
+NineP.Protocol.Auth.PasswordAuthenticator.PasswordAuthenticator(NineP.Protocol.Auth.IPasswordStore! store) -> void
+NineP.Protocol.Auth.PasswordCredential
+NineP.Protocol.Auth.PasswordCredential.AuthenticateAsync(NineP.Protocol.Auth.IAuthChannel! channel, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask
+NineP.Protocol.Auth.PasswordCredential.PasswordCredential(string! user, string! password) -> void
+NineP.Protocol.Auth.PasswordFileStore
+NineP.Protocol.Auth.PasswordFileStore.VerifyAsync(string! user, System.ReadOnlyMemory<byte> password, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Auth.Identity?>
+NineP.Protocol.Auth.TlsClientCertAuthenticator
+NineP.Protocol.Auth.TlsClientCertAuthenticator.BeginAsync(NineP.Protocol.Auth.AuthRequest request, NineP.Protocol.Transports.PeerIdentity? peer, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Auth.IAuthSession?>
+NineP.Protocol.Auth.TlsClientCertAuthenticator.IsRequired.get -> bool
+NineP.Protocol.Auth.TlsClientCertAuthenticator.TlsClientCertAuthenticator(System.Func<System.Security.Cryptography.X509Certificates.X509Certificate2!, NineP.Protocol.Auth.Identity?>? mapper = null) -> void
+NineP.Protocol.Auth.TokenAuthenticator
+NineP.Protocol.Auth.TokenAuthenticator.BeginAsync(NineP.Protocol.Auth.AuthRequest request, NineP.Protocol.Transports.PeerIdentity? peer, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Auth.IAuthSession?>
+NineP.Protocol.Auth.TokenAuthenticator.IsRequired.get -> bool
+NineP.Protocol.Auth.TokenAuthenticator.TokenAuthenticator(System.Func<NineP.Protocol.Auth.AuthRequest, System.ReadOnlyMemory<byte>?>! secretLookup) -> void
+NineP.Protocol.Auth.TokenAuthenticator.TokenAuthenticator(System.ReadOnlyMemory<byte> secret) -> void
+NineP.Protocol.Auth.TokenCredential
+NineP.Protocol.Auth.TokenCredential.AuthenticateAsync(NineP.Protocol.Auth.IAuthChannel! channel, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask
+NineP.Protocol.Auth.TokenCredential.TokenCredential(System.ReadOnlyMemory<byte> token) -> void
+NineP.Protocol.Codec.MessageCodec
+NineP.Protocol.Constants
+NineP.Protocol.DeviceId
+NineP.Protocol.DeviceId.Deconstruct(out uint Major, out uint Minor) -> void
+NineP.Protocol.DeviceId.DeviceId() -> void
+NineP.Protocol.DeviceId.DeviceId(uint Major, uint Minor) -> void
+NineP.Protocol.DeviceId.Equals(NineP.Protocol.DeviceId other) -> bool
+NineP.Protocol.DeviceId.Major.get -> uint
+NineP.Protocol.DeviceId.Major.init -> void
+NineP.Protocol.DeviceId.Minor.get -> uint
+NineP.Protocol.DeviceId.Minor.init -> void
+NineP.Protocol.Dialect
+NineP.Protocol.Dialect.P9_2000 = 0 -> NineP.Protocol.Dialect
+NineP.Protocol.Dialect.P9_2000_L = 2 -> NineP.Protocol.Dialect
+NineP.Protocol.Dialect.P9_2000_u = 1 -> NineP.Protocol.Dialect
+NineP.Protocol.DirEntry
+NineP.Protocol.DirEntry.Cursor.get -> ulong
+NineP.Protocol.DirEntry.Cursor.init -> void
+NineP.Protocol.DirEntry.Deconstruct(out string! Name, out NineP.Protocol.Qid Qid, out NineP.Protocol.FileKind Kind, out ulong Cursor) -> void
+NineP.Protocol.DirEntry.DirEntry() -> void
+NineP.Protocol.DirEntry.DirEntry(string! Name, NineP.Protocol.Qid Qid, NineP.Protocol.FileKind Kind, ulong Cursor) -> void
+NineP.Protocol.DirEntry.DirentType.get -> byte
+NineP.Protocol.DirEntry.Equals(NineP.Protocol.DirEntry other) -> bool
+NineP.Protocol.DirEntry.Kind.get -> NineP.Protocol.FileKind
+NineP.Protocol.DirEntry.Kind.init -> void
+NineP.Protocol.DirEntry.Name.get -> string!
+NineP.Protocol.DirEntry.Name.init -> void
+NineP.Protocol.DirEntry.Qid.get -> NineP.Protocol.Qid
+NineP.Protocol.DirEntry.Qid.init -> void
+NineP.Protocol.Errno
+NineP.Protocol.ErrorTable
+NineP.Protocol.FileFlags
+NineP.Protocol.FileFlags.Append = 1 -> NineP.Protocol.FileFlags
+NineP.Protocol.FileFlags.Auth = 8 -> NineP.Protocol.FileFlags
+NineP.Protocol.FileFlags.Exclusive = 2 -> NineP.Protocol.FileFlags
+NineP.Protocol.FileFlags.Mount = 16 -> NineP.Protocol.FileFlags
+NineP.Protocol.FileFlags.None = 0 -> NineP.Protocol.FileFlags
+NineP.Protocol.FileFlags.Temporary = 4 -> NineP.Protocol.FileFlags
+NineP.Protocol.FileKind
+NineP.Protocol.FileKind.BlockDevice = 6 -> NineP.Protocol.FileKind
+NineP.Protocol.FileKind.CharDevice = 5 -> NineP.Protocol.FileKind
+NineP.Protocol.FileKind.Directory = 1 -> NineP.Protocol.FileKind
+NineP.Protocol.FileKind.Fifo = 3 -> NineP.Protocol.FileKind
+NineP.Protocol.FileKind.File = 0 -> NineP.Protocol.FileKind
+NineP.Protocol.FileKind.Socket = 4 -> NineP.Protocol.FileKind
+NineP.Protocol.FileKind.Symlink = 2 -> NineP.Protocol.FileKind
+NineP.Protocol.Limits
+NineP.Protocol.Limits.<Clone>$() -> NineP.Protocol.Limits!
+NineP.Protocol.Limits.AuthTimeout.get -> System.TimeSpan
+NineP.Protocol.Limits.AuthTimeout.init -> void
+NineP.Protocol.Limits.Equals(NineP.Protocol.Limits? other) -> bool
+NineP.Protocol.Limits.FlushReservePerConnection.get -> int
+NineP.Protocol.Limits.FlushReservePerConnection.init -> void
+NineP.Protocol.Limits.IdleTimeout.get -> System.TimeSpan
+NineP.Protocol.Limits.IdleTimeout.init -> void
+NineP.Protocol.Limits.Limits() -> void
+NineP.Protocol.Limits.MaxAuthBytes.get -> int
+NineP.Protocol.Limits.MaxAuthBytes.init -> void
+NineP.Protocol.Limits.MaxConnectionsPerListener.get -> int
+NineP.Protocol.Limits.MaxConnectionsPerListener.init -> void
+NineP.Protocol.Limits.MaxFidsPerConnection.get -> int
+NineP.Protocol.Limits.MaxFidsPerConnection.init -> void
+NineP.Protocol.Limits.MaxInFlightPerConnection.get -> int
+NineP.Protocol.Limits.MaxInFlightPerConnection.init -> void
+NineP.Protocol.Limits.MaxInFlightPerListener.get -> int
+NineP.Protocol.Limits.MaxInFlightPerListener.init -> void
+NineP.Protocol.Limits.MaxMsize.get -> uint
+NineP.Protocol.Limits.MaxMsize.init -> void
+NineP.Protocol.Limits.MaxNameLength.get -> int
+NineP.Protocol.Limits.MaxNameLength.init -> void
+NineP.Protocol.Limits.MinMsize.get -> uint
+NineP.Protocol.Limits.MinMsize.init -> void
+NineP.Protocol.Limits.PreNegotiationFrameCap.get -> uint
+NineP.Protocol.Limits.PreNegotiationFrameCap.init -> void
+NineP.Protocol.Limits.ReadHeaderTimeout.get -> System.TimeSpan
+NineP.Protocol.Limits.ReadHeaderTimeout.init -> void
+NineP.Protocol.Limits.Validate() -> void
+NineP.Protocol.LockFlags
+NineP.Protocol.LockFlags.Block = 1 -> NineP.Protocol.LockFlags
+NineP.Protocol.LockFlags.None = 0 -> NineP.Protocol.LockFlags
+NineP.Protocol.LockFlags.Reclaim = 2 -> NineP.Protocol.LockFlags
+NineP.Protocol.LockQueryResult
+NineP.Protocol.LockQueryResult.ClientId.get -> string!
+NineP.Protocol.LockQueryResult.ClientId.init -> void
+NineP.Protocol.LockQueryResult.Deconstruct(out NineP.Protocol.LockType Type, out ulong Start, out ulong Length, out uint ProcId, out string! ClientId) -> void
+NineP.Protocol.LockQueryResult.Equals(NineP.Protocol.LockQueryResult other) -> bool
+NineP.Protocol.LockQueryResult.Length.get -> ulong
+NineP.Protocol.LockQueryResult.Length.init -> void
+NineP.Protocol.LockQueryResult.LockQueryResult() -> void
+NineP.Protocol.LockQueryResult.LockQueryResult(NineP.Protocol.LockType Type, ulong Start, ulong Length, uint ProcId, string! ClientId) -> void
+NineP.Protocol.LockQueryResult.ProcId.get -> uint
+NineP.Protocol.LockQueryResult.ProcId.init -> void
+NineP.Protocol.LockQueryResult.Start.get -> ulong
+NineP.Protocol.LockQueryResult.Start.init -> void
+NineP.Protocol.LockQueryResult.Type.get -> NineP.Protocol.LockType
+NineP.Protocol.LockQueryResult.Type.init -> void
+NineP.Protocol.LockRequest
+NineP.Protocol.LockRequest.ClientId.get -> string!
+NineP.Protocol.LockRequest.ClientId.init -> void
+NineP.Protocol.LockRequest.Deconstruct(out NineP.Protocol.LockType Type, out NineP.Protocol.LockFlags Flags, out ulong Start, out ulong Length, out uint ProcId, out string! ClientId) -> void
+NineP.Protocol.LockRequest.Equals(NineP.Protocol.LockRequest other) -> bool
+NineP.Protocol.LockRequest.Flags.get -> NineP.Protocol.LockFlags
+NineP.Protocol.LockRequest.Flags.init -> void
+NineP.Protocol.LockRequest.Length.get -> ulong
+NineP.Protocol.LockRequest.Length.init -> void
+NineP.Protocol.LockRequest.LockRequest() -> void
+NineP.Protocol.LockRequest.LockRequest(NineP.Protocol.LockType Type, NineP.Protocol.LockFlags Flags, ulong Start, ulong Length, uint ProcId, string! ClientId) -> void
+NineP.Protocol.LockRequest.ProcId.get -> uint
+NineP.Protocol.LockRequest.ProcId.init -> void
+NineP.Protocol.LockRequest.Start.get -> ulong
+NineP.Protocol.LockRequest.Start.init -> void
+NineP.Protocol.LockRequest.Type.get -> NineP.Protocol.LockType
+NineP.Protocol.LockRequest.Type.init -> void
+NineP.Protocol.LockStatus
+NineP.Protocol.LockStatus.Blocked = 1 -> NineP.Protocol.LockStatus
+NineP.Protocol.LockStatus.Error = 2 -> NineP.Protocol.LockStatus
+NineP.Protocol.LockStatus.Grace = 3 -> NineP.Protocol.LockStatus
+NineP.Protocol.LockStatus.Success = 0 -> NineP.Protocol.LockStatus
+NineP.Protocol.LockType
+NineP.Protocol.LockType.ReadLock = 0 -> NineP.Protocol.LockType
+NineP.Protocol.LockType.Unlock = 2 -> NineP.Protocol.LockType
+NineP.Protocol.LockType.WriteLock = 1 -> NineP.Protocol.LockType
+NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Rattach = 105 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Rauth = 103 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Rclunk = 121 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Rcreate = 115 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Rerror = 107 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Rflush = 109 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Rfsync = 51 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Rgetattr = 25 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Rgetlock = 55 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Rlcreate = 15 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Rlerror = 7 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Rlink = 71 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Rlock = 53 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Rlopen = 13 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Rmkdir = 73 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Rmknod = 19 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Ropen = 113 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Rread = 117 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Rreaddir = 41 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Rreadlink = 23 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Rremove = 123 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Rrename = 21 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Rrenameat = 75 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Rsetattr = 27 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Rstat = 125 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Rstatfs = 9 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Rsymlink = 17 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Runlinkat = 77 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Rversion = 101 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Rwalk = 111 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Rwrite = 119 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Rwstat = 127 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Rxattrcreate = 33 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Rxattrwalk = 31 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Tattach = 104 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Tauth = 102 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Tclunk = 120 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Tcreate = 114 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Terror = 106 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Tflush = 108 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Tfsync = 50 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Tgetattr = 24 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Tgetlock = 54 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Tlcreate = 14 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Tlerror = 6 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Tlink = 70 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Tlock = 52 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Tlopen = 12 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Tmkdir = 72 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Tmknod = 18 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Topen = 112 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Tread = 116 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Treaddir = 40 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Treadlink = 22 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Tremove = 122 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Trename = 20 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Trenameat = 74 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Tsetattr = 26 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Tstat = 124 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Tstatfs = 8 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Tsymlink = 16 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Tunlinkat = 76 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Tversion = 100 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Twalk = 110 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Twrite = 118 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Twstat = 126 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Txattrcreate = 32 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageType.Txattrwalk = 30 -> NineP.Protocol.MessageType
+NineP.Protocol.MessageTypes
+NineP.Protocol.Messages.GetAttrMask
+NineP.Protocol.Messages.GetAttrMask.ATime = 32 -> NineP.Protocol.Messages.GetAttrMask
+NineP.Protocol.Messages.GetAttrMask.All = NineP.Protocol.Messages.GetAttrMask.Basic | NineP.Protocol.Messages.GetAttrMask.BTime | NineP.Protocol.Messages.GetAttrMask.Gen | NineP.Protocol.Messages.GetAttrMask.DataVersion -> NineP.Protocol.Messages.GetAttrMask
+NineP.Protocol.Messages.GetAttrMask.BTime = 2048 -> NineP.Protocol.Messages.GetAttrMask
+NineP.Protocol.Messages.GetAttrMask.Basic = NineP.Protocol.Messages.GetAttrMask.Mode | NineP.Protocol.Messages.GetAttrMask.NLink | NineP.Protocol.Messages.GetAttrMask.Uid | NineP.Protocol.Messages.GetAttrMask.Gid | NineP.Protocol.Messages.GetAttrMask.Rdev | NineP.Protocol.Messages.GetAttrMask.ATime | NineP.Protocol.Messages.GetAttrMask.MTime | NineP.Protocol.Messages.GetAttrMask.CTime | NineP.Protocol.Messages.GetAttrMask.Ino | NineP.Protocol.Messages.GetAttrMask.Size | NineP.Protocol.Messages.GetAttrMask.Blocks -> NineP.Protocol.Messages.GetAttrMask
+NineP.Protocol.Messages.GetAttrMask.Blocks = 1024 -> NineP.Protocol.Messages.GetAttrMask
+NineP.Protocol.Messages.GetAttrMask.CTime = 128 -> NineP.Protocol.Messages.GetAttrMask
+NineP.Protocol.Messages.GetAttrMask.DataVersion = 8192 -> NineP.Protocol.Messages.GetAttrMask
+NineP.Protocol.Messages.GetAttrMask.Gen = 4096 -> NineP.Protocol.Messages.GetAttrMask
+NineP.Protocol.Messages.GetAttrMask.Gid = 8 -> NineP.Protocol.Messages.GetAttrMask
+NineP.Protocol.Messages.GetAttrMask.Ino = 256 -> NineP.Protocol.Messages.GetAttrMask
+NineP.Protocol.Messages.GetAttrMask.MTime = 64 -> NineP.Protocol.Messages.GetAttrMask
+NineP.Protocol.Messages.GetAttrMask.Mode = 1 -> NineP.Protocol.Messages.GetAttrMask
+NineP.Protocol.Messages.GetAttrMask.NLink = 2 -> NineP.Protocol.Messages.GetAttrMask
+NineP.Protocol.Messages.GetAttrMask.None = 0 -> NineP.Protocol.Messages.GetAttrMask
+NineP.Protocol.Messages.GetAttrMask.Rdev = 16 -> NineP.Protocol.Messages.GetAttrMask
+NineP.Protocol.Messages.GetAttrMask.Size = 512 -> NineP.Protocol.Messages.GetAttrMask
+NineP.Protocol.Messages.GetAttrMask.Uid = 4 -> NineP.Protocol.Messages.GetAttrMask
+NineP.Protocol.Messages.IMessage
+NineP.Protocol.Messages.IMessage.Tag.get -> ushort
+NineP.Protocol.Messages.IMessage.Type.get -> NineP.Protocol.MessageType
+NineP.Protocol.Messages.Rattach
+NineP.Protocol.Messages.Rattach.Deconstruct(out ushort Tag, out NineP.Protocol.Qid Qid) -> void
+NineP.Protocol.Messages.Rattach.Equals(NineP.Protocol.Messages.Rattach other) -> bool
+NineP.Protocol.Messages.Rattach.Qid.get -> NineP.Protocol.Qid
+NineP.Protocol.Messages.Rattach.Qid.init -> void
+NineP.Protocol.Messages.Rattach.Rattach() -> void
+NineP.Protocol.Messages.Rattach.Rattach(ushort Tag, NineP.Protocol.Qid Qid) -> void
+NineP.Protocol.Messages.Rattach.Tag.get -> ushort
+NineP.Protocol.Messages.Rattach.Tag.init -> void
+NineP.Protocol.Messages.Rauth
+NineP.Protocol.Messages.Rauth.Aqid.get -> NineP.Protocol.Qid
+NineP.Protocol.Messages.Rauth.Aqid.init -> void
+NineP.Protocol.Messages.Rauth.Deconstruct(out ushort Tag, out NineP.Protocol.Qid Aqid) -> void
+NineP.Protocol.Messages.Rauth.Equals(NineP.Protocol.Messages.Rauth other) -> bool
+NineP.Protocol.Messages.Rauth.Rauth() -> void
+NineP.Protocol.Messages.Rauth.Rauth(ushort Tag, NineP.Protocol.Qid Aqid) -> void
+NineP.Protocol.Messages.Rauth.Tag.get -> ushort
+NineP.Protocol.Messages.Rauth.Tag.init -> void
+NineP.Protocol.Messages.Rclunk
+NineP.Protocol.Messages.Rclunk.Deconstruct(out ushort Tag) -> void
+NineP.Protocol.Messages.Rclunk.Equals(NineP.Protocol.Messages.Rclunk other) -> bool
+NineP.Protocol.Messages.Rclunk.Rclunk() -> void
+NineP.Protocol.Messages.Rclunk.Rclunk(ushort Tag) -> void
+NineP.Protocol.Messages.Rclunk.Tag.get -> ushort
+NineP.Protocol.Messages.Rclunk.Tag.init -> void
+NineP.Protocol.Messages.Rcreate
+NineP.Protocol.Messages.Rcreate.Deconstruct(out ushort Tag, out NineP.Protocol.Qid Qid, out uint Iounit) -> void
+NineP.Protocol.Messages.Rcreate.Equals(NineP.Protocol.Messages.Rcreate other) -> bool
+NineP.Protocol.Messages.Rcreate.Iounit.get -> uint
+NineP.Protocol.Messages.Rcreate.Iounit.init -> void
+NineP.Protocol.Messages.Rcreate.Qid.get -> NineP.Protocol.Qid
+NineP.Protocol.Messages.Rcreate.Qid.init -> void
+NineP.Protocol.Messages.Rcreate.Rcreate() -> void
+NineP.Protocol.Messages.Rcreate.Rcreate(ushort Tag, NineP.Protocol.Qid Qid, uint Iounit) -> void
+NineP.Protocol.Messages.Rcreate.Tag.get -> ushort
+NineP.Protocol.Messages.Rcreate.Tag.init -> void
+NineP.Protocol.Messages.Rerror
+NineP.Protocol.Messages.Rerror.Deconstruct(out ushort Tag, out string! Ename, out int Errno) -> void
+NineP.Protocol.Messages.Rerror.Ename.get -> string!
+NineP.Protocol.Messages.Rerror.Ename.init -> void
+NineP.Protocol.Messages.Rerror.Equals(NineP.Protocol.Messages.Rerror other) -> bool
+NineP.Protocol.Messages.Rerror.Errno.get -> int
+NineP.Protocol.Messages.Rerror.Errno.init -> void
+NineP.Protocol.Messages.Rerror.Rerror() -> void
+NineP.Protocol.Messages.Rerror.Rerror(ushort Tag, string! Ename, int Errno) -> void
+NineP.Protocol.Messages.Rerror.Tag.get -> ushort
+NineP.Protocol.Messages.Rerror.Tag.init -> void
+NineP.Protocol.Messages.Rflush
+NineP.Protocol.Messages.Rflush.Deconstruct(out ushort Tag) -> void
+NineP.Protocol.Messages.Rflush.Equals(NineP.Protocol.Messages.Rflush other) -> bool
+NineP.Protocol.Messages.Rflush.Rflush() -> void
+NineP.Protocol.Messages.Rflush.Rflush(ushort Tag) -> void
+NineP.Protocol.Messages.Rflush.Tag.get -> ushort
+NineP.Protocol.Messages.Rflush.Tag.init -> void
+NineP.Protocol.Messages.Rfsync
+NineP.Protocol.Messages.Rfsync.Deconstruct(out ushort Tag) -> void
+NineP.Protocol.Messages.Rfsync.Equals(NineP.Protocol.Messages.Rfsync other) -> bool
+NineP.Protocol.Messages.Rfsync.Rfsync() -> void
+NineP.Protocol.Messages.Rfsync.Rfsync(ushort Tag) -> void
+NineP.Protocol.Messages.Rfsync.Tag.get -> ushort
+NineP.Protocol.Messages.Rfsync.Tag.init -> void
+NineP.Protocol.Messages.Rgetattr
+NineP.Protocol.Messages.Rgetattr.ATime.get -> NineP.Protocol.TimeSpec
+NineP.Protocol.Messages.Rgetattr.ATime.init -> void
+NineP.Protocol.Messages.Rgetattr.BTime.get -> NineP.Protocol.TimeSpec
+NineP.Protocol.Messages.Rgetattr.BTime.init -> void
+NineP.Protocol.Messages.Rgetattr.BlkSize.get -> ulong
+NineP.Protocol.Messages.Rgetattr.BlkSize.init -> void
+NineP.Protocol.Messages.Rgetattr.Blocks.get -> ulong
+NineP.Protocol.Messages.Rgetattr.Blocks.init -> void
+NineP.Protocol.Messages.Rgetattr.CTime.get -> NineP.Protocol.TimeSpec
+NineP.Protocol.Messages.Rgetattr.CTime.init -> void
+NineP.Protocol.Messages.Rgetattr.DataVersion.get -> ulong
+NineP.Protocol.Messages.Rgetattr.DataVersion.init -> void
+NineP.Protocol.Messages.Rgetattr.Deconstruct(out ushort Tag, out NineP.Protocol.Messages.GetAttrMask Valid, out NineP.Protocol.Qid Qid, out uint Mode, out uint Uid, out uint Gid, out ulong NLink, out ulong Rdev, out ulong Size, out ulong BlkSize, out ulong Blocks, out NineP.Protocol.TimeSpec ATime, out NineP.Protocol.TimeSpec MTime, out NineP.Protocol.TimeSpec CTime, out NineP.Protocol.TimeSpec BTime, out ulong Gen, out ulong DataVersion) -> void
+NineP.Protocol.Messages.Rgetattr.Equals(NineP.Protocol.Messages.Rgetattr other) -> bool
+NineP.Protocol.Messages.Rgetattr.Gen.get -> ulong
+NineP.Protocol.Messages.Rgetattr.Gen.init -> void
+NineP.Protocol.Messages.Rgetattr.Gid.get -> uint
+NineP.Protocol.Messages.Rgetattr.Gid.init -> void
+NineP.Protocol.Messages.Rgetattr.MTime.get -> NineP.Protocol.TimeSpec
+NineP.Protocol.Messages.Rgetattr.MTime.init -> void
+NineP.Protocol.Messages.Rgetattr.Mode.get -> uint
+NineP.Protocol.Messages.Rgetattr.Mode.init -> void
+NineP.Protocol.Messages.Rgetattr.NLink.get -> ulong
+NineP.Protocol.Messages.Rgetattr.NLink.init -> void
+NineP.Protocol.Messages.Rgetattr.Qid.get -> NineP.Protocol.Qid
+NineP.Protocol.Messages.Rgetattr.Qid.init -> void
+NineP.Protocol.Messages.Rgetattr.Rdev.get -> ulong
+NineP.Protocol.Messages.Rgetattr.Rdev.init -> void
+NineP.Protocol.Messages.Rgetattr.Rgetattr() -> void
+NineP.Protocol.Messages.Rgetattr.Rgetattr(ushort Tag, NineP.Protocol.Messages.GetAttrMask Valid, NineP.Protocol.Qid Qid, uint Mode, uint Uid, uint Gid, ulong NLink, ulong Rdev, ulong Size, ulong BlkSize, ulong Blocks, NineP.Protocol.TimeSpec ATime, NineP.Protocol.TimeSpec MTime, NineP.Protocol.TimeSpec CTime, NineP.Protocol.TimeSpec BTime, ulong Gen, ulong DataVersion) -> void
+NineP.Protocol.Messages.Rgetattr.Size.get -> ulong
+NineP.Protocol.Messages.Rgetattr.Size.init -> void
+NineP.Protocol.Messages.Rgetattr.Tag.get -> ushort
+NineP.Protocol.Messages.Rgetattr.Tag.init -> void
+NineP.Protocol.Messages.Rgetattr.Uid.get -> uint
+NineP.Protocol.Messages.Rgetattr.Uid.init -> void
+NineP.Protocol.Messages.Rgetattr.Valid.get -> NineP.Protocol.Messages.GetAttrMask
+NineP.Protocol.Messages.Rgetattr.Valid.init -> void
+NineP.Protocol.Messages.Rgetlock
+NineP.Protocol.Messages.Rgetlock.Deconstruct(out ushort Tag, out NineP.Protocol.LockQueryResult Result) -> void
+NineP.Protocol.Messages.Rgetlock.Equals(NineP.Protocol.Messages.Rgetlock other) -> bool
+NineP.Protocol.Messages.Rgetlock.Result.get -> NineP.Protocol.LockQueryResult
+NineP.Protocol.Messages.Rgetlock.Result.init -> void
+NineP.Protocol.Messages.Rgetlock.Rgetlock() -> void
+NineP.Protocol.Messages.Rgetlock.Rgetlock(ushort Tag, NineP.Protocol.LockQueryResult Result) -> void
+NineP.Protocol.Messages.Rgetlock.Tag.get -> ushort
+NineP.Protocol.Messages.Rgetlock.Tag.init -> void
+NineP.Protocol.Messages.Rlcreate
+NineP.Protocol.Messages.Rlcreate.Deconstruct(out ushort Tag, out NineP.Protocol.Qid Qid, out uint Iounit) -> void
+NineP.Protocol.Messages.Rlcreate.Equals(NineP.Protocol.Messages.Rlcreate other) -> bool
+NineP.Protocol.Messages.Rlcreate.Iounit.get -> uint
+NineP.Protocol.Messages.Rlcreate.Iounit.init -> void
+NineP.Protocol.Messages.Rlcreate.Qid.get -> NineP.Protocol.Qid
+NineP.Protocol.Messages.Rlcreate.Qid.init -> void
+NineP.Protocol.Messages.Rlcreate.Rlcreate() -> void
+NineP.Protocol.Messages.Rlcreate.Rlcreate(ushort Tag, NineP.Protocol.Qid Qid, uint Iounit) -> void
+NineP.Protocol.Messages.Rlcreate.Tag.get -> ushort
+NineP.Protocol.Messages.Rlcreate.Tag.init -> void
+NineP.Protocol.Messages.Rlerror
+NineP.Protocol.Messages.Rlerror.Deconstruct(out ushort Tag, out int Ecode) -> void
+NineP.Protocol.Messages.Rlerror.Ecode.get -> int
+NineP.Protocol.Messages.Rlerror.Ecode.init -> void
+NineP.Protocol.Messages.Rlerror.Equals(NineP.Protocol.Messages.Rlerror other) -> bool
+NineP.Protocol.Messages.Rlerror.Rlerror() -> void
+NineP.Protocol.Messages.Rlerror.Rlerror(ushort Tag, int Ecode) -> void
+NineP.Protocol.Messages.Rlerror.Tag.get -> ushort
+NineP.Protocol.Messages.Rlerror.Tag.init -> void
+NineP.Protocol.Messages.Rlink
+NineP.Protocol.Messages.Rlink.Deconstruct(out ushort Tag) -> void
+NineP.Protocol.Messages.Rlink.Equals(NineP.Protocol.Messages.Rlink other) -> bool
+NineP.Protocol.Messages.Rlink.Rlink() -> void
+NineP.Protocol.Messages.Rlink.Rlink(ushort Tag) -> void
+NineP.Protocol.Messages.Rlink.Tag.get -> ushort
+NineP.Protocol.Messages.Rlink.Tag.init -> void
+NineP.Protocol.Messages.Rlock
+NineP.Protocol.Messages.Rlock.Deconstruct(out ushort Tag, out NineP.Protocol.LockStatus Status) -> void
+NineP.Protocol.Messages.Rlock.Equals(NineP.Protocol.Messages.Rlock other) -> bool
+NineP.Protocol.Messages.Rlock.Rlock() -> void
+NineP.Protocol.Messages.Rlock.Rlock(ushort Tag, NineP.Protocol.LockStatus Status) -> void
+NineP.Protocol.Messages.Rlock.Status.get -> NineP.Protocol.LockStatus
+NineP.Protocol.Messages.Rlock.Status.init -> void
+NineP.Protocol.Messages.Rlock.Tag.get -> ushort
+NineP.Protocol.Messages.Rlock.Tag.init -> void
+NineP.Protocol.Messages.Rlopen
+NineP.Protocol.Messages.Rlopen.Deconstruct(out ushort Tag, out NineP.Protocol.Qid Qid, out uint Iounit) -> void
+NineP.Protocol.Messages.Rlopen.Equals(NineP.Protocol.Messages.Rlopen other) -> bool
+NineP.Protocol.Messages.Rlopen.Iounit.get -> uint
+NineP.Protocol.Messages.Rlopen.Iounit.init -> void
+NineP.Protocol.Messages.Rlopen.Qid.get -> NineP.Protocol.Qid
+NineP.Protocol.Messages.Rlopen.Qid.init -> void
+NineP.Protocol.Messages.Rlopen.Rlopen() -> void
+NineP.Protocol.Messages.Rlopen.Rlopen(ushort Tag, NineP.Protocol.Qid Qid, uint Iounit) -> void
+NineP.Protocol.Messages.Rlopen.Tag.get -> ushort
+NineP.Protocol.Messages.Rlopen.Tag.init -> void
+NineP.Protocol.Messages.Rmkdir
+NineP.Protocol.Messages.Rmkdir.Deconstruct(out ushort Tag, out NineP.Protocol.Qid Qid) -> void
+NineP.Protocol.Messages.Rmkdir.Equals(NineP.Protocol.Messages.Rmkdir other) -> bool
+NineP.Protocol.Messages.Rmkdir.Qid.get -> NineP.Protocol.Qid
+NineP.Protocol.Messages.Rmkdir.Qid.init -> void
+NineP.Protocol.Messages.Rmkdir.Rmkdir() -> void
+NineP.Protocol.Messages.Rmkdir.Rmkdir(ushort Tag, NineP.Protocol.Qid Qid) -> void
+NineP.Protocol.Messages.Rmkdir.Tag.get -> ushort
+NineP.Protocol.Messages.Rmkdir.Tag.init -> void
+NineP.Protocol.Messages.Rmknod
+NineP.Protocol.Messages.Rmknod.Deconstruct(out ushort Tag, out NineP.Protocol.Qid Qid) -> void
+NineP.Protocol.Messages.Rmknod.Equals(NineP.Protocol.Messages.Rmknod other) -> bool
+NineP.Protocol.Messages.Rmknod.Qid.get -> NineP.Protocol.Qid
+NineP.Protocol.Messages.Rmknod.Qid.init -> void
+NineP.Protocol.Messages.Rmknod.Rmknod() -> void
+NineP.Protocol.Messages.Rmknod.Rmknod(ushort Tag, NineP.Protocol.Qid Qid) -> void
+NineP.Protocol.Messages.Rmknod.Tag.get -> ushort
+NineP.Protocol.Messages.Rmknod.Tag.init -> void
+NineP.Protocol.Messages.Ropen
+NineP.Protocol.Messages.Ropen.Deconstruct(out ushort Tag, out NineP.Protocol.Qid Qid, out uint Iounit) -> void
+NineP.Protocol.Messages.Ropen.Equals(NineP.Protocol.Messages.Ropen other) -> bool
+NineP.Protocol.Messages.Ropen.Iounit.get -> uint
+NineP.Protocol.Messages.Ropen.Iounit.init -> void
+NineP.Protocol.Messages.Ropen.Qid.get -> NineP.Protocol.Qid
+NineP.Protocol.Messages.Ropen.Qid.init -> void
+NineP.Protocol.Messages.Ropen.Ropen() -> void
+NineP.Protocol.Messages.Ropen.Ropen(ushort Tag, NineP.Protocol.Qid Qid, uint Iounit) -> void
+NineP.Protocol.Messages.Ropen.Tag.get -> ushort
+NineP.Protocol.Messages.Ropen.Tag.init -> void
+NineP.Protocol.Messages.Rread
+NineP.Protocol.Messages.Rread.Data.get -> System.ReadOnlyMemory<byte>
+NineP.Protocol.Messages.Rread.Data.init -> void
+NineP.Protocol.Messages.Rread.Deconstruct(out ushort Tag, out System.ReadOnlyMemory<byte> Data) -> void
+NineP.Protocol.Messages.Rread.Equals(NineP.Protocol.Messages.Rread other) -> bool
+NineP.Protocol.Messages.Rread.Rread() -> void
+NineP.Protocol.Messages.Rread.Rread(ushort Tag, System.ReadOnlyMemory<byte> Data) -> void
+NineP.Protocol.Messages.Rread.Tag.get -> ushort
+NineP.Protocol.Messages.Rread.Tag.init -> void
+NineP.Protocol.Messages.Rreaddir
+NineP.Protocol.Messages.Rreaddir.Data.get -> System.ReadOnlyMemory<byte>
+NineP.Protocol.Messages.Rreaddir.Data.init -> void
+NineP.Protocol.Messages.Rreaddir.Deconstruct(out ushort Tag, out System.ReadOnlyMemory<byte> Data) -> void
+NineP.Protocol.Messages.Rreaddir.Equals(NineP.Protocol.Messages.Rreaddir other) -> bool
+NineP.Protocol.Messages.Rreaddir.Rreaddir() -> void
+NineP.Protocol.Messages.Rreaddir.Rreaddir(ushort Tag, System.ReadOnlyMemory<byte> Data) -> void
+NineP.Protocol.Messages.Rreaddir.Tag.get -> ushort
+NineP.Protocol.Messages.Rreaddir.Tag.init -> void
+NineP.Protocol.Messages.Rreadlink
+NineP.Protocol.Messages.Rreadlink.Deconstruct(out ushort Tag, out string! Target) -> void
+NineP.Protocol.Messages.Rreadlink.Equals(NineP.Protocol.Messages.Rreadlink other) -> bool
+NineP.Protocol.Messages.Rreadlink.Rreadlink() -> void
+NineP.Protocol.Messages.Rreadlink.Rreadlink(ushort Tag, string! Target) -> void
+NineP.Protocol.Messages.Rreadlink.Tag.get -> ushort
+NineP.Protocol.Messages.Rreadlink.Tag.init -> void
+NineP.Protocol.Messages.Rreadlink.Target.get -> string!
+NineP.Protocol.Messages.Rreadlink.Target.init -> void
+NineP.Protocol.Messages.Rremove
+NineP.Protocol.Messages.Rremove.Deconstruct(out ushort Tag) -> void
+NineP.Protocol.Messages.Rremove.Equals(NineP.Protocol.Messages.Rremove other) -> bool
+NineP.Protocol.Messages.Rremove.Rremove() -> void
+NineP.Protocol.Messages.Rremove.Rremove(ushort Tag) -> void
+NineP.Protocol.Messages.Rremove.Tag.get -> ushort
+NineP.Protocol.Messages.Rremove.Tag.init -> void
+NineP.Protocol.Messages.Rrename
+NineP.Protocol.Messages.Rrename.Deconstruct(out ushort Tag) -> void
+NineP.Protocol.Messages.Rrename.Equals(NineP.Protocol.Messages.Rrename other) -> bool
+NineP.Protocol.Messages.Rrename.Rrename() -> void
+NineP.Protocol.Messages.Rrename.Rrename(ushort Tag) -> void
+NineP.Protocol.Messages.Rrename.Tag.get -> ushort
+NineP.Protocol.Messages.Rrename.Tag.init -> void
+NineP.Protocol.Messages.Rrenameat
+NineP.Protocol.Messages.Rrenameat.Deconstruct(out ushort Tag) -> void
+NineP.Protocol.Messages.Rrenameat.Equals(NineP.Protocol.Messages.Rrenameat other) -> bool
+NineP.Protocol.Messages.Rrenameat.Rrenameat() -> void
+NineP.Protocol.Messages.Rrenameat.Rrenameat(ushort Tag) -> void
+NineP.Protocol.Messages.Rrenameat.Tag.get -> ushort
+NineP.Protocol.Messages.Rrenameat.Tag.init -> void
+NineP.Protocol.Messages.Rsetattr
+NineP.Protocol.Messages.Rsetattr.Deconstruct(out ushort Tag) -> void
+NineP.Protocol.Messages.Rsetattr.Equals(NineP.Protocol.Messages.Rsetattr other) -> bool
+NineP.Protocol.Messages.Rsetattr.Rsetattr() -> void
+NineP.Protocol.Messages.Rsetattr.Rsetattr(ushort Tag) -> void
+NineP.Protocol.Messages.Rsetattr.Tag.get -> ushort
+NineP.Protocol.Messages.Rsetattr.Tag.init -> void
+NineP.Protocol.Messages.Rstat
+NineP.Protocol.Messages.Rstat.Deconstruct(out ushort Tag, out NineP.Protocol.Messages.StatRecord Stat) -> void
+NineP.Protocol.Messages.Rstat.Equals(NineP.Protocol.Messages.Rstat other) -> bool
+NineP.Protocol.Messages.Rstat.Rstat() -> void
+NineP.Protocol.Messages.Rstat.Rstat(ushort Tag, NineP.Protocol.Messages.StatRecord Stat) -> void
+NineP.Protocol.Messages.Rstat.Stat.get -> NineP.Protocol.Messages.StatRecord
+NineP.Protocol.Messages.Rstat.Stat.init -> void
+NineP.Protocol.Messages.Rstat.Tag.get -> ushort
+NineP.Protocol.Messages.Rstat.Tag.init -> void
+NineP.Protocol.Messages.Rstatfs
+NineP.Protocol.Messages.Rstatfs.Deconstruct(out ushort Tag, out NineP.Protocol.StatFs Stat) -> void
+NineP.Protocol.Messages.Rstatfs.Equals(NineP.Protocol.Messages.Rstatfs other) -> bool
+NineP.Protocol.Messages.Rstatfs.Rstatfs() -> void
+NineP.Protocol.Messages.Rstatfs.Rstatfs(ushort Tag, NineP.Protocol.StatFs Stat) -> void
+NineP.Protocol.Messages.Rstatfs.Stat.get -> NineP.Protocol.StatFs
+NineP.Protocol.Messages.Rstatfs.Stat.init -> void
+NineP.Protocol.Messages.Rstatfs.Tag.get -> ushort
+NineP.Protocol.Messages.Rstatfs.Tag.init -> void
+NineP.Protocol.Messages.Rsymlink
+NineP.Protocol.Messages.Rsymlink.Deconstruct(out ushort Tag, out NineP.Protocol.Qid Qid) -> void
+NineP.Protocol.Messages.Rsymlink.Equals(NineP.Protocol.Messages.Rsymlink other) -> bool
+NineP.Protocol.Messages.Rsymlink.Qid.get -> NineP.Protocol.Qid
+NineP.Protocol.Messages.Rsymlink.Qid.init -> void
+NineP.Protocol.Messages.Rsymlink.Rsymlink() -> void
+NineP.Protocol.Messages.Rsymlink.Rsymlink(ushort Tag, NineP.Protocol.Qid Qid) -> void
+NineP.Protocol.Messages.Rsymlink.Tag.get -> ushort
+NineP.Protocol.Messages.Rsymlink.Tag.init -> void
+NineP.Protocol.Messages.Runlinkat
+NineP.Protocol.Messages.Runlinkat.Deconstruct(out ushort Tag) -> void
+NineP.Protocol.Messages.Runlinkat.Equals(NineP.Protocol.Messages.Runlinkat other) -> bool
+NineP.Protocol.Messages.Runlinkat.Runlinkat() -> void
+NineP.Protocol.Messages.Runlinkat.Runlinkat(ushort Tag) -> void
+NineP.Protocol.Messages.Runlinkat.Tag.get -> ushort
+NineP.Protocol.Messages.Runlinkat.Tag.init -> void
+NineP.Protocol.Messages.Rversion
+NineP.Protocol.Messages.Rversion.Deconstruct(out ushort Tag, out uint Msize, out string! Version) -> void
+NineP.Protocol.Messages.Rversion.Equals(NineP.Protocol.Messages.Rversion other) -> bool
+NineP.Protocol.Messages.Rversion.Msize.get -> uint
+NineP.Protocol.Messages.Rversion.Msize.init -> void
+NineP.Protocol.Messages.Rversion.Rversion() -> void
+NineP.Protocol.Messages.Rversion.Rversion(ushort Tag, uint Msize, string! Version) -> void
+NineP.Protocol.Messages.Rversion.Tag.get -> ushort
+NineP.Protocol.Messages.Rversion.Tag.init -> void
+NineP.Protocol.Messages.Rversion.Version.get -> string!
+NineP.Protocol.Messages.Rversion.Version.init -> void
+NineP.Protocol.Messages.Rwalk
+NineP.Protocol.Messages.Rwalk.Deconstruct(out ushort Tag, out System.Collections.Generic.IReadOnlyList<NineP.Protocol.Qid>! Wqids) -> void
+NineP.Protocol.Messages.Rwalk.Equals(NineP.Protocol.Messages.Rwalk other) -> bool
+NineP.Protocol.Messages.Rwalk.Rwalk() -> void
+NineP.Protocol.Messages.Rwalk.Rwalk(ushort Tag, System.Collections.Generic.IReadOnlyList<NineP.Protocol.Qid>! Wqids) -> void
+NineP.Protocol.Messages.Rwalk.Tag.get -> ushort
+NineP.Protocol.Messages.Rwalk.Tag.init -> void
+NineP.Protocol.Messages.Rwalk.Wqids.get -> System.Collections.Generic.IReadOnlyList<NineP.Protocol.Qid>!
+NineP.Protocol.Messages.Rwalk.Wqids.init -> void
+NineP.Protocol.Messages.Rwrite
+NineP.Protocol.Messages.Rwrite.Count.get -> uint
+NineP.Protocol.Messages.Rwrite.Count.init -> void
+NineP.Protocol.Messages.Rwrite.Deconstruct(out ushort Tag, out uint Count) -> void
+NineP.Protocol.Messages.Rwrite.Equals(NineP.Protocol.Messages.Rwrite other) -> bool
+NineP.Protocol.Messages.Rwrite.Rwrite() -> void
+NineP.Protocol.Messages.Rwrite.Rwrite(ushort Tag, uint Count) -> void
+NineP.Protocol.Messages.Rwrite.Tag.get -> ushort
+NineP.Protocol.Messages.Rwrite.Tag.init -> void
+NineP.Protocol.Messages.Rwstat
+NineP.Protocol.Messages.Rwstat.Deconstruct(out ushort Tag) -> void
+NineP.Protocol.Messages.Rwstat.Equals(NineP.Protocol.Messages.Rwstat other) -> bool
+NineP.Protocol.Messages.Rwstat.Rwstat() -> void
+NineP.Protocol.Messages.Rwstat.Rwstat(ushort Tag) -> void
+NineP.Protocol.Messages.Rwstat.Tag.get -> ushort
+NineP.Protocol.Messages.Rwstat.Tag.init -> void
+NineP.Protocol.Messages.Rxattrcreate
+NineP.Protocol.Messages.Rxattrcreate.Deconstruct(out ushort Tag) -> void
+NineP.Protocol.Messages.Rxattrcreate.Equals(NineP.Protocol.Messages.Rxattrcreate other) -> bool
+NineP.Protocol.Messages.Rxattrcreate.Rxattrcreate() -> void
+NineP.Protocol.Messages.Rxattrcreate.Rxattrcreate(ushort Tag) -> void
+NineP.Protocol.Messages.Rxattrcreate.Tag.get -> ushort
+NineP.Protocol.Messages.Rxattrcreate.Tag.init -> void
+NineP.Protocol.Messages.Rxattrwalk
+NineP.Protocol.Messages.Rxattrwalk.Deconstruct(out ushort Tag, out ulong Size) -> void
+NineP.Protocol.Messages.Rxattrwalk.Equals(NineP.Protocol.Messages.Rxattrwalk other) -> bool
+NineP.Protocol.Messages.Rxattrwalk.Rxattrwalk() -> void
+NineP.Protocol.Messages.Rxattrwalk.Rxattrwalk(ushort Tag, ulong Size) -> void
+NineP.Protocol.Messages.Rxattrwalk.Size.get -> ulong
+NineP.Protocol.Messages.Rxattrwalk.Size.init -> void
+NineP.Protocol.Messages.Rxattrwalk.Tag.get -> ushort
+NineP.Protocol.Messages.Rxattrwalk.Tag.init -> void
+NineP.Protocol.Messages.SetAttrMask
+NineP.Protocol.Messages.SetAttrMask.ATime = 16 -> NineP.Protocol.Messages.SetAttrMask
+NineP.Protocol.Messages.SetAttrMask.ATimeSet = 128 -> NineP.Protocol.Messages.SetAttrMask
+NineP.Protocol.Messages.SetAttrMask.CTime = 64 -> NineP.Protocol.Messages.SetAttrMask
+NineP.Protocol.Messages.SetAttrMask.Gid = 4 -> NineP.Protocol.Messages.SetAttrMask
+NineP.Protocol.Messages.SetAttrMask.MTime = 32 -> NineP.Protocol.Messages.SetAttrMask
+NineP.Protocol.Messages.SetAttrMask.MTimeSet = 256 -> NineP.Protocol.Messages.SetAttrMask
+NineP.Protocol.Messages.SetAttrMask.Mode = 1 -> NineP.Protocol.Messages.SetAttrMask
+NineP.Protocol.Messages.SetAttrMask.None = 0 -> NineP.Protocol.Messages.SetAttrMask
+NineP.Protocol.Messages.SetAttrMask.Size = 8 -> NineP.Protocol.Messages.SetAttrMask
+NineP.Protocol.Messages.SetAttrMask.Uid = 2 -> NineP.Protocol.Messages.SetAttrMask
+NineP.Protocol.Messages.StatRecord
+NineP.Protocol.Messages.StatRecord.ATime.get -> uint
+NineP.Protocol.Messages.StatRecord.ATime.init -> void
+NineP.Protocol.Messages.StatRecord.Dev.get -> uint
+NineP.Protocol.Messages.StatRecord.Dev.init -> void
+NineP.Protocol.Messages.StatRecord.Equals(NineP.Protocol.Messages.StatRecord other) -> bool
+NineP.Protocol.Messages.StatRecord.Extension.get -> string?
+NineP.Protocol.Messages.StatRecord.Extension.init -> void
+NineP.Protocol.Messages.StatRecord.GetEncodedSize(NineP.Protocol.Dialect dialect) -> int
+NineP.Protocol.Messages.StatRecord.Gid.get -> string!
+NineP.Protocol.Messages.StatRecord.Gid.init -> void
+NineP.Protocol.Messages.StatRecord.IsAllDontTouch.get -> bool
+NineP.Protocol.Messages.StatRecord.Length.get -> ulong
+NineP.Protocol.Messages.StatRecord.Length.init -> void
+NineP.Protocol.Messages.StatRecord.MTime.get -> uint
+NineP.Protocol.Messages.StatRecord.MTime.init -> void
+NineP.Protocol.Messages.StatRecord.Mode.get -> uint
+NineP.Protocol.Messages.StatRecord.Mode.init -> void
+NineP.Protocol.Messages.StatRecord.Muid.get -> string!
+NineP.Protocol.Messages.StatRecord.Muid.init -> void
+NineP.Protocol.Messages.StatRecord.NGid.get -> uint
+NineP.Protocol.Messages.StatRecord.NGid.init -> void
+NineP.Protocol.Messages.StatRecord.NMuid.get -> uint
+NineP.Protocol.Messages.StatRecord.NMuid.init -> void
+NineP.Protocol.Messages.StatRecord.NUid.get -> uint
+NineP.Protocol.Messages.StatRecord.NUid.init -> void
+NineP.Protocol.Messages.StatRecord.Name.get -> string!
+NineP.Protocol.Messages.StatRecord.Name.init -> void
+NineP.Protocol.Messages.StatRecord.Qid.get -> NineP.Protocol.Qid
+NineP.Protocol.Messages.StatRecord.Qid.init -> void
+NineP.Protocol.Messages.StatRecord.StatRecord() -> void
+NineP.Protocol.Messages.StatRecord.Type.get -> ushort
+NineP.Protocol.Messages.StatRecord.Type.init -> void
+NineP.Protocol.Messages.StatRecord.Uid.get -> string!
+NineP.Protocol.Messages.StatRecord.Uid.init -> void
+NineP.Protocol.Messages.Tattach
+NineP.Protocol.Messages.Tattach.Afid.get -> uint
+NineP.Protocol.Messages.Tattach.Afid.init -> void
+NineP.Protocol.Messages.Tattach.Aname.get -> string!
+NineP.Protocol.Messages.Tattach.Aname.init -> void
+NineP.Protocol.Messages.Tattach.Deconstruct(out ushort Tag, out uint Fid, out uint Afid, out string! Uname, out string! Aname, out uint NUname) -> void
+NineP.Protocol.Messages.Tattach.Equals(NineP.Protocol.Messages.Tattach other) -> bool
+NineP.Protocol.Messages.Tattach.Fid.get -> uint
+NineP.Protocol.Messages.Tattach.Fid.init -> void
+NineP.Protocol.Messages.Tattach.NUname.get -> uint
+NineP.Protocol.Messages.Tattach.NUname.init -> void
+NineP.Protocol.Messages.Tattach.Tag.get -> ushort
+NineP.Protocol.Messages.Tattach.Tag.init -> void
+NineP.Protocol.Messages.Tattach.Tattach() -> void
+NineP.Protocol.Messages.Tattach.Tattach(ushort Tag, uint Fid, uint Afid, string! Uname, string! Aname, uint NUname) -> void
+NineP.Protocol.Messages.Tattach.Uname.get -> string!
+NineP.Protocol.Messages.Tattach.Uname.init -> void
+NineP.Protocol.Messages.Tauth
+NineP.Protocol.Messages.Tauth.Afid.get -> uint
+NineP.Protocol.Messages.Tauth.Afid.init -> void
+NineP.Protocol.Messages.Tauth.Aname.get -> string!
+NineP.Protocol.Messages.Tauth.Aname.init -> void
+NineP.Protocol.Messages.Tauth.Deconstruct(out ushort Tag, out uint Afid, out string! Uname, out string! Aname, out uint NUname) -> void
+NineP.Protocol.Messages.Tauth.Equals(NineP.Protocol.Messages.Tauth other) -> bool
+NineP.Protocol.Messages.Tauth.NUname.get -> uint
+NineP.Protocol.Messages.Tauth.NUname.init -> void
+NineP.Protocol.Messages.Tauth.Tag.get -> ushort
+NineP.Protocol.Messages.Tauth.Tag.init -> void
+NineP.Protocol.Messages.Tauth.Tauth() -> void
+NineP.Protocol.Messages.Tauth.Tauth(ushort Tag, uint Afid, string! Uname, string! Aname, uint NUname) -> void
+NineP.Protocol.Messages.Tauth.Uname.get -> string!
+NineP.Protocol.Messages.Tauth.Uname.init -> void
+NineP.Protocol.Messages.Tclunk
+NineP.Protocol.Messages.Tclunk.Deconstruct(out ushort Tag, out uint Fid) -> void
+NineP.Protocol.Messages.Tclunk.Equals(NineP.Protocol.Messages.Tclunk other) -> bool
+NineP.Protocol.Messages.Tclunk.Fid.get -> uint
+NineP.Protocol.Messages.Tclunk.Fid.init -> void
+NineP.Protocol.Messages.Tclunk.Tag.get -> ushort
+NineP.Protocol.Messages.Tclunk.Tag.init -> void
+NineP.Protocol.Messages.Tclunk.Tclunk() -> void
+NineP.Protocol.Messages.Tclunk.Tclunk(ushort Tag, uint Fid) -> void
+NineP.Protocol.Messages.Tcreate
+NineP.Protocol.Messages.Tcreate.Deconstruct(out ushort Tag, out uint Fid, out string! Name, out uint Perm, out byte Mode, out string? Extension) -> void
+NineP.Protocol.Messages.Tcreate.Equals(NineP.Protocol.Messages.Tcreate other) -> bool
+NineP.Protocol.Messages.Tcreate.Extension.get -> string?
+NineP.Protocol.Messages.Tcreate.Extension.init -> void
+NineP.Protocol.Messages.Tcreate.Fid.get -> uint
+NineP.Protocol.Messages.Tcreate.Fid.init -> void
+NineP.Protocol.Messages.Tcreate.Mode.get -> byte
+NineP.Protocol.Messages.Tcreate.Mode.init -> void
+NineP.Protocol.Messages.Tcreate.Name.get -> string!
+NineP.Protocol.Messages.Tcreate.Name.init -> void
+NineP.Protocol.Messages.Tcreate.Perm.get -> uint
+NineP.Protocol.Messages.Tcreate.Perm.init -> void
+NineP.Protocol.Messages.Tcreate.Tag.get -> ushort
+NineP.Protocol.Messages.Tcreate.Tag.init -> void
+NineP.Protocol.Messages.Tcreate.Tcreate() -> void
+NineP.Protocol.Messages.Tcreate.Tcreate(ushort Tag, uint Fid, string! Name, uint Perm, byte Mode, string? Extension) -> void
+NineP.Protocol.Messages.Tflush
+NineP.Protocol.Messages.Tflush.Deconstruct(out ushort Tag, out ushort OldTag) -> void
+NineP.Protocol.Messages.Tflush.Equals(NineP.Protocol.Messages.Tflush other) -> bool
+NineP.Protocol.Messages.Tflush.OldTag.get -> ushort
+NineP.Protocol.Messages.Tflush.OldTag.init -> void
+NineP.Protocol.Messages.Tflush.Tag.get -> ushort
+NineP.Protocol.Messages.Tflush.Tag.init -> void
+NineP.Protocol.Messages.Tflush.Tflush() -> void
+NineP.Protocol.Messages.Tflush.Tflush(ushort Tag, ushort OldTag) -> void
+NineP.Protocol.Messages.Tfsync
+NineP.Protocol.Messages.Tfsync.Datasync.get -> uint
+NineP.Protocol.Messages.Tfsync.Datasync.init -> void
+NineP.Protocol.Messages.Tfsync.Deconstruct(out ushort Tag, out uint Fid, out uint Datasync) -> void
+NineP.Protocol.Messages.Tfsync.Equals(NineP.Protocol.Messages.Tfsync other) -> bool
+NineP.Protocol.Messages.Tfsync.Fid.get -> uint
+NineP.Protocol.Messages.Tfsync.Fid.init -> void
+NineP.Protocol.Messages.Tfsync.Tag.get -> ushort
+NineP.Protocol.Messages.Tfsync.Tag.init -> void
+NineP.Protocol.Messages.Tfsync.Tfsync() -> void
+NineP.Protocol.Messages.Tfsync.Tfsync(ushort Tag, uint Fid, uint Datasync) -> void
+NineP.Protocol.Messages.Tgetattr
+NineP.Protocol.Messages.Tgetattr.Deconstruct(out ushort Tag, out uint Fid, out NineP.Protocol.Messages.GetAttrMask RequestMask) -> void
+NineP.Protocol.Messages.Tgetattr.Equals(NineP.Protocol.Messages.Tgetattr other) -> bool
+NineP.Protocol.Messages.Tgetattr.Fid.get -> uint
+NineP.Protocol.Messages.Tgetattr.Fid.init -> void
+NineP.Protocol.Messages.Tgetattr.RequestMask.get -> NineP.Protocol.Messages.GetAttrMask
+NineP.Protocol.Messages.Tgetattr.RequestMask.init -> void
+NineP.Protocol.Messages.Tgetattr.Tag.get -> ushort
+NineP.Protocol.Messages.Tgetattr.Tag.init -> void
+NineP.Protocol.Messages.Tgetattr.Tgetattr() -> void
+NineP.Protocol.Messages.Tgetattr.Tgetattr(ushort Tag, uint Fid, NineP.Protocol.Messages.GetAttrMask RequestMask) -> void
+NineP.Protocol.Messages.Tgetlock
+NineP.Protocol.Messages.Tgetlock.ClientId.get -> string!
+NineP.Protocol.Messages.Tgetlock.ClientId.init -> void
+NineP.Protocol.Messages.Tgetlock.Deconstruct(out ushort Tag, out uint Fid, out NineP.Protocol.LockType Type, out ulong Start, out ulong Length, out uint ProcId, out string! ClientId) -> void
+NineP.Protocol.Messages.Tgetlock.Equals(NineP.Protocol.Messages.Tgetlock other) -> bool
+NineP.Protocol.Messages.Tgetlock.Fid.get -> uint
+NineP.Protocol.Messages.Tgetlock.Fid.init -> void
+NineP.Protocol.Messages.Tgetlock.Length.get -> ulong
+NineP.Protocol.Messages.Tgetlock.Length.init -> void
+NineP.Protocol.Messages.Tgetlock.ProcId.get -> uint
+NineP.Protocol.Messages.Tgetlock.ProcId.init -> void
+NineP.Protocol.Messages.Tgetlock.Start.get -> ulong
+NineP.Protocol.Messages.Tgetlock.Start.init -> void
+NineP.Protocol.Messages.Tgetlock.Tag.get -> ushort
+NineP.Protocol.Messages.Tgetlock.Tag.init -> void
+NineP.Protocol.Messages.Tgetlock.Tgetlock() -> void
+NineP.Protocol.Messages.Tgetlock.Tgetlock(ushort Tag, uint Fid, NineP.Protocol.LockType Type, ulong Start, ulong Length, uint ProcId, string! ClientId) -> void
+NineP.Protocol.Messages.Tgetlock.Type.get -> NineP.Protocol.LockType
+NineP.Protocol.Messages.Tgetlock.Type.init -> void
+NineP.Protocol.Messages.Tlcreate
+NineP.Protocol.Messages.Tlcreate.Deconstruct(out ushort Tag, out uint Fid, out string! Name, out uint Flags, out uint Mode, out uint Gid) -> void
+NineP.Protocol.Messages.Tlcreate.Equals(NineP.Protocol.Messages.Tlcreate other) -> bool
+NineP.Protocol.Messages.Tlcreate.Fid.get -> uint
+NineP.Protocol.Messages.Tlcreate.Fid.init -> void
+NineP.Protocol.Messages.Tlcreate.Flags.get -> uint
+NineP.Protocol.Messages.Tlcreate.Flags.init -> void
+NineP.Protocol.Messages.Tlcreate.Gid.get -> uint
+NineP.Protocol.Messages.Tlcreate.Gid.init -> void
+NineP.Protocol.Messages.Tlcreate.Mode.get -> uint
+NineP.Protocol.Messages.Tlcreate.Mode.init -> void
+NineP.Protocol.Messages.Tlcreate.Name.get -> string!
+NineP.Protocol.Messages.Tlcreate.Name.init -> void
+NineP.Protocol.Messages.Tlcreate.Tag.get -> ushort
+NineP.Protocol.Messages.Tlcreate.Tag.init -> void
+NineP.Protocol.Messages.Tlcreate.Tlcreate() -> void
+NineP.Protocol.Messages.Tlcreate.Tlcreate(ushort Tag, uint Fid, string! Name, uint Flags, uint Mode, uint Gid) -> void
+NineP.Protocol.Messages.Tlink
+NineP.Protocol.Messages.Tlink.Deconstruct(out ushort Tag, out uint Dfid, out uint Fid, out string! Name) -> void
+NineP.Protocol.Messages.Tlink.Dfid.get -> uint
+NineP.Protocol.Messages.Tlink.Dfid.init -> void
+NineP.Protocol.Messages.Tlink.Equals(NineP.Protocol.Messages.Tlink other) -> bool
+NineP.Protocol.Messages.Tlink.Fid.get -> uint
+NineP.Protocol.Messages.Tlink.Fid.init -> void
+NineP.Protocol.Messages.Tlink.Name.get -> string!
+NineP.Protocol.Messages.Tlink.Name.init -> void
+NineP.Protocol.Messages.Tlink.Tag.get -> ushort
+NineP.Protocol.Messages.Tlink.Tag.init -> void
+NineP.Protocol.Messages.Tlink.Tlink() -> void
+NineP.Protocol.Messages.Tlink.Tlink(ushort Tag, uint Dfid, uint Fid, string! Name) -> void
+NineP.Protocol.Messages.Tlock
+NineP.Protocol.Messages.Tlock.Deconstruct(out ushort Tag, out uint Fid, out NineP.Protocol.LockRequest Request) -> void
+NineP.Protocol.Messages.Tlock.Equals(NineP.Protocol.Messages.Tlock other) -> bool
+NineP.Protocol.Messages.Tlock.Fid.get -> uint
+NineP.Protocol.Messages.Tlock.Fid.init -> void
+NineP.Protocol.Messages.Tlock.Request.get -> NineP.Protocol.LockRequest
+NineP.Protocol.Messages.Tlock.Request.init -> void
+NineP.Protocol.Messages.Tlock.Tag.get -> ushort
+NineP.Protocol.Messages.Tlock.Tag.init -> void
+NineP.Protocol.Messages.Tlock.Tlock() -> void
+NineP.Protocol.Messages.Tlock.Tlock(ushort Tag, uint Fid, NineP.Protocol.LockRequest Request) -> void
+NineP.Protocol.Messages.Tlopen
+NineP.Protocol.Messages.Tlopen.Deconstruct(out ushort Tag, out uint Fid, out uint Flags) -> void
+NineP.Protocol.Messages.Tlopen.Equals(NineP.Protocol.Messages.Tlopen other) -> bool
+NineP.Protocol.Messages.Tlopen.Fid.get -> uint
+NineP.Protocol.Messages.Tlopen.Fid.init -> void
+NineP.Protocol.Messages.Tlopen.Flags.get -> uint
+NineP.Protocol.Messages.Tlopen.Flags.init -> void
+NineP.Protocol.Messages.Tlopen.Tag.get -> ushort
+NineP.Protocol.Messages.Tlopen.Tag.init -> void
+NineP.Protocol.Messages.Tlopen.Tlopen() -> void
+NineP.Protocol.Messages.Tlopen.Tlopen(ushort Tag, uint Fid, uint Flags) -> void
+NineP.Protocol.Messages.Tmkdir
+NineP.Protocol.Messages.Tmkdir.Deconstruct(out ushort Tag, out uint Dfid, out string! Name, out uint Mode, out uint Gid) -> void
+NineP.Protocol.Messages.Tmkdir.Dfid.get -> uint
+NineP.Protocol.Messages.Tmkdir.Dfid.init -> void
+NineP.Protocol.Messages.Tmkdir.Equals(NineP.Protocol.Messages.Tmkdir other) -> bool
+NineP.Protocol.Messages.Tmkdir.Gid.get -> uint
+NineP.Protocol.Messages.Tmkdir.Gid.init -> void
+NineP.Protocol.Messages.Tmkdir.Mode.get -> uint
+NineP.Protocol.Messages.Tmkdir.Mode.init -> void
+NineP.Protocol.Messages.Tmkdir.Name.get -> string!
+NineP.Protocol.Messages.Tmkdir.Name.init -> void
+NineP.Protocol.Messages.Tmkdir.Tag.get -> ushort
+NineP.Protocol.Messages.Tmkdir.Tag.init -> void
+NineP.Protocol.Messages.Tmkdir.Tmkdir() -> void
+NineP.Protocol.Messages.Tmkdir.Tmkdir(ushort Tag, uint Dfid, string! Name, uint Mode, uint Gid) -> void
+NineP.Protocol.Messages.Tmknod
+NineP.Protocol.Messages.Tmknod.Deconstruct(out ushort Tag, out uint Dfid, out string! Name, out uint Mode, out uint Major, out uint Minor, out uint Gid) -> void
+NineP.Protocol.Messages.Tmknod.Dfid.get -> uint
+NineP.Protocol.Messages.Tmknod.Dfid.init -> void
+NineP.Protocol.Messages.Tmknod.Equals(NineP.Protocol.Messages.Tmknod other) -> bool
+NineP.Protocol.Messages.Tmknod.Gid.get -> uint
+NineP.Protocol.Messages.Tmknod.Gid.init -> void
+NineP.Protocol.Messages.Tmknod.Major.get -> uint
+NineP.Protocol.Messages.Tmknod.Major.init -> void
+NineP.Protocol.Messages.Tmknod.Minor.get -> uint
+NineP.Protocol.Messages.Tmknod.Minor.init -> void
+NineP.Protocol.Messages.Tmknod.Mode.get -> uint
+NineP.Protocol.Messages.Tmknod.Mode.init -> void
+NineP.Protocol.Messages.Tmknod.Name.get -> string!
+NineP.Protocol.Messages.Tmknod.Name.init -> void
+NineP.Protocol.Messages.Tmknod.Tag.get -> ushort
+NineP.Protocol.Messages.Tmknod.Tag.init -> void
+NineP.Protocol.Messages.Tmknod.Tmknod() -> void
+NineP.Protocol.Messages.Tmknod.Tmknod(ushort Tag, uint Dfid, string! Name, uint Mode, uint Major, uint Minor, uint Gid) -> void
+NineP.Protocol.Messages.Topen
+NineP.Protocol.Messages.Topen.Deconstruct(out ushort Tag, out uint Fid, out byte Mode) -> void
+NineP.Protocol.Messages.Topen.Equals(NineP.Protocol.Messages.Topen other) -> bool
+NineP.Protocol.Messages.Topen.Fid.get -> uint
+NineP.Protocol.Messages.Topen.Fid.init -> void
+NineP.Protocol.Messages.Topen.Mode.get -> byte
+NineP.Protocol.Messages.Topen.Mode.init -> void
+NineP.Protocol.Messages.Topen.Tag.get -> ushort
+NineP.Protocol.Messages.Topen.Tag.init -> void
+NineP.Protocol.Messages.Topen.Topen() -> void
+NineP.Protocol.Messages.Topen.Topen(ushort Tag, uint Fid, byte Mode) -> void
+NineP.Protocol.Messages.Tread
+NineP.Protocol.Messages.Tread.Count.get -> uint
+NineP.Protocol.Messages.Tread.Count.init -> void
+NineP.Protocol.Messages.Tread.Deconstruct(out ushort Tag, out uint Fid, out ulong Offset, out uint Count) -> void
+NineP.Protocol.Messages.Tread.Equals(NineP.Protocol.Messages.Tread other) -> bool
+NineP.Protocol.Messages.Tread.Fid.get -> uint
+NineP.Protocol.Messages.Tread.Fid.init -> void
+NineP.Protocol.Messages.Tread.Offset.get -> ulong
+NineP.Protocol.Messages.Tread.Offset.init -> void
+NineP.Protocol.Messages.Tread.Tag.get -> ushort
+NineP.Protocol.Messages.Tread.Tag.init -> void
+NineP.Protocol.Messages.Tread.Tread() -> void
+NineP.Protocol.Messages.Tread.Tread(ushort Tag, uint Fid, ulong Offset, uint Count) -> void
+NineP.Protocol.Messages.Treaddir
+NineP.Protocol.Messages.Treaddir.Count.get -> uint
+NineP.Protocol.Messages.Treaddir.Count.init -> void
+NineP.Protocol.Messages.Treaddir.Deconstruct(out ushort Tag, out uint Fid, out ulong Offset, out uint Count) -> void
+NineP.Protocol.Messages.Treaddir.Equals(NineP.Protocol.Messages.Treaddir other) -> bool
+NineP.Protocol.Messages.Treaddir.Fid.get -> uint
+NineP.Protocol.Messages.Treaddir.Fid.init -> void
+NineP.Protocol.Messages.Treaddir.Offset.get -> ulong
+NineP.Protocol.Messages.Treaddir.Offset.init -> void
+NineP.Protocol.Messages.Treaddir.Tag.get -> ushort
+NineP.Protocol.Messages.Treaddir.Tag.init -> void
+NineP.Protocol.Messages.Treaddir.Treaddir() -> void
+NineP.Protocol.Messages.Treaddir.Treaddir(ushort Tag, uint Fid, ulong Offset, uint Count) -> void
+NineP.Protocol.Messages.Treadlink
+NineP.Protocol.Messages.Treadlink.Deconstruct(out ushort Tag, out uint Fid) -> void
+NineP.Protocol.Messages.Treadlink.Equals(NineP.Protocol.Messages.Treadlink other) -> bool
+NineP.Protocol.Messages.Treadlink.Fid.get -> uint
+NineP.Protocol.Messages.Treadlink.Fid.init -> void
+NineP.Protocol.Messages.Treadlink.Tag.get -> ushort
+NineP.Protocol.Messages.Treadlink.Tag.init -> void
+NineP.Protocol.Messages.Treadlink.Treadlink() -> void
+NineP.Protocol.Messages.Treadlink.Treadlink(ushort Tag, uint Fid) -> void
+NineP.Protocol.Messages.Tremove
+NineP.Protocol.Messages.Tremove.Deconstruct(out ushort Tag, out uint Fid) -> void
+NineP.Protocol.Messages.Tremove.Equals(NineP.Protocol.Messages.Tremove other) -> bool
+NineP.Protocol.Messages.Tremove.Fid.get -> uint
+NineP.Protocol.Messages.Tremove.Fid.init -> void
+NineP.Protocol.Messages.Tremove.Tag.get -> ushort
+NineP.Protocol.Messages.Tremove.Tag.init -> void
+NineP.Protocol.Messages.Tremove.Tremove() -> void
+NineP.Protocol.Messages.Tremove.Tremove(ushort Tag, uint Fid) -> void
+NineP.Protocol.Messages.Trename
+NineP.Protocol.Messages.Trename.Deconstruct(out ushort Tag, out uint Fid, out uint Dfid, out string! Name) -> void
+NineP.Protocol.Messages.Trename.Dfid.get -> uint
+NineP.Protocol.Messages.Trename.Dfid.init -> void
+NineP.Protocol.Messages.Trename.Equals(NineP.Protocol.Messages.Trename other) -> bool
+NineP.Protocol.Messages.Trename.Fid.get -> uint
+NineP.Protocol.Messages.Trename.Fid.init -> void
+NineP.Protocol.Messages.Trename.Name.get -> string!
+NineP.Protocol.Messages.Trename.Name.init -> void
+NineP.Protocol.Messages.Trename.Tag.get -> ushort
+NineP.Protocol.Messages.Trename.Tag.init -> void
+NineP.Protocol.Messages.Trename.Trename() -> void
+NineP.Protocol.Messages.Trename.Trename(ushort Tag, uint Fid, uint Dfid, string! Name) -> void
+NineP.Protocol.Messages.Trenameat
+NineP.Protocol.Messages.Trenameat.Deconstruct(out ushort Tag, out uint OldDirFid, out string! OldName, out uint NewDirFid, out string! NewName) -> void
+NineP.Protocol.Messages.Trenameat.Equals(NineP.Protocol.Messages.Trenameat other) -> bool
+NineP.Protocol.Messages.Trenameat.NewDirFid.get -> uint
+NineP.Protocol.Messages.Trenameat.NewDirFid.init -> void
+NineP.Protocol.Messages.Trenameat.NewName.get -> string!
+NineP.Protocol.Messages.Trenameat.NewName.init -> void
+NineP.Protocol.Messages.Trenameat.OldDirFid.get -> uint
+NineP.Protocol.Messages.Trenameat.OldDirFid.init -> void
+NineP.Protocol.Messages.Trenameat.OldName.get -> string!
+NineP.Protocol.Messages.Trenameat.OldName.init -> void
+NineP.Protocol.Messages.Trenameat.Tag.get -> ushort
+NineP.Protocol.Messages.Trenameat.Tag.init -> void
+NineP.Protocol.Messages.Trenameat.Trenameat() -> void
+NineP.Protocol.Messages.Trenameat.Trenameat(ushort Tag, uint OldDirFid, string! OldName, uint NewDirFid, string! NewName) -> void
+NineP.Protocol.Messages.Tsetattr
+NineP.Protocol.Messages.Tsetattr.ATime.get -> NineP.Protocol.TimeSpec
+NineP.Protocol.Messages.Tsetattr.ATime.init -> void
+NineP.Protocol.Messages.Tsetattr.Deconstruct(out ushort Tag, out uint Fid, out NineP.Protocol.Messages.SetAttrMask Valid, out uint Mode, out uint Uid, out uint Gid, out ulong Size, out NineP.Protocol.TimeSpec ATime, out NineP.Protocol.TimeSpec MTime) -> void
+NineP.Protocol.Messages.Tsetattr.Equals(NineP.Protocol.Messages.Tsetattr other) -> bool
+NineP.Protocol.Messages.Tsetattr.Fid.get -> uint
+NineP.Protocol.Messages.Tsetattr.Fid.init -> void
+NineP.Protocol.Messages.Tsetattr.Gid.get -> uint
+NineP.Protocol.Messages.Tsetattr.Gid.init -> void
+NineP.Protocol.Messages.Tsetattr.MTime.get -> NineP.Protocol.TimeSpec
+NineP.Protocol.Messages.Tsetattr.MTime.init -> void
+NineP.Protocol.Messages.Tsetattr.Mode.get -> uint
+NineP.Protocol.Messages.Tsetattr.Mode.init -> void
+NineP.Protocol.Messages.Tsetattr.Size.get -> ulong
+NineP.Protocol.Messages.Tsetattr.Size.init -> void
+NineP.Protocol.Messages.Tsetattr.Tag.get -> ushort
+NineP.Protocol.Messages.Tsetattr.Tag.init -> void
+NineP.Protocol.Messages.Tsetattr.Tsetattr() -> void
+NineP.Protocol.Messages.Tsetattr.Tsetattr(ushort Tag, uint Fid, NineP.Protocol.Messages.SetAttrMask Valid, uint Mode, uint Uid, uint Gid, ulong Size, NineP.Protocol.TimeSpec ATime, NineP.Protocol.TimeSpec MTime) -> void
+NineP.Protocol.Messages.Tsetattr.Uid.get -> uint
+NineP.Protocol.Messages.Tsetattr.Uid.init -> void
+NineP.Protocol.Messages.Tsetattr.Valid.get -> NineP.Protocol.Messages.SetAttrMask
+NineP.Protocol.Messages.Tsetattr.Valid.init -> void
+NineP.Protocol.Messages.Tstat
+NineP.Protocol.Messages.Tstat.Deconstruct(out ushort Tag, out uint Fid) -> void
+NineP.Protocol.Messages.Tstat.Equals(NineP.Protocol.Messages.Tstat other) -> bool
+NineP.Protocol.Messages.Tstat.Fid.get -> uint
+NineP.Protocol.Messages.Tstat.Fid.init -> void
+NineP.Protocol.Messages.Tstat.Tag.get -> ushort
+NineP.Protocol.Messages.Tstat.Tag.init -> void
+NineP.Protocol.Messages.Tstat.Tstat() -> void
+NineP.Protocol.Messages.Tstat.Tstat(ushort Tag, uint Fid) -> void
+NineP.Protocol.Messages.Tstatfs
+NineP.Protocol.Messages.Tstatfs.Deconstruct(out ushort Tag, out uint Fid) -> void
+NineP.Protocol.Messages.Tstatfs.Equals(NineP.Protocol.Messages.Tstatfs other) -> bool
+NineP.Protocol.Messages.Tstatfs.Fid.get -> uint
+NineP.Protocol.Messages.Tstatfs.Fid.init -> void
+NineP.Protocol.Messages.Tstatfs.Tag.get -> ushort
+NineP.Protocol.Messages.Tstatfs.Tag.init -> void
+NineP.Protocol.Messages.Tstatfs.Tstatfs() -> void
+NineP.Protocol.Messages.Tstatfs.Tstatfs(ushort Tag, uint Fid) -> void
+NineP.Protocol.Messages.Tsymlink
+NineP.Protocol.Messages.Tsymlink.Deconstruct(out ushort Tag, out uint Fid, out string! Name, out string! Symtgt, out uint Gid) -> void
+NineP.Protocol.Messages.Tsymlink.Equals(NineP.Protocol.Messages.Tsymlink other) -> bool
+NineP.Protocol.Messages.Tsymlink.Fid.get -> uint
+NineP.Protocol.Messages.Tsymlink.Fid.init -> void
+NineP.Protocol.Messages.Tsymlink.Gid.get -> uint
+NineP.Protocol.Messages.Tsymlink.Gid.init -> void
+NineP.Protocol.Messages.Tsymlink.Name.get -> string!
+NineP.Protocol.Messages.Tsymlink.Name.init -> void
+NineP.Protocol.Messages.Tsymlink.Symtgt.get -> string!
+NineP.Protocol.Messages.Tsymlink.Symtgt.init -> void
+NineP.Protocol.Messages.Tsymlink.Tag.get -> ushort
+NineP.Protocol.Messages.Tsymlink.Tag.init -> void
+NineP.Protocol.Messages.Tsymlink.Tsymlink() -> void
+NineP.Protocol.Messages.Tsymlink.Tsymlink(ushort Tag, uint Fid, string! Name, string! Symtgt, uint Gid) -> void
+NineP.Protocol.Messages.Tunlinkat
+NineP.Protocol.Messages.Tunlinkat.Deconstruct(out ushort Tag, out uint DirFid, out string! Name, out uint Flags) -> void
+NineP.Protocol.Messages.Tunlinkat.DirFid.get -> uint
+NineP.Protocol.Messages.Tunlinkat.DirFid.init -> void
+NineP.Protocol.Messages.Tunlinkat.Equals(NineP.Protocol.Messages.Tunlinkat other) -> bool
+NineP.Protocol.Messages.Tunlinkat.Flags.get -> uint
+NineP.Protocol.Messages.Tunlinkat.Flags.init -> void
+NineP.Protocol.Messages.Tunlinkat.Name.get -> string!
+NineP.Protocol.Messages.Tunlinkat.Name.init -> void
+NineP.Protocol.Messages.Tunlinkat.Tag.get -> ushort
+NineP.Protocol.Messages.Tunlinkat.Tag.init -> void
+NineP.Protocol.Messages.Tunlinkat.Tunlinkat() -> void
+NineP.Protocol.Messages.Tunlinkat.Tunlinkat(ushort Tag, uint DirFid, string! Name, uint Flags) -> void
+NineP.Protocol.Messages.Tversion
+NineP.Protocol.Messages.Tversion.Deconstruct(out ushort Tag, out uint Msize, out string! Version) -> void
+NineP.Protocol.Messages.Tversion.Equals(NineP.Protocol.Messages.Tversion other) -> bool
+NineP.Protocol.Messages.Tversion.Msize.get -> uint
+NineP.Protocol.Messages.Tversion.Msize.init -> void
+NineP.Protocol.Messages.Tversion.Tag.get -> ushort
+NineP.Protocol.Messages.Tversion.Tag.init -> void
+NineP.Protocol.Messages.Tversion.Tversion() -> void
+NineP.Protocol.Messages.Tversion.Tversion(ushort Tag, uint Msize, string! Version) -> void
+NineP.Protocol.Messages.Tversion.Version.get -> string!
+NineP.Protocol.Messages.Tversion.Version.init -> void
+NineP.Protocol.Messages.Twalk
+NineP.Protocol.Messages.Twalk.Deconstruct(out ushort Tag, out uint Fid, out uint NewFid, out System.Collections.Generic.IReadOnlyList<string!>! Wnames) -> void
+NineP.Protocol.Messages.Twalk.Equals(NineP.Protocol.Messages.Twalk other) -> bool
+NineP.Protocol.Messages.Twalk.Fid.get -> uint
+NineP.Protocol.Messages.Twalk.Fid.init -> void
+NineP.Protocol.Messages.Twalk.NewFid.get -> uint
+NineP.Protocol.Messages.Twalk.NewFid.init -> void
+NineP.Protocol.Messages.Twalk.Tag.get -> ushort
+NineP.Protocol.Messages.Twalk.Tag.init -> void
+NineP.Protocol.Messages.Twalk.Twalk() -> void
+NineP.Protocol.Messages.Twalk.Twalk(ushort Tag, uint Fid, uint NewFid, System.Collections.Generic.IReadOnlyList<string!>! Wnames) -> void
+NineP.Protocol.Messages.Twalk.Wnames.get -> System.Collections.Generic.IReadOnlyList<string!>!
+NineP.Protocol.Messages.Twalk.Wnames.init -> void
+NineP.Protocol.Messages.Twrite
+NineP.Protocol.Messages.Twrite.Data.get -> System.ReadOnlyMemory<byte>
+NineP.Protocol.Messages.Twrite.Data.init -> void
+NineP.Protocol.Messages.Twrite.Deconstruct(out ushort Tag, out uint Fid, out ulong Offset, out System.ReadOnlyMemory<byte> Data) -> void
+NineP.Protocol.Messages.Twrite.Equals(NineP.Protocol.Messages.Twrite other) -> bool
+NineP.Protocol.Messages.Twrite.Fid.get -> uint
+NineP.Protocol.Messages.Twrite.Fid.init -> void
+NineP.Protocol.Messages.Twrite.Offset.get -> ulong
+NineP.Protocol.Messages.Twrite.Offset.init -> void
+NineP.Protocol.Messages.Twrite.Tag.get -> ushort
+NineP.Protocol.Messages.Twrite.Tag.init -> void
+NineP.Protocol.Messages.Twrite.Twrite() -> void
+NineP.Protocol.Messages.Twrite.Twrite(ushort Tag, uint Fid, ulong Offset, System.ReadOnlyMemory<byte> Data) -> void
+NineP.Protocol.Messages.Twstat
+NineP.Protocol.Messages.Twstat.Deconstruct(out ushort Tag, out uint Fid, out NineP.Protocol.Messages.StatRecord Stat) -> void
+NineP.Protocol.Messages.Twstat.Equals(NineP.Protocol.Messages.Twstat other) -> bool
+NineP.Protocol.Messages.Twstat.Fid.get -> uint
+NineP.Protocol.Messages.Twstat.Fid.init -> void
+NineP.Protocol.Messages.Twstat.Stat.get -> NineP.Protocol.Messages.StatRecord
+NineP.Protocol.Messages.Twstat.Stat.init -> void
+NineP.Protocol.Messages.Twstat.Tag.get -> ushort
+NineP.Protocol.Messages.Twstat.Tag.init -> void
+NineP.Protocol.Messages.Twstat.Twstat() -> void
+NineP.Protocol.Messages.Twstat.Twstat(ushort Tag, uint Fid, NineP.Protocol.Messages.StatRecord Stat) -> void
+NineP.Protocol.Messages.Txattrcreate
+NineP.Protocol.Messages.Txattrcreate.AttrSize.get -> ulong
+NineP.Protocol.Messages.Txattrcreate.AttrSize.init -> void
+NineP.Protocol.Messages.Txattrcreate.Deconstruct(out ushort Tag, out uint Fid, out string! Name, out ulong AttrSize, out NineP.Protocol.XattrFlags Flags) -> void
+NineP.Protocol.Messages.Txattrcreate.Equals(NineP.Protocol.Messages.Txattrcreate other) -> bool
+NineP.Protocol.Messages.Txattrcreate.Fid.get -> uint
+NineP.Protocol.Messages.Txattrcreate.Fid.init -> void
+NineP.Protocol.Messages.Txattrcreate.Flags.get -> NineP.Protocol.XattrFlags
+NineP.Protocol.Messages.Txattrcreate.Flags.init -> void
+NineP.Protocol.Messages.Txattrcreate.Name.get -> string!
+NineP.Protocol.Messages.Txattrcreate.Name.init -> void
+NineP.Protocol.Messages.Txattrcreate.Tag.get -> ushort
+NineP.Protocol.Messages.Txattrcreate.Tag.init -> void
+NineP.Protocol.Messages.Txattrcreate.Txattrcreate() -> void
+NineP.Protocol.Messages.Txattrcreate.Txattrcreate(ushort Tag, uint Fid, string! Name, ulong AttrSize, NineP.Protocol.XattrFlags Flags) -> void
+NineP.Protocol.Messages.Txattrwalk
+NineP.Protocol.Messages.Txattrwalk.Deconstruct(out ushort Tag, out uint Fid, out uint NewFid, out string! Name) -> void
+NineP.Protocol.Messages.Txattrwalk.Equals(NineP.Protocol.Messages.Txattrwalk other) -> bool
+NineP.Protocol.Messages.Txattrwalk.Fid.get -> uint
+NineP.Protocol.Messages.Txattrwalk.Fid.init -> void
+NineP.Protocol.Messages.Txattrwalk.Name.get -> string!
+NineP.Protocol.Messages.Txattrwalk.Name.init -> void
+NineP.Protocol.Messages.Txattrwalk.NewFid.get -> uint
+NineP.Protocol.Messages.Txattrwalk.NewFid.init -> void
+NineP.Protocol.Messages.Txattrwalk.Tag.get -> ushort
+NineP.Protocol.Messages.Txattrwalk.Tag.init -> void
+NineP.Protocol.Messages.Txattrwalk.Txattrwalk() -> void
+NineP.Protocol.Messages.Txattrwalk.Txattrwalk(ushort Tag, uint Fid, uint NewFid, string! Name) -> void
+NineP.Protocol.Negotiation.NegotiationResult
+NineP.Protocol.Negotiation.NegotiationResult.Deconstruct(out string! Version, out uint Msize, out NineP.Protocol.Dialect? Dialect) -> void
+NineP.Protocol.Negotiation.NegotiationResult.Dialect.get -> NineP.Protocol.Dialect?
+NineP.Protocol.Negotiation.NegotiationResult.Dialect.init -> void
+NineP.Protocol.Negotiation.NegotiationResult.Equals(NineP.Protocol.Negotiation.NegotiationResult other) -> bool
+NineP.Protocol.Negotiation.NegotiationResult.IsUnknown.get -> bool
+NineP.Protocol.Negotiation.NegotiationResult.Msize.get -> uint
+NineP.Protocol.Negotiation.NegotiationResult.Msize.init -> void
+NineP.Protocol.Negotiation.NegotiationResult.NegotiationResult() -> void
+NineP.Protocol.Negotiation.NegotiationResult.NegotiationResult(string! Version, uint Msize, NineP.Protocol.Dialect? Dialect) -> void
+NineP.Protocol.Negotiation.NegotiationResult.Version.get -> string!
+NineP.Protocol.Negotiation.NegotiationResult.Version.init -> void
+NineP.Protocol.Negotiation.Negotiator
+NineP.Protocol.NinePError
+NineP.Protocol.NinePError.Deconstruct(out string! Ename, out int Errno) -> void
+NineP.Protocol.NinePError.Ename.get -> string!
+NineP.Protocol.NinePError.Ename.init -> void
+NineP.Protocol.NinePError.Equals(NineP.Protocol.NinePError other) -> bool
+NineP.Protocol.NinePError.Errno.get -> int
+NineP.Protocol.NinePError.Errno.init -> void
+NineP.Protocol.NinePError.NinePError() -> void
+NineP.Protocol.NinePError.NinePError(string! Ename, int Errno) -> void
+NineP.Protocol.NinePError.TruncatedEname.get -> string!
+NineP.Protocol.NinePException
+NineP.Protocol.NinePException.Error.get -> NineP.Protocol.NinePError
+NineP.Protocol.NinePException.NinePException() -> void
+NineP.Protocol.NinePException.NinePException(NineP.Protocol.NinePError error) -> void
+NineP.Protocol.NinePException.NinePException(string! message) -> void
+NineP.Protocol.NinePException.NinePException(string! message, System.Exception! innerException) -> void
+NineP.Protocol.NinePProtocolException
+NineP.Protocol.NinePProtocolException.Kind.get -> NineP.Protocol.ProtocolErrorKind
+NineP.Protocol.NinePProtocolException.NinePProtocolException() -> void
+NineP.Protocol.NinePProtocolException.NinePProtocolException(NineP.Protocol.ProtocolErrorKind kind, string! message) -> void
+NineP.Protocol.NinePProtocolException.NinePProtocolException(string! message) -> void
+NineP.Protocol.NinePProtocolException.NinePProtocolException(string! message, System.Exception! innerException) -> void
+NineP.Protocol.NinePVersionException
+NineP.Protocol.NinePVersionException.NinePVersionException() -> void
+NineP.Protocol.NinePVersionException.NinePVersionException(string! message) -> void
+NineP.Protocol.NinePVersionException.NinePVersionException(string! message, System.Exception! innerException) -> void
+NineP.Protocol.NinePVersionException.NinePVersionException(string! message, string! serverVersion, uint serverMsize) -> void
+NineP.Protocol.NinePVersionException.ServerMsize.get -> uint
+NineP.Protocol.NinePVersionException.ServerVersion.get -> string!
+NineP.Protocol.OpenFlags
+NineP.Protocol.OpenFlags.Append = 4 -> NineP.Protocol.OpenFlags
+NineP.Protocol.OpenFlags.Directory = 16 -> NineP.Protocol.OpenFlags
+NineP.Protocol.OpenFlags.Exclusive = 8 -> NineP.Protocol.OpenFlags
+NineP.Protocol.OpenFlags.NoFollow = 32 -> NineP.Protocol.OpenFlags
+NineP.Protocol.OpenFlags.None = 0 -> NineP.Protocol.OpenFlags
+NineP.Protocol.OpenFlags.RemoveOnClose = 2 -> NineP.Protocol.OpenFlags
+NineP.Protocol.OpenFlags.Truncate = 1 -> NineP.Protocol.OpenFlags
+NineP.Protocol.OpenMode
+NineP.Protocol.OpenMode.Exec = 3 -> NineP.Protocol.OpenMode
+NineP.Protocol.OpenMode.Read = 0 -> NineP.Protocol.OpenMode
+NineP.Protocol.OpenMode.ReadWrite = 2 -> NineP.Protocol.OpenMode
+NineP.Protocol.OpenMode.Write = 1 -> NineP.Protocol.OpenMode
+NineP.Protocol.ProtocolErrorKind
+NineP.Protocol.ProtocolErrorKind.Bounds = 1 -> NineP.Protocol.ProtocolErrorKind
+NineP.Protocol.ProtocolErrorKind.NWName = 5 -> NineP.Protocol.ProtocolErrorKind
+NineP.Protocol.ProtocolErrorKind.Name = 4 -> NineP.Protocol.ProtocolErrorKind
+NineP.Protocol.ProtocolErrorKind.Nul = 3 -> NineP.Protocol.ProtocolErrorKind
+NineP.Protocol.ProtocolErrorKind.Overflow = 7 -> NineP.Protocol.ProtocolErrorKind
+NineP.Protocol.ProtocolErrorKind.Size = 0 -> NineP.Protocol.ProtocolErrorKind
+NineP.Protocol.ProtocolErrorKind.Stat = 8 -> NineP.Protocol.ProtocolErrorKind
+NineP.Protocol.ProtocolErrorKind.Trailing = 6 -> NineP.Protocol.ProtocolErrorKind
+NineP.Protocol.ProtocolErrorKind.Type = 9 -> NineP.Protocol.ProtocolErrorKind
+NineP.Protocol.ProtocolErrorKind.Utf8 = 2 -> NineP.Protocol.ProtocolErrorKind
+NineP.Protocol.Qid
+NineP.Protocol.Qid.Deconstruct(out NineP.Protocol.QidType Type, out uint Version, out ulong Path) -> void
+NineP.Protocol.Qid.Equals(NineP.Protocol.Qid other) -> bool
+NineP.Protocol.Qid.Path.get -> ulong
+NineP.Protocol.Qid.Path.init -> void
+NineP.Protocol.Qid.Qid() -> void
+NineP.Protocol.Qid.Qid(NineP.Protocol.QidType Type, uint Version, ulong Path) -> void
+NineP.Protocol.Qid.Type.get -> NineP.Protocol.QidType
+NineP.Protocol.Qid.Type.init -> void
+NineP.Protocol.Qid.Version.get -> uint
+NineP.Protocol.Qid.Version.init -> void
+NineP.Protocol.QidType
+NineP.Protocol.QidType.QTAPPEND = 64 -> NineP.Protocol.QidType
+NineP.Protocol.QidType.QTAUTH = 8 -> NineP.Protocol.QidType
+NineP.Protocol.QidType.QTDIR = 128 -> NineP.Protocol.QidType
+NineP.Protocol.QidType.QTEXCL = 32 -> NineP.Protocol.QidType
+NineP.Protocol.QidType.QTFILE = 0 -> NineP.Protocol.QidType
+NineP.Protocol.QidType.QTLINK = 1 -> NineP.Protocol.QidType
+NineP.Protocol.QidType.QTMOUNT = 16 -> NineP.Protocol.QidType
+NineP.Protocol.QidType.QTSYMLINK = 2 -> NineP.Protocol.QidType
+NineP.Protocol.QidType.QTTMP = 4 -> NineP.Protocol.QidType
+NineP.Protocol.SetAttr
+NineP.Protocol.SetAttr.<Clone>$() -> NineP.Protocol.SetAttr!
+NineP.Protocol.SetAttr.ATime.get -> NineP.Protocol.TimeSpec?
+NineP.Protocol.SetAttr.ATime.init -> void
+NineP.Protocol.SetAttr.ATimeToNow.get -> bool
+NineP.Protocol.SetAttr.ATimeToNow.init -> void
+NineP.Protocol.SetAttr.CTimeToNow.get -> bool
+NineP.Protocol.SetAttr.CTimeToNow.init -> void
+NineP.Protocol.SetAttr.Equals(NineP.Protocol.SetAttr? other) -> bool
+NineP.Protocol.SetAttr.Gid.get -> uint?
+NineP.Protocol.SetAttr.Gid.init -> void
+NineP.Protocol.SetAttr.GroupName.get -> string?
+NineP.Protocol.SetAttr.GroupName.init -> void
+NineP.Protocol.SetAttr.IsFsyncRequest.get -> bool
+NineP.Protocol.SetAttr.MTime.get -> NineP.Protocol.TimeSpec?
+NineP.Protocol.SetAttr.MTime.init -> void
+NineP.Protocol.SetAttr.MTimeToNow.get -> bool
+NineP.Protocol.SetAttr.MTimeToNow.init -> void
+NineP.Protocol.SetAttr.Name.get -> string?
+NineP.Protocol.SetAttr.Name.init -> void
+NineP.Protocol.SetAttr.Perm.get -> uint?
+NineP.Protocol.SetAttr.Perm.init -> void
+NineP.Protocol.SetAttr.SetAttr() -> void
+NineP.Protocol.SetAttr.Size.get -> ulong?
+NineP.Protocol.SetAttr.Size.init -> void
+NineP.Protocol.SetAttr.Uid.get -> uint?
+NineP.Protocol.SetAttr.Uid.init -> void
+NineP.Protocol.StatFs
+NineP.Protocol.StatFs.BlockSize.get -> uint
+NineP.Protocol.StatFs.BlockSize.init -> void
+NineP.Protocol.StatFs.Blocks.get -> ulong
+NineP.Protocol.StatFs.Blocks.init -> void
+NineP.Protocol.StatFs.BlocksAvailable.get -> ulong
+NineP.Protocol.StatFs.BlocksAvailable.init -> void
+NineP.Protocol.StatFs.BlocksFree.get -> ulong
+NineP.Protocol.StatFs.BlocksFree.init -> void
+NineP.Protocol.StatFs.Deconstruct(out uint Type, out uint BlockSize, out ulong Blocks, out ulong BlocksFree, out ulong BlocksAvailable, out ulong Files, out ulong FilesFree, out ulong FsId, out uint NameLength) -> void
+NineP.Protocol.StatFs.Equals(NineP.Protocol.StatFs other) -> bool
+NineP.Protocol.StatFs.Files.get -> ulong
+NineP.Protocol.StatFs.Files.init -> void
+NineP.Protocol.StatFs.FilesFree.get -> ulong
+NineP.Protocol.StatFs.FilesFree.init -> void
+NineP.Protocol.StatFs.FsId.get -> ulong
+NineP.Protocol.StatFs.FsId.init -> void
+NineP.Protocol.StatFs.NameLength.get -> uint
+NineP.Protocol.StatFs.NameLength.init -> void
+NineP.Protocol.StatFs.StatFs() -> void
+NineP.Protocol.StatFs.StatFs(uint Type, uint BlockSize, ulong Blocks, ulong BlocksFree, ulong BlocksAvailable, ulong Files, ulong FilesFree, ulong FsId, uint NameLength) -> void
+NineP.Protocol.StatFs.Type.get -> uint
+NineP.Protocol.StatFs.Type.init -> void
+NineP.Protocol.TimeSpec
+NineP.Protocol.TimeSpec.Deconstruct(out long Seconds, out uint Nanoseconds) -> void
+NineP.Protocol.TimeSpec.Equals(NineP.Protocol.TimeSpec other) -> bool
+NineP.Protocol.TimeSpec.Nanoseconds.get -> uint
+NineP.Protocol.TimeSpec.Nanoseconds.init -> void
+NineP.Protocol.TimeSpec.Seconds.get -> long
+NineP.Protocol.TimeSpec.Seconds.init -> void
+NineP.Protocol.TimeSpec.TimeSpec() -> void
+NineP.Protocol.TimeSpec.TimeSpec(long Seconds, uint Nanoseconds) -> void
+NineP.Protocol.Transports.CloseReason
+NineP.Protocol.Transports.CloseReason.MessageTooLarge = 3 -> NineP.Protocol.Transports.CloseReason
+NineP.Protocol.Transports.CloseReason.Normal = 0 -> NineP.Protocol.Transports.CloseReason
+NineP.Protocol.Transports.CloseReason.PeerClosed = 1 -> NineP.Protocol.Transports.CloseReason
+NineP.Protocol.Transports.CloseReason.ProtocolViolation = 2 -> NineP.Protocol.Transports.CloseReason
+NineP.Protocol.Transports.CloseReason.ResourceLimit = 5 -> NineP.Protocol.Transports.CloseReason
+NineP.Protocol.Transports.CloseReason.Shutdown = 6 -> NineP.Protocol.Transports.CloseReason
+NineP.Protocol.Transports.CloseReason.Timeout = 4 -> NineP.Protocol.Transports.CloseReason
+NineP.Protocol.Transports.CloseReason.TransportError = 7 -> NineP.Protocol.Transports.CloseReason
+NineP.Protocol.Transports.INinePConnection
+NineP.Protocol.Transports.INinePConnection.CloseAsync(NineP.Protocol.Transports.CloseReason reason, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask
+NineP.Protocol.Transports.INinePConnection.PeerIdentity.get -> NineP.Protocol.Transports.PeerIdentity?
+NineP.Protocol.Transports.INinePConnection.ReadAsync(System.Memory<byte> buffer, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<int>
+NineP.Protocol.Transports.INinePConnection.RemoteAddress.get -> NineP.Protocol.Transports.NinePAddress
+NineP.Protocol.Transports.INinePConnection.WriteAsync(System.ReadOnlyMemory<byte> message, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask
+NineP.Protocol.Transports.INinePListener
+NineP.Protocol.Transports.INinePListener.AcceptAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Transports.INinePConnection?>
+NineP.Protocol.Transports.INinePListener.LocalAddress.get -> NineP.Protocol.Transports.NinePAddress
+NineP.Protocol.Transports.ITransport
+NineP.Protocol.Transports.ITransport.ConnectAsync(NineP.Protocol.Transports.NinePAddress address, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Transports.INinePConnection!>
+NineP.Protocol.Transports.ITransport.ListenAsync(NineP.Protocol.Transports.NinePAddress address, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Transports.INinePListener!>
+NineP.Protocol.Transports.ITransport.Schemes.get -> System.Collections.Generic.IReadOnlyCollection<NineP.Protocol.Transports.NinePScheme>!
+NineP.Protocol.Transports.MemoryTransport
+NineP.Protocol.Transports.MemoryTransport.ConnectAsync(NineP.Protocol.Transports.NinePAddress address, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Transports.INinePConnection!>
+NineP.Protocol.Transports.MemoryTransport.ListenAsync(NineP.Protocol.Transports.NinePAddress address, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Transports.INinePListener!>
+NineP.Protocol.Transports.MemoryTransport.MemoryTransport() -> void
+NineP.Protocol.Transports.MemoryTransport.Schemes.get -> System.Collections.Generic.IReadOnlyCollection<NineP.Protocol.Transports.NinePScheme>!
+NineP.Protocol.Transports.NinePAddress
+NineP.Protocol.Transports.NinePAddress.Deconstruct(out NineP.Protocol.Transports.NinePScheme Scheme, out string! Host, out int Port, out string! Path) -> void
+NineP.Protocol.Transports.NinePAddress.Equals(NineP.Protocol.Transports.NinePAddress other) -> bool
+NineP.Protocol.Transports.NinePAddress.Host.get -> string!
+NineP.Protocol.Transports.NinePAddress.Host.init -> void
+NineP.Protocol.Transports.NinePAddress.IsSecure.get -> bool
+NineP.Protocol.Transports.NinePAddress.NinePAddress() -> void
+NineP.Protocol.Transports.NinePAddress.NinePAddress(NineP.Protocol.Transports.NinePScheme Scheme, string! Host, int Port, string! Path) -> void
+NineP.Protocol.Transports.NinePAddress.Path.get -> string!
+NineP.Protocol.Transports.NinePAddress.Path.init -> void
+NineP.Protocol.Transports.NinePAddress.Port.get -> int
+NineP.Protocol.Transports.NinePAddress.Port.init -> void
+NineP.Protocol.Transports.NinePAddress.Scheme.get -> NineP.Protocol.Transports.NinePScheme
+NineP.Protocol.Transports.NinePAddress.Scheme.init -> void
+NineP.Protocol.Transports.NinePScheme
+NineP.Protocol.Transports.NinePScheme.Memory = 5 -> NineP.Protocol.Transports.NinePScheme
+NineP.Protocol.Transports.NinePScheme.Tcp = 0 -> NineP.Protocol.Transports.NinePScheme
+NineP.Protocol.Transports.NinePScheme.Tls = 1 -> NineP.Protocol.Transports.NinePScheme
+NineP.Protocol.Transports.NinePScheme.Unix = 4 -> NineP.Protocol.Transports.NinePScheme
+NineP.Protocol.Transports.NinePScheme.Ws = 2 -> NineP.Protocol.Transports.NinePScheme
+NineP.Protocol.Transports.NinePScheme.Wss = 3 -> NineP.Protocol.Transports.NinePScheme
+NineP.Protocol.Transports.PeerIdentity
+NineP.Protocol.Transports.PeerIdentity.<Clone>$() -> NineP.Protocol.Transports.PeerIdentity!
+NineP.Protocol.Transports.PeerIdentity.ClientCertificate.get -> System.Security.Cryptography.X509Certificates.X509Certificate2?
+NineP.Protocol.Transports.PeerIdentity.ClientCertificate.init -> void
+NineP.Protocol.Transports.PeerIdentity.Equals(NineP.Protocol.Transports.PeerIdentity? other) -> bool
+NineP.Protocol.Transports.PeerIdentity.Headers.get -> System.Collections.Generic.IReadOnlyDictionary<string!, string!>!
+NineP.Protocol.Transports.PeerIdentity.Headers.init -> void
+NineP.Protocol.Transports.PeerIdentity.Origin.get -> string?
+NineP.Protocol.Transports.PeerIdentity.Origin.init -> void
+NineP.Protocol.Transports.PeerIdentity.PeerIdentity() -> void
+NineP.Protocol.Transports.PeerIdentity.RemoteAddress.get -> string?
+NineP.Protocol.Transports.PeerIdentity.RemoteAddress.init -> void
+NineP.Protocol.Transports.TcpTransport
+NineP.Protocol.Transports.TcpTransport.ConnectAsync(NineP.Protocol.Transports.NinePAddress address, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Transports.INinePConnection!>
+NineP.Protocol.Transports.TcpTransport.ListenAsync(NineP.Protocol.Transports.NinePAddress address, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Transports.INinePListener!>
+NineP.Protocol.Transports.TcpTransport.Schemes.get -> System.Collections.Generic.IReadOnlyCollection<NineP.Protocol.Transports.NinePScheme>!
+NineP.Protocol.Transports.TcpTransport.TcpTransport(NineP.Protocol.Transports.TcpTransportOptions? options = null) -> void
+NineP.Protocol.Transports.TcpTransportOptions
+NineP.Protocol.Transports.TcpTransportOptions.<Clone>$() -> NineP.Protocol.Transports.TcpTransportOptions!
+NineP.Protocol.Transports.TcpTransportOptions.Backlog.get -> int
+NineP.Protocol.Transports.TcpTransportOptions.Backlog.init -> void
+NineP.Protocol.Transports.TcpTransportOptions.ConnectTimeout.get -> System.TimeSpan
+NineP.Protocol.Transports.TcpTransportOptions.ConnectTimeout.init -> void
+NineP.Protocol.Transports.TcpTransportOptions.Equals(NineP.Protocol.Transports.TcpTransportOptions? other) -> bool
+NineP.Protocol.Transports.TcpTransportOptions.KeepAlive.get -> bool
+NineP.Protocol.Transports.TcpTransportOptions.KeepAlive.init -> void
+NineP.Protocol.Transports.TcpTransportOptions.Logger.get -> Microsoft.Extensions.Logging.ILogger?
+NineP.Protocol.Transports.TcpTransportOptions.Logger.init -> void
+NineP.Protocol.Transports.TcpTransportOptions.MaxConnections.get -> int
+NineP.Protocol.Transports.TcpTransportOptions.MaxConnections.init -> void
+NineP.Protocol.Transports.TcpTransportOptions.NoDelay.get -> bool
+NineP.Protocol.Transports.TcpTransportOptions.NoDelay.init -> void
+NineP.Protocol.Transports.TcpTransportOptions.TcpTransportOptions() -> void
+NineP.Protocol.Transports.TlsTransport
+NineP.Protocol.Transports.TlsTransport.ConnectAsync(NineP.Protocol.Transports.NinePAddress address, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Transports.INinePConnection!>
+NineP.Protocol.Transports.TlsTransport.ListenAsync(NineP.Protocol.Transports.NinePAddress address, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Transports.INinePListener!>
+NineP.Protocol.Transports.TlsTransport.Schemes.get -> System.Collections.Generic.IReadOnlyCollection<NineP.Protocol.Transports.NinePScheme>!
+NineP.Protocol.Transports.TlsTransport.TlsTransport(NineP.Protocol.Transports.TlsTransportOptions! options) -> void
+NineP.Protocol.Transports.TlsTransportOptions
+NineP.Protocol.Transports.TlsTransportOptions.<Clone>$() -> NineP.Protocol.Transports.TlsTransportOptions!
+NineP.Protocol.Transports.TlsTransportOptions.AdditionalPeerCheck.get -> System.Func<System.Security.Cryptography.X509Certificates.X509Certificate2!, bool>?
+NineP.Protocol.Transports.TlsTransportOptions.AdditionalPeerCheck.init -> void
+NineP.Protocol.Transports.TlsTransportOptions.AllowInsecureCertificates.get -> bool
+NineP.Protocol.Transports.TlsTransportOptions.AllowInsecureCertificates.init -> void
+NineP.Protocol.Transports.TlsTransportOptions.ClientCertificates.get -> System.Security.Cryptography.X509Certificates.X509Certificate2Collection?
+NineP.Protocol.Transports.TlsTransportOptions.ClientCertificates.init -> void
+NineP.Protocol.Transports.TlsTransportOptions.Equals(NineP.Protocol.Transports.TlsTransportOptions? other) -> bool
+NineP.Protocol.Transports.TlsTransportOptions.HandshakeTimeout.get -> System.TimeSpan
+NineP.Protocol.Transports.TlsTransportOptions.HandshakeTimeout.init -> void
+NineP.Protocol.Transports.TlsTransportOptions.Logger.get -> Microsoft.Extensions.Logging.ILogger?
+NineP.Protocol.Transports.TlsTransportOptions.Logger.init -> void
+NineP.Protocol.Transports.TlsTransportOptions.RequireClientCertificate.get -> bool
+NineP.Protocol.Transports.TlsTransportOptions.RequireClientCertificate.init -> void
+NineP.Protocol.Transports.TlsTransportOptions.ServerCertificate.get -> System.Security.Cryptography.X509Certificates.X509Certificate2?
+NineP.Protocol.Transports.TlsTransportOptions.ServerCertificate.init -> void
+NineP.Protocol.Transports.TlsTransportOptions.TargetHost.get -> string?
+NineP.Protocol.Transports.TlsTransportOptions.TargetHost.init -> void
+NineP.Protocol.Transports.TlsTransportOptions.Tcp.get -> NineP.Protocol.Transports.TcpTransportOptions?
+NineP.Protocol.Transports.TlsTransportOptions.Tcp.init -> void
+NineP.Protocol.Transports.TlsTransportOptions.TlsTransportOptions() -> void
+NineP.Protocol.Transports.TlsTransportOptions.TrustedRoots.get -> System.Security.Cryptography.X509Certificates.X509Certificate2Collection?
+NineP.Protocol.Transports.TlsTransportOptions.TrustedRoots.init -> void
+NineP.Protocol.Transports.WebSocketTransport
+NineP.Protocol.Transports.WebSocketTransport.ConnectAsync(NineP.Protocol.Transports.NinePAddress address, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Transports.INinePConnection!>
+NineP.Protocol.Transports.WebSocketTransport.ListenAsync(NineP.Protocol.Transports.NinePAddress address, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Transports.INinePListener!>
+NineP.Protocol.Transports.WebSocketTransport.Schemes.get -> System.Collections.Generic.IReadOnlyCollection<NineP.Protocol.Transports.NinePScheme>!
+NineP.Protocol.Transports.WebSocketTransport.WebSocketTransport(NineP.Protocol.Transports.WebSocketTransportOptions? options = null) -> void
+NineP.Protocol.Transports.WebSocketTransportOptions
+NineP.Protocol.Transports.WebSocketTransportOptions.<Clone>$() -> NineP.Protocol.Transports.WebSocketTransportOptions!
+NineP.Protocol.Transports.WebSocketTransportOptions.AllowedOrigins.get -> System.Collections.Generic.IReadOnlyCollection<string!>!
+NineP.Protocol.Transports.WebSocketTransportOptions.AllowedOrigins.init -> void
+NineP.Protocol.Transports.WebSocketTransportOptions.Equals(NineP.Protocol.Transports.WebSocketTransportOptions? other) -> bool
+NineP.Protocol.Transports.WebSocketTransportOptions.HandshakeTimeout.get -> System.TimeSpan
+NineP.Protocol.Transports.WebSocketTransportOptions.HandshakeTimeout.init -> void
+NineP.Protocol.Transports.WebSocketTransportOptions.KeepAliveInterval.get -> System.TimeSpan
+NineP.Protocol.Transports.WebSocketTransportOptions.KeepAliveInterval.init -> void
+NineP.Protocol.Transports.WebSocketTransportOptions.Logger.get -> Microsoft.Extensions.Logging.ILogger?
+NineP.Protocol.Transports.WebSocketTransportOptions.Logger.init -> void
+NineP.Protocol.Transports.WebSocketTransportOptions.MaxMessageSize.get -> int
+NineP.Protocol.Transports.WebSocketTransportOptions.MaxMessageSize.init -> void
+NineP.Protocol.Transports.WebSocketTransportOptions.Subprotocol.get -> string?
+NineP.Protocol.Transports.WebSocketTransportOptions.Subprotocol.init -> void
+NineP.Protocol.Transports.WebSocketTransportOptions.Tcp.get -> NineP.Protocol.Transports.TcpTransportOptions?
+NineP.Protocol.Transports.WebSocketTransportOptions.Tcp.init -> void
+NineP.Protocol.Transports.WebSocketTransportOptions.Tls.get -> NineP.Protocol.Transports.TlsTransportOptions?
+NineP.Protocol.Transports.WebSocketTransportOptions.Tls.init -> void
+NineP.Protocol.Transports.WebSocketTransportOptions.WebSocketTransportOptions() -> void
+NineP.Protocol.XattrFlags
+NineP.Protocol.XattrFlags.Create = 1 -> NineP.Protocol.XattrFlags
+NineP.Protocol.XattrFlags.None = 0 -> NineP.Protocol.XattrFlags
+NineP.Protocol.XattrFlags.Replace = 2 -> NineP.Protocol.XattrFlags
+const NineP.Protocol.Auth.PasswordFileStore.Algorithm = "pbkdf2-sha256" -> string!
+const NineP.Protocol.Auth.PasswordFileStore.MinimumIterations = 600000 -> int
+const NineP.Protocol.Constants.ERRMAX = 128 -> int
+const NineP.Protocol.Constants.HDRSZ = 7 -> int
+const NineP.Protocol.Constants.IOHDRSZ = 24 -> int
+const NineP.Protocol.Constants.MAXWELEM = 16 -> int
+const NineP.Protocol.Constants.MaxNameLength = 255 -> int
+const NineP.Protocol.Constants.NOFID = 4294967295 -> uint
+const NineP.Protocol.Constants.NONUNAME = 4294967295 -> uint
+const NineP.Protocol.Constants.NOTAG = 65535 -> ushort
+const NineP.Protocol.Constants.READDIRHDRSZ = 24 -> int
+const NineP.Protocol.Constants.RreadHeaderSize = 11 -> int
+const NineP.Protocol.Constants.STATFIXLEN = 49 -> int
+const NineP.Protocol.Constants.TwriteHeaderSize = 23 -> int
+const NineP.Protocol.Constants.Version9P2000 = "9P2000" -> string!
+const NineP.Protocol.Constants.Version9P2000L = "9P2000.L" -> string!
+const NineP.Protocol.Constants.Version9P2000u = "9P2000.u" -> string!
+const NineP.Protocol.Constants.VersionUnknown = "unknown" -> string!
+const NineP.Protocol.Constants.WebSocketSubprotocol = "9p" -> string!
+const NineP.Protocol.Errno.EACCES = 13 -> int
+const NineP.Protocol.Errno.EAGAIN = 11 -> int
+const NineP.Protocol.Errno.EBADF = 9 -> int
+const NineP.Protocol.Errno.ECONNREFUSED = 111 -> int
+const NineP.Protocol.Errno.EEXIST = 17 -> int
+const NineP.Protocol.Errno.EFBIG = 27 -> int
+const NineP.Protocol.Errno.EINVAL = 22 -> int
+const NineP.Protocol.Errno.EIO = 5 -> int
+const NineP.Protocol.Errno.EISDIR = 21 -> int
+const NineP.Protocol.Errno.ELOOP = 40 -> int
+const NineP.Protocol.Errno.ENAMETOOLONG = 36 -> int
+const NineP.Protocol.Errno.ENFILE = 23 -> int
+const NineP.Protocol.Errno.ENODATA = 61 -> int
+const NineP.Protocol.Errno.ENOENT = 2 -> int
+const NineP.Protocol.Errno.ENOLCK = 37 -> int
+const NineP.Protocol.Errno.ENOMEM = 12 -> int
+const NineP.Protocol.Errno.ENOSPC = 28 -> int
+const NineP.Protocol.Errno.ENOSYS = 38 -> int
+const NineP.Protocol.Errno.ENOTDIR = 20 -> int
+const NineP.Protocol.Errno.ENOTEMPTY = 39 -> int
+const NineP.Protocol.Errno.ENXIO = 6 -> int
+const NineP.Protocol.Errno.EOPNOTSUPP = 95 -> int
+const NineP.Protocol.Errno.EOVERFLOW = 75 -> int
+const NineP.Protocol.Errno.EPERM = 1 -> int
+const NineP.Protocol.Errno.EPROTO = 71 -> int
+const NineP.Protocol.Errno.ERANGE = 34 -> int
+const NineP.Protocol.Errno.EROFS = 30 -> int
+const NineP.Protocol.Qid.WireSize = 13 -> int
+const NineP.Protocol.StatFs.V9fsMagic = 16914839 -> uint
+override NineP.Protocol.Attr.Equals(object? obj) -> bool
+override NineP.Protocol.Attr.GetHashCode() -> int
+override NineP.Protocol.Attr.ToString() -> string!
+override NineP.Protocol.Auth.AuthRequest.GetHashCode() -> int
+override NineP.Protocol.Auth.Identity.Equals(object? obj) -> bool
+override NineP.Protocol.Auth.Identity.GetHashCode() -> int
+override NineP.Protocol.Auth.Identity.ToString() -> string!
+override NineP.Protocol.DeviceId.GetHashCode() -> int
+override NineP.Protocol.DirEntry.GetHashCode() -> int
+override NineP.Protocol.Limits.Equals(object? obj) -> bool
+override NineP.Protocol.Limits.GetHashCode() -> int
+override NineP.Protocol.Limits.ToString() -> string!
+override NineP.Protocol.LockQueryResult.GetHashCode() -> int
+override NineP.Protocol.LockRequest.GetHashCode() -> int
+override NineP.Protocol.Messages.Rattach.GetHashCode() -> int
+override NineP.Protocol.Messages.Rauth.GetHashCode() -> int
+override NineP.Protocol.Messages.Rclunk.GetHashCode() -> int
+override NineP.Protocol.Messages.Rcreate.GetHashCode() -> int
+override NineP.Protocol.Messages.Rerror.GetHashCode() -> int
+override NineP.Protocol.Messages.Rflush.GetHashCode() -> int
+override NineP.Protocol.Messages.Rfsync.GetHashCode() -> int
+override NineP.Protocol.Messages.Rgetattr.GetHashCode() -> int
+override NineP.Protocol.Messages.Rgetlock.GetHashCode() -> int
+override NineP.Protocol.Messages.Rlcreate.GetHashCode() -> int
+override NineP.Protocol.Messages.Rlerror.GetHashCode() -> int
+override NineP.Protocol.Messages.Rlink.GetHashCode() -> int
+override NineP.Protocol.Messages.Rlock.GetHashCode() -> int
+override NineP.Protocol.Messages.Rlopen.GetHashCode() -> int
+override NineP.Protocol.Messages.Rmkdir.GetHashCode() -> int
+override NineP.Protocol.Messages.Rmknod.GetHashCode() -> int
+override NineP.Protocol.Messages.Ropen.GetHashCode() -> int
+override NineP.Protocol.Messages.Rread.GetHashCode() -> int
+override NineP.Protocol.Messages.Rreaddir.GetHashCode() -> int
+override NineP.Protocol.Messages.Rreadlink.GetHashCode() -> int
+override NineP.Protocol.Messages.Rremove.GetHashCode() -> int
+override NineP.Protocol.Messages.Rrename.GetHashCode() -> int
+override NineP.Protocol.Messages.Rrenameat.GetHashCode() -> int
+override NineP.Protocol.Messages.Rsetattr.GetHashCode() -> int
+override NineP.Protocol.Messages.Rstat.GetHashCode() -> int
+override NineP.Protocol.Messages.Rstatfs.GetHashCode() -> int
+override NineP.Protocol.Messages.Rsymlink.GetHashCode() -> int
+override NineP.Protocol.Messages.Runlinkat.GetHashCode() -> int
+override NineP.Protocol.Messages.Rversion.GetHashCode() -> int
+override NineP.Protocol.Messages.Rwalk.GetHashCode() -> int
+override NineP.Protocol.Messages.Rwrite.GetHashCode() -> int
+override NineP.Protocol.Messages.Rwstat.GetHashCode() -> int
+override NineP.Protocol.Messages.Rxattrcreate.GetHashCode() -> int
+override NineP.Protocol.Messages.Rxattrwalk.GetHashCode() -> int
+override NineP.Protocol.Messages.StatRecord.GetHashCode() -> int
+override NineP.Protocol.Messages.Tattach.GetHashCode() -> int
+override NineP.Protocol.Messages.Tauth.GetHashCode() -> int
+override NineP.Protocol.Messages.Tclunk.GetHashCode() -> int
+override NineP.Protocol.Messages.Tcreate.GetHashCode() -> int
+override NineP.Protocol.Messages.Tflush.GetHashCode() -> int
+override NineP.Protocol.Messages.Tfsync.GetHashCode() -> int
+override NineP.Protocol.Messages.Tgetattr.GetHashCode() -> int
+override NineP.Protocol.Messages.Tgetlock.GetHashCode() -> int
+override NineP.Protocol.Messages.Tlcreate.GetHashCode() -> int
+override NineP.Protocol.Messages.Tlink.GetHashCode() -> int
+override NineP.Protocol.Messages.Tlock.GetHashCode() -> int
+override NineP.Protocol.Messages.Tlopen.GetHashCode() -> int
+override NineP.Protocol.Messages.Tmkdir.GetHashCode() -> int
+override NineP.Protocol.Messages.Tmknod.GetHashCode() -> int
+override NineP.Protocol.Messages.Topen.GetHashCode() -> int
+override NineP.Protocol.Messages.Tread.GetHashCode() -> int
+override NineP.Protocol.Messages.Treaddir.GetHashCode() -> int
+override NineP.Protocol.Messages.Treadlink.GetHashCode() -> int
+override NineP.Protocol.Messages.Tremove.GetHashCode() -> int
+override NineP.Protocol.Messages.Trename.GetHashCode() -> int
+override NineP.Protocol.Messages.Trenameat.GetHashCode() -> int
+override NineP.Protocol.Messages.Tsetattr.GetHashCode() -> int
+override NineP.Protocol.Messages.Tstat.GetHashCode() -> int
+override NineP.Protocol.Messages.Tstatfs.GetHashCode() -> int
+override NineP.Protocol.Messages.Tsymlink.GetHashCode() -> int
+override NineP.Protocol.Messages.Tunlinkat.GetHashCode() -> int
+override NineP.Protocol.Messages.Tversion.GetHashCode() -> int
+override NineP.Protocol.Messages.Twalk.GetHashCode() -> int
+override NineP.Protocol.Messages.Twrite.GetHashCode() -> int
+override NineP.Protocol.Messages.Twstat.GetHashCode() -> int
+override NineP.Protocol.Messages.Txattrcreate.GetHashCode() -> int
+override NineP.Protocol.Messages.Txattrwalk.GetHashCode() -> int
+override NineP.Protocol.Negotiation.NegotiationResult.GetHashCode() -> int
+override NineP.Protocol.NinePError.GetHashCode() -> int
+override NineP.Protocol.Qid.GetHashCode() -> int
+override NineP.Protocol.SetAttr.Equals(object? obj) -> bool
+override NineP.Protocol.SetAttr.GetHashCode() -> int
+override NineP.Protocol.SetAttr.ToString() -> string!
+override NineP.Protocol.StatFs.GetHashCode() -> int
+override NineP.Protocol.TimeSpec.GetHashCode() -> int
+override NineP.Protocol.Transports.NinePAddress.GetHashCode() -> int
+override NineP.Protocol.Transports.NinePAddress.ToString() -> string!
+override NineP.Protocol.Transports.PeerIdentity.Equals(object? obj) -> bool
+override NineP.Protocol.Transports.PeerIdentity.GetHashCode() -> int
+override NineP.Protocol.Transports.PeerIdentity.ToString() -> string!
+override NineP.Protocol.Transports.TcpTransportOptions.Equals(object? obj) -> bool
+override NineP.Protocol.Transports.TcpTransportOptions.GetHashCode() -> int
+override NineP.Protocol.Transports.TcpTransportOptions.ToString() -> string!
+override NineP.Protocol.Transports.TlsTransportOptions.Equals(object? obj) -> bool
+override NineP.Protocol.Transports.TlsTransportOptions.GetHashCode() -> int
+override NineP.Protocol.Transports.TlsTransportOptions.ToString() -> string!
+override NineP.Protocol.Transports.WebSocketTransportOptions.Equals(object? obj) -> bool
+override NineP.Protocol.Transports.WebSocketTransportOptions.GetHashCode() -> int
+override NineP.Protocol.Transports.WebSocketTransportOptions.ToString() -> string!
+static NineP.Protocol.Attr.operator !=(NineP.Protocol.Attr? left, NineP.Protocol.Attr? right) -> bool
+static NineP.Protocol.Attr.operator ==(NineP.Protocol.Attr? left, NineP.Protocol.Attr? right) -> bool
+static NineP.Protocol.Auth.AuthRequest.operator !=(NineP.Protocol.Auth.AuthRequest left, NineP.Protocol.Auth.AuthRequest right) -> bool
+static NineP.Protocol.Auth.AuthRequest.operator ==(NineP.Protocol.Auth.AuthRequest left, NineP.Protocol.Auth.AuthRequest right) -> bool
+static NineP.Protocol.Auth.ConstantTime.Equals(System.ReadOnlySpan<byte> left, System.ReadOnlySpan<byte> right) -> bool
+static NineP.Protocol.Auth.Identity.Anonymous(string! user, uint uid = 4294967295) -> NineP.Protocol.Auth.Identity!
+static NineP.Protocol.Auth.Identity.operator !=(NineP.Protocol.Auth.Identity? left, NineP.Protocol.Auth.Identity? right) -> bool
+static NineP.Protocol.Auth.Identity.operator ==(NineP.Protocol.Auth.Identity? left, NineP.Protocol.Auth.Identity? right) -> bool
+static NineP.Protocol.Auth.PasswordFileStore.HashPassword(string! password, int iterations = 600000) -> string!
+static NineP.Protocol.Auth.PasswordFileStore.Load(string! path) -> NineP.Protocol.Auth.PasswordFileStore!
+static NineP.Protocol.Auth.TlsClientCertAuthenticator.DefaultMapper(System.Security.Cryptography.X509Certificates.X509Certificate2! certificate) -> NineP.Protocol.Auth.Identity?
+static NineP.Protocol.Codec.MessageCodec.Decode<TMessage>(System.ReadOnlyMemory<byte> frame, NineP.Protocol.Dialect dialect) -> TMessage
+static NineP.Protocol.Codec.MessageCodec.Encode<TMessage>(System.Buffers.IBufferWriter<byte>! writer, in TMessage message, NineP.Protocol.Dialect dialect) -> int
+static NineP.Protocol.Codec.MessageCodec.GetEncodedSize<TMessage>(in TMessage message, NineP.Protocol.Dialect dialect) -> int
+static NineP.Protocol.Codec.MessageCodec.PeekSize(System.ReadOnlySpan<byte> frame) -> uint
+static NineP.Protocol.Codec.MessageCodec.PeekTag(System.ReadOnlySpan<byte> frame) -> ushort
+static NineP.Protocol.Codec.MessageCodec.PeekType(System.ReadOnlySpan<byte> frame) -> NineP.Protocol.MessageType
+static NineP.Protocol.Codec.MessageCodec.TryDecode<TMessage>(System.ReadOnlyMemory<byte> frame, NineP.Protocol.Dialect dialect, out TMessage message, out NineP.Protocol.ProtocolErrorKind failure) -> bool
+static NineP.Protocol.DeviceId.operator !=(NineP.Protocol.DeviceId left, NineP.Protocol.DeviceId right) -> bool
+static NineP.Protocol.DeviceId.operator ==(NineP.Protocol.DeviceId left, NineP.Protocol.DeviceId right) -> bool
+static NineP.Protocol.DirEntry.KindOf(byte direntType) -> NineP.Protocol.FileKind
+static NineP.Protocol.DirEntry.operator !=(NineP.Protocol.DirEntry left, NineP.Protocol.DirEntry right) -> bool
+static NineP.Protocol.DirEntry.operator ==(NineP.Protocol.DirEntry left, NineP.Protocol.DirEntry right) -> bool
+static NineP.Protocol.ErrorTable.All.get -> System.Collections.Generic.IReadOnlyList<NineP.Protocol.NinePError>!
+static NineP.Protocol.ErrorTable.EnameFor(int errno) -> string!
+static NineP.Protocol.ErrorTable.ErrnoFor(string! ename) -> int
+static NineP.Protocol.Limits.Default.get -> NineP.Protocol.Limits!
+static NineP.Protocol.Limits.operator !=(NineP.Protocol.Limits? left, NineP.Protocol.Limits? right) -> bool
+static NineP.Protocol.Limits.operator ==(NineP.Protocol.Limits? left, NineP.Protocol.Limits? right) -> bool
+static NineP.Protocol.LockQueryResult.operator !=(NineP.Protocol.LockQueryResult left, NineP.Protocol.LockQueryResult right) -> bool
+static NineP.Protocol.LockQueryResult.operator ==(NineP.Protocol.LockQueryResult left, NineP.Protocol.LockQueryResult right) -> bool
+static NineP.Protocol.LockRequest.operator !=(NineP.Protocol.LockRequest left, NineP.Protocol.LockRequest right) -> bool
+static NineP.Protocol.LockRequest.operator ==(NineP.Protocol.LockRequest left, NineP.Protocol.LockRequest right) -> bool
+static NineP.Protocol.MessageTypes.GetName(NineP.Protocol.MessageType type) -> string!
+static NineP.Protocol.MessageTypes.IsLegal(NineP.Protocol.MessageType type, NineP.Protocol.Dialect dialect) -> bool
+static NineP.Protocol.MessageTypes.IsRequest(NineP.Protocol.MessageType type) -> bool
+static NineP.Protocol.MessageTypes.ReplyOf(NineP.Protocol.MessageType requestType) -> NineP.Protocol.MessageType
+static NineP.Protocol.Messages.Rattach.operator !=(NineP.Protocol.Messages.Rattach left, NineP.Protocol.Messages.Rattach right) -> bool
+static NineP.Protocol.Messages.Rattach.operator ==(NineP.Protocol.Messages.Rattach left, NineP.Protocol.Messages.Rattach right) -> bool
+static NineP.Protocol.Messages.Rauth.operator !=(NineP.Protocol.Messages.Rauth left, NineP.Protocol.Messages.Rauth right) -> bool
+static NineP.Protocol.Messages.Rauth.operator ==(NineP.Protocol.Messages.Rauth left, NineP.Protocol.Messages.Rauth right) -> bool
+static NineP.Protocol.Messages.Rclunk.operator !=(NineP.Protocol.Messages.Rclunk left, NineP.Protocol.Messages.Rclunk right) -> bool
+static NineP.Protocol.Messages.Rclunk.operator ==(NineP.Protocol.Messages.Rclunk left, NineP.Protocol.Messages.Rclunk right) -> bool
+static NineP.Protocol.Messages.Rcreate.operator !=(NineP.Protocol.Messages.Rcreate left, NineP.Protocol.Messages.Rcreate right) -> bool
+static NineP.Protocol.Messages.Rcreate.operator ==(NineP.Protocol.Messages.Rcreate left, NineP.Protocol.Messages.Rcreate right) -> bool
+static NineP.Protocol.Messages.Rerror.operator !=(NineP.Protocol.Messages.Rerror left, NineP.Protocol.Messages.Rerror right) -> bool
+static NineP.Protocol.Messages.Rerror.operator ==(NineP.Protocol.Messages.Rerror left, NineP.Protocol.Messages.Rerror right) -> bool
+static NineP.Protocol.Messages.Rflush.operator !=(NineP.Protocol.Messages.Rflush left, NineP.Protocol.Messages.Rflush right) -> bool
+static NineP.Protocol.Messages.Rflush.operator ==(NineP.Protocol.Messages.Rflush left, NineP.Protocol.Messages.Rflush right) -> bool
+static NineP.Protocol.Messages.Rfsync.operator !=(NineP.Protocol.Messages.Rfsync left, NineP.Protocol.Messages.Rfsync right) -> bool
+static NineP.Protocol.Messages.Rfsync.operator ==(NineP.Protocol.Messages.Rfsync left, NineP.Protocol.Messages.Rfsync right) -> bool
+static NineP.Protocol.Messages.Rgetattr.operator !=(NineP.Protocol.Messages.Rgetattr left, NineP.Protocol.Messages.Rgetattr right) -> bool
+static NineP.Protocol.Messages.Rgetattr.operator ==(NineP.Protocol.Messages.Rgetattr left, NineP.Protocol.Messages.Rgetattr right) -> bool
+static NineP.Protocol.Messages.Rgetlock.operator !=(NineP.Protocol.Messages.Rgetlock left, NineP.Protocol.Messages.Rgetlock right) -> bool
+static NineP.Protocol.Messages.Rgetlock.operator ==(NineP.Protocol.Messages.Rgetlock left, NineP.Protocol.Messages.Rgetlock right) -> bool
+static NineP.Protocol.Messages.Rlcreate.operator !=(NineP.Protocol.Messages.Rlcreate left, NineP.Protocol.Messages.Rlcreate right) -> bool
+static NineP.Protocol.Messages.Rlcreate.operator ==(NineP.Protocol.Messages.Rlcreate left, NineP.Protocol.Messages.Rlcreate right) -> bool
+static NineP.Protocol.Messages.Rlerror.operator !=(NineP.Protocol.Messages.Rlerror left, NineP.Protocol.Messages.Rlerror right) -> bool
+static NineP.Protocol.Messages.Rlerror.operator ==(NineP.Protocol.Messages.Rlerror left, NineP.Protocol.Messages.Rlerror right) -> bool
+static NineP.Protocol.Messages.Rlink.operator !=(NineP.Protocol.Messages.Rlink left, NineP.Protocol.Messages.Rlink right) -> bool
+static NineP.Protocol.Messages.Rlink.operator ==(NineP.Protocol.Messages.Rlink left, NineP.Protocol.Messages.Rlink right) -> bool
+static NineP.Protocol.Messages.Rlock.operator !=(NineP.Protocol.Messages.Rlock left, NineP.Protocol.Messages.Rlock right) -> bool
+static NineP.Protocol.Messages.Rlock.operator ==(NineP.Protocol.Messages.Rlock left, NineP.Protocol.Messages.Rlock right) -> bool
+static NineP.Protocol.Messages.Rlopen.operator !=(NineP.Protocol.Messages.Rlopen left, NineP.Protocol.Messages.Rlopen right) -> bool
+static NineP.Protocol.Messages.Rlopen.operator ==(NineP.Protocol.Messages.Rlopen left, NineP.Protocol.Messages.Rlopen right) -> bool
+static NineP.Protocol.Messages.Rmkdir.operator !=(NineP.Protocol.Messages.Rmkdir left, NineP.Protocol.Messages.Rmkdir right) -> bool
+static NineP.Protocol.Messages.Rmkdir.operator ==(NineP.Protocol.Messages.Rmkdir left, NineP.Protocol.Messages.Rmkdir right) -> bool
+static NineP.Protocol.Messages.Rmknod.operator !=(NineP.Protocol.Messages.Rmknod left, NineP.Protocol.Messages.Rmknod right) -> bool
+static NineP.Protocol.Messages.Rmknod.operator ==(NineP.Protocol.Messages.Rmknod left, NineP.Protocol.Messages.Rmknod right) -> bool
+static NineP.Protocol.Messages.Ropen.operator !=(NineP.Protocol.Messages.Ropen left, NineP.Protocol.Messages.Ropen right) -> bool
+static NineP.Protocol.Messages.Ropen.operator ==(NineP.Protocol.Messages.Ropen left, NineP.Protocol.Messages.Ropen right) -> bool
+static NineP.Protocol.Messages.Rread.operator !=(NineP.Protocol.Messages.Rread left, NineP.Protocol.Messages.Rread right) -> bool
+static NineP.Protocol.Messages.Rread.operator ==(NineP.Protocol.Messages.Rread left, NineP.Protocol.Messages.Rread right) -> bool
+static NineP.Protocol.Messages.Rreaddir.operator !=(NineP.Protocol.Messages.Rreaddir left, NineP.Protocol.Messages.Rreaddir right) -> bool
+static NineP.Protocol.Messages.Rreaddir.operator ==(NineP.Protocol.Messages.Rreaddir left, NineP.Protocol.Messages.Rreaddir right) -> bool
+static NineP.Protocol.Messages.Rreadlink.operator !=(NineP.Protocol.Messages.Rreadlink left, NineP.Protocol.Messages.Rreadlink right) -> bool
+static NineP.Protocol.Messages.Rreadlink.operator ==(NineP.Protocol.Messages.Rreadlink left, NineP.Protocol.Messages.Rreadlink right) -> bool
+static NineP.Protocol.Messages.Rremove.operator !=(NineP.Protocol.Messages.Rremove left, NineP.Protocol.Messages.Rremove right) -> bool
+static NineP.Protocol.Messages.Rremove.operator ==(NineP.Protocol.Messages.Rremove left, NineP.Protocol.Messages.Rremove right) -> bool
+static NineP.Protocol.Messages.Rrename.operator !=(NineP.Protocol.Messages.Rrename left, NineP.Protocol.Messages.Rrename right) -> bool
+static NineP.Protocol.Messages.Rrename.operator ==(NineP.Protocol.Messages.Rrename left, NineP.Protocol.Messages.Rrename right) -> bool
+static NineP.Protocol.Messages.Rrenameat.operator !=(NineP.Protocol.Messages.Rrenameat left, NineP.Protocol.Messages.Rrenameat right) -> bool
+static NineP.Protocol.Messages.Rrenameat.operator ==(NineP.Protocol.Messages.Rrenameat left, NineP.Protocol.Messages.Rrenameat right) -> bool
+static NineP.Protocol.Messages.Rsetattr.operator !=(NineP.Protocol.Messages.Rsetattr left, NineP.Protocol.Messages.Rsetattr right) -> bool
+static NineP.Protocol.Messages.Rsetattr.operator ==(NineP.Protocol.Messages.Rsetattr left, NineP.Protocol.Messages.Rsetattr right) -> bool
+static NineP.Protocol.Messages.Rstat.operator !=(NineP.Protocol.Messages.Rstat left, NineP.Protocol.Messages.Rstat right) -> bool
+static NineP.Protocol.Messages.Rstat.operator ==(NineP.Protocol.Messages.Rstat left, NineP.Protocol.Messages.Rstat right) -> bool
+static NineP.Protocol.Messages.Rstatfs.operator !=(NineP.Protocol.Messages.Rstatfs left, NineP.Protocol.Messages.Rstatfs right) -> bool
+static NineP.Protocol.Messages.Rstatfs.operator ==(NineP.Protocol.Messages.Rstatfs left, NineP.Protocol.Messages.Rstatfs right) -> bool
+static NineP.Protocol.Messages.Rsymlink.operator !=(NineP.Protocol.Messages.Rsymlink left, NineP.Protocol.Messages.Rsymlink right) -> bool
+static NineP.Protocol.Messages.Rsymlink.operator ==(NineP.Protocol.Messages.Rsymlink left, NineP.Protocol.Messages.Rsymlink right) -> bool
+static NineP.Protocol.Messages.Runlinkat.operator !=(NineP.Protocol.Messages.Runlinkat left, NineP.Protocol.Messages.Runlinkat right) -> bool
+static NineP.Protocol.Messages.Runlinkat.operator ==(NineP.Protocol.Messages.Runlinkat left, NineP.Protocol.Messages.Runlinkat right) -> bool
+static NineP.Protocol.Messages.Rversion.operator !=(NineP.Protocol.Messages.Rversion left, NineP.Protocol.Messages.Rversion right) -> bool
+static NineP.Protocol.Messages.Rversion.operator ==(NineP.Protocol.Messages.Rversion left, NineP.Protocol.Messages.Rversion right) -> bool
+static NineP.Protocol.Messages.Rwalk.operator !=(NineP.Protocol.Messages.Rwalk left, NineP.Protocol.Messages.Rwalk right) -> bool
+static NineP.Protocol.Messages.Rwalk.operator ==(NineP.Protocol.Messages.Rwalk left, NineP.Protocol.Messages.Rwalk right) -> bool
+static NineP.Protocol.Messages.Rwrite.operator !=(NineP.Protocol.Messages.Rwrite left, NineP.Protocol.Messages.Rwrite right) -> bool
+static NineP.Protocol.Messages.Rwrite.operator ==(NineP.Protocol.Messages.Rwrite left, NineP.Protocol.Messages.Rwrite right) -> bool
+static NineP.Protocol.Messages.Rwstat.operator !=(NineP.Protocol.Messages.Rwstat left, NineP.Protocol.Messages.Rwstat right) -> bool
+static NineP.Protocol.Messages.Rwstat.operator ==(NineP.Protocol.Messages.Rwstat left, NineP.Protocol.Messages.Rwstat right) -> bool
+static NineP.Protocol.Messages.Rxattrcreate.operator !=(NineP.Protocol.Messages.Rxattrcreate left, NineP.Protocol.Messages.Rxattrcreate right) -> bool
+static NineP.Protocol.Messages.Rxattrcreate.operator ==(NineP.Protocol.Messages.Rxattrcreate left, NineP.Protocol.Messages.Rxattrcreate right) -> bool
+static NineP.Protocol.Messages.Rxattrwalk.operator !=(NineP.Protocol.Messages.Rxattrwalk left, NineP.Protocol.Messages.Rxattrwalk right) -> bool
+static NineP.Protocol.Messages.Rxattrwalk.operator ==(NineP.Protocol.Messages.Rxattrwalk left, NineP.Protocol.Messages.Rxattrwalk right) -> bool
+static NineP.Protocol.Messages.StatRecord.DontTouch.get -> NineP.Protocol.Messages.StatRecord
+static NineP.Protocol.Messages.StatRecord.operator !=(NineP.Protocol.Messages.StatRecord left, NineP.Protocol.Messages.StatRecord right) -> bool
+static NineP.Protocol.Messages.StatRecord.operator ==(NineP.Protocol.Messages.StatRecord left, NineP.Protocol.Messages.StatRecord right) -> bool
+static NineP.Protocol.Messages.Tattach.operator !=(NineP.Protocol.Messages.Tattach left, NineP.Protocol.Messages.Tattach right) -> bool
+static NineP.Protocol.Messages.Tattach.operator ==(NineP.Protocol.Messages.Tattach left, NineP.Protocol.Messages.Tattach right) -> bool
+static NineP.Protocol.Messages.Tauth.operator !=(NineP.Protocol.Messages.Tauth left, NineP.Protocol.Messages.Tauth right) -> bool
+static NineP.Protocol.Messages.Tauth.operator ==(NineP.Protocol.Messages.Tauth left, NineP.Protocol.Messages.Tauth right) -> bool
+static NineP.Protocol.Messages.Tclunk.operator !=(NineP.Protocol.Messages.Tclunk left, NineP.Protocol.Messages.Tclunk right) -> bool
+static NineP.Protocol.Messages.Tclunk.operator ==(NineP.Protocol.Messages.Tclunk left, NineP.Protocol.Messages.Tclunk right) -> bool
+static NineP.Protocol.Messages.Tcreate.operator !=(NineP.Protocol.Messages.Tcreate left, NineP.Protocol.Messages.Tcreate right) -> bool
+static NineP.Protocol.Messages.Tcreate.operator ==(NineP.Protocol.Messages.Tcreate left, NineP.Protocol.Messages.Tcreate right) -> bool
+static NineP.Protocol.Messages.Tflush.operator !=(NineP.Protocol.Messages.Tflush left, NineP.Protocol.Messages.Tflush right) -> bool
+static NineP.Protocol.Messages.Tflush.operator ==(NineP.Protocol.Messages.Tflush left, NineP.Protocol.Messages.Tflush right) -> bool
+static NineP.Protocol.Messages.Tfsync.operator !=(NineP.Protocol.Messages.Tfsync left, NineP.Protocol.Messages.Tfsync right) -> bool
+static NineP.Protocol.Messages.Tfsync.operator ==(NineP.Protocol.Messages.Tfsync left, NineP.Protocol.Messages.Tfsync right) -> bool
+static NineP.Protocol.Messages.Tgetattr.operator !=(NineP.Protocol.Messages.Tgetattr left, NineP.Protocol.Messages.Tgetattr right) -> bool
+static NineP.Protocol.Messages.Tgetattr.operator ==(NineP.Protocol.Messages.Tgetattr left, NineP.Protocol.Messages.Tgetattr right) -> bool
+static NineP.Protocol.Messages.Tgetlock.operator !=(NineP.Protocol.Messages.Tgetlock left, NineP.Protocol.Messages.Tgetlock right) -> bool
+static NineP.Protocol.Messages.Tgetlock.operator ==(NineP.Protocol.Messages.Tgetlock left, NineP.Protocol.Messages.Tgetlock right) -> bool
+static NineP.Protocol.Messages.Tlcreate.operator !=(NineP.Protocol.Messages.Tlcreate left, NineP.Protocol.Messages.Tlcreate right) -> bool
+static NineP.Protocol.Messages.Tlcreate.operator ==(NineP.Protocol.Messages.Tlcreate left, NineP.Protocol.Messages.Tlcreate right) -> bool
+static NineP.Protocol.Messages.Tlink.operator !=(NineP.Protocol.Messages.Tlink left, NineP.Protocol.Messages.Tlink right) -> bool
+static NineP.Protocol.Messages.Tlink.operator ==(NineP.Protocol.Messages.Tlink left, NineP.Protocol.Messages.Tlink right) -> bool
+static NineP.Protocol.Messages.Tlock.operator !=(NineP.Protocol.Messages.Tlock left, NineP.Protocol.Messages.Tlock right) -> bool
+static NineP.Protocol.Messages.Tlock.operator ==(NineP.Protocol.Messages.Tlock left, NineP.Protocol.Messages.Tlock right) -> bool
+static NineP.Protocol.Messages.Tlopen.operator !=(NineP.Protocol.Messages.Tlopen left, NineP.Protocol.Messages.Tlopen right) -> bool
+static NineP.Protocol.Messages.Tlopen.operator ==(NineP.Protocol.Messages.Tlopen left, NineP.Protocol.Messages.Tlopen right) -> bool
+static NineP.Protocol.Messages.Tmkdir.operator !=(NineP.Protocol.Messages.Tmkdir left, NineP.Protocol.Messages.Tmkdir right) -> bool
+static NineP.Protocol.Messages.Tmkdir.operator ==(NineP.Protocol.Messages.Tmkdir left, NineP.Protocol.Messages.Tmkdir right) -> bool
+static NineP.Protocol.Messages.Tmknod.operator !=(NineP.Protocol.Messages.Tmknod left, NineP.Protocol.Messages.Tmknod right) -> bool
+static NineP.Protocol.Messages.Tmknod.operator ==(NineP.Protocol.Messages.Tmknod left, NineP.Protocol.Messages.Tmknod right) -> bool
+static NineP.Protocol.Messages.Topen.operator !=(NineP.Protocol.Messages.Topen left, NineP.Protocol.Messages.Topen right) -> bool
+static NineP.Protocol.Messages.Topen.operator ==(NineP.Protocol.Messages.Topen left, NineP.Protocol.Messages.Topen right) -> bool
+static NineP.Protocol.Messages.Tread.operator !=(NineP.Protocol.Messages.Tread left, NineP.Protocol.Messages.Tread right) -> bool
+static NineP.Protocol.Messages.Tread.operator ==(NineP.Protocol.Messages.Tread left, NineP.Protocol.Messages.Tread right) -> bool
+static NineP.Protocol.Messages.Treaddir.operator !=(NineP.Protocol.Messages.Treaddir left, NineP.Protocol.Messages.Treaddir right) -> bool
+static NineP.Protocol.Messages.Treaddir.operator ==(NineP.Protocol.Messages.Treaddir left, NineP.Protocol.Messages.Treaddir right) -> bool
+static NineP.Protocol.Messages.Treadlink.operator !=(NineP.Protocol.Messages.Treadlink left, NineP.Protocol.Messages.Treadlink right) -> bool
+static NineP.Protocol.Messages.Treadlink.operator ==(NineP.Protocol.Messages.Treadlink left, NineP.Protocol.Messages.Treadlink right) -> bool
+static NineP.Protocol.Messages.Tremove.operator !=(NineP.Protocol.Messages.Tremove left, NineP.Protocol.Messages.Tremove right) -> bool
+static NineP.Protocol.Messages.Tremove.operator ==(NineP.Protocol.Messages.Tremove left, NineP.Protocol.Messages.Tremove right) -> bool
+static NineP.Protocol.Messages.Trename.operator !=(NineP.Protocol.Messages.Trename left, NineP.Protocol.Messages.Trename right) -> bool
+static NineP.Protocol.Messages.Trename.operator ==(NineP.Protocol.Messages.Trename left, NineP.Protocol.Messages.Trename right) -> bool
+static NineP.Protocol.Messages.Trenameat.operator !=(NineP.Protocol.Messages.Trenameat left, NineP.Protocol.Messages.Trenameat right) -> bool
+static NineP.Protocol.Messages.Trenameat.operator ==(NineP.Protocol.Messages.Trenameat left, NineP.Protocol.Messages.Trenameat right) -> bool
+static NineP.Protocol.Messages.Tsetattr.operator !=(NineP.Protocol.Messages.Tsetattr left, NineP.Protocol.Messages.Tsetattr right) -> bool
+static NineP.Protocol.Messages.Tsetattr.operator ==(NineP.Protocol.Messages.Tsetattr left, NineP.Protocol.Messages.Tsetattr right) -> bool
+static NineP.Protocol.Messages.Tstat.operator !=(NineP.Protocol.Messages.Tstat left, NineP.Protocol.Messages.Tstat right) -> bool
+static NineP.Protocol.Messages.Tstat.operator ==(NineP.Protocol.Messages.Tstat left, NineP.Protocol.Messages.Tstat right) -> bool
+static NineP.Protocol.Messages.Tstatfs.operator !=(NineP.Protocol.Messages.Tstatfs left, NineP.Protocol.Messages.Tstatfs right) -> bool
+static NineP.Protocol.Messages.Tstatfs.operator ==(NineP.Protocol.Messages.Tstatfs left, NineP.Protocol.Messages.Tstatfs right) -> bool
+static NineP.Protocol.Messages.Tsymlink.operator !=(NineP.Protocol.Messages.Tsymlink left, NineP.Protocol.Messages.Tsymlink right) -> bool
+static NineP.Protocol.Messages.Tsymlink.operator ==(NineP.Protocol.Messages.Tsymlink left, NineP.Protocol.Messages.Tsymlink right) -> bool
+static NineP.Protocol.Messages.Tunlinkat.operator !=(NineP.Protocol.Messages.Tunlinkat left, NineP.Protocol.Messages.Tunlinkat right) -> bool
+static NineP.Protocol.Messages.Tunlinkat.operator ==(NineP.Protocol.Messages.Tunlinkat left, NineP.Protocol.Messages.Tunlinkat right) -> bool
+static NineP.Protocol.Messages.Tversion.operator !=(NineP.Protocol.Messages.Tversion left, NineP.Protocol.Messages.Tversion right) -> bool
+static NineP.Protocol.Messages.Tversion.operator ==(NineP.Protocol.Messages.Tversion left, NineP.Protocol.Messages.Tversion right) -> bool
+static NineP.Protocol.Messages.Twalk.operator !=(NineP.Protocol.Messages.Twalk left, NineP.Protocol.Messages.Twalk right) -> bool
+static NineP.Protocol.Messages.Twalk.operator ==(NineP.Protocol.Messages.Twalk left, NineP.Protocol.Messages.Twalk right) -> bool
+static NineP.Protocol.Messages.Twrite.operator !=(NineP.Protocol.Messages.Twrite left, NineP.Protocol.Messages.Twrite right) -> bool
+static NineP.Protocol.Messages.Twrite.operator ==(NineP.Protocol.Messages.Twrite left, NineP.Protocol.Messages.Twrite right) -> bool
+static NineP.Protocol.Messages.Twstat.operator !=(NineP.Protocol.Messages.Twstat left, NineP.Protocol.Messages.Twstat right) -> bool
+static NineP.Protocol.Messages.Twstat.operator ==(NineP.Protocol.Messages.Twstat left, NineP.Protocol.Messages.Twstat right) -> bool
+static NineP.Protocol.Messages.Txattrcreate.operator !=(NineP.Protocol.Messages.Txattrcreate left, NineP.Protocol.Messages.Txattrcreate right) -> bool
+static NineP.Protocol.Messages.Txattrcreate.operator ==(NineP.Protocol.Messages.Txattrcreate left, NineP.Protocol.Messages.Txattrcreate right) -> bool
+static NineP.Protocol.Messages.Txattrwalk.operator !=(NineP.Protocol.Messages.Txattrwalk left, NineP.Protocol.Messages.Txattrwalk right) -> bool
+static NineP.Protocol.Messages.Txattrwalk.operator ==(NineP.Protocol.Messages.Txattrwalk left, NineP.Protocol.Messages.Txattrwalk right) -> bool
+static NineP.Protocol.Negotiation.NegotiationResult.operator !=(NineP.Protocol.Negotiation.NegotiationResult left, NineP.Protocol.Negotiation.NegotiationResult right) -> bool
+static NineP.Protocol.Negotiation.NegotiationResult.operator ==(NineP.Protocol.Negotiation.NegotiationResult left, NineP.Protocol.Negotiation.NegotiationResult right) -> bool
+static NineP.Protocol.Negotiation.Negotiator.Negotiate(System.Collections.Generic.IReadOnlySet<NineP.Protocol.Dialect>! configured, string! clientVersion, uint clientMsize, NineP.Protocol.Limits! limits) -> NineP.Protocol.Negotiation.NegotiationResult
+static NineP.Protocol.Negotiation.Negotiator.TryParseVersion(string! version, out NineP.Protocol.Dialect dialect) -> bool
+static NineP.Protocol.Negotiation.Negotiator.VersionString(NineP.Protocol.Dialect dialect) -> string!
+static NineP.Protocol.NinePError.FromEname(string! ename) -> NineP.Protocol.NinePError
+static NineP.Protocol.NinePError.FromErrno(int errno) -> NineP.Protocol.NinePError
+static NineP.Protocol.NinePError.operator !=(NineP.Protocol.NinePError left, NineP.Protocol.NinePError right) -> bool
+static NineP.Protocol.NinePError.operator ==(NineP.Protocol.NinePError left, NineP.Protocol.NinePError right) -> bool
+static NineP.Protocol.Qid.operator !=(NineP.Protocol.Qid left, NineP.Protocol.Qid right) -> bool
+static NineP.Protocol.Qid.operator ==(NineP.Protocol.Qid left, NineP.Protocol.Qid right) -> bool
+static NineP.Protocol.SetAttr.operator !=(NineP.Protocol.SetAttr? left, NineP.Protocol.SetAttr? right) -> bool
+static NineP.Protocol.SetAttr.operator ==(NineP.Protocol.SetAttr? left, NineP.Protocol.SetAttr? right) -> bool
+static NineP.Protocol.StatFs.operator !=(NineP.Protocol.StatFs left, NineP.Protocol.StatFs right) -> bool
+static NineP.Protocol.StatFs.operator ==(NineP.Protocol.StatFs left, NineP.Protocol.StatFs right) -> bool
+static NineP.Protocol.TimeSpec.operator !=(NineP.Protocol.TimeSpec left, NineP.Protocol.TimeSpec right) -> bool
+static NineP.Protocol.TimeSpec.operator ==(NineP.Protocol.TimeSpec left, NineP.Protocol.TimeSpec right) -> bool
+static NineP.Protocol.Transports.MemoryTransport.CreatePair() -> (NineP.Protocol.Transports.INinePConnection! Client, NineP.Protocol.Transports.INinePConnection! Server)
+static NineP.Protocol.Transports.NinePAddress.Parse(string! value) -> NineP.Protocol.Transports.NinePAddress
+static NineP.Protocol.Transports.NinePAddress.TryParse(string? value, out NineP.Protocol.Transports.NinePAddress address) -> bool
+static NineP.Protocol.Transports.NinePAddress.operator !=(NineP.Protocol.Transports.NinePAddress left, NineP.Protocol.Transports.NinePAddress right) -> bool
+static NineP.Protocol.Transports.NinePAddress.operator ==(NineP.Protocol.Transports.NinePAddress left, NineP.Protocol.Transports.NinePAddress right) -> bool
+static NineP.Protocol.Transports.PeerIdentity.operator !=(NineP.Protocol.Transports.PeerIdentity? left, NineP.Protocol.Transports.PeerIdentity? right) -> bool
+static NineP.Protocol.Transports.PeerIdentity.operator ==(NineP.Protocol.Transports.PeerIdentity? left, NineP.Protocol.Transports.PeerIdentity? right) -> bool
+static NineP.Protocol.Transports.TcpTransportOptions.operator !=(NineP.Protocol.Transports.TcpTransportOptions? left, NineP.Protocol.Transports.TcpTransportOptions? right) -> bool
+static NineP.Protocol.Transports.TcpTransportOptions.operator ==(NineP.Protocol.Transports.TcpTransportOptions? left, NineP.Protocol.Transports.TcpTransportOptions? right) -> bool
+static NineP.Protocol.Transports.TlsTransportOptions.operator !=(NineP.Protocol.Transports.TlsTransportOptions? left, NineP.Protocol.Transports.TlsTransportOptions? right) -> bool
+static NineP.Protocol.Transports.TlsTransportOptions.operator ==(NineP.Protocol.Transports.TlsTransportOptions? left, NineP.Protocol.Transports.TlsTransportOptions? right) -> bool
+static NineP.Protocol.Transports.WebSocketTransportOptions.operator !=(NineP.Protocol.Transports.WebSocketTransportOptions? left, NineP.Protocol.Transports.WebSocketTransportOptions? right) -> bool
+static NineP.Protocol.Transports.WebSocketTransportOptions.operator ==(NineP.Protocol.Transports.WebSocketTransportOptions? left, NineP.Protocol.Transports.WebSocketTransportOptions? right) -> bool
+~override NineP.Protocol.Auth.AuthRequest.Equals(object obj) -> bool
+~override NineP.Protocol.Auth.AuthRequest.ToString() -> string
+~override NineP.Protocol.DeviceId.Equals(object obj) -> bool
+~override NineP.Protocol.DeviceId.ToString() -> string
+~override NineP.Protocol.DirEntry.Equals(object obj) -> bool
+~override NineP.Protocol.DirEntry.ToString() -> string
+~override NineP.Protocol.LockQueryResult.Equals(object obj) -> bool
+~override NineP.Protocol.LockQueryResult.ToString() -> string
+~override NineP.Protocol.LockRequest.Equals(object obj) -> bool
+~override NineP.Protocol.LockRequest.ToString() -> string
+~override NineP.Protocol.Messages.Rattach.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Rattach.ToString() -> string
+~override NineP.Protocol.Messages.Rauth.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Rauth.ToString() -> string
+~override NineP.Protocol.Messages.Rclunk.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Rclunk.ToString() -> string
+~override NineP.Protocol.Messages.Rcreate.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Rcreate.ToString() -> string
+~override NineP.Protocol.Messages.Rerror.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Rerror.ToString() -> string
+~override NineP.Protocol.Messages.Rflush.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Rflush.ToString() -> string
+~override NineP.Protocol.Messages.Rfsync.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Rfsync.ToString() -> string
+~override NineP.Protocol.Messages.Rgetattr.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Rgetattr.ToString() -> string
+~override NineP.Protocol.Messages.Rgetlock.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Rgetlock.ToString() -> string
+~override NineP.Protocol.Messages.Rlcreate.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Rlcreate.ToString() -> string
+~override NineP.Protocol.Messages.Rlerror.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Rlerror.ToString() -> string
+~override NineP.Protocol.Messages.Rlink.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Rlink.ToString() -> string
+~override NineP.Protocol.Messages.Rlock.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Rlock.ToString() -> string
+~override NineP.Protocol.Messages.Rlopen.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Rlopen.ToString() -> string
+~override NineP.Protocol.Messages.Rmkdir.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Rmkdir.ToString() -> string
+~override NineP.Protocol.Messages.Rmknod.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Rmknod.ToString() -> string
+~override NineP.Protocol.Messages.Ropen.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Ropen.ToString() -> string
+~override NineP.Protocol.Messages.Rread.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Rread.ToString() -> string
+~override NineP.Protocol.Messages.Rreaddir.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Rreaddir.ToString() -> string
+~override NineP.Protocol.Messages.Rreadlink.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Rreadlink.ToString() -> string
+~override NineP.Protocol.Messages.Rremove.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Rremove.ToString() -> string
+~override NineP.Protocol.Messages.Rrename.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Rrename.ToString() -> string
+~override NineP.Protocol.Messages.Rrenameat.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Rrenameat.ToString() -> string
+~override NineP.Protocol.Messages.Rsetattr.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Rsetattr.ToString() -> string
+~override NineP.Protocol.Messages.Rstat.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Rstat.ToString() -> string
+~override NineP.Protocol.Messages.Rstatfs.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Rstatfs.ToString() -> string
+~override NineP.Protocol.Messages.Rsymlink.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Rsymlink.ToString() -> string
+~override NineP.Protocol.Messages.Runlinkat.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Runlinkat.ToString() -> string
+~override NineP.Protocol.Messages.Rversion.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Rversion.ToString() -> string
+~override NineP.Protocol.Messages.Rwalk.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Rwalk.ToString() -> string
+~override NineP.Protocol.Messages.Rwrite.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Rwrite.ToString() -> string
+~override NineP.Protocol.Messages.Rwstat.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Rwstat.ToString() -> string
+~override NineP.Protocol.Messages.Rxattrcreate.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Rxattrcreate.ToString() -> string
+~override NineP.Protocol.Messages.Rxattrwalk.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Rxattrwalk.ToString() -> string
+~override NineP.Protocol.Messages.StatRecord.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.StatRecord.ToString() -> string
+~override NineP.Protocol.Messages.Tattach.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Tattach.ToString() -> string
+~override NineP.Protocol.Messages.Tauth.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Tauth.ToString() -> string
+~override NineP.Protocol.Messages.Tclunk.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Tclunk.ToString() -> string
+~override NineP.Protocol.Messages.Tcreate.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Tcreate.ToString() -> string
+~override NineP.Protocol.Messages.Tflush.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Tflush.ToString() -> string
+~override NineP.Protocol.Messages.Tfsync.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Tfsync.ToString() -> string
+~override NineP.Protocol.Messages.Tgetattr.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Tgetattr.ToString() -> string
+~override NineP.Protocol.Messages.Tgetlock.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Tgetlock.ToString() -> string
+~override NineP.Protocol.Messages.Tlcreate.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Tlcreate.ToString() -> string
+~override NineP.Protocol.Messages.Tlink.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Tlink.ToString() -> string
+~override NineP.Protocol.Messages.Tlock.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Tlock.ToString() -> string
+~override NineP.Protocol.Messages.Tlopen.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Tlopen.ToString() -> string
+~override NineP.Protocol.Messages.Tmkdir.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Tmkdir.ToString() -> string
+~override NineP.Protocol.Messages.Tmknod.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Tmknod.ToString() -> string
+~override NineP.Protocol.Messages.Topen.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Topen.ToString() -> string
+~override NineP.Protocol.Messages.Tread.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Tread.ToString() -> string
+~override NineP.Protocol.Messages.Treaddir.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Treaddir.ToString() -> string
+~override NineP.Protocol.Messages.Treadlink.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Treadlink.ToString() -> string
+~override NineP.Protocol.Messages.Tremove.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Tremove.ToString() -> string
+~override NineP.Protocol.Messages.Trename.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Trename.ToString() -> string
+~override NineP.Protocol.Messages.Trenameat.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Trenameat.ToString() -> string
+~override NineP.Protocol.Messages.Tsetattr.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Tsetattr.ToString() -> string
+~override NineP.Protocol.Messages.Tstat.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Tstat.ToString() -> string
+~override NineP.Protocol.Messages.Tstatfs.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Tstatfs.ToString() -> string
+~override NineP.Protocol.Messages.Tsymlink.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Tsymlink.ToString() -> string
+~override NineP.Protocol.Messages.Tunlinkat.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Tunlinkat.ToString() -> string
+~override NineP.Protocol.Messages.Tversion.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Tversion.ToString() -> string
+~override NineP.Protocol.Messages.Twalk.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Twalk.ToString() -> string
+~override NineP.Protocol.Messages.Twrite.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Twrite.ToString() -> string
+~override NineP.Protocol.Messages.Twstat.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Twstat.ToString() -> string
+~override NineP.Protocol.Messages.Txattrcreate.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Txattrcreate.ToString() -> string
+~override NineP.Protocol.Messages.Txattrwalk.Equals(object obj) -> bool
+~override NineP.Protocol.Messages.Txattrwalk.ToString() -> string
+~override NineP.Protocol.Negotiation.NegotiationResult.Equals(object obj) -> bool
+~override NineP.Protocol.Negotiation.NegotiationResult.ToString() -> string
+~override NineP.Protocol.NinePError.Equals(object obj) -> bool
+~override NineP.Protocol.NinePError.ToString() -> string
+~override NineP.Protocol.Qid.Equals(object obj) -> bool
+~override NineP.Protocol.Qid.ToString() -> string
+~override NineP.Protocol.StatFs.Equals(object obj) -> bool
+~override NineP.Protocol.StatFs.ToString() -> string
+~override NineP.Protocol.TimeSpec.Equals(object obj) -> bool
+~override NineP.Protocol.TimeSpec.ToString() -> string
+~override NineP.Protocol.Transports.NinePAddress.Equals(object obj) -> bool

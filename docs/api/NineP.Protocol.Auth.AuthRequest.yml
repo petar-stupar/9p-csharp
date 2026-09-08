@@ -1,0 +1,115 @@
+### YamlMime:ApiPage
+title: Struct AuthRequest
+body:
+- api1: Struct AuthRequest
+  id: NineP_Protocol_Auth_AuthRequest
+  metadata:
+    uid: NineP.Protocol.Auth.AuthRequest
+    commentId: T:NineP.Protocol.Auth.AuthRequest
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Auth
+      url: NineP.Protocol.Auth.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    The triple a <code>Tauth</code> binds an afid to (reference §5.2, S-22). Binding on
+
+    <code>uname</code> and <code>aname</code> alone would let an afid opened for one numeric user satisfy an
+
+    attach claiming another in a .u or .L session.
+- code: 'public readonly record struct AuthRequest : IEquatable<AuthRequest>'
+- h4: Implements
+- list:
+  - text: IEquatable<AuthRequest>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: AuthRequest(string, uint, string)
+  id: NineP_Protocol_Auth_AuthRequest__ctor_System_String_System_UInt32_System_String_
+  metadata:
+    uid: NineP.Protocol.Auth.AuthRequest.#ctor(System.String,System.UInt32,System.String)
+    commentId: M:NineP.Protocol.Auth.AuthRequest.#ctor(System.String,System.UInt32,System.String)
+- markdown: >-
+    The triple a <code>Tauth</code> binds an afid to (reference §5.2, S-22). Binding on
+
+    <code>uname</code> and <code>aname</code> alone would let an afid opened for one numeric user satisfy an
+
+    attach claiming another in a .u or .L session.
+- code: public AuthRequest(string Uname, uint NUname, string Aname)
+- h4: Parameters
+- parameters:
+  - name: Uname
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The textual user name; empty means "unspecified".
+  - name: NUname
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The numeric user id; NONUNAME means "unspecified".
+  - name: Aname
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The tree the client intends to attach to.
+- h2: Properties
+- api3: Aname
+  id: NineP_Protocol_Auth_AuthRequest_Aname
+  metadata:
+    uid: NineP.Protocol.Auth.AuthRequest.Aname
+    commentId: P:NineP.Protocol.Auth.AuthRequest.Aname
+- markdown: The tree the client intends to attach to.
+- code: public string Aname { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: NUname
+  id: NineP_Protocol_Auth_AuthRequest_NUname
+  metadata:
+    uid: NineP.Protocol.Auth.AuthRequest.NUname
+    commentId: P:NineP.Protocol.Auth.AuthRequest.NUname
+- markdown: The numeric user id; NONUNAME means "unspecified".
+- code: public uint NUname { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Uname
+  id: NineP_Protocol_Auth_AuthRequest_Uname
+  metadata:
+    uid: NineP.Protocol.Auth.AuthRequest.Uname
+    commentId: P:NineP.Protocol.Auth.AuthRequest.Uname
+- markdown: The textual user name; empty means "unspecified".
+- code: public string Uname { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+languageId: csharp
+metadata:
+  description: >-
+    The triple a Tauth binds an afid to (reference §5.2, S-22). Binding on
+
+    uname and aname alone would let an afid opened for one numeric user satisfy an
+
+    attach claiming another in a .u or .L session.

@@ -1,0 +1,58 @@
+<Project>
+
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
+  </PropertyGroup>
+
+  <ItemGroup Label="framing">
+    <!-- System.IO.Pipelines is inbox from net9.0 onward; on net8.0 it is a package, and §6.1
+         builds the frame reader on PipeReader. Referenced by NineP.Protocol for net8.0 only. -->
+    <PackageVersion Include="System.IO.Pipelines" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup Label="logging">
+    <!-- IR-1: the published packages log through Microsoft.Extensions.Logging.Abstractions. 8.0.3
+         is the lowest version carrying the [LoggerMessage] source generator, and it is deliberately
+         not raised: a library that references the lowest version it compiles against lets the
+         consuming application choose, where a 10.x reference would force every net8.0 consumer up.
+         On both target frameworks it brings exactly one transitive package,
+         Microsoft.Extensions.DependencyInjection.Abstractions 8.0.2. -->
+    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.3" />
+  </ItemGroup>
+
+  <!-- NLog 6.2 requires the .NET 10 logging implementation in executable/test hosts.
+       Published libraries retain their compatible 8.0.3 minimum dependency. -->
+  <ItemGroup Condition="'$(MSBuildProjectName)' != 'NineP.Protocol' and '$(MSBuildProjectName)' != 'NineP.Client' and '$(MSBuildProjectName)' != 'NineP.Server'">
+    <PackageVersion Update="Microsoft.Extensions.Logging.Abstractions" Version="10.0.11" />
+  </ItemGroup>
+
+  <ItemGroup Label="examples runtime">
+    <!-- The concrete logger the examples configure; referenced by the examples only, so no
+         published package acquires it (S-30). -->
+    <PackageVersion Include="NLog" Version="6.2.0" />
+    <PackageVersion Include="NLog.Extensions.Logging" Version="6.2.0" />
+  </ItemGroup>
+
+  <ItemGroup Label="todofs runtime">
+    <PackageVersion Include="Microsoft.Data.Sqlite" Version="10.0.11" />
+    <PackageVersion Include="Microsoft.IdentityModel.JsonWebTokens" Version="8.22.0" />
+    <PackageVersion Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="8.22.0" />
+  </ItemGroup>
+
+  <ItemGroup Label="tests">
+    <PackageVersion Include="xunit.v3" Version="4.0.0" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="4.0.0" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.9.0" />
+    <PackageVersion Include="FsCheck" Version="3.4.0" />
+    <PackageVersion Include="FsCheck.Xunit" Version="3.4.0" />
+    <PackageVersion Include="SharpFuzz" Version="2.3.0" />
+    <PackageVersion Include="BenchmarkDotNet" Version="0.15.8" />
+  </ItemGroup>
+
+  <ItemGroup Label="build-only">
+    <PackageVersion Include="Microsoft.CodeAnalysis.BannedApiAnalyzers" Version="5.6.0" />
+    <PackageVersion Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="5.6.0" />
+  </ItemGroup>
+
+</Project>

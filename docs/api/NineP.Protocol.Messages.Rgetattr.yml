@@ -1,0 +1,349 @@
+### YamlMime:ApiPage
+title: Struct Rgetattr
+body:
+- api1: Struct Rgetattr
+  id: NineP_Protocol_Messages_Rgetattr
+  metadata:
+    uid: NineP.Protocol.Messages.Rgetattr
+    commentId: T:NineP.Protocol.Messages.Rgetattr
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Messages
+      url: NineP.Protocol.Messages.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    Answers a Tgetattr; the frame is always 160 bytes and fields not marked valid carry zero
+
+    (reference §4.6).
+- code: 'public readonly record struct Rgetattr : IMessage, IEquatable<Rgetattr>'
+- h4: Implements
+- list:
+  - text: IMessage
+    url: NineP.Protocol.Messages.IMessage.html
+  - text: IEquatable<Rgetattr>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: Rgetattr(ushort, GetAttrMask, Qid, uint, uint, uint, ulong, ulong, ulong, ulong, ulong, TimeSpec, TimeSpec, TimeSpec, TimeSpec, ulong, ulong)
+  id: NineP_Protocol_Messages_Rgetattr__ctor_System_UInt16_NineP_Protocol_Messages_GetAttrMask_NineP_Protocol_Qid_System_UInt32_System_UInt32_System_UInt32_System_UInt64_System_UInt64_System_UInt64_System_UInt64_System_UInt64_NineP_Protocol_TimeSpec_NineP_Protocol_TimeSpec_NineP_Protocol_TimeSpec_NineP_Protocol_TimeSpec_System_UInt64_System_UInt64_
+  metadata:
+    uid: NineP.Protocol.Messages.Rgetattr.#ctor(System.UInt16,NineP.Protocol.Messages.GetAttrMask,NineP.Protocol.Qid,System.UInt32,System.UInt32,System.UInt32,System.UInt64,System.UInt64,System.UInt64,System.UInt64,System.UInt64,NineP.Protocol.TimeSpec,NineP.Protocol.TimeSpec,NineP.Protocol.TimeSpec,NineP.Protocol.TimeSpec,System.UInt64,System.UInt64)
+    commentId: M:NineP.Protocol.Messages.Rgetattr.#ctor(System.UInt16,NineP.Protocol.Messages.GetAttrMask,NineP.Protocol.Qid,System.UInt32,System.UInt32,System.UInt32,System.UInt64,System.UInt64,System.UInt64,System.UInt64,System.UInt64,NineP.Protocol.TimeSpec,NineP.Protocol.TimeSpec,NineP.Protocol.TimeSpec,NineP.Protocol.TimeSpec,System.UInt64,System.UInt64)
+- markdown: >-
+    Answers a Tgetattr; the frame is always 160 bytes and fields not marked valid carry zero
+
+    (reference §4.6).
+- code: public Rgetattr(ushort Tag, GetAttrMask Valid, Qid Qid, uint Mode, uint Uid, uint Gid, ulong NLink, ulong Rdev, ulong Size, ulong BlkSize, ulong Blocks, TimeSpec ATime, TimeSpec MTime, TimeSpec CTime, TimeSpec BTime, ulong Gen, ulong DataVersion)
+- h4: Parameters
+- parameters:
+  - name: Tag
+    type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+    description: The message tag, which pairs this message with its partner.
+  - name: Valid
+    type:
+    - text: GetAttrMask
+      url: NineP.Protocol.Messages.GetAttrMask.html
+    description: Which of the fields below the server filled in.
+  - name: Qid
+    type:
+    - text: Qid
+      url: NineP.Protocol.Qid.html
+    description: The qid of the file; always valid.
+  - name: Mode
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The POSIX mode word, which is the authority for the file type in .L.
+  - name: Uid
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The numeric owner.
+  - name: Gid
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The numeric group.
+  - name: NLink
+    type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+    description: The hard-link count.
+  - name: Rdev
+    type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+    description: The device numbers of a device node.
+  - name: Size
+    type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+    description: The file length in bytes.
+  - name: BlkSize
+    type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+    description: The preferred I/O block size.
+  - name: Blocks
+    type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+    description: The allocated 512-byte block count.
+  - name: ATime
+    type:
+    - text: TimeSpec
+      url: NineP.Protocol.TimeSpec.html
+    description: The last access time.
+  - name: MTime
+    type:
+    - text: TimeSpec
+      url: NineP.Protocol.TimeSpec.html
+    description: The last modification time.
+  - name: CTime
+    type:
+    - text: TimeSpec
+      url: NineP.Protocol.TimeSpec.html
+    description: The last status-change time.
+  - name: BTime
+    type:
+    - text: TimeSpec
+      url: NineP.Protocol.TimeSpec.html
+    description: The creation time; zero when unknown.
+  - name: Gen
+    type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+    description: The generation number.
+  - name: DataVersion
+    type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+    description: The data version.
+- h2: Properties
+- api3: ATime
+  id: NineP_Protocol_Messages_Rgetattr_ATime
+  metadata:
+    uid: NineP.Protocol.Messages.Rgetattr.ATime
+    commentId: P:NineP.Protocol.Messages.Rgetattr.ATime
+- markdown: The last access time.
+- code: public TimeSpec ATime { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: TimeSpec
+      url: NineP.Protocol.TimeSpec.html
+- api3: BTime
+  id: NineP_Protocol_Messages_Rgetattr_BTime
+  metadata:
+    uid: NineP.Protocol.Messages.Rgetattr.BTime
+    commentId: P:NineP.Protocol.Messages.Rgetattr.BTime
+- markdown: The creation time; zero when unknown.
+- code: public TimeSpec BTime { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: TimeSpec
+      url: NineP.Protocol.TimeSpec.html
+- api3: BlkSize
+  id: NineP_Protocol_Messages_Rgetattr_BlkSize
+  metadata:
+    uid: NineP.Protocol.Messages.Rgetattr.BlkSize
+    commentId: P:NineP.Protocol.Messages.Rgetattr.BlkSize
+- markdown: The preferred I/O block size.
+- code: public ulong BlkSize { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+- api3: Blocks
+  id: NineP_Protocol_Messages_Rgetattr_Blocks
+  metadata:
+    uid: NineP.Protocol.Messages.Rgetattr.Blocks
+    commentId: P:NineP.Protocol.Messages.Rgetattr.Blocks
+- markdown: The allocated 512-byte block count.
+- code: public ulong Blocks { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+- api3: CTime
+  id: NineP_Protocol_Messages_Rgetattr_CTime
+  metadata:
+    uid: NineP.Protocol.Messages.Rgetattr.CTime
+    commentId: P:NineP.Protocol.Messages.Rgetattr.CTime
+- markdown: The last status-change time.
+- code: public TimeSpec CTime { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: TimeSpec
+      url: NineP.Protocol.TimeSpec.html
+- api3: DataVersion
+  id: NineP_Protocol_Messages_Rgetattr_DataVersion
+  metadata:
+    uid: NineP.Protocol.Messages.Rgetattr.DataVersion
+    commentId: P:NineP.Protocol.Messages.Rgetattr.DataVersion
+- markdown: The data version.
+- code: public ulong DataVersion { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+- api3: Gen
+  id: NineP_Protocol_Messages_Rgetattr_Gen
+  metadata:
+    uid: NineP.Protocol.Messages.Rgetattr.Gen
+    commentId: P:NineP.Protocol.Messages.Rgetattr.Gen
+- markdown: The generation number.
+- code: public ulong Gen { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+- api3: Gid
+  id: NineP_Protocol_Messages_Rgetattr_Gid
+  metadata:
+    uid: NineP.Protocol.Messages.Rgetattr.Gid
+    commentId: P:NineP.Protocol.Messages.Rgetattr.Gid
+- markdown: The numeric group.
+- code: public uint Gid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: MTime
+  id: NineP_Protocol_Messages_Rgetattr_MTime
+  metadata:
+    uid: NineP.Protocol.Messages.Rgetattr.MTime
+    commentId: P:NineP.Protocol.Messages.Rgetattr.MTime
+- markdown: The last modification time.
+- code: public TimeSpec MTime { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: TimeSpec
+      url: NineP.Protocol.TimeSpec.html
+- api3: Mode
+  id: NineP_Protocol_Messages_Rgetattr_Mode
+  metadata:
+    uid: NineP.Protocol.Messages.Rgetattr.Mode
+    commentId: P:NineP.Protocol.Messages.Rgetattr.Mode
+- markdown: The POSIX mode word, which is the authority for the file type in .L.
+- code: public uint Mode { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: NLink
+  id: NineP_Protocol_Messages_Rgetattr_NLink
+  metadata:
+    uid: NineP.Protocol.Messages.Rgetattr.NLink
+    commentId: P:NineP.Protocol.Messages.Rgetattr.NLink
+- markdown: The hard-link count.
+- code: public ulong NLink { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+- api3: Qid
+  id: NineP_Protocol_Messages_Rgetattr_Qid
+  metadata:
+    uid: NineP.Protocol.Messages.Rgetattr.Qid
+    commentId: P:NineP.Protocol.Messages.Rgetattr.Qid
+- markdown: The qid of the file; always valid.
+- code: public Qid Qid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: Qid
+      url: NineP.Protocol.Qid.html
+- api3: Rdev
+  id: NineP_Protocol_Messages_Rgetattr_Rdev
+  metadata:
+    uid: NineP.Protocol.Messages.Rgetattr.Rdev
+    commentId: P:NineP.Protocol.Messages.Rgetattr.Rdev
+- markdown: The device numbers of a device node.
+- code: public ulong Rdev { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+- api3: Size
+  id: NineP_Protocol_Messages_Rgetattr_Size
+  metadata:
+    uid: NineP.Protocol.Messages.Rgetattr.Size
+    commentId: P:NineP.Protocol.Messages.Rgetattr.Size
+- markdown: The file length in bytes.
+- code: public ulong Size { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+- api3: Tag
+  id: NineP_Protocol_Messages_Rgetattr_Tag
+  metadata:
+    uid: NineP.Protocol.Messages.Rgetattr.Tag
+    commentId: P:NineP.Protocol.Messages.Rgetattr.Tag
+- markdown: The message tag, which pairs this message with its partner.
+- code: public ushort Tag { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+- api3: Uid
+  id: NineP_Protocol_Messages_Rgetattr_Uid
+  metadata:
+    uid: NineP.Protocol.Messages.Rgetattr.Uid
+    commentId: P:NineP.Protocol.Messages.Rgetattr.Uid
+- markdown: The numeric owner.
+- code: public uint Uid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Valid
+  id: NineP_Protocol_Messages_Rgetattr_Valid
+  metadata:
+    uid: NineP.Protocol.Messages.Rgetattr.Valid
+    commentId: P:NineP.Protocol.Messages.Rgetattr.Valid
+- markdown: Which of the fields below the server filled in.
+- code: public GetAttrMask Valid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: GetAttrMask
+      url: NineP.Protocol.Messages.GetAttrMask.html
+languageId: csharp
+metadata:
+  description: >-
+    Answers a Tgetattr; the frame is always 160 bytes and fields not marked valid carry zero
+
+    (reference §4.6).

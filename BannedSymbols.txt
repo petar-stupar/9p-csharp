@@ -1,0 +1,3 @@
+T:System.BitConverter;host-endian; use System.Buffers.Binary.BinaryPrimitives
+P:System.Text.Encoding.UTF8;substitutes U+FFFD; use NinePText.Utf8 (throwOnInvalidBytes)
+M:System.Threading.Tasks.Task.Run`1(System.Func{`0});no Task.Run per request; use the bounded pool

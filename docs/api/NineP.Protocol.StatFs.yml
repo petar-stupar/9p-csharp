@@ -1,0 +1,215 @@
+### YamlMime:ApiPage
+title: Struct StatFs
+body:
+- api1: Struct StatFs
+  id: NineP_Protocol_StatFs
+  metadata:
+    uid: NineP.Protocol.StatFs
+    commentId: T:NineP.Protocol.StatFs
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol
+      url: NineP.Protocol.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: Filesystem statistics answered by <code>Tstatfs</code> (reference §4.9).
+- code: 'public readonly record struct StatFs : IEquatable<StatFs>'
+- h4: Implements
+- list:
+  - text: IEquatable<StatFs>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: StatFs(uint, uint, ulong, ulong, ulong, ulong, ulong, ulong, uint)
+  id: NineP_Protocol_StatFs__ctor_System_UInt32_System_UInt32_System_UInt64_System_UInt64_System_UInt64_System_UInt64_System_UInt64_System_UInt64_System_UInt32_
+  metadata:
+    uid: NineP.Protocol.StatFs.#ctor(System.UInt32,System.UInt32,System.UInt64,System.UInt64,System.UInt64,System.UInt64,System.UInt64,System.UInt64,System.UInt32)
+    commentId: M:NineP.Protocol.StatFs.#ctor(System.UInt32,System.UInt32,System.UInt64,System.UInt64,System.UInt64,System.UInt64,System.UInt64,System.UInt64,System.UInt32)
+- markdown: Filesystem statistics answered by <code>Tstatfs</code> (reference §4.9).
+- code: public StatFs(uint Type, uint BlockSize, ulong Blocks, ulong BlocksFree, ulong BlocksAvailable, ulong Files, ulong FilesFree, ulong FsId, uint NameLength)
+- h4: Parameters
+- parameters:
+  - name: Type
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The filesystem magic; synthetic servers report <xref href="NineP.Protocol.StatFs.V9fsMagic" data-throw-if-not-resolved="false"></xref>.
+  - name: BlockSize
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The block size the other counts are expressed in.
+  - name: Blocks
+    type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+    description: Total blocks.
+  - name: BlocksFree
+    type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+    description: Free blocks.
+  - name: BlocksAvailable
+    type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+    description: Blocks available to an unprivileged user.
+  - name: Files
+    type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+    description: Total inodes.
+  - name: FilesFree
+    type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+    description: Free inodes.
+  - name: FsId
+    type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+    description: An opaque filesystem identifier.
+  - name: NameLength
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The longest component name the filesystem accepts.
+- h2: Fields
+- api3: V9fsMagic
+  id: NineP_Protocol_StatFs_V9fsMagic
+  metadata:
+    uid: NineP.Protocol.StatFs.V9fsMagic
+    commentId: F:NineP.Protocol.StatFs.V9fsMagic
+- markdown: V9FS_MAGIC (0x01021997), the type a synthetic server reports.
+- code: public const uint V9fsMagic = 16914839
+- h4: Field Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- h2: Properties
+- api3: BlockSize
+  id: NineP_Protocol_StatFs_BlockSize
+  metadata:
+    uid: NineP.Protocol.StatFs.BlockSize
+    commentId: P:NineP.Protocol.StatFs.BlockSize
+- markdown: The block size the other counts are expressed in.
+- code: public uint BlockSize { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Blocks
+  id: NineP_Protocol_StatFs_Blocks
+  metadata:
+    uid: NineP.Protocol.StatFs.Blocks
+    commentId: P:NineP.Protocol.StatFs.Blocks
+- markdown: Total blocks.
+- code: public ulong Blocks { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+- api3: BlocksAvailable
+  id: NineP_Protocol_StatFs_BlocksAvailable
+  metadata:
+    uid: NineP.Protocol.StatFs.BlocksAvailable
+    commentId: P:NineP.Protocol.StatFs.BlocksAvailable
+- markdown: Blocks available to an unprivileged user.
+- code: public ulong BlocksAvailable { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+- api3: BlocksFree
+  id: NineP_Protocol_StatFs_BlocksFree
+  metadata:
+    uid: NineP.Protocol.StatFs.BlocksFree
+    commentId: P:NineP.Protocol.StatFs.BlocksFree
+- markdown: Free blocks.
+- code: public ulong BlocksFree { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+- api3: Files
+  id: NineP_Protocol_StatFs_Files
+  metadata:
+    uid: NineP.Protocol.StatFs.Files
+    commentId: P:NineP.Protocol.StatFs.Files
+- markdown: Total inodes.
+- code: public ulong Files { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+- api3: FilesFree
+  id: NineP_Protocol_StatFs_FilesFree
+  metadata:
+    uid: NineP.Protocol.StatFs.FilesFree
+    commentId: P:NineP.Protocol.StatFs.FilesFree
+- markdown: Free inodes.
+- code: public ulong FilesFree { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+- api3: FsId
+  id: NineP_Protocol_StatFs_FsId
+  metadata:
+    uid: NineP.Protocol.StatFs.FsId
+    commentId: P:NineP.Protocol.StatFs.FsId
+- markdown: An opaque filesystem identifier.
+- code: public ulong FsId { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+- api3: NameLength
+  id: NineP_Protocol_StatFs_NameLength
+  metadata:
+    uid: NineP.Protocol.StatFs.NameLength
+    commentId: P:NineP.Protocol.StatFs.NameLength
+- markdown: The longest component name the filesystem accepts.
+- code: public uint NameLength { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Type
+  id: NineP_Protocol_StatFs_Type
+  metadata:
+    uid: NineP.Protocol.StatFs.Type
+    commentId: P:NineP.Protocol.StatFs.Type
+- markdown: The filesystem magic; synthetic servers report <xref href="NineP.Protocol.StatFs.V9fsMagic" data-throw-if-not-resolved="false"></xref>.
+- code: public uint Type { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+languageId: csharp
+metadata:
+  description: Filesystem statistics answered by Tstatfs (reference §4.9).

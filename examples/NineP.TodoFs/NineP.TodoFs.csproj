@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- Single-target so that "dotnet run" needs no framework switch. -->
+    <TargetFramework>net10.0</TargetFramework>
+    <TargetFrameworks />
+    <OutputType>Exe</OutputType>
+    <AssemblyName>todofs</AssemblyName>
+    <RootNamespace>NineP.TodoFs</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup Label="the concrete logger the example configures">
+    <PackageReference Include="NLog" />
+    <PackageReference Include="NLog.Extensions.Logging" />
+  </ItemGroup>
+
+  <ItemGroup Label="the test projects that drive this example see its internals">
+    <!-- IR-3: the example is a program, so every type in it is internal. These are the
+         projects that exercise it, and they are the reason anything here was public. -->
+    <InternalsVisibleTo Include="NineP.Client.Tests" />
+    <InternalsVisibleTo Include="NineP.Server.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../src/NineP.Server/NineP.Server.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.Sqlite" />
+    <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" />
+    <PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" />
+  </ItemGroup>
+
+</Project>

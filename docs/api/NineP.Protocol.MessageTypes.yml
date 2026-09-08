@@ -1,0 +1,146 @@
+### YamlMime:ApiPage
+title: Class MessageTypes
+body:
+- api1: Class MessageTypes
+  id: NineP_Protocol_MessageTypes
+  metadata:
+    uid: NineP.Protocol.MessageTypes
+    commentId: T:NineP.Protocol.MessageTypes
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol
+      url: NineP.Protocol.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    Helpers over <xref href="NineP.Protocol.MessageType" data-throw-if-not-resolved="false"></xref>: wire legality per dialect, T/R pairing, and the
+
+    protocol's own name for a type number.
+- code: public static class MessageTypes
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: MessageTypes
+    url: NineP.Protocol.MessageTypes.html
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.MemberwiseClone()
+    url: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Methods
+- api3: GetName(MessageType)
+  id: NineP_Protocol_MessageTypes_GetName_NineP_Protocol_MessageType_
+  metadata:
+    uid: NineP.Protocol.MessageTypes.GetName(NineP.Protocol.MessageType)
+    commentId: M:NineP.Protocol.MessageTypes.GetName(NineP.Protocol.MessageType)
+- markdown: The protocol's name for the type, for example "Twalk", used in logs and error text.
+- code: public static string GetName(MessageType type)
+- h4: Parameters
+- parameters:
+  - name: type
+    type:
+    - text: MessageType
+      url: NineP.Protocol.MessageType.html
+    description: The type number to name.
+- h4: Returns
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The protocol name, or "type &lt;n&gt;" for a number the protocol does not define.
+- api3: IsLegal(MessageType, Dialect)
+  id: NineP_Protocol_MessageTypes_IsLegal_NineP_Protocol_MessageType_NineP_Protocol_Dialect_
+  metadata:
+    uid: NineP.Protocol.MessageTypes.IsLegal(NineP.Protocol.MessageType,NineP.Protocol.Dialect)
+    commentId: M:NineP.Protocol.MessageTypes.IsLegal(NineP.Protocol.MessageType,NineP.Protocol.Dialect)
+- markdown: >-
+    True when the type may appear in a session of that dialect (reference §2). <code>Terror</code>
+
+    and <code>Tlerror</code> are legal in none.
+- code: public static bool IsLegal(MessageType type, Dialect dialect)
+- h4: Parameters
+- parameters:
+  - name: type
+    type:
+    - text: MessageType
+      url: NineP.Protocol.MessageType.html
+    description: The type number peeked out of the frame.
+  - name: dialect
+    type:
+    - text: Dialect
+      url: NineP.Protocol.Dialect.html
+    description: The dialect the session negotiated.
+- h4: Returns
+- parameters:
+  - type:
+    - text: bool
+      url: https://learn.microsoft.com/dotnet/api/system.boolean
+    description: False for an unknown number and for one the dialect does not carry.
+- api3: IsRequest(MessageType)
+  id: NineP_Protocol_MessageTypes_IsRequest_NineP_Protocol_MessageType_
+  metadata:
+    uid: NineP.Protocol.MessageTypes.IsRequest(NineP.Protocol.MessageType)
+    commentId: M:NineP.Protocol.MessageTypes.IsRequest(NineP.Protocol.MessageType)
+- markdown: >-
+    True for a request type, false for a reply. <code>Terror</code> and <code>Tlerror</code> are neither:
+
+    they are declared so that the numbers are accounted for, and they never reach the wire.
+- code: public static bool IsRequest(MessageType type)
+- h4: Parameters
+- parameters:
+  - name: type
+    type:
+    - text: MessageType
+      url: NineP.Protocol.MessageType.html
+    description: The type number to classify.
+- h4: Returns
+- parameters:
+  - type:
+    - text: bool
+      url: https://learn.microsoft.com/dotnet/api/system.boolean
+    description: True only for a T-message that may be sent.
+- api3: ReplyOf(MessageType)
+  id: NineP_Protocol_MessageTypes_ReplyOf_NineP_Protocol_MessageType_
+  metadata:
+    uid: NineP.Protocol.MessageTypes.ReplyOf(NineP.Protocol.MessageType)
+    commentId: M:NineP.Protocol.MessageTypes.ReplyOf(NineP.Protocol.MessageType)
+- markdown: The reply type paired with a request type, which is always its number plus one.
+- code: public static MessageType ReplyOf(MessageType requestType)
+- h4: Parameters
+- parameters:
+  - name: requestType
+    type:
+    - text: MessageType
+      url: NineP.Protocol.MessageType.html
+    description: The request type.
+- h4: Returns
+- parameters:
+  - type:
+    - text: MessageType
+      url: NineP.Protocol.MessageType.html
+    description: The type of the reply that answers it.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: ArgumentOutOfRangeException
+      url: https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception
+    description: The argument is not a request type.
+languageId: csharp
+metadata:
+  description: >-
+    Helpers over : wire legality per dialect, T/R pairing, and the
+
+    protocol's own name for a type number.

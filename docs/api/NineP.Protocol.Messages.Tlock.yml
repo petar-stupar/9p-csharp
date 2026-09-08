@@ -1,0 +1,102 @@
+### YamlMime:ApiPage
+title: Struct Tlock
+body:
+- api1: Struct Tlock
+  id: NineP_Protocol_Messages_Tlock
+  metadata:
+    uid: NineP.Protocol.Messages.Tlock
+    commentId: T:NineP.Protocol.Messages.Tlock
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Messages
+      url: NineP.Protocol.Messages.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: Acquires or releases a byte-range lock (reference §4.8).
+- code: 'public readonly record struct Tlock : IMessage, IEquatable<Tlock>'
+- h4: Implements
+- list:
+  - text: IMessage
+    url: NineP.Protocol.Messages.IMessage.html
+  - text: IEquatable<Tlock>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: Tlock(ushort, uint, LockRequest)
+  id: NineP_Protocol_Messages_Tlock__ctor_System_UInt16_System_UInt32_NineP_Protocol_LockRequest_
+  metadata:
+    uid: NineP.Protocol.Messages.Tlock.#ctor(System.UInt16,System.UInt32,NineP.Protocol.LockRequest)
+    commentId: M:NineP.Protocol.Messages.Tlock.#ctor(System.UInt16,System.UInt32,NineP.Protocol.LockRequest)
+- markdown: Acquires or releases a byte-range lock (reference §4.8).
+- code: public Tlock(ushort Tag, uint Fid, LockRequest Request)
+- h4: Parameters
+- parameters:
+  - name: Tag
+    type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+    description: The message tag, which pairs this message with its partner.
+  - name: Fid
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The open fid to lock.
+  - name: Request
+    type:
+    - text: LockRequest
+      url: NineP.Protocol.LockRequest.html
+    description: The range, type and owner of the lock.
+- h2: Properties
+- api3: Fid
+  id: NineP_Protocol_Messages_Tlock_Fid
+  metadata:
+    uid: NineP.Protocol.Messages.Tlock.Fid
+    commentId: P:NineP.Protocol.Messages.Tlock.Fid
+- markdown: The open fid to lock.
+- code: public uint Fid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Request
+  id: NineP_Protocol_Messages_Tlock_Request
+  metadata:
+    uid: NineP.Protocol.Messages.Tlock.Request
+    commentId: P:NineP.Protocol.Messages.Tlock.Request
+- markdown: The range, type and owner of the lock.
+- code: public LockRequest Request { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: LockRequest
+      url: NineP.Protocol.LockRequest.html
+- api3: Tag
+  id: NineP_Protocol_Messages_Tlock_Tag
+  metadata:
+    uid: NineP.Protocol.Messages.Tlock.Tag
+    commentId: P:NineP.Protocol.Messages.Tlock.Tag
+- markdown: The message tag, which pairs this message with its partner.
+- code: public ushort Tag { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+languageId: csharp
+metadata:
+  description: Acquires or releases a byte-range lock (reference §4.8).

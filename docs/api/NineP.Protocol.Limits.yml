@@ -1,0 +1,255 @@
+### YamlMime:ApiPage
+title: Class Limits
+body:
+- api1: Class Limits
+  id: NineP_Protocol_Limits
+  metadata:
+    uid: NineP.Protocol.Limits
+    commentId: T:NineP.Protocol.Limits
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol
+      url: NineP.Protocol.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    Every configurable bound of the workspace architecture §4, with the defaults this workspace
+
+    ships. The record is immutable: a server or client is handed one at construction and it does
+
+    not change under it.
+- code: 'public sealed record Limits : IEquatable<Limits>'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: Limits
+    url: NineP.Protocol.Limits.html
+- h4: Implements
+- list:
+  - text: IEquatable<Limits>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Properties
+- api3: AuthTimeout
+  id: NineP_Protocol_Limits_AuthTimeout
+  metadata:
+    uid: NineP.Protocol.Limits.AuthTimeout
+    commentId: P:NineP.Protocol.Limits.AuthTimeout
+- markdown: The wall-clock budget for one afid exchange. Default 30 s.
+- code: public TimeSpan AuthTimeout { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: TimeSpan
+      url: https://learn.microsoft.com/dotnet/api/system.timespan
+- api3: Default
+  id: NineP_Protocol_Limits_Default
+  metadata:
+    uid: NineP.Protocol.Limits.Default
+    commentId: P:NineP.Protocol.Limits.Default
+- markdown: The limits every server and client uses unless the caller overrides them.
+- code: public static Limits Default { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: Limits
+      url: NineP.Protocol.Limits.html
+- api3: FlushReservePerConnection
+  id: NineP_Protocol_Limits_FlushReservePerConnection
+  metadata:
+    uid: NineP.Protocol.Limits.FlushReservePerConnection
+    commentId: P:NineP.Protocol.Limits.FlushReservePerConnection
+- markdown: >-
+    Slots of the per-connection budget only <code>Tflush</code> may use, so a client that filled its
+
+    window can still cancel what is in it. Default 8.
+- code: public int FlushReservePerConnection { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: IdleTimeout
+  id: NineP_Protocol_Limits_IdleTimeout
+  metadata:
+    uid: NineP.Protocol.Limits.IdleTimeout
+    commentId: P:NineP.Protocol.Limits.IdleTimeout
+- markdown: Idle timeout; <xref href="System.TimeSpan.Zero" data-throw-if-not-resolved="false"></xref> disables it. Default Zero.
+- code: public TimeSpan IdleTimeout { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: TimeSpan
+      url: https://learn.microsoft.com/dotnet/api/system.timespan
+- api3: MaxAuthBytes
+  id: NineP_Protocol_Limits_MaxAuthBytes
+  metadata:
+    uid: NineP.Protocol.Limits.MaxAuthBytes
+    commentId: P:NineP.Protocol.Limits.MaxAuthBytes
+- markdown: Bytes an afid exchange may carry in each direction. Default 64 KiB.
+- code: public int MaxAuthBytes { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: MaxConnectionsPerListener
+  id: NineP_Protocol_Limits_MaxConnectionsPerListener
+  metadata:
+    uid: NineP.Protocol.Limits.MaxConnectionsPerListener
+    commentId: P:NineP.Protocol.Limits.MaxConnectionsPerListener
+- markdown: Accepted connections per listener. Default 1024.
+- code: public int MaxConnectionsPerListener { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: MaxFidsPerConnection
+  id: NineP_Protocol_Limits_MaxFidsPerConnection
+  metadata:
+    uid: NineP.Protocol.Limits.MaxFidsPerConnection
+    commentId: P:NineP.Protocol.Limits.MaxFidsPerConnection
+- markdown: Fids one connection may hold; beyond it "too many fids" / ENFILE. Default 65536.
+- code: public int MaxFidsPerConnection { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: MaxInFlightPerConnection
+  id: NineP_Protocol_Limits_MaxInFlightPerConnection
+  metadata:
+    uid: NineP.Protocol.Limits.MaxInFlightPerConnection
+    commentId: P:NineP.Protocol.Limits.MaxInFlightPerConnection
+- markdown: Requests in flight per connection, including the flush reserve. Default 256.
+- code: public int MaxInFlightPerConnection { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- h4: Remarks
+- markdown: Excess ordinary requests receive EAGAIN; Tflush uses its reserved capacity.
+- api3: MaxInFlightPerListener
+  id: NineP_Protocol_Limits_MaxInFlightPerListener
+  metadata:
+    uid: NineP.Protocol.Limits.MaxInFlightPerListener
+    commentId: P:NineP.Protocol.Limits.MaxInFlightPerListener
+- markdown: Ordinary requests in flight across every connection of one listener. Default 4096.
+- code: public int MaxInFlightPerListener { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- h4: Remarks
+- markdown: Excess ordinary requests receive EAGAIN; Tflush does not consume this budget.
+- api3: MaxMsize
+  id: NineP_Protocol_Limits_MaxMsize
+  metadata:
+    uid: NineP.Protocol.Limits.MaxMsize
+    commentId: P:NineP.Protocol.Limits.MaxMsize
+- markdown: The largest msize this side will negotiate. Default 1 MiB.
+- code: public uint MaxMsize { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: MaxNameLength
+  id: NineP_Protocol_Limits_MaxNameLength
+  metadata:
+    uid: NineP.Protocol.Limits.MaxNameLength
+    commentId: P:NineP.Protocol.Limits.MaxNameLength
+- markdown: The longest legal file-name component in bytes. Default 255.
+- code: public int MaxNameLength { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: MinMsize
+  id: NineP_Protocol_Limits_MinMsize
+  metadata:
+    uid: NineP.Protocol.Limits.MinMsize
+    commentId: P:NineP.Protocol.Limits.MinMsize
+- markdown: >-
+    The smallest msize this side will serve; below it a server answers <code>Rversion "unknown"</code>
+
+    rather than an <code>Rerror</code>, which version(5) forbids. Default 4096.
+- code: public uint MinMsize { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: PreNegotiationFrameCap
+  id: NineP_Protocol_Limits_PreNegotiationFrameCap
+  metadata:
+    uid: NineP.Protocol.Limits.PreNegotiationFrameCap
+    commentId: P:NineP.Protocol.Limits.PreNegotiationFrameCap
+- markdown: >-
+    The frame cap that applies until <code>Tversion</code> has been answered. It is a small constant,
+
+    never the configured maximum: an unauthenticated peer must not be able to make a connection
+
+    reserve a megabyte by lying in the size field. Default 8192.
+- code: public uint PreNegotiationFrameCap { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: ReadHeaderTimeout
+  id: NineP_Protocol_Limits_ReadHeaderTimeout
+  metadata:
+    uid: NineP.Protocol.Limits.ReadHeaderTimeout
+    commentId: P:NineP.Protocol.Limits.ReadHeaderTimeout
+- markdown: How long a connection may take to deliver a complete frame header. Default 30 s.
+- code: public TimeSpan ReadHeaderTimeout { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: TimeSpan
+      url: https://learn.microsoft.com/dotnet/api/system.timespan
+- h2: Methods
+- api3: Validate()
+  id: NineP_Protocol_Limits_Validate
+  metadata:
+    uid: NineP.Protocol.Limits.Validate
+    commentId: M:NineP.Protocol.Limits.Validate
+- markdown: >-
+    Throws <xref href="System.ArgumentOutOfRangeException" data-throw-if-not-resolved="false"></xref> when the record is internally inconsistent,
+
+    so a misconfiguration fails at construction rather than under load.
+- code: public void Validate()
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: ArgumentOutOfRangeException
+      url: https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception
+    description: A bound is out of range or contradicts another.
+languageId: csharp
+metadata:
+  description: >-
+    Every configurable bound of the workspace architecture §4, with the defaults this workspace
+
+    ships. The record is immutable: a server or client is handed one at construction and it does
+
+    not change under it.

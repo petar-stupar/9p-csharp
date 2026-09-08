@@ -1,0 +1,151 @@
+### YamlMime:ApiPage
+title: Class NinePProtocolException
+body:
+- api1: Class NinePProtocolException
+  id: NineP_Protocol_NinePProtocolException
+  metadata:
+    uid: NineP.Protocol.NinePProtocolException
+    commentId: T:NineP.Protocol.NinePProtocolException
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol
+      url: NineP.Protocol.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    A malformed or illegal 9P message (reference §8). The kind is machine-readable so that a caller
+
+    can tell a size violation, which cannot be resynced, from a field that merely did not parse.
+- code: 'public sealed class NinePProtocolException : NinePException, ISerializable'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: Exception
+    url: https://learn.microsoft.com/dotnet/api/system.exception
+  - text: NinePException
+    url: NineP.Protocol.NinePException.html
+  - text: NinePProtocolException
+    url: NineP.Protocol.NinePProtocolException.html
+- h4: Implements
+- list:
+  - text: ISerializable
+    url: https://learn.microsoft.com/dotnet/api/system.runtime.serialization.iserializable
+- h4: Inherited Members
+- list:
+  - text: NinePException.Error
+    url: NineP.Protocol.NinePException.html#NineP_Protocol_NinePException_Error
+  - text: Exception.GetBaseException()
+    url: https://learn.microsoft.com/dotnet/api/system.exception.getbaseexception
+  - text: Exception.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.exception.gettype
+  - text: Exception.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.exception.tostring
+  - text: Exception.Data
+    url: https://learn.microsoft.com/dotnet/api/system.exception.data
+  - text: Exception.HelpLink
+    url: https://learn.microsoft.com/dotnet/api/system.exception.helplink
+  - text: Exception.HResult
+    url: https://learn.microsoft.com/dotnet/api/system.exception.hresult
+  - text: Exception.InnerException
+    url: https://learn.microsoft.com/dotnet/api/system.exception.innerexception
+  - text: Exception.Message
+    url: https://learn.microsoft.com/dotnet/api/system.exception.message
+  - text: Exception.Source
+    url: https://learn.microsoft.com/dotnet/api/system.exception.source
+  - text: Exception.StackTrace
+    url: https://learn.microsoft.com/dotnet/api/system.exception.stacktrace
+  - text: Exception.TargetSite
+    url: https://learn.microsoft.com/dotnet/api/system.exception.targetsite
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: NinePProtocolException()
+  id: NineP_Protocol_NinePProtocolException__ctor
+  metadata:
+    uid: NineP.Protocol.NinePProtocolException.#ctor
+    commentId: M:NineP.Protocol.NinePProtocolException.#ctor
+- markdown: Creates a protocol exception of no particular kind.
+- code: public NinePProtocolException()
+- api3: NinePProtocolException(string)
+  id: NineP_Protocol_NinePProtocolException__ctor_System_String_
+  metadata:
+    uid: NineP.Protocol.NinePProtocolException.#ctor(System.String)
+    commentId: M:NineP.Protocol.NinePProtocolException.#ctor(System.String)
+- markdown: Creates a protocol exception with a message.
+- code: public NinePProtocolException(string message)
+- h4: Parameters
+- parameters:
+  - name: message
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The message for the developer, never for the wire.
+- api3: NinePProtocolException(string, Exception)
+  id: NineP_Protocol_NinePProtocolException__ctor_System_String_System_Exception_
+  metadata:
+    uid: NineP.Protocol.NinePProtocolException.#ctor(System.String,System.Exception)
+    commentId: M:NineP.Protocol.NinePProtocolException.#ctor(System.String,System.Exception)
+- markdown: Creates a protocol exception with a message and the failure that caused it.
+- code: public NinePProtocolException(string message, Exception innerException)
+- h4: Parameters
+- parameters:
+  - name: message
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The message for the developer, never for the wire.
+  - name: innerException
+    type:
+    - text: Exception
+      url: https://learn.microsoft.com/dotnet/api/system.exception
+    description: The failure being wrapped.
+- api3: NinePProtocolException(ProtocolErrorKind, string)
+  id: NineP_Protocol_NinePProtocolException__ctor_NineP_Protocol_ProtocolErrorKind_System_String_
+  metadata:
+    uid: NineP.Protocol.NinePProtocolException.#ctor(NineP.Protocol.ProtocolErrorKind,System.String)
+    commentId: M:NineP.Protocol.NinePProtocolException.#ctor(NineP.Protocol.ProtocolErrorKind,System.String)
+- markdown: Creates a protocol exception of a given kind with a human-readable detail.
+- code: public NinePProtocolException(ProtocolErrorKind kind, string message)
+- h4: Parameters
+- parameters:
+  - name: kind
+    type:
+    - text: ProtocolErrorKind
+      url: NineP.Protocol.ProtocolErrorKind.html
+    description: What was wrong with the message.
+  - name: message
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The detail for the developer, never for the wire.
+- h2: Properties
+- api3: Kind
+  id: NineP_Protocol_NinePProtocolException_Kind
+  metadata:
+    uid: NineP.Protocol.NinePProtocolException.Kind
+    commentId: P:NineP.Protocol.NinePProtocolException.Kind
+- markdown: What was wrong with the message.
+- code: public ProtocolErrorKind Kind { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ProtocolErrorKind
+      url: NineP.Protocol.ProtocolErrorKind.html
+languageId: csharp
+metadata:
+  description: >-
+    A malformed or illegal 9P message (reference §8). The kind is machine-readable so that a caller
+
+    can tell a size violation, which cannot be resynced, from a field that merely did not parse.

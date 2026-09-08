@@ -1,0 +1,85 @@
+### YamlMime:ApiPage
+title: Struct Rlock
+body:
+- api1: Struct Rlock
+  id: NineP_Protocol_Messages_Rlock
+  metadata:
+    uid: NineP.Protocol.Messages.Rlock
+    commentId: T:NineP.Protocol.Messages.Rlock
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Messages
+      url: NineP.Protocol.Messages.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: Answers a Tlock with the outcome; BLOCKED asks the client to retry (reference §4.8).
+- code: 'public readonly record struct Rlock : IMessage, IEquatable<Rlock>'
+- h4: Implements
+- list:
+  - text: IMessage
+    url: NineP.Protocol.Messages.IMessage.html
+  - text: IEquatable<Rlock>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: Rlock(ushort, LockStatus)
+  id: NineP_Protocol_Messages_Rlock__ctor_System_UInt16_NineP_Protocol_LockStatus_
+  metadata:
+    uid: NineP.Protocol.Messages.Rlock.#ctor(System.UInt16,NineP.Protocol.LockStatus)
+    commentId: M:NineP.Protocol.Messages.Rlock.#ctor(System.UInt16,NineP.Protocol.LockStatus)
+- markdown: Answers a Tlock with the outcome; BLOCKED asks the client to retry (reference §4.8).
+- code: public Rlock(ushort Tag, LockStatus Status)
+- h4: Parameters
+- parameters:
+  - name: Tag
+    type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+    description: The message tag, which pairs this message with its partner.
+  - name: Status
+    type:
+    - text: LockStatus
+      url: NineP.Protocol.LockStatus.html
+    description: Whether the lock was granted, blocked, refused, or in grace.
+- h2: Properties
+- api3: Status
+  id: NineP_Protocol_Messages_Rlock_Status
+  metadata:
+    uid: NineP.Protocol.Messages.Rlock.Status
+    commentId: P:NineP.Protocol.Messages.Rlock.Status
+- markdown: Whether the lock was granted, blocked, refused, or in grace.
+- code: public LockStatus Status { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: LockStatus
+      url: NineP.Protocol.LockStatus.html
+- api3: Tag
+  id: NineP_Protocol_Messages_Rlock_Tag
+  metadata:
+    uid: NineP.Protocol.Messages.Rlock.Tag
+    commentId: P:NineP.Protocol.Messages.Rlock.Tag
+- markdown: The message tag, which pairs this message with its partner.
+- code: public ushort Tag { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+languageId: csharp
+metadata:
+  description: Answers a Tlock with the outcome; BLOCKED asks the client to retry (reference §4.8).

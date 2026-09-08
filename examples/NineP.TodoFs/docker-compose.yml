@@ -1,0 +1,24 @@
+# A real Keycloak, for manual runs only. No test in this repository touches this file: the suite
+# runs against the in-process fake issuer of tests/NineP.TestSupport/FakeIssuer, which needs no
+# container, no network and no fixture keys.
+#
+#   docker compose up -d
+#   # create the realm "ninep", a client "todofs-cli" with the device and password grants enabled,
+#   # a client scope that puts the audience "todofs" in the access token, and a realm role
+#   # "todofs-admin" (README.md walks through the console); then, since the realm is plain HTTP:
+#   dotnet run --project examples/NineP.TodoFs -- \
+#     --listen tcp://127.0.0.1:5640 --db /tmp/todo.sqlite \
+#     --oidc-issuer http://localhost:8080/realms/ninep --oidc-audience todofs --allow-insecure-issuer
+#   dotnet run --project examples/NineP.Cli -- \
+#     --addr tcp://127.0.0.1:5640 --uname <your-keycloak-user> \
+#     --auth oidc-device --oidc-issuer http://localhost:8080/realms/ninep \
+#     --oidc-client-id todofs-cli ls /users
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.0
+    command: ["start-dev"]
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+    ports:
+      - "8080:8080"

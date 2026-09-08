@@ -1,0 +1,131 @@
+### YamlMime:ApiPage
+title: Class TcpTransportOptions
+body:
+- api1: Class TcpTransportOptions
+  id: NineP_Protocol_Transports_TcpTransportOptions
+  metadata:
+    uid: NineP.Protocol.Transports.TcpTransportOptions
+    commentId: T:NineP.Protocol.Transports.TcpTransportOptions
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Transports
+      url: NineP.Protocol.Transports.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: TCP transport tuning (workspace architecture §3).
+- code: 'public sealed record TcpTransportOptions : IEquatable<TcpTransportOptions>'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: TcpTransportOptions
+    url: NineP.Protocol.Transports.TcpTransportOptions.html
+- h4: Implements
+- list:
+  - text: IEquatable<TcpTransportOptions>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Properties
+- api3: Backlog
+  id: NineP_Protocol_Transports_TcpTransportOptions_Backlog
+  metadata:
+    uid: NineP.Protocol.Transports.TcpTransportOptions.Backlog
+    commentId: P:NineP.Protocol.Transports.TcpTransportOptions.Backlog
+- markdown: The listen backlog. Default 128.
+- code: public int Backlog { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: ConnectTimeout
+  id: NineP_Protocol_Transports_TcpTransportOptions_ConnectTimeout
+  metadata:
+    uid: NineP.Protocol.Transports.TcpTransportOptions.ConnectTimeout
+    commentId: P:NineP.Protocol.Transports.TcpTransportOptions.ConnectTimeout
+- markdown: The dial timeout. Default 30 s.
+- code: public TimeSpan ConnectTimeout { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: TimeSpan
+      url: https://learn.microsoft.com/dotnet/api/system.timespan
+- api3: KeepAlive
+  id: NineP_Protocol_Transports_TcpTransportOptions_KeepAlive
+  metadata:
+    uid: NineP.Protocol.Transports.TcpTransportOptions.KeepAlive
+    commentId: P:NineP.Protocol.Transports.TcpTransportOptions.KeepAlive
+- markdown: Enable TCP keep-alive. Default true.
+- code: public bool KeepAlive { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: bool
+      url: https://learn.microsoft.com/dotnet/api/system.boolean
+- api3: Logger
+  id: NineP_Protocol_Transports_TcpTransportOptions_Logger
+  metadata:
+    uid: NineP.Protocol.Transports.TcpTransportOptions.Logger
+    commentId: P:NineP.Protocol.Transports.TcpTransportOptions.Logger
+- markdown: >-
+    Where a transient accept failure is reported; <xref href="Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance" data-throw-if-not-resolved="false"></xref> when null. An
+
+    accept that fails and is retried is the one thing this transport has to say, and a
+
+    listener that says nothing about it hides a machine running out of descriptors.
+- code: public ILogger? Logger { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ILogger
+      url: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger
+    - '?'
+- api3: MaxConnections
+  id: NineP_Protocol_Transports_TcpTransportOptions_MaxConnections
+  metadata:
+    uid: NineP.Protocol.Transports.TcpTransportOptions.MaxConnections
+    commentId: P:NineP.Protocol.Transports.TcpTransportOptions.MaxConnections
+- markdown: >-
+    Accepted connections held at once; further accepts wait. Beyond the cap the listener stops
+
+    accepting — pending connections stay in the kernel's backlog rather than being accepted and
+
+    reset. Default 1024.
+- code: public int MaxConnections { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: NoDelay
+  id: NineP_Protocol_Transports_TcpTransportOptions_NoDelay
+  metadata:
+    uid: NineP.Protocol.Transports.TcpTransportOptions.NoDelay
+    commentId: P:NineP.Protocol.Transports.TcpTransportOptions.NoDelay
+- markdown: >-
+    Disable Nagle. Default true: 9P is a request/response protocol whose messages are small and
+
+    whose latency is the thing being measured, and the ticket's pitfall list requires it.
+- code: public bool NoDelay { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: bool
+      url: https://learn.microsoft.com/dotnet/api/system.boolean
+languageId: csharp
+metadata:
+  description: TCP transport tuning (workspace architecture §3).

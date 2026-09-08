@@ -1,0 +1,85 @@
+### YamlMime:ApiPage
+title: Struct Rmkdir
+body:
+- api1: Struct Rmkdir
+  id: NineP_Protocol_Messages_Rmkdir
+  metadata:
+    uid: NineP.Protocol.Messages.Rmkdir
+    commentId: T:NineP.Protocol.Messages.Rmkdir
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Messages
+      url: NineP.Protocol.Messages.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: Answers a Tmkdir with the qid of the new directory (reference §3.4).
+- code: 'public readonly record struct Rmkdir : IMessage, IEquatable<Rmkdir>'
+- h4: Implements
+- list:
+  - text: IMessage
+    url: NineP.Protocol.Messages.IMessage.html
+  - text: IEquatable<Rmkdir>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: Rmkdir(ushort, Qid)
+  id: NineP_Protocol_Messages_Rmkdir__ctor_System_UInt16_NineP_Protocol_Qid_
+  metadata:
+    uid: NineP.Protocol.Messages.Rmkdir.#ctor(System.UInt16,NineP.Protocol.Qid)
+    commentId: M:NineP.Protocol.Messages.Rmkdir.#ctor(System.UInt16,NineP.Protocol.Qid)
+- markdown: Answers a Tmkdir with the qid of the new directory (reference §3.4).
+- code: public Rmkdir(ushort Tag, Qid Qid)
+- h4: Parameters
+- parameters:
+  - name: Tag
+    type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+    description: The message tag, which pairs this message with its partner.
+  - name: Qid
+    type:
+    - text: Qid
+      url: NineP.Protocol.Qid.html
+    description: The qid of the directory that was created.
+- h2: Properties
+- api3: Qid
+  id: NineP_Protocol_Messages_Rmkdir_Qid
+  metadata:
+    uid: NineP.Protocol.Messages.Rmkdir.Qid
+    commentId: P:NineP.Protocol.Messages.Rmkdir.Qid
+- markdown: The qid of the directory that was created.
+- code: public Qid Qid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: Qid
+      url: NineP.Protocol.Qid.html
+- api3: Tag
+  id: NineP_Protocol_Messages_Rmkdir_Tag
+  metadata:
+    uid: NineP.Protocol.Messages.Rmkdir.Tag
+    commentId: P:NineP.Protocol.Messages.Rmkdir.Tag
+- markdown: The message tag, which pairs this message with its partner.
+- code: public ushort Tag { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+languageId: csharp
+metadata:
+  description: Answers a Tmkdir with the qid of the new directory (reference §3.4).

@@ -1,0 +1,51 @@
+# Judge Scoring — Requirements Refinement
+
+You are an independent judge evaluating the quality of a requirements analysis.
+You did NOT produce the analysis below. Score it strictly and objectively.
+
+## Analysis to Score
+
+Read the refined analysis from `.qode/contexts/current/refined-analysis.md` before scoring.
+
+## Scoring Rubric ({{len .Rubric.Dimensions}} dimensions = {{.Rubric.Total}} maximum)
+
+For each dimension, give a score and a one-sentence justification.
+Be strict: only award full marks for genuinely excellent work.
+
+{{range $i, $d := .Rubric.Dimensions -}}
+### Dimension {{add $i 1}}: {{$d.Name}} (0-{{$d.Weight}})
+{{if $d.Levels}}{{range $d.Levels}}- {{.}}
+{{end}}{{end}}
+**Score:** /{{$d.Weight}}
+**Justification:**
+
+{{end}}
+## Summary
+
+**Total Score:** /{{.Rubric.Total}}
+**Pass threshold:** {{.TargetScore}}/{{.Rubric.Total}}
+
+**Overall Assessment:** (one paragraph)
+
+**Top 3 improvements needed for next iteration:**
+1.
+2.
+3.
+
+**Recommendation:** {{"{{"}}if ge .Score {{.TargetScore}}{{"}}"}}✅ Ready for spec generation{{"{{"}}else{{"}}"}}🔄 Iterate again — address improvements above{{"{{"}}end{{"}}"}}
+
+---
+
+At the very end of your response, append this block exactly:
+
+```yaml
+judgment:
+  total_score: <N>
+  max_score: {{.Rubric.Total}}
+  dimensions:
+{{- range .Rubric.Dimensions}}
+    - name: "{{.Name}}"
+      score: <N>
+      max: {{.Weight}}
+{{- end}}
+```

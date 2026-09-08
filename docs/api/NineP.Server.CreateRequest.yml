@@ -1,0 +1,161 @@
+### YamlMime:ApiPage
+title: Class CreateRequest
+body:
+- api1: Class CreateRequest
+  id: NineP_Server_CreateRequest
+  metadata:
+    uid: NineP.Server.CreateRequest
+    commentId: T:NineP.Server.CreateRequest
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Server
+      url: NineP.Server.html
+  - name: Assembly
+    value: NineP.Server.dll
+- markdown: >-
+    Everything <code>Tcreate</code>, <code>Tlcreate</code>, <code>Tmkdir</code>, <code>Tsymlink</code> and <code>Tmknod</code>
+
+    need, unified into one shape (reference §7). A handler writes one create, not five.
+- code: 'public sealed record CreateRequest : IEquatable<CreateRequest>'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: CreateRequest
+    url: NineP.Server.CreateRequest.html
+- h4: Implements
+- list:
+  - text: IEquatable<CreateRequest>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Properties
+- api3: Flags
+  id: NineP_Server_CreateRequest_Flags
+  metadata:
+    uid: NineP.Server.CreateRequest.Flags
+    commentId: P:NineP.Server.CreateRequest.Flags
+- markdown: Open flags accompanying the create.
+- code: public OpenFlags Flags { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: OpenFlags
+      url: NineP.Protocol.OpenFlags.html
+- api3: Gid
+  id: NineP_Server_CreateRequest_Gid
+  metadata:
+    uid: NineP.Server.CreateRequest.Gid
+    commentId: P:NineP.Server.CreateRequest.Gid
+- markdown: The group id a .L create supplied; NONUNAME when the dialect carries none.
+- code: public uint Gid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Identity
+  id: NineP_Server_CreateRequest_Identity
+  metadata:
+    uid: NineP.Server.CreateRequest.Identity
+    commentId: P:NineP.Server.CreateRequest.Identity
+- markdown: 'The identity the create runs as: the implicit user of the fid (reference §5.2).'
+- code: public required Identity Identity { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: Identity
+      url: NineP.Protocol.Auth.Identity.html
+- api3: Kind
+  id: NineP_Server_CreateRequest_Kind
+  metadata:
+    uid: NineP.Server.CreateRequest.Kind
+    commentId: P:NineP.Server.CreateRequest.Kind
+- markdown: What to create.
+- code: public required FileKind Kind { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: FileKind
+      url: NineP.Protocol.FileKind.html
+- api3: Mode
+  id: NineP_Server_CreateRequest_Mode
+  metadata:
+    uid: NineP.Server.CreateRequest.Mode
+    commentId: P:NineP.Server.CreateRequest.Mode
+- markdown: The access mode the new file is opened with; Read for a directory.
+- code: public OpenMode Mode { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: OpenMode
+      url: NineP.Protocol.OpenMode.html
+- api3: Name
+  id: NineP_Server_CreateRequest_Name
+  metadata:
+    uid: NineP.Server.CreateRequest.Name
+    commentId: P:NineP.Server.CreateRequest.Name
+- markdown: The name to create; validated against reference §8 rule 3 by the core.
+- code: public required string Name { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: Perm
+  id: NineP_Server_CreateRequest_Perm
+  metadata:
+    uid: NineP.Server.CreateRequest.Perm
+    commentId: P:NineP.Server.CreateRequest.Perm
+- markdown: Permission bits after the core applied the parent mask and the 07777 mask.
+- code: public required uint Perm { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Rdev
+  id: NineP_Server_CreateRequest_Rdev
+  metadata:
+    uid: NineP.Server.CreateRequest.Rdev
+    commentId: P:NineP.Server.CreateRequest.Rdev
+- markdown: The device numbers when the kind is a character or block device.
+- code: public DeviceId? Rdev { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: DeviceId
+      url: NineP.Protocol.DeviceId.html
+    - '?'
+- api3: Target
+  id: NineP_Server_CreateRequest_Target
+  metadata:
+    uid: NineP.Server.CreateRequest.Target
+    commentId: P:NineP.Server.CreateRequest.Target
+- markdown: The symlink target when <xref href="NineP.Server.CreateRequest.Kind" data-throw-if-not-resolved="false"></xref> is <xref href="NineP.Protocol.FileKind.Symlink" data-throw-if-not-resolved="false"></xref>.
+- code: public string? Target { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+languageId: csharp
+metadata:
+  description: >-
+    Everything Tcreate, Tlcreate, Tmkdir, Tsymlink and Tmknod
+
+    need, unified into one shape (reference §7). A handler writes one create, not five.

@@ -1,0 +1,136 @@
+### YamlMime:ApiPage
+title: Namespace NineP.Protocol.Transports
+body:
+- api1: Namespace NineP.Protocol.Transports
+  id: NineP_Protocol_Transports
+  metadata:
+    uid: NineP.Protocol.Transports
+    commentId: N:NineP.Protocol.Transports
+- h3: Classes
+- parameters:
+  - type:
+      text: MemoryTransport
+      url: NineP.Protocol.Transports.MemoryTransport.html
+    description: >-
+      An in-process transport over duplex pipes (workspace architecture §3, S-31). It is the seam the
+
+      test suite proves: everything above <xref href="NineP.Protocol.Transports.ITransport" data-throw-if-not-resolved="false"></xref> is exercised over it, so a bug in
+
+      the session layer cannot hide behind a socket. Each instance is isolated — two transports never
+
+      share an endpoint name — and a close reason given to one end is visible at the other.
+  - type:
+      text: PeerIdentity
+      url: NineP.Protocol.Transports.PeerIdentity.html
+    description: >-
+      What the transport learned about the peer during its handshake: a TLS client certificate, the
+
+      headers of a WebSocket upgrade. It is evidence the transport gathered, never a claim the peer
+
+      made in a 9P message — the session's identity still comes from the authenticator.
+  - type:
+      text: TcpTransport
+      url: NineP.Protocol.Transports.TcpTransport.html
+    description: >-
+      TCP with <code>TCP_NODELAY</code> and keep-alive on, an accept backlog and a per-listener connection
+
+      cap. The cap <b>stops accepting</b>: a connection over the limit waits in the kernel's backlog
+
+      and is served when a slot frees, rather than being accepted and reset, which a client cannot
+
+      tell from a crash.
+  - type:
+      text: TcpTransportOptions
+      url: NineP.Protocol.Transports.TcpTransportOptions.html
+    description: TCP transport tuning (workspace architecture §3).
+  - type:
+      text: TlsTransport
+      url: NineP.Protocol.Transports.TlsTransport.html
+    description: >-
+      TLS 1.2 / 1.3 over TCP, with chain and host-name verification on by default and optional mutual
+
+      TLS. The insecure opt-out is a separate explicit option that logs on every connect, and
+
+      <xref href="NineP.Protocol.Transports.TlsTransportOptions.AdditionalPeerCheck" data-throw-if-not-resolved="false"></xref> can only ever <b>add</b> a check: it runs
+
+      after verification has already passed, so no callback can turn a bad certificate into a good
+
+      one. Closing sends <code>close_notify</code> before the socket goes away (RK-57).
+  - type:
+      text: TlsTransportOptions
+      url: NineP.Protocol.Transports.TlsTransportOptions.html
+    description: >-
+      TLS configuration. Verification is on by default; the insecure opt-out is a separate, explicit
+
+      option and it is logged on every connect (workspace architecture §8.4), so a deployment that
+
+      turned it on cannot forget that it did.
+  - type:
+      text: WebSocketTransport
+      url: NineP.Protocol.Transports.WebSocketTransport.html
+    description: >-
+      RFC 6455 WebSocket: one 9P message per binary WebSocket message (S-1). Fragmentation stays
+
+      inside WebSocket, the size cap is enforced while a message is being reassembled, a text message
+
+      is a protocol error, and the server checks the <code>Origin</code> allow-list before the upgrade
+
+      completes. No ASP.NET dependency: the client is <xref href="System.Net.WebSockets.ClientWebSocket" data-throw-if-not-resolved="false"></xref> and the server is
+
+      a raw socket listener plus <code>WebSocket.CreateFromStream</code>.
+  - type:
+      text: WebSocketTransportOptions
+      url: NineP.Protocol.Transports.WebSocketTransportOptions.html
+    description: >-
+      WebSocket configuration (workspace architecture §3, Decision Log WebSocket row). One 9P message
+
+      travels as one binary WebSocket message, so the size cap here bounds a 9P frame directly.
+- h3: Structs
+- parameters:
+  - type:
+      text: NinePAddress
+      url: NineP.Protocol.Transports.NinePAddress.html
+    description: >-
+      A 9P endpoint URL: <code>tcp://host:port</code>, <code>tls://host:port</code>, <code>ws://host:port/path</code>,
+
+      <code>wss://host:port/path</code>, <code>unix:///path</code>, <code>memory://name</code>. Parsing is exact — an
+
+      address this type cannot render back is not an address it accepts.
+- h3: Interfaces
+- parameters:
+  - type:
+      text: INinePConnection
+      url: NineP.Protocol.Transports.INinePConnection.html
+    description: >-
+      One bidirectional 9P byte stream. <xref href="NineP.Protocol.Transports.INinePConnection.WriteAsync(System.ReadOnlyMemory%7bSystem.Byte%7d%2cSystem.Threading.CancellationToken)" data-throw-if-not-resolved="false"></xref> is called once per complete 9P
+
+      message, so a message-oriented transport can put each message in one frame of its own.
+  - type:
+      text: INinePListener
+      url: NineP.Protocol.Transports.INinePListener.html
+    description: A listening endpoint that accepts 9P connections.
+  - type:
+      text: ITransport
+      url: NineP.Protocol.Transports.ITransport.html
+    description: >-
+      The user-defined-transport seam (workspace architecture §3): dial and listen. Implementing this
+
+      interface is the extension point, and <xref href="NineP.Protocol.Transports.MemoryTransport" data-throw-if-not-resolved="false"></xref> is the proof that the seam
+
+      is real — every test that can run over it does.
+- h3: Enums
+- parameters:
+  - type:
+      text: CloseReason
+      url: NineP.Protocol.Transports.CloseReason.html
+    description: >-
+      Why a connection closed; carried to the peer where the transport can express it (workspace
+
+      architecture §3). A framing violation cannot be resynced, so it is always a close and never a
+
+      skipped message.
+  - type:
+      text: NinePScheme
+      url: NineP.Protocol.Transports.NinePScheme.html
+    description: The address schemes a <xref href="NineP.Protocol.Transports.NinePAddress" data-throw-if-not-resolved="false"></xref> may carry (workspace architecture §3).
+languageId: csharp

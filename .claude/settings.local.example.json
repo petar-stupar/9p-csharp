@@ -1,0 +1,46 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git:*)",
+      "Bash(qode:*)",
+      "Bash(head:*)",
+      "Bash(cat:*)",
+      "Bash(cp:*)",
+      "Bash(mkdir:*)",
+      "Bash(grep:*)",
+      "Bash(tree:*)",
+      "Bash(tail:*)",
+      "Bash(ls:*)",
+      "Bash(wc:*)",
+      "Bash(awk:*)",
+      "Bash(sed -n:*)",
+      "Bash(diff:*)",
+      "Bash(find:*)",
+      "Bash(env -u GITHUB_TOKEN gh pr view:*)",
+      "Bash(env -u GITHUB_TOKEN gh pr list:*)",
+      "Bash(env -u GITHUB_TOKEN gh pr checks:*)"
+    ],
+    "deny": [
+      "Bash(ssh:*)",
+      "Bash(sudo:*)",
+      "Bash(chown:*)",
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/repo-scoped-fs-guard.mjs\"",
+            "timeout": 10,
+            "statusMessage": "repo-scoped rm/mv/chmod guard"
+          }
+        ]
+      }
+    ]
+  }
+}

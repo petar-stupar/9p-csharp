@@ -1,0 +1,129 @@
+### YamlMime:ApiPage
+title: Namespace NineP.Server
+body:
+- api1: Namespace NineP.Server
+  id: NineP_Server
+  metadata:
+    uid: NineP.Server
+    commentId: N:NineP.Server
+- h3: Classes
+- parameters:
+  - type:
+      text: CreateRequest
+      url: NineP.Server.CreateRequest.html
+    description: >-
+      Everything <code>Tcreate</code>, <code>Tlcreate</code>, <code>Tmkdir</code>, <code>Tsymlink</code> and <code>Tmknod</code>
+
+      need, unified into one shape (reference §7). A handler writes one create, not five.
+  - type:
+      text: NinePServer
+      url: NineP.Server.NinePServer.html
+    description: >-
+      A 9P server: listeners, dialects, authenticator, limits, logger and clock (architecture §4).
+
+      The developer supplies an <xref href="NineP.Server.IFilesystem" data-throw-if-not-resolved="false"></xref> of typed handlers; everything in reference
+
+      §5 and §8 — negotiation, fids, tags, flush, packing, permissions — belongs to this package.
+  - type:
+      text: ServerCounters
+      url: NineP.Server.ServerCounters.html
+    description: >-
+      A snapshot of what the server has done, for metrics scraping (architecture §4). It is a record
+
+      rather than a set of live counters so that a scrape sees one consistent moment rather than a
+
+      mixture of two.
+  - type:
+      text: ServerOptions
+      url: NineP.Server.ServerOptions.html
+    description: Everything a server needs; init-only, with the defaults of the architecture §4.
+- h3: Structs
+- parameters:
+  - type:
+      text: DirectoryListing
+      url: NineP.Server.DirectoryListing.html
+    description: >-
+      A page of directory entries (architecture §4). The handler decides how many it can produce; the
+
+      core decides how many fit the reply, and never splits one across replies (reference §6.7).
+  - type:
+      text: RequestLogEntry
+      url: NineP.Server.RequestLogEntry.html
+    description: >-
+      One completed request, for auditing (architecture §4). Every string in it has already been
+
+      escaped and capped by the core (reference §8 rule 11), so a sink may write it out as it is.
+- h3: Interfaces
+- parameters:
+  - type:
+      text: IDirectoryHandler
+      url: NineP.Server.IDirectoryHandler.html
+    description: >-
+      A directory (architecture §4). Every name reaching these methods has already been validated
+
+      against reference §8 rule 3 by the core, so a handler never has to defend against "..", "/" or
+
+      a NUL byte in a name.
+  - type:
+      text: IFileHandler
+      url: NineP.Server.IFileHandler.html
+    description: A regular file (architecture §4).
+  - type:
+      text: IFilesystem
+      url: NineP.Server.IFilesystem.html
+    description: >-
+      The tree a server serves (architecture §4): one root directory per authenticated attach. This
+
+      is the only interface a developer must implement, and it is handed the identity the
+
+      authenticator produced, never the <code>uname</code> the client claimed.
+  - type:
+      text: IHandler
+      url: NineP.Server.IHandler.html
+    description: >-
+      The operations every file type answers (architecture §4). A handler never sees a T-message, a
+
+      tag, a fid, a dialect or an error shape: the core owns all of that, which is what keeps one
+
+      handler correct in all three dialects.
+  - type:
+      text: ILinkCapability
+      url: NineP.Server.ILinkCapability.html
+    description: 'Optional: hard links (.L <code>Tlink</code>), implemented on the directory that receives the link.'
+  - type:
+      text: ILockCapability
+      url: NineP.Server.ILockCapability.html
+    description: >-
+      Optional: POSIX byte-range locks (.L). A handler that does not implement it answers
+
+      <code>EOPNOTSUPP</code> from the core, never a crash (architecture §4).
+  - type:
+      text: IOpenFile
+      url: NineP.Server.IOpenFile.html
+    description: >-
+      One open instance of a file (architecture §4). <xref href="NineP.Server.IOpenFile.ReadAsync(System.UInt64%2cSystem.Memory%7bSystem.Byte%7d%2cSystem.Threading.CancellationToken)" data-throw-if-not-resolved="false"></xref> writes straight into the
+
+      outgoing frame's own payload buffer, so a read costs no copy between the handler and the wire.
+  - type:
+      text: IRequestLogSink
+      url: NineP.Server.IRequestLogSink.html
+    description: >-
+      Receives one entry per completed request. An implementation must not throw and must not block:
+
+      it is called from the connection's own loop, and a slow sink is backpressure on the session.
+  - type:
+      text: IStatFsCapability
+      url: NineP.Server.IStatFsCapability.html
+    description: >-
+      Optional: filesystem statistics (.L <code>Tstatfs</code>), implemented on the filesystem or on a
+
+      handler.
+  - type:
+      text: ISymlinkHandler
+      url: NineP.Server.ISymlinkHandler.html
+    description: A symbolic link (architecture §4).
+  - type:
+      text: IXattrHandler
+      url: NineP.Server.IXattrHandler.html
+    description: 'Optional: extended attributes (.L). Absent means <code>EOPNOTSUPP</code>.'
+languageId: csharp

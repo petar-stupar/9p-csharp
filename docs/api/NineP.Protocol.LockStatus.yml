@@ -1,0 +1,42 @@
+### YamlMime:ApiPage
+title: Enum LockStatus
+body:
+- api1: Enum LockStatus
+  id: NineP_Protocol_LockStatus
+  metadata:
+    uid: NineP.Protocol.LockStatus
+    commentId: T:NineP.Protocol.LockStatus
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol
+      url: NineP.Protocol.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: The status an <code>Rlock</code> carries (reference §4.8).
+- code: 'public enum LockStatus : byte'
+- h2: Fields
+- parameters:
+  - name: Blocked
+    default: "1"
+    description: >+
+      A conflicting lock is held; the client may retry.
+
+  - name: Error
+    default: "2"
+    description: >+
+      The request could not be honoured.
+
+  - name: Grace
+    default: "3"
+    description: >+
+      The server is in its post-restart grace period.
+
+  - name: Success
+    default: "0"
+    description: >+
+      The lock was granted or released.
+
+languageId: csharp
+metadata:
+  description: The status an Rlock carries (reference §4.8).

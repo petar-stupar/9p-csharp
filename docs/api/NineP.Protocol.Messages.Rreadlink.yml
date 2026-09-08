@@ -1,0 +1,85 @@
+### YamlMime:ApiPage
+title: Struct Rreadlink
+body:
+- api1: Struct Rreadlink
+  id: NineP_Protocol_Messages_Rreadlink
+  metadata:
+    uid: NineP.Protocol.Messages.Rreadlink
+    commentId: T:NineP.Protocol.Messages.Rreadlink
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Messages
+      url: NineP.Protocol.Messages.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: Answers a Treadlink with the link's target (reference §3.4).
+- code: 'public readonly record struct Rreadlink : IMessage, IEquatable<Rreadlink>'
+- h4: Implements
+- list:
+  - text: IMessage
+    url: NineP.Protocol.Messages.IMessage.html
+  - text: IEquatable<Rreadlink>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: Rreadlink(ushort, string)
+  id: NineP_Protocol_Messages_Rreadlink__ctor_System_UInt16_System_String_
+  metadata:
+    uid: NineP.Protocol.Messages.Rreadlink.#ctor(System.UInt16,System.String)
+    commentId: M:NineP.Protocol.Messages.Rreadlink.#ctor(System.UInt16,System.String)
+- markdown: Answers a Treadlink with the link's target (reference §3.4).
+- code: public Rreadlink(ushort Tag, string Target)
+- h4: Parameters
+- parameters:
+  - name: Tag
+    type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+    description: The message tag, which pairs this message with its partner.
+  - name: Target
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The text the link points at.
+- h2: Properties
+- api3: Tag
+  id: NineP_Protocol_Messages_Rreadlink_Tag
+  metadata:
+    uid: NineP.Protocol.Messages.Rreadlink.Tag
+    commentId: P:NineP.Protocol.Messages.Rreadlink.Tag
+- markdown: The message tag, which pairs this message with its partner.
+- code: public ushort Tag { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+- api3: Target
+  id: NineP_Protocol_Messages_Rreadlink_Target
+  metadata:
+    uid: NineP.Protocol.Messages.Rreadlink.Target
+    commentId: P:NineP.Protocol.Messages.Rreadlink.Target
+- markdown: The text the link points at.
+- code: public string Target { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+languageId: csharp
+metadata:
+  description: Answers a Treadlink with the link's target (reference §3.4).

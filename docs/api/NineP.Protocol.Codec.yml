@@ -1,0 +1,20 @@
+### YamlMime:ApiPage
+title: Namespace NineP.Protocol.Codec
+body:
+- api1: Namespace NineP.Protocol.Codec
+  id: NineP_Protocol_Codec
+  metadata:
+    uid: NineP.Protocol.Codec
+    commentId: N:NineP.Protocol.Codec
+- h3: Classes
+- parameters:
+  - type:
+      text: MessageCodec
+      url: NineP.Protocol.Codec.MessageCodec.html
+    description: >-
+      Encodes and decodes single 9P frames. This is the whole public surface of the codec: the
+
+      streaming frame reader and writer, the pooled leases and the per-primitive readers are
+
+      internal, because no public member of this library exposes a pipe, a sequence or a pool.
+languageId: csharp

@@ -1,0 +1,37 @@
+### YamlMime:ApiPage
+title: Enum LockType
+body:
+- api1: Enum LockType
+  id: NineP_Protocol_LockType
+  metadata:
+    uid: NineP.Protocol.LockType
+    commentId: T:NineP.Protocol.LockType
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol
+      url: NineP.Protocol.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: The POSIX lock type carried by <code>Tlock</code> and <code>Tgetlock</code> (reference §4.8).
+- code: 'public enum LockType : byte'
+- h2: Fields
+- parameters:
+  - name: ReadLock
+    default: "0"
+    description: >+
+      A shared read lock.
+
+  - name: Unlock
+    default: "2"
+    description: >+
+      Release a lock; as a <code>Rgetlock</code> answer it means "no conflicting lock".
+
+  - name: WriteLock
+    default: "1"
+    description: >+
+      An exclusive write lock.
+
+languageId: csharp
+metadata:
+  description: The POSIX lock type carried by Tlock and Tgetlock (reference §4.8).

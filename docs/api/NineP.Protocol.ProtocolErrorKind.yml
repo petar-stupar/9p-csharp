@@ -1,0 +1,74 @@
+### YamlMime:ApiPage
+title: Enum ProtocolErrorKind
+body:
+- api1: Enum ProtocolErrorKind
+  id: NineP_Protocol_ProtocolErrorKind
+  metadata:
+    uid: NineP.Protocol.ProtocolErrorKind
+    commentId: T:NineP.Protocol.ProtocolErrorKind
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol
+      url: NineP.Protocol.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: The machine-readable classification of a codec failure (workspace architecture §3).
+- code: public enum ProtocolErrorKind
+- h2: Fields
+- parameters:
+  - name: Bounds
+    default: "1"
+    description: >+
+      A counted field runs past the end of the frame.
+
+  - name: NWName
+    default: "5"
+    description: >+
+      <code>nwname</code> or <code>nwqid</code> exceeds MAXWELEM (16).
+
+  - name: Name
+    default: "4"
+    description: >+
+      A name contains '/', is ".", or exceeds 255 bytes.
+
+  - name: Nul
+    default: "3"
+    description: >+
+      A string contains a NUL byte.
+
+  - name: Overflow
+    default: "7"
+    description: >+
+      An arithmetic overflow: offset plus count, a size, a lock's start plus length, or an
+
+      <code>errno[4]</code> / <code>ecode[4]</code> above <code>int.MaxValue</code>, which no signed errno can hold.
+
+  - name: Size
+    default: "0"
+    description: >+
+      <code>size</code> is below 7, above the active bound, or the frame is short.
+
+  - name: Stat
+    default: "8"
+    description: >+
+      A <code>stat[n]</code> whose inner <code>size[2]</code> disagrees with <code>n - 2</code>.
+
+  - name: Trailing
+    default: "6"
+    description: >+
+      Bytes remain after the last field of the message.
+
+  - name: Type
+    default: "9"
+    description: >+
+      An unknown type number, or one illegal for the session dialect.
+
+  - name: Utf8
+    default: "2"
+    description: >+
+      A string is not valid UTF-8.
+
+languageId: csharp
+metadata:
+  description: The machine-readable classification of a codec failure (workspace architecture §3).

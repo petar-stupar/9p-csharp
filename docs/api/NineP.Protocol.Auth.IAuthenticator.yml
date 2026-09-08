@@ -1,0 +1,76 @@
+### YamlMime:ApiPage
+title: Interface IAuthenticator
+body:
+- api1: Interface IAuthenticator
+  id: NineP_Protocol_Auth_IAuthenticator
+  metadata:
+    uid: NineP.Protocol.Auth.IAuthenticator
+    commentId: T:NineP.Protocol.Auth.IAuthenticator
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Auth
+      url: NineP.Protocol.Auth.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    Server-side authentication (workspace architecture §5). Returning null from
+
+    <xref href="NineP.Protocol.Auth.IAuthenticator.BeginAsync(NineP.Protocol.Auth.AuthRequest%2cNineP.Protocol.Transports.PeerIdentity%2cSystem.Threading.CancellationToken)" data-throw-if-not-resolved="false"></xref> refuses the <code>Tauth</code> outright.
+- code: public interface IAuthenticator
+- h2: Properties
+- api3: IsRequired
+  id: NineP_Protocol_Auth_IAuthenticator_IsRequired
+  metadata:
+    uid: NineP.Protocol.Auth.IAuthenticator.IsRequired
+    commentId: P:NineP.Protocol.Auth.IAuthenticator.IsRequired
+- markdown: True when an attach must present a verified afid; false lets NOFID attaches through.
+- code: bool IsRequired { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: bool
+      url: https://learn.microsoft.com/dotnet/api/system.boolean
+- h2: Methods
+- api3: BeginAsync(AuthRequest, PeerIdentity?, CancellationToken)
+  id: NineP_Protocol_Auth_IAuthenticator_BeginAsync_NineP_Protocol_Auth_AuthRequest_NineP_Protocol_Transports_PeerIdentity_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Protocol.Auth.IAuthenticator.BeginAsync(NineP.Protocol.Auth.AuthRequest,NineP.Protocol.Transports.PeerIdentity,System.Threading.CancellationToken)
+    commentId: M:NineP.Protocol.Auth.IAuthenticator.BeginAsync(NineP.Protocol.Auth.AuthRequest,NineP.Protocol.Transports.PeerIdentity,System.Threading.CancellationToken)
+- markdown: Starts an afid exchange, or refuses the <code>Tauth</code>.
+- code: ValueTask<IAuthSession?> BeginAsync(AuthRequest request, PeerIdentity? peer, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: request
+    type:
+    - text: AuthRequest
+      url: NineP.Protocol.Auth.AuthRequest.html
+    description: The triple the afid will be bound to.
+  - name: peer
+    type:
+    - text: PeerIdentity
+      url: NineP.Protocol.Transports.PeerIdentity.html
+    - '?'
+    description: What the transport learned about the peer, when it learned anything.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the exchange.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: IAuthSession
+      url: NineP.Protocol.Auth.IAuthSession.html
+    - '?'
+    - '>'
+    description: The session, or null to refuse (S-23 chooses the refusal's shape).
+languageId: csharp
+metadata:
+  description: >-
+    Server-side authentication (workspace architecture §5). Returning null from
+     refuses the Tauth outright.

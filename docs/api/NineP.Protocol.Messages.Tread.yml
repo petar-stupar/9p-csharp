@@ -1,0 +1,119 @@
+### YamlMime:ApiPage
+title: Struct Tread
+body:
+- api1: Struct Tread
+  id: NineP_Protocol_Messages_Tread
+  metadata:
+    uid: NineP.Protocol.Messages.Tread
+    commentId: T:NineP.Protocol.Messages.Tread
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Messages
+      url: NineP.Protocol.Messages.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: Reads bytes from an open fid (reference §5.6).
+- code: 'public readonly record struct Tread : IMessage, IEquatable<Tread>'
+- h4: Implements
+- list:
+  - text: IMessage
+    url: NineP.Protocol.Messages.IMessage.html
+  - text: IEquatable<Tread>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: Tread(ushort, uint, ulong, uint)
+  id: NineP_Protocol_Messages_Tread__ctor_System_UInt16_System_UInt32_System_UInt64_System_UInt32_
+  metadata:
+    uid: NineP.Protocol.Messages.Tread.#ctor(System.UInt16,System.UInt32,System.UInt64,System.UInt32)
+    commentId: M:NineP.Protocol.Messages.Tread.#ctor(System.UInt16,System.UInt32,System.UInt64,System.UInt32)
+- markdown: Reads bytes from an open fid (reference §5.6).
+- code: public Tread(ushort Tag, uint Fid, ulong Offset, uint Count)
+- h4: Parameters
+- parameters:
+  - name: Tag
+    type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+    description: The message tag, which pairs this message with its partner.
+  - name: Fid
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The open fid to read from.
+  - name: Offset
+    type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+    description: The byte offset to read from.
+  - name: Count
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: How many bytes the client wants; the server may return fewer.
+- h2: Properties
+- api3: Count
+  id: NineP_Protocol_Messages_Tread_Count
+  metadata:
+    uid: NineP.Protocol.Messages.Tread.Count
+    commentId: P:NineP.Protocol.Messages.Tread.Count
+- markdown: How many bytes the client wants; the server may return fewer.
+- code: public uint Count { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Fid
+  id: NineP_Protocol_Messages_Tread_Fid
+  metadata:
+    uid: NineP.Protocol.Messages.Tread.Fid
+    commentId: P:NineP.Protocol.Messages.Tread.Fid
+- markdown: The open fid to read from.
+- code: public uint Fid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Offset
+  id: NineP_Protocol_Messages_Tread_Offset
+  metadata:
+    uid: NineP.Protocol.Messages.Tread.Offset
+    commentId: P:NineP.Protocol.Messages.Tread.Offset
+- markdown: The byte offset to read from.
+- code: public ulong Offset { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+- api3: Tag
+  id: NineP_Protocol_Messages_Tread_Tag
+  metadata:
+    uid: NineP.Protocol.Messages.Tread.Tag
+    commentId: P:NineP.Protocol.Messages.Tread.Tag
+- markdown: The message tag, which pairs this message with its partner.
+- code: public ushort Tag { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+languageId: csharp
+metadata:
+  description: Reads bytes from an open fid (reference §5.6).

@@ -1,0 +1,28 @@
+{
+  "name": "conformance",
+  "version": 1,
+  "enabled": true,
+  "ratio": 2.5,
+  "negative": -3,
+  "big number": 1234567890,
+  "nothing": null,
+  "greeting": "hello, 9P\n",
+  "unicode": "héllo — 世界 🚀",
+  "empty": "",
+  "list": ["zero", 1, false, null, { "k": "v" }, [ "nested" ]],
+  "dir": {
+    "sub": { "deep": { "leaf": "bottom" } },
+    "file.txt": "content of file.txt",
+    "a b": "name with space",
+    "big": "0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789"
+  },
+  "names": {
+    ".hidden": "dot",
+    "héllo wörld": "unicode",
+    "Ａ": "fullwidth",
+    "🚀": "astral",
+    "世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世世": "255 bytes"
+  },
+  "emptyobj": {},
+  "emptyarr": []
+}

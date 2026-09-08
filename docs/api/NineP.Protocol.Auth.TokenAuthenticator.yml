@@ -1,0 +1,167 @@
+### YamlMime:ApiPage
+title: Class TokenAuthenticator
+body:
+- api1: Class TokenAuthenticator
+  id: NineP_Protocol_Auth_TokenAuthenticator
+  metadata:
+    uid: NineP.Protocol.Auth.TokenAuthenticator
+    commentId: T:NineP.Protocol.Auth.TokenAuthenticator
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Auth
+      url: NineP.Protocol.Auth.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    Default authentication: the client writes an opaque token to the afid once, the server compares
+
+    it in constant time and answers <code>ok\n</code> (workspace architecture §5). Plan 9's
+
+    <code>p9any</code>/<code>p9sk1</code> is deliberately out of scope: it is DES-based and is not production
+
+    security.
+- code: 'public sealed class TokenAuthenticator : IAuthenticator'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: TokenAuthenticator
+    url: NineP.Protocol.Auth.TokenAuthenticator.html
+- h4: Implements
+- list:
+  - text: IAuthenticator
+    url: NineP.Protocol.Auth.IAuthenticator.html
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: TokenAuthenticator(ReadOnlyMemory<byte>)
+  id: NineP_Protocol_Auth_TokenAuthenticator__ctor_System_ReadOnlyMemory_System_Byte__
+  metadata:
+    uid: NineP.Protocol.Auth.TokenAuthenticator.#ctor(System.ReadOnlyMemory{System.Byte})
+    commentId: M:NineP.Protocol.Auth.TokenAuthenticator.#ctor(System.ReadOnlyMemory{System.Byte})
+- markdown: Verifies against one shared secret; the identity is the claimed uname.
+- code: public TokenAuthenticator(ReadOnlyMemory<byte> secret)
+- h4: Parameters
+- parameters:
+  - name: secret
+    type:
+    - text: ReadOnlyMemory
+      url: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+    - <
+    - text: byte
+      url: https://learn.microsoft.com/dotnet/api/system.byte
+    - '>'
+    description: The token every client must present.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: ArgumentException
+      url: https://learn.microsoft.com/dotnet/api/system.argumentexception
+    description: The secret is empty.
+- api3: TokenAuthenticator(Func<AuthRequest, ReadOnlyMemory<byte>?>)
+  id: NineP_Protocol_Auth_TokenAuthenticator__ctor_System_Func_NineP_Protocol_Auth_AuthRequest_System_Nullable_System_ReadOnlyMemory_System_Byte____
+  metadata:
+    uid: NineP.Protocol.Auth.TokenAuthenticator.#ctor(System.Func{NineP.Protocol.Auth.AuthRequest,System.Nullable{System.ReadOnlyMemory{System.Byte}}})
+    commentId: M:NineP.Protocol.Auth.TokenAuthenticator.#ctor(System.Func{NineP.Protocol.Auth.AuthRequest,System.Nullable{System.ReadOnlyMemory{System.Byte}}})
+- markdown: Verifies against a per-user secret lookup; the identity is the resolved user.
+- code: public TokenAuthenticator(Func<AuthRequest, ReadOnlyMemory<byte>?> secretLookup)
+- h4: Parameters
+- parameters:
+  - name: secretLookup
+    type:
+    - text: Func
+      url: https://learn.microsoft.com/dotnet/api/system.func-2
+    - <
+    - text: AuthRequest
+      url: NineP.Protocol.Auth.AuthRequest.html
+    - ','
+    - " "
+    - text: ReadOnlyMemory
+      url: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+    - <
+    - text: byte
+      url: https://learn.microsoft.com/dotnet/api/system.byte
+    - '>'
+    - '?'
+    - '>'
+    description: Returns the secret for a request, or null to refuse it.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: ArgumentNullException
+      url: https://learn.microsoft.com/dotnet/api/system.argumentnullexception
+    description: The lookup is null.
+- h2: Properties
+- api3: IsRequired
+  id: NineP_Protocol_Auth_TokenAuthenticator_IsRequired
+  metadata:
+    uid: NineP.Protocol.Auth.TokenAuthenticator.IsRequired
+    commentId: P:NineP.Protocol.Auth.TokenAuthenticator.IsRequired
+- markdown: An attach must present a verified afid.
+- code: public bool IsRequired { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: bool
+      url: https://learn.microsoft.com/dotnet/api/system.boolean
+- h2: Methods
+- api3: BeginAsync(AuthRequest, PeerIdentity?, CancellationToken)
+  id: NineP_Protocol_Auth_TokenAuthenticator_BeginAsync_NineP_Protocol_Auth_AuthRequest_NineP_Protocol_Transports_PeerIdentity_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Protocol.Auth.TokenAuthenticator.BeginAsync(NineP.Protocol.Auth.AuthRequest,NineP.Protocol.Transports.PeerIdentity,System.Threading.CancellationToken)
+    commentId: M:NineP.Protocol.Auth.TokenAuthenticator.BeginAsync(NineP.Protocol.Auth.AuthRequest,NineP.Protocol.Transports.PeerIdentity,System.Threading.CancellationToken)
+- markdown: Starts an exchange, or refuses a request the lookup has no secret for.
+- code: public ValueTask<IAuthSession?> BeginAsync(AuthRequest request, PeerIdentity? peer, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: request
+    type:
+    - text: AuthRequest
+      url: NineP.Protocol.Auth.AuthRequest.html
+    description: The triple the afid will be bound to.
+  - name: peer
+    type:
+    - text: PeerIdentity
+      url: NineP.Protocol.Transports.PeerIdentity.html
+    - '?'
+    description: 'Unused: a token proves the client, not the transport.'
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the exchange.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: IAuthSession
+      url: NineP.Protocol.Auth.IAuthSession.html
+    - '?'
+    - '>'
+    description: The session, or null when there is no secret for this request.
+languageId: csharp
+metadata:
+  description: >-
+    Default authentication: the client writes an opaque token to the afid once, the server compares
+
+    it in constant time and answers ok\n (workspace architecture §5). Plan 9's
+
+    p9any/p9sk1 is deliberately out of scope: it is DES-based and is not production
+
+    security.

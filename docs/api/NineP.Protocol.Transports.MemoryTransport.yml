@@ -1,0 +1,192 @@
+### YamlMime:ApiPage
+title: Class MemoryTransport
+body:
+- api1: Class MemoryTransport
+  id: NineP_Protocol_Transports_MemoryTransport
+  metadata:
+    uid: NineP.Protocol.Transports.MemoryTransport
+    commentId: T:NineP.Protocol.Transports.MemoryTransport
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Transports
+      url: NineP.Protocol.Transports.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    An in-process transport over duplex pipes (workspace architecture §3, S-31). It is the seam the
+
+    test suite proves: everything above <xref href="NineP.Protocol.Transports.ITransport" data-throw-if-not-resolved="false"></xref> is exercised over it, so a bug in
+
+    the session layer cannot hide behind a socket. Each instance is isolated — two transports never
+
+    share an endpoint name — and a close reason given to one end is visible at the other.
+- code: 'public sealed class MemoryTransport : ITransport'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: MemoryTransport
+    url: NineP.Protocol.Transports.MemoryTransport.html
+- h4: Implements
+- list:
+  - text: ITransport
+    url: NineP.Protocol.Transports.ITransport.html
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: MemoryTransport()
+  id: NineP_Protocol_Transports_MemoryTransport__ctor
+  metadata:
+    uid: NineP.Protocol.Transports.MemoryTransport.#ctor
+    commentId: M:NineP.Protocol.Transports.MemoryTransport.#ctor
+- markdown: Creates an isolated in-process transport; its addresses are <code>memory://name</code>.
+- code: public MemoryTransport()
+- h2: Properties
+- api3: Schemes
+  id: NineP_Protocol_Transports_MemoryTransport_Schemes
+  metadata:
+    uid: NineP.Protocol.Transports.MemoryTransport.Schemes
+    commentId: P:NineP.Protocol.Transports.MemoryTransport.Schemes
+- markdown: The schemes this transport can dial and bind.
+- code: public IReadOnlyCollection<NinePScheme> Schemes { get; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: IReadOnlyCollection
+      url: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1
+    - <
+    - text: NinePScheme
+      url: NineP.Protocol.Transports.NinePScheme.html
+    - '>'
+- h2: Methods
+- api3: ConnectAsync(NinePAddress, CancellationToken)
+  id: NineP_Protocol_Transports_MemoryTransport_ConnectAsync_NineP_Protocol_Transports_NinePAddress_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Protocol.Transports.MemoryTransport.ConnectAsync(NineP.Protocol.Transports.NinePAddress,System.Threading.CancellationToken)
+    commentId: M:NineP.Protocol.Transports.MemoryTransport.ConnectAsync(NineP.Protocol.Transports.NinePAddress,System.Threading.CancellationToken)
+- markdown: Dials an in-process endpoint.
+- code: public ValueTask<INinePConnection> ConnectAsync(NinePAddress address, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: address
+    type:
+    - text: NinePAddress
+      url: NineP.Protocol.Transports.NinePAddress.html
+    description: The <code>memory://name</code> endpoint to connect to.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the dial.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: INinePConnection
+      url: NineP.Protocol.Transports.INinePConnection.html
+    - '>'
+    description: The client end of a fresh connection.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: ArgumentException
+      url: https://learn.microsoft.com/dotnet/api/system.argumentexception
+    description: The address is not a memory address.
+  - type:
+    - text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: Nothing is listening on that name.
+- api3: CreatePair()
+  id: NineP_Protocol_Transports_MemoryTransport_CreatePair
+  metadata:
+    uid: NineP.Protocol.Transports.MemoryTransport.CreatePair
+    commentId: M:NineP.Protocol.Transports.MemoryTransport.CreatePair
+- markdown: >-
+    Creates a connected client/server pair without a listener, for tests that want two ends of a
+
+    wire and nothing else.
+- code: public static (INinePConnection Client, INinePConnection Server) CreatePair()
+- h4: Returns
+- parameters:
+  - type:
+    - (
+    - text: INinePConnection
+      url: NineP.Protocol.Transports.INinePConnection.html
+    - " "
+    - text: Client
+      url: https://learn.microsoft.com/dotnet/api/system.valuetuple-ninep.protocol.transports.ininepconnection,ninep.protocol.transports.ininepconnection-.client
+    - ','
+    - " "
+    - text: INinePConnection
+      url: NineP.Protocol.Transports.INinePConnection.html
+    - " "
+    - text: Server
+      url: https://learn.microsoft.com/dotnet/api/system.valuetuple-ninep.protocol.transports.ininepconnection,ninep.protocol.transports.ininepconnection-.server
+    - )
+    description: The two ends; the caller disposes both.
+- api3: ListenAsync(NinePAddress, CancellationToken)
+  id: NineP_Protocol_Transports_MemoryTransport_ListenAsync_NineP_Protocol_Transports_NinePAddress_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Protocol.Transports.MemoryTransport.ListenAsync(NineP.Protocol.Transports.NinePAddress,System.Threading.CancellationToken)
+    commentId: M:NineP.Protocol.Transports.MemoryTransport.ListenAsync(NineP.Protocol.Transports.NinePAddress,System.Threading.CancellationToken)
+- markdown: Binds an in-process endpoint.
+- code: public ValueTask<INinePListener> ListenAsync(NinePAddress address, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: address
+    type:
+    - text: NinePAddress
+      url: NineP.Protocol.Transports.NinePAddress.html
+    description: The <code>memory://name</code> endpoint to bind.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the bind.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: INinePListener
+      url: NineP.Protocol.Transports.INinePListener.html
+    - '>'
+    description: The listener; the caller disposes it.
+- h4: Exceptions
+- parameters:
+  - type:
+    - text: ArgumentException
+      url: https://learn.microsoft.com/dotnet/api/system.argumentexception
+    description: The address is not a memory address.
+  - type:
+    - text: InvalidOperationException
+      url: https://learn.microsoft.com/dotnet/api/system.invalidoperationexception
+    description: The name is already bound on this transport.
+languageId: csharp
+metadata:
+  description: >-
+    An in-process transport over duplex pipes (workspace architecture §3, S-31). It is the seam the
+
+    test suite proves: everything above  is exercised over it, so a bug in
+
+    the session layer cannot hide behind a socket. Each instance is isolated — two transports never
+
+    share an endpoint name — and a close reason given to one end is visible at the other.

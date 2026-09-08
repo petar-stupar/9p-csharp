@@ -1,0 +1,43 @@
+### YamlMime:ApiPage
+title: Enum Dialect
+body:
+- api1: Enum Dialect
+  id: NineP_Protocol_Dialect
+  metadata:
+    uid: NineP.Protocol.Dialect
+    commentId: T:NineP.Protocol.Dialect
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol
+      url: NineP.Protocol.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    The three separately negotiated 9P dialects (reference §2). The workspace's umbrella label
+
+    "9P2000.uL" means "implements all three" and is never sent on the wire.
+- code: public enum Dialect
+- h2: Fields
+- parameters:
+  - name: P9_2000
+    default: "0"
+    description: >+
+      Base 9P2000, the Plan 9 protocol of intro(5).
+
+  - name: P9_2000_L
+    default: "2"
+    description: >+
+      9P2000.L, the Linux dialect of diod and v9fs.
+
+  - name: P9_2000_u
+    default: "1"
+    description: >+
+      9P2000.u, the Unix extension: numeric ids, errno, extension strings.
+
+languageId: csharp
+metadata:
+  description: >-
+    The three separately negotiated 9P dialects (reference §2). The workspace's umbrella label
+
+    "9P2000.uL" means "implements all three" and is never sent on the wire.

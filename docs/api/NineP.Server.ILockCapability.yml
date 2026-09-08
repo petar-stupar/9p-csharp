@@ -1,0 +1,87 @@
+### YamlMime:ApiPage
+title: Interface ILockCapability
+body:
+- api1: Interface ILockCapability
+  id: NineP_Server_ILockCapability
+  metadata:
+    uid: NineP.Server.ILockCapability
+    commentId: T:NineP.Server.ILockCapability
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Server
+      url: NineP.Server.html
+  - name: Assembly
+    value: NineP.Server.dll
+- markdown: >-
+    Optional: POSIX byte-range locks (.L). A handler that does not implement it answers
+
+    <code>EOPNOTSUPP</code> from the core, never a crash (architecture §4).
+- code: public interface ILockCapability
+- h2: Methods
+- api3: GetLockAsync(LockRequest, CancellationToken)
+  id: NineP_Server_ILockCapability_GetLockAsync_NineP_Protocol_LockRequest_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Server.ILockCapability.GetLockAsync(NineP.Protocol.LockRequest,System.Threading.CancellationToken)
+    commentId: M:NineP.Server.ILockCapability.GetLockAsync(NineP.Protocol.LockRequest,System.Threading.CancellationToken)
+- markdown: Reports the lock that conflicts with a range, if any.
+- code: ValueTask<LockQueryResult> GetLockAsync(LockRequest request, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: request
+    type:
+    - text: LockRequest
+      url: NineP.Protocol.LockRequest.html
+    description: The range and type the caller would like to take.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: LockQueryResult
+      url: NineP.Protocol.LockQueryResult.html
+    - '>'
+    description: The conflicting lock, or <xref href="NineP.Protocol.LockType.Unlock" data-throw-if-not-resolved="false"></xref> when there is none.
+- api3: LockAsync(LockRequest, CancellationToken)
+  id: NineP_Server_ILockCapability_LockAsync_NineP_Protocol_LockRequest_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Server.ILockCapability.LockAsync(NineP.Protocol.LockRequest,System.Threading.CancellationToken)
+    commentId: M:NineP.Server.ILockCapability.LockAsync(NineP.Protocol.LockRequest,System.Threading.CancellationToken)
+- markdown: Acquires or releases a lock.
+- code: ValueTask<LockStatus> LockAsync(LockRequest request, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: request
+    type:
+    - text: LockRequest
+      url: NineP.Protocol.LockRequest.html
+    description: The range, type and owner.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: LockStatus
+      url: NineP.Protocol.LockStatus.html
+    - '>'
+    description: Whether the lock was granted, blocked, refused or in grace.
+languageId: csharp
+metadata:
+  description: >-
+    Optional: POSIX byte-range locks (.L). A handler that does not implement it answers
+
+    EOPNOTSUPP from the core, never a crash (architecture §4).

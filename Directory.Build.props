@@ -1,0 +1,54 @@
+<Project>
+
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+    <AnalysisLevel>latest-all</AnalysisLevel>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <InvariantGlobalization>false</InvariantGlobalization>
+    <Deterministic>true</Deterministic>
+    <ContinuousIntegrationBuild Condition="'$(CI)' == 'true'">true</ContinuousIntegrationBuild>
+    <DebugType>portable</DebugType>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <NuGetAudit>true</NuGetAudit>
+    <NuGetAuditMode>all</NuGetAuditMode>
+    <NuGetAuditLevel>low</NuGetAuditLevel>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+
+  <PropertyGroup Label="test run bounds">
+    <!-- A hang must fail the build, not outlive it. `dotnet test` runs these projects through the
+         Microsoft.Testing.Platform runner named in global.json, and this is how the check command
+         carries a wall-clock bound without every caller having to remember one: a run that wedges
+         is killed and reported at twenty minutes instead of sitting at 0% CPU for hours. The
+         per-test bound is NineP.TestSupport's TestDeadlines, which names the offending test.
+         Non-test projects ignore the property. -->
+    <TestingPlatformCommandLineArguments>$(TestingPlatformCommandLineArguments) --timeout 20m</TestingPlatformCommandLineArguments>
+  </PropertyGroup>
+
+  <PropertyGroup Label="package metadata">
+    <Version>0.1.0</Version>
+    <Authors>petar-stupar</Authors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageProjectUrl>https://github.com/petar-stupar/9p-csharp</PackageProjectUrl>
+    <RepositoryType>git</RepositoryType>
+    <!-- PublishRepositoryUrl fills the <repository> element's branch and commit from the checkout,
+         but it can only fill the url from a configured remote, and a clone that has none would pack
+         a repository element with no url at all. Stating it keeps the SourceLink metadata complete
+         however the package was built. -->
+    <RepositoryUrl>https://github.com/petar-stupar/9p-csharp.git</RepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <PackageTags>9p;9p2000;plan9;v9fs;filesystem;protocol</PackageTags>
+  </PropertyGroup>
+
+</Project>

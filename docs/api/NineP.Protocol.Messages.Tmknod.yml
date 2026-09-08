@@ -1,0 +1,170 @@
+### YamlMime:ApiPage
+title: Struct Tmknod
+body:
+- api1: Struct Tmknod
+  id: NineP_Protocol_Messages_Tmknod
+  metadata:
+    uid: NineP.Protocol.Messages.Tmknod
+    commentId: T:NineP.Protocol.Messages.Tmknod
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Messages
+      url: NineP.Protocol.Messages.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: Creates a device, socket or named pipe (reference §3.4).
+- code: 'public readonly record struct Tmknod : IMessage, IEquatable<Tmknod>'
+- h4: Implements
+- list:
+  - text: IMessage
+    url: NineP.Protocol.Messages.IMessage.html
+  - text: IEquatable<Tmknod>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: Tmknod(ushort, uint, string, uint, uint, uint, uint)
+  id: NineP_Protocol_Messages_Tmknod__ctor_System_UInt16_System_UInt32_System_String_System_UInt32_System_UInt32_System_UInt32_System_UInt32_
+  metadata:
+    uid: NineP.Protocol.Messages.Tmknod.#ctor(System.UInt16,System.UInt32,System.String,System.UInt32,System.UInt32,System.UInt32,System.UInt32)
+    commentId: M:NineP.Protocol.Messages.Tmknod.#ctor(System.UInt16,System.UInt32,System.String,System.UInt32,System.UInt32,System.UInt32,System.UInt32)
+- markdown: Creates a device, socket or named pipe (reference §3.4).
+- code: public Tmknod(ushort Tag, uint Dfid, string Name, uint Mode, uint Major, uint Minor, uint Gid)
+- h4: Parameters
+- parameters:
+  - name: Tag
+    type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+    description: The message tag, which pairs this message with its partner.
+  - name: Dfid
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The fid naming the directory to create the node in.
+  - name: Name
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The name of the node.
+  - name: Mode
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The POSIX mode, which carries the file type.
+  - name: Major
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The device major number.
+  - name: Minor
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The device minor number.
+  - name: Gid
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The numeric group the node belongs to.
+- h2: Properties
+- api3: Dfid
+  id: NineP_Protocol_Messages_Tmknod_Dfid
+  metadata:
+    uid: NineP.Protocol.Messages.Tmknod.Dfid
+    commentId: P:NineP.Protocol.Messages.Tmknod.Dfid
+- markdown: The fid naming the directory to create the node in.
+- code: public uint Dfid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Gid
+  id: NineP_Protocol_Messages_Tmknod_Gid
+  metadata:
+    uid: NineP.Protocol.Messages.Tmknod.Gid
+    commentId: P:NineP.Protocol.Messages.Tmknod.Gid
+- markdown: The numeric group the node belongs to.
+- code: public uint Gid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Major
+  id: NineP_Protocol_Messages_Tmknod_Major
+  metadata:
+    uid: NineP.Protocol.Messages.Tmknod.Major
+    commentId: P:NineP.Protocol.Messages.Tmknod.Major
+- markdown: The device major number.
+- code: public uint Major { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Minor
+  id: NineP_Protocol_Messages_Tmknod_Minor
+  metadata:
+    uid: NineP.Protocol.Messages.Tmknod.Minor
+    commentId: P:NineP.Protocol.Messages.Tmknod.Minor
+- markdown: The device minor number.
+- code: public uint Minor { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Mode
+  id: NineP_Protocol_Messages_Tmknod_Mode
+  metadata:
+    uid: NineP.Protocol.Messages.Tmknod.Mode
+    commentId: P:NineP.Protocol.Messages.Tmknod.Mode
+- markdown: The POSIX mode, which carries the file type.
+- code: public uint Mode { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Name
+  id: NineP_Protocol_Messages_Tmknod_Name
+  metadata:
+    uid: NineP.Protocol.Messages.Tmknod.Name
+    commentId: P:NineP.Protocol.Messages.Tmknod.Name
+- markdown: The name of the node.
+- code: public string Name { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: Tag
+  id: NineP_Protocol_Messages_Tmknod_Tag
+  metadata:
+    uid: NineP.Protocol.Messages.Tmknod.Tag
+    commentId: P:NineP.Protocol.Messages.Tmknod.Tag
+- markdown: The message tag, which pairs this message with its partner.
+- code: public ushort Tag { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+languageId: csharp
+metadata:
+  description: Creates a device, socket or named pipe (reference §3.4).

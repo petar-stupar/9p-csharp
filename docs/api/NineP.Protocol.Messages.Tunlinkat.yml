@@ -1,0 +1,119 @@
+### YamlMime:ApiPage
+title: Struct Tunlinkat
+body:
+- api1: Struct Tunlinkat
+  id: NineP_Protocol_Messages_Tunlinkat
+  metadata:
+    uid: NineP.Protocol.Messages.Tunlinkat
+    commentId: T:NineP.Protocol.Messages.Tunlinkat
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Messages
+      url: NineP.Protocol.Messages.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: Removes by directory fid and name (reference §3.4).
+- code: 'public readonly record struct Tunlinkat : IMessage, IEquatable<Tunlinkat>'
+- h4: Implements
+- list:
+  - text: IMessage
+    url: NineP.Protocol.Messages.IMessage.html
+  - text: IEquatable<Tunlinkat>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: Tunlinkat(ushort, uint, string, uint)
+  id: NineP_Protocol_Messages_Tunlinkat__ctor_System_UInt16_System_UInt32_System_String_System_UInt32_
+  metadata:
+    uid: NineP.Protocol.Messages.Tunlinkat.#ctor(System.UInt16,System.UInt32,System.String,System.UInt32)
+    commentId: M:NineP.Protocol.Messages.Tunlinkat.#ctor(System.UInt16,System.UInt32,System.String,System.UInt32)
+- markdown: Removes by directory fid and name (reference §3.4).
+- code: public Tunlinkat(ushort Tag, uint DirFid, string Name, uint Flags)
+- h4: Parameters
+- parameters:
+  - name: Tag
+    type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+    description: The message tag, which pairs this message with its partner.
+  - name: DirFid
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The fid naming the directory.
+  - name: Name
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The name to remove.
+  - name: Flags
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: AT_REMOVEDIR (0x200) to remove a directory.
+- h2: Properties
+- api3: DirFid
+  id: NineP_Protocol_Messages_Tunlinkat_DirFid
+  metadata:
+    uid: NineP.Protocol.Messages.Tunlinkat.DirFid
+    commentId: P:NineP.Protocol.Messages.Tunlinkat.DirFid
+- markdown: The fid naming the directory.
+- code: public uint DirFid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Flags
+  id: NineP_Protocol_Messages_Tunlinkat_Flags
+  metadata:
+    uid: NineP.Protocol.Messages.Tunlinkat.Flags
+    commentId: P:NineP.Protocol.Messages.Tunlinkat.Flags
+- markdown: AT_REMOVEDIR (0x200) to remove a directory.
+- code: public uint Flags { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Name
+  id: NineP_Protocol_Messages_Tunlinkat_Name
+  metadata:
+    uid: NineP.Protocol.Messages.Tunlinkat.Name
+    commentId: P:NineP.Protocol.Messages.Tunlinkat.Name
+- markdown: The name to remove.
+- code: public string Name { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: Tag
+  id: NineP_Protocol_Messages_Tunlinkat_Tag
+  metadata:
+    uid: NineP.Protocol.Messages.Tunlinkat.Tag
+    commentId: P:NineP.Protocol.Messages.Tunlinkat.Tag
+- markdown: The message tag, which pairs this message with its partner.
+- code: public ushort Tag { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+languageId: csharp
+metadata:
+  description: Removes by directory fid and name (reference §3.4).

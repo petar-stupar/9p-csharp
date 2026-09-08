@@ -1,0 +1,204 @@
+### YamlMime:ApiPage
+title: Namespace NineP.Protocol
+body:
+- api1: Namespace NineP.Protocol
+  id: NineP_Protocol
+  metadata:
+    uid: NineP.Protocol
+    commentId: N:NineP.Protocol
+- h3: Namespaces
+- parameters:
+  - type:
+      text: NineP.Protocol.Auth
+      url: NineP.Protocol.Auth.html
+  - type:
+      text: NineP.Protocol.Codec
+      url: NineP.Protocol.Codec.html
+  - type:
+      text: NineP.Protocol.Messages
+      url: NineP.Protocol.Messages.html
+  - type:
+      text: NineP.Protocol.Negotiation
+      url: NineP.Protocol.Negotiation.html
+  - type:
+      text: NineP.Protocol.Transports
+      url: NineP.Protocol.Transports.html
+- h3: Classes
+- parameters:
+  - type:
+      text: Attr
+      url: NineP.Protocol.Attr.html
+    description: >-
+      The dialect-neutral attributes of one file (reference §7). A handler produces exactly one of
+
+      these and the protocol layer projects it into a 9P2000 stat record, a 9P2000.u stat record or
+
+      an <code>Rgetattr</code>; no handler ever writes a dialect-specific shape itself.
+  - type:
+      text: Constants
+      url: NineP.Protocol.Constants.html
+    description: The protocol constants of reference §1, under their <code>fcall.h</code> / <code>linux-9p.h</code> names.
+  - type:
+      text: Errno
+      url: NineP.Protocol.Errno.html
+    description: The Linux errno values this workspace's servers use (reference §5.9).
+  - type:
+      text: ErrorTable
+      url: NineP.Protocol.ErrorTable.html
+    description: >-
+      The errno to ename projection table (workspace architecture §3): Plan 9 wording where one
+
+      exists, so a 9P2000 client and a 9P2000.L client are told the same thing in their own terms.
+  - type:
+      text: Limits
+      url: NineP.Protocol.Limits.html
+    description: >-
+      Every configurable bound of the workspace architecture §4, with the defaults this workspace
+
+      ships. The record is immutable: a server or client is handed one at construction and it does
+
+      not change under it.
+  - type:
+      text: MessageTypes
+      url: NineP.Protocol.MessageTypes.html
+    description: >-
+      Helpers over <xref href="NineP.Protocol.MessageType" data-throw-if-not-resolved="false"></xref>: wire legality per dialect, T/R pairing, and the
+
+      protocol's own name for a type number.
+  - type:
+      text: NinePException
+      url: NineP.Protocol.NinePException.html
+    description: >-
+      The base of every exception this library throws, carrying the 9P error value the core projects
+
+      onto the wire. Nothing else escapes a public method except the <xref href="System.ArgumentException" data-throw-if-not-resolved="false"></xref>
+
+      family, <xref href="System.ObjectDisposedException" data-throw-if-not-resolved="false"></xref> and <xref href="System.OperationCanceledException" data-throw-if-not-resolved="false"></xref>.
+  - type:
+      text: NinePProtocolException
+      url: NineP.Protocol.NinePProtocolException.html
+    description: >-
+      A malformed or illegal 9P message (reference §8). The kind is machine-readable so that a caller
+
+      can tell a size violation, which cannot be resynced, from a field that merely did not parse.
+  - type:
+      text: NinePVersionException
+      url: NineP.Protocol.NinePVersionException.html
+    description: >-
+      Version negotiation failed: the server answered "unknown", or it offered a dialect below the
+
+      client's floor. The client never silently downgrades (reference §5.1).
+  - type:
+      text: SetAttr
+      url: NineP.Protocol.SetAttr.html
+    description: >-
+      A partial attribute update; a null member means "do not touch" (reference §7). One type carries
+
+      both a <code>Twstat</code> and a <code>Tsetattr</code>, so a handler never learns which dialect asked.
+- h3: Structs
+- parameters:
+  - type:
+      text: DeviceId
+      url: NineP.Protocol.DeviceId.html
+    description: A device major/minor pair for character and block devices (reference §4.7).
+  - type:
+      text: DirEntry
+      url: NineP.Protocol.DirEntry.html
+    description: >-
+      One directory entry, unified over 9P2000 stat records and .L dirents (reference §4.3). The
+
+      server's directory packer and the client's <code>ReadDir</code> both speak it, so a listing looks the
+
+      same to a caller whichever record format the session negotiated.
+  - type:
+      text: LockQueryResult
+      url: NineP.Protocol.LockQueryResult.html
+    description: The answer to <code>Tgetlock</code>; <xref href="NineP.Protocol.LockType.Unlock" data-throw-if-not-resolved="false"></xref> means no conflict.
+  - type:
+      text: LockRequest
+      url: NineP.Protocol.LockRequest.html
+    description: A byte-range lock request; a <code>Length</code> of 0 means "to the end of the file".
+  - type:
+      text: NinePError
+      url: NineP.Protocol.NinePError.html
+    description: >-
+      The 9P error value: a Plan 9 ename plus a Linux errno (workspace architecture §3). One value,
+
+      three wire shapes — <code>Rerror</code>, <code>Rerror</code> with <code>errno[4]</code>, and <code>Rlerror</code> —
+
+      chosen by the session dialect, never by the code that raised it.
+  - type:
+      text: Qid
+      url: NineP.Protocol.Qid.html
+    description: 'A 9P qid: <code>type[1] version[4] path[8]</code> (reference §4.1).'
+  - type:
+      text: StatFs
+      url: NineP.Protocol.StatFs.html
+    description: Filesystem statistics answered by <code>Tstatfs</code> (reference §4.9).
+  - type:
+      text: TimeSpec
+      url: NineP.Protocol.TimeSpec.html
+    description: A POSIX-style timestamp with nanosecond resolution (reference §3.4, §4.6).
+- h3: Enums
+- parameters:
+  - type:
+      text: Dialect
+      url: NineP.Protocol.Dialect.html
+    description: >-
+      The three separately negotiated 9P dialects (reference §2). The workspace's umbrella label
+
+      "9P2000.uL" means "implements all three" and is never sent on the wire.
+  - type:
+      text: FileFlags
+      url: NineP.Protocol.FileFlags.html
+    description: The non-permission mode bits of reference §4.4, dialect-neutral.
+  - type:
+      text: FileKind
+      url: NineP.Protocol.FileKind.html
+    description: The dialect-neutral file type a handler declares (reference §7).
+  - type:
+      text: LockFlags
+      url: NineP.Protocol.LockFlags.html
+    description: <code>Tlock</code> flags (reference §4.8). RECLAIM is reserved and never honoured.
+  - type:
+      text: LockStatus
+      url: NineP.Protocol.LockStatus.html
+    description: The status an <code>Rlock</code> carries (reference §4.8).
+  - type:
+      text: LockType
+      url: NineP.Protocol.LockType.html
+    description: The POSIX lock type carried by <code>Tlock</code> and <code>Tgetlock</code> (reference §4.8).
+  - type:
+      text: MessageType
+      url: NineP.Protocol.MessageType.html
+    description: >-
+      Every 9P message type number of reference §2: 34 T/R pairs, 68 members, R == T + 1.
+
+      <code>Terror</code> (106) and <code>Tlerror</code> (6) are illegal on the wire and carry no record.
+  - type:
+      text: OpenFlags
+      url: NineP.Protocol.OpenFlags.html
+    description: >-
+      Flags that modify an open without changing its access mode (reference §4.5). OAPPEND is one of
+
+      these, not an access mode: OREAD plus OAPPEND stays a read open.
+  - type:
+      text: OpenMode
+      url: NineP.Protocol.OpenMode.html
+    description: 'The access mode of an open fid: the low two bits of reference §4.5, unified across dialects.'
+  - type:
+      text: ProtocolErrorKind
+      url: NineP.Protocol.ProtocolErrorKind.html
+    description: The machine-readable classification of a codec failure (workspace architecture §3).
+  - type:
+      text: QidType
+      url: NineP.Protocol.QidType.html
+    description: >-
+      Qid type bits (reference §4.1). The two low bits follow Linux, not the 9P2000.u draft:
+
+      every .u and .L peer this workspace interoperates with is Linux-derived.
+  - type:
+      text: XattrFlags
+      url: NineP.Protocol.XattrFlags.html
+    description: <code>Txattrcreate</code> flags (reference §5.9).
+languageId: csharp

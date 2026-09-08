@@ -1,0 +1,40 @@
+### YamlMime:ApiPage
+title: Enum LockFlags
+body:
+- api1: Enum LockFlags
+  id: NineP_Protocol_LockFlags
+  metadata:
+    uid: NineP.Protocol.LockFlags
+    commentId: T:NineP.Protocol.LockFlags
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol
+      url: NineP.Protocol.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: <code>Tlock</code> flags (reference §4.8). RECLAIM is reserved and never honoured.
+- code: >-
+    [Flags]
+
+    public enum LockFlags
+- h2: Fields
+- parameters:
+  - name: Block
+    default: "1"
+    description: >+
+      The client is willing to be told BLOCKED and to retry.
+
+  - name: None
+    default: "0"
+    description: >+
+      No flag is set.
+
+  - name: Reclaim
+    default: "2"
+    description: >+
+      Reserved by the reference; this workspace never honours it.
+
+languageId: csharp
+metadata:
+  description: Tlock flags (reference §4.8). RECLAIM is reserved and never honoured.

@@ -1,0 +1,356 @@
+### YamlMime:TableOfContent
+- name: NineP.Client
+  href: NineP.Client.yml
+  items:
+  - name: Classes
+  - name: ClientOptions
+    href: NineP.Client.ClientOptions.yml
+  - name: NinePClient
+    href: NineP.Client.NinePClient.yml
+  - name: NinePFid
+    href: NineP.Client.NinePFid.yml
+  - name: NinePSession
+    href: NineP.Client.NinePSession.yml
+  - name: Interfaces
+  - name: INinePMessages
+    href: NineP.Client.INinePMessages.yml
+- name: NineP.Protocol
+  href: NineP.Protocol.yml
+  items:
+  - name: Classes
+  - name: Attr
+    href: NineP.Protocol.Attr.yml
+  - name: Constants
+    href: NineP.Protocol.Constants.yml
+  - name: Errno
+    href: NineP.Protocol.Errno.yml
+  - name: ErrorTable
+    href: NineP.Protocol.ErrorTable.yml
+  - name: Limits
+    href: NineP.Protocol.Limits.yml
+  - name: MessageTypes
+    href: NineP.Protocol.MessageTypes.yml
+  - name: NinePException
+    href: NineP.Protocol.NinePException.yml
+  - name: NinePProtocolException
+    href: NineP.Protocol.NinePProtocolException.yml
+  - name: NinePVersionException
+    href: NineP.Protocol.NinePVersionException.yml
+  - name: SetAttr
+    href: NineP.Protocol.SetAttr.yml
+  - name: Structs
+  - name: DeviceId
+    href: NineP.Protocol.DeviceId.yml
+  - name: DirEntry
+    href: NineP.Protocol.DirEntry.yml
+  - name: LockQueryResult
+    href: NineP.Protocol.LockQueryResult.yml
+  - name: LockRequest
+    href: NineP.Protocol.LockRequest.yml
+  - name: NinePError
+    href: NineP.Protocol.NinePError.yml
+  - name: Qid
+    href: NineP.Protocol.Qid.yml
+  - name: StatFs
+    href: NineP.Protocol.StatFs.yml
+  - name: TimeSpec
+    href: NineP.Protocol.TimeSpec.yml
+  - name: Enums
+  - name: Dialect
+    href: NineP.Protocol.Dialect.yml
+  - name: FileFlags
+    href: NineP.Protocol.FileFlags.yml
+  - name: FileKind
+    href: NineP.Protocol.FileKind.yml
+  - name: LockFlags
+    href: NineP.Protocol.LockFlags.yml
+  - name: LockStatus
+    href: NineP.Protocol.LockStatus.yml
+  - name: LockType
+    href: NineP.Protocol.LockType.yml
+  - name: MessageType
+    href: NineP.Protocol.MessageType.yml
+  - name: OpenFlags
+    href: NineP.Protocol.OpenFlags.yml
+  - name: OpenMode
+    href: NineP.Protocol.OpenMode.yml
+  - name: ProtocolErrorKind
+    href: NineP.Protocol.ProtocolErrorKind.yml
+  - name: QidType
+    href: NineP.Protocol.QidType.yml
+  - name: XattrFlags
+    href: NineP.Protocol.XattrFlags.yml
+- name: NineP.Protocol.Auth
+  href: NineP.Protocol.Auth.yml
+  items:
+  - name: Classes
+  - name: BearerTokenCredential
+    href: NineP.Protocol.Auth.BearerTokenCredential.yml
+  - name: CallbackCredential
+    href: NineP.Protocol.Auth.CallbackCredential.yml
+  - name: ConstantTime
+    href: NineP.Protocol.Auth.ConstantTime.yml
+  - name: Identity
+    href: NineP.Protocol.Auth.Identity.yml
+  - name: PasswordAuthenticator
+    href: NineP.Protocol.Auth.PasswordAuthenticator.yml
+  - name: PasswordCredential
+    href: NineP.Protocol.Auth.PasswordCredential.yml
+  - name: PasswordFileStore
+    href: NineP.Protocol.Auth.PasswordFileStore.yml
+  - name: TlsClientCertAuthenticator
+    href: NineP.Protocol.Auth.TlsClientCertAuthenticator.yml
+  - name: TokenAuthenticator
+    href: NineP.Protocol.Auth.TokenAuthenticator.yml
+  - name: TokenCredential
+    href: NineP.Protocol.Auth.TokenCredential.yml
+  - name: Structs
+  - name: AuthRequest
+    href: NineP.Protocol.Auth.AuthRequest.yml
+  - name: Interfaces
+  - name: IAuthChannel
+    href: NineP.Protocol.Auth.IAuthChannel.yml
+  - name: IAuthSession
+    href: NineP.Protocol.Auth.IAuthSession.yml
+  - name: IAuthenticator
+    href: NineP.Protocol.Auth.IAuthenticator.yml
+  - name: ICredential
+    href: NineP.Protocol.Auth.ICredential.yml
+  - name: IPasswordStore
+    href: NineP.Protocol.Auth.IPasswordStore.yml
+- name: NineP.Protocol.Codec
+  href: NineP.Protocol.Codec.yml
+  items:
+  - name: Classes
+  - name: MessageCodec
+    href: NineP.Protocol.Codec.MessageCodec.yml
+- name: NineP.Protocol.Messages
+  href: NineP.Protocol.Messages.yml
+  items:
+  - name: Structs
+  - name: Rattach
+    href: NineP.Protocol.Messages.Rattach.yml
+  - name: Rauth
+    href: NineP.Protocol.Messages.Rauth.yml
+  - name: Rclunk
+    href: NineP.Protocol.Messages.Rclunk.yml
+  - name: Rcreate
+    href: NineP.Protocol.Messages.Rcreate.yml
+  - name: Rerror
+    href: NineP.Protocol.Messages.Rerror.yml
+  - name: Rflush
+    href: NineP.Protocol.Messages.Rflush.yml
+  - name: Rfsync
+    href: NineP.Protocol.Messages.Rfsync.yml
+  - name: Rgetattr
+    href: NineP.Protocol.Messages.Rgetattr.yml
+  - name: Rgetlock
+    href: NineP.Protocol.Messages.Rgetlock.yml
+  - name: Rlcreate
+    href: NineP.Protocol.Messages.Rlcreate.yml
+  - name: Rlerror
+    href: NineP.Protocol.Messages.Rlerror.yml
+  - name: Rlink
+    href: NineP.Protocol.Messages.Rlink.yml
+  - name: Rlock
+    href: NineP.Protocol.Messages.Rlock.yml
+  - name: Rlopen
+    href: NineP.Protocol.Messages.Rlopen.yml
+  - name: Rmkdir
+    href: NineP.Protocol.Messages.Rmkdir.yml
+  - name: Rmknod
+    href: NineP.Protocol.Messages.Rmknod.yml
+  - name: Ropen
+    href: NineP.Protocol.Messages.Ropen.yml
+  - name: Rread
+    href: NineP.Protocol.Messages.Rread.yml
+  - name: Rreaddir
+    href: NineP.Protocol.Messages.Rreaddir.yml
+  - name: Rreadlink
+    href: NineP.Protocol.Messages.Rreadlink.yml
+  - name: Rremove
+    href: NineP.Protocol.Messages.Rremove.yml
+  - name: Rrename
+    href: NineP.Protocol.Messages.Rrename.yml
+  - name: Rrenameat
+    href: NineP.Protocol.Messages.Rrenameat.yml
+  - name: Rsetattr
+    href: NineP.Protocol.Messages.Rsetattr.yml
+  - name: Rstat
+    href: NineP.Protocol.Messages.Rstat.yml
+  - name: Rstatfs
+    href: NineP.Protocol.Messages.Rstatfs.yml
+  - name: Rsymlink
+    href: NineP.Protocol.Messages.Rsymlink.yml
+  - name: Runlinkat
+    href: NineP.Protocol.Messages.Runlinkat.yml
+  - name: Rversion
+    href: NineP.Protocol.Messages.Rversion.yml
+  - name: Rwalk
+    href: NineP.Protocol.Messages.Rwalk.yml
+  - name: Rwrite
+    href: NineP.Protocol.Messages.Rwrite.yml
+  - name: Rwstat
+    href: NineP.Protocol.Messages.Rwstat.yml
+  - name: Rxattrcreate
+    href: NineP.Protocol.Messages.Rxattrcreate.yml
+  - name: Rxattrwalk
+    href: NineP.Protocol.Messages.Rxattrwalk.yml
+  - name: StatRecord
+    href: NineP.Protocol.Messages.StatRecord.yml
+  - name: Tattach
+    href: NineP.Protocol.Messages.Tattach.yml
+  - name: Tauth
+    href: NineP.Protocol.Messages.Tauth.yml
+  - name: Tclunk
+    href: NineP.Protocol.Messages.Tclunk.yml
+  - name: Tcreate
+    href: NineP.Protocol.Messages.Tcreate.yml
+  - name: Tflush
+    href: NineP.Protocol.Messages.Tflush.yml
+  - name: Tfsync
+    href: NineP.Protocol.Messages.Tfsync.yml
+  - name: Tgetattr
+    href: NineP.Protocol.Messages.Tgetattr.yml
+  - name: Tgetlock
+    href: NineP.Protocol.Messages.Tgetlock.yml
+  - name: Tlcreate
+    href: NineP.Protocol.Messages.Tlcreate.yml
+  - name: Tlink
+    href: NineP.Protocol.Messages.Tlink.yml
+  - name: Tlock
+    href: NineP.Protocol.Messages.Tlock.yml
+  - name: Tlopen
+    href: NineP.Protocol.Messages.Tlopen.yml
+  - name: Tmkdir
+    href: NineP.Protocol.Messages.Tmkdir.yml
+  - name: Tmknod
+    href: NineP.Protocol.Messages.Tmknod.yml
+  - name: Topen
+    href: NineP.Protocol.Messages.Topen.yml
+  - name: Tread
+    href: NineP.Protocol.Messages.Tread.yml
+  - name: Treaddir
+    href: NineP.Protocol.Messages.Treaddir.yml
+  - name: Treadlink
+    href: NineP.Protocol.Messages.Treadlink.yml
+  - name: Tremove
+    href: NineP.Protocol.Messages.Tremove.yml
+  - name: Trename
+    href: NineP.Protocol.Messages.Trename.yml
+  - name: Trenameat
+    href: NineP.Protocol.Messages.Trenameat.yml
+  - name: Tsetattr
+    href: NineP.Protocol.Messages.Tsetattr.yml
+  - name: Tstat
+    href: NineP.Protocol.Messages.Tstat.yml
+  - name: Tstatfs
+    href: NineP.Protocol.Messages.Tstatfs.yml
+  - name: Tsymlink
+    href: NineP.Protocol.Messages.Tsymlink.yml
+  - name: Tunlinkat
+    href: NineP.Protocol.Messages.Tunlinkat.yml
+  - name: Tversion
+    href: NineP.Protocol.Messages.Tversion.yml
+  - name: Twalk
+    href: NineP.Protocol.Messages.Twalk.yml
+  - name: Twrite
+    href: NineP.Protocol.Messages.Twrite.yml
+  - name: Twstat
+    href: NineP.Protocol.Messages.Twstat.yml
+  - name: Txattrcreate
+    href: NineP.Protocol.Messages.Txattrcreate.yml
+  - name: Txattrwalk
+    href: NineP.Protocol.Messages.Txattrwalk.yml
+  - name: Interfaces
+  - name: IMessage
+    href: NineP.Protocol.Messages.IMessage.yml
+  - name: Enums
+  - name: GetAttrMask
+    href: NineP.Protocol.Messages.GetAttrMask.yml
+  - name: SetAttrMask
+    href: NineP.Protocol.Messages.SetAttrMask.yml
+- name: NineP.Protocol.Negotiation
+  href: NineP.Protocol.Negotiation.yml
+  items:
+  - name: Classes
+  - name: Negotiator
+    href: NineP.Protocol.Negotiation.Negotiator.yml
+  - name: Structs
+  - name: NegotiationResult
+    href: NineP.Protocol.Negotiation.NegotiationResult.yml
+- name: NineP.Protocol.Transports
+  href: NineP.Protocol.Transports.yml
+  items:
+  - name: Classes
+  - name: MemoryTransport
+    href: NineP.Protocol.Transports.MemoryTransport.yml
+  - name: PeerIdentity
+    href: NineP.Protocol.Transports.PeerIdentity.yml
+  - name: TcpTransport
+    href: NineP.Protocol.Transports.TcpTransport.yml
+  - name: TcpTransportOptions
+    href: NineP.Protocol.Transports.TcpTransportOptions.yml
+  - name: TlsTransport
+    href: NineP.Protocol.Transports.TlsTransport.yml
+  - name: TlsTransportOptions
+    href: NineP.Protocol.Transports.TlsTransportOptions.yml
+  - name: WebSocketTransport
+    href: NineP.Protocol.Transports.WebSocketTransport.yml
+  - name: WebSocketTransportOptions
+    href: NineP.Protocol.Transports.WebSocketTransportOptions.yml
+  - name: Structs
+  - name: NinePAddress
+    href: NineP.Protocol.Transports.NinePAddress.yml
+  - name: Interfaces
+  - name: INinePConnection
+    href: NineP.Protocol.Transports.INinePConnection.yml
+  - name: INinePListener
+    href: NineP.Protocol.Transports.INinePListener.yml
+  - name: ITransport
+    href: NineP.Protocol.Transports.ITransport.yml
+  - name: Enums
+  - name: CloseReason
+    href: NineP.Protocol.Transports.CloseReason.yml
+  - name: NinePScheme
+    href: NineP.Protocol.Transports.NinePScheme.yml
+- name: NineP.Server
+  href: NineP.Server.yml
+  items:
+  - name: Classes
+  - name: CreateRequest
+    href: NineP.Server.CreateRequest.yml
+  - name: NinePServer
+    href: NineP.Server.NinePServer.yml
+  - name: ServerCounters
+    href: NineP.Server.ServerCounters.yml
+  - name: ServerOptions
+    href: NineP.Server.ServerOptions.yml
+  - name: Structs
+  - name: DirectoryListing
+    href: NineP.Server.DirectoryListing.yml
+  - name: RequestLogEntry
+    href: NineP.Server.RequestLogEntry.yml
+  - name: Interfaces
+  - name: IDirectoryHandler
+    href: NineP.Server.IDirectoryHandler.yml
+  - name: IFileHandler
+    href: NineP.Server.IFileHandler.yml
+  - name: IFilesystem
+    href: NineP.Server.IFilesystem.yml
+  - name: IHandler
+    href: NineP.Server.IHandler.yml
+  - name: ILinkCapability
+    href: NineP.Server.ILinkCapability.yml
+  - name: ILockCapability
+    href: NineP.Server.ILockCapability.yml
+  - name: IOpenFile
+    href: NineP.Server.IOpenFile.yml
+  - name: IRequestLogSink
+    href: NineP.Server.IRequestLogSink.yml
+  - name: IStatFsCapability
+    href: NineP.Server.IStatFsCapability.yml
+  - name: ISymlinkHandler
+    href: NineP.Server.ISymlinkHandler.yml
+  - name: IXattrHandler
+    href: NineP.Server.IXattrHandler.yml

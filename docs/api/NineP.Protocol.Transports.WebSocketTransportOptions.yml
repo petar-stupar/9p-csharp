@@ -1,0 +1,163 @@
+### YamlMime:ApiPage
+title: Class WebSocketTransportOptions
+body:
+- api1: Class WebSocketTransportOptions
+  id: NineP_Protocol_Transports_WebSocketTransportOptions
+  metadata:
+    uid: NineP.Protocol.Transports.WebSocketTransportOptions
+    commentId: T:NineP.Protocol.Transports.WebSocketTransportOptions
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Transports
+      url: NineP.Protocol.Transports.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    WebSocket configuration (workspace architecture §3, Decision Log WebSocket row). One 9P message
+
+    travels as one binary WebSocket message, so the size cap here bounds a 9P frame directly.
+- code: 'public sealed record WebSocketTransportOptions : IEquatable<WebSocketTransportOptions>'
+- h4: Inheritance
+- inheritance:
+  - text: object
+    url: https://learn.microsoft.com/dotnet/api/system.object
+  - text: WebSocketTransportOptions
+    url: NineP.Protocol.Transports.WebSocketTransportOptions.html
+- h4: Implements
+- list:
+  - text: IEquatable<WebSocketTransportOptions>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Properties
+- api3: AllowedOrigins
+  id: NineP_Protocol_Transports_WebSocketTransportOptions_AllowedOrigins
+  metadata:
+    uid: NineP.Protocol.Transports.WebSocketTransportOptions.AllowedOrigins
+    commentId: P:NineP.Protocol.Transports.WebSocketTransportOptions.AllowedOrigins
+- markdown: >-
+    Origins the server accepts. Empty means "accept any", which is logged as a warning at listen
+
+    time: a browser-reachable 9P server with no allow-list is a cross-origin hole.
+- code: public IReadOnlyCollection<string> AllowedOrigins { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: IReadOnlyCollection
+      url: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1
+    - <
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '>'
+- api3: HandshakeTimeout
+  id: NineP_Protocol_Transports_WebSocketTransportOptions_HandshakeTimeout
+  metadata:
+    uid: NineP.Protocol.Transports.WebSocketTransportOptions.HandshakeTimeout
+    commentId: P:NineP.Protocol.Transports.WebSocketTransportOptions.HandshakeTimeout
+- markdown: The handshake timeout. Default 30 s.
+- code: public TimeSpan HandshakeTimeout { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: TimeSpan
+      url: https://learn.microsoft.com/dotnet/api/system.timespan
+- api3: KeepAliveInterval
+  id: NineP_Protocol_Transports_WebSocketTransportOptions_KeepAliveInterval
+  metadata:
+    uid: NineP.Protocol.Transports.WebSocketTransportOptions.KeepAliveInterval
+    commentId: P:NineP.Protocol.Transports.WebSocketTransportOptions.KeepAliveInterval
+- markdown: The ping interval. Default 30 s.
+- code: public TimeSpan KeepAliveInterval { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: TimeSpan
+      url: https://learn.microsoft.com/dotnet/api/system.timespan
+- api3: Logger
+  id: NineP_Protocol_Transports_WebSocketTransportOptions_Logger
+  metadata:
+    uid: NineP.Protocol.Transports.WebSocketTransportOptions.Logger
+    commentId: P:NineP.Protocol.Transports.WebSocketTransportOptions.Logger
+- markdown: Where handshake refusals are logged; <xref href="Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance" data-throw-if-not-resolved="false"></xref> when null.
+- code: public ILogger? Logger { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ILogger
+      url: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger
+    - '?'
+- api3: MaxMessageSize
+  id: NineP_Protocol_Transports_WebSocketTransportOptions_MaxMessageSize
+  metadata:
+    uid: NineP.Protocol.Transports.WebSocketTransportOptions.MaxMessageSize
+    commentId: P:NineP.Protocol.Transports.WebSocketTransportOptions.MaxMessageSize
+- markdown: >-
+    The largest message accepted, enforced <b>during</b> accumulation rather than at the end:
+
+    a peer must not be able to make the server buffer a gigabyte before it is refused. Over the
+
+    cap the socket closes 1009. Default 1 MiB.
+- code: public int MaxMessageSize { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: Subprotocol
+  id: NineP_Protocol_Transports_WebSocketTransportOptions_Subprotocol
+  metadata:
+    uid: NineP.Protocol.Transports.WebSocketTransportOptions.Subprotocol
+    commentId: P:NineP.Protocol.Transports.WebSocketTransportOptions.Subprotocol
+- markdown: The subprotocol offered and echoed. Default "9p"; null offers none.
+- code: public string? Subprotocol { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    - '?'
+- api3: Tcp
+  id: NineP_Protocol_Transports_WebSocketTransportOptions_Tcp
+  metadata:
+    uid: NineP.Protocol.Transports.WebSocketTransportOptions.Tcp
+    commentId: P:NineP.Protocol.Transports.WebSocketTransportOptions.Tcp
+- markdown: The underlying TCP tuning.
+- code: public TcpTransportOptions? Tcp { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: TcpTransportOptions
+      url: NineP.Protocol.Transports.TcpTransportOptions.html
+    - '?'
+- api3: Tls
+  id: NineP_Protocol_Transports_WebSocketTransportOptions_Tls
+  metadata:
+    uid: NineP.Protocol.Transports.WebSocketTransportOptions.Tls
+    commentId: P:NineP.Protocol.Transports.WebSocketTransportOptions.Tls
+- markdown: TLS settings for <code>wss://</code>; ignored for <code>ws://</code>.
+- code: public TlsTransportOptions? Tls { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: TlsTransportOptions
+      url: NineP.Protocol.Transports.TlsTransportOptions.html
+    - '?'
+languageId: csharp
+metadata:
+  description: >-
+    WebSocket configuration (workspace architecture §3, Decision Log WebSocket row). One 9P message
+
+    travels as one binary WebSocket message, so the size cap here bounds a 9P frame directly.

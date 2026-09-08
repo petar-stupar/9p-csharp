@@ -1,0 +1,72 @@
+### YamlMime:ApiPage
+title: Enum CloseReason
+body:
+- api1: Enum CloseReason
+  id: NineP_Protocol_Transports_CloseReason
+  metadata:
+    uid: NineP.Protocol.Transports.CloseReason
+    commentId: T:NineP.Protocol.Transports.CloseReason
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Transports
+      url: NineP.Protocol.Transports.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    Why a connection closed; carried to the peer where the transport can express it (workspace
+
+    architecture §3). A framing violation cannot be resynced, so it is always a close and never a
+
+    skipped message.
+- code: public enum CloseReason
+- h2: Fields
+- parameters:
+  - name: MessageTooLarge
+    default: "3"
+    description: >+
+      A frame exceeded the negotiated msize or the pre-negotiation cap.
+
+  - name: Normal
+    default: "0"
+    description: >+
+      An orderly close initiated by this side.
+
+  - name: PeerClosed
+    default: "1"
+    description: >+
+      The peer closed.
+
+  - name: ProtocolViolation
+    default: "2"
+    description: >+
+      A frame violated size, framing or dialect rules; the connection cannot be resynced.
+
+  - name: ResourceLimit
+    default: "5"
+    description: >+
+      A limit was exceeded: connections, fids, or in-flight requests.
+
+  - name: Shutdown
+    default: "6"
+    description: >+
+      The server is shutting down.
+
+  - name: Timeout
+    default: "4"
+    description: >+
+      A timeout elapsed: read-header, idle, or authentication.
+
+  - name: TransportError
+    default: "7"
+    description: >+
+      An unexpected I/O or transport failure.
+
+languageId: csharp
+metadata:
+  description: >-
+    Why a connection closed; carried to the peer where the transport can express it (workspace
+
+    architecture §3). A framing violation cannot be resynced, so it is always a close and never a
+
+    skipped message.

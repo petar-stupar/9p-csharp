@@ -1,0 +1,134 @@
+### YamlMime:ApiPage
+title: Interface IOpenFile
+body:
+- api1: Interface IOpenFile
+  id: NineP_Server_IOpenFile
+  metadata:
+    uid: NineP.Server.IOpenFile
+    commentId: T:NineP.Server.IOpenFile
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Server
+      url: NineP.Server.html
+  - name: Assembly
+    value: NineP.Server.dll
+- markdown: >-
+    One open instance of a file (architecture §4). <xref href="NineP.Server.IOpenFile.ReadAsync(System.UInt64%2cSystem.Memory%7bSystem.Byte%7d%2cSystem.Threading.CancellationToken)" data-throw-if-not-resolved="false"></xref> writes straight into the
+
+    outgoing frame's own payload buffer, so a read costs no copy between the handler and the wire.
+- code: 'public interface IOpenFile : IAsyncDisposable'
+- h4: Implements
+- list:
+  - text: IAsyncDisposable
+    url: https://learn.microsoft.com/dotnet/api/system.iasyncdisposable
+- h2: Methods
+- api3: GetSizeAsync(CancellationToken)
+  id: NineP_Server_IOpenFile_GetSizeAsync_System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Server.IOpenFile.GetSizeAsync(System.Threading.CancellationToken)
+    commentId: M:NineP.Server.IOpenFile.GetSizeAsync(System.Threading.CancellationToken)
+- markdown: The current length, used for end of file and for <code>Rgetattr.size</code>.
+- code: ValueTask<ulong> GetSizeAsync(CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the request.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+    - '>'
+    description: The length in bytes.
+- api3: ReadAsync(ulong, Memory<byte>, CancellationToken)
+  id: NineP_Server_IOpenFile_ReadAsync_System_UInt64_System_Memory_System_Byte__System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Server.IOpenFile.ReadAsync(System.UInt64,System.Memory{System.Byte},System.Threading.CancellationToken)
+    commentId: M:NineP.Server.IOpenFile.ReadAsync(System.UInt64,System.Memory{System.Byte},System.Threading.CancellationToken)
+- markdown: Reads into the frame's payload buffer.
+- code: ValueTask<int> ReadAsync(ulong offset, Memory<byte> buffer, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: offset
+    type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+    description: Where to read from; ignored on an append-only file.
+  - name: buffer
+    type:
+    - text: Memory
+      url: https://learn.microsoft.com/dotnet/api/system.memory-1
+    - <
+    - text: byte
+      url: https://learn.microsoft.com/dotnet/api/system.byte
+    - '>'
+    description: The frame's own buffer, already clamped to the reply budget.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the read.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+    - '>'
+    description: The number of bytes read; 0 at end of file.
+- api3: WriteAsync(ulong, ReadOnlyMemory<byte>, CancellationToken)
+  id: NineP_Server_IOpenFile_WriteAsync_System_UInt64_System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_
+  metadata:
+    uid: NineP.Server.IOpenFile.WriteAsync(System.UInt64,System.ReadOnlyMemory{System.Byte},System.Threading.CancellationToken)
+    commentId: M:NineP.Server.IOpenFile.WriteAsync(System.UInt64,System.ReadOnlyMemory{System.Byte},System.Threading.CancellationToken)
+- markdown: Writes a view of the incoming frame.
+- code: ValueTask<int> WriteAsync(ulong offset, ReadOnlyMemory<byte> data, CancellationToken cancellationToken = default)
+- h4: Parameters
+- parameters:
+  - name: offset
+    type:
+    - text: ulong
+      url: https://learn.microsoft.com/dotnet/api/system.uint64
+    description: Where to write; ignored on an append-only file.
+  - name: data
+    type:
+    - text: ReadOnlyMemory
+      url: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+    - <
+    - text: byte
+      url: https://learn.microsoft.com/dotnet/api/system.byte
+    - '>'
+    description: The bytes, viewing the frame that is still owned by the core.
+  - name: cancellationToken
+    type:
+    - text: CancellationToken
+      url: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+    description: Cancels the write.
+    optional: true
+- h4: Returns
+- parameters:
+  - type:
+    - text: ValueTask
+      url: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1
+    - <
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+    - '>'
+    description: The number of bytes actually written; fewer is a short write, not an error.
+languageId: csharp
+metadata:
+  description: >-
+    One open instance of a file (architecture §4).  writes straight into the
+
+    outgoing frame's own payload buffer, so a read costs no copy between the handler and the wire.

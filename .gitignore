@@ -1,0 +1,17 @@
+# qode task state is per-machine
+.qode/contexts/
+# editor / OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
+# local claude settings stay local
+.claude/settings.local.json
+# qode temp files
+.qode/contexts/*
+.qode/prompts/scaffold/
+# build output
+bin/
+obj/
+artifacts/
+BenchmarkDotNet.Artifacts/

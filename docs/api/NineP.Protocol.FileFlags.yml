@@ -1,0 +1,55 @@
+### YamlMime:ApiPage
+title: Enum FileFlags
+body:
+- api1: Enum FileFlags
+  id: NineP_Protocol_FileFlags
+  metadata:
+    uid: NineP.Protocol.FileFlags
+    commentId: T:NineP.Protocol.FileFlags
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol
+      url: NineP.Protocol.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: The non-permission mode bits of reference §4.4, dialect-neutral.
+- code: >-
+    [Flags]
+
+    public enum FileFlags
+- h2: Fields
+- parameters:
+  - name: Append
+    default: "1"
+    description: >+
+      Append only: writes ignore the offset and OTRUNC is ignored.
+
+  - name: Auth
+    default: "8"
+    description: >+
+      The authentication file behind an afid.
+
+  - name: Exclusive
+    default: "2"
+    description: >+
+      Exclusive use: one open fid at a time.
+
+  - name: Mount
+    default: "16"
+    description: >+
+      A mounted channel.
+
+  - name: None
+    default: "0"
+    description: >+
+      No flag is set.
+
+  - name: Temporary
+    default: "4"
+    description: >+
+      Not backed up.
+
+languageId: csharp
+metadata:
+  description: The non-permission mode bits of reference §4.4, dialect-neutral.

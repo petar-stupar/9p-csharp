@@ -1,0 +1,119 @@
+### YamlMime:ApiPage
+title: Struct Trename
+body:
+- api1: Struct Trename
+  id: NineP_Protocol_Messages_Trename
+  metadata:
+    uid: NineP.Protocol.Messages.Trename
+    commentId: T:NineP.Protocol.Messages.Trename
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol.Messages
+      url: NineP.Protocol.Messages.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: Renames a file into another directory (reference §3.4).
+- code: 'public readonly record struct Trename : IMessage, IEquatable<Trename>'
+- h4: Implements
+- list:
+  - text: IMessage
+    url: NineP.Protocol.Messages.IMessage.html
+  - text: IEquatable<Trename>
+    url: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+- h4: Inherited Members
+- list:
+  - text: object.Equals(object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - text: object.Equals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - text: object.GetHashCode()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - text: object.GetType()
+    url: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - text: object.ReferenceEquals(object?, object?)
+    url: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - text: object.ToString()
+    url: https://learn.microsoft.com/dotnet/api/system.object.tostring
+- h2: Constructors
+- api3: Trename(ushort, uint, uint, string)
+  id: NineP_Protocol_Messages_Trename__ctor_System_UInt16_System_UInt32_System_UInt32_System_String_
+  metadata:
+    uid: NineP.Protocol.Messages.Trename.#ctor(System.UInt16,System.UInt32,System.UInt32,System.String)
+    commentId: M:NineP.Protocol.Messages.Trename.#ctor(System.UInt16,System.UInt32,System.UInt32,System.String)
+- markdown: Renames a file into another directory (reference §3.4).
+- code: public Trename(ushort Tag, uint Fid, uint Dfid, string Name)
+- h4: Parameters
+- parameters:
+  - name: Tag
+    type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+    description: The message tag, which pairs this message with its partner.
+  - name: Fid
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The fid naming the file to rename.
+  - name: Dfid
+    type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    description: The fid naming the destination directory.
+  - name: Name
+    type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+    description: The new name.
+- h2: Properties
+- api3: Dfid
+  id: NineP_Protocol_Messages_Trename_Dfid
+  metadata:
+    uid: NineP.Protocol.Messages.Trename.Dfid
+    commentId: P:NineP.Protocol.Messages.Trename.Dfid
+- markdown: The fid naming the destination directory.
+- code: public uint Dfid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Fid
+  id: NineP_Protocol_Messages_Trename_Fid
+  metadata:
+    uid: NineP.Protocol.Messages.Trename.Fid
+    commentId: P:NineP.Protocol.Messages.Trename.Fid
+- markdown: The fid naming the file to rename.
+- code: public uint Fid { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: uint
+      url: https://learn.microsoft.com/dotnet/api/system.uint32
+- api3: Name
+  id: NineP_Protocol_Messages_Trename_Name
+  metadata:
+    uid: NineP.Protocol.Messages.Trename.Name
+    commentId: P:NineP.Protocol.Messages.Trename.Name
+- markdown: The new name.
+- code: public string Name { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: string
+      url: https://learn.microsoft.com/dotnet/api/system.string
+- api3: Tag
+  id: NineP_Protocol_Messages_Trename_Tag
+  metadata:
+    uid: NineP.Protocol.Messages.Trename.Tag
+    commentId: P:NineP.Protocol.Messages.Trename.Tag
+- markdown: The message tag, which pairs this message with its partner.
+- code: public ushort Tag { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: ushort
+      url: https://learn.microsoft.com/dotnet/api/system.uint16
+languageId: csharp
+metadata:
+  description: Renames a file into another directory (reference §3.4).

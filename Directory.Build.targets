@@ -1,0 +1,37 @@
+<Project>
+
+  <PropertyGroup>
+    <_NinePRoot>$(MSBuildThisFileDirectory)</_NinePRoot>
+    <_NinePIsSrc Condition="$(MSBuildProjectDirectory.StartsWith('$(_NinePRoot)src'))">true</_NinePIsSrc>
+    <_NinePIsExample Condition="$(MSBuildProjectDirectory.StartsWith('$(_NinePRoot)examples'))">true</_NinePIsExample>
+    <_NinePIsTest Condition="$(MSBuildProjectDirectory.StartsWith('$(_NinePRoot)tests'))">true</_NinePIsTest>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(_NinePIsSrc)' == 'true'">
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(_NinePIsExample)' == 'true' or '$(_NinePIsTest)' == 'true'">
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <!-- xunit.v3 hosts the Microsoft.Testing.Platform runner only when asked. Without this the test
+       assemblies run xunit's in-process runner, which rejects every platform option (the timeout
+       of Directory.Build.props, CI's TRX report switch, a method filter) as an unknown option, and
+       `dotnet test` then reports "Zero tests ran" for the whole solution. Set here, after the
+       project file, so that it never precedes a project's own TargetFrameworks. -->
+  <PropertyGroup Condition="'$(_NinePIsTest)' == 'true' and $(MSBuildProjectName.EndsWith('.Tests'))">
+    <UseMicrosoftTestingPlatformRunner>true</UseMicrosoftTestingPlatformRunner>
+    <TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(_NinePIsSrc)' == 'true'">
+    <PackageReference Include="Microsoft.CodeAnalysis.BannedApiAnalyzers" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
+    <PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
+    <AdditionalFiles Include="$(_NinePRoot)BannedSymbols.txt" />
+    <!-- PublicApiAnalyzers includes the shipped/unshipped baselines itself. -->
+    <None Include="$(_NinePRoot)README.md" Pack="true" PackagePath="/" Visible="false" />
+    <None Include="$(_NinePRoot)LICENSE" Pack="true" PackagePath="/" Visible="false" />
+  </ItemGroup>
+
+</Project>
