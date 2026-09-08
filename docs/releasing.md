@@ -11,7 +11,7 @@ packages are deliberately not published anywhere.
    README's install lines and the packaging test read it from there. Semantic versioning, and a
    prerelease is a prerelease suffix: `0.2.0-rc.1`.
 2. **Write the changelog.** Rename `## [Unreleased]` in [CHANGELOG.md](../CHANGELOG.md) to
-   `## [<version>] - <date>` and open a fresh `## [Unreleased]` above it. The section becomes the
+   `## [<version>] — <date>` and open a fresh `## [Unreleased]` above it. The section becomes the
    GitHub Release's notes verbatim, and the release refuses a version that has no section.
 3. **Merge to `main`** through the ordinary pull request and its three-platform gate.
 4. **Tag and push the tag** from the merge commit on `main`:
