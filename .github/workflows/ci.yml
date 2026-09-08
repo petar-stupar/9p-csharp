@@ -76,8 +76,10 @@ jobs:
 
       # ConformanceTests already runs the complete 145-outcome self scenario during Test.
 
+      # Without --libfuzzer this is the deterministic mutation loop over the golden corpus: managed
+      # code only, no native driver, so it runs on every platform in the matrix. libFuzzer proper
+      # stays a local exercise (docs/security.md §2).
       - name: Fuzz smoke
-        if: runner.os == 'Linux'
         run: dotnet run --project tests/NineP.Fuzz -c Release -- -max_total_time=60
 
       - name: Pack

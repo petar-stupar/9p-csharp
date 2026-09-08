@@ -25,7 +25,7 @@ count clamp.
 `tests/NineP.Fuzz` is a SharpFuzz / libFuzzer target over the decoder, its corpus seeded from the 77
 golden vectors of `docs/9p/fixtures/wire-vectors.json` (committed as hex, because the repository
 refuses to track a file containing control bytes, and materialised as `.bin` by
-`--seed-corpus`). CI runs a 60 s budget on Linux.
+`--seed-corpus`). CI runs a 60 s budget of the deterministic loop on Linux, macOS and Windows.
 
 The gate never depends on libFuzzer building: the same program runs a deterministic mutation loop
 with no instrumentation at all, and `CodecProperties` runs FsCheck properties plus a 20 000-input
