@@ -1,0 +1,139 @@
+name: release
+
+# A version reaches nuget.org from a tag, never from a push to main: a NuGet version is
+# immutable, so a push per commit would need a bump per commit or fail as a duplicate. The
+# procedure and the guards below are documented in docs/releasing.md.
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "The v* tag to release (it must already exist)"
+        required: true
+
+permissions:
+  contents: write # the GitHub Release
+  id-token: write # nuget.org Trusted Publishing
+
+env:
+  CI: "true"
+  DOTNET_NOLOGO: "true"
+  DOTNET_CLI_TELEMETRY_OPTOUT: "true"
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "true"
+
+jobs:
+  release:
+    name: release ${{ github.event.inputs.tag || github.ref_name }}
+    runs-on: ubuntu-latest
+    environment: release
+    env:
+      TAG: ${{ github.event.inputs.tag || github.ref_name }}
+      # Set when the account uses an API key instead of Trusted Publishing; see docs/releasing.md.
+      NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+
+    steps:
+      - name: Check out the tag
+        uses: actions/checkout@v7
+        with:
+          ref: refs/tags/${{ github.event.inputs.tag || github.ref_name }}
+          fetch-depth: 0
+
+      - name: The tag names the version in Directory.Build.props, sits on main, and has a changelog section
+        shell: bash
+        run: |
+          set -euo pipefail
+          version="$(sed -n 's/.*<Version>\([^<]*\)<\/Version>.*/\1/p' Directory.Build.props | head -1)"
+          test -n "$version" || { echo "Directory.Build.props has no <Version>"; exit 1; }
+          if [ "$TAG" != "v$version" ]; then
+            echo "tag $TAG does not name the version $version in Directory.Build.props"
+            exit 1
+          fi
+          git fetch --quiet origin main
+          if ! git merge-base --is-ancestor HEAD origin/main; then
+            echo "tag $TAG is not on main"
+            exit 1
+          fi
+          if ! grep -Eq "^## \[$version\]" CHANGELOG.md; then
+            echo "CHANGELOG.md has no '## [$version]' section; the release notes come from it"
+            exit 1
+          fi
+          echo "VERSION=$version" >> "$GITHUB_ENV"
+
+      - name: The version is not on nuget.org yet
+        shell: bash
+        run: |
+          set -euo pipefail
+          for id in ninep.protocol ninep.client ninep.server; do
+            code="$(curl -s -o index.json -w '%{http_code}' "https://api.nuget.org/v3-flatcontainer/$id/index.json")"
+            if [ "$code" = "200" ] && grep -q "\"$(echo "$VERSION" | tr '[:upper:]' '[:lower:]')\"" index.json; then
+              echo "$id $VERSION is already on nuget.org; a version is immutable, bump it instead"
+              exit 1
+            fi
+          done
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: global.json
+
+      - name: Restore with locked mode
+        run: dotnet restore --locked-mode
+
+      - name: Build
+        run: dotnet build -warnaserror -c Release --no-restore
+
+      - name: Test
+        run: dotnet test -c Release --no-build
+
+      - name: Lint
+        run: dotnet format --verify-no-changes
+
+      - name: Pack
+        run: dotnet pack -c Release --no-build -o artifacts
+
+      - name: Release notes from CHANGELOG.md
+        shell: bash
+        run: |
+          set -euo pipefail
+          awk -v v="$VERSION" '
+            $0 ~ "^## \\[" v "\\]" { on = 1; next }
+            on && /^## \[/ { exit }
+            on { print }
+          ' CHANGELOG.md > notes.md
+          test -s notes.md || { echo "the '## [$VERSION]' section of CHANGELOG.md is empty"; exit 1; }
+          cat notes.md
+
+      # Trusted Publishing: nuget.org exchanges this job's OIDC token for an API key that lives
+      # one hour, so it is requested right before the push. NUGET_USER is the nuget.org profile
+      # name (not the e-mail), kept as a secret so it is not in the workflow text.
+      - name: NuGet login (Trusted Publishing)
+        if: env.NUGET_API_KEY == ''
+        id: login
+        uses: NuGet/login@v1
+        with:
+          user: ${{ secrets.NUGET_USER }}
+
+      - name: Push to nuget.org
+        shell: bash
+        env:
+          TEMP_KEY: ${{ steps.login.outputs.NUGET_API_KEY }}
+        run: |
+          set -euo pipefail
+          key="${NUGET_API_KEY:-$TEMP_KEY}"
+          test -n "$key" || { echo "no API key: configure Trusted Publishing (NUGET_USER) or NUGET_API_KEY"; exit 1; }
+          # The .snupkg beside each .nupkg is pushed with it. --skip-duplicate makes a rerun after
+          # a partial push idempotent rather than a failure on the packages that already landed.
+          dotnet nuget push "artifacts/*.nupkg" --source https://api.nuget.org/v3/index.json --api-key "$key" --skip-duplicate
+
+      - name: GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          prerelease=""
+          case "$VERSION" in *-*) prerelease="--prerelease" ;; esac
+          gh release create "$TAG" artifacts/*.nupkg artifacts/*.snupkg \
+            --title "$TAG" --notes-file notes.md --verify-tag $prerelease

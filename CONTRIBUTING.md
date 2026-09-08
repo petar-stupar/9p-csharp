@@ -50,6 +50,13 @@ Restore runs in locked mode, so a bump must carry every `packages.lock.json` it 
 `docs/`, the README, the CHANGELOG and ARCHITECTURE.md are maintained in this repository; a change
 in behavior updates them in the same pull request, and measured claims carry their measurement.
 
+## Releasing
+
+A version reaches nuget.org from a `v*` tag on `main`, pushed by the owner; the `release`
+workflow checks the tag against `Directory.Build.props` and `CHANGELOG.md`, reruns the gate, and
+publishes through nuget.org Trusted Publishing. [docs/releasing.md](docs/releasing.md) has the
+procedure. Nothing is published per commit.
+
 ## The qode workflow
 
 The owner drives larger tickets through qode with the slash commands

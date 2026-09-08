@@ -375,6 +375,7 @@ Full detail, including how a token is obtained: [docs/auth.md](https://github.co
 | [docs/security.md](https://github.com/petar-stupar/9p-csharp/blob/main/docs/security.md) | the caps, the validation rules, and what is out of scope |
 | [docs/benchmarks.md](https://github.com/petar-stupar/9p-csharp/blob/main/docs/benchmarks.md) | measured throughput, latency, peak RSS and codec ns/op |
 | [docs/interop.md](https://github.com/petar-stupar/9p-csharp/blob/main/docs/interop.md) | what this implementation has been run against, and what it has not |
+| [docs/releasing.md](https://github.com/petar-stupar/9p-csharp/blob/main/docs/releasing.md) | how a version reaches nuget.org: tag, checks, Trusted Publishing |
 | `docs/api/` | the generated API reference (`dotnet tool restore && dotnet docfx metadata && dotnet docfx build`) |
 
 ## Building and testing

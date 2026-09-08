@@ -24,6 +24,14 @@ All notable changes to this repository are recorded here. The format follows
   with absolute URLs so that it renders on nuget.org as well as on GitHub. `PackagingTests` pins
   every one of them in the nuspec.
 
+### Releasing
+
+- A `release` workflow publishes the three packages to nuget.org from a `v<version>` tag on
+  `main`, after checking the tag against `Directory.Build.props` and `CHANGELOG.md`, that the
+  version is not on nuget.org yet, and that the gate is green on that commit; it creates the
+  GitHub Release with the changelog section as its notes. Trusted Publishing by default, an API
+  key as the fallback. [docs/releasing.md](docs/releasing.md) documents it.
+
 ### Continuous integration
 
 - Windows joins Linux and macOS in the CI matrix, so the packages are built, tested and
