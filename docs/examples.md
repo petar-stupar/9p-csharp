@@ -29,6 +29,7 @@ it. Everything below is the detail behind those three commands.
 
 ```text
 jsonfs --listen <url> [--listen <url>...] --file <path.json> [--writable] [--write-back]
+       [--write-back-delay <ms>] [--max-entries <n>]
        [--dialects 9P2000,9P2000.u,9P2000.L]
        [--auth none|token:<secret>|password-file:<path>]
        [--tls-cert <pem> --tls-key <pem> --tls-client-ca <pem>]
@@ -110,10 +111,30 @@ whose directory sync fails is answered `EIO`: the document has been renamed, but
 flag promises was not delivered, and a write that says so is retried where one that hides it is
 trusted.
 
+`--write-back-delay <ms>` **implies `--write-back`**, as `--write-back` implies `--writable`: a
+window is only ever measured for a write-back. With `0`, the default, the document is rewritten
+inside every change, as before. With a positive value the first change opens a window of that many
+milliseconds and every change inside it rides along; when the window closes the document is
+rewritten once, through the same temp file, rename and directory `fsync`. A rewrite the window
+cannot make leaves the old document whole and the document dirty, and the next window retries; an
+`fsync` on any file rewrites at once and reports the failure. A graceful stop writes back what the
+open window still owes before exiting, so a change made just before the stop survives a restart
+(conformance Part B step 8); a stop that is not graceful loses at most one window, which is the
+trade the flag names. If that final rewrite fails, jsonfs prints the error and exits **1** rather
+than exiting clean over a stale document.
+
+`--max-entries <n>` (default `100000`) bounds the entries — every object key and every array
+element, anywhere in the document — the served document may hold, beside the 64 MiB and 256-level
+caps. The create or `mkdir` that would go past it is answered `No space left on device` / `ENOSPC`
+and changes nothing (reference §8 rule 27); a rename moves an entry without adding one; a remove
+frees the count, so the next create succeeds. It is the handler's half of reference §8 rule 40:
+the library bounds what a peer may spend on the wire, and only a handler knows what an entry costs
+to store.
+
 ### Refusals at startup
 
-A document of 64 MiB or more, or one nested deeper than 256 levels, is refused before it is
-served. The process prints a message naming the limit and exits **3**.
+A document of 64 MiB or more, one nested deeper than 256 levels, or one holding more than
+`--max-entries` entries is refused before it is served. The process prints a message naming the limit and exits **3**.
 
 A `--tls-cert` / `--tls-key` / `--tls-client-ca` with no `tls://` or `wss://` `--listen`, and a
 `--ws-origin` with no `ws://` or `wss://` one, are **accepted and unused**: the listeners jsonfs was

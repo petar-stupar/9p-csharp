@@ -19,6 +19,12 @@ All notable changes to this repository are recorded here. The format follows
   making the server pay for a PBKDF2 derivation. The in-process transport is exempt from the two
   address budgets. `ServerCounters` gains `RequestsMetered` and `AuthAttemptsThrottled`.
 
+- **jsonfs bounds its entries and can coalesce write-back.** `--max-entries` (100000) refuses the
+  create or `mkdir` that would exceed it with `ENOSPC`, whole or nothing, beside the existing byte
+  and depth caps, and a document already over the cap is refused at startup. `--write-back-delay`
+  rewrites the document once per window instead of once per change, flushing what it owes on a
+  graceful stop so a change made just before it survives a restart.
+
 - **todofs enforces per-user quotas.** `--max-lists` (1000) and `--max-items` (10000) refuse the
   `mkdir` that would exceed them with `ENOSPC`, counted and inserted inside one writer
   transaction so two creates racing at the cap yield exactly one row.

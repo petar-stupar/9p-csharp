@@ -209,4 +209,6 @@ Reading the table:
 | 182 | Ref §8.40 | A successful attach clears whatever the address had spent | `ResourceLimitTests.ASuccessClearsTheAddressBudget` | limits |
 | 183 | Ref §8.40 | todofs refuses a create past a per-user quota with ENOSPC, inside the writer transaction | `TodoFsItemTests.ListAndItemQuotasAreEnospc` | limits |
 | 184 | Ref §8.40 | Two creates racing at the quota yield exactly one row | `TodoFsStoreTests.TwoConcurrentCreatesAtTheQuotaHaveExactlyOneWinner` | limits |
+| 185 | Ref §8.40 | jsonfs refuses a create past its entry cap with ENOSPC and changes nothing | `JsonFsTests.CreateBeyondMaxEntriesIsEnospc` | limits |
+| 186 | Ref §8.40 | A coalescing write-back rewrites once per window and flushes what it owes on shutdown | `JsonFsTests.WriteBackIsCoalescedAndFlushedOnShutdown` | limits |
 
