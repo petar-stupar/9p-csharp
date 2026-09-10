@@ -23,23 +23,38 @@ internal sealed partial class TodoStore : IAsyncDisposable
     private readonly SqliteConnection _writer;
     private readonly string _connectionString;
     private readonly TimeProvider _clock;
+    private readonly TodoQuotas _quotas;
 
-    private TodoStore(SqliteConnection writer, string connectionString, TimeProvider clock)
+    private TodoStore(
+        SqliteConnection writer, string connectionString, TimeProvider clock, TodoQuotas quotas)
     {
         _writer = writer;
         _connectionString = connectionString;
         _clock = clock;
+        _quotas = quotas;
     }
+
+    /// <summary>The quotas every create is checked against, inside its transaction.</summary>
+    public TodoQuotas Quotas => _quotas;
 
     /// <summary>Opens or creates a database and brings its schema up to this build's version.</summary>
     /// <param name="path">The database file.</param>
     /// <param name="clock">The clock every timestamp comes from.</param>
+    /// <param name="quotas">The list and item quotas; the defaults when null.</param>
     /// <param name="cancellationToken">Cancels the work.</param>
     /// <returns>The open store.</returns>
     /// <exception cref="TodoSchemaException">The database is newer than this build.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">A quota is below one.</exception>
     public static async Task<TodoStore> OpenAsync(
-        string path, TimeProvider? clock = null, CancellationToken cancellationToken = default)
+        string path,
+        TimeProvider? clock = null,
+        TodoQuotas? quotas = null,
+        CancellationToken cancellationToken = default)
     {
+        TodoQuotas limits = quotas ?? new TodoQuotas();
+        ArgumentOutOfRangeException.ThrowIfLessThan(limits.MaxLists, 1, nameof(quotas));
+        ArgumentOutOfRangeException.ThrowIfLessThan(limits.MaxItems, 1, nameof(quotas));
+
         string connectionString = new SqliteConnectionStringBuilder
         {
             DataSource = path,
@@ -59,7 +74,7 @@ internal sealed partial class TodoStore : IAsyncDisposable
             throw;
         }
 
-        return new TodoStore(writer, connectionString, clock ?? TimeProvider.System);
+        return new TodoStore(writer, connectionString, clock ?? TimeProvider.System, limits);
     }
 
     /// <summary>Closes the writer connection.</summary>
@@ -239,6 +254,80 @@ internal sealed partial class TodoStore : IAsyncDisposable
             bind(command);
 
             return await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
+        }
+        finally
+        {
+            _writerGate.Release();
+        }
+    }
+
+    /// <summary>
+    /// Runs one insert on the writer connection, under its gate and inside one immediate
+    /// transaction with the count that decides whether the insert may happen at all. The count
+    /// and the insert see the same snapshot and no other writer can interleave between them, so
+    /// two creates racing at the cap yield exactly one row: whichever runs second counts the
+    /// first's row and is refused. A refusal rolls the transaction back with nothing written.
+    /// </summary>
+    /// <param name="countSql">The parameterised count of what the insert would add one to.</param>
+    /// <param name="bindCount">Adds the count's parameters.</param>
+    /// <param name="max">The most the count may already be for the insert to proceed.</param>
+    /// <param name="insertSql">The parameterised insert.</param>
+    /// <param name="bindInsert">Adds the insert's parameters.</param>
+    /// <param name="refusal">The message of the exception when the count is at the cap.</param>
+    /// <param name="cancellationToken">Cancels the work.</param>
+    /// <returns>The number of rows the insert affected.</returns>
+    /// <exception cref="TodoQuotaException">The count is already at <paramref name="max"/>.</exception>
+    private async Task<int> InsertWithinQuotaAsync(
+        string countSql,
+        Action<SqliteCommand> bindCount,
+        int max,
+        string insertSql,
+        Action<SqliteCommand> bindInsert,
+        string refusal,
+        CancellationToken cancellationToken)
+    {
+        await _writerGate.WaitAsync(cancellationToken).ConfigureAwait(false);
+
+        try
+        {
+            // Immediate, not deferred: Microsoft.Data.Sqlite's default isolation level begins the
+            // transaction with the write lock taken, so the count below is already the count no
+            // other connection can change before the insert commits.
+            await using SqliteTransaction transaction = (SqliteTransaction)
+                await _writer.BeginTransactionAsync(cancellationToken).ConfigureAwait(false);
+
+            await using (SqliteCommand count = _writer.CreateCommand())
+            {
+                count.Transaction = transaction;
+
+                // CA2100: as in WriteAsync, the statement text is a constant of this assembly.
+#pragma warning disable CA2100
+                count.CommandText = countSql;
+#pragma warning restore CA2100
+                bindCount(count);
+
+                object? held = await count.ExecuteScalarAsync(cancellationToken).ConfigureAwait(false);
+                if (Convert.ToInt64(held, CultureInfo.InvariantCulture) >= max)
+                {
+                    // Disposing the transaction without a commit rolls it back.
+                    throw new TodoQuotaException(refusal);
+                }
+            }
+
+            int affected;
+            await using (SqliteCommand insert = _writer.CreateCommand())
+            {
+                insert.Transaction = transaction;
+#pragma warning disable CA2100
+                insert.CommandText = insertSql;
+#pragma warning restore CA2100
+                bindInsert(insert);
+
+                affected = await insert.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
+            }
+
+            await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
+            return affected;
         }
         finally
         {

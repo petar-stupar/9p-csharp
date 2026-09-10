@@ -46,7 +46,11 @@ internal sealed class TodoListDirectory(
     /// <param name="request">Everything the create messages carry, unified.</param>
     /// <param name="cancellationToken">Cancels the create.</param>
     /// <returns>The new item's handler.</returns>
-    /// <exception cref="NinePException">The name is not the next number, or the kind is wrong.</exception>
+    /// <exception cref="NinePException">
+    /// The name is not the next number, the kind is wrong, or the list is at <c>--max-items</c>
+    /// (<c>ENOSPC</c>). The quota is the store's to decide, inside the create's own transaction:
+    /// a count here would be a second, racing, check (E2).
+    /// </exception>
     public override async ValueTask<IHandler> CreateAsync(
         CreateRequest request, CancellationToken cancellationToken = default)
     {
@@ -72,8 +76,16 @@ internal sealed class TodoListDirectory(
             throw Invalid();
         }
 
-        ItemRow created = await Session.Store
-            .CreateItemAsync(owner.Id, list.Id, index, cancellationToken).ConfigureAwait(false);
+        ItemRow created;
+        try
+        {
+            created = await Session.Store
+                .CreateItemAsync(owner.Id, list.Id, index, cancellationToken).ConfigureAwait(false);
+        }
+        catch (TodoQuotaException)
+        {
+            throw new NinePException(NinePError.FromErrno(Errno.ENOSPC));
+        }
 
         return new TodoItemDirectory(Session, owner, list, created);
     }

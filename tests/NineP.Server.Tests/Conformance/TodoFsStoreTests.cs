@@ -17,6 +17,9 @@ namespace NineP.Server.Tests.Conformance;
 [Trait("Category", "Conformance")]
 public sealed class TodoFsStoreTests : IAsyncLifetime
 {
+    /// <summary>The sorted outcome of a race at the cap: one refusal (false), one row (true).</summary>
+    private static readonly bool[] OneRefusalOneRow = [false, true];
+
     private string _directory = string.Empty;
 
     private static CancellationToken Ct => TestDeadlines.Wrap(TestContext.Current.CancellationToken);
@@ -72,6 +75,42 @@ public sealed class TodoFsStoreTests : IAsyncLifetime
         IReadOnlyList<ListRow> lists = await store.ListListsAsync(user.Id, Ct);
         Assert.Equal(50, lists.Count);
         Assert.Equal([.. Enumerable.Range(0, 50).Select(i => (long)i)], lists.Select(row => row.Index));
+    }
+
+    /// <summary>
+    /// Ticket 015 E2, the pattern of <c>BoundaryTests.F26_ConcurrentCreatesHaveExactlyOneWinner</c>
+    /// at the store: with one slot left under the quota, two creates released together yield
+    /// exactly one row and one <see cref="TodoQuotaException"/>, for lists and for items. The
+    /// count runs inside the insert's own transaction under the writer gate; a count taken before
+    /// the gate, or on the read path, would let both pass.
+    /// <b>Mutation:</b> take the count of <c>TodoStore.InsertWithinQuotaAsync</c> before the gate,
+    /// or drop the refusal, and the row counts below read three.
+    /// </summary>
+    [Fact]
+    public async Task TwoConcurrentCreatesAtTheQuotaHaveExactlyOneWinner()
+    {
+        await using TodoStore store = await TodoStore.OpenAsync(
+            Path.Combine(_directory, "todo.sqlite"),
+            quotas: new TodoQuotas { MaxLists = 2, MaxItems = 2 },
+            cancellationToken: Ct);
+        UserRow user = await store.EnsureUserAsync("glenda", Ct);
+        ListRow list = await store.CreateListAsync(user.Id, 0, Ct);
+
+        Assert.Equal(
+            OneRefusalOneRow,
+            await RaceAsync(
+                () => store.CreateListAsync(user.Id, 1, Ct),
+                () => store.CreateListAsync(user.Id, 2, Ct)));
+        Assert.Equal(2, (await store.ListListsAsync(user.Id, Ct)).Count);
+
+        await store.CreateItemAsync(user.Id, list.Id, 0, Ct);
+
+        Assert.Equal(
+            OneRefusalOneRow,
+            await RaceAsync(
+                () => store.CreateItemAsync(user.Id, list.Id, 1, Ct),
+                () => store.CreateItemAsync(user.Id, list.Id, 2, Ct)));
+        Assert.Equal(2, (await store.ListItemsAsync(user.Id, list.Id, Ct)).Count);
     }
 
     /// <summary>A database written by a newer build is refused, with a message naming both versions.</summary>
@@ -166,6 +205,35 @@ public sealed class TodoFsStoreTests : IAsyncLifetime
         Assert.Empty(await store.ListItemsAsync(a.Id, theirs.Id, Ct));
         Assert.False(await store.RemoveListAsync(a.Id, theirs.Id, Ct));
         Assert.False(await store.SetListNameAsync(a.Id, theirs.Id, "mine", Ct));
+    }
+
+    /// <summary>
+    /// Releases two creates together and reports which won, sorted: a refusal is false, a row is
+    /// true. Anything but a quota refusal is a failure of the test, not an outcome.
+    /// </summary>
+    private static async Task<bool[]> RaceAsync(Func<Task> first, Func<Task> second)
+    {
+        TaskCompletionSource start = new(TaskCreationOptions.RunContinuationsAsynchronously);
+
+        async Task<bool> Create(Func<Task> create)
+        {
+            await start.Task;
+            try
+            {
+                await create();
+                return true;
+            }
+            catch (TodoQuotaException)
+            {
+                return false;
+            }
+        }
+
+        Task<bool> a = Task.Run(() => Create(first), Ct);
+        Task<bool> b = Task.Run(() => Create(second), Ct);
+        start.SetResult();
+
+        return [.. (await Task.WhenAll(a, b)).Order()];
     }
 
     private Task<TodoStore> OpenAsync() =>

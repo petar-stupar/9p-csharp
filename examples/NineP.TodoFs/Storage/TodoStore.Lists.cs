@@ -48,17 +48,25 @@ internal sealed partial class TodoStore
         return found.Count == 0 ? null : found[0];
     }
 
-    /// <summary>Creates a list at an index of this user's own numbering.</summary>
+    /// <summary>
+    /// Creates a list at an index of this user's own numbering, unless the user already holds
+    /// <see cref="TodoQuotas.MaxLists"/>. The count and the insert are one transaction under the
+    /// writer gate, so the cap holds under concurrent creates (E2).
+    /// </summary>
     /// <param name="userId">The attaching user's id.</param>
     /// <param name="index">The list's number.</param>
     /// <param name="cancellationToken">Cancels the work.</param>
     /// <returns>The new row.</returns>
     /// <exception cref="SqliteException">The index is already taken.</exception>
+    /// <exception cref="TodoQuotaException">The user is at the list quota; nothing was written.</exception>
     public async Task<ListRow> CreateListAsync(
         long userId, long index, CancellationToken cancellationToken = default)
     {
         long now = Now();
-        await WriteAsync(
+        await InsertWithinQuotaAsync(
+            "SELECT COUNT(*) FROM lists WHERE user_id = @uid",
+            command => command.Parameters.AddWithValue("@uid", userId),
+            _quotas.MaxLists,
             "INSERT INTO lists (user_id, idx, name, created_at, updated_at) "
             + "VALUES (@uid, @idx, '', @now, @now)",
             command =>
@@ -67,6 +75,7 @@ internal sealed partial class TodoStore
                 command.Parameters.AddWithValue("@idx", index);
                 command.Parameters.AddWithValue("@now", now);
             },
+            "the user already holds the most lists --max-lists allows",
             cancellationToken).ConfigureAwait(false);
 
         return await FindListAsync(userId, index, cancellationToken).ConfigureAwait(false)
@@ -158,18 +167,31 @@ internal sealed partial class TodoStore
         return found.Count == 0 ? null : found[0];
     }
 
-    /// <summary>Creates an item with an empty label and description and status <c>open</c>.</summary>
+    /// <summary>
+    /// Creates an item with an empty label and description and status <c>open</c>, unless the
+    /// list already holds <see cref="TodoQuotas.MaxItems"/>. The count and the insert are one
+    /// transaction under the writer gate, so the cap holds under concurrent creates (E2).
+    /// </summary>
     /// <param name="userId">The attaching user's id.</param>
     /// <param name="listId">The list.</param>
     /// <param name="index">The item's number.</param>
     /// <param name="cancellationToken">Cancels the work.</param>
     /// <returns>The new row.</returns>
     /// <exception cref="SqliteException">The index is already taken.</exception>
+    /// <exception cref="TodoQuotaException">The list is at the item quota; nothing was written.</exception>
     public async Task<ItemRow> CreateItemAsync(
         long userId, long listId, long index, CancellationToken cancellationToken = default)
     {
         long now = Now();
-        await WriteAsync(
+        await InsertWithinQuotaAsync(
+            "SELECT COUNT(*) FROM items JOIN lists ON lists.id = items.list_id "
+            + "WHERE items.list_id = @lid AND lists.user_id = @uid",
+            command =>
+            {
+                command.Parameters.AddWithValue("@lid", listId);
+                command.Parameters.AddWithValue("@uid", userId);
+            },
+            _quotas.MaxItems,
             "INSERT INTO items (list_id, idx, label, description, status, created_at, updated_at) "
             + "SELECT @lid, @idx, '', '', 'open', @now, @now FROM lists "
             + "WHERE lists.id = @lid AND lists.user_id = @uid",
@@ -180,6 +202,7 @@ internal sealed partial class TodoStore
                 command.Parameters.AddWithValue("@now", now);
                 command.Parameters.AddWithValue("@uid", userId);
             },
+            "the list already holds the most items --max-items allows",
             cancellationToken).ConfigureAwait(false);
 
         return await FindItemAsync(userId, listId, index, cancellationToken).ConfigureAwait(false)

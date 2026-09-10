@@ -4,6 +4,7 @@ using System.Security.Cryptography.X509Certificates;
 using Microsoft.Extensions.Logging;
 using NineP.Protocol;
 using NineP.Protocol.Transports;
+using NineP.TodoFs.Storage;
 
 namespace NineP.TodoFs;
 
@@ -14,12 +15,14 @@ internal sealed record TodoFsOptions
     public const string Usage = """
         usage: todofs --listen <url>... --db <path.sqlite> --oidc-issuer <url>
                       --oidc-audience <aud> [--admin-role todofs-admin] [--jwks-cache <secs>]
-                      [--allow-insecure-issuer]
+                      [--allow-insecure-issuer] [--max-lists 1000] [--max-items 10000]
                       [--dialects 9P2000,9P2000.u,9P2000.L]
                       [--tls-cert <pem> --tls-key <pem> --tls-client-ca <pem>] [--log <level>]
 
         --allow-insecure-issuer  fetch the realm's discovery and JWKS documents over plain HTTP;
                                for a loopback development issuer only
+        --max-lists <n>          the most lists one user may hold; a mkdir past it is ENOSPC
+        --max-items <n>          the most items one list may hold; a mkdir past it is ENOSPC
         """;
 
     /// <summary>Addresses to bind; at least one is required.</summary>
@@ -39,6 +42,12 @@ internal sealed record TodoFsOptions
 
     /// <summary>How long the realm's JWKS is reused.</summary>
     public TimeSpan JwksCache { get; init; } = TimeSpan.FromMinutes(5);
+
+    /// <summary>
+    /// The list and item quotas of <c>--max-lists</c> and <c>--max-items</c> (ticket 015, E2),
+    /// which the store enforces inside the create's transaction.
+    /// </summary>
+    public TodoQuotas Quotas { get; init; } = new();
 
     /// <summary>The dialects this server will negotiate.</summary>
     public IReadOnlySet<Dialect> Dialects { get; init; } =
@@ -100,6 +109,18 @@ internal sealed record TodoFsOptions
                     break;
                 case "--allow-insecure-issuer":
                     options = options with { RequireHttps = false };
+                    break;
+                case "--max-lists":
+                    options = options with
+                    {
+                        Quotas = options.Quotas with { MaxLists = ParseCount("--max-lists", Value(args, ref i)) },
+                    };
+                    break;
+                case "--max-items":
+                    options = options with
+                    {
+                        Quotas = options.Quotas with { MaxItems = ParseCount("--max-items", Value(args, ref i)) },
+                    };
                     break;
                 case "--dialects":
                     options = options with { Dialects = ParseDialects(Value(args, ref i)) };
@@ -172,6 +193,16 @@ internal sealed record TodoFsOptions
         int.TryParse(value, NumberStyles.None, CultureInfo.InvariantCulture, out int seconds)
             ? TimeSpan.FromSeconds(seconds)
             : throw new TodoFsUsageException("--jwks-cache takes a number of seconds");
+
+    /// <summary>A quota is a whole number of at least one: zero would refuse every create.</summary>
+    /// <param name="flag">The flag being parsed, for the usage error.</param>
+    /// <param name="value">Its text.</param>
+    /// <returns>The count.</returns>
+    /// <exception cref="TodoFsUsageException">The text is not a positive whole number.</exception>
+    private static int ParseCount(string flag, string value) =>
+        int.TryParse(value, NumberStyles.None, CultureInfo.InvariantCulture, out int count) && count >= 1
+            ? count
+            : throw new TodoFsUsageException(flag + " takes a whole number of at least one");
 
     private static HashSet<Dialect> ParseDialects(string value)
     {

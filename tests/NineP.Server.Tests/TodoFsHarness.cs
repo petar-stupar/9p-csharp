@@ -33,14 +33,18 @@ internal sealed class TodoFsHarness : IAsyncDisposable
 
     /// <summary>Starts a server over a fresh database.</summary>
     /// <param name="roles">Realm roles per user name; a user not named here has none.</param>
+    /// <param name="quotas">The list and item quotas; the shipped defaults when null.</param>
     /// <returns>The running harness.</returns>
-    public static async Task<TodoFsHarness> StartAsync(IReadOnlyDictionary<string, string[]>? roles = null)
+    public static async Task<TodoFsHarness> StartAsync(
+        IReadOnlyDictionary<string, string[]>? roles = null, TodoQuotas? quotas = null)
     {
         string directory = Path.Combine(Path.GetTempPath(), "todofs-" + Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(directory);
 
         TodoStore store = await TodoStore.OpenAsync(
-            Path.Combine(directory, "todo.sqlite"), cancellationToken: TestDeadlines.Wrap(TestContext.Current.CancellationToken));
+            Path.Combine(directory, "todo.sqlite"),
+            quotas: quotas,
+            cancellationToken: TestDeadlines.Wrap(TestContext.Current.CancellationToken));
 
         TodoFilesystem tree = new(store);
 
