@@ -100,6 +100,13 @@ All notable changes to this repository are recorded here. The format follows
   connection with a `NinePVersionException` that quotes it, instead of terminating the session
   over "unknown tag 65535"; diod answers a dialect it does not speak that way. Named test
   `ClientInteropRegressionTests.AnErrorAnsweringTheVersionRequestIsAVersionError`.
+- Client: disposing a session whose connection has already died no longer throws. The courtesy
+  clunks `NinePSession.DisposeAsync` issues cannot reach a dead peer, and the send path rethrows
+  whatever the transport raised without wrapping it, so an `IOException` from a real socket — or an
+  `InvalidOperationException` from a pipe whose writer was completed — escaped `DisposeAsync` when
+  the write lost the race against the reader noticing the termination. `await using` on a session
+  whose server has gone away is exactly when a caller can least afford a new exception. Named test
+  `ClientLifetimeRegressionTests.DisposingASessionWhoseServerIsGoneIsQuiet`.
 - Tests: `FakeOidcIssuer.Dispose` bounds the wait for its serving loop at five seconds. Closing an
   `HttpListener` is meant to wake a pending `GetContextAsync` and the managed listener does not
   always do so, so an unbounded wait could park a whole `dotnet test` run indefinitely — observed

@@ -550,11 +550,18 @@ public sealed class NinePSession : IAsyncDisposable
         {
             await fid.DisposeAsync().ConfigureAwait(false);
         }
-        catch (Exception failure) when (failure is NinePException or ObjectDisposedException
-            or TimeoutException or OperationCanceledException)
+        catch (Exception failure) when (failure is NinePException or IOException
+            or ObjectDisposedException or InvalidOperationException or TimeoutException
+            or OperationCanceledException)
         {
             // The connection is going away; a fid the server will forget anyway is not news, and
-            // one clunk's failure must not stop the others or the socket being closed.
+            // one clunk's failure must not stop the others or the socket being closed. The list
+            // covers a socket that broke under the writer as well as a session already declared
+            // terminated: the send path rethrows what the transport raised without wrapping it, so
+            // an IOException from a real socket -- or an InvalidOperationException from a pipe
+            // whose writer was completed -- arrives here unchanged, and only a NinePException does
+            // when the reader noticed the death first. Catching the second but not the first made
+            // disposal throw or not depending on which of the two won a race.
         }
     }
 
@@ -651,6 +658,12 @@ public sealed class NinePSession : IAsyncDisposable
         catch (NinePException)
         {
             // clunk(5): the fid is gone whatever the reply says.
+        }
+        catch (Exception failure) when (failure is IOException or ObjectDisposedException
+            or InvalidOperationException or TimeoutException or OperationCanceledException)
+        {
+            // The same dead connection the fid overload above describes, on the afid path. The
+            // fid is returned in the finally either way.
         }
         finally
         {
