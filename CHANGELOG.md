@@ -6,6 +6,8 @@ All notable changes to this repository are recorded here. The format follows
 
 ## [Unreleased]
 
+## [0.2.0] — 2026-09-10
+
 ### Abuse budgets — 2026-09-10
 
 - **`Limits` gains four bounds and a window** (reference §8 rule 40, ticket 015).
@@ -81,6 +83,7 @@ All notable changes to this repository are recorded here. The format follows
   `EACCES` (conformance E9 and F5 assert it in every dialect). The fixture
   `docs/9p/fixtures/linux-9p-errors.json` is generated from the kernel source at a pinned commit
   and `ErrorTableTests` holds the table to it. Owner decision of 2026-09-10 after the interop runs.
+
 ### Interop
 
 - The Linux kernel client (v9fs) mounts `jsonfs` in all three dialects, diod and `p9ufs` serve
@@ -97,6 +100,10 @@ All notable changes to this repository are recorded here. The format follows
   connection with a `NinePVersionException` that quotes it, instead of terminating the session
   over "unknown tag 65535"; diod answers a dialect it does not speak that way. Named test
   `ClientInteropRegressionTests.AnErrorAnsweringTheVersionRequestIsAVersionError`.
+- Tests: `FakeOidcIssuer.Dispose` bounds the wait for its serving loop at five seconds. Closing an
+  `HttpListener` is meant to wake a pending `GetContextAsync` and the managed listener does not
+  always do so, so an unbounded wait could park a whole `dotnet test` run indefinitely — observed
+  on macOS at zero CPU. No shipped code is affected.
 
 ## [0.1.0] — 2026-09-08
 
