@@ -207,3 +207,6 @@ Reading the table:
 | 180 | Ref §8.40 | Past the per-address budget a `Tauth` is refused before the authenticator is asked | `ResourceLimitTests.AnAuthFloodStopsPayingTheDerivation` | limits |
 | 181 | Ref §8.40 | A budget of zero throttles nothing, which is how an operator opts out | `ResourceLimitTests.ABudgetOfZeroThrottlesNothing` | limits |
 | 182 | Ref §8.40 | A successful attach clears whatever the address had spent | `ResourceLimitTests.ASuccessClearsTheAddressBudget` | limits |
+| 183 | Ref §8.40 | todofs refuses a create past a per-user quota with ENOSPC, inside the writer transaction | `TodoFsItemTests.ListAndItemQuotasAreEnospc` | limits |
+| 184 | Ref §8.40 | Two creates racing at the quota yield exactly one row | `TodoFsStoreTests.TwoConcurrentCreatesAtTheQuotaHaveExactlyOneWinner` | limits |
+

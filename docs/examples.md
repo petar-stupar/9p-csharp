@@ -246,6 +246,14 @@ read from the token's `realm_access.roles`; everyone else gets `EACCES` on the r
 write. `remove` takes the user's lists and items with it, through the schema's cascade. A user who
 authenticates but has no row is created on attach.
 
+**Quotas.** `--max-lists <n>` (default 1000) is the most lists one user may hold and
+`--max-items <n>` (default 10000) the most items one list may hold. The `mkdir` that would exceed
+either is refused with `ENOSPC` and nothing is created; an `rmdir` frees a slot. The store enforces
+both inside the create's own writer transaction — the count and the insert are one atomic step — so
+two creates racing at the cap yield exactly one row, and the handler layer never pre-checks. This is
+the handler's half of reference §8 rule 40: the library bounds what a peer may spend on the wire,
+and only a handler knows what an entry costs to store.
+
 **Lists and items.** `mkdir /users/<u>/<n>` creates a list, where `n` must be the **next** number;
 anything else is `EINVAL`, so the lists that already exist never change name. Its `name` file is
 empty until written. `mkdir .../<n>/<m>` creates an item with an empty label and description and

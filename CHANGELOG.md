@@ -19,6 +19,14 @@ All notable changes to this repository are recorded here. The format follows
   making the server pay for a PBKDF2 derivation. The in-process transport is exempt from the two
   address budgets. `ServerCounters` gains `RequestsMetered` and `AuthAttemptsThrottled`.
 
+- **todofs enforces per-user quotas.** `--max-lists` (1000) and `--max-items` (10000) refuse the
+  `mkdir` that would exceed them with `ENOSPC`, counted and inserted inside one writer
+  transaction so two creates racing at the cap yield exactly one row.
+
+- **Interop reads a multi-chunk file.** Every external peer row now also reads a 32 KiB file whose
+  every eight-byte block encodes its own offset, at `msize 4096` where the peer allows it, so a
+  `Tread` answered out of order, twice or not at all changes the bytes and not only the count.
+
 ### Test audit 002 — 2026-09-10
 
 - **Server:** a `Tsetattr` with `valid = 0` validates the fid and answers `Rsetattr` without calling the handler; `ATIME_SET` / `MTIME_SET` without their base bit are `EINVAL`; a directory length change is refused in the core before the handler (`.L`: any size; 9P2000/.u: a non-zero length, per stat(5)).
