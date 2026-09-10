@@ -3,6 +3,7 @@ title: Struct Tlock
 body:
 - api1: Struct Tlock
   id: NineP_Protocol_Messages_Tlock
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tlock.cs#L9
   metadata:
     uid: NineP.Protocol.Messages.Tlock
     commentId: T:NineP.Protocol.Messages.Tlock
@@ -38,6 +39,7 @@ body:
 - h2: Constructors
 - api3: Tlock(ushort, uint, LockRequest)
   id: NineP_Protocol_Messages_Tlock__ctor_System_UInt16_System_UInt32_NineP_Protocol_LockRequest_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tlock.cs#L9
   metadata:
     uid: NineP.Protocol.Messages.Tlock.#ctor(System.UInt16,System.UInt32,NineP.Protocol.LockRequest)
     commentId: M:NineP.Protocol.Messages.Tlock.#ctor(System.UInt16,System.UInt32,NineP.Protocol.LockRequest)
@@ -63,6 +65,7 @@ body:
 - h2: Properties
 - api3: Fid
   id: NineP_Protocol_Messages_Tlock_Fid
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tlock.cs#L9
   metadata:
     uid: NineP.Protocol.Messages.Tlock.Fid
     commentId: P:NineP.Protocol.Messages.Tlock.Fid
@@ -75,6 +78,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Request
   id: NineP_Protocol_Messages_Tlock_Request
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tlock.cs#L9
   metadata:
     uid: NineP.Protocol.Messages.Tlock.Request
     commentId: P:NineP.Protocol.Messages.Tlock.Request
@@ -87,6 +91,7 @@ body:
       url: NineP.Protocol.LockRequest.html
 - api3: Tag
   id: NineP_Protocol_Messages_Tlock_Tag
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tlock.cs#L9
   metadata:
     uid: NineP.Protocol.Messages.Tlock.Tag
     commentId: P:NineP.Protocol.Messages.Tlock.Tag

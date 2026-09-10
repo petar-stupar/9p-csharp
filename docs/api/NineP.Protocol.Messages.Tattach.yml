@@ -3,6 +3,7 @@ title: Struct Tattach
 body:
 - api1: Struct Tattach
   id: NineP_Protocol_Messages_Tattach
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tattach.cs#L14
   metadata:
     uid: NineP.Protocol.Messages.Tattach
     commentId: T:NineP.Protocol.Messages.Tattach
@@ -38,6 +39,7 @@ body:
 - h2: Constructors
 - api3: Tattach(ushort, uint, uint, string, string, uint)
   id: NineP_Protocol_Messages_Tattach__ctor_System_UInt16_System_UInt32_System_UInt32_System_String_System_String_System_UInt32_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tattach.cs#L14
   metadata:
     uid: NineP.Protocol.Messages.Tattach.#ctor(System.UInt16,System.UInt32,System.UInt32,System.String,System.String,System.UInt32)
     commentId: M:NineP.Protocol.Messages.Tattach.#ctor(System.UInt16,System.UInt32,System.UInt32,System.String,System.String,System.UInt32)
@@ -82,6 +84,7 @@ body:
 - h2: Properties
 - api3: Afid
   id: NineP_Protocol_Messages_Tattach_Afid
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tattach.cs#L15
   metadata:
     uid: NineP.Protocol.Messages.Tattach.Afid
     commentId: P:NineP.Protocol.Messages.Tattach.Afid
@@ -94,6 +97,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Aname
   id: NineP_Protocol_Messages_Tattach_Aname
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tattach.cs#L15
   metadata:
     uid: NineP.Protocol.Messages.Tattach.Aname
     commentId: P:NineP.Protocol.Messages.Tattach.Aname
@@ -106,6 +110,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.string
 - api3: Fid
   id: NineP_Protocol_Messages_Tattach_Fid
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tattach.cs#L15
   metadata:
     uid: NineP.Protocol.Messages.Tattach.Fid
     commentId: P:NineP.Protocol.Messages.Tattach.Fid
@@ -118,6 +123,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: NUname
   id: NineP_Protocol_Messages_Tattach_NUname
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tattach.cs#L15
   metadata:
     uid: NineP.Protocol.Messages.Tattach.NUname
     commentId: P:NineP.Protocol.Messages.Tattach.NUname
@@ -132,6 +138,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Tag
   id: NineP_Protocol_Messages_Tattach_Tag
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tattach.cs#L15
   metadata:
     uid: NineP.Protocol.Messages.Tattach.Tag
     commentId: P:NineP.Protocol.Messages.Tattach.Tag
@@ -144,6 +151,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint16
 - api3: Uname
   id: NineP_Protocol_Messages_Tattach_Uname
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tattach.cs#L15
   metadata:
     uid: NineP.Protocol.Messages.Tattach.Uname
     commentId: P:NineP.Protocol.Messages.Tattach.Uname

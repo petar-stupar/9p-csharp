@@ -3,6 +3,7 @@ title: Class ServerCounters
 body:
 - api1: Class ServerCounters
   id: NineP_Server_ServerCounters
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/ServerCounters.cs#L10
   metadata:
     uid: NineP.Server.ServerCounters
     commentId: T:NineP.Server.ServerCounters
@@ -47,6 +48,7 @@ body:
 - h2: Properties
 - api3: BytesRead
   id: NineP_Server_ServerCounters_BytesRead
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/ServerCounters.cs#L24
   metadata:
     uid: NineP.Server.ServerCounters.BytesRead
     commentId: P:NineP.Server.ServerCounters.BytesRead
@@ -59,6 +61,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int64
 - api3: BytesWritten
   id: NineP_Server_ServerCounters_BytesWritten
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/ServerCounters.cs#L27
   metadata:
     uid: NineP.Server.ServerCounters.BytesWritten
     commentId: P:NineP.Server.ServerCounters.BytesWritten
@@ -71,6 +74,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int64
 - api3: ConnectionsAccepted
   id: NineP_Server_ServerCounters_ConnectionsAccepted
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/ServerCounters.cs#L30
   metadata:
     uid: NineP.Server.ServerCounters.ConnectionsAccepted
     commentId: P:NineP.Server.ServerCounters.ConnectionsAccepted
@@ -83,6 +87,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int64
 - api3: ConnectionsOpen
   id: NineP_Server_ServerCounters_ConnectionsOpen
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/ServerCounters.cs#L33
   metadata:
     uid: NineP.Server.ServerCounters.ConnectionsOpen
     commentId: P:NineP.Server.ServerCounters.ConnectionsOpen
@@ -95,6 +100,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int64
 - api3: ConnectionsRefused
   id: NineP_Server_ServerCounters_ConnectionsRefused
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/ServerCounters.cs#L36
   metadata:
     uid: NineP.Server.ServerCounters.ConnectionsRefused
     commentId: P:NineP.Server.ServerCounters.ConnectionsRefused
@@ -107,6 +113,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int64
 - api3: ErrorsByErrno
   id: NineP_Server_ServerCounters_ErrorsByErrno
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/ServerCounters.cs#L21
   metadata:
     uid: NineP.Server.ServerCounters.ErrorsByErrno
     commentId: P:NineP.Server.ServerCounters.ErrorsByErrno
@@ -127,6 +134,7 @@ body:
     - '>'
 - api3: MessagesByType
   id: NineP_Server_ServerCounters_MessagesByType
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/ServerCounters.cs#L13
   metadata:
     uid: NineP.Server.ServerCounters.MessagesByType
     commentId: P:NineP.Server.ServerCounters.MessagesByType
@@ -147,6 +155,7 @@ body:
     - '>'
 - api3: ProtocolErrorsByKind
   id: NineP_Server_ServerCounters_ProtocolErrorsByKind
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/ServerCounters.cs#L17
   metadata:
     uid: NineP.Server.ServerCounters.ProtocolErrorsByKind
     commentId: P:NineP.Server.ServerCounters.ProtocolErrorsByKind

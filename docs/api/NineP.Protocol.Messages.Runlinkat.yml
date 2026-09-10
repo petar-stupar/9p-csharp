@@ -3,6 +3,7 @@ title: Struct Runlinkat
 body:
 - api1: Struct Runlinkat
   id: NineP_Protocol_Messages_Runlinkat
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Runlinkat.cs#L7
   metadata:
     uid: NineP.Protocol.Messages.Runlinkat
     commentId: T:NineP.Protocol.Messages.Runlinkat
@@ -38,6 +39,7 @@ body:
 - h2: Constructors
 - api3: Runlinkat(ushort)
   id: NineP_Protocol_Messages_Runlinkat__ctor_System_UInt16_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Runlinkat.cs#L7
   metadata:
     uid: NineP.Protocol.Messages.Runlinkat.#ctor(System.UInt16)
     commentId: M:NineP.Protocol.Messages.Runlinkat.#ctor(System.UInt16)
@@ -53,6 +55,7 @@ body:
 - h2: Properties
 - api3: Tag
   id: NineP_Protocol_Messages_Runlinkat_Tag
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Runlinkat.cs#L7
   metadata:
     uid: NineP.Protocol.Messages.Runlinkat.Tag
     commentId: P:NineP.Protocol.Messages.Runlinkat.Tag

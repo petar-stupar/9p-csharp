@@ -3,6 +3,7 @@ title: Struct Rlink
 body:
 - api1: Struct Rlink
   id: NineP_Protocol_Messages_Rlink
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rlink.cs#L7
   metadata:
     uid: NineP.Protocol.Messages.Rlink
     commentId: T:NineP.Protocol.Messages.Rlink
@@ -38,6 +39,7 @@ body:
 - h2: Constructors
 - api3: Rlink(ushort)
   id: NineP_Protocol_Messages_Rlink__ctor_System_UInt16_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rlink.cs#L7
   metadata:
     uid: NineP.Protocol.Messages.Rlink.#ctor(System.UInt16)
     commentId: M:NineP.Protocol.Messages.Rlink.#ctor(System.UInt16)
@@ -53,6 +55,7 @@ body:
 - h2: Properties
 - api3: Tag
   id: NineP_Protocol_Messages_Rlink_Tag
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rlink.cs#L7
   metadata:
     uid: NineP.Protocol.Messages.Rlink.Tag
     commentId: P:NineP.Protocol.Messages.Rlink.Tag

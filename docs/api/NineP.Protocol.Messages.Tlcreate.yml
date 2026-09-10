@@ -3,6 +3,7 @@ title: Struct Tlcreate
 body:
 - api1: Struct Tlcreate
   id: NineP_Protocol_Messages_Tlcreate
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tlcreate.cs#L12
   metadata:
     uid: NineP.Protocol.Messages.Tlcreate
     commentId: T:NineP.Protocol.Messages.Tlcreate
@@ -38,6 +39,7 @@ body:
 - h2: Constructors
 - api3: Tlcreate(ushort, uint, string, uint, uint, uint)
   id: NineP_Protocol_Messages_Tlcreate__ctor_System_UInt16_System_UInt32_System_String_System_UInt32_System_UInt32_System_UInt32_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tlcreate.cs#L12
   metadata:
     uid: NineP.Protocol.Messages.Tlcreate.#ctor(System.UInt16,System.UInt32,System.String,System.UInt32,System.UInt32,System.UInt32)
     commentId: M:NineP.Protocol.Messages.Tlcreate.#ctor(System.UInt16,System.UInt32,System.String,System.UInt32,System.UInt32,System.UInt32)
@@ -78,6 +80,7 @@ body:
 - h2: Properties
 - api3: Fid
   id: NineP_Protocol_Messages_Tlcreate_Fid
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tlcreate.cs#L13
   metadata:
     uid: NineP.Protocol.Messages.Tlcreate.Fid
     commentId: P:NineP.Protocol.Messages.Tlcreate.Fid
@@ -90,6 +93,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Flags
   id: NineP_Protocol_Messages_Tlcreate_Flags
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tlcreate.cs#L13
   metadata:
     uid: NineP.Protocol.Messages.Tlcreate.Flags
     commentId: P:NineP.Protocol.Messages.Tlcreate.Flags
@@ -102,6 +106,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Gid
   id: NineP_Protocol_Messages_Tlcreate_Gid
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tlcreate.cs#L13
   metadata:
     uid: NineP.Protocol.Messages.Tlcreate.Gid
     commentId: P:NineP.Protocol.Messages.Tlcreate.Gid
@@ -114,6 +119,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Mode
   id: NineP_Protocol_Messages_Tlcreate_Mode
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tlcreate.cs#L13
   metadata:
     uid: NineP.Protocol.Messages.Tlcreate.Mode
     commentId: P:NineP.Protocol.Messages.Tlcreate.Mode
@@ -126,6 +132,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Name
   id: NineP_Protocol_Messages_Tlcreate_Name
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tlcreate.cs#L13
   metadata:
     uid: NineP.Protocol.Messages.Tlcreate.Name
     commentId: P:NineP.Protocol.Messages.Tlcreate.Name
@@ -138,6 +145,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.string
 - api3: Tag
   id: NineP_Protocol_Messages_Tlcreate_Tag
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tlcreate.cs#L13
   metadata:
     uid: NineP.Protocol.Messages.Tlcreate.Tag
     commentId: P:NineP.Protocol.Messages.Tlcreate.Tag

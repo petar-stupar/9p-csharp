@@ -3,6 +3,7 @@ title: Class PeerIdentity
 body:
 - api1: Class PeerIdentity
   id: NineP_Protocol_Transports_PeerIdentity
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/PeerIdentity.cs#L10
   metadata:
     uid: NineP.Protocol.Transports.PeerIdentity
     commentId: T:NineP.Protocol.Transports.PeerIdentity
@@ -47,6 +48,7 @@ body:
 - h2: Properties
 - api3: ClientCertificate
   id: NineP_Protocol_Transports_PeerIdentity_ClientCertificate
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/PeerIdentity.cs#L13
   metadata:
     uid: NineP.Protocol.Transports.PeerIdentity.ClientCertificate
     commentId: P:NineP.Protocol.Transports.PeerIdentity.ClientCertificate
@@ -60,6 +62,7 @@ body:
     - '?'
 - api3: Headers
   id: NineP_Protocol_Transports_PeerIdentity_Headers
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/PeerIdentity.cs#L19
   metadata:
     uid: NineP.Protocol.Transports.PeerIdentity.Headers
     commentId: P:NineP.Protocol.Transports.PeerIdentity.Headers
@@ -80,6 +83,7 @@ body:
     - '>'
 - api3: Origin
   id: NineP_Protocol_Transports_PeerIdentity_Origin
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/PeerIdentity.cs#L16
   metadata:
     uid: NineP.Protocol.Transports.PeerIdentity.Origin
     commentId: P:NineP.Protocol.Transports.PeerIdentity.Origin
@@ -93,6 +97,7 @@ body:
     - '?'
 - api3: RemoteAddress
   id: NineP_Protocol_Transports_PeerIdentity_RemoteAddress
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/PeerIdentity.cs#L23
   metadata:
     uid: NineP.Protocol.Transports.PeerIdentity.RemoteAddress
     commentId: P:NineP.Protocol.Transports.PeerIdentity.RemoteAddress

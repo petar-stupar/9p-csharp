@@ -3,6 +3,7 @@ title: Class ConstantTime
 body:
 - api1: Class ConstantTime
   id: NineP_Protocol_Auth_ConstantTime
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Auth/ConstantTime.cs#L11
   metadata:
     uid: NineP.Protocol.Auth.ConstantTime
     commentId: T:NineP.Protocol.Auth.ConstantTime
@@ -47,6 +48,7 @@ body:
 - h2: Methods
 - api3: Equals(ReadOnlySpan<byte>, ReadOnlySpan<byte>)
   id: NineP_Protocol_Auth_ConstantTime_Equals_System_ReadOnlySpan_System_Byte__System_ReadOnlySpan_System_Byte__
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Auth/ConstantTime.cs#L17
   metadata:
     uid: NineP.Protocol.Auth.ConstantTime.Equals(System.ReadOnlySpan{System.Byte},System.ReadOnlySpan{System.Byte})
     commentId: M:NineP.Protocol.Auth.ConstantTime.Equals(System.ReadOnlySpan{System.Byte},System.ReadOnlySpan{System.Byte})

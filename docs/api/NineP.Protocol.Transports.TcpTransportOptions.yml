@@ -3,6 +3,7 @@ title: Class TcpTransportOptions
 body:
 - api1: Class TcpTransportOptions
   id: NineP_Protocol_Transports_TcpTransportOptions
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/TcpTransportOptions.cs#L6
   metadata:
     uid: NineP.Protocol.Transports.TcpTransportOptions
     commentId: T:NineP.Protocol.Transports.TcpTransportOptions
@@ -42,6 +43,7 @@ body:
 - h2: Properties
 - api3: Backlog
   id: NineP_Protocol_Transports_TcpTransportOptions_Backlog
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/TcpTransportOptions.cs#L18
   metadata:
     uid: NineP.Protocol.Transports.TcpTransportOptions.Backlog
     commentId: P:NineP.Protocol.Transports.TcpTransportOptions.Backlog
@@ -54,6 +56,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ConnectTimeout
   id: NineP_Protocol_Transports_TcpTransportOptions_ConnectTimeout
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/TcpTransportOptions.cs#L28
   metadata:
     uid: NineP.Protocol.Transports.TcpTransportOptions.ConnectTimeout
     commentId: P:NineP.Protocol.Transports.TcpTransportOptions.ConnectTimeout
@@ -66,6 +69,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.timespan
 - api3: KeepAlive
   id: NineP_Protocol_Transports_TcpTransportOptions_KeepAlive
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/TcpTransportOptions.cs#L15
   metadata:
     uid: NineP.Protocol.Transports.TcpTransportOptions.KeepAlive
     commentId: P:NineP.Protocol.Transports.TcpTransportOptions.KeepAlive
@@ -78,6 +82,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.boolean
 - api3: Logger
   id: NineP_Protocol_Transports_TcpTransportOptions_Logger
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/TcpTransportOptions.cs#L35
   metadata:
     uid: NineP.Protocol.Transports.TcpTransportOptions.Logger
     commentId: P:NineP.Protocol.Transports.TcpTransportOptions.Logger
@@ -96,6 +101,7 @@ body:
     - '?'
 - api3: MaxConnections
   id: NineP_Protocol_Transports_TcpTransportOptions_MaxConnections
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/TcpTransportOptions.cs#L25
   metadata:
     uid: NineP.Protocol.Transports.TcpTransportOptions.MaxConnections
     commentId: P:NineP.Protocol.Transports.TcpTransportOptions.MaxConnections
@@ -113,6 +119,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: NoDelay
   id: NineP_Protocol_Transports_TcpTransportOptions_NoDelay
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/TcpTransportOptions.cs#L12
   metadata:
     uid: NineP.Protocol.Transports.TcpTransportOptions.NoDelay
     commentId: P:NineP.Protocol.Transports.TcpTransportOptions.NoDelay

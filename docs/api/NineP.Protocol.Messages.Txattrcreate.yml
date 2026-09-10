@@ -3,6 +3,7 @@ title: Struct Txattrcreate
 body:
 - api1: Struct Txattrcreate
   id: NineP_Protocol_Messages_Txattrcreate
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Txattrcreate.cs#L11
   metadata:
     uid: NineP.Protocol.Messages.Txattrcreate
     commentId: T:NineP.Protocol.Messages.Txattrcreate
@@ -38,6 +39,7 @@ body:
 - h2: Constructors
 - api3: Txattrcreate(ushort, uint, string, ulong, XattrFlags)
   id: NineP_Protocol_Messages_Txattrcreate__ctor_System_UInt16_System_UInt32_System_String_System_UInt64_NineP_Protocol_XattrFlags_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Txattrcreate.cs#L11
   metadata:
     uid: NineP.Protocol.Messages.Txattrcreate.#ctor(System.UInt16,System.UInt32,System.String,System.UInt64,NineP.Protocol.XattrFlags)
     commentId: M:NineP.Protocol.Messages.Txattrcreate.#ctor(System.UInt16,System.UInt32,System.String,System.UInt64,NineP.Protocol.XattrFlags)
@@ -73,6 +75,7 @@ body:
 - h2: Properties
 - api3: AttrSize
   id: NineP_Protocol_Messages_Txattrcreate_AttrSize
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Txattrcreate.cs#L12
   metadata:
     uid: NineP.Protocol.Messages.Txattrcreate.AttrSize
     commentId: P:NineP.Protocol.Messages.Txattrcreate.AttrSize
@@ -85,6 +88,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint64
 - api3: Fid
   id: NineP_Protocol_Messages_Txattrcreate_Fid
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Txattrcreate.cs#L12
   metadata:
     uid: NineP.Protocol.Messages.Txattrcreate.Fid
     commentId: P:NineP.Protocol.Messages.Txattrcreate.Fid
@@ -97,6 +101,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Flags
   id: NineP_Protocol_Messages_Txattrcreate_Flags
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Txattrcreate.cs#L12
   metadata:
     uid: NineP.Protocol.Messages.Txattrcreate.Flags
     commentId: P:NineP.Protocol.Messages.Txattrcreate.Flags
@@ -109,6 +114,7 @@ body:
       url: NineP.Protocol.XattrFlags.html
 - api3: Name
   id: NineP_Protocol_Messages_Txattrcreate_Name
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Txattrcreate.cs#L12
   metadata:
     uid: NineP.Protocol.Messages.Txattrcreate.Name
     commentId: P:NineP.Protocol.Messages.Txattrcreate.Name
@@ -121,6 +127,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.string
 - api3: Tag
   id: NineP_Protocol_Messages_Txattrcreate_Tag
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Txattrcreate.cs#L12
   metadata:
     uid: NineP.Protocol.Messages.Txattrcreate.Tag
     commentId: P:NineP.Protocol.Messages.Txattrcreate.Tag

@@ -3,6 +3,7 @@ title: Class WebSocketTransport
 body:
 - api1: Class WebSocketTransport
   id: NineP_Protocol_Transports_WebSocketTransport
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/WebSocketTransport.cs#L16
   metadata:
     uid: NineP.Protocol.Transports.WebSocketTransport
     commentId: T:NineP.Protocol.Transports.WebSocketTransport
@@ -51,6 +52,7 @@ body:
 - h2: Constructors
 - api3: WebSocketTransport(WebSocketTransportOptions?)
   id: NineP_Protocol_Transports_WebSocketTransport__ctor_NineP_Protocol_Transports_WebSocketTransportOptions_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/WebSocketTransport.cs#L25
   metadata:
     uid: NineP.Protocol.Transports.WebSocketTransport.#ctor(NineP.Protocol.Transports.WebSocketTransportOptions)
     commentId: M:NineP.Protocol.Transports.WebSocketTransport.#ctor(NineP.Protocol.Transports.WebSocketTransportOptions)
@@ -74,6 +76,7 @@ body:
 - h2: Properties
 - api3: Schemes
   id: NineP_Protocol_Transports_WebSocketTransport_Schemes
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/WebSocketTransport.cs#L32
   metadata:
     uid: NineP.Protocol.Transports.WebSocketTransport.Schemes
     commentId: P:NineP.Protocol.Transports.WebSocketTransport.Schemes
@@ -91,6 +94,7 @@ body:
 - h2: Methods
 - api3: ConnectAsync(NinePAddress, CancellationToken)
   id: NineP_Protocol_Transports_WebSocketTransport_ConnectAsync_NineP_Protocol_Transports_NinePAddress_System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/WebSocketTransport.cs#L40
   metadata:
     uid: NineP.Protocol.Transports.WebSocketTransport.ConnectAsync(NineP.Protocol.Transports.NinePAddress,System.Threading.CancellationToken)
     commentId: M:NineP.Protocol.Transports.WebSocketTransport.ConnectAsync(NineP.Protocol.Transports.NinePAddress,System.Threading.CancellationToken)
@@ -131,6 +135,7 @@ body:
     description: The upgrade was refused.
 - api3: ListenAsync(NinePAddress, CancellationToken)
   id: NineP_Protocol_Transports_WebSocketTransport_ListenAsync_NineP_Protocol_Transports_NinePAddress_System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/WebSocketTransport.cs#L97
   metadata:
     uid: NineP.Protocol.Transports.WebSocketTransport.ListenAsync(NineP.Protocol.Transports.NinePAddress,System.Threading.CancellationToken)
     commentId: M:NineP.Protocol.Transports.WebSocketTransport.ListenAsync(NineP.Protocol.Transports.NinePAddress,System.Threading.CancellationToken)

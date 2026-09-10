@@ -3,6 +3,7 @@ title: Class TlsTransport
 body:
 - api1: Class TlsTransport
   id: NineP_Protocol_Transports_TlsTransport
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/TlsTransport.cs#L20
   metadata:
     uid: NineP.Protocol.Transports.TlsTransport
     commentId: T:NineP.Protocol.Transports.TlsTransport
@@ -51,6 +52,7 @@ body:
 - h2: Constructors
 - api3: TlsTransport(TlsTransportOptions)
   id: NineP_Protocol_Transports_TlsTransport__ctor_NineP_Protocol_Transports_TlsTransportOptions_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/TlsTransport.cs#L42
   metadata:
     uid: NineP.Protocol.Transports.TlsTransport.#ctor(NineP.Protocol.Transports.TlsTransportOptions)
     commentId: M:NineP.Protocol.Transports.TlsTransport.#ctor(NineP.Protocol.Transports.TlsTransportOptions)
@@ -72,6 +74,7 @@ body:
 - h2: Properties
 - api3: Schemes
   id: NineP_Protocol_Transports_TlsTransport_Schemes
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/TlsTransport.cs#L52
   metadata:
     uid: NineP.Protocol.Transports.TlsTransport.Schemes
     commentId: P:NineP.Protocol.Transports.TlsTransport.Schemes
@@ -89,6 +92,7 @@ body:
 - h2: Methods
 - api3: ConnectAsync(NinePAddress, CancellationToken)
   id: NineP_Protocol_Transports_TlsTransport_ConnectAsync_NineP_Protocol_Transports_NinePAddress_System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/TlsTransport.cs#L60
   metadata:
     uid: NineP.Protocol.Transports.TlsTransport.ConnectAsync(NineP.Protocol.Transports.NinePAddress,System.Threading.CancellationToken)
     commentId: M:NineP.Protocol.Transports.TlsTransport.ConnectAsync(NineP.Protocol.Transports.NinePAddress,System.Threading.CancellationToken)
@@ -129,6 +133,7 @@ body:
     description: The peer's certificate was not accepted.
 - api3: ListenAsync(NinePAddress, CancellationToken)
   id: NineP_Protocol_Transports_TlsTransport_ListenAsync_NineP_Protocol_Transports_NinePAddress_System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/TlsTransport.cs#L84
   metadata:
     uid: NineP.Protocol.Transports.TlsTransport.ListenAsync(NineP.Protocol.Transports.NinePAddress,System.Threading.CancellationToken)
     commentId: M:NineP.Protocol.Transports.TlsTransport.ListenAsync(NineP.Protocol.Transports.NinePAddress,System.Threading.CancellationToken)

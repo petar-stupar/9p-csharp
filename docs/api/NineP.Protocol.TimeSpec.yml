@@ -3,6 +3,7 @@ title: Struct TimeSpec
 body:
 - api1: Struct TimeSpec
   id: NineP_Protocol_TimeSpec
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/TimeSpec.cs#L6
   metadata:
     uid: NineP.Protocol.TimeSpec
     commentId: T:NineP.Protocol.TimeSpec
@@ -36,6 +37,7 @@ body:
 - h2: Constructors
 - api3: TimeSpec(long, uint)
   id: NineP_Protocol_TimeSpec__ctor_System_Int64_System_UInt32_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/TimeSpec.cs#L6
   metadata:
     uid: NineP.Protocol.TimeSpec.#ctor(System.Int64,System.UInt32)
     commentId: M:NineP.Protocol.TimeSpec.#ctor(System.Int64,System.UInt32)
@@ -56,6 +58,7 @@ body:
 - h2: Properties
 - api3: Nanoseconds
   id: NineP_Protocol_TimeSpec_Nanoseconds
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/TimeSpec.cs#L6
   metadata:
     uid: NineP.Protocol.TimeSpec.Nanoseconds
     commentId: P:NineP.Protocol.TimeSpec.Nanoseconds
@@ -68,6 +71,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Seconds
   id: NineP_Protocol_TimeSpec_Seconds
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/TimeSpec.cs#L6
   metadata:
     uid: NineP.Protocol.TimeSpec.Seconds
     commentId: P:NineP.Protocol.TimeSpec.Seconds

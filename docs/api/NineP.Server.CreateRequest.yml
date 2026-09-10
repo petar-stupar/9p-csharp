@@ -3,6 +3,7 @@ title: Class CreateRequest
 body:
 - api1: Class CreateRequest
   id: NineP_Server_CreateRequest
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/CreateRequest.cs#L10
   metadata:
     uid: NineP.Server.CreateRequest
     commentId: T:NineP.Server.CreateRequest
@@ -45,6 +46,7 @@ body:
 - h2: Properties
 - api3: Flags
   id: NineP_Server_CreateRequest_Flags
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/CreateRequest.cs#L25
   metadata:
     uid: NineP.Server.CreateRequest.Flags
     commentId: P:NineP.Server.CreateRequest.Flags
@@ -57,6 +59,7 @@ body:
       url: NineP.Protocol.OpenFlags.html
 - api3: Gid
   id: NineP_Server_CreateRequest_Gid
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/CreateRequest.cs#L34
   metadata:
     uid: NineP.Server.CreateRequest.Gid
     commentId: P:NineP.Server.CreateRequest.Gid
@@ -69,6 +72,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Identity
   id: NineP_Server_CreateRequest_Identity
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/CreateRequest.cs#L37
   metadata:
     uid: NineP.Server.CreateRequest.Identity
     commentId: P:NineP.Server.CreateRequest.Identity
@@ -81,6 +85,7 @@ body:
       url: NineP.Protocol.Auth.Identity.html
 - api3: Kind
   id: NineP_Server_CreateRequest_Kind
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/CreateRequest.cs#L16
   metadata:
     uid: NineP.Server.CreateRequest.Kind
     commentId: P:NineP.Server.CreateRequest.Kind
@@ -93,6 +98,7 @@ body:
       url: NineP.Protocol.FileKind.html
 - api3: Mode
   id: NineP_Server_CreateRequest_Mode
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/CreateRequest.cs#L22
   metadata:
     uid: NineP.Server.CreateRequest.Mode
     commentId: P:NineP.Server.CreateRequest.Mode
@@ -105,6 +111,7 @@ body:
       url: NineP.Protocol.OpenMode.html
 - api3: Name
   id: NineP_Server_CreateRequest_Name
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/CreateRequest.cs#L13
   metadata:
     uid: NineP.Server.CreateRequest.Name
     commentId: P:NineP.Server.CreateRequest.Name
@@ -117,6 +124,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.string
 - api3: Perm
   id: NineP_Server_CreateRequest_Perm
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/CreateRequest.cs#L19
   metadata:
     uid: NineP.Server.CreateRequest.Perm
     commentId: P:NineP.Server.CreateRequest.Perm
@@ -129,6 +137,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Rdev
   id: NineP_Server_CreateRequest_Rdev
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/CreateRequest.cs#L31
   metadata:
     uid: NineP.Server.CreateRequest.Rdev
     commentId: P:NineP.Server.CreateRequest.Rdev
@@ -142,6 +151,7 @@ body:
     - '?'
 - api3: Target
   id: NineP_Server_CreateRequest_Target
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/CreateRequest.cs#L28
   metadata:
     uid: NineP.Server.CreateRequest.Target
     commentId: P:NineP.Server.CreateRequest.Target

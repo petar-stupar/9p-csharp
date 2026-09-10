@@ -3,6 +3,7 @@ title: Struct Rlock
 body:
 - api1: Struct Rlock
   id: NineP_Protocol_Messages_Rlock
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rlock.cs#L8
   metadata:
     uid: NineP.Protocol.Messages.Rlock
     commentId: T:NineP.Protocol.Messages.Rlock
@@ -38,6 +39,7 @@ body:
 - h2: Constructors
 - api3: Rlock(ushort, LockStatus)
   id: NineP_Protocol_Messages_Rlock__ctor_System_UInt16_NineP_Protocol_LockStatus_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rlock.cs#L8
   metadata:
     uid: NineP.Protocol.Messages.Rlock.#ctor(System.UInt16,NineP.Protocol.LockStatus)
     commentId: M:NineP.Protocol.Messages.Rlock.#ctor(System.UInt16,NineP.Protocol.LockStatus)
@@ -58,6 +60,7 @@ body:
 - h2: Properties
 - api3: Status
   id: NineP_Protocol_Messages_Rlock_Status
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rlock.cs#L8
   metadata:
     uid: NineP.Protocol.Messages.Rlock.Status
     commentId: P:NineP.Protocol.Messages.Rlock.Status
@@ -70,6 +73,7 @@ body:
       url: NineP.Protocol.LockStatus.html
 - api3: Tag
   id: NineP_Protocol_Messages_Rlock_Tag
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rlock.cs#L8
   metadata:
     uid: NineP.Protocol.Messages.Rlock.Tag
     commentId: P:NineP.Protocol.Messages.Rlock.Tag

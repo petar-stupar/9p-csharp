@@ -3,6 +3,7 @@ title: Struct LockRequest
 body:
 - api1: Struct LockRequest
   id: NineP_Protocol_LockRequest
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/LockRequest.cs#L10
   metadata:
     uid: NineP.Protocol.LockRequest
     commentId: T:NineP.Protocol.LockRequest
@@ -36,6 +37,7 @@ body:
 - h2: Constructors
 - api3: LockRequest(LockType, LockFlags, ulong, ulong, uint, string)
   id: NineP_Protocol_LockRequest__ctor_NineP_Protocol_LockType_NineP_Protocol_LockFlags_System_UInt64_System_UInt64_System_UInt32_System_String_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/LockRequest.cs#L10
   metadata:
     uid: NineP.Protocol.LockRequest.#ctor(NineP.Protocol.LockType,NineP.Protocol.LockFlags,System.UInt64,System.UInt64,System.UInt32,System.String)
     commentId: M:NineP.Protocol.LockRequest.#ctor(NineP.Protocol.LockType,NineP.Protocol.LockFlags,System.UInt64,System.UInt64,System.UInt32,System.String)
@@ -76,6 +78,7 @@ body:
 - h2: Properties
 - api3: ClientId
   id: NineP_Protocol_LockRequest_ClientId
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/LockRequest.cs#L11
   metadata:
     uid: NineP.Protocol.LockRequest.ClientId
     commentId: P:NineP.Protocol.LockRequest.ClientId
@@ -88,6 +91,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.string
 - api3: Flags
   id: NineP_Protocol_LockRequest_Flags
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/LockRequest.cs#L11
   metadata:
     uid: NineP.Protocol.LockRequest.Flags
     commentId: P:NineP.Protocol.LockRequest.Flags
@@ -100,6 +104,7 @@ body:
       url: NineP.Protocol.LockFlags.html
 - api3: Length
   id: NineP_Protocol_LockRequest_Length
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/LockRequest.cs#L11
   metadata:
     uid: NineP.Protocol.LockRequest.Length
     commentId: P:NineP.Protocol.LockRequest.Length
@@ -112,6 +117,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint64
 - api3: ProcId
   id: NineP_Protocol_LockRequest_ProcId
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/LockRequest.cs#L11
   metadata:
     uid: NineP.Protocol.LockRequest.ProcId
     commentId: P:NineP.Protocol.LockRequest.ProcId
@@ -124,6 +130,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Start
   id: NineP_Protocol_LockRequest_Start
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/LockRequest.cs#L11
   metadata:
     uid: NineP.Protocol.LockRequest.Start
     commentId: P:NineP.Protocol.LockRequest.Start
@@ -136,6 +143,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint64
 - api3: Type
   id: NineP_Protocol_LockRequest_Type
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/LockRequest.cs#L11
   metadata:
     uid: NineP.Protocol.LockRequest.Type
     commentId: P:NineP.Protocol.LockRequest.Type

@@ -3,6 +3,7 @@ title: Class Constants
 body:
 - api1: Class Constants
   id: NineP_Protocol_Constants
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Constants.cs#L6
   metadata:
     uid: NineP.Protocol.Constants
     commentId: T:NineP.Protocol.Constants
@@ -40,6 +41,7 @@ body:
 - h2: Fields
 - api3: ERRMAX
   id: NineP_Protocol_Constants_ERRMAX
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Constants.cs#L27
   metadata:
     uid: NineP.Protocol.Constants.ERRMAX
     commentId: F:NineP.Protocol.Constants.ERRMAX
@@ -52,6 +54,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: HDRSZ
   id: NineP_Protocol_Constants_HDRSZ
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Constants.cs#L33
   metadata:
     uid: NineP.Protocol.Constants.HDRSZ
     commentId: F:NineP.Protocol.Constants.HDRSZ
@@ -64,6 +67,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: IOHDRSZ
   id: NineP_Protocol_Constants_IOHDRSZ
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Constants.cs#L21
   metadata:
     uid: NineP.Protocol.Constants.IOHDRSZ
     commentId: F:NineP.Protocol.Constants.IOHDRSZ
@@ -76,6 +80,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: MAXWELEM
   id: NineP_Protocol_Constants_MAXWELEM
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Constants.cs#L18
   metadata:
     uid: NineP.Protocol.Constants.MAXWELEM
     commentId: F:NineP.Protocol.Constants.MAXWELEM
@@ -88,6 +93,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: MaxNameLength
   id: NineP_Protocol_Constants_MaxNameLength
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Constants.cs#L42
   metadata:
     uid: NineP.Protocol.Constants.MaxNameLength
     commentId: F:NineP.Protocol.Constants.MaxNameLength
@@ -100,6 +106,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: NOFID
   id: NineP_Protocol_Constants_NOFID
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Constants.cs#L12
   metadata:
     uid: NineP.Protocol.Constants.NOFID
     commentId: F:NineP.Protocol.Constants.NOFID
@@ -112,6 +119,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: NONUNAME
   id: NineP_Protocol_Constants_NONUNAME
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Constants.cs#L15
   metadata:
     uid: NineP.Protocol.Constants.NONUNAME
     commentId: F:NineP.Protocol.Constants.NONUNAME
@@ -124,6 +132,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: NOTAG
   id: NineP_Protocol_Constants_NOTAG
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Constants.cs#L9
   metadata:
     uid: NineP.Protocol.Constants.NOTAG
     commentId: F:NineP.Protocol.Constants.NOTAG
@@ -136,6 +145,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint16
 - api3: READDIRHDRSZ
   id: NineP_Protocol_Constants_READDIRHDRSZ
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Constants.cs#L24
   metadata:
     uid: NineP.Protocol.Constants.READDIRHDRSZ
     commentId: F:NineP.Protocol.Constants.READDIRHDRSZ
@@ -148,6 +158,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: RreadHeaderSize
   id: NineP_Protocol_Constants_RreadHeaderSize
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Constants.cs#L39
   metadata:
     uid: NineP.Protocol.Constants.RreadHeaderSize
     commentId: F:NineP.Protocol.Constants.RreadHeaderSize
@@ -160,6 +171,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: STATFIXLEN
   id: NineP_Protocol_Constants_STATFIXLEN
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Constants.cs#L30
   metadata:
     uid: NineP.Protocol.Constants.STATFIXLEN
     commentId: F:NineP.Protocol.Constants.STATFIXLEN
@@ -172,6 +184,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: TwriteHeaderSize
   id: NineP_Protocol_Constants_TwriteHeaderSize
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Constants.cs#L36
   metadata:
     uid: NineP.Protocol.Constants.TwriteHeaderSize
     commentId: F:NineP.Protocol.Constants.TwriteHeaderSize
@@ -184,6 +197,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: Version9P2000
   id: NineP_Protocol_Constants_Version9P2000
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Constants.cs#L45
   metadata:
     uid: NineP.Protocol.Constants.Version9P2000
     commentId: F:NineP.Protocol.Constants.Version9P2000
@@ -196,6 +210,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.string
 - api3: Version9P2000L
   id: NineP_Protocol_Constants_Version9P2000L
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Constants.cs#L51
   metadata:
     uid: NineP.Protocol.Constants.Version9P2000L
     commentId: F:NineP.Protocol.Constants.Version9P2000L
@@ -208,6 +223,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.string
 - api3: Version9P2000u
   id: NineP_Protocol_Constants_Version9P2000u
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Constants.cs#L48
   metadata:
     uid: NineP.Protocol.Constants.Version9P2000u
     commentId: F:NineP.Protocol.Constants.Version9P2000u
@@ -220,6 +236,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.string
 - api3: VersionUnknown
   id: NineP_Protocol_Constants_VersionUnknown
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Constants.cs#L54
   metadata:
     uid: NineP.Protocol.Constants.VersionUnknown
     commentId: F:NineP.Protocol.Constants.VersionUnknown
@@ -232,6 +249,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.string
 - api3: WebSocketSubprotocol
   id: NineP_Protocol_Constants_WebSocketSubprotocol
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Constants.cs#L57
   metadata:
     uid: NineP.Protocol.Constants.WebSocketSubprotocol
     commentId: F:NineP.Protocol.Constants.WebSocketSubprotocol

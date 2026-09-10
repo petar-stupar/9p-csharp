@@ -3,6 +3,7 @@ title: Enum OpenMode
 body:
 - api1: Enum OpenMode
   id: NineP_Protocol_OpenMode
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/OpenMode.cs#L6
   metadata:
     uid: NineP.Protocol.OpenMode
     commentId: T:NineP.Protocol.OpenMode

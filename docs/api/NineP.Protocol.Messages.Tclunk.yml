@@ -3,6 +3,7 @@ title: Struct Tclunk
 body:
 - api1: Struct Tclunk
   id: NineP_Protocol_Messages_Tclunk
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tclunk.cs#L8
   metadata:
     uid: NineP.Protocol.Messages.Tclunk
     commentId: T:NineP.Protocol.Messages.Tclunk
@@ -38,6 +39,7 @@ body:
 - h2: Constructors
 - api3: Tclunk(ushort, uint)
   id: NineP_Protocol_Messages_Tclunk__ctor_System_UInt16_System_UInt32_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tclunk.cs#L8
   metadata:
     uid: NineP.Protocol.Messages.Tclunk.#ctor(System.UInt16,System.UInt32)
     commentId: M:NineP.Protocol.Messages.Tclunk.#ctor(System.UInt16,System.UInt32)
@@ -58,6 +60,7 @@ body:
 - h2: Properties
 - api3: Fid
   id: NineP_Protocol_Messages_Tclunk_Fid
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tclunk.cs#L8
   metadata:
     uid: NineP.Protocol.Messages.Tclunk.Fid
     commentId: P:NineP.Protocol.Messages.Tclunk.Fid
@@ -70,6 +73,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Tag
   id: NineP_Protocol_Messages_Tclunk_Tag
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tclunk.cs#L8
   metadata:
     uid: NineP.Protocol.Messages.Tclunk.Tag
     commentId: P:NineP.Protocol.Messages.Tclunk.Tag

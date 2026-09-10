@@ -3,6 +3,7 @@ title: Class TcpTransport
 body:
 - api1: Class TcpTransport
   id: NineP_Protocol_Transports_TcpTransport
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/TcpTransport.cs#L17
   metadata:
     uid: NineP.Protocol.Transports.TcpTransport
     commentId: T:NineP.Protocol.Transports.TcpTransport
@@ -49,6 +50,7 @@ body:
 - h2: Constructors
 - api3: TcpTransport(TcpTransportOptions?)
   id: NineP_Protocol_Transports_TcpTransport__ctor_NineP_Protocol_Transports_TcpTransportOptions_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/TcpTransport.cs#L26
   metadata:
     uid: NineP.Protocol.Transports.TcpTransport.#ctor(NineP.Protocol.Transports.TcpTransportOptions)
     commentId: M:NineP.Protocol.Transports.TcpTransport.#ctor(NineP.Protocol.Transports.TcpTransportOptions)
@@ -72,6 +74,7 @@ body:
 - h2: Properties
 - api3: Schemes
   id: NineP_Protocol_Transports_TcpTransport_Schemes
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/TcpTransport.cs#L35
   metadata:
     uid: NineP.Protocol.Transports.TcpTransport.Schemes
     commentId: P:NineP.Protocol.Transports.TcpTransport.Schemes
@@ -89,6 +92,7 @@ body:
 - h2: Methods
 - api3: ConnectAsync(NinePAddress, CancellationToken)
   id: NineP_Protocol_Transports_TcpTransport_ConnectAsync_NineP_Protocol_Transports_NinePAddress_System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/TcpTransport.cs#L43
   metadata:
     uid: NineP.Protocol.Transports.TcpTransport.ConnectAsync(NineP.Protocol.Transports.NinePAddress,System.Threading.CancellationToken)
     commentId: M:NineP.Protocol.Transports.TcpTransport.ConnectAsync(NineP.Protocol.Transports.NinePAddress,System.Threading.CancellationToken)
@@ -129,6 +133,7 @@ body:
     description: The dial did not complete within the configured budget.
 - api3: ListenAsync(NinePAddress, CancellationToken)
   id: NineP_Protocol_Transports_TcpTransport_ListenAsync_NineP_Protocol_Transports_NinePAddress_System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/TcpTransport.cs#L86
   metadata:
     uid: NineP.Protocol.Transports.TcpTransport.ListenAsync(NineP.Protocol.Transports.NinePAddress,System.Threading.CancellationToken)
     commentId: M:NineP.Protocol.Transports.TcpTransport.ListenAsync(NineP.Protocol.Transports.NinePAddress,System.Threading.CancellationToken)

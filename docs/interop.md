@@ -71,14 +71,14 @@ errno, report `Permission denied`. Several of ours differ from an accepted wordi
 (`read-only file system` against Linux's `read only file system`; `is a directory` against
 `Is a directory`).
 
-Not changed here: the enames are protocol-visible, several are fixed by the workspace reference
-(`too many fids`, `unknown fid`, `authentication not required`, `version not negotiated`), and
-`fixtures/conformance.md` freezes the cli's error text for every port. The table Linux accepts,
-per errno, is recorded in [the interop test assets](../tests/interop/README.md) so the owner can
-decide the wording once for all ports; the recommendation is to adopt, for each errno, the Linux
-table's Plan 9 wording where one exists and its `strerror` text otherwise, and to make the
-reverse lookup (`ErrorTable.ErrnoFor`) accept every string in that table so this client
-understands Linux-style servers over 9P2000.
+Changed, by owner decision the same day: `ErrorTable` now sends, for every errno Linux
+can name, a string Linux maps to that errno (a Plan 9 wording where Linux lists one, `strerror`
+text otherwise), `Errno` carries every one of those errnos, and every string in Linux's table plus
+every wording this table used to send is understood on receipt. The table is
+`docs/9p/fixtures/linux-9p-errors.json`, generated from the kernel source at a pinned commit, and
+`ErrorTableTests` holds the implementation to it row by row; the rule is stated in the workspace
+architecture §3. The reference-defined enames that never reach a Linux mount (`authentication not
+required`, `version not negotiated`) keep their wording.
 
 ### diod resolves the client's address, and drops it when it cannot
 

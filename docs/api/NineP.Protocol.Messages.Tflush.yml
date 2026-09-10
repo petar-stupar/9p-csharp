@@ -3,6 +3,7 @@ title: Struct Tflush
 body:
 - api1: Struct Tflush
   id: NineP_Protocol_Messages_Tflush
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tflush.cs#L8
   metadata:
     uid: NineP.Protocol.Messages.Tflush
     commentId: T:NineP.Protocol.Messages.Tflush
@@ -38,6 +39,7 @@ body:
 - h2: Constructors
 - api3: Tflush(ushort, ushort)
   id: NineP_Protocol_Messages_Tflush__ctor_System_UInt16_System_UInt16_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tflush.cs#L8
   metadata:
     uid: NineP.Protocol.Messages.Tflush.#ctor(System.UInt16,System.UInt16)
     commentId: M:NineP.Protocol.Messages.Tflush.#ctor(System.UInt16,System.UInt16)
@@ -58,6 +60,7 @@ body:
 - h2: Properties
 - api3: OldTag
   id: NineP_Protocol_Messages_Tflush_OldTag
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tflush.cs#L8
   metadata:
     uid: NineP.Protocol.Messages.Tflush.OldTag
     commentId: P:NineP.Protocol.Messages.Tflush.OldTag
@@ -70,6 +73,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint16
 - api3: Tag
   id: NineP_Protocol_Messages_Tflush_Tag
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tflush.cs#L8
   metadata:
     uid: NineP.Protocol.Messages.Tflush.Tag
     commentId: P:NineP.Protocol.Messages.Tflush.Tag

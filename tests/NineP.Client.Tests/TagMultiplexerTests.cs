@@ -192,7 +192,7 @@ public sealed class TagMultiplexerTests
         NinePException failure = await Assert.ThrowsAsync<NinePException>(async () => await request);
 
         Assert.Equal(Errno.EBADF, failure.Error.Errno);
-        Assert.Equal("unknown fid", failure.Error.Ename);
+        Assert.Equal("fid unknown or out of range", failure.Error.Ename);
     }
 
     /// <summary>A 9P2000.u error reply carries both halves, and the errno wins over the table.</summary>

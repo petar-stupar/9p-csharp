@@ -16,6 +16,13 @@ namespace NineP.Server.Internal;
 /// </summary>
 internal sealed class Dispatcher(ServerSession session, OpenState openState)
 {
+    /// <summary>
+    /// Reference §5.2: a server with no authenticator refuses <c>Tauth</c> with exactly this ename
+    /// in 9P2000 and 9P2000.u and with <c>ECONNREFUSED</c> in <c>.L</c>. The wording is the
+    /// reference's, not the table's row for the errno ("Connection refused"), so it is stated here.
+    /// </summary>
+    private static readonly NinePError AuthenticationNotRequired = new("authentication not required", Errno.ECONNREFUSED);
+
     private const uint FilePermMask = 0x1B6;
     private const uint DirectoryPermMask = 0x1FF;
 
@@ -356,7 +363,7 @@ internal sealed class Dispatcher(ServerSession session, OpenState openState)
         // dialect uses — "authentication not required" and ECONNREFUSED are one error value.
         if (session.Options.Authenticator is not { } authenticator)
         {
-            throw new NinePException(NinePError.FromErrno(Errno.ECONNREFUSED));
+            throw new NinePException(AuthenticationNotRequired);
         }
 
         AuthRequest binding = new(request.Uname, request.NUname, request.Aname);
@@ -365,7 +372,7 @@ internal sealed class Dispatcher(ServerSession session, OpenState openState)
 
         if (exchange is null)
         {
-            throw new NinePException(NinePError.FromErrno(Errno.ECONNREFUSED));
+            throw new NinePException(AuthenticationNotRequired);
         }
 
         AuthFileHandler file = new(exchange, session.Options.Limits, session.Options.TimeProvider);

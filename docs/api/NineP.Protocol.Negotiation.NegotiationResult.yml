@@ -3,6 +3,7 @@ title: Struct NegotiationResult
 body:
 - api1: Struct NegotiationResult
   id: NineP_Protocol_Negotiation_NegotiationResult
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Negotiation/NegotiationResult.cs#L11
   metadata:
     uid: NineP.Protocol.Negotiation.NegotiationResult
     commentId: T:NineP.Protocol.Negotiation.NegotiationResult
@@ -41,6 +42,7 @@ body:
 - h2: Constructors
 - api3: NegotiationResult(string, uint, Dialect?)
   id: NineP_Protocol_Negotiation_NegotiationResult__ctor_System_String_System_UInt32_System_Nullable_NineP_Protocol_Dialect__
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Negotiation/NegotiationResult.cs#L11
   metadata:
     uid: NineP.Protocol.Negotiation.NegotiationResult.#ctor(System.String,System.UInt32,System.Nullable{NineP.Protocol.Dialect})
     commentId: M:NineP.Protocol.Negotiation.NegotiationResult.#ctor(System.String,System.UInt32,System.Nullable{NineP.Protocol.Dialect})
@@ -72,6 +74,7 @@ body:
 - h2: Properties
 - api3: Dialect
   id: NineP_Protocol_Negotiation_NegotiationResult_Dialect
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Negotiation/NegotiationResult.cs#L11
   metadata:
     uid: NineP.Protocol.Negotiation.NegotiationResult.Dialect
     commentId: P:NineP.Protocol.Negotiation.NegotiationResult.Dialect
@@ -85,6 +88,7 @@ body:
     - '?'
 - api3: IsUnknown
   id: NineP_Protocol_Negotiation_NegotiationResult_IsUnknown
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Negotiation/NegotiationResult.cs#L14
   metadata:
     uid: NineP.Protocol.Negotiation.NegotiationResult.IsUnknown
     commentId: P:NineP.Protocol.Negotiation.NegotiationResult.IsUnknown
@@ -97,6 +101,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.boolean
 - api3: Msize
   id: NineP_Protocol_Negotiation_NegotiationResult_Msize
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Negotiation/NegotiationResult.cs#L11
   metadata:
     uid: NineP.Protocol.Negotiation.NegotiationResult.Msize
     commentId: P:NineP.Protocol.Negotiation.NegotiationResult.Msize
@@ -109,6 +114,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Version
   id: NineP_Protocol_Negotiation_NegotiationResult_Version
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Negotiation/NegotiationResult.cs#L11
   metadata:
     uid: NineP.Protocol.Negotiation.NegotiationResult.Version
     commentId: P:NineP.Protocol.Negotiation.NegotiationResult.Version

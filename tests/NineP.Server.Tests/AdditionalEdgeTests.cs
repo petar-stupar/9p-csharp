@@ -85,7 +85,10 @@ public sealed class AdditionalEdgeTests
         await wire.ReceiveAsync<Rclunk>(Ct);
         await wire.AttachAsync(1, Ct);
         await wire.SendAsync(new Tremove(3, 1), Ct);
-        Assert.Equal(dialect == Dialect.P9_2000 ? Errno.EACCES : Errno.EPERM, await WireError(wire));
+        // Every dialect recovers EPERM: plain 9P2000 carries the ename "Operation not permitted",
+        // which is the string Linux maps to EPERM, so the collapse into EACCES that the shared
+        // "permission denied" wording forced is gone (owner decision of 2026-09-10).
+        Assert.Equal(Errno.EPERM, await WireError(wire));
         await wire.SendAsync(new Tclunk(4, 1), Ct);
         Assert.Equal(Errno.EBADF, await WireError(wire));
         await wire.AttachAsync(1, Ct);

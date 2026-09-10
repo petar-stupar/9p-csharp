@@ -3,6 +3,7 @@ title: Struct AuthRequest
 body:
 - api1: Struct AuthRequest
   id: NineP_Protocol_Auth_AuthRequest
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Auth/AuthRequest.cs#L11
   metadata:
     uid: NineP.Protocol.Auth.AuthRequest
     commentId: T:NineP.Protocol.Auth.AuthRequest
@@ -41,6 +42,7 @@ body:
 - h2: Constructors
 - api3: AuthRequest(string, uint, string)
   id: NineP_Protocol_Auth_AuthRequest__ctor_System_String_System_UInt32_System_String_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Auth/AuthRequest.cs#L11
   metadata:
     uid: NineP.Protocol.Auth.AuthRequest.#ctor(System.String,System.UInt32,System.String)
     commentId: M:NineP.Protocol.Auth.AuthRequest.#ctor(System.String,System.UInt32,System.String)
@@ -71,6 +73,7 @@ body:
 - h2: Properties
 - api3: Aname
   id: NineP_Protocol_Auth_AuthRequest_Aname
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Auth/AuthRequest.cs#L11
   metadata:
     uid: NineP.Protocol.Auth.AuthRequest.Aname
     commentId: P:NineP.Protocol.Auth.AuthRequest.Aname
@@ -83,6 +86,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.string
 - api3: NUname
   id: NineP_Protocol_Auth_AuthRequest_NUname
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Auth/AuthRequest.cs#L11
   metadata:
     uid: NineP.Protocol.Auth.AuthRequest.NUname
     commentId: P:NineP.Protocol.Auth.AuthRequest.NUname
@@ -95,6 +99,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Uname
   id: NineP_Protocol_Auth_AuthRequest_Uname
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Auth/AuthRequest.cs#L11
   metadata:
     uid: NineP.Protocol.Auth.AuthRequest.Uname
     commentId: P:NineP.Protocol.Auth.AuthRequest.Uname

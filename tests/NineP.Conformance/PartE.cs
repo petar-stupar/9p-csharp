@@ -130,9 +130,9 @@ internal static partial class Scenario
         await Check("E9", async () =>
         {
             await Error(Errno.ENOENT, "rm", "/missing");
-            int denied = target.Dialect == Dialect.P9_2000 ? Errno.EACCES : Errno.EPERM;
-            await Error(denied, "rm", "/");
-            await Error(denied, "rm", "/dir/..");
+            // Plain 9P2000 recovers EPERM too: the ename is the string Linux maps to EPERM.
+            await Error(Errno.EPERM, "rm", "/");
+            await Error(Errno.EPERM, "rm", "/dir/..");
             Contains(await Output("ls", "/"), "dir/\n");
         });
         await Check("E10", async () =>

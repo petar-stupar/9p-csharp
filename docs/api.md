@@ -780,33 +780,81 @@ public const string WebSocketSubprotocol = "9p";
 constants, each with the POSIX meaning of its name.
 
 ```csharp
-public const int EPERM = 1;          // operation not permitted
-public const int ENOENT = 2;         // no such file or directory
-public const int EIO = 5;            // input/output error
-public const int ENXIO = 6;          // no such device or address: an unopenable fifo, socket or device
-public const int EBADF = 9;          // bad file descriptor: in 9P, an unknown fid
-public const int EAGAIN = 11;        // resource temporarily unavailable
-public const int ENOMEM = 12;        // out of memory
-public const int EACCES = 13;        // permission denied
-public const int EEXIST = 17;        // file exists
-public const int ENOTDIR = 20;       // not a directory
-public const int EISDIR = 21;        // is a directory
-public const int EINVAL = 22;        // invalid argument
-public const int ENFILE = 23;        // too many open files in the system: in 9P, the fid cap
-public const int EFBIG = 27;         // file too large
-public const int ENOSPC = 28;        // no space left on device
-public const int EROFS = 30;         // read-only file system
-public const int ERANGE = 34;        // result too large
-public const int ENAMETOOLONG = 36;  // file name too long
-public const int ENOLCK = 37;        // no locks available
-public const int ENOSYS = 38;        // function not implemented
-public const int ENOTEMPTY = 39;     // directory not empty
-public const int ELOOP = 40;         // too many levels of symbolic links
-public const int ENODATA = 61;       // no data available: no such extended attribute
-public const int EPROTO = 71;        // protocol error
-public const int EOVERFLOW = 75;     // value too large for its type
-public const int EOPNOTSUPP = 95;    // operation not supported
-public const int ECONNREFUSED = 111; // connection refused: the .L Tauth refusal
+public const int EPERM = 1;           // /// The Linux errno values this workspace's servers use (reference §5.9): every errno the Linux /// kernel's 9P client can name (docs/9p/fixtures/linux-9p-errors.json), plus EOVERFLOW. /// </summary> public static class Errno { /// <summary>Operation not permitted
+public const int ENOENT = 2;          // no such file or directory
+public const int EINTR = 4;           // interrupted system call
+public const int EIO = 5;             // input/output error
+public const int ENXIO = 6;           // /// No such device or address: a Tlopen of a fifo, socket or device the server cannot /// open (reference §8 rule 23). ///
+public const int E2BIG = 7;           // argument list too long
+public const int EBADF = 9;           // bad file descriptor: in 9P, an unknown fid
+public const int EAGAIN = 11;         // resource temporarily unavailable
+public const int ENOMEM = 12;         // out of memory
+public const int EACCES = 13;         // permission denied
+public const int EFAULT = 14;         // bad address
+public const int ENOTBLK = 15;        // block device required
+public const int EBUSY = 16;          // device or resource busy
+public const int EEXIST = 17;         // file exists
+public const int EXDEV = 18;          // invalid cross-device link
+public const int ENODEV = 19;         // no such device
+public const int ENOTDIR = 20;        // not a directory
+public const int EISDIR = 21;         // is a directory
+public const int EINVAL = 22;         // invalid argument
+public const int ENFILE = 23;         // too many open files in the system: in 9P, the fid cap
+public const int EMFILE = 24;         // too many open files
+public const int ETXTBSY = 26;        // text file busy
+public const int EFBIG = 27;          // file too large
+public const int ENOSPC = 28;         // no space left on device
+public const int ESPIPE = 29;         // illegal seek
+public const int EROFS = 30;          // read-only filesystem
+public const int EMLINK = 31;         // too many links
+public const int EPIPE = 32;          // broken pipe
+public const int EDOM = 33;           // numerical argument out of domain
+public const int ERANGE = 34;         // result too large
+public const int EDEADLK = 35;        // resource deadlock avoided
+public const int ENAMETOOLONG = 36;   // file name too long
+public const int ENOLCK = 37;         // no locks available
+public const int ENOSYS = 38;         // function not implemented
+public const int ENOTEMPTY = 39;      // directory not empty
+public const int ELOOP = 40;          // too many levels of symbolic links
+public const int ENOMSG = 42;         // no message of desired type
+public const int EIDRM = 43;          // identifier removed
+public const int ENODATA = 61;        // no data available: no such extended attribute
+public const int ENONET = 64;         // machine is not on the network
+public const int ENOPKG = 65;         // package not installed
+public const int EREMOTE = 66;        // object is remote
+public const int ENOLINK = 67;        // link has been severed
+public const int ECOMM = 70;          // communication error on send
+public const int EPROTO = 71;         // protocol error: a malformed 9P message
+public const int EBADMSG = 74;        // bad message
+public const int EOVERFLOW = 75;      // value too large for its type
+public const int EBADFD = 77;         // file descriptor in bad state
+public const int ESTRPIPE = 86;       // streams pipe error
+public const int EUSERS = 87;         // too many users
+public const int ENOTSOCK = 88;       // socket operation on non-socket
+public const int EMSGSIZE = 90;       // message too long
+public const int ENOPROTOOPT = 92;    // protocol not available
+public const int EPROTONOSUPPORT = 93; // protocol not supported
+public const int ESOCKTNOSUPPORT = 94; // socket type not supported
+public const int EOPNOTSUPP = 95;     // operation not supported
+public const int EPFNOSUPPORT = 96;   // protocol family not supported
+public const int ENETDOWN = 100;      // network is down
+public const int ENETUNREACH = 101;   // network is unreachable
+public const int ENETRESET = 102;     // network dropped connection on reset
+public const int ECONNABORTED = 103;  // software caused connection abort
+public const int ECONNRESET = 104;    // connection reset by peer
+public const int ENOBUFS = 105;       // no buffer space available
+public const int EISCONN = 106;       // transport endpoint is already connected
+public const int ENOTCONN = 107;      // transport endpoint is not connected
+public const int ESHUTDOWN = 108;     // cannot send after transport endpoint shutdown
+public const int ETIMEDOUT = 110;     // connection timed out
+public const int ECONNREFUSED = 111;  // connection refused: in 9P, authentication is not required
+public const int EHOSTDOWN = 112;     // host is down
+public const int EHOSTUNREACH = 113;  // no route to host
+public const int EALREADY = 114;      // operation already in progress
+public const int EINPROGRESS = 115;   // operation now in progress
+public const int EISNAM = 120;        // is a named type file
+public const int EREMOTEIO = 121;     // remote I/O error
+public const int EDQUOT = 122;        // disk quota exceeded
 ```
 
 ### `ErrorTable`
@@ -829,32 +877,66 @@ public static IReadOnlyList<NinePError> All { get; }
 ```
 Every (errno, ename) pair in the table, for documentation and tests.
 
-The table is fixed and is a test fixture in its own right (`ErrorTableTests`):
+The table sends, for every errno the Linux kernel's 9P client can name, one ename that Linux
+maps to exactly that errno: over plain 9P2000 an `Rerror` carries only the text, and v9fs turns it
+into an errno with the exact-match table in `net/9p/error.c`, so any other wording reaches a Linux
+mount as error 526. Where Linux lists a Plan 9 wording beside `strerror`'s, the Plan 9 one is sent
+(`file not found`, `i/o error`, `permission denied`, `file already exists`, `not a directory`,
+`file too big`, `fid unknown or out of range`, `protocol botch`); otherwise the `strerror` text.
+`EOVERFLOW` is the one errno Linux's table does not name. On receipt every string in Linux's
+table is understood, as are the wordings this table sent before 2026-09-10 (`unknown fid`,
+`too many fids`, `bad argument`, `read-only file system`, …), which are never sent again. The
+fixture is `docs/9p/fixtures/linux-9p-errors.json`, generated from the kernel source at a pinned
+commit, and `ErrorTableTests` holds the table to it row by row:
 
 | errno | ename | errno | ename |
 | --- | --- | --- | --- |
-| EPERM 1 | `permission denied` | ENFILE 23 | `too many fids` |
-| ENOENT 2 | `file not found` | EFBIG 27 | `file too big` |
-| EIO 5 | `i/o error` | ENOSPC 28 | `no space left` |
-| ENXIO 6 | `no such device or address` | | |
-| EBADF 9 | `unknown fid` | EROFS 30 | `read-only file system` |
-| EAGAIN 11 | `try again` | ERANGE 34 | `result too large` |
-| ENOMEM 12 | `out of memory` | ENAMETOOLONG 36 | `file name too long` |
-| EACCES 13 | `permission denied` | ENOLCK 37 | `lock not available` |
-| EEXIST 17 | `file already exists` | ENOSYS 38 | `not implemented` |
-| ENOTDIR 20 | `not a directory` | ENOTEMPTY 39 | `directory not empty` |
-| EISDIR 21 | `is a directory` | ELOOP 40 | `too many symbolic links` |
-| EINVAL 22 | `bad argument` | ENODATA 61 | `no such attribute` |
-| EPROTO 71 | `bad message` | EOVERFLOW 75 | `value too large` |
-| EOPNOTSUPP 95 | `not supported` | ECONNREFUSED 111 | `authentication not required` |
+| EPERM 1 | `Operation not permitted` | ENODATA 61 | `No data available` |
+| ENOENT 2 | `file not found` | ENONET 64 | `Machine is not on the network` |
+| EINTR 4 | `Interrupted system call` | ENOPKG 65 | `Package not installed` |
+| EIO 5 | `i/o error` | EREMOTE 66 | `Object is remote` |
+| ENXIO 6 | `No such device or address` | ENOLINK 67 | `Link has been severed` |
+| E2BIG 7 | `Argument list too long` | ECOMM 70 | `Communication error on send` |
+| EBADF 9 | `fid unknown or out of range` | EPROTO 71 | `protocol botch` |
+| EAGAIN 11 | `Resource temporarily unavailable` | EBADMSG 74 | `Bad message` |
+| ENOMEM 12 | `Cannot allocate memory` | EOVERFLOW 75 | `Value too large for defined data type` |
+| EACCES 13 | `permission denied` | EBADFD 77 | `File descriptor in bad state` |
+| EFAULT 14 | `Bad address` | ESTRPIPE 86 | `Streams pipe error` |
+| ENOTBLK 15 | `Block device required` | EUSERS 87 | `Too many users` |
+| EBUSY 16 | `Device or resource busy` | ENOTSOCK 88 | `Socket operation on non-socket` |
+| EEXIST 17 | `file already exists` | EMSGSIZE 90 | `Message too long` |
+| EXDEV 18 | `Invalid cross-device link` | ENOPROTOOPT 92 | `Protocol not available` |
+| ENODEV 19 | `No such device` | EPROTONOSUPPORT 93 | `Protocol not supported` |
+| ENOTDIR 20 | `not a directory` | ESOCKTNOSUPPORT 94 | `Socket type not supported` |
+| EISDIR 21 | `Is a directory` | EOPNOTSUPP 95 | `Operation not supported` |
+| EINVAL 22 | `Invalid argument` | EPFNOSUPPORT 96 | `Protocol family not supported` |
+| ENFILE 23 | `Too many open files in system` | ENETDOWN 100 | `Network is down` |
+| EMFILE 24 | `Too many open files` | ENETUNREACH 101 | `Network is unreachable` |
+| ETXTBSY 26 | `Text file busy` | ENETRESET 102 | `Network dropped connection on reset` |
+| EFBIG 27 | `file too big` | ECONNABORTED 103 | `Software caused connection abort` |
+| ENOSPC 28 | `No space left on device` | ECONNRESET 104 | `Connection reset by peer` |
+| ESPIPE 29 | `Illegal seek` | ENOBUFS 105 | `No buffer space available` |
+| EROFS 30 | `Read-only file system` | EISCONN 106 | `Transport endpoint is already connected` |
+| EMLINK 31 | `Too many links` | ENOTCONN 107 | `Transport endpoint is not connected` |
+| EPIPE 32 | `Broken pipe` | ESHUTDOWN 108 | `Cannot send after transport endpoint shutdown` |
+| EDOM 33 | `Numerical argument out of domain` | ETIMEDOUT 110 | `Connection timed out` |
+| ERANGE 34 | `Numerical result out of range` | ECONNREFUSED 111 | `Connection refused` |
+| EDEADLK 35 | `Resource deadlock avoided` | EHOSTDOWN 112 | `Host is down` |
+| ENAMETOOLONG 36 | `File name too long` | EHOSTUNREACH 113 | `No route to host` |
+| ENOLCK 37 | `No locks available` | EALREADY 114 | `Operation already in progress` |
+| ENOSYS 38 | `Function not implemented` | EINPROGRESS 115 | `Operation now in progress` |
+| ENOTEMPTY 39 | `Directory not empty` | EISNAM 120 | `Is a named type file` |
+| ELOOP 40 | `Too many levels of symbolic links` | EREMOTEIO 121 | `Remote I/O error` |
+| ENOMSG 42 | `No message of desired type` | EDQUOT 122 | `Disk quota exceeded` |
+| EIDRM 43 | `Identifier removed` |  | |
 
-Server-generated enames that are not derived from an errno keep their Plan 9 wording and map back
-through `ErrnoFor`: `"bad message"` (EPROTO), `"duplicate tag"` (EINVAL), `"duplicate fid"`
-(EINVAL), `"unknown fid"` (EBADF), `"unknown message"` (EOPNOTSUPP), `"bad offset"` (EINVAL),
-`"bad open mode"` (EINVAL), `"bad name"` (EINVAL), `"cannot clone open fid"` (EINVAL),
-`"authentication failed"` (EACCES), `"authentication not required"` (ECONNREFUSED),
-`"too many fids"` (ENFILE), `"version not negotiated"` (EPROTO), `"symlinks not supported"`
-(EOPNOTSUPP), `"file exists"` (EEXIST) and `"directory not empty"` (ENOTEMPTY).
+Server-generated enames that are not derived from an errno keep their reference wording and map
+back through `ErrnoFor`: `"duplicate tag"` (EINVAL), `"duplicate fid"` (EINVAL),
+`"unknown message"` (EOPNOTSUPP), `"bad offset"` (EINVAL), `"bad open mode"` (EINVAL),
+`"bad name"` (EINVAL), `"cannot clone open fid"` (EINVAL), `"authentication failed"` (EACCES,
+where Linux files the same words under ECONNREFUSED; reference §5.2 wins),
+`"authentication not required"` (ECONNREFUSED), `"version not negotiated"` (EPROTO),
+`"symlinks not supported"` (EOPNOTSUPP) and `"file exists"` (EEXIST).
 
 The refusals of §8 rules 15 and 19 are in the same list, so a 9P2000 peer — whose `Rerror` carries
 the text and no errno — recovers the errno the refusal actually meant rather than `EIO`:

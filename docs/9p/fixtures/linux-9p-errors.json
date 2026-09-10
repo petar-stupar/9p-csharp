@@ -1,0 +1,572 @@
+{
+ "source": "linux/net/9p/error.c and include/uapi/asm-generic/errno*.h at ad2e2a77dcc7912c737a07fe061d93c414c6745e",
+ "errnos": [
+  {
+   "name": "EPERM",
+   "errno": 1,
+   "strings": [
+    "Operation not permitted",
+    "wstat prohibited",
+    "wstat can't convert between files and directories",
+    "not a member of proposed group",
+    "no access to special file",
+    "only support truncation to zero length",
+    "cannot remove root"
+   ]
+  },
+  {
+   "name": "ENOENT",
+   "errno": 2,
+   "strings": [
+    "No such file or directory",
+    "directory entry not found",
+    "file not found",
+    "file does not exist",
+    "illegal path element",
+    "directory entry is not allocated"
+   ]
+  },
+  {
+   "name": "EINTR",
+   "errno": 4,
+   "strings": [
+    "Interrupted system call"
+   ]
+  },
+  {
+   "name": "EIO",
+   "errno": 5,
+   "strings": [
+    "Input/output error",
+    "i/o error",
+    "i/o count too large",
+    "corrupted directory entry",
+    "corrupted file entry",
+    "corrupted block label",
+    "corrupted meta data",
+    "root of file system is corrupted",
+    "corrupted super block",
+    "venti i/o error"
+   ]
+  },
+  {
+   "name": "ENXIO",
+   "errno": 6,
+   "strings": [
+    "No such device or address"
+   ]
+  },
+  {
+   "name": "E2BIG",
+   "errno": 7,
+   "strings": [
+    "Argument list too long"
+   ]
+  },
+  {
+   "name": "EBADF",
+   "errno": 9,
+   "strings": [
+    "Bad file descriptor",
+    "fid unknown or out of range",
+    "bad use of fid",
+    "fid already in use"
+   ]
+  },
+  {
+   "name": "EAGAIN",
+   "errno": 11,
+   "strings": [
+    "Resource temporarily unavailable",
+    "exclusive use file already open",
+    "file is in use"
+   ]
+  },
+  {
+   "name": "ENOMEM",
+   "errno": 12,
+   "strings": [
+    "Cannot allocate memory"
+   ]
+  },
+  {
+   "name": "EACCES",
+   "errno": 13,
+   "strings": [
+    "Permission denied",
+    "permission denied",
+    "not owner",
+    "only owner can change group in wstat"
+   ]
+  },
+  {
+   "name": "EFAULT",
+   "errno": 14,
+   "strings": [
+    "Bad address"
+   ]
+  },
+  {
+   "name": "ENOTBLK",
+   "errno": 15,
+   "strings": [
+    "Block device required"
+   ]
+  },
+  {
+   "name": "EBUSY",
+   "errno": 16,
+   "strings": [
+    "Device or resource busy"
+   ]
+  },
+  {
+   "name": "EEXIST",
+   "errno": 17,
+   "strings": [
+    "File exists",
+    "file exists",
+    "file already exists",
+    "file or directory already exists"
+   ]
+  },
+  {
+   "name": "EXDEV",
+   "errno": 18,
+   "strings": [
+    "Invalid cross-device link"
+   ]
+  },
+  {
+   "name": "ENODEV",
+   "errno": 19,
+   "strings": [
+    "No such device"
+   ]
+  },
+  {
+   "name": "ENOTDIR",
+   "errno": 20,
+   "strings": [
+    "Not a directory",
+    "not a directory"
+   ]
+  },
+  {
+   "name": "EISDIR",
+   "errno": 21,
+   "strings": [
+    "Is a directory"
+   ]
+  },
+  {
+   "name": "EINVAL",
+   "errno": 22,
+   "strings": [
+    "Invalid argument",
+    "illegal mode",
+    "unknown group",
+    "unknown user",
+    "illegal offset"
+   ]
+  },
+  {
+   "name": "ENFILE",
+   "errno": 23,
+   "strings": [
+    "Too many open files in system"
+   ]
+  },
+  {
+   "name": "EMFILE",
+   "errno": 24,
+   "strings": [
+    "Too many open files"
+   ]
+  },
+  {
+   "name": "ETXTBSY",
+   "errno": 26,
+   "strings": [
+    "Text file busy",
+    "file in use",
+    "file already open for I/O"
+   ]
+  },
+  {
+   "name": "EFBIG",
+   "errno": 27,
+   "strings": [
+    "File too large",
+    "file too big"
+   ]
+  },
+  {
+   "name": "ENOSPC",
+   "errno": 28,
+   "strings": [
+    "No space left on device",
+    "file system is full"
+   ]
+  },
+  {
+   "name": "ESPIPE",
+   "errno": 29,
+   "strings": [
+    "Illegal seek",
+    "bad offset in directory read"
+   ]
+  },
+  {
+   "name": "EROFS",
+   "errno": 30,
+   "strings": [
+    "Read-only file system",
+    "read only file system",
+    "file is read only"
+   ]
+  },
+  {
+   "name": "EMLINK",
+   "errno": 31,
+   "strings": [
+    "Too many links"
+   ]
+  },
+  {
+   "name": "EPIPE",
+   "errno": 32,
+   "strings": [
+    "Broken pipe"
+   ]
+  },
+  {
+   "name": "EDOM",
+   "errno": 33,
+   "strings": [
+    "Numerical argument out of domain"
+   ]
+  },
+  {
+   "name": "ERANGE",
+   "errno": 34,
+   "strings": [
+    "Numerical result out of range"
+   ]
+  },
+  {
+   "name": "EDEADLK",
+   "errno": 35,
+   "strings": [
+    "Resource deadlock avoided"
+   ]
+  },
+  {
+   "name": "ENAMETOOLONG",
+   "errno": 36,
+   "strings": [
+    "File name too long",
+    "illegal name"
+   ]
+  },
+  {
+   "name": "ENOLCK",
+   "errno": 37,
+   "strings": [
+    "No locks available"
+   ]
+  },
+  {
+   "name": "ENOSYS",
+   "errno": 38,
+   "strings": [
+    "Function not implemented"
+   ]
+  },
+  {
+   "name": "ENOTEMPTY",
+   "errno": 39,
+   "strings": [
+    "Directory not empty",
+    "directory is not empty"
+   ]
+  },
+  {
+   "name": "ELOOP",
+   "errno": 40,
+   "strings": [
+    "Too many levels of symbolic links"
+   ]
+  },
+  {
+   "name": "ENOMSG",
+   "errno": 42,
+   "strings": [
+    "No message of desired type"
+   ]
+  },
+  {
+   "name": "EIDRM",
+   "errno": 43,
+   "strings": [
+    "Identifier removed",
+    "file has been removed"
+   ]
+  },
+  {
+   "name": "ENODATA",
+   "errno": 61,
+   "strings": [
+    "No data available"
+   ]
+  },
+  {
+   "name": "ENONET",
+   "errno": 64,
+   "strings": [
+    "Machine is not on the network"
+   ]
+  },
+  {
+   "name": "ENOPKG",
+   "errno": 65,
+   "strings": [
+    "Package not installed"
+   ]
+  },
+  {
+   "name": "EREMOTE",
+   "errno": 66,
+   "strings": [
+    "Object is remote"
+   ]
+  },
+  {
+   "name": "ENOLINK",
+   "errno": 67,
+   "strings": [
+    "Link has been severed"
+   ]
+  },
+  {
+   "name": "ECOMM",
+   "errno": 70,
+   "strings": [
+    "Communication error on send"
+   ]
+  },
+  {
+   "name": "EPROTO",
+   "errno": 71,
+   "strings": [
+    "Protocol error",
+    "bogus wstat buffer",
+    "protocol botch"
+   ]
+  },
+  {
+   "name": "EBADMSG",
+   "errno": 74,
+   "strings": [
+    "Bad message"
+   ]
+  },
+  {
+   "name": "EBADFD",
+   "errno": 77,
+   "strings": [
+    "File descriptor in bad state"
+   ]
+  },
+  {
+   "name": "ESTRPIPE",
+   "errno": 86,
+   "strings": [
+    "Streams pipe error"
+   ]
+  },
+  {
+   "name": "EUSERS",
+   "errno": 87,
+   "strings": [
+    "Too many users"
+   ]
+  },
+  {
+   "name": "ENOTSOCK",
+   "errno": 88,
+   "strings": [
+    "Socket operation on non-socket"
+   ]
+  },
+  {
+   "name": "EMSGSIZE",
+   "errno": 90,
+   "strings": [
+    "Message too long"
+   ]
+  },
+  {
+   "name": "ENOPROTOOPT",
+   "errno": 92,
+   "strings": [
+    "Protocol not available"
+   ]
+  },
+  {
+   "name": "EPROTONOSUPPORT",
+   "errno": 93,
+   "strings": [
+    "Protocol not supported"
+   ]
+  },
+  {
+   "name": "ESOCKTNOSUPPORT",
+   "errno": 94,
+   "strings": [
+    "Socket type not supported"
+   ]
+  },
+  {
+   "name": "EOPNOTSUPP",
+   "errno": 95,
+   "strings": [
+    "Operation not supported"
+   ]
+  },
+  {
+   "name": "EPFNOSUPPORT",
+   "errno": 96,
+   "strings": [
+    "Protocol family not supported"
+   ]
+  },
+  {
+   "name": "ENETDOWN",
+   "errno": 100,
+   "strings": [
+    "Network is down"
+   ]
+  },
+  {
+   "name": "ENETUNREACH",
+   "errno": 101,
+   "strings": [
+    "Network is unreachable"
+   ]
+  },
+  {
+   "name": "ENETRESET",
+   "errno": 102,
+   "strings": [
+    "Network dropped connection on reset"
+   ]
+  },
+  {
+   "name": "ECONNABORTED",
+   "errno": 103,
+   "strings": [
+    "Software caused connection abort"
+   ]
+  },
+  {
+   "name": "ECONNRESET",
+   "errno": 104,
+   "strings": [
+    "Connection reset by peer"
+   ]
+  },
+  {
+   "name": "ENOBUFS",
+   "errno": 105,
+   "strings": [
+    "No buffer space available"
+   ]
+  },
+  {
+   "name": "EISCONN",
+   "errno": 106,
+   "strings": [
+    "Transport endpoint is already connected"
+   ]
+  },
+  {
+   "name": "ENOTCONN",
+   "errno": 107,
+   "strings": [
+    "Transport endpoint is not connected"
+   ]
+  },
+  {
+   "name": "ESHUTDOWN",
+   "errno": 108,
+   "strings": [
+    "Cannot send after transport endpoint shutdown"
+   ]
+  },
+  {
+   "name": "ETIMEDOUT",
+   "errno": 110,
+   "strings": [
+    "Connection timed out"
+   ]
+  },
+  {
+   "name": "ECONNREFUSED",
+   "errno": 111,
+   "strings": [
+    "Connection refused",
+    "authentication failed"
+   ]
+  },
+  {
+   "name": "EHOSTDOWN",
+   "errno": 112,
+   "strings": [
+    "Host is down"
+   ]
+  },
+  {
+   "name": "EHOSTUNREACH",
+   "errno": 113,
+   "strings": [
+    "No route to host"
+   ]
+  },
+  {
+   "name": "EALREADY",
+   "errno": 114,
+   "strings": [
+    "Operation already in progress"
+   ]
+  },
+  {
+   "name": "EINPROGRESS",
+   "errno": 115,
+   "strings": [
+    "Operation now in progress"
+   ]
+  },
+  {
+   "name": "EISNAM",
+   "errno": 120,
+   "strings": [
+    "Is a named type file"
+   ]
+  },
+  {
+   "name": "EREMOTEIO",
+   "errno": 121,
+   "strings": [
+    "Remote I/O error"
+   ]
+  },
+  {
+   "name": "EDQUOT",
+   "errno": 122,
+   "strings": [
+    "Disk quota exceeded"
+   ]
+  }
+ ]
+}

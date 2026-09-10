@@ -3,6 +3,7 @@ title: Class SetAttr
 body:
 - api1: Class SetAttr
   id: NineP_Protocol_SetAttr
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/SetAttr.cs#L7
   metadata:
     uid: NineP.Protocol.SetAttr
     commentId: T:NineP.Protocol.SetAttr
@@ -45,6 +46,7 @@ body:
 - h2: Properties
 - api3: ATime
   id: NineP_Protocol_SetAttr_ATime
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/SetAttr.cs#L30
   metadata:
     uid: NineP.Protocol.SetAttr.ATime
     commentId: P:NineP.Protocol.SetAttr.ATime
@@ -58,6 +60,7 @@ body:
     - '?'
 - api3: ATimeToNow
   id: NineP_Protocol_SetAttr_ATimeToNow
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/SetAttr.cs#L39
   metadata:
     uid: NineP.Protocol.SetAttr.ATimeToNow
     commentId: P:NineP.Protocol.SetAttr.ATimeToNow
@@ -70,6 +73,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.boolean
 - api3: CTimeToNow
   id: NineP_Protocol_SetAttr_CTimeToNow
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/SetAttr.cs#L45
   metadata:
     uid: NineP.Protocol.SetAttr.CTimeToNow
     commentId: P:NineP.Protocol.SetAttr.CTimeToNow
@@ -82,6 +86,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.boolean
 - api3: Gid
   id: NineP_Protocol_SetAttr_Gid
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/SetAttr.cs#L19
   metadata:
     uid: NineP.Protocol.SetAttr.Gid
     commentId: P:NineP.Protocol.SetAttr.Gid
@@ -95,6 +100,7 @@ body:
     - '?'
 - api3: GroupName
   id: NineP_Protocol_SetAttr_GroupName
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/SetAttr.cs#L22
   metadata:
     uid: NineP.Protocol.SetAttr.GroupName
     commentId: P:NineP.Protocol.SetAttr.GroupName
@@ -108,6 +114,7 @@ body:
     - '?'
 - api3: IsFsyncRequest
   id: NineP_Protocol_SetAttr_IsFsyncRequest
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/SetAttr.cs#L51
   metadata:
     uid: NineP.Protocol.SetAttr.IsFsyncRequest
     commentId: P:NineP.Protocol.SetAttr.IsFsyncRequest
@@ -123,6 +130,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.boolean
 - api3: MTime
   id: NineP_Protocol_SetAttr_MTime
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/SetAttr.cs#L36
   metadata:
     uid: NineP.Protocol.SetAttr.MTime
     commentId: P:NineP.Protocol.SetAttr.MTime
@@ -139,6 +147,7 @@ body:
     - '?'
 - api3: MTimeToNow
   id: NineP_Protocol_SetAttr_MTimeToNow
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/SetAttr.cs#L42
   metadata:
     uid: NineP.Protocol.SetAttr.MTimeToNow
     commentId: P:NineP.Protocol.SetAttr.MTimeToNow
@@ -151,6 +160,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.boolean
 - api3: Name
   id: NineP_Protocol_SetAttr_Name
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/SetAttr.cs#L10
   metadata:
     uid: NineP.Protocol.SetAttr.Name
     commentId: P:NineP.Protocol.SetAttr.Name
@@ -164,6 +174,7 @@ body:
     - '?'
 - api3: Perm
   id: NineP_Protocol_SetAttr_Perm
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/SetAttr.cs#L13
   metadata:
     uid: NineP.Protocol.SetAttr.Perm
     commentId: P:NineP.Protocol.SetAttr.Perm
@@ -177,6 +188,7 @@ body:
     - '?'
 - api3: Size
   id: NineP_Protocol_SetAttr_Size
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/SetAttr.cs#L25
   metadata:
     uid: NineP.Protocol.SetAttr.Size
     commentId: P:NineP.Protocol.SetAttr.Size
@@ -190,6 +202,7 @@ body:
     - '?'
 - api3: Uid
   id: NineP_Protocol_SetAttr_Uid
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/SetAttr.cs#L16
   metadata:
     uid: NineP.Protocol.SetAttr.Uid
     commentId: P:NineP.Protocol.SetAttr.Uid

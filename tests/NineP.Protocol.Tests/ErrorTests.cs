@@ -47,7 +47,7 @@ public sealed class ErrorTests
     public void FromErrnoAndFromEnameAgree()
     {
         NinePError fromErrno = NinePError.FromErrno(Errno.ENOTEMPTY);
-        NinePError fromEname = NinePError.FromEname("directory not empty");
+        NinePError fromEname = NinePError.FromEname("Directory not empty");
 
         Assert.Equal(fromErrno, fromEname);
     }

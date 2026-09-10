@@ -3,6 +3,7 @@ title: Struct StatFs
 body:
 - api1: Struct StatFs
   id: NineP_Protocol_StatFs
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/StatFs.cs#L13
   metadata:
     uid: NineP.Protocol.StatFs
     commentId: T:NineP.Protocol.StatFs
@@ -36,6 +37,7 @@ body:
 - h2: Constructors
 - api3: StatFs(uint, uint, ulong, ulong, ulong, ulong, ulong, ulong, uint)
   id: NineP_Protocol_StatFs__ctor_System_UInt32_System_UInt32_System_UInt64_System_UInt64_System_UInt64_System_UInt64_System_UInt64_System_UInt64_System_UInt32_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/StatFs.cs#L13
   metadata:
     uid: NineP.Protocol.StatFs.#ctor(System.UInt32,System.UInt32,System.UInt64,System.UInt64,System.UInt64,System.UInt64,System.UInt64,System.UInt64,System.UInt32)
     commentId: M:NineP.Protocol.StatFs.#ctor(System.UInt32,System.UInt32,System.UInt64,System.UInt64,System.UInt64,System.UInt64,System.UInt64,System.UInt64,System.UInt32)
@@ -91,6 +93,7 @@ body:
 - h2: Fields
 - api3: V9fsMagic
   id: NineP_Protocol_StatFs_V9fsMagic
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/StatFs.cs#L25
   metadata:
     uid: NineP.Protocol.StatFs.V9fsMagic
     commentId: F:NineP.Protocol.StatFs.V9fsMagic
@@ -104,6 +107,7 @@ body:
 - h2: Properties
 - api3: BlockSize
   id: NineP_Protocol_StatFs_BlockSize
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/StatFs.cs#L15
   metadata:
     uid: NineP.Protocol.StatFs.BlockSize
     commentId: P:NineP.Protocol.StatFs.BlockSize
@@ -116,6 +120,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Blocks
   id: NineP_Protocol_StatFs_Blocks
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/StatFs.cs#L16
   metadata:
     uid: NineP.Protocol.StatFs.Blocks
     commentId: P:NineP.Protocol.StatFs.Blocks
@@ -128,6 +133,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint64
 - api3: BlocksAvailable
   id: NineP_Protocol_StatFs_BlocksAvailable
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/StatFs.cs#L18
   metadata:
     uid: NineP.Protocol.StatFs.BlocksAvailable
     commentId: P:NineP.Protocol.StatFs.BlocksAvailable
@@ -140,6 +146,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint64
 - api3: BlocksFree
   id: NineP_Protocol_StatFs_BlocksFree
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/StatFs.cs#L17
   metadata:
     uid: NineP.Protocol.StatFs.BlocksFree
     commentId: P:NineP.Protocol.StatFs.BlocksFree
@@ -152,6 +159,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint64
 - api3: Files
   id: NineP_Protocol_StatFs_Files
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/StatFs.cs#L19
   metadata:
     uid: NineP.Protocol.StatFs.Files
     commentId: P:NineP.Protocol.StatFs.Files
@@ -164,6 +172,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint64
 - api3: FilesFree
   id: NineP_Protocol_StatFs_FilesFree
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/StatFs.cs#L20
   metadata:
     uid: NineP.Protocol.StatFs.FilesFree
     commentId: P:NineP.Protocol.StatFs.FilesFree
@@ -176,6 +185,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint64
 - api3: FsId
   id: NineP_Protocol_StatFs_FsId
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/StatFs.cs#L21
   metadata:
     uid: NineP.Protocol.StatFs.FsId
     commentId: P:NineP.Protocol.StatFs.FsId
@@ -188,6 +198,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint64
 - api3: NameLength
   id: NineP_Protocol_StatFs_NameLength
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/StatFs.cs#L22
   metadata:
     uid: NineP.Protocol.StatFs.NameLength
     commentId: P:NineP.Protocol.StatFs.NameLength
@@ -200,6 +211,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Type
   id: NineP_Protocol_StatFs_Type
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/StatFs.cs#L14
   metadata:
     uid: NineP.Protocol.StatFs.Type
     commentId: P:NineP.Protocol.StatFs.Type

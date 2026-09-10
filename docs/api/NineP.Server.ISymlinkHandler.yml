@@ -3,6 +3,7 @@ title: Interface ISymlinkHandler
 body:
 - api1: Interface ISymlinkHandler
   id: NineP_Server_ISymlinkHandler
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/ISymlinkHandler.cs#L4
   metadata:
     uid: NineP.Server.ISymlinkHandler
     commentId: T:NineP.Server.ISymlinkHandler
@@ -22,6 +23,7 @@ body:
 - h2: Methods
 - api3: ReadlinkAsync(CancellationToken)
   id: NineP_Server_ISymlinkHandler_ReadlinkAsync_System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/ISymlinkHandler.cs#L9
   metadata:
     uid: NineP.Server.ISymlinkHandler.ReadlinkAsync(System.Threading.CancellationToken)
     commentId: M:NineP.Server.ISymlinkHandler.ReadlinkAsync(System.Threading.CancellationToken)

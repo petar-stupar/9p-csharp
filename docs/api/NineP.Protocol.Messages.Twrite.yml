@@ -3,6 +3,7 @@ title: Struct Twrite
 body:
 - api1: Struct Twrite
   id: NineP_Protocol_Messages_Twrite
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Twrite.cs#L15
   metadata:
     uid: NineP.Protocol.Messages.Twrite
     commentId: T:NineP.Protocol.Messages.Twrite
@@ -41,6 +42,7 @@ body:
 - h2: Constructors
 - api3: Twrite(ushort, uint, ulong, ReadOnlyMemory<byte>)
   id: NineP_Protocol_Messages_Twrite__ctor_System_UInt16_System_UInt32_System_UInt64_System_ReadOnlyMemory_System_Byte__
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Twrite.cs#L15
   metadata:
     uid: NineP.Protocol.Messages.Twrite.#ctor(System.UInt16,System.UInt32,System.UInt64,System.ReadOnlyMemory{System.Byte})
     commentId: M:NineP.Protocol.Messages.Twrite.#ctor(System.UInt16,System.UInt32,System.UInt64,System.ReadOnlyMemory{System.Byte})
@@ -83,6 +85,7 @@ body:
 - h2: Properties
 - api3: Data
   id: NineP_Protocol_Messages_Twrite_Data
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Twrite.cs#L15
   metadata:
     uid: NineP.Protocol.Messages.Twrite.Data
     commentId: P:NineP.Protocol.Messages.Twrite.Data
@@ -104,6 +107,7 @@ body:
     - '>'
 - api3: Fid
   id: NineP_Protocol_Messages_Twrite_Fid
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Twrite.cs#L15
   metadata:
     uid: NineP.Protocol.Messages.Twrite.Fid
     commentId: P:NineP.Protocol.Messages.Twrite.Fid
@@ -116,6 +120,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Offset
   id: NineP_Protocol_Messages_Twrite_Offset
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Twrite.cs#L15
   metadata:
     uid: NineP.Protocol.Messages.Twrite.Offset
     commentId: P:NineP.Protocol.Messages.Twrite.Offset
@@ -128,6 +133,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint64
 - api3: Tag
   id: NineP_Protocol_Messages_Twrite_Tag
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Twrite.cs#L15
   metadata:
     uid: NineP.Protocol.Messages.Twrite.Tag
     commentId: P:NineP.Protocol.Messages.Twrite.Tag

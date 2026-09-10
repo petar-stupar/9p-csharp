@@ -687,7 +687,7 @@ Decoding (per `convM2S.c` and `srv.c`, hardened):
    bytes — and the first message on a connection must be a `Tversion` (rule 9).
 2. Every counted field is bounds-checked against the remaining bytes **before** any allocation;
    `nwname > 16`, `count > size`, string overruns, trailing bytes after the last field, and a
-   `stat[n]` whose inner `size[2]` disagrees with `n` are all malformed → `Rerror "bad message"` /
+   `stat[n]` whose inner `size[2]` disagrees with `n` are all malformed → `Rerror "protocol botch"` /
    `Rlerror EPROTO` `[D]` and the connection is closed after the reply. Sole exception: a `Tfsync`
    of exactly 11 bytes (no `datasync[4]`) is legal and decodes with `datasync = 0` (§3.4).
 3. Strings must be valid UTF-8 and contain no NUL; names in `Twalk`, `Tcreate`, `Tlcreate`,
@@ -711,10 +711,10 @@ Session state:
 
 6. Tags: a T-message whose tag is already pending draws `Rerror "duplicate tag"` (`Eduptag`) and
    the new request is dropped. `NOTAG` outside `Tversion` is accepted as an ordinary tag `[D]`.
-7. Fids: unknown fid → `Eunknownfid "unknown fid"` / `EBADF`; in-use fid where a fresh one is
+7. Fids: unknown fid → `Eunknownfid "fid unknown or out of range"` / `EBADF`; in-use fid where a fresh one is
    required → `Edupfid`; operations on the afid other than read/write/clunk → error. The
    per-connection fid table is bounded (default 65536 entries `[D]`), and exceeding the cap is one
-   condition with **one** answer: `Rerror "too many fids"` in 9P2000/.u, `Rlerror ENFILE (23)` in
+   condition with **one** answer: `Rerror "Too many open files in system"` in 9P2000/.u, `Rlerror ENFILE (23)` in
    `.L` `[D]`. An afid additionally carries the triple `(uname, n_uname, aname)` it was created
    with (§5.2): a `Tattach` presenting it must match that triple, with an empty `uname` and an
    `n_uname` of `NONUNAME` accepted as "unspecified", and the session's identity is the one the

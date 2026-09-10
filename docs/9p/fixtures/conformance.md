@@ -38,10 +38,10 @@ the server supports (a peer that lacks one skips it and records why):
 4. `diff` against `sample.expected.txt`. Any difference fails.
 5. Negative checks (each must fail with exit 2 and the expected errno / ename):
    - `ninep cat /missing` → `ENOENT` / `file not found`
-   - `ninep cat /dir` → `EISDIR` / `is a directory` (9P2000 dialects: read of a directory via
+   - `ninep cat /dir` → `EISDIR` / `Is a directory` (9P2000 dialects: read of a directory via
      `cat` is the client's own error because `cat` opens for reading — the driver instead runs
      `ninep ls /name` → `ENOTDIR` / `not a directory`)
-   - `ninep write /name` on the read-only server → `EROFS` / `read-only file system`
+   - `ninep write /name` on the read-only server → `EROFS` / `Read-only file system`
    - `ninep ls "/dir/../.."` → the root listing (`..` at root is root)
    - a 17-element walk in one message is impossible through the cli; the codec test covers it.
 
@@ -51,7 +51,7 @@ the server supports (a peer that lacks one skips it and records why):
 2. `ninep mkdir /newdir`; `printf 'x' | ninep write /newdir/f`; `ninep ls /newdir` → `f`.
 3. `ninep mv /newdir/f /newdir/g`; `ninep ls /newdir` → `g`.
 4. `ninep rm /newdir/g`; `ninep rm /newdir`; `ninep ls /` must not contain `newdir/`.
-5. `ninep rm /dir` (non-empty) → `ENOTEMPTY` / `directory not empty`.
+5. `ninep rm /dir` (non-empty) → `ENOTEMPTY` / `Directory not empty`.
 6. `printf '7' | ninep write /list/6` (append to array) → ok; `printf '7' | ninep write /list/9` → `EINVAL`/`ENOENT`.
 7. `printf 'yes' | ninep write /enabled` → `ninep cat /enabled` → `yes` (type demoted to string, documented).
 8. With `--write-back`, restart the server and confirm step 1's value persisted.
@@ -164,18 +164,18 @@ implementation does not have yet; the owner may overrule them in the Decision Lo
    `offset = 2⁶⁴ − 1` → `Rread count=0`, session stays up.
 5. **The root fid.** `Tclunk` of the attach fid → `Rclunk`, and a fresh `Tattach` works.
    `Tremove` of the attach fid → `EPERM`, **and the fid is freed anyway** (remove(5) clunks even on
-   error): a following `Tclunk` of the same fid → `EBADF` / `unknown fid`.
+   error): a following `Tclunk` of the same fid → `EBADF` / `fid unknown or out of range`.
 6. **Creating what exists, every verb.** Against a directory that already holds `f` and `d`:
    `Tcreate f`, `Tlcreate f`, `Tmkdir d`, `Tmkdir f`, `Tsymlink f`, `Tmknod f`, `Tlink … f` →
    `EEXIST` / `file already exists`, session stays up; the directory listing is unchanged.
 7. **Name limits.**
    - A 256-byte name in `Twalk`, `Tcreate`, `Tlcreate`, `Tmkdir`, `Trenameat` and `Tunlinkat` is
-     malformed (§8 rules 2–3): `Rerror "bad message"` / `Rlerror EPROTO` and the connection is
+     malformed (§8 rules 2–3): `Rerror "protocol botch"` / `Rlerror EPROTO` and the connection is
      closed; a second connection is unaffected.
    - A 255-byte name works end to end — create, walk, list, stat, remove — in every dialect at
      **msize 4096**, where a stat record for it is a third of the payload.
    - With `Limits.MaxNameLength = 64`, a legal 65-byte name in any of those messages →
-     `ENAMETOOLONG` / `file name too long`, session stays up **[approved 2026-09-08]**; the limit bounds what a
+     `ENAMETOOLONG` / `File name too long`, session stays up **[approved 2026-09-08]**; the limit bounds what a
      handler is asked to store, and today no port enforces it.
    - Names are bytes: create `é` as NFC (`C3 A9`), walk `é` as NFD (`65 CC 81`) → `ENOENT`; the
      listing holds one entry. No normalisation anywhere.
@@ -309,8 +309,10 @@ and measured resource costs in its own `docs/benchmarks.md`.
 Record every run — peer, version, dialect, transport, pass/fail, and the diff on failure — in
 the repo's `docs/interop.md`. "Not run" entries carry the reason.
 
-Plain 9P2000 carries only an ename. E9/F5 therefore assert the canonical `permission denied`
-projection (EACCES on the receiving client); .u and .L preserve numeric EPERM. This does not
+Plain 9P2000 carries only an ename, and since 2026-09-10 the ename sent for an errno is a string
+the Linux kernel maps to exactly that errno (`fixtures/linux-9p-errors.json`): EPERM travels as
+`Operation not permitted`, so E9/F5 assert EPERM on the receiving client in every dialect. Before
+that date EPERM and EACCES shared `permission denied` and 9P2000 recovered EACCES. This does not
 change the server's root-removal policy. Scale child processes use `DOTNET_PROCESSOR_COUNT=2`
 to bound per-thread buffer pools independently of host CPU count, with a fixed 256 MiB file
 warmup (or the full workload when smaller).

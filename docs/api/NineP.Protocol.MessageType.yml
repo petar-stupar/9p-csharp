@@ -3,6 +3,7 @@ title: Enum MessageType
 body:
 - api1: Enum MessageType
   id: NineP_Protocol_MessageType
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/MessageType.cs#L8
   metadata:
     uid: NineP.Protocol.MessageType
     commentId: T:NineP.Protocol.MessageType

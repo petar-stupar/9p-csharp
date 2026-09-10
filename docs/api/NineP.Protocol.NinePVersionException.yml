@@ -3,6 +3,7 @@ title: Class NinePVersionException
 body:
 - api1: Class NinePVersionException
   id: NineP_Protocol_NinePVersionException
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/NinePVersionException.cs#L7
   metadata:
     uid: NineP.Protocol.NinePVersionException
     commentId: T:NineP.Protocol.NinePVersionException
@@ -73,6 +74,7 @@ body:
 - h2: Constructors
 - api3: NinePVersionException()
   id: NineP_Protocol_NinePVersionException__ctor
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/NinePVersionException.cs#L10
   metadata:
     uid: NineP.Protocol.NinePVersionException.#ctor
     commentId: M:NineP.Protocol.NinePVersionException.#ctor
@@ -80,6 +82,7 @@ body:
 - code: public NinePVersionException()
 - api3: NinePVersionException(string)
   id: NineP_Protocol_NinePVersionException__ctor_System_String_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/NinePVersionException.cs#L17
   metadata:
     uid: NineP.Protocol.NinePVersionException.#ctor(System.String)
     commentId: M:NineP.Protocol.NinePVersionException.#ctor(System.String)
@@ -94,6 +97,7 @@ body:
     description: The message for the developer.
 - api3: NinePVersionException(string, Exception)
   id: NineP_Protocol_NinePVersionException__ctor_System_String_System_Exception_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/NinePVersionException.cs#L26
   metadata:
     uid: NineP.Protocol.NinePVersionException.#ctor(System.String,System.Exception)
     commentId: M:NineP.Protocol.NinePVersionException.#ctor(System.String,System.Exception)
@@ -113,6 +117,7 @@ body:
     description: The failure being wrapped.
 - api3: NinePVersionException(string, string, uint)
   id: NineP_Protocol_NinePVersionException__ctor_System_String_System_String_System_UInt32_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/NinePVersionException.cs#L36
   metadata:
     uid: NineP.Protocol.NinePVersionException.#ctor(System.String,System.String,System.UInt32)
     commentId: M:NineP.Protocol.NinePVersionException.#ctor(System.String,System.String,System.UInt32)
@@ -138,6 +143,7 @@ body:
 - h2: Properties
 - api3: ServerMsize
   id: NineP_Protocol_NinePVersionException_ServerMsize
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/NinePVersionException.cs#L47
   metadata:
     uid: NineP.Protocol.NinePVersionException.ServerMsize
     commentId: P:NineP.Protocol.NinePVersionException.ServerMsize
@@ -150,6 +156,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: ServerVersion
   id: NineP_Protocol_NinePVersionException_ServerVersion
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/NinePVersionException.cs#L44
   metadata:
     uid: NineP.Protocol.NinePVersionException.ServerVersion
     commentId: P:NineP.Protocol.NinePVersionException.ServerVersion

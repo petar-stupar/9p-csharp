@@ -3,6 +3,7 @@ title: Struct Ropen
 body:
 - api1: Struct Ropen
   id: NineP_Protocol_Messages_Ropen
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Ropen.cs#L9
   metadata:
     uid: NineP.Protocol.Messages.Ropen
     commentId: T:NineP.Protocol.Messages.Ropen
@@ -38,6 +39,7 @@ body:
 - h2: Constructors
 - api3: Ropen(ushort, Qid, uint)
   id: NineP_Protocol_Messages_Ropen__ctor_System_UInt16_NineP_Protocol_Qid_System_UInt32_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Ropen.cs#L9
   metadata:
     uid: NineP.Protocol.Messages.Ropen.#ctor(System.UInt16,NineP.Protocol.Qid,System.UInt32)
     commentId: M:NineP.Protocol.Messages.Ropen.#ctor(System.UInt16,NineP.Protocol.Qid,System.UInt32)
@@ -63,6 +65,7 @@ body:
 - h2: Properties
 - api3: Iounit
   id: NineP_Protocol_Messages_Ropen_Iounit
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Ropen.cs#L9
   metadata:
     uid: NineP.Protocol.Messages.Ropen.Iounit
     commentId: P:NineP.Protocol.Messages.Ropen.Iounit
@@ -75,6 +78,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Qid
   id: NineP_Protocol_Messages_Ropen_Qid
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Ropen.cs#L9
   metadata:
     uid: NineP.Protocol.Messages.Ropen.Qid
     commentId: P:NineP.Protocol.Messages.Ropen.Qid
@@ -87,6 +91,7 @@ body:
       url: NineP.Protocol.Qid.html
 - api3: Tag
   id: NineP_Protocol_Messages_Ropen_Tag
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Ropen.cs#L9
   metadata:
     uid: NineP.Protocol.Messages.Ropen.Tag
     commentId: P:NineP.Protocol.Messages.Ropen.Tag

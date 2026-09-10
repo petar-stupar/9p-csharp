@@ -68,7 +68,7 @@ Resource bounds and their defaults are
 | --- | --- | --- |
 | `MaxMsize` / `MinMsize` | 1 MiB / 4096 | a frame above it closes the connection; an msize below it is answered `"unknown"` |
 | `PreNegotiationFrameCap` | 8192 | a pre-`Tversion` frame above it closes the connection — the configured maximum is **not** the bound here |
-| `MaxFidsPerConnection` | 65 536 | `Rerror "too many fids"` / `Rlerror ENFILE`; the connection stays up |
+| `MaxFidsPerConnection` | 65 536 | `Rerror "Too many open files in system"` / `Rlerror ENFILE`; the connection stays up |
 | `MaxInFlightPerConnection` | 256, of which 8 are reserved | excess ordinary requests receive EAGAIN; the reader continues processing Tflush |
 | `FlushReservePerConnection` | 8 | `Tflush` keeps being read and answered while the general window is full |
 | `MaxInFlightPerListener` | 4096 | excess ordinary requests receive EAGAIN; the partial connection slot is released |
