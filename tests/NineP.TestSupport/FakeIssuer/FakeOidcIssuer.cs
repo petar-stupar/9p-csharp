@@ -18,6 +18,9 @@ public sealed class FakeOidcIssuer : IDisposable
     private readonly CancellationTokenSource _stopping = new();
     private readonly Task _serving;
 
+    /// <summary>How long <see cref="Dispose"/> waits for the serving loop before abandoning it.</summary>
+    private static readonly TimeSpan StopGrace = TimeSpan.FromSeconds(5);
+
     private int _pendingLeft;
 
     private FakeOidcIssuer(HttpListener listener, string issuer)
@@ -102,23 +105,38 @@ public sealed class FakeOidcIssuer : IDisposable
         FakeToken.Build(options ?? Default, Issuer, Audience, _keys, DateTimeOffset.UtcNow);
 
     /// <summary>Stops the listener.</summary>
+    /// <remarks>
+    /// The wait for the serving loop is bounded. Closing an <see cref="HttpListener"/> is meant to
+    /// wake a pending <c>GetContextAsync</c>, but the managed listener does not always do so: this
+    /// was observed on macOS, where the loop stayed parked at its await and an unbounded wait here
+    /// blocked the whole test run for over an hour rather than the seconds a fixture teardown
+    /// should take. The loop owns nothing a test needs released, so past the grace it is abandoned
+    /// — and the two disposables it still reads are then left alone, because disposing them under a
+    /// live loop would trade a hang for a race.
+    /// </remarks>
     public void Dispose()
     {
         _stopping.Cancel();
         _listener.Close();
 
+        bool stopped;
         try
         {
-            _serving.GetAwaiter().GetResult();
+            stopped = _serving.Wait(StopGrace);
         }
-        catch (Exception failure) when (failure is OperationCanceledException or HttpListenerException
-            or ObjectDisposedException)
+        catch (AggregateException failure) when (failure.InnerExceptions.All(
+            inner => inner is OperationCanceledException or HttpListenerException
+                or ObjectDisposedException))
         {
             // The listener was closed on purpose.
+            stopped = true;
         }
 
-        _stopping.Dispose();
-        _keys.Dispose();
+        if (stopped)
+        {
+            _stopping.Dispose();
+            _keys.Dispose();
+        }
     }
 
     private static int FreePort()
