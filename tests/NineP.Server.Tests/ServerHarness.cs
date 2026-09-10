@@ -96,7 +96,10 @@ internal sealed class ServerHarness : IAsyncDisposable
         }
     }
 
-    private static MemoryFilesystem Populate(MemoryFilesystem tree)
+    /// <summary>Fills a tree with the fixture every server test expects.</summary>
+    /// <param name="tree">The tree to fill.</param>
+    /// <returns>The same tree.</returns>
+    internal static MemoryFilesystem Populate(MemoryFilesystem tree)
     {
         MemoryFile greeting = tree.NewFile("hello.txt", 0x1A4);
         greeting.Data = "hello, 9P\n"u8.ToArray();

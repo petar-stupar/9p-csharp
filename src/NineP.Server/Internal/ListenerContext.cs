@@ -14,7 +14,9 @@ internal sealed class ListenerContext : IAsyncDisposable
     private readonly ServerOptions _options;
     private readonly ServerMetrics _metrics;
     private readonly OpenState _openState;
+    private readonly AuthThrottle _authThrottle;
     private readonly SemaphoreSlim _connections;
+    private readonly AddressCounter _addresses;
     private readonly HashSet<Task> _sessions = [];
     private readonly HashSet<ServerSession> _live = [];
     private bool _connectionsRetired;
@@ -24,20 +26,32 @@ internal sealed class ListenerContext : IAsyncDisposable
     /// <param name="options">The server configuration.</param>
     /// <param name="metrics">The counters this listener contributes to.</param>
     /// <param name="openState">The server-wide open state, which owns the DMEXCL registry.</param>
+    /// <param name="authThrottle">The server-wide per-address auth budget (reference §8 rule 40).</param>
     public ListenerContext(
-        INinePListener listener, ServerOptions options, ServerMetrics metrics, OpenState openState)
+        INinePListener listener,
+        ServerOptions options,
+        ServerMetrics metrics,
+        OpenState openState,
+        AuthThrottle authThrottle)
     {
         ArgumentNullException.ThrowIfNull(listener);
         ArgumentNullException.ThrowIfNull(options);
         ArgumentNullException.ThrowIfNull(metrics);
         ArgumentNullException.ThrowIfNull(openState);
+        ArgumentNullException.ThrowIfNull(authThrottle);
 
         _listener = listener;
         _options = options;
         _metrics = metrics;
         _openState = openState;
+        _authThrottle = authThrottle;
         _connections = new SemaphoreSlim(options.Limits.MaxConnectionsPerListener);
+        _addresses = new AddressCounter(options.Limits.MaxConnectionsPerAddress);
         InFlight = new SemaphoreSlim(options.Limits.MaxInFlightPerListener);
+        Rate = new TokenBucket(
+            options.Limits.MaxRequestsPerSecondPerListener,
+            options.Limits.MaxInFlightPerListener,
+            options.TimeProvider);
     }
 
     /// <summary>The address actually bound, carrying the real port when 0 was requested.</summary>
@@ -45,6 +59,14 @@ internal sealed class ListenerContext : IAsyncDisposable
 
     /// <summary>The requests in flight across every connection of this listener.</summary>
     public SemaphoreSlim InFlight { get; }
+
+    /// <summary>The listener-wide request rate budget (reference §8 rule 40).</summary>
+    public TokenBucket Rate { get; }
+
+    /// <summary>Live connections held for one address; for tests and diagnostics.</summary>
+    /// <param name="address">The peer address to report.</param>
+    /// <returns>The number of connections that address holds.</returns>
+    public int ConnectionsFor(string address) => _addresses.HeldFor(address);
 
     /// <summary>Accepts connections until the token fires or the listener is disposed.</summary>
     /// <param name="filesystem">The tree every session serves.</param>
@@ -77,9 +99,26 @@ internal sealed class ListenerContext : IAsyncDisposable
                     return;
                 }
 
+                // The per-address cap can only be applied here: the listener cap is taken before
+                // the accept, but an address is not known until a connection exists.
+                string? peer = PeerOf(connection);
+                if (!_addresses.TryHold(peer, out bool firstRefusal))
+                {
+                    if (firstRefusal && peer is not null)
+                    {
+                        _options.Logger.ConnectionsPerAddressExceeded(
+                            peer, _options.Limits.MaxConnectionsPerAddress);
+                    }
+
+                    _metrics.ConnectionRefused();
+                    await CloseRefusedAsync(connection).ConfigureAwait(false);
+                    ReleaseConnection();
+                    continue;
+                }
+
                 _metrics.ConnectionAccepted();
                 Task serving = Task.Run(
-                    () => ServeAsync(connection, filesystem, cancellationToken), CancellationToken.None);
+                    () => ServeAsync(connection, peer, filesystem, cancellationToken), CancellationToken.None);
 
                 lock (_sessions)
                 {
@@ -189,10 +228,32 @@ internal sealed class ListenerContext : IAsyncDisposable
         }
     }
 
-    private async Task ServeAsync(
-        INinePConnection connection, IFilesystem filesystem, CancellationToken cancellationToken)
+    private static string? PeerOf(INinePConnection connection) =>
+        ServerSession.PeerAddressOf(connection);
+
+    private async Task CloseRefusedAsync(INinePConnection connection)
     {
-        ServerSession session = new(connection, _options, filesystem, _metrics, _openState, InFlight);
+        try
+        {
+            await connection.CloseAsync(CloseReason.ResourceLimit).ConfigureAwait(false);
+        }
+#pragma warning disable CA1031 // A refused peer must not be able to end the accept loop.
+        catch (Exception failure)
+#pragma warning restore CA1031
+        {
+            _options.Logger.CleanupFailedSafely(failure);
+        }
+        finally
+        {
+            await connection.DisposeAsync().ConfigureAwait(false);
+        }
+    }
+
+    private async Task ServeAsync(
+        INinePConnection connection, string? peer, IFilesystem filesystem, CancellationToken cancellationToken)
+    {
+        ServerSession session = new(
+            connection, _options, filesystem, _metrics, _openState, InFlight, Rate, _authThrottle);
 
         lock (_live)
         {
@@ -222,6 +283,7 @@ internal sealed class ListenerContext : IAsyncDisposable
             finally
             {
                 _metrics.ConnectionClosed();
+                _addresses.Release(peer);
                 ReleaseConnection();
             }
         }

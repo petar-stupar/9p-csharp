@@ -166,6 +166,30 @@ After a connection has closed, cleanup failures are observed and logged. If the 
 throws during that cleanup, remaining fids and synchronization resources are still released.
 This cleanup exception does not change the documented live-connection policy for throwing loggers.
 
+## 6. Abuse budgets (reference §8 rule 40)
+
+The caps of §5 bound one connection's *state*; these bound what a peer may *spend*. Each refuses
+rather than delays, so the reader stays free for the `Tflush` that cancels what is in flight.
+
+| Bound | Default | What it stops |
+| --- | --- | --- |
+| `Limits.MaxRequestsPerSecondPerConnection` | 0 (off) | one authenticated connection driving a handler as fast as the server answers |
+| `Limits.MaxRequestsPerSecondPerListener` | 0 (off) | many connections doing the same together |
+| `Limits.MaxConnectionsPerAddress` | 64 | one host taking every slot of `MaxConnectionsPerListener` |
+| `Limits.MaxAuthFailuresPerAddress` / `AuthFailureWindow` | 32 per minute | a guesser making the server pay for a PBKDF2 derivation per attempt |
+
+Metering ships **off**: only the operator knows what one request costs their handler, and a wrong
+rate is an outage. The burst is the corresponding in-flight budget, so a client that pipelines
+inside its window is never refused for the rate; `Tversion` and `Tflush` are never metered. The
+connection and authentication budgets ship on, are keyed on the host alone (a budget keyed on the
+port would reset with every connection), and exempt the in-process transport, whose peers already
+run inside the process. `ServerCounters.RequestsMetered` and `AuthAttemptsThrottled` report what
+was refused. `Security.ResourceLimitTests` pins all three, each with its mutation.
+
+Storage is the handler's: the library cannot know what an entry costs. Both shipped examples
+demonstrate the pattern — jsonfs `--max-entries` and todofs `--max-lists` / `--max-items` refuse
+with `ENOSPC`, whole or nothing.
+
 ## Test suites
 
 HostileClientTests, including HalfHeaderTimesOut, stays in `Security`. Separate `Chaos` tests exercise transport stalls and late/duplicate replies. `Robustness.MutationMatrixTests` mutates all 88 golden vectors where the operation applies, including oversized count claims and exact stat framing. The suite trait is always `Category`; optional workload selectors use `Kind`.

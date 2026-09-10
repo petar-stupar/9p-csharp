@@ -6,6 +6,19 @@ All notable changes to this repository are recorded here. The format follows
 
 ## [Unreleased]
 
+### Abuse budgets — 2026-09-10
+
+- **`Limits` gains four bounds and a window** (reference §8 rule 40, ticket 015).
+  `MaxRequestsPerSecondPerConnection` and `MaxRequestsPerSecondPerListener` meter ordinary
+  requests, answering `EAGAIN` at once past the budget and never metering `Tversion` or `Tflush`;
+  both default to 0, which is off, because only the operator knows what a request costs their
+  handler. `MaxConnectionsPerAddress` (64) stops one host holding every slot of
+  `MaxConnectionsPerListener`. `MaxAuthFailuresPerAddress` (32) with `AuthFailureWindow` (1 min)
+  refuses a `Tauth` from an address that keeps beginning exchanges without one reaching a
+  successful attach, **before the authenticator is asked**, so a peer that is guessing stops
+  making the server pay for a PBKDF2 derivation. The in-process transport is exempt from the two
+  address budgets. `ServerCounters` gains `RequestsMetered` and `AuthAttemptsThrottled`.
+
 ### Test audit 002 — 2026-09-10
 
 - **Server:** a `Tsetattr` with `valid = 0` validates the fid and answers `Rsetattr` without calling the handler; `ATIME_SET` / `MTIME_SET` without their base bit are `EINVAL`; a directory length change is refused in the core before the handler (`.L`: any size; 9P2000/.u: a non-zero length, per stat(5)).

@@ -51,6 +51,19 @@ internal static partial class ServerLog
         Level = LogLevel.Warning,
         Message = "a fid could not be finalized during session cleanup")]
     public static partial void FidCleanupFailed(this ILogger logger, Exception exception);
+
+    [LoggerMessage(
+        EventId = 3008,
+        Level = LogLevel.Warning,
+        Message = "{Address} holds {Limit} connections; further ones are refused until it releases some")]
+    public static partial void ConnectionsPerAddressExceeded(this ILogger logger, string address, int limit);
+
+    [LoggerMessage(
+        EventId = 3009,
+        Level = LogLevel.Warning,
+        Message = "refusing Tauth from {Address}: {Budget} failed authentications inside the window")]
+    public static partial void AuthAttemptsThrottled(this ILogger logger, string address, int budget);
+
     /// <summary>Reports detached cleanup failures without allowing a broken sink to abort later cleanup.</summary>
     /// <param name="logger">The configured sink.</param>
     /// <param name="failure">The failure encountered after the connection has already closed.</param>

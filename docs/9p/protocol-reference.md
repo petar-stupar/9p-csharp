@@ -877,6 +877,24 @@ Lifetime and progress (reference review, 2026-09-08):
     `version not negotiated`) keep their wording. One deliberate override: `authentication failed`
     is `EACCES` on receipt (§5.2), where Linux files it under `ECONNREFUSED`.
 
+40. **Abuse budgets.** A server bounds what a peer may spend, and every bound **refuses rather
+    than delays**, so the reader stays free for the `Tflush` that cancels what is already in
+    flight. `[D]` (a) An ordinary request past a configured requests-per-second budget, per
+    connection or per listener, is answered `EAGAIN`; the burst is the corresponding in-flight
+    budget, so a client inside its window is never refused for the rate, and `Tversion` and
+    `Tflush` are never metered. (b) Live connections from one peer address are capped; the excess
+    connection is accepted — the address is not known before that — and closed at once, while the
+    listener-wide cap of rule 8 continues to leave its excess in the kernel's backlog. (c)
+    Authentications begun from one address inside a window without one of them reaching a
+    successful attach are capped, and past the cap `Tauth` is refused with `"authentication
+    failed"` / `EACCES` **before the authenticator is asked**, so a peer that is guessing does not
+    make the server pay for a credential check. A successful attach clears the address. Defaults
+    are the server's to choose; this workspace ships metering off, 64 connections and 32 unverified
+    authentications per address. An in-process endpoint is exempt from (b) and (c): whoever can
+    dial it already runs inside the process. The tracking tables are themselves bounded, so the
+    defence cannot become the memory a flood is aiming at.
+
+
 ## 9. Golden vectors
 
 [fixtures/wire-vectors.json](fixtures/wire-vectors.json) holds 88 frames. Notable ones:

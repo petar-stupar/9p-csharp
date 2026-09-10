@@ -11,7 +11,8 @@ Sources: `Ref §n` is [docs/9p/protocol-reference.md](9p/protocol-reference.md);
 `Exit n` are the nine exit criteria of Arch §10. A `review` task marks a rule that came out of the
 independent review of 2026-09-08 rather than a ticket task; `interop` marks one found by running
 against another implementation (`docs/interop.md`); `flags` marks the owner decision of
-2026-09-10 to honour the settable file flags, as open(2) and stat(5) require.
+2026-09-10 to honour the settable file flags, as open(2) and stat(5) require; `limits` marks
+ticket 015, the abuse budgets of §8 rule 40.
 
 Reading the table:
 
@@ -201,3 +202,8 @@ Reading the table:
 | 175 | Ref §4.6 | Orphan time modifiers fail EINVAL before any mutation | `ServerSetattrTests.OrphanTimeModifiersAreEinvalWithoutMutation` | audit-002 |
 | 176 | Ref §5.8 / §4.6 | Directory size rejection is dialect-sensitive and atomic | `ServerSetattrTests.DirectorySizeIsRefusedBeforeAnyPartOfTheUpdate` | audit-002 |
 | 177 | Ref §5.8 | Legacy directory length zero reaches the handler | `ServerSetattrTests.LegacyDirectoryLengthZeroReachesTheHandler` | audit-002 |
+| 178 | Ref §8.40 | A request past the rate budget is answered EAGAIN at once, is counted, and never delays a `Tflush` | `ResourceLimitTests.ARequestFloodIsMeteredAndFlushStillAnswered` | limits |
+| 179 | Ref §8.40 | One peer address cannot hold every connection of a listener; the slot returns when it disconnects | `ResourceLimitTests.OneAddressCannotHoldEveryConnection` | limits |
+| 180 | Ref §8.40 | Past the per-address budget a `Tauth` is refused before the authenticator is asked | `ResourceLimitTests.AnAuthFloodStopsPayingTheDerivation` | limits |
+| 181 | Ref §8.40 | A budget of zero throttles nothing, which is how an operator opts out | `ResourceLimitTests.ABudgetOfZeroThrottlesNothing` | limits |
+| 182 | Ref §8.40 | A successful attach clears whatever the address had spent | `ResourceLimitTests.ASuccessClearsTheAddressBudget` | limits |

@@ -135,7 +135,11 @@ XattrHandler?         list() · get(name) · set(name, value, flags) · remove(n
   `Rerror "Too many open files in system"` / `Rlerror ENFILE`); max outstanding requests 256 per connection and
   4096 per listener, of which 8 per connection are reserved for `Tflush`; max connections per
   listener 1024; read header timeout 30 s; idle timeout off; max name 255 bytes; `Twalk` ≤ 16
-  elements (protocol).
+  elements (protocol); **abuse budgets** (protocol-reference §8 rule 40): requests per second per
+  connection and per listener **off** by default, live connections per peer address 64, and
+  unverified authentications per address 32 in a 1-minute window. Idle timeout stays off on
+  purpose: a v9fs mount sits idle for hours and does not reconnect, so the per-address cap, not a
+  timeout, is what stops one host hoarding slots.
 - **Observability**: structured logging through an injected logger (never a global), counters
   for messages by type, errors by kind, bytes, connections; a request-log hook receives
   `(identity, T-message summary, R-type, duration)` with strings escaped.

@@ -97,6 +97,8 @@ NineP.Server.RequestLogEntry.Summary.get -> string!
 NineP.Server.RequestLogEntry.Summary.init -> void
 NineP.Server.ServerCounters
 NineP.Server.ServerCounters.<Clone>$() -> NineP.Server.ServerCounters!
+NineP.Server.ServerCounters.AuthAttemptsThrottled.get -> long
+NineP.Server.ServerCounters.AuthAttemptsThrottled.init -> void
 NineP.Server.ServerCounters.BytesRead.get -> long
 NineP.Server.ServerCounters.BytesRead.init -> void
 NineP.Server.ServerCounters.BytesWritten.get -> long
@@ -114,6 +116,8 @@ NineP.Server.ServerCounters.MessagesByType.get -> System.Collections.Generic.IRe
 NineP.Server.ServerCounters.MessagesByType.init -> void
 NineP.Server.ServerCounters.ProtocolErrorsByKind.get -> System.Collections.Generic.IReadOnlyDictionary<NineP.Protocol.ProtocolErrorKind, long>!
 NineP.Server.ServerCounters.ProtocolErrorsByKind.init -> void
+NineP.Server.ServerCounters.RequestsMetered.get -> long
+NineP.Server.ServerCounters.RequestsMetered.init -> void
 NineP.Server.ServerCounters.ServerCounters() -> void
 NineP.Server.ServerOptions
 NineP.Server.ServerOptions.<Clone>$() -> NineP.Server.ServerOptions!

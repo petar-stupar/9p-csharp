@@ -220,7 +220,12 @@ public sealed class ServerLifecycleRegressionTests
         MemoryTransport transport = new();
         NinePAddress address = new(NinePScheme.Memory, "lifecycle-" + Guid.NewGuid().ToString("N"), 0, "");
         INinePListener listener = await transport.ListenAsync(address, Ct);
-        await using ListenerContext context = new(listener, new ServerOptions { Listen = [address] }, new ServerMetrics(), new OpenState());
+        await using ListenerContext context = new(
+            listener,
+            new ServerOptions { Listen = [address] },
+            new ServerMetrics(),
+            new OpenState(),
+            new AuthThrottle(0, TimeSpan.Zero, TimeProvider.System));
         using CancellationTokenSource stopping = CancellationTokenSource.CreateLinkedTokenSource(Ct);
         Task accepting = context.AcceptAsync(new MemoryFilesystem(), stopping.Token);
         try
