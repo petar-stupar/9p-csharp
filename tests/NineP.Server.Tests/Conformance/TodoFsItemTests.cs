@@ -243,11 +243,64 @@ public sealed class TodoFsItemTests
         Assert.Equal(4UL, await status.GetAttrAsync(Ct) is { } attr ? attr.Size : 0UL);
     }
 
+    /// <summary>
+    /// Ticket 015 E2: <c>--max-lists</c> and <c>--max-items</c>. The n+1th list and the n+1th
+    /// item are refused with <c>ENOSPC</c> and the listing is what it was; a refusal is whole, so
+    /// the refused number is still the next one and an <c>rmdir</c> frees the slot it takes;
+    /// another user's count is their own, and so is each list's.
+    /// <b>Mutation:</b> drop the refusal in <c>TodoStore.InsertWithinQuotaAsync</c> and the first
+    /// <c>Enospc</c> below fails.
+    /// </summary>
+    [Fact]
+    public async Task ListAndItemQuotasAreEnospc()
+    {
+        await using TodoFsHarness harness = await TodoFsHarness.StartAsync(
+            quotas: new TodoQuotas { MaxLists = 2, MaxItems = 2 });
+        await using NinePSession glenda = await harness.ConnectAsync("glenda");
+
+        await glenda.MkdirAsync("users/glenda/0", cancellationToken: Ct);
+        await glenda.MkdirAsync("users/glenda/1", cancellationToken: Ct);
+        await Enospc(async () => await glenda.MkdirAsync("users/glenda/2", cancellationToken: Ct));
+        Assert.Equal(["0", "1"], await NamesAsync(glenda, "users/glenda"));
+
+        await glenda.MkdirAsync("users/glenda/0/0", cancellationToken: Ct);
+        await glenda.MkdirAsync("users/glenda/0/1", cancellationToken: Ct);
+        await Enospc(async () => await glenda.MkdirAsync("users/glenda/0/2", cancellationToken: Ct));
+        Assert.Equal(["0", "1", "name"], await NamesAsync(glenda, "users/glenda/0"));
+
+        // An rmdir frees one slot, and only one: the refused number is created, the next is not.
+        await glenda.RemoveAsync("users/glenda/0/1", Ct);
+        await glenda.MkdirAsync("users/glenda/0/1", cancellationToken: Ct);
+        await Enospc(async () => await glenda.MkdirAsync("users/glenda/0/2", cancellationToken: Ct));
+
+        await glenda.RemoveAsync("users/glenda/1", Ct);
+        await glenda.MkdirAsync("users/glenda/1", cancellationToken: Ct);
+        await Enospc(async () => await glenda.MkdirAsync("users/glenda/2", cancellationToken: Ct));
+
+        // The quotas are per user and per list: bob starts from zero, and so does glenda's second list.
+        await using NinePSession bob = await harness.ConnectAsync("bob");
+        await bob.MkdirAsync("users/bob/0", cancellationToken: Ct);
+        await glenda.MkdirAsync("users/glenda/1/0", cancellationToken: Ct);
+
+        Assert.Equal(["0"], await NamesAsync(bob, "users/bob"));
+        Assert.Equal(["0", "1"], await NamesAsync(glenda, "users/glenda"));
+        Assert.Equal(["0", "name"], await NamesAsync(glenda, "users/glenda/1"));
+    }
+
     private static async Task Einval(Func<Task> write)
     {
         NinePException refusal = await Assert.ThrowsAsync<NinePException>(write);
         Assert.Equal(Errno.EINVAL, refusal.Error.Errno);
     }
+
+    private static async Task Enospc(Func<Task> create)
+    {
+        NinePException refusal = await Assert.ThrowsAsync<NinePException>(create);
+        Assert.Equal(Errno.ENOSPC, refusal.Error.Errno);
+    }
+
+    private static async Task<string[]> NamesAsync(NinePSession session, string path) =>
+        [.. (await session.ReadDirAsync(path, Ct)).Select(entry => entry.Name).Order(StringComparer.Ordinal)];
 
     private static async Task<string> TextAsync(NinePSession session, string path) =>
         Encoding.UTF8.GetString(await session.ReadFileAsync(path, Ct));
