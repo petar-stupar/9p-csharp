@@ -28,7 +28,8 @@ public sealed class JsonFsBoundaryTests
         const int Count = 5000;
         string document = "{\"d\":{" + string.Join(',', Enumerable.Range(0, Count).Select(i => $"\"e{i:D7}\":\"x\"")) + "},\"gone\":{\"leaf\":\"x\"}}";
         JsonTree tree = Parse(document);
-        await using ServerHarness h = await ServerHarness.StartAsync(filesystem: new JsonFilesystem(tree, writable: true));
+        using JsonFilesystem fs = new(tree, writable: true);
+        await using ServerHarness h = await ServerHarness.StartAsync(filesystem: fs);
         await using NinePSession a = await h.ConnectAsync(dialect, o => o with { Msize = 4096 });
         await using NinePSession b = await h.ConnectAsync(dialect);
         await using NinePFid directory = await a.OpenFileAsync("d", OpenMode.Read, OpenFlags.None, Ct);
@@ -80,7 +81,7 @@ public sealed class JsonFsBoundaryTests
         JsonTree tree = Parse("""{"a":"ok","keep":"safe"}""");
         byte[] before = Serialize(tree);
         tree.DocumentLimit = before.Length + 1;
-        JsonFilesystem fs = new(tree, writable: true);
+        using JsonFilesystem fs = new(tree, writable: true);
         await using ServerHarness h = await ServerHarness.StartAsync(filesystem: fs);
         await using NinePSession s = await h.ConnectAsync(dialect);
         await using NinePFid open = await s.OpenFileAsync("a", OpenMode.ReadWrite, OpenFlags.None, Ct);
@@ -103,7 +104,8 @@ public sealed class JsonFsBoundaryTests
     {
         JsonTree tree = Parse("""{"a":""}""");
         tree.DocumentLimit = Serialize(tree).Length + 3;
-        await using ServerHarness h = await ServerHarness.StartAsync(filesystem: new JsonFilesystem(tree, writable: true));
+        using JsonFilesystem fs = new(tree, writable: true);
+        await using ServerHarness h = await ServerHarness.StartAsync(filesystem: fs);
         await using NinePSession a = await h.ConnectAsync(dialect);
         await using NinePSession b = await h.ConnectAsync(dialect);
         await using NinePFid first = await a.OpenFileAsync("a", OpenMode.Write, OpenFlags.None, Ct);
@@ -115,7 +117,8 @@ public sealed class JsonFsBoundaryTests
         JsonTree capacity = Parse("{}");
         JsonTree one = Parse("""{"x":{}}""");
         capacity.DocumentLimit = Serialize(one).Length + 1;
-        await using ServerHarness limited = await ServerHarness.StartAsync(filesystem: new JsonFilesystem(capacity, writable: true));
+        using JsonFilesystem limitedFs = new(capacity, writable: true);
+        await using ServerHarness limited = await ServerHarness.StartAsync(filesystem: limitedFs);
         await using NinePSession c = await limited.ConnectAsync(dialect);
         await using NinePSession d = await limited.ConnectAsync(dialect);
         async Task<int> Create(NinePSession client, string name)
@@ -137,7 +140,8 @@ public sealed class JsonFsBoundaryTests
             for (int split = 1; split < bytes.Length; split++)
             {
                 JsonTree tree = Parse("""{"a":""}""");
-                await using ServerHarness h = await ServerHarness.StartAsync(filesystem: new JsonFilesystem(tree, writable: true));
+                using JsonFilesystem fs = new(tree, writable: true);
+                await using ServerHarness h = await ServerHarness.StartAsync(filesystem: fs);
                 await using NinePSession s = await h.ConnectAsync(dialect);
                 await using NinePFid file = await s.OpenFileAsync("a", OpenMode.ReadWrite, OpenFlags.None, Ct);
                 Assert.Equal(split, await file.WriteAsync(0, bytes.AsMemory(0, split), Ct));
@@ -158,7 +162,8 @@ public sealed class JsonFsBoundaryTests
     public async Task F28_WholeFilePipelineSplitsUtf8AcrossWireChunks(Dialect dialect)
     {
         JsonTree tree = Parse("{} ");
-        await using ServerHarness h = await ServerHarness.StartAsync(filesystem: new JsonFilesystem(tree, writable: true));
+        using JsonFilesystem fs = new(tree, writable: true);
+        await using ServerHarness h = await ServerHarness.StartAsync(filesystem: fs);
         await using NinePSession s = await h.ConnectAsync(dialect, o => o with { Msize = 4096 });
         byte[] text = Encoding.UTF8.GetBytes(string.Concat(Enumerable.Repeat("é世🚀", 3000)));
         await using (NinePFid file = await s.CreateFileAsync("data", 0x1A4, Ct))
@@ -173,7 +178,8 @@ public sealed class JsonFsBoundaryTests
     public async Task F28_IncompleteUtf8AtClunkIsAnErrorAndFidIsReleased(Dialect dialect)
     {
         JsonTree tree = Parse("""{"a":""}""");
-        await using ServerHarness h = await ServerHarness.StartAsync(filesystem: new JsonFilesystem(tree, writable: true));
+        using JsonFilesystem fs = new(tree, writable: true);
+        await using ServerHarness h = await ServerHarness.StartAsync(filesystem: fs);
         await using NinePSession s = await h.ConnectAsync(dialect);
         NinePFid file = await s.OpenFileAsync("a", OpenMode.Write, OpenFlags.None, Ct);
         Assert.Equal(1, await file.WriteAsync(0, new byte[] { 0xF0 }, Ct));
@@ -190,7 +196,8 @@ public sealed class JsonFsBoundaryTests
         JsonTree tree = Parse("""{"a":{"b":{}},"move":{"leaf":{}}}""");
         tree.DepthLimit = 3;
         byte[] before = Serialize(tree);
-        await using ServerHarness h = await ServerHarness.StartAsync(filesystem: new JsonFilesystem(tree, writable: true));
+        using JsonFilesystem fs = new(tree, writable: true);
+        await using ServerHarness h = await ServerHarness.StartAsync(filesystem: fs);
         await using NinePSession s = await h.ConnectAsync(dialect);
         await BoundaryTests.Error(Errno.ENOSPC, async () => await s.MkdirAsync("a/b/c", 0x1ED, Ct));
         if (dialect == Dialect.P9_2000_L)
@@ -216,7 +223,7 @@ public sealed class JsonFsBoundaryTests
             const string Before = """{"a":"before"}""";
             await File.WriteAllTextAsync(path, Before, Ct);
             JsonTree tree = Parse(Before);
-            JsonFilesystem fs = new(tree, writable: true, writeBackPath: path);
+            using JsonFilesystem fs = new(tree, writable: true, writeBackPath: path);
             if (afterReplace)
             {
                 fs.Persistence.AfterReplace = () => throw new IOException("injected directory sync failure");
@@ -252,7 +259,8 @@ public sealed class JsonFsBoundaryTests
         try
         {
             await File.WriteAllTextAsync(path, "{}", Ct);
-            await using (ServerHarness h = await ServerHarness.StartAsync(filesystem: new JsonFilesystem(JsonTree.Load(path), true, path)))
+            using JsonFilesystem fs = new(JsonTree.Load(path), true, path);
+            await using (ServerHarness h = await ServerHarness.StartAsync(filesystem: fs))
             await using (NinePSession s = await h.ConnectAsync(Dialect.P9_2000_L))
             {
                 foreach (string name in new[] { "%", "%25", "%2F", "%2E", "%2E%2E", "%252F" })
@@ -281,7 +289,8 @@ public sealed class JsonFsBoundaryTests
         try
         {
             await File.WriteAllTextAsync(path, "{\"a\":\"abc\"}", Ct);
-            await using (ServerHarness h = await ServerHarness.StartAsync(filesystem: new JsonFilesystem(JsonTree.Load(path), true, path)))
+            using JsonFilesystem fs = new(JsonTree.Load(path), true, path);
+            await using (ServerHarness h = await ServerHarness.StartAsync(filesystem: fs))
             await using (NinePSession s = await h.ConnectAsync(dialect))
             await using (NinePFid f = await s.OpenFileAsync("a", OpenMode.ReadWrite, OpenFlags.None, Ct))
             {
@@ -295,7 +304,8 @@ public sealed class JsonFsBoundaryTests
                 Assert.Equal(new byte[] { 97, 98, 99, 0, 0, 0, 122 }, await s.ReadFileAsync("a", Ct));
                 Assert.Equal(7ul, (await f.GetAttrAsync(Ct)).Size);
             }
-            await using ServerHarness reloaded = await ServerHarness.StartAsync(filesystem: new JsonFilesystem(JsonTree.Load(path), true));
+            using JsonFilesystem reloadedFs = new(JsonTree.Load(path), true);
+            await using ServerHarness reloaded = await ServerHarness.StartAsync(filesystem: reloadedFs);
             await using NinePSession reader = await reloaded.ConnectAsync(dialect);
             Assert.Equal(new byte[] { 97, 98, 99, 0, 0, 0, 122 }, await reader.ReadFileAsync("a", Ct));
         }

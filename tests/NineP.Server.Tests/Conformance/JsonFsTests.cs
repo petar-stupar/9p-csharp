@@ -153,8 +153,8 @@ public sealed class JsonFsTests
     [Fact]
     public async Task ArrayAppendOnlyAtNextIndex()
     {
-        await using ServerHarness harness = await ServerHarness.StartAsync(
-            filesystem: new JsonFilesystem(Parse("""{"list":["a","b"]}"""), writable: true));
+        using JsonFilesystem filesystem = new(Parse("""{"list":["a","b"]}"""), writable: true);
+        await using ServerHarness harness = await ServerHarness.StartAsync(filesystem: filesystem);
         await using NinePSession session = await harness.ConnectAsync(Dialect.P9_2000_L);
 
         await using (NinePFid appended = await session.CreateFileAsync("list/2", cancellationToken: Ct))
@@ -185,7 +185,7 @@ public sealed class JsonFsTests
             await File.WriteAllTextAsync(path, """{"name":"before"}""", Ct);
 
             JsonTree tree = JsonTree.Load(path);
-            JsonFilesystem filesystem = new(tree, writable: true, writeBackPath: path);
+            using JsonFilesystem filesystem = new(tree, writable: true, writeBackPath: path);
 
             await using (ServerHarness harness = await ServerHarness.StartAsync(filesystem: filesystem))
             await using (NinePSession session = await harness.ConnectAsync(Dialect.P9_2000_L))
@@ -257,7 +257,7 @@ public sealed class JsonFsTests
                 path, """{"list":["zero",1,false],"big":1e300,"name":"before"}""", Ct);
 
             JsonTree tree = JsonTree.Load(path);
-            JsonFilesystem filesystem = new(tree, writable: true, writeBackPath: path);
+            using JsonFilesystem filesystem = new(tree, writable: true, writeBackPath: path);
 
             await using (ServerHarness harness = await ServerHarness.StartAsync(filesystem: filesystem))
             await using (NinePSession session = await harness.ConnectAsync(Dialect.P9_2000_L))
@@ -295,8 +295,8 @@ public sealed class JsonFsTests
     public async Task ScalarTypeDemotionIsDocumented()
     {
         JsonTree document = Parse("""{"enabled":true,"count":1,"nothing":null}""");
-        await using ServerHarness harness = await ServerHarness.StartAsync(
-            filesystem: new JsonFilesystem(document, writable: true));
+        using JsonFilesystem filesystem = new(document, writable: true);
+        await using ServerHarness harness = await ServerHarness.StartAsync(filesystem: filesystem);
         await using NinePSession session = await harness.ConnectAsync(Dialect.P9_2000_L);
 
         await WriteAsync(session, "enabled", "yes");
@@ -335,8 +335,8 @@ public sealed class JsonFsTests
     [InlineData(ulong.MaxValue - 8)]
     public async Task AWriteBeyondTheScalarBoundIsRefusedBeforeItAllocates(ulong offset)
     {
-        await using ServerHarness harness = await ServerHarness.StartAsync(
-            filesystem: new JsonFilesystem(Parse("""{"greeting":"hello"}"""), writable: true));
+        using JsonFilesystem filesystem = new(Parse("""{"greeting":"hello"}"""), writable: true);
+        await using ServerHarness harness = await ServerHarness.StartAsync(filesystem: filesystem);
         await using NinePSession session = await harness.ConnectAsync(Dialect.P9_2000_L);
 
         await using NinePFid file = await session.OpenFileAsync(
@@ -364,8 +364,8 @@ public sealed class JsonFsTests
     public async Task AMoveIntoOwnSubtreeIsRefused(string destination)
     {
         JsonTree document = Parse("""{"dir":{"sub":{"leaf":"kept"}},"other":"kept"}""");
-        await using ServerHarness harness = await ServerHarness.StartAsync(
-            filesystem: new JsonFilesystem(document, writable: true));
+        using JsonFilesystem filesystem = new(document, writable: true);
+        await using ServerHarness harness = await ServerHarness.StartAsync(filesystem: filesystem);
         await using NinePSession session = await harness.ConnectAsync(Dialect.P9_2000_L);
 
         NinePException refusal = await Assert.ThrowsAsync<NinePException>(
@@ -401,7 +401,7 @@ public sealed class JsonFsTests
                 path, """{"unicode":"héllo — 世界 🚀","name":"before"}""", Ct);
 
             JsonTree tree = JsonTree.Load(path);
-            JsonFilesystem filesystem = new(tree, writable: true, writeBackPath: path);
+            using JsonFilesystem filesystem = new(tree, writable: true, writeBackPath: path);
 
             await using (ServerHarness harness = await ServerHarness.StartAsync(filesystem: filesystem))
             await using (NinePSession session = await harness.ConnectAsync(Dialect.P9_2000_L))
@@ -424,6 +424,283 @@ public sealed class JsonFsTests
         finally
         {
             Directory.Delete(directory, recursive: true);
+        }
+    }
+
+    /// <summary>
+    /// Ticket 015 E1: <c>--max-entries</c> bounds the entries — every object key and every array
+    /// element, anywhere in the document — jsonfs will hold. The create or <c>mkdir</c> that
+    /// would go past it is refused with <c>ENOSPC</c> and changes nothing (reference §8 rule 27,
+    /// alongside the byte and depth caps); a rename costs no entry; a remove frees one, so the
+    /// next create succeeds; and a document already past the cap is refused at startup naming
+    /// the cap, exactly as the byte and depth caps are.
+    /// <b>Mutation:</b> drop the entry check from <c>JsonTree.ValidateGrowth</c> and the first
+    /// refusal below is answered with success; drop <c>CountEntry</c> from the load and the
+    /// startup refusal never fires.
+    /// </summary>
+    [Fact]
+    public async Task CreateBeyondMaxEntriesIsEnospc()
+    {
+        // Four entries: two keys at the root, two elements in the array.
+        const string Document = """{"a":"x","list":[1,2]}""";
+        JsonTree document = Parse(Document);
+        document.EntryLimit = 4;
+        using JsonFilesystem filesystem = new(document, writable: true);
+        await using ServerHarness harness = await ServerHarness.StartAsync(filesystem: filesystem);
+        await using NinePSession session = await harness.ConnectAsync(Dialect.P9_2000_L);
+
+        NinePException create = await Assert.ThrowsAsync<NinePException>(
+            async () => await session.CreateFileAsync("b", cancellationToken: Ct));
+        Assert.Equal(Errno.ENOSPC, create.Error.Errno);
+
+        NinePException mkdir = await Assert.ThrowsAsync<NinePException>(
+            async () => await session.MkdirAsync("d", 0x1ED, Ct));
+        Assert.Equal(Errno.ENOSPC, mkdir.Error.Errno);
+
+        NinePException append = await Assert.ThrowsAsync<NinePException>(
+            async () => await session.CreateFileAsync("list/2", cancellationToken: Ct));
+        Assert.Equal(Errno.ENOSPC, append.Error.Errno);
+
+        // Whole or nothing: the listings are as they were.
+        Assert.Equal(["a", "list"], await NamesAsync(session, "/"));
+        Assert.Equal(["0", "1"], await NamesAsync(session, "list"));
+
+        // A rename moves an entry, it does not add one.
+        await session.RenameAsync("a", "z", Ct);
+        Assert.Equal(["list", "z"], await NamesAsync(session, "/"));
+
+        // A remove frees the count, and the create after it succeeds — once.
+        await session.RemoveAsync("z", Ct);
+        await using (NinePFid created = await session.CreateFileAsync("b", cancellationToken: Ct))
+        {
+            Assert.Equal(QidType.QTFILE, created.Qid.Type);
+        }
+
+        Assert.Equal(["b", "list"], await NamesAsync(session, "/"));
+        NinePException again = await Assert.ThrowsAsync<NinePException>(
+            async () => await session.MkdirAsync("d", 0x1ED, Ct));
+        Assert.Equal(Errno.ENOSPC, again.Error.Errno);
+
+        // Startup: the flag sets the cap, and a document already past it is refused before it is
+        // served, naming the cap; one exactly at the cap loads.
+        JsonFsOptions options = JsonFsOptions.Parse(
+            ["--listen", "tcp://127.0.0.1:0", "--file", "d.json", "--max-entries", "3"]);
+        Assert.Equal(3, options.MaxEntries);
+        Assert.Equal(
+            JsonTree.DefaultMaxEntries,
+            JsonFsOptions.Parse(["--listen", "tcp://127.0.0.1:0", "--file", "d.json"]).MaxEntries);
+        Assert.Throws<JsonFsUsageException>(
+            () => JsonFsOptions.Parse(["--listen", "tcp://127.0.0.1:0", "--file", "d.json", "--max-entries", "0"]));
+
+        using (MemoryStream tooMany = new(Encoding.UTF8.GetBytes(Document)))
+        {
+            JsonFsStartupException refusal = Assert.Throws<JsonFsStartupException>(
+                () => JsonTree.Parse(tooMany, "many.json", options.MaxEntries));
+            Assert.Contains("more than 3 entries", refusal.Message, StringComparison.Ordinal);
+        }
+
+        using (MemoryStream exact = new(Encoding.UTF8.GetBytes(Document)))
+        {
+            Assert.Equal(2, JsonTree.Parse(exact, "exact.json", maxEntries: 4).Root.Children.Count);
+        }
+    }
+
+    /// <summary>
+    /// Ticket 015 E1: <c>--write-back-delay</c> coalesces every mutation inside one window into
+    /// one rewrite, measured on the injected clock; a rewrite the window cannot make keeps the
+    /// old document whole, the document dirty and the window armed for a retry (the failure
+    /// semantics of F30, with no request to answer); a graceful shutdown — the filesystem's
+    /// dispose — writes back what the open window still owes, so conformance Part B step 8
+    /// holds; and a delay of zero keeps today's one rewrite per mutation. Rewrites are counted
+    /// at the rename over the original, which is the one step every rewrite performs.
+    /// <b>Mutation:</b> rewrite inside <c>JsonFsMutator.Mutate</c> whatever the delay and the
+    /// coalescing count fails; drop the rewrite from <c>Dispose</c> and the "last" write below
+    /// never reaches the disk.
+    /// </summary>
+    [Fact]
+    public async Task WriteBackIsCoalescedAndFlushedOnShutdown()
+    {
+        string directory = Path.Combine(Path.GetTempPath(), "jsonfs-window-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(directory);
+        string path = Path.Combine(directory, "doc.json");
+
+        try
+        {
+            await File.WriteAllTextAsync(path, """{"name":"before"}""", Ct);
+            ManualClock clock = new();
+            TimeSpan window = TimeSpan.FromMilliseconds(250);
+            int rewrites = 0;
+
+            using (JsonFilesystem filesystem = new(
+                JsonTree.Load(path), writable: true, writeBackPath: path, clock: clock, writeBackDelay: window))
+            {
+                filesystem.Persistence.AfterReplace = () => rewrites++;
+                await using ServerHarness harness = await ServerHarness.StartAsync(filesystem: filesystem);
+                await using NinePSession session = await harness.ConnectAsync(Dialect.P9_2000_L);
+
+                // Several mutations inside one window: one window open, nothing on disk yet.
+                await WriteAsync(session, "name", "after");
+                await using (await session.CreateFileAsync("added", 0x1A4, Ct))
+                {
+                }
+
+                await session.MkdirAsync("dir", 0x1ED, Ct);
+
+                Assert.Equal(0, rewrites);
+                Assert.Equal(1, clock.Arms);
+                Assert.Equal(window, clock.DueTime);
+                Assert.True(filesystem.Persistence.IsDirty);
+                Assert.Equal("before", await NameOnDiskAsync(path));
+
+                // The window closes: one rewrite, carrying all of them.
+                clock.Fire();
+
+                Assert.Equal(1, rewrites);
+                Assert.False(filesystem.Persistence.IsDirty);
+                using (JsonDocument written = JsonDocument.Parse(await File.ReadAllTextAsync(path, Ct)))
+                {
+                    Assert.Equal("after", written.RootElement.GetProperty("name").GetString());
+                    Assert.Equal(JsonValueKind.String, written.RootElement.GetProperty("added").ValueKind);
+                    Assert.Equal(JsonValueKind.Object, written.RootElement.GetProperty("dir").ValueKind);
+                }
+
+                // A rewrite the window cannot make: the old document stays whole, the temp file
+                // is gone, the document stays dirty and the window is armed again for a retry.
+                filesystem.Persistence.BeforeReplace = () => throw new IOException("injected replacement failure");
+                await session.MkdirAsync("late", 0x1ED, Ct);
+                Assert.Equal(2, clock.Arms);
+                clock.Fire();
+
+                Assert.Equal(1, rewrites);
+                Assert.True(filesystem.Persistence.IsDirty);
+                Assert.Equal(3, clock.Arms);
+                Assert.Equal([path], Directory.GetFiles(directory));
+
+                filesystem.Persistence.BeforeReplace = null;
+                clock.Fire();
+                Assert.Equal(2, rewrites);
+                Assert.False(filesystem.Persistence.IsDirty);
+
+                // The next mutation opens a new window rather than rewriting on the spot.
+                await WriteAsync(session, "name", "last");
+                Assert.Equal(2, rewrites);
+                Assert.Equal(4, clock.Arms);
+                Assert.Equal("after", await NameOnDiskAsync(path));
+            }
+
+            // The harness stopped the server, then the dispose flushed what the window owed.
+            Assert.Equal(3, rewrites);
+            Assert.Equal("last", await NameOnDiskAsync(path));
+            Assert.True(clock.TimerDisposed);
+            Assert.Equal([path], Directory.GetFiles(directory));
+
+            // A timer that fires late does nothing to a disposed filesystem.
+            clock.Fire();
+            Assert.Equal(3, rewrites);
+
+            // Delay zero is today's behaviour: one rewrite per mutation, nothing owed at the end,
+            // and no window ever opened.
+            rewrites = 0;
+            using (JsonFilesystem immediate = new(JsonTree.Load(path), writable: true, writeBackPath: path, clock: clock))
+            {
+                immediate.Persistence.AfterReplace = () => rewrites++;
+                await using ServerHarness harness = await ServerHarness.StartAsync(filesystem: immediate);
+                await using NinePSession session = await harness.ConnectAsync(Dialect.P9_2000_L);
+
+                await using (await session.CreateFileAsync("one", 0x1A4, Ct))
+                {
+                }
+
+                Assert.Equal(1, rewrites);
+                await session.MkdirAsync("two", 0x1ED, Ct);
+                Assert.Equal(2, rewrites);
+                await session.RemoveAsync("one", Ct);
+                Assert.Equal(3, rewrites);
+                Assert.False(immediate.Persistence.IsDirty);
+            }
+
+            Assert.Equal(3, rewrites);
+            Assert.Equal(4, clock.Arms);
+            using (JsonDocument written = JsonDocument.Parse(await File.ReadAllTextAsync(path, Ct)))
+            {
+                Assert.False(written.RootElement.TryGetProperty("one", out _));
+                Assert.Equal(JsonValueKind.Object, written.RootElement.GetProperty("two").ValueKind);
+            }
+
+            // The flag that sets the window turns write-back, and with it writing, on.
+            JsonFsOptions options = JsonFsOptions.Parse(
+                ["--listen", "tcp://127.0.0.1:0", "--file", path, "--write-back-delay", "250"]);
+            Assert.Equal(window, options.WriteBackDelay);
+            Assert.True(options.WriteBack);
+            Assert.True(options.Writable);
+            Assert.Equal(
+                TimeSpan.Zero,
+                JsonFsOptions.Parse(["--listen", "tcp://127.0.0.1:0", "--file", path, "--write-back"]).WriteBackDelay);
+            Assert.Contains("--write-back-delay implies --write-back", JsonFsOptions.Usage, StringComparison.Ordinal);
+        }
+        finally
+        {
+            Directory.Delete(directory, recursive: true);
+        }
+    }
+
+    /// <summary>The names in a directory, sorted, as the client lists them.</summary>
+    private static async Task<string[]> NamesAsync(NinePSession session, string path) =>
+        [.. (await session.ReadDirAsync(path, Ct)).Select(entry => entry.Name).Order(StringComparer.Ordinal)];
+
+    /// <summary>The <c>name</c> value of the document on disk.</summary>
+    private static async Task<string?> NameOnDiskAsync(string path)
+    {
+        using JsonDocument written = JsonDocument.Parse(await File.ReadAllTextAsync(path, Ct));
+        return written.RootElement.GetProperty("name").GetString();
+    }
+
+    /// <summary>
+    /// A clock whose one timer fires when the test says so, so a write-back window is measured
+    /// in assertions rather than in wall-clock sleeps.
+    /// </summary>
+    private sealed class ManualClock : TimeProvider
+    {
+        private TimerCallback? _callback;
+        private object? _state;
+
+        /// <summary>How many times the window was opened: the timer's creation plus every re-arm.</summary>
+        public int Arms { get; private set; }
+
+        /// <summary>The due time of the last arm.</summary>
+        public TimeSpan DueTime { get; private set; }
+
+        /// <summary>True once the timer has been disposed.</summary>
+        public bool TimerDisposed { get; private set; }
+
+        public override ITimer CreateTimer(TimerCallback callback, object? state, TimeSpan dueTime, TimeSpan period)
+        {
+            _callback = callback;
+            _state = state;
+            DueTime = dueTime;
+            Arms++;
+            return new Timer(this);
+        }
+
+        /// <summary>Fires the timer's callback on the calling thread.</summary>
+        public void Fire() => _callback?.Invoke(_state);
+
+        private sealed class Timer(ManualClock owner) : ITimer
+        {
+            public bool Change(TimeSpan dueTime, TimeSpan period)
+            {
+                owner.DueTime = dueTime;
+                owner.Arms++;
+                return true;
+            }
+
+            public void Dispose() => owner.TimerDisposed = true;
+
+            public ValueTask DisposeAsync()
+            {
+                Dispose();
+                return ValueTask.CompletedTask;
+            }
         }
     }
 
@@ -480,8 +757,8 @@ public sealed class JsonFsTests
     public async Task SetAttrAppliesATruncationAndARenameTogether()
     {
         JsonTree document = Parse("""{"greeting":"hello","other":"kept"}""");
-        await using ServerHarness harness = await ServerHarness.StartAsync(
-            filesystem: new JsonFilesystem(document, writable: true));
+        using JsonFilesystem filesystem = new(document, writable: true);
+        await using ServerHarness harness = await ServerHarness.StartAsync(filesystem: filesystem);
 
         // The name only reaches a handler through a Twstat: Tsetattr has no name field at all.
         await using NinePSession session = await harness.ConnectAsync(Dialect.P9_2000);
@@ -509,8 +786,8 @@ public sealed class JsonFsTests
     public async Task SetAttrWithAnUnsupportedFieldChangesNothing(SetAttr update)
     {
         JsonTree document = Parse("""{"greeting":"hello","other":"kept"}""");
-        await using ServerHarness harness = await ServerHarness.StartAsync(
-            filesystem: new JsonFilesystem(document, writable: true));
+        using JsonFilesystem filesystem = new(document, writable: true);
+        await using ServerHarness harness = await ServerHarness.StartAsync(filesystem: filesystem);
         await using NinePSession session = await harness.ConnectAsync(Dialect.P9_2000);
 
         NinePException refusal = await Assert.ThrowsAsync<NinePException>(
@@ -533,8 +810,8 @@ public sealed class JsonFsTests
     public async Task ACreateAskingForAFlagIsRefused()
     {
         JsonTree document = Parse("""{"greeting":"hello"}""");
-        await using ServerHarness harness = await ServerHarness.StartAsync(
-            filesystem: new JsonFilesystem(document, writable: true));
+        using JsonFilesystem filesystem = new(document, writable: true);
+        await using ServerHarness harness = await ServerHarness.StartAsync(filesystem: filesystem);
         await using NinePSession session = await harness.ConnectAsync(Dialect.P9_2000);
 
         NinePFid root = await session.WalkAsync("/", Ct);
@@ -571,8 +848,8 @@ public sealed class JsonFsTests
     public async Task SetAttrRefusesALengthItCannotProduce()
     {
         JsonTree document = Parse("""{"greeting":"hello","dir":{"leaf":"kept"}}""");
-        await using ServerHarness harness = await ServerHarness.StartAsync(
-            filesystem: new JsonFilesystem(document, writable: true));
+        using JsonFilesystem filesystem = new(document, writable: true);
+        await using ServerHarness harness = await ServerHarness.StartAsync(filesystem: filesystem);
         await using NinePSession session = await harness.ConnectAsync(Dialect.P9_2000_L);
 
         NinePException grown = await Assert.ThrowsAsync<NinePException>(

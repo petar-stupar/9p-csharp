@@ -10,6 +10,14 @@ internal sealed partial class JsonTree
     internal long DocumentLimit { get; set; } = MaxDocumentBytes;
     internal int DepthLimit { get; set; } = MaxDepth;
 
+    /// <summary>
+    /// The most entries the document may hold: <c>--max-entries</c>, or
+    /// <see cref="DefaultMaxEntries"/>. Checked at load and after every mutation, in the same
+    /// walk as the depth check, so a create or <c>mkdir</c> past it is <c>ENOSPC</c> and a remove
+    /// frees the count for the next one.
+    /// </summary>
+    internal long EntryLimit { get; set; }
+
     internal Action Capture()
     {
         List<Action> undo = [];
@@ -39,11 +47,22 @@ internal sealed partial class JsonTree
 
     internal void ValidateGrowth()
     {
+        // Every container is visited once, so the entry count and the depth come from one walk.
+        // Recounting from the root rather than tracking a running total is what makes the count
+        // exact after a rollback, a rename across containers or a remove, with no bookkeeping to
+        // get out of step; the rewrite that follows walks the same nodes anyway.
+        long entries = 0;
         Stack<(JsonDirectoryNode Node, int Depth)> pending = new();
         pending.Push((Root, 1));
         while (pending.TryPop(out var item))
         {
             if (item.Depth > DepthLimit)
+            {
+                throw new NinePException(NinePError.FromErrno(Errno.ENOSPC));
+            }
+
+            entries += item.Node.Children.Count;
+            if (entries > EntryLimit)
             {
                 throw new NinePException(NinePError.FromErrno(Errno.ENOSPC));
             }

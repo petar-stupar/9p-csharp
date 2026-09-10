@@ -14,13 +14,21 @@ internal sealed record JsonFsOptions
     /// <summary>The usage text printed when the command line is wrong.</summary>
     public const string Usage = """
         usage: jsonfs --listen <url> [--listen <url>...] --file <path.json> [--writable]
-                      [--write-back] [--dialects 9P2000,9P2000.u,9P2000.L]
+                      [--write-back] [--write-back-delay <ms>] [--max-entries <n>]
+                      [--dialects 9P2000,9P2000.u,9P2000.L]
                       [--auth none|token:<secret>|password-file:<path>]
                       [--tls-cert <pem> --tls-key <pem> --tls-client-ca <pem>]
                       [--ws-origin <origin>...] [--msize <bytes>] [--log <level>]
 
         --write-back implies --writable: there is nothing to write back from a read-only
                      server, so the flag turns writing on rather than being ignored without it.
+        --write-back-delay implies --write-back for the same reason: a window with nothing to
+                     write back at the end of it is a flag that does nothing. 0 (the default)
+                     rewrites the document inside every change; a positive value rewrites once
+                     per window, and a graceful stop writes back what the last window still owes.
+        --max-entries bounds the entries (object keys and array elements) the document may
+                     hold, 100000 by default: a create or mkdir past it is refused with ENOSPC,
+                     and a document already past it is refused at startup.
         """;
 
     /// <summary>Addresses to bind; at least one is required.</summary>
@@ -38,6 +46,20 @@ internal sealed record JsonFsOptions
     /// being silently inert without <c>--writable</c> beside it.
     /// </summary>
     public bool WriteBack { get; init; }
+
+    /// <summary>
+    /// How long after a change the document is rewritten, with every change inside that window
+    /// coalesced into one rewrite. Zero, the default, rewrites inside each change. A positive
+    /// value implies <see cref="WriteBack"/>, and through it <see cref="Writable"/>.
+    /// </summary>
+    public TimeSpan WriteBackDelay { get; init; }
+
+    /// <summary>
+    /// The most entries — object keys and array elements, anywhere in the document — the served
+    /// document may hold. A create or <c>mkdir</c> past it is <c>ENOSPC</c>; a document already
+    /// past it is refused at startup.
+    /// </summary>
+    public long MaxEntries { get; init; } = JsonTree.DefaultMaxEntries;
 
     /// <summary>The dialects this server will negotiate.</summary>
     public IReadOnlySet<Dialect> Dialects { get; init; } =
@@ -93,6 +115,19 @@ internal sealed record JsonFsOptions
                     // Documented in the usage text above and in docs/examples.md: --write-back
                     // implies --writable, because a read-only server has nothing to write back.
                     options = options with { WriteBack = true, Writable = true };
+                    break;
+                case "--write-back-delay":
+                    // Same reasoning one step further: a window is only ever measured for a
+                    // write-back, so the flag turns write-back (and with it writing) on.
+                    options = options with
+                    {
+                        WriteBackDelay = ParseWriteBackDelay(Value(args, ref i)),
+                        WriteBack = true,
+                        Writable = true,
+                    };
+                    break;
+                case "--max-entries":
+                    options = options with { MaxEntries = ParseMaxEntries(Value(args, ref i)) };
                     break;
                 case "--dialects":
                     options = options with { Dialects = ParseDialects(Value(args, ref i)) };
@@ -199,6 +234,16 @@ internal sealed record JsonFsOptions
         uint.TryParse(value, NumberStyles.None, CultureInfo.InvariantCulture, out uint msize)
             ? msize
             : throw new JsonFsUsageException("--msize takes a byte count");
+
+    private static TimeSpan ParseWriteBackDelay(string value) =>
+        uint.TryParse(value, NumberStyles.None, CultureInfo.InvariantCulture, out uint milliseconds)
+            ? TimeSpan.FromMilliseconds(milliseconds)
+            : throw new JsonFsUsageException("--write-back-delay takes a whole number of milliseconds");
+
+    private static long ParseMaxEntries(string value) =>
+        long.TryParse(value, NumberStyles.None, CultureInfo.InvariantCulture, out long entries) && entries > 0
+            ? entries
+            : throw new JsonFsUsageException("--max-entries takes a positive entry count");
 
     private static LogLevel? Level(string value) => value switch
     {
