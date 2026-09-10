@@ -400,6 +400,14 @@ valid.
 ATIME_SET 0x80 MTIME_SET 0x100`. A time bit without its `_SET` bit means "use server's current
 time"; with `_SET`, use the supplied value.
 
+Workspace policy `[D]` (approved 2026-09-10): `valid=0` validates the fid and succeeds without
+attribute mutation or fsync. `ATIME_SET` without `ATIME`, or `MTIME_SET` without `MTIME`, is
+`EINVAL`, including when other fields are requested; no part of the update is applied and the
+connection remains usable. This rejection is a workspace policy, not a requirement stated by diod.
+The all-don't-touch `Twstat` fsync convention does not apply to `Tsetattr`; `.L` has `Tfsync`.
+A `.L` size update on a directory is `EISDIR`, even for zero. Legacy `Twstat` forbids nonzero
+directory length; a zero length remains subject to the handler's own restrictions.
+
 ### 4.7 `.L` mode and file types
 
 `Rgetattr.mode`, `Tlcreate.mode`, `Tmkdir.mode`, `Tmknod.mode` are POSIX `st_mode` values (the
@@ -871,7 +879,7 @@ Lifetime and progress (reference review, 2026-09-08):
 
 ## 9. Golden vectors
 
-[fixtures/wire-vectors.json](fixtures/wire-vectors.json) holds 77 frames. Notable ones:
+[fixtures/wire-vectors.json](fixtures/wire-vectors.json) holds 88 frames. Notable ones:
 
 | Vector | Bytes (hex) |
 | --- | --- |
@@ -881,6 +889,7 @@ Lifetime and progress (reference review, 2026-09-08):
 | `Rreaddir` two entries | see file — 68 bytes; `count` 57; entries 29 bytes (`users`) and 28 bytes (`auth`), each `qid[13] offset[8] type[1] name[s]` |
 | `Rgetattr` | 160 bytes; `valid 0x7ff` |
 | `Tfsync` / `Tfsync (no datasync)` | 15 bytes with `datasync[4]` (diod) and 11 bytes without (hugelgupf/p9); both must decode — §3.4 |
+| `Tread (count 0)` … `Txattrcreate (remove)` | the eleven zero-count and empty-field boundaries (indices 77–87): `Rread (count 0)` = `0b000000 75 2800 00000000`, `Rwalk (nwqid 0)` = `09000000 6f 2a00 0000`, `Rgetattr (valid 0)` still 160 bytes, `Txattrwalk (list)` with `name` empty, `Txattrcreate (remove)` with `attr_size` 0 (§8 rule 21) |
 
 Each implementation's codec test decodes every vector into its typed message, re-encodes, and
 compares bytes; then mutates each vector (truncate by one byte, bump `size`, set `nwname = 17`,

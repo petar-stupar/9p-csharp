@@ -22,7 +22,7 @@ count clamp.
 
 ## 2. Fuzzing
 
-`tests/NineP.Fuzz` is a SharpFuzz / libFuzzer target over the decoder, its corpus seeded from the 77
+`tests/NineP.Fuzz` is a SharpFuzz / libFuzzer target over the decoder, its corpus seeded from the 88
 golden vectors of `docs/9p/fixtures/wire-vectors.json` (committed as hex, because the repository
 refuses to track a file containing control bytes, and materialised as `.bin` by
 `--seed-corpus`). CI runs a 60 s budget of the deterministic loop on Linux, macOS and Windows.
@@ -48,7 +48,7 @@ boundary and never carries a path, a stack trace or the input verbatim (rule 10)
 TLS 1.2 is the floor and 1.3 is preferred, fixed in the library rather than inherited from the
 machine. Renegotiation is off on both sides for the same reason: `TlsTransport` sets
 `AllowRenegotiation = false` on the server and the client `SslAuthenticationOptions` it builds, and
-`TlsTransportTests.RenegotiationIsOffOnBothSides` asserts it, so the guarantee is this code's and
+`TlsSecurityTests.RenegotiationIsOffOnBothSides` asserts it, so the guarantee is this code's and
 not the BCL default's. The chain and the host name are verified by default. `AdditionalPeerCheck` may only add a
 check, never rescue a certificate the platform rejected; the only way to accept an untrusted
 certificate is `AllowInsecureCertificates`, which is explicit, logged at `Warning` every time it is
@@ -165,3 +165,7 @@ a claim of a complete new mutation campaign is not implied.
 After a connection has closed, cleanup failures are observed and logged. If the logging sink itself
 throws during that cleanup, remaining fids and synchronization resources are still released.
 This cleanup exception does not change the documented live-connection policy for throwing loggers.
+
+## Test suites
+
+HostileClientTests, including HalfHeaderTimesOut, stays in `Security`. Separate `Chaos` tests exercise transport stalls and late/duplicate replies. `Robustness.MutationMatrixTests` mutates all 88 golden vectors where the operation applies, including oversized count claims and exact stat framing. The suite trait is always `Category`; optional workload selectors use `Kind`.

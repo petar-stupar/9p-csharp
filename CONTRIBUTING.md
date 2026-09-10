@@ -62,3 +62,39 @@ procedure. Nothing is published per commit.
 The owner drives larger tickets through qode with the slash commands
 under `.claude/commands/` and the prompts under `.qode/`. They are committed so that anyone using
 Claude Code can reuse them; they are not required for an ordinary pull request.
+
+## Test suites
+
+The protocol, client and server test projects share seven suite folders and namespaces. Each test
+class has exactly one `Category` trait matching its folder. Helpers and collection definitions
+are exempt. Additional qualifiers use `Kind` (for example `Interop`, `Scale`, or `Stress`).
+
+| Category | Put tests here when they primarily check |
+| --- | --- |
+| Conformance | Required wire, API and filesystem behavior, including legal boundaries |
+| Robustness | Malformed input, limits and recoverable or terminal error handling |
+| Regression | A previously fixed bug with a named regression |
+| Chaos | Controlled transport faults, scale and performance measurements |
+| StateMachine | Generated operation sequences, state tables and codec properties |
+| Security | Authentication, authorization and hostile-peer defenses |
+| Compat | Dialect negotiation, external peers, frameworks and interoperability |
+
+Run a category in an applicable layer, for example:
+
+```sh
+dotnet test --project tests/NineP.Server.Tests -- --filter-trait "Category=Security"
+python scripts/test-suites.py
+```
+
+The discovery report counts cases by framework and suite; it includes opt-in cases, while the
+execution report distinguishes skips. Protocol has no Chaos integration suite. Client and server
+host the transport fault and lifecycle models. Example tests run only on net10.0; the client
+Security suite (CLI OIDC) therefore exists only there. Other behavior suites cover both frameworks.
+Repo/Docs tests check repository hygiene and are outside the behavior taxonomy. NineP.Conformance,
+NineP.Fuzz and NineP.Benchmarks keep their executable project shapes. Full-scale workloads remain
+local opt-ins, and allocation measurements keep their isolated xUnit collection.
+
+The generated state models (`StateMachine`) run fixed seeds in CI. `NINEP_MODEL_SEED=<uint>`
+replaces the seed, `NINEP_MODEL_STEPS=<count>` (at most 4096) the sequence length, and
+`NINEP_MODEL_COMMANDS=<comma-separated uints>` replays a minimized command list from a failure
+message exactly.

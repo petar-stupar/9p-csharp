@@ -214,3 +214,7 @@ Requests using a single existing fid enter its operation queue in wire arrival o
 moves to the thread pool after acquiring the fid lease, so synchronous handlers cannot block
 the connection reader. This preserves chunk order for pipelined writes, including split UTF-8
 writes in jsonfs. Different fids can still execute concurrently.
+
+## Setattr boundary policy
+
+After fid validation, a literal `.L` zero valid mask returns success without invoking SetAttr or fsync. ATIME_SET/MTIME_SET require their corresponding base bits; malformed masks fail EINVAL before any field changes. This is the explicit workspace §4.6 policy. Directory size changes are checked after write permission: legacy wstat permits zero to reach the handler and rejects nonzero; `.L` rejects either. All-don't-touch wstat and explicit Tfsync keep their existing semantics.

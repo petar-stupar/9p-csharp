@@ -76,7 +76,7 @@ new TlsTransport(new TlsTransportOptions
 ```
 
 TLS **1.2 is the floor and 1.3 is preferred**, fixed in the library rather than left to the machine:
-`TlsTransportTests.Tls11Refused` asserts it, and letting the operating system decide would make that
+`TlsSecurityTests.Tls11Refused` asserts it, and letting the operating system decide would make that
 assertion depend on the host's configuration instead of on this code. The chain and the host name
 are verified by default.
 
@@ -180,3 +180,7 @@ that wait, not other clients' handshakes. The existing handshake timeout applies
 Custom TLS roots add trust anchors while retaining the peer's required application purpose: server
 authentication when dialing, client authentication for a presented client certificate. Leaf and
 intermediate EKU restrictions and hostname validation remain effective with custom roots.
+
+## Fault injection in tests
+
+`NineP.TestSupport.FaultyTransport` wraps the transport seam with per-connection scripts. Fragmentation, throttling and stalls preserve byte order; complete-frame drop and duplication model an adversarial peer. One-shot selectors, activation traces, copied delayed frames and cancellation on disposal make each scenario reproducible. Client and Server `Chaos` folders hold the executable checks.

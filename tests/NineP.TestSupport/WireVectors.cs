@@ -127,7 +127,7 @@ public sealed class WireVector
 }
 
 /// <summary>
-/// The 77 golden frames of reference §9, read from the vendored fixture. They are the shared
+/// The 88 golden frames of reference §9, read from the vendored fixture. They are the shared
 /// truth of every implementation in the workspace, so they are read, never regenerated.
 /// </summary>
 public static class WireVectors

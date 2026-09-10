@@ -51,6 +51,16 @@ internal static class RuleIndexValidator
 /// <summary>Missing obligations must fail even while all other rows resolve.</summary>
 public sealed class RuleIndexValidatorTests
 {
+    [Fact]
+    public void AmbiguityFailsOnlyWhenTheIndexReferencesTheName()
+    {
+        Assert.NotNull(TestResolver.FindType(nameof(RuleIndexTests)));
+        InvalidOperationException error = Assert.Throws<InvalidOperationException>(
+            () => TestResolver.FindType("TargetFrameworkTests"));
+        Assert.Contains("Ambiguous indexed test type", error.Message, StringComparison.Ordinal);
+        Assert.Empty(RuleIndexValidator.Validate(RuleIndex.Rows, TestResolver.FindType));
+    }
+
     [Theory]
     [InlineData("MissingType.Present")]
     [InlineData("Fixture.MissingMethod")]

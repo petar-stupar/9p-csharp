@@ -49,8 +49,8 @@ Reading the table:
 | 23 | Ref §5.1 | The 56-row oracle in `docs/negotiation.json` is generated from the shipped negotiator | `NegotiationTests.OracleMatchesCommittedFile` | 16 |
 | 24 | Ref §5.2 | An afid carries the triple `(uname, n_uname, aname)`; a mismatched `Tattach` is refused | `AfidTests.DifferentNUnameRejected` | 33 |
 | 25 | Ref §5.2 | The session identity is the authenticator's, never the claimed `uname` | `AfidTests.IdentityComesFromTheAuthenticator` | 33 |
-| 26 | Ref §5.2 | `Tauth` refusal is `Rerror "authentication not required"` / `Rlerror ECONNREFUSED` | `AfidTests.AuthNotRequiredRefusalShape` | 33 |
-| 27 | Ref §5.3 | A flushed request is answered exactly once and `Rflush` follows it | `ServerFlushTests.FlushedRequestAnsweredOnce` | 31 |
+| 26 | Ref §5.2 | `Tauth` refusal is `Rerror "authentication not required"` / `Rlerror ECONNREFUSED` | `AuthRefusalTests.AuthNotRequiredRefusalShape` | 33 |
+| 27 | Ref §5.3 | A flushed request is answered exactly once and `Rflush` follows it | `FlushTests.FlushedRequestAnsweredOnce` | 31 |
 | 28 | Ref §5.4 | A partial walk returns the qid prefix and does not bind `newfid` | `WalkTests.PartialWalkReturnsPrefix` | 29 |
 | 29 | Ref §5.4 | An open fid cannot be cloned | `WalkTests.CannotCloneOpenFid` | 29 |
 | 30 | Ref §5.5 | `iounit` is `msize − IOHDRSZ` on every open and create reply | `OpenStateTests.IounitIsMsizeMinusIohdrsz` | 29 |
@@ -58,14 +58,14 @@ Reading the table:
 | 32 | Ref §5.7 | A clunked fid is gone even when the remove fails | `ClunkRemoveTests.FidGoneEvenWhenRemoveFails` | 29 |
 | 33 | Ref §5.8 | A `wstat` is atomic: all changes or none | `WstatTests.AllOrNothing` | 32 |
 | 34 | Ref §5.9 | A `.L` session never sees an `Rerror`; every error is an `Rlerror` errno | `ErrorProjectionTests.DotLAlwaysUsesRlerror` | 17 |
-| 35 | Ref §5.9 | `Tread` on a directory is an error in `.L` | `ServerDispatchTests.DotLReadOnDirectoryIsAnError` | 32 |
+| 35 | Ref §5.9 | `Tread` on a directory is an error in `.L` | `DirectoryReadTests.TreadOnDirIsErrorInDotL` | 32 |
 | 36 | Ref §8.1 | `size < 7` or `size >` the active bound closes the connection | `FrameReaderTests.SizeLieClosesConnection` | 14 |
 | 37 | Ref §8.1 | The pre-negotiation frame cap is the constant 8192, never the configured maximum | `FrameReaderTests.PreNegotiationCapIs8192` | 14 |
 | 38 | Ref §8.2 | Counted fields, `nwname`, trailing bytes and the stat inner size are checked before any allocation | `MutationMatrixTests.EveryMutationYieldsATypedError` | 13 |
 | 39 | Ref §8.2 | A `Tfsync` of exactly 11 bytes is the sole legal short frame | `TfsyncTests.ShortFormLegalOnlyForTfsync` | 11 |
-| 40 | Ref §8.3 | Strings must be valid UTF-8 | `WireReaderTests.RejectsInvalidUtf8` | 5 |
-| 41 | Ref §8.3 | Strings must contain no NUL | `WireReaderTests.RejectsNulInString` | 5 |
-| 42 | Ref §8.3 | Names must not contain `/`, must not be `.`, and are at most 255 bytes; `..` is legal only in `Twalk` | `WireReaderTests.RejectsSlashInName` | 5 |
+| 40 | Ref §8.3 | Strings must be valid UTF-8 | `WireReaderRejectionTests.RejectsInvalidUtf8` | 5 |
+| 41 | Ref §8.3 | Strings must contain no NUL | `WireReaderRejectionTests.RejectsNulInString` | 5 |
+| 42 | Ref §8.3 | Names must not contain `/`, must not be `.`, and are at most 255 bytes; `..` is legal only in `Twalk` | `WireReaderRejectionTests.RejectsSlashInName` | 5 |
 | 43 | Ref §8.4 | `Twrite.count` must equal `size − 23` | `MutationMatrixTests.TwriteCountDisagreesWithSize` | 13 |
 | 44 | Ref §8.4 | A maximal legal `Twrite` (`count == msize − 23`) is accepted | `TwriteTests.MaximalLegalWriteIsAccepted` | 32 |
 | 45 | Ref §8.5 | `Twrite.offset + count`, `Tsetattr.size` and `Tlock.start + length` are guarded against `u64` overflow | `OverflowTests.WriteOffsetOverflowRejected` | 7 |
@@ -78,11 +78,11 @@ Reading the table:
 | 52 | Ref §8.9 | A `Tversion` mid-session resets the whole session | `ServerVersionTests.SecondTversionResetsSession` | 27 |
 | 53 | Ref §8.10 | Errors carry no internals; `ename` is truncated to `ERRMAX − 1` bytes on a rune boundary | `ErrorTests.EnameTruncatedAtRuneBoundary` | 17 |
 | 54 | Ref §8.11 | Untrusted strings are escaped and capped at 256 bytes before they are logged | `UntrustedTextTests.UntrustedStringsEscapedAndCapped` | 17 |
-| 55 | Ref §8.12 | A reply with an unknown tag, an unexpected type, or a size over msize terminates the client session | `TagMultiplexerTests.UnknownTagTerminatesSession` | 23 |
+| 55 | Ref §8.12 | A reply with an unknown tag, an unexpected type, or a size over msize terminates the client session | `ClientSessionTerminationTests.UnknownTagTerminatesSession` | 23 |
 | 56 | Ref §8.13 | An over-count `Rread` / `Rreaddir` / `Rwrite`, `nwqid > nwname`, a bad stat size and a split dirent are client protocol errors | `ClientProtocolErrorTests.OverCountRepliesAreRejected` | 26 |
 | 57 | Ref §8.14 | The client waits for `Rflush` before reusing `oldtag` | `ClientFlushTests.WaitsForRflushBeforeTagReuse` | 24 |
 | 58 | Ref §8.14 | A reply that arrives before the `Rflush` is delivered normally | `ClientFlushTests.DeliversRaceyReply` | 24 |
-| 59 | Ref §9 | The 77 golden vectors decode and re-encode byte-exactly | `GoldenVectorTests.EveryVectorRoundTripsByteExactly` | 12 |
+| 59 | Ref §9 | The 88 golden vectors decode and re-encode byte-exactly | `GoldenVectorTests.EveryVectorRoundTripsByteExactly` | 12 |
 | 60 | AC-a | `jsonfs` plus the repo's `cli` reproduce `sample.expected.txt` byte-for-byte over tcp, tls and ws in all three dialects | `ConformanceTests.SampleOutputMatchesByteForByte` | 36 |
 | 61 | AC-b | A hostile client cannot exceed the tested per-connection allocation bound proportional to msize or stall another connection | `HostileClientTests.AllocationStaysWithinMsize` | 40 |
 | 62 | AC-c | `todofs`: user A's attach cannot reach anything under `/users/B`, and `users/ctl` needs the admin role | `TodoFsIsolationTests.UserACannotReachUserB` | 38 |
@@ -179,3 +179,25 @@ Reading the table:
 | 153 | Ref §8.27 | jsonfs refuses a create asking for a file flag whole | `JsonFsTests.ACreateAskingForAFlagIsRefused` | flags |
 | 154 | Ref §8.27 | todofs refuses a create asking for a file flag whole | `TodoFsItemTests.ACreateAskingForAFlagIsRefused` | flags |
 | 155 | Ref §8.39 | Every ename sent over 9P2000 is one the Linux kernel maps to that errno | `ErrorTableTests.EverySentEnameIsOneLinuxMapsToThatErrno` | interop |
+| 156 | Ref §5.7 | Actual Twrite count 0, offsets 0/middle/EOF/past EOF/ulong.MaxValue; bytes and size unchanged. | `ContentBoundaryTests.AZeroByteWriteLeavesANonEmptyFileUntouched` | audit-002 |
+| 157 | Ref §5.5 | Populated and already-empty files; shorter replacement has no stale suffix. | `ContentBoundaryTests.ATruncatingOpenEmptiesAPlainFile` | audit-002 |
+| 158 | Ref §5.5 | Denied before mutation; permitted read/truncate remains read-only. | `ContentBoundaryTests.TruncateNeedsWritePermissionEvenForAReadOpen` | audit-002 |
+| 159 | Ref §5.7 | Sparse bytes/size; JsonFsBoundaryTests.EmptyWritesPreserveContentAndSparseWritesSurviveReload checks write-back U+0000. | `ContentBoundaryTests.AWritePastTheEndZeroFillsTheHole` | audit-002 |
+| 160 | Ref §5.7 | Independent before/after byte arrays. | `ContentBoundaryTests.AMidFileOverwritePreservesPrefixAndSuffix` | audit-002 |
+| 161 | Ref §5.7 | Error and subsequent session operation. | `ContentBoundaryTests.AWriteToAnOpenedDirectoryIsRefused` | audit-002 |
+| 162 | Ref §5.8 | Zero, extension, unchanged empty wstat name; ServerSetattrTests covers directory dialect rules and mixed-update atomicity. | `ContentBoundaryTests.LengthZeroAndExtensionChangeOnlyTheRequestedBytes` | audit-002 |
+| 163 | Ref §4.6 | Valid fid required; zero mask calls neither handler API. OrphanTimeModifiersAreEinvalWithoutMutation covers five malformed masks, including mixed fields. | `ServerSetattrTests.AValidMaskOfZeroChangesNothingAndDoesNotFsync` | audit-002 |
+| 164 | Ref §4.6 | 160 bytes, zero valid mask, valid qid and remaining zero fields. | `ContentBoundaryTests.ARequestMaskOfZeroMarksNothingValidButTheQid` | audit-002 |
+| 165 | Ref §8.2–3 | Per-field invalid-name matrix, both renameat names, healthy second connection; positive parent walk, empty wstat name and empty xattrwalk. | `NameLimitTests.MalformedNamesRespectEachFieldsLegalExceptions` | audit-002 |
+| 166 | Ref §5.5 | Non-directory and already-open fids rejected. | `ContentBoundaryTests.CreateRequiresAnUnopenedDirectoryFid` | audit-002 |
+| 167 | Ref §4.2 | Create, stat and actual zero-count Rread; directory size zero. | `ContentBoundaryTests.AnEmptyFileReportsSizeZeroAndReadsNothing` | audit-002 |
+| 168 | Ref §5.3–4 | 16 returned qids, NOFID refusal; AFlushNamingItselfIsAnswered pins own-tag flush. | `ContentBoundaryTests.SixteenWalkElementsSucceedAndNofidIsRefused` | audit-002 |
+| 169 | Ref §5.9 | Namespace removal and fid reuse. | `ContentBoundaryTests.RemovingAnOpenFidRemovesTheFileAndFreesTheFid` | audit-002 |
+| 170 | Client API | Scripted next-message sentinel; real-server counterpart checks bytes and request counter. | `ClientBoundaryTests.AnEmptyWriteAllSendsNoTwrite` | audit-002 |
+| 171 | Client API | WriteFile empty truncates, append-only preserves, new-file and directory size zero. | `ClientFileApiTests.EmptyFileApisDistinguishWriteAllFromTruncatingOpen` | audit-002 |
+| 172 | Client API | Nonempty ordinary write receiving Rwrite 0 fails EIO without spinning. | `ClientBoundaryTests.AZeroProgressOrdinaryWriteIsEio` | audit-002 |
+| 173 | Ref §4.2/§4.7 | Three scripted pages plus empty terminator; exact legacy byte offsets and L cookies. | `ClientBoundaryTests.APageEndingOnARecordBoundaryContinues` | audit-002 |
+| 174 | Ref §8.2 | Astral and 255-byte names through create/read/list/remove. | `ClientFileApiTests.TypedApiHandlesAstralAndMaximumNames` | audit-002 |
+| 175 | Ref §4.6 | Orphan time modifiers fail EINVAL before any mutation | `ServerSetattrTests.OrphanTimeModifiersAreEinvalWithoutMutation` | audit-002 |
+| 176 | Ref §5.8 / §4.6 | Directory size rejection is dialect-sensitive and atomic | `ServerSetattrTests.DirectorySizeIsRefusedBeforeAnyPartOfTheUpdate` | audit-002 |
+| 177 | Ref §5.8 | Legacy directory length zero reaches the handler | `ServerSetattrTests.LegacyDirectoryLengthZeroReachesTheHandler` | audit-002 |

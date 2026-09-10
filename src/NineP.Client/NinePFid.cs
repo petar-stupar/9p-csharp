@@ -364,6 +364,8 @@ public sealed class NinePFid : IAsyncDisposable
     /// <summary>
     /// Writes the whole buffer with the in-flight window, except append opens and append-only
     /// qids use one outstanding write so short writes cannot reorder or duplicate appended bytes.
+    /// An empty buffer sends no Twrite and never truncates. NinePSession.WriteFileAsync instead
+    /// requests truncation when opening the file (ignored for append-only files).
     /// </summary>
     /// <param name="data">The bytes to write, starting at offset 0.</param>
     /// <param name="cancellationToken">Cancels the transfer.</param>

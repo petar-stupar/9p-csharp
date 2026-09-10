@@ -316,3 +316,7 @@ Names are compared without Unicode normalization. `Limits.MaxNameLength` counts 
 up to the protocol's hard 255-byte limit. A legal name over the configured limit is ENAMETOOLONG;
 a malformed name is a protocol error. Long paths are split by both MAXWELEM and encoded frame
 size. A partial walk stopping at a file with components remaining is ENOTDIR.
+
+## Empty file writes
+
+`NinePFid.WriteAllAsync` with empty content sends no `Twrite` and leaves bytes unchanged. `NinePSession.WriteFileAsync` opens with truncate, so empty content empties a plain file at open; an append-only file ignores truncation and keeps its bytes. A zero-byte wire write is tested separately.

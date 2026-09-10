@@ -6,6 +6,12 @@ All notable changes to this repository are recorded here. The format follows
 
 ## [Unreleased]
 
+### Test audit 002 — 2026-09-10
+
+- **Server:** a `Tsetattr` with `valid = 0` validates the fid and answers `Rsetattr` without calling the handler; `ATIME_SET` / `MTIME_SET` without their base bit are `EINVAL`; a directory length change is refused in the core before the handler (`.L`: any size; 9P2000/.u: a non-zero length, per stat(5)).
+- **Tests:** the three test projects are organised into seven suites (Conformance, Robustness, Regression, Chaos, StateMachine, Security, Compat) as folders, namespaces and one `Category` trait, enforced by `TestSuiteHygieneTests`; empty and zero-count boundary coverage on the wire, the client API and the codec; a `FaultyTransport` fault injector with chaos tests on both sides; generated fid-lifecycle and tag-multiplexer models. The golden corpus grows from 77 to 88 vectors.
+- **Docs:** `NinePFid.WriteAllAsync` documents that an empty buffer sends no `Twrite`; `docs/client.md`, `docs/server.md`, `docs/security.md`, `docs/transports.md` and `CONTRIBUTING.md` describe the new semantics and the suites.
+
 ### Added
 
 - **The settable file flags reach the handler.** `SetAttr` gains `Flags` and `CreateRequest`
@@ -254,7 +260,7 @@ An independent four-persona review of 2026-09-08 raised 22 findings (15 Critical
 - **TLS: renegotiation is off by this library's word, not the platform's.** `TlsTransport` never set
   `AllowRenegotiation` on the `SslAuthenticationOptions` it built, so `docs/security.md`'s claim rode
   on the BCL defaults — `true` on the client side, `false` on the server side. Both builders now
-  set it to `false`, and `TlsTransportTests.RenegotiationIsOffOnBothSides` asserts it (security
+  set it to `false`, and `TlsSecurityTests.RenegotiationIsOffOnBothSides` asserts it (security
   review S-2).
 
 - **Client: a `Tflush` answered with an error stranded `oldtag`.** A server that answers a `Tflush`

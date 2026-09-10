@@ -327,7 +327,7 @@ with `diff`.
 1. Three installable packages build from a clean checkout with the ecosystem's standard command
    (`dotnet pack`, `npm pack`, `go build ./...` + module path, `python -m build`, …) — the
    ticket's "two installable packages: client and server" plus the shared one.
-2. Every message type of protocol-reference §2 encodes/decodes; all 77 golden vectors round-trip
+2. Every message type of protocol-reference §2 encodes/decodes; all 88 golden vectors round-trip
    byte-exactly; the mutation matrix of protocol-reference §9 yields typed errors.
 3. Server and client pass the **conformance scenario** ([fixtures/conformance.md](fixtures/conformance.md))
    in all three dialects over TCP, TLS, and WebSocket, and over the in-memory transport.

@@ -178,6 +178,21 @@ const vectors = [
   ['Rrenameat', '9P2000.L', { tag: 37 }, frame(T.Rrenameat, 37)],
   ['Tunlinkat', '9P2000.L', { tag: 38, dirfd: 0, name: 'newdir', flags: 0x200 }, frame(T.Tunlinkat, 38, u32(0), str('newdir'), u32(0x200))],
   ['Runlinkat', '9P2000.L', { tag: 38 }, frame(T.Runlinkat, 38)],
+
+  // Zero-count and empty-field boundaries; keep existing corpus indices stable.
+  ['Tread (count 0)', '9P2000', { tag: 40, fid: 1, offset: 0, count: 0 }, frame(T.Tread, 40, u32(1), u64(0), u32(0))],
+  ['Rread (count 0)', '9P2000', { tag: 40, data: '' }, frame(T.Rread, 40, u32(0))],
+  ['Twrite (count 0)', '9P2000', { tag: 41, fid: 1, offset: 0, data: '' }, frame(T.Twrite, 41, u32(1), u64(0), u32(0))],
+  ['Rwrite (count 0)', '9P2000', { tag: 41, count: 0 }, frame(T.Rwrite, 41, u32(0))],
+  ['Rwalk (nwqid 0)', '9P2000', { tag: 42, wqid: [] }, frame(T.Rwalk, 42, u16(0))],
+  ['Tsetattr (valid 0)', '9P2000.L', { tag: 43, fid: 1, valid: 0, mode: 0, uid: 0, gid: 0, size: 0, atime_sec: 0, atime_nsec: 0, mtime_sec: 0, mtime_nsec: 0 },
+    frame(T.Tsetattr, 43, u32(1), u32(0), u32(0), u32(0), u32(0), u64(0), u64(0), u64(0), u64(0), u64(0))],
+  ['Tgetattr (mask 0)', '9P2000.L', { tag: 44, fid: 1, request_mask: 0 }, frame(T.Tgetattr, 44, u32(1), u64(0))],
+  ['Rgetattr (valid 0)', '9P2000.L', { tag: 44, valid: 0, qid: QFILE, mode: 0, uid: 0, gid: 0, nlink: 0, rdev: 0, size: 0, blksize: 0, blocks: 0, atime_sec: 0, atime_nsec: 0, mtime_sec: 0, mtime_nsec: 0, ctime_sec: 0, ctime_nsec: 0, btime_sec: 0, btime_nsec: 0, gen: 0, data_version: 0 },
+    frame(T.Rgetattr, 44, u64(0), qid(QFILE), u32(0), u32(0), u32(0), ...Array.from({ length: 15 }, () => u64(0)))],
+  ['Rreaddir (count 0)', '9P2000.L', { tag: 45, entries: [] }, frame(T.Rreaddir, 45, u32(0))],
+  ['Txattrwalk (list)', '9P2000.L', { tag: 46, fid: 1, newfid: 2, name: '' }, frame(T.Txattrwalk, 46, u32(1), u32(2), str(''))],
+  ['Txattrcreate (remove)', '9P2000.L', { tag: 47, fid: 1, name: 'user.note', attr_size: 0, flags: 0 }, frame(T.Txattrcreate, 47, u32(1), str('user.note'), u64(0), u32(0))],
 ];
 
 const out = {

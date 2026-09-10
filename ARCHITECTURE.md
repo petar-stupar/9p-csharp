@@ -21,7 +21,7 @@ and server consumers access to its internal framing and projection helpers.
 | client | `src/NineP.Client/` | `NineP.Client` 0.1.0 — `net8.0;net10.0`, references protocol |
 | server | `src/NineP.Server/` | `NineP.Server` 0.1.0 — `net8.0;net10.0`, references protocol |
 | examples | `examples/NineP.JsonFs/`, `examples/NineP.TodoFs/`, `examples/NineP.Cli/` | jsonfs, todofs, cli (unpublished, `net10.0`) |
-| tests | `tests/NineP.TestSupport/`, `tests/NineP.{Protocol,Client,Server}.Tests/` | shared harness and the three suites (`net8.0;net10.0`) |
+| tests | `tests/NineP.TestSupport/`, `tests/NineP.{Protocol,Client,Server}.Tests/` | shared harness; Conformance, Robustness, Regression, Chaos, StateMachine, Security, Compat within each layer (`net8.0;net10.0`) |
 | tests | `tests/NineP.{Repo,Docs}.Tests/`, `tests/NineP.{Conformance,Benchmarks}/` | hygiene, README, conformance driver, benchmarks (`net10.0`) |
 | tests | `tests/NineP.Fuzz/` | SharpFuzz libFuzzer target (`net8.0`) |
 
@@ -131,3 +131,4 @@ see the formatting divergence the conformance output depends on.
 | 2026-09-10 | `ClientOptions.Dialects` stays; the question left open on 2026-09-08 is closed | Owner decision. The cli's `--dialect` and a consumer talking to a `.L`-only server such as diod need to offer exactly one dialect, and the "not honoured" finding that motivated removal is fixed. |
 | 2026-09-10 | Reference §8 rules 37–39: the `Trename` fallback, an error answering `Tversion` is a version error, and the Linux ename table — promoted from this port's named tests | Owner decision. The backport policy says a rule only one port tests is not a rule; rule-index rows 139, 140 and 155 now point at §8. |
 | 2026-09-08 | **Review finding C12** — live ancestry aliases follow protocol rename operations across connections, with each attach root preserved | The path registry owns only live fid/traversal state. Mutations coordinate affected paths and walks revalidate raced lookups, avoiding a global lock across handler calls. No public handler callback or per-Qid history is added. |
+| 2026-09-10 | Approved audit 002: seven behavior suites within each existing test layer; deterministic transport faults and bounded generated state models | No runtime dependency or public transport option. Folder/namespace/Category hygiene and discovered case counts are checked. Literal zero-mask setattr bypasses handlers; malformed time modifiers fail EINVAL; directory length validation follows dialect semantics. Workspace §4.6 records the policy. |

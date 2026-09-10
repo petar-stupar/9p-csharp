@@ -16,7 +16,7 @@ builds. The measured results are in [docs/interop.md](../../docs/interop.md).
 
 ```text
 eval "$(tests/interop/setup.sh)"
-dotnet test --project tests/NineP.Client.Tests -f net10.0 -- --filter-class NineP.Client.Tests.InteropTests
+dotnet test --project tests/NineP.Client.Tests -f net10.0 -- --filter-class NineP.Client.Tests.Compat.InteropTests
 ```
 
 ## The enames Linux v9fs accepts over plain 9P2000
