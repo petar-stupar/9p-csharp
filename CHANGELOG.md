@@ -100,7 +100,8 @@ All notable changes to this repository are recorded here. The format follows
   connection with a `NinePVersionException` that quotes it, instead of terminating the session
   over "unknown tag 65535"; diod answers a dialect it does not speak that way. Named test
   `ClientInteropRegressionTests.AnErrorAnsweringTheVersionRequestIsAVersionError`.
-- Client: disposing a session whose connection has already died no longer throws. The courtesy
+- Client: disposing a session whose connection has already died no longer throws (reference §8
+  rule 41). The courtesy
   clunks `NinePSession.DisposeAsync` issues cannot reach a dead peer, and the send path rethrows
   whatever the transport raised without wrapping it, so an `IOException` from a real socket — or an
   `InvalidOperationException` from a pipe whose writer was completed — escaped `DisposeAsync` when
