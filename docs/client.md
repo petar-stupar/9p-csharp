@@ -95,6 +95,14 @@ Disposing a `NinePFid` never throws for a clunk the peer refused, never answered
 already going away could not send: it is documented as safe to call from a `finally`, and a
 disposal that threw there would replace the failure the caller was actually being told about.
 
+`session.DisposeAsync` carries the same promise, and for the same reason. A connection that has
+already died — a peer that crashed, a socket closed under the writer — is the ordinary way a
+session ends, not an exceptional one, so the courtesy clunks it can no longer deliver are
+swallowed whether the transport reports them as a protocol failure or raises its own
+`IOException`. `await using` on a session whose server has gone away is exactly when a caller can
+least afford a new exception, and until 0.2.0 it got one depending on whether the write or the
+reader noticed the death first.
+
 **A `Tclunk` that was flushed.** Disposal itself is never cancelled — the clunk goes out under no
 token — so the only thing that flushes it is `RequestTimeout` elapsing, at which point the session
 sends `Tflush` as it would for any request. The fid **number** is not returned to the session's fid

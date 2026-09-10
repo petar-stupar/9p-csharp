@@ -894,6 +894,18 @@ Lifetime and progress (reference review, 2026-09-08):
     dial it already runs inside the process. The tracking tables are themselves bounded, so the
     defence cannot become the memory a flood is aiming at.
 
+41. **Releasing a client session never fails because the connection is dead** `[D]`. The `Tclunk`s
+    a session sends as it closes are a courtesy: a server forgets every fid on a connection when
+    that connection closes (§5.3), so a peer that has already gone away is an ordinary end to a
+    session rather than an exceptional one. Releasing a session or a handle therefore reports no
+    error for a clunk it could not deliver, **whatever shape the failure arrives in** — the
+    session's own protocol error when the reader has already seen the close, or the transport's
+    raw I/O failure when the write is what meets the dead socket first. Those are one event seen
+    from two sides, and which of them a caller meets is a race; a release that raises for one and
+    not the other is a release that raises at random. The fid numbers are returned either way, and
+    the caller, who is by definition unwinding from a failure, is not handed a second one that
+    replaces the first.
+
 
 ## 9. Golden vectors
 

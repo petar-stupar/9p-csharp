@@ -16,6 +16,44 @@ public sealed class ClientLifetimeRegressionTests
 {
     private static CancellationToken Ct => TestDeadlines.Wrap(TestContext.Current.CancellationToken);
 
+    /// <summary>
+    /// Disposing a session whose peer has already gone away is quiet. The courtesy clunks cannot
+    /// reach a dead connection, and the send path rethrows whatever the transport raised without
+    /// wrapping it, so <c>ClunkQuietlyAsync</c> used to catch only <c>NinePException</c> and let an
+    /// <c>IOException</c> — or, over the in-memory pipe, an <c>InvalidOperationException</c> —
+    /// escape <c>DisposeAsync</c>. A caller unwinding from a crashed server is exactly who can
+    /// least afford a new exception out of <c>await using</c>.
+    /// <b>Mutation:</b> narrow the catch in <c>NinePSession.ClunkQuietlyAsync</c> back to
+    /// <c>NinePException</c> and this test fails.
+    /// </summary>
+    [Fact]
+    public async Task DisposingASessionWhoseServerIsGoneIsQuiet()
+    {
+        (INinePConnection client, FakeNinePServer server) = FakeNinePServer.CreatePair();
+        await using FakeNinePServer _ = server;
+        await using DeadWriteConnection dead = new(client);
+
+        Task<NinePSession> connecting = NinePClient.ConnectAsync(dead, new ClientOptions
+        {
+            Dialects = [Dialect.P9_2000_L],
+        }, Ct).AsTask();
+        await server.NegotiateAsync(
+            NineP.Protocol.Negotiation.Negotiator.VersionString(Dialect.P9_2000_L), cancellationToken: Ct);
+        NinePSession session = await connecting;
+
+        Task<NinePFid> attaching = session.AttachAsync(Ct).AsTask();
+        Tattach attach = await server.ReadAsync<Tattach>(Ct);
+        await server.WriteAsync(new Rattach(attach.Tag, new Qid(QidType.QTFILE, 0, attach.Fid + 1)), Ct);
+        await attaching;
+
+        // The socket breaks under the writer while the reader is still parked, which is the order
+        // the courtesy clunk actually meets: the session has not yet been told it is terminated,
+        // so the clunk is attempted and the transport raises straight out of the send path.
+        dead.BreakWrites();
+
+        await session.DisposeAsync();
+    }
+
     [Theory]
     [InlineData(false)]
     [InlineData(true)]
@@ -473,6 +511,34 @@ public sealed class ClientLifetimeRegressionTests
             throw new InvalidOperationException("Invalid options must be rejected before dialing");
         }
         public ValueTask<INinePListener> ListenAsync(NinePAddress address, CancellationToken cancellationToken = default) => throw new NotSupportedException();
+    }
+
+    /// <summary>
+    /// A connection whose writes fail on demand while its reads stay parked, so a caller meets a
+    /// broken socket before anything has declared the session terminated.
+    /// </summary>
+    private sealed class DeadWriteConnection(INinePConnection inner) : INinePConnection
+    {
+        private volatile bool _broken;
+
+        public NinePAddress RemoteAddress => inner.RemoteAddress;
+
+        public PeerIdentity? PeerIdentity => inner.PeerIdentity;
+
+        public void BreakWrites() => _broken = true;
+
+        public ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default) =>
+            inner.ReadAsync(buffer, cancellationToken);
+
+        public ValueTask WriteAsync(ReadOnlyMemory<byte> message, CancellationToken cancellationToken = default) =>
+            _broken
+                ? throw new IOException("the socket is gone")
+                : inner.WriteAsync(message, cancellationToken);
+
+        public ValueTask CloseAsync(CloseReason reason, CancellationToken cancellationToken = default) =>
+            inner.CloseAsync(reason, cancellationToken);
+
+        public ValueTask DisposeAsync() => inner.DisposeAsync();
     }
 
     private sealed class Harness(NinePSession session, FakeNinePServer server) : IAsyncDisposable
