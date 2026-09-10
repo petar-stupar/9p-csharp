@@ -7,6 +7,8 @@ using FsCheck.Fluent;
 using NineP.Client;
 using NineP.JsonFs;
 using NineP.Protocol;
+using NineP.Protocol.Codec.Internal;
+using NineP.Protocol.Messages;
 using Xunit;
 using NineP.TestSupport;
 
@@ -519,11 +521,40 @@ public sealed class JsonFsTests
         Assert.Equal("hello", await ReadAsync(session, "greeting"));
     }
 
+    /// <summary>
+    /// Rule 19: JSON has nowhere to keep an append-only, exclusive or temporary flag, so a
+    /// <c>Tcreate</c> asking for one is refused whole and no member is added — where the mode a
+    /// create carries is dropped, the flags it carries are not.
+    /// </summary>
+    [Fact]
+    public async Task ACreateAskingForAFlagIsRefused()
+    {
+        JsonTree document = Parse("""{"greeting":"hello"}""");
+        await using ServerHarness harness = await ServerHarness.StartAsync(
+            filesystem: new JsonFilesystem(document, writable: true));
+        await using NinePSession session = await harness.ConnectAsync(Dialect.P9_2000);
+
+        NinePFid root = await session.WalkAsync("/", Ct);
+        await using (root.ConfigureAwait(false))
+        {
+            NinePException refusal = await Assert.ThrowsAsync<NinePException>(
+                async () => await session.Messages.CreateAsync(
+                    new Tcreate(0, root.Fid, "log", ModeBits.DMAPPEND | 0x1A4, 1, null), Ct));
+
+            Assert.Equal(Errno.EOPNOTSUPP, refusal.Error.Errno);
+        }
+
+        Assert.Equal(
+            ["greeting"],
+            (await session.ReadDirAsync("/", Ct)).Select(entry => entry.Name).Order(StringComparer.Ordinal));
+    }
+
     /// <summary>Updates that name a truncation, a rename and one field jsonfs does not have.</summary>
     /// <returns>One update per row.</returns>
     public static TheoryData<SetAttr> UnsupportedUpdates() =>
     [
-        new SetAttr { Size = 0, Name = "salutation", Perm = 0x1FF },
+        new SetAttr { Size = 0, Name = "salutation", Perm = 0x1FF, Flags = FileFlags.None },
+        new SetAttr { Size = 0, Name = "salutation", Perm = 0x1A4, Flags = FileFlags.Append },
         new SetAttr { Size = 0, Name = "salutation", GroupName = "wheel" },
         new SetAttr { Size = 0, Name = "salutation", MTime = new TimeSpec(1, 0) },
     ];

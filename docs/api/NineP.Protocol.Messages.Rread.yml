@@ -3,7 +3,7 @@ title: Struct Rread
 body:
 - api1: Struct Rread
   id: NineP_Protocol_Messages_Rread
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rread.cs#L13
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Rread.cs#L13
   metadata:
     uid: NineP.Protocol.Messages.Rread
     commentId: T:NineP.Protocol.Messages.Rread
@@ -39,7 +39,7 @@ body:
 - h2: Constructors
 - api3: Rread(ushort, ReadOnlyMemory<byte>)
   id: NineP_Protocol_Messages_Rread__ctor_System_UInt16_System_ReadOnlyMemory_System_Byte__
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rread.cs#L13
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Rread.cs#L13
   metadata:
     uid: NineP.Protocol.Messages.Rread.#ctor(System.UInt16,System.ReadOnlyMemory{System.Byte})
     commentId: M:NineP.Protocol.Messages.Rread.#ctor(System.UInt16,System.ReadOnlyMemory{System.Byte})
@@ -71,7 +71,7 @@ body:
 - h2: Properties
 - api3: Data
   id: NineP_Protocol_Messages_Rread_Data
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rread.cs#L13
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Rread.cs#L13
   metadata:
     uid: NineP.Protocol.Messages.Rread.Data
     commentId: P:NineP.Protocol.Messages.Rread.Data
@@ -95,7 +95,7 @@ body:
     - '>'
 - api3: Tag
   id: NineP_Protocol_Messages_Rread_Tag
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rread.cs#L13
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Rread.cs#L13
   metadata:
     uid: NineP.Protocol.Messages.Rread.Tag
     commentId: P:NineP.Protocol.Messages.Rread.Tag

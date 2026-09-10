@@ -157,7 +157,7 @@ trace, or the untrusted input verbatim.
 | 16 client: `OEXEC` → `O_RDONLY`; a full sync satisfies a data sync | `ModeBits`, `NinePFid` | `ModeBitsTests`, `ClientProjectionTests` |
 | 17 client: read only what `Rgetattr.valid` marks; kind agrees with the qid | `AttrProjector` | `AttrProjectorTests`, `ClientProjectionTests` |
 | 18 client: the `Rversion` must answer the offer; a stray one is rule 12 | `NinePClient`, `TagMultiplexer` | `ClientProjectionTests`, `TagMultiplexerTests` |
-| 19 `DMAPPEND`/`DMEXCL`/`DMTMP` refused in `Twstat.mode` and `Tcreate.perm`; the `.u` `DMSETUID`/`DMSETGID`/`DMSETVTX` honoured | `Dispatcher`, `AttrProjector` | `CreateTests.CreateWithAnUnsupportedModeBitIsRefused`, `WstatTests.ChangingAnUnsupportedModeBitIsRefused`, `WstatTests.TheDotUPermissionBitsRoundTripThroughWstat` |
+| 19 `DMAPPEND`/`DMEXCL`/`DMTMP` honoured in `Twstat.mode` and `Tcreate.perm` and read back; `DMAUTH`/`DMMOUNT` refused; the `.u` `DMSETUID`/`DMSETGID`/`DMSETVTX` honoured | `Dispatcher`, `AttrProjector`, `NinePFid` | `CreateTests.CreateCarriesTheFileFlagsToTheHandler`, `WstatTests.ChangingAFileFlagReachesTheHandler`, `ClientProjectionTests.AHalfStatedModeWordIsCompletedFromTheRecord`, `WstatTests.TheDotUPermissionBitsRoundTripThroughWstat` |
 | 20 `Tunlinkat.flags`: `AT_REMOVEDIR` required for a directory, refused otherwise | `Dispatcher` | `UnlinkatTests.DirectoryWithoutRemovedirIsEisdir`, `FileWithRemovedirIsEnotdir`, `AnUnknownFlagIsEinval` |
 | 21 `Txattrcreate` with `attr_size = 0` removes the attribute | `Dispatcher` | `DispatcherTests.XattrcreateWithZeroSizeRemovesTheAttribute` |
 | 22 `btime`, `gen` and `data_version` marked valid only when non-zero | `Dispatcher`, `AttrProjector` | `GetattrTests.FieldsTheHandlerLeftZeroAreNotMarkedValid` |
@@ -178,3 +178,9 @@ that exceed either worker budget while continuing to receive Tflush. Each dialec
 resource error in its own error shape. A client should retry ordinary work after capacity recovers;
 it must continue reading replies. See [server.md](server.md) and [client.md](client.md) for the
 observable API behavior and ownership rules.
+
+Rules 37 and 38 are the client's behaviour against real peers, found by the interop runs
+(`ClientInteropRegressionTests`): the `Trename` fallback when `Trenameat` is `EOPNOTSUPP`, and an
+error answering the `Tversion` being a version error rather than a stray tag. Rule 39 is the ename
+table: every string sent over 9P2000 is one the Linux kernel maps to the same errno
+(`ErrorTableTests`, held to `docs/9p/fixtures/linux-9p-errors.json`).

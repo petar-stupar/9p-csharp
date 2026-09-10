@@ -57,6 +57,12 @@ internal sealed class TodoListDirectory(
             throw Invalid();
         }
 
+        // An item's flags are the tree's to derive, not the client's to ask for (rule 19).
+        if (request.FileFlags != FileFlags.None)
+        {
+            throw Unsupported();
+        }
+
         IReadOnlyList<ItemRow> existing = await Session.Store
             .ListItemsAsync(owner.Id, list.Id, cancellationToken).ConfigureAwait(false);
 

@@ -3,7 +3,7 @@ title: Struct Trenameat
 body:
 - api1: Struct Trenameat
   id: NineP_Protocol_Messages_Trenameat
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Trenameat.cs#L11
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Trenameat.cs#L11
   metadata:
     uid: NineP.Protocol.Messages.Trenameat
     commentId: T:NineP.Protocol.Messages.Trenameat
@@ -39,7 +39,7 @@ body:
 - h2: Constructors
 - api3: Trenameat(ushort, uint, string, uint, string)
   id: NineP_Protocol_Messages_Trenameat__ctor_System_UInt16_System_UInt32_System_String_System_UInt32_System_String_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Trenameat.cs#L11
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Trenameat.cs#L11
   metadata:
     uid: NineP.Protocol.Messages.Trenameat.#ctor(System.UInt16,System.UInt32,System.String,System.UInt32,System.String)
     commentId: M:NineP.Protocol.Messages.Trenameat.#ctor(System.UInt16,System.UInt32,System.String,System.UInt32,System.String)
@@ -75,7 +75,7 @@ body:
 - h2: Properties
 - api3: NewDirFid
   id: NineP_Protocol_Messages_Trenameat_NewDirFid
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Trenameat.cs#L12
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Trenameat.cs#L12
   metadata:
     uid: NineP.Protocol.Messages.Trenameat.NewDirFid
     commentId: P:NineP.Protocol.Messages.Trenameat.NewDirFid
@@ -88,7 +88,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: NewName
   id: NineP_Protocol_Messages_Trenameat_NewName
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Trenameat.cs#L12
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Trenameat.cs#L12
   metadata:
     uid: NineP.Protocol.Messages.Trenameat.NewName
     commentId: P:NineP.Protocol.Messages.Trenameat.NewName
@@ -101,7 +101,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.string
 - api3: OldDirFid
   id: NineP_Protocol_Messages_Trenameat_OldDirFid
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Trenameat.cs#L12
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Trenameat.cs#L12
   metadata:
     uid: NineP.Protocol.Messages.Trenameat.OldDirFid
     commentId: P:NineP.Protocol.Messages.Trenameat.OldDirFid
@@ -114,7 +114,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: OldName
   id: NineP_Protocol_Messages_Trenameat_OldName
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Trenameat.cs#L12
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Trenameat.cs#L12
   metadata:
     uid: NineP.Protocol.Messages.Trenameat.OldName
     commentId: P:NineP.Protocol.Messages.Trenameat.OldName
@@ -127,7 +127,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.string
 - api3: Tag
   id: NineP_Protocol_Messages_Trenameat_Tag
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Trenameat.cs#L12
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Trenameat.cs#L12
   metadata:
     uid: NineP.Protocol.Messages.Trenameat.Tag
     commentId: P:NineP.Protocol.Messages.Trenameat.Tag

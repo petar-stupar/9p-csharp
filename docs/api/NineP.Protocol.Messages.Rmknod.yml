@@ -3,7 +3,7 @@ title: Struct Rmknod
 body:
 - api1: Struct Rmknod
   id: NineP_Protocol_Messages_Rmknod
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rmknod.cs#L8
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Rmknod.cs#L8
   metadata:
     uid: NineP.Protocol.Messages.Rmknod
     commentId: T:NineP.Protocol.Messages.Rmknod
@@ -39,7 +39,7 @@ body:
 - h2: Constructors
 - api3: Rmknod(ushort, Qid)
   id: NineP_Protocol_Messages_Rmknod__ctor_System_UInt16_NineP_Protocol_Qid_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rmknod.cs#L8
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Rmknod.cs#L8
   metadata:
     uid: NineP.Protocol.Messages.Rmknod.#ctor(System.UInt16,NineP.Protocol.Qid)
     commentId: M:NineP.Protocol.Messages.Rmknod.#ctor(System.UInt16,NineP.Protocol.Qid)
@@ -60,7 +60,7 @@ body:
 - h2: Properties
 - api3: Qid
   id: NineP_Protocol_Messages_Rmknod_Qid
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rmknod.cs#L8
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Rmknod.cs#L8
   metadata:
     uid: NineP.Protocol.Messages.Rmknod.Qid
     commentId: P:NineP.Protocol.Messages.Rmknod.Qid
@@ -73,7 +73,7 @@ body:
       url: NineP.Protocol.Qid.html
 - api3: Tag
   id: NineP_Protocol_Messages_Rmknod_Tag
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rmknod.cs#L8
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Rmknod.cs#L8
   metadata:
     uid: NineP.Protocol.Messages.Rmknod.Tag
     commentId: P:NineP.Protocol.Messages.Rmknod.Tag

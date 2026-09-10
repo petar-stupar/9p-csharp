@@ -24,6 +24,17 @@ public sealed record CreateRequest
     /// <summary>Open flags accompanying the create.</summary>
     public OpenFlags Flags { get; init; }
 
+    /// <summary>
+    /// The file flags the new file is to carry: <see cref="FileFlags.Append"/>,
+    /// <see cref="FileFlags.Exclusive"/> and <see cref="FileFlags.Temporary"/>, from the
+    /// <c>DMAPPEND</c>, <c>DMEXCL</c> and <c>DMTMP</c> bits of <c>Tcreate.perm</c> (open(2);
+    /// reference §8 rule 19). <see cref="FileFlags.None"/> for every other create message, which
+    /// has no spelling for them. A handler that cannot give a file these flags refuses the create;
+    /// the core reads the new file's attributes back and removes a file that lacks them, so a
+    /// success reply is never sent for a plain file.
+    /// </summary>
+    public FileFlags FileFlags { get; init; }
+
     /// <summary>The symlink target when <see cref="Kind"/> is <see cref="FileKind.Symlink"/>.</summary>
     public string? Target { get; init; }
 

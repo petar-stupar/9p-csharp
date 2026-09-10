@@ -3,7 +3,7 @@ title: Class ClientOptions
 body:
 - api1: Class ClientOptions
   id: NineP_Client_ClientOptions
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/ClientOptions.cs#L9
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/ClientOptions.cs#L9
   metadata:
     uid: NineP.Client.ClientOptions
     commentId: T:NineP.Client.ClientOptions
@@ -43,7 +43,7 @@ body:
 - h2: Fields
 - api3: DefaultLegacyMsize
   id: NineP_Client_ClientOptions_DefaultLegacyMsize
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/ClientOptions.cs#L15
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/ClientOptions.cs#L15
   metadata:
     uid: NineP.Client.ClientOptions.DefaultLegacyMsize
     commentId: F:NineP.Client.ClientOptions.DefaultLegacyMsize
@@ -56,7 +56,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: DefaultLinuxMsize
   id: NineP_Client_ClientOptions_DefaultLinuxMsize
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/ClientOptions.cs#L12
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/ClientOptions.cs#L12
   metadata:
     uid: NineP.Client.ClientOptions.DefaultLinuxMsize
     commentId: F:NineP.Client.ClientOptions.DefaultLinuxMsize
@@ -70,7 +70,7 @@ body:
 - h2: Properties
 - api3: Aname
   id: NineP_Client_ClientOptions_Aname
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/ClientOptions.cs#L50
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/ClientOptions.cs#L50
   metadata:
     uid: NineP.Client.ClientOptions.Aname
     commentId: P:NineP.Client.ClientOptions.Aname
@@ -83,7 +83,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.string
 - api3: ConnectTimeout
   id: NineP_Client_ClientOptions_ConnectTimeout
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/ClientOptions.cs#L73
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/ClientOptions.cs#L73
   metadata:
     uid: NineP.Client.ClientOptions.ConnectTimeout
     commentId: P:NineP.Client.ClientOptions.ConnectTimeout
@@ -96,7 +96,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.timespan
 - api3: Credential
   id: NineP_Client_ClientOptions_Credential
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/ClientOptions.cs#L41
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/ClientOptions.cs#L41
   metadata:
     uid: NineP.Client.ClientOptions.Credential
     commentId: P:NineP.Client.ClientOptions.Credential
@@ -110,7 +110,7 @@ body:
     - '?'
 - api3: Dialects
   id: NineP_Client_ClientOptions_Dialects
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/ClientOptions.cs#L22
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/ClientOptions.cs#L22
   metadata:
     uid: NineP.Client.ClientOptions.Dialects
     commentId: P:NineP.Client.ClientOptions.Dialects
@@ -132,7 +132,7 @@ body:
     - '>'
 - api3: DisposeTimeout
   id: NineP_Client_ClientOptions_DisposeTimeout
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/ClientOptions.cs#L70
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/ClientOptions.cs#L70
   metadata:
     uid: NineP.Client.ClientOptions.DisposeTimeout
     commentId: P:NineP.Client.ClientOptions.DisposeTimeout
@@ -154,7 +154,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.timespan
 - api3: InFlightWindow
   id: NineP_Client_ClientOptions_InFlightWindow
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/ClientOptions.cs#L58
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/ClientOptions.cs#L58
   metadata:
     uid: NineP.Client.ClientOptions.InFlightWindow
     commentId: P:NineP.Client.ClientOptions.InFlightWindow
@@ -169,7 +169,7 @@ body:
 - markdown: Must be at least 1; invalid values are rejected before dialing or negotiation.
 - api3: Limits
   id: NineP_Client_ClientOptions_Limits
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/ClientOptions.cs#L76
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/ClientOptions.cs#L76
   metadata:
     uid: NineP.Client.ClientOptions.Limits
     commentId: P:NineP.Client.ClientOptions.Limits
@@ -182,7 +182,7 @@ body:
       url: NineP.Protocol.Limits.html
 - api3: Logger
   id: NineP_Client_ClientOptions_Logger
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/ClientOptions.cs#L79
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/ClientOptions.cs#L79
   metadata:
     uid: NineP.Client.ClientOptions.Logger
     commentId: P:NineP.Client.ClientOptions.Logger
@@ -195,7 +195,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger
 - api3: MaxReadAll
   id: NineP_Client_ClientOptions_MaxReadAll
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/ClientOptions.cs#L54
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/ClientOptions.cs#L54
   metadata:
     uid: NineP.Client.ClientOptions.MaxReadAll
     commentId: P:NineP.Client.ClientOptions.MaxReadAll
@@ -210,7 +210,7 @@ body:
 - markdown: Checked against metadata before reading and against actual bytes as they arrive.
 - api3: MinDialect
   id: NineP_Client_ClientOptions_MinDialect
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/ClientOptions.cs#L35
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/ClientOptions.cs#L35
   metadata:
     uid: NineP.Client.ClientOptions.MinDialect
     commentId: P:NineP.Client.ClientOptions.MinDialect
@@ -238,7 +238,7 @@ body:
       url: NineP.Protocol.Dialect.html
 - api3: Msize
   id: NineP_Client_ClientOptions_Msize
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/ClientOptions.cs#L38
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/ClientOptions.cs#L38
   metadata:
     uid: NineP.Client.ClientOptions.Msize
     commentId: P:NineP.Client.ClientOptions.Msize
@@ -252,7 +252,7 @@ body:
     - '?'
 - api3: NUname
   id: NineP_Client_ClientOptions_NUname
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/ClientOptions.cs#L47
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/ClientOptions.cs#L47
   metadata:
     uid: NineP.Client.ClientOptions.NUname
     commentId: P:NineP.Client.ClientOptions.NUname
@@ -265,7 +265,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: RequestTimeout
   id: NineP_Client_ClientOptions_RequestTimeout
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/ClientOptions.cs#L61
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/ClientOptions.cs#L61
   metadata:
     uid: NineP.Client.ClientOptions.RequestTimeout
     commentId: P:NineP.Client.ClientOptions.RequestTimeout
@@ -278,7 +278,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.timespan
 - api3: Uname
   id: NineP_Client_ClientOptions_Uname
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/ClientOptions.cs#L44
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/ClientOptions.cs#L44
   metadata:
     uid: NineP.Client.ClientOptions.Uname
     commentId: P:NineP.Client.ClientOptions.Uname

@@ -3,7 +3,7 @@ title: Struct Tremove
 body:
 - api1: Struct Tremove
   id: NineP_Protocol_Messages_Tremove
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tremove.cs#L9
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Tremove.cs#L9
   metadata:
     uid: NineP.Protocol.Messages.Tremove
     commentId: T:NineP.Protocol.Messages.Tremove
@@ -42,7 +42,7 @@ body:
 - h2: Constructors
 - api3: Tremove(ushort, uint)
   id: NineP_Protocol_Messages_Tremove__ctor_System_UInt16_System_UInt32_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tremove.cs#L9
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Tremove.cs#L9
   metadata:
     uid: NineP.Protocol.Messages.Tremove.#ctor(System.UInt16,System.UInt32)
     commentId: M:NineP.Protocol.Messages.Tremove.#ctor(System.UInt16,System.UInt32)
@@ -66,7 +66,7 @@ body:
 - h2: Properties
 - api3: Fid
   id: NineP_Protocol_Messages_Tremove_Fid
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tremove.cs#L9
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Tremove.cs#L9
   metadata:
     uid: NineP.Protocol.Messages.Tremove.Fid
     commentId: P:NineP.Protocol.Messages.Tremove.Fid
@@ -79,7 +79,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Tag
   id: NineP_Protocol_Messages_Tremove_Tag
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tremove.cs#L9
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Tremove.cs#L9
   metadata:
     uid: NineP.Protocol.Messages.Tremove.Tag
     commentId: P:NineP.Protocol.Messages.Tremove.Tag

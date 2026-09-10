@@ -3,6 +3,8 @@ NineP.Server.CreateRequest
 NineP.Server.CreateRequest.<Clone>$() -> NineP.Server.CreateRequest!
 NineP.Server.CreateRequest.CreateRequest() -> void
 NineP.Server.CreateRequest.Equals(NineP.Server.CreateRequest? other) -> bool
+NineP.Server.CreateRequest.FileFlags.get -> NineP.Protocol.FileFlags
+NineP.Server.CreateRequest.FileFlags.init -> void
 NineP.Server.CreateRequest.Flags.get -> NineP.Protocol.OpenFlags
 NineP.Server.CreateRequest.Flags.init -> void
 NineP.Server.CreateRequest.Gid.get -> uint

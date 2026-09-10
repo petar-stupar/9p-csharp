@@ -3,7 +3,7 @@ title: Interface IAuthChannel
 body:
 - api1: Interface IAuthChannel
   id: NineP_Protocol_Auth_IAuthChannel
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Auth/IAuthChannel.cs#L6
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Auth/IAuthChannel.cs#L6
   metadata:
     uid: NineP.Protocol.Auth.IAuthChannel
     commentId: T:NineP.Protocol.Auth.IAuthChannel
@@ -19,7 +19,7 @@ body:
 - h2: Methods
 - api3: ReadAsync(int, CancellationToken)
   id: NineP_Protocol_Auth_IAuthChannel_ReadAsync_System_Int32_System_Threading_CancellationToken_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Auth/IAuthChannel.cs#L18
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Auth/IAuthChannel.cs#L18
   metadata:
     uid: NineP.Protocol.Auth.IAuthChannel.ReadAsync(System.Int32,System.Threading.CancellationToken)
     commentId: M:NineP.Protocol.Auth.IAuthChannel.ReadAsync(System.Int32,System.Threading.CancellationToken)
@@ -54,7 +54,7 @@ body:
     description: The bytes the server produced; empty at the end of the exchange.
 - api3: WriteAsync(ReadOnlyMemory<byte>, CancellationToken)
   id: NineP_Protocol_Auth_IAuthChannel_WriteAsync_System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Auth/IAuthChannel.cs#L12
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Auth/IAuthChannel.cs#L12
   metadata:
     uid: NineP.Protocol.Auth.IAuthChannel.WriteAsync(System.ReadOnlyMemory{System.Byte},System.Threading.CancellationToken)
     commentId: M:NineP.Protocol.Auth.IAuthChannel.WriteAsync(System.ReadOnlyMemory{System.Byte},System.Threading.CancellationToken)

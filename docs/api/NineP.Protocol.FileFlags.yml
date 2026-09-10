@@ -3,7 +3,7 @@ title: Enum FileFlags
 body:
 - api1: Enum FileFlags
   id: NineP_Protocol_FileFlags
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/FileFlags.cs#L4
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/FileFlags.cs#L4
   metadata:
     uid: NineP.Protocol.FileFlags
     commentId: T:NineP.Protocol.FileFlags

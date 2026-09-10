@@ -3,7 +3,7 @@ title: Struct Rerror
 body:
 - api1: Struct Rerror
   id: NineP_Protocol_Messages_Rerror
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rerror.cs#L12
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Rerror.cs#L12
   metadata:
     uid: NineP.Protocol.Messages.Rerror
     commentId: T:NineP.Protocol.Messages.Rerror
@@ -42,7 +42,7 @@ body:
 - h2: Constructors
 - api3: Rerror(ushort, string, int)
   id: NineP_Protocol_Messages_Rerror__ctor_System_UInt16_System_String_System_Int32_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rerror.cs#L12
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Rerror.cs#L12
   metadata:
     uid: NineP.Protocol.Messages.Rerror.#ctor(System.UInt16,System.String,System.Int32)
     commentId: M:NineP.Protocol.Messages.Rerror.#ctor(System.UInt16,System.String,System.Int32)
@@ -74,7 +74,7 @@ body:
 - h2: Properties
 - api3: Ename
   id: NineP_Protocol_Messages_Rerror_Ename
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rerror.cs#L12
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Rerror.cs#L12
   metadata:
     uid: NineP.Protocol.Messages.Rerror.Ename
     commentId: P:NineP.Protocol.Messages.Rerror.Ename
@@ -87,7 +87,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.string
 - api3: Errno
   id: NineP_Protocol_Messages_Rerror_Errno
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rerror.cs#L12
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Rerror.cs#L12
   metadata:
     uid: NineP.Protocol.Messages.Rerror.Errno
     commentId: P:NineP.Protocol.Messages.Rerror.Errno
@@ -103,7 +103,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: Tag
   id: NineP_Protocol_Messages_Rerror_Tag
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rerror.cs#L12
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Rerror.cs#L12
   metadata:
     uid: NineP.Protocol.Messages.Rerror.Tag
     commentId: P:NineP.Protocol.Messages.Rerror.Tag

@@ -3,7 +3,7 @@ title: Class Negotiator
 body:
 - api1: Class Negotiator
   id: NineP_Protocol_Negotiation_Negotiator
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Negotiation/Negotiator.cs#L10
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Negotiation/Negotiator.cs#L10
   metadata:
     uid: NineP.Protocol.Negotiation.Negotiator
     commentId: T:NineP.Protocol.Negotiation.Negotiator
@@ -50,7 +50,7 @@ body:
 - h2: Methods
 - api3: Negotiate(IReadOnlySet<Dialect>, string, uint, Limits)
   id: NineP_Protocol_Negotiation_Negotiator_Negotiate_System_Collections_Generic_IReadOnlySet_NineP_Protocol_Dialect__System_String_System_UInt32_NineP_Protocol_Limits_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Negotiation/Negotiator.cs#L19
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Negotiation/Negotiator.cs#L19
   metadata:
     uid: NineP.Protocol.Negotiation.Negotiator.Negotiate(System.Collections.Generic.IReadOnlySet{NineP.Protocol.Dialect},System.String,System.UInt32,NineP.Protocol.Limits)
     commentId: M:NineP.Protocol.Negotiation.Negotiator.Negotiate(System.Collections.Generic.IReadOnlySet{NineP.Protocol.Dialect},System.String,System.UInt32,NineP.Protocol.Limits)
@@ -96,7 +96,7 @@ body:
     description: An argument is null.
 - api3: TryParseVersion(string, out Dialect)
   id: NineP_Protocol_Negotiation_Negotiator_TryParseVersion_System_String_NineP_Protocol_Dialect__
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Negotiation/Negotiator.cs#L72
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Negotiation/Negotiator.cs#L72
   metadata:
     uid: NineP.Protocol.Negotiation.Negotiator.TryParseVersion(System.String,NineP.Protocol.Dialect@)
     commentId: M:NineP.Protocol.Negotiation.Negotiator.TryParseVersion(System.String,NineP.Protocol.Dialect@)
@@ -122,7 +122,7 @@ body:
     description: True only for an exact match on one of the three strings.
 - api3: VersionString(Dialect)
   id: NineP_Protocol_Negotiation_Negotiator_VersionString_NineP_Protocol_Dialect_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Negotiation/Negotiator.cs#L60
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Negotiation/Negotiator.cs#L60
   metadata:
     uid: NineP.Protocol.Negotiation.Negotiator.VersionString(NineP.Protocol.Dialect)
     commentId: M:NineP.Protocol.Negotiation.Negotiator.VersionString(NineP.Protocol.Dialect)

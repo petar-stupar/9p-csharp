@@ -3,7 +3,7 @@ title: Enum XattrFlags
 body:
 - api1: Enum XattrFlags
   id: NineP_Protocol_XattrFlags
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/XattrFlags.cs#L4
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/XattrFlags.cs#L4
   metadata:
     uid: NineP.Protocol.XattrFlags
     commentId: T:NineP.Protocol.XattrFlags

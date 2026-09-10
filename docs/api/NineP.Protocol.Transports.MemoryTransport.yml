@@ -3,7 +3,7 @@ title: Class MemoryTransport
 body:
 - api1: Class MemoryTransport
   id: NineP_Protocol_Transports_MemoryTransport
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/MemoryTransport.cs#L16
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Transports/MemoryTransport.cs#L16
   metadata:
     uid: NineP.Protocol.Transports.MemoryTransport
     commentId: T:NineP.Protocol.Transports.MemoryTransport
@@ -50,7 +50,7 @@ body:
 - h2: Constructors
 - api3: MemoryTransport()
   id: NineP_Protocol_Transports_MemoryTransport__ctor
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/MemoryTransport.cs#L24
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Transports/MemoryTransport.cs#L24
   metadata:
     uid: NineP.Protocol.Transports.MemoryTransport.#ctor
     commentId: M:NineP.Protocol.Transports.MemoryTransport.#ctor
@@ -59,7 +59,7 @@ body:
 - h2: Properties
 - api3: Schemes
   id: NineP_Protocol_Transports_MemoryTransport_Schemes
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/MemoryTransport.cs#L29
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Transports/MemoryTransport.cs#L29
   metadata:
     uid: NineP.Protocol.Transports.MemoryTransport.Schemes
     commentId: P:NineP.Protocol.Transports.MemoryTransport.Schemes
@@ -77,7 +77,7 @@ body:
 - h2: Methods
 - api3: ConnectAsync(NinePAddress, CancellationToken)
   id: NineP_Protocol_Transports_MemoryTransport_ConnectAsync_NineP_Protocol_Transports_NinePAddress_System_Threading_CancellationToken_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/MemoryTransport.cs#L48
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Transports/MemoryTransport.cs#L48
   metadata:
     uid: NineP.Protocol.Transports.MemoryTransport.ConnectAsync(NineP.Protocol.Transports.NinePAddress,System.Threading.CancellationToken)
     commentId: M:NineP.Protocol.Transports.MemoryTransport.ConnectAsync(NineP.Protocol.Transports.NinePAddress,System.Threading.CancellationToken)
@@ -118,7 +118,7 @@ body:
     description: Nothing is listening on that name.
 - api3: CreatePair()
   id: NineP_Protocol_Transports_MemoryTransport_CreatePair
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/MemoryTransport.cs#L36
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Transports/MemoryTransport.cs#L36
   metadata:
     uid: NineP.Protocol.Transports.MemoryTransport.CreatePair
     commentId: M:NineP.Protocol.Transports.MemoryTransport.CreatePair
@@ -147,7 +147,7 @@ body:
     description: The two ends; the caller disposes both.
 - api3: ListenAsync(NinePAddress, CancellationToken)
   id: NineP_Protocol_Transports_MemoryTransport_ListenAsync_NineP_Protocol_Transports_NinePAddress_System_Threading_CancellationToken_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/MemoryTransport.cs#L76
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Transports/MemoryTransport.cs#L76
   metadata:
     uid: NineP.Protocol.Transports.MemoryTransport.ListenAsync(NineP.Protocol.Transports.NinePAddress,System.Threading.CancellationToken)
     commentId: M:NineP.Protocol.Transports.MemoryTransport.ListenAsync(NineP.Protocol.Transports.NinePAddress,System.Threading.CancellationToken)

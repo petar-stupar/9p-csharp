@@ -3,7 +3,7 @@ title: Interface IFilesystem
 body:
 - api1: Interface IFilesystem
   id: NineP_Server_IFilesystem
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/IFilesystem.cs#L11
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Server/IFilesystem.cs#L11
   metadata:
     uid: NineP.Server.IFilesystem
     commentId: T:NineP.Server.IFilesystem
@@ -24,7 +24,7 @@ body:
 - h2: Methods
 - api3: AttachAsync(Identity, string, CancellationToken)
   id: NineP_Server_IFilesystem_AttachAsync_NineP_Protocol_Auth_Identity_System_String_System_Threading_CancellationToken_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/IFilesystem.cs#L19
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Server/IFilesystem.cs#L19
   metadata:
     uid: NineP.Server.IFilesystem.AttachAsync(NineP.Protocol.Auth.Identity,System.String,System.Threading.CancellationToken)
     commentId: M:NineP.Server.IFilesystem.AttachAsync(NineP.Protocol.Auth.Identity,System.String,System.Threading.CancellationToken)

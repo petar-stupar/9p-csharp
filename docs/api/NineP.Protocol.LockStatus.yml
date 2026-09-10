@@ -3,7 +3,7 @@ title: Enum LockStatus
 body:
 - api1: Enum LockStatus
   id: NineP_Protocol_LockStatus
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/LockStatus.cs#L4
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/LockStatus.cs#L4
   metadata:
     uid: NineP.Protocol.LockStatus
     commentId: T:NineP.Protocol.LockStatus

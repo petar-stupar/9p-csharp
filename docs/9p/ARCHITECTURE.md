@@ -95,7 +95,7 @@ Filesystem
 
 Handler (common)      getattr() -> Attr · setattr(SetAttr) · qid · clunk(wasOpen) · fsync(dataOnly)
 DirectoryHandler      lookup(name) -> Handler · readdir(cursor, max) -> DirectoryListing
-                      create(CreateRequest{name, kind, perm, mode, flags, target, rdev, gid, identity}) -> Handler
+                      create(CreateRequest{name, kind, perm, mode, flags, file_flags, target, rdev, gid, identity}) -> Handler
                       remove(name, kind) · rename(oldname, newdir: DirectoryHandler, newname)
                       link?(name, target: Handler)
 FileHandler           open(mode, flags) -> OpenFile{ read(offset, buf) · write(offset, data) · size() · close() }
@@ -116,7 +116,8 @@ XattrHandler?         list() · get(name) · set(name, value, flags) · remove(n
   rule, open-state tracking (a fid is open once; `ORCLOSE`; `DMEXCL` exclusivity), directory
   read offset validation and record packing for both `Rread` (stat records) and `Rreaddir`
   (dirents), `iounit`, msize clamping, `Tremove`'s clunk-even-on-error, attach identity binding
-  (the implicit user of every fid), dialect projection of `Attr`, and permission checks against
+  (the implicit user of every fid), dialect projection of `Attr`, the read-back of the file flags
+  a create or a `setattr` asked for (protocol-reference §8 rule 19), and permission checks against
   `Attr.perm` + the fid's identity **before** calling the handler (handlers may check more).
 - **Concurrency**: one reader and writer per connection, bounded ordinary workers (default 248
   per connection plus 8 reserved control slots; 4096 per listener), and per-fid operation leases.
@@ -406,7 +407,8 @@ reviewed; the shapes are the C# ones with the language-specific spelling strippe
    the clunks a session disposal issues). Dropped: `ClientOptions.time_provider` (a clock the
    client never read; the server keeps its own). `ClientOptions.dialects` stays — it is a
    preference list the client walks on `"unknown"`, tested since code review round 1 — and is
-   what a cli's `--dialect` flag sets.
+   what a cli's `--dialect` flag sets. Kept by owner decision of 2026-09-10; the question is
+   closed.
 
 ### Shapes
 
@@ -461,7 +463,7 @@ server
   Filesystem       { attach(identity, aname) -> DirectoryHandler }
   Handler          { qid · getattr() -> Attr · setattr(SetAttr) · clunk(was_open) · fsync(data_only) }
   DirectoryHandler { lookup(name) -> Handler? · readdir(cursor, max) -> DirectoryListing{entries, next_cursor, end}
-                     create(CreateRequest{name, kind, perm, mode, flags, target?, rdev?, gid, identity}) -> Handler
+                     create(CreateRequest{name, kind, perm, mode, flags, file_flags, target?, rdev?, gid, identity}) -> Handler
                      remove(name, kind) · rename(old_name, new_parent, new_name) }
   FileHandler      { open(mode, flags) -> OpenFile }
   OpenFile         { read(offset, buf) -> n · write(offset, data) -> n · size() -> u64 · dispose }
@@ -512,6 +514,10 @@ it against this section.
 | 2026-09-08 | **Backports**: an issue found in one port that is transferable to previously implemented ports becomes a numbered rule (protocol-reference §8 or this file), gets a named test *and* a fix in every earlier port before the loop advances, and is tracked in `backports.md` | Owner decision. A rule that only one port tests is not a rule; the sequence is serial, so the earlier ports are the ones that can drift. Mechanics in `loop.md` §Backports. |
 | 2026-09-08 | **Review findings C01–C15 and H01 of 2026-09-08** — reference rules 28–36 cover lifetime leases, honest xattr commit, append ordering, persistent ancestry, permission policies, bounded listener progress and TLS purpose checks; rule 8 now refuses excess ordinary work with EAGAIN while processing Tflush | Owner authorized all Critical/High fixes. No changes to dialect-neutral handler signatures. Documentation and named regression tests define the behavior future ports must follow. |
 | 2026-09-08 | **Conformance Parts E and F** (`fixtures/conformance.md`): Part E freezes the cli answers to missing paths, empty directories, paths through files, slashes, name edge cases (`sample.json` gains a `names` directory: dot-file, accented, 255-byte, U+FF21 and astral names; the expected-output generator now sorts bytewise) and create/remove/rename mistakes; Part F freezes wire-level cases (unopened fids, `count=0`, EOF, root fid, EEXIST on every verb, name limits, listings under mutation, stale fids) and three scale cases (4 GiB file, 10⁶-entry directory, 10⁶ creates). The proposed Part F behaviors were subsequently approved and are recorded in the conformance fixture | Owner question of 2026-09-08 about large reads, huge listings and mass creates; requirements in [fixtures/conformance.md](fixtures/conformance.md). |
+| 2026-09-10 | **Enames match the Linux kernel's 9P table** (protocol-reference §8 rule 39): over 9P2000 and `.u` every ename sent for an errno is one Linux's `net/9p/error.c` maps to that errno, per [fixtures/linux-9p-errors.json](fixtures/linux-9p-errors.json); every string in that table and every former wording is understood on receipt | Owner decision after the interop runs of 2026-09-10 ("we should be implementing all of the error strings, not just a handful, and they should match"): a `version=9p2000` v9fs mount read most of the C# port's enames as error 526. Landed in `9p-csharp` the same day; every later port ships the table from the start. |
+| 2026-09-10 | **File flags reach the handler**: §12's `SetAttr` gains a nullable `flags` and `CreateRequest` a `file_flags`; protocol-reference §8 rule 19 rewritten — `DMAPPEND` / `DMEXCL` / `DMTMP` on `Tcreate.perm` and a `Twstat` that changes them are honoured, read back, and refused with `EOPNOTSUPP` when a handler did not apply them; `DMAUTH` / `DMMOUNT` refused with `EPERM`; a client completes a half-stated `Twstat` mode word from a `Tstat` and refuses the flags in `.L` | Owner decision of 2026-09-10, conditional on the standard requiring it: open(2) makes a create's `DMEXCL` and `DMAPPEND` the file's flags and stat(5) says "the directory bit cannot be changed by a wstat; the other defined permission and mode bits can", so the refusal of 2026-09-08 was honest but not compliant. Closes the follow-up left open in the projection-honesty row. Landed in `9p-csharp` (rule-index rows 91, 92, 141–154); `backports.md` B-4. |
+| 2026-09-10 | Protocol-reference §8 rules 37 and 38: the `Trename` fallback when `Trenameat` is `EOPNOTSUPP`, and an error on `NOTAG` answering a `Tversion` is a version error | Owner decision. Found against diod by the interop runs of 2026-09-10 and pinned by the C# port's named tests; promoted so the next port does not rediscover them (`backports.md` B-3). |
+| 2026-09-10 | `ClientOptions.dialects` stays in §12; the question left open on 2026-09-08 is closed | Owner decision. The cli's `--dialect` and a consumer talking to a `.L`-only server such as diod need to offer exactly one dialect; the "not honoured" finding that motivated removal is fixed. |
 
 
 ### 2026-09-08 — approved edge-test behavior and resource limits

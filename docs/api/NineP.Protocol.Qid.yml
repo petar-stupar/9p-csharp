@@ -3,7 +3,7 @@ title: Struct Qid
 body:
 - api1: Struct Qid
   id: NineP_Protocol_Qid
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Qid.cs#L9
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Qid.cs#L9
   metadata:
     uid: NineP.Protocol.Qid
     commentId: T:NineP.Protocol.Qid
@@ -37,7 +37,7 @@ body:
 - h2: Constructors
 - api3: Qid(QidType, uint, ulong)
   id: NineP_Protocol_Qid__ctor_NineP_Protocol_QidType_System_UInt32_System_UInt64_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Qid.cs#L9
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Qid.cs#L9
   metadata:
     uid: NineP.Protocol.Qid.#ctor(NineP.Protocol.QidType,System.UInt32,System.UInt64)
     commentId: M:NineP.Protocol.Qid.#ctor(NineP.Protocol.QidType,System.UInt32,System.UInt64)
@@ -63,7 +63,7 @@ body:
 - h2: Fields
 - api3: WireSize
   id: NineP_Protocol_Qid_WireSize
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Qid.cs#L12
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Qid.cs#L12
   metadata:
     uid: NineP.Protocol.Qid.WireSize
     commentId: F:NineP.Protocol.Qid.WireSize
@@ -77,7 +77,7 @@ body:
 - h2: Properties
 - api3: Path
   id: NineP_Protocol_Qid_Path
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Qid.cs#L9
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Qid.cs#L9
   metadata:
     uid: NineP.Protocol.Qid.Path
     commentId: P:NineP.Protocol.Qid.Path
@@ -90,7 +90,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint64
 - api3: Type
   id: NineP_Protocol_Qid_Type
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Qid.cs#L9
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Qid.cs#L9
   metadata:
     uid: NineP.Protocol.Qid.Type
     commentId: P:NineP.Protocol.Qid.Type
@@ -103,7 +103,7 @@ body:
       url: NineP.Protocol.QidType.html
 - api3: Version
   id: NineP_Protocol_Qid_Version
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Qid.cs#L9
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Qid.cs#L9
   metadata:
     uid: NineP.Protocol.Qid.Version
     commentId: P:NineP.Protocol.Qid.Version

@@ -3,7 +3,7 @@ title: Struct DirectoryListing
 body:
 - api1: Struct DirectoryListing
   id: NineP_Server_DirectoryListing
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/DirectoryListing.cs#L12
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Server/DirectoryListing.cs#L12
   metadata:
     uid: NineP.Server.DirectoryListing
     commentId: T:NineP.Server.DirectoryListing
@@ -40,7 +40,7 @@ body:
 - h2: Constructors
 - api3: DirectoryListing(IReadOnlyList<DirEntry>, ulong, bool)
   id: NineP_Server_DirectoryListing__ctor_System_Collections_Generic_IReadOnlyList_NineP_Protocol_DirEntry__System_UInt64_System_Boolean_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/DirectoryListing.cs#L12
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Server/DirectoryListing.cs#L12
   metadata:
     uid: NineP.Server.DirectoryListing.#ctor(System.Collections.Generic.IReadOnlyList{NineP.Protocol.DirEntry},System.UInt64,System.Boolean)
     commentId: M:NineP.Server.DirectoryListing.#ctor(System.Collections.Generic.IReadOnlyList{NineP.Protocol.DirEntry},System.UInt64,System.Boolean)
@@ -73,7 +73,7 @@ body:
 - h2: Properties
 - api3: EndOfDirectory
   id: NineP_Server_DirectoryListing_EndOfDirectory
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/DirectoryListing.cs#L13
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Server/DirectoryListing.cs#L13
   metadata:
     uid: NineP.Server.DirectoryListing.EndOfDirectory
     commentId: P:NineP.Server.DirectoryListing.EndOfDirectory
@@ -86,7 +86,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.boolean
 - api3: Entries
   id: NineP_Server_DirectoryListing_Entries
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/DirectoryListing.cs#L13
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Server/DirectoryListing.cs#L13
   metadata:
     uid: NineP.Server.DirectoryListing.Entries
     commentId: P:NineP.Server.DirectoryListing.Entries
@@ -103,7 +103,7 @@ body:
     - '>'
 - api3: NextCursor
   id: NineP_Server_DirectoryListing_NextCursor
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/DirectoryListing.cs#L13
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Server/DirectoryListing.cs#L13
   metadata:
     uid: NineP.Server.DirectoryListing.NextCursor
     commentId: P:NineP.Server.DirectoryListing.NextCursor

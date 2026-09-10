@@ -3,7 +3,7 @@ title: Interface ILinkCapability
 body:
 - api1: Interface ILinkCapability
   id: NineP_Server_ILinkCapability
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/ILinkCapability.cs#L8
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Server/ILinkCapability.cs#L8
   metadata:
     uid: NineP.Server.ILinkCapability
     commentId: T:NineP.Server.ILinkCapability
@@ -19,7 +19,7 @@ body:
 - h2: Methods
 - api3: LinkAsync(string, IHandler, CancellationToken)
   id: NineP_Server_ILinkCapability_LinkAsync_System_String_NineP_Server_IHandler_System_Threading_CancellationToken_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/ILinkCapability.cs#L15
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Server/ILinkCapability.cs#L15
   metadata:
     uid: NineP.Server.ILinkCapability.LinkAsync(System.String,NineP.Server.IHandler,System.Threading.CancellationToken)
     commentId: M:NineP.Server.ILinkCapability.LinkAsync(System.String,NineP.Server.IHandler,System.Threading.CancellationToken)

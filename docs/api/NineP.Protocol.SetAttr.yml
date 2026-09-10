@@ -3,7 +3,7 @@ title: Class SetAttr
 body:
 - api1: Class SetAttr
   id: NineP_Protocol_SetAttr
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/SetAttr.cs#L7
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/SetAttr.cs#L7
   metadata:
     uid: NineP.Protocol.SetAttr
     commentId: T:NineP.Protocol.SetAttr
@@ -46,7 +46,7 @@ body:
 - h2: Properties
 - api3: ATime
   id: NineP_Protocol_SetAttr_ATime
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/SetAttr.cs#L30
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/SetAttr.cs#L40
   metadata:
     uid: NineP.Protocol.SetAttr.ATime
     commentId: P:NineP.Protocol.SetAttr.ATime
@@ -60,7 +60,7 @@ body:
     - '?'
 - api3: ATimeToNow
   id: NineP_Protocol_SetAttr_ATimeToNow
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/SetAttr.cs#L39
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/SetAttr.cs#L49
   metadata:
     uid: NineP.Protocol.SetAttr.ATimeToNow
     commentId: P:NineP.Protocol.SetAttr.ATimeToNow
@@ -73,7 +73,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.boolean
 - api3: CTimeToNow
   id: NineP_Protocol_SetAttr_CTimeToNow
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/SetAttr.cs#L45
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/SetAttr.cs#L55
   metadata:
     uid: NineP.Protocol.SetAttr.CTimeToNow
     commentId: P:NineP.Protocol.SetAttr.CTimeToNow
@@ -84,9 +84,34 @@ body:
   - type:
     - text: bool
       url: https://learn.microsoft.com/dotnet/api/system.boolean
+- api3: Flags
+  id: NineP_Protocol_SetAttr_Flags
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/SetAttr.cs#L23
+  metadata:
+    uid: NineP.Protocol.SetAttr.Flags
+    commentId: P:NineP.Protocol.SetAttr.Flags
+- markdown: >-
+    The file flags the file is to have after the update, all three stated together:
+
+    <xref href="NineP.Protocol.FileFlags.Append" data-throw-if-not-resolved="false"></xref>, <xref href="NineP.Protocol.FileFlags.Exclusive" data-throw-if-not-resolved="false"></xref> and
+
+    <xref href="NineP.Protocol.FileFlags.Temporary" data-throw-if-not-resolved="false"></xref> are the settable ones (stat(5): "the other defined
+
+    permission and mode bits can" change; reference §5.8 and §8 rule 19). <code>Twstat</code> only:
+
+    <code>Tsetattr</code> has no spelling for them. The core hands a handler a value only when the
+
+    request would change the flags the file has; an echoed-back set is "do not touch".
+- code: public FileFlags? Flags { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: FileFlags
+      url: NineP.Protocol.FileFlags.html
+    - '?'
 - api3: Gid
   id: NineP_Protocol_SetAttr_Gid
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/SetAttr.cs#L19
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/SetAttr.cs#L29
   metadata:
     uid: NineP.Protocol.SetAttr.Gid
     commentId: P:NineP.Protocol.SetAttr.Gid
@@ -100,7 +125,7 @@ body:
     - '?'
 - api3: GroupName
   id: NineP_Protocol_SetAttr_GroupName
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/SetAttr.cs#L22
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/SetAttr.cs#L32
   metadata:
     uid: NineP.Protocol.SetAttr.GroupName
     commentId: P:NineP.Protocol.SetAttr.GroupName
@@ -114,7 +139,7 @@ body:
     - '?'
 - api3: IsFsyncRequest
   id: NineP_Protocol_SetAttr_IsFsyncRequest
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/SetAttr.cs#L51
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/SetAttr.cs#L61
   metadata:
     uid: NineP.Protocol.SetAttr.IsFsyncRequest
     commentId: P:NineP.Protocol.SetAttr.IsFsyncRequest
@@ -130,7 +155,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.boolean
 - api3: MTime
   id: NineP_Protocol_SetAttr_MTime
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/SetAttr.cs#L36
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/SetAttr.cs#L46
   metadata:
     uid: NineP.Protocol.SetAttr.MTime
     commentId: P:NineP.Protocol.SetAttr.MTime
@@ -147,7 +172,7 @@ body:
     - '?'
 - api3: MTimeToNow
   id: NineP_Protocol_SetAttr_MTimeToNow
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/SetAttr.cs#L42
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/SetAttr.cs#L52
   metadata:
     uid: NineP.Protocol.SetAttr.MTimeToNow
     commentId: P:NineP.Protocol.SetAttr.MTimeToNow
@@ -160,7 +185,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.boolean
 - api3: Name
   id: NineP_Protocol_SetAttr_Name
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/SetAttr.cs#L10
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/SetAttr.cs#L10
   metadata:
     uid: NineP.Protocol.SetAttr.Name
     commentId: P:NineP.Protocol.SetAttr.Name
@@ -174,7 +199,7 @@ body:
     - '?'
 - api3: Perm
   id: NineP_Protocol_SetAttr_Perm
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/SetAttr.cs#L13
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/SetAttr.cs#L13
   metadata:
     uid: NineP.Protocol.SetAttr.Perm
     commentId: P:NineP.Protocol.SetAttr.Perm
@@ -188,7 +213,7 @@ body:
     - '?'
 - api3: Size
   id: NineP_Protocol_SetAttr_Size
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/SetAttr.cs#L25
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/SetAttr.cs#L35
   metadata:
     uid: NineP.Protocol.SetAttr.Size
     commentId: P:NineP.Protocol.SetAttr.Size
@@ -202,7 +227,7 @@ body:
     - '?'
 - api3: Uid
   id: NineP_Protocol_SetAttr_Uid
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/SetAttr.cs#L16
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/SetAttr.cs#L26
   metadata:
     uid: NineP.Protocol.SetAttr.Uid
     commentId: P:NineP.Protocol.SetAttr.Uid

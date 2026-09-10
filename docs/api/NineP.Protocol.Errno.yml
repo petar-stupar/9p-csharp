@@ -3,7 +3,7 @@ title: Class Errno
 body:
 - api1: Class Errno
   id: NineP_Protocol_Errno
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L7
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L7
   metadata:
     uid: NineP.Protocol.Errno
     commentId: T:NineP.Protocol.Errno
@@ -44,7 +44,7 @@ body:
 - h2: Fields
 - api3: E2BIG
   id: NineP_Protocol_Errno_E2BIG
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L28
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L28
   metadata:
     uid: NineP.Protocol.Errno.E2BIG
     commentId: F:NineP.Protocol.Errno.E2BIG
@@ -57,7 +57,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EACCES
   id: NineP_Protocol_Errno_EACCES
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L40
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L40
   metadata:
     uid: NineP.Protocol.Errno.EACCES
     commentId: F:NineP.Protocol.Errno.EACCES
@@ -70,7 +70,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EAGAIN
   id: NineP_Protocol_Errno_EAGAIN
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L34
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L34
   metadata:
     uid: NineP.Protocol.Errno.EAGAIN
     commentId: F:NineP.Protocol.Errno.EAGAIN
@@ -83,7 +83,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EALREADY
   id: NineP_Protocol_Errno_EALREADY
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L223
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L223
   metadata:
     uid: NineP.Protocol.Errno.EALREADY
     commentId: F:NineP.Protocol.Errno.EALREADY
@@ -96,7 +96,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EBADF
   id: NineP_Protocol_Errno_EBADF
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L31
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L31
   metadata:
     uid: NineP.Protocol.Errno.EBADF
     commentId: F:NineP.Protocol.Errno.EBADF
@@ -109,7 +109,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EBADFD
   id: NineP_Protocol_Errno_EBADFD
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L154
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L154
   metadata:
     uid: NineP.Protocol.Errno.EBADFD
     commentId: F:NineP.Protocol.Errno.EBADFD
@@ -122,7 +122,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EBADMSG
   id: NineP_Protocol_Errno_EBADMSG
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L148
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L148
   metadata:
     uid: NineP.Protocol.Errno.EBADMSG
     commentId: F:NineP.Protocol.Errno.EBADMSG
@@ -135,7 +135,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EBUSY
   id: NineP_Protocol_Errno_EBUSY
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L49
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L49
   metadata:
     uid: NineP.Protocol.Errno.EBUSY
     commentId: F:NineP.Protocol.Errno.EBUSY
@@ -148,7 +148,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ECOMM
   id: NineP_Protocol_Errno_ECOMM
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L142
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L142
   metadata:
     uid: NineP.Protocol.Errno.ECOMM
     commentId: F:NineP.Protocol.Errno.ECOMM
@@ -161,7 +161,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ECONNABORTED
   id: NineP_Protocol_Errno_ECONNABORTED
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L193
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L193
   metadata:
     uid: NineP.Protocol.Errno.ECONNABORTED
     commentId: F:NineP.Protocol.Errno.ECONNABORTED
@@ -174,7 +174,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ECONNREFUSED
   id: NineP_Protocol_Errno_ECONNREFUSED
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L214
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L214
   metadata:
     uid: NineP.Protocol.Errno.ECONNREFUSED
     commentId: F:NineP.Protocol.Errno.ECONNREFUSED
@@ -187,7 +187,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ECONNRESET
   id: NineP_Protocol_Errno_ECONNRESET
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L196
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L196
   metadata:
     uid: NineP.Protocol.Errno.ECONNRESET
     commentId: F:NineP.Protocol.Errno.ECONNRESET
@@ -200,7 +200,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EDEADLK
   id: NineP_Protocol_Errno_EDEADLK
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L103
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L103
   metadata:
     uid: NineP.Protocol.Errno.EDEADLK
     commentId: F:NineP.Protocol.Errno.EDEADLK
@@ -213,7 +213,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EDOM
   id: NineP_Protocol_Errno_EDOM
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L97
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L97
   metadata:
     uid: NineP.Protocol.Errno.EDOM
     commentId: F:NineP.Protocol.Errno.EDOM
@@ -226,7 +226,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EDQUOT
   id: NineP_Protocol_Errno_EDQUOT
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L235
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L235
   metadata:
     uid: NineP.Protocol.Errno.EDQUOT
     commentId: F:NineP.Protocol.Errno.EDQUOT
@@ -239,7 +239,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EEXIST
   id: NineP_Protocol_Errno_EEXIST
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L52
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L52
   metadata:
     uid: NineP.Protocol.Errno.EEXIST
     commentId: F:NineP.Protocol.Errno.EEXIST
@@ -252,7 +252,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EFAULT
   id: NineP_Protocol_Errno_EFAULT
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L43
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L43
   metadata:
     uid: NineP.Protocol.Errno.EFAULT
     commentId: F:NineP.Protocol.Errno.EFAULT
@@ -265,7 +265,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EFBIG
   id: NineP_Protocol_Errno_EFBIG
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L79
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L79
   metadata:
     uid: NineP.Protocol.Errno.EFBIG
     commentId: F:NineP.Protocol.Errno.EFBIG
@@ -278,7 +278,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EHOSTDOWN
   id: NineP_Protocol_Errno_EHOSTDOWN
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L217
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L217
   metadata:
     uid: NineP.Protocol.Errno.EHOSTDOWN
     commentId: F:NineP.Protocol.Errno.EHOSTDOWN
@@ -291,7 +291,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EHOSTUNREACH
   id: NineP_Protocol_Errno_EHOSTUNREACH
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L220
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L220
   metadata:
     uid: NineP.Protocol.Errno.EHOSTUNREACH
     commentId: F:NineP.Protocol.Errno.EHOSTUNREACH
@@ -304,7 +304,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EIDRM
   id: NineP_Protocol_Errno_EIDRM
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L124
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L124
   metadata:
     uid: NineP.Protocol.Errno.EIDRM
     commentId: F:NineP.Protocol.Errno.EIDRM
@@ -317,7 +317,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EINPROGRESS
   id: NineP_Protocol_Errno_EINPROGRESS
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L226
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L226
   metadata:
     uid: NineP.Protocol.Errno.EINPROGRESS
     commentId: F:NineP.Protocol.Errno.EINPROGRESS
@@ -330,7 +330,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EINTR
   id: NineP_Protocol_Errno_EINTR
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L16
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L16
   metadata:
     uid: NineP.Protocol.Errno.EINTR
     commentId: F:NineP.Protocol.Errno.EINTR
@@ -343,7 +343,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EINVAL
   id: NineP_Protocol_Errno_EINVAL
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L67
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L67
   metadata:
     uid: NineP.Protocol.Errno.EINVAL
     commentId: F:NineP.Protocol.Errno.EINVAL
@@ -356,7 +356,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EIO
   id: NineP_Protocol_Errno_EIO
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L19
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L19
   metadata:
     uid: NineP.Protocol.Errno.EIO
     commentId: F:NineP.Protocol.Errno.EIO
@@ -369,7 +369,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EISCONN
   id: NineP_Protocol_Errno_EISCONN
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L202
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L202
   metadata:
     uid: NineP.Protocol.Errno.EISCONN
     commentId: F:NineP.Protocol.Errno.EISCONN
@@ -382,7 +382,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EISDIR
   id: NineP_Protocol_Errno_EISDIR
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L64
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L64
   metadata:
     uid: NineP.Protocol.Errno.EISDIR
     commentId: F:NineP.Protocol.Errno.EISDIR
@@ -395,7 +395,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EISNAM
   id: NineP_Protocol_Errno_EISNAM
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L229
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L229
   metadata:
     uid: NineP.Protocol.Errno.EISNAM
     commentId: F:NineP.Protocol.Errno.EISNAM
@@ -408,7 +408,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ELOOP
   id: NineP_Protocol_Errno_ELOOP
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L118
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L118
   metadata:
     uid: NineP.Protocol.Errno.ELOOP
     commentId: F:NineP.Protocol.Errno.ELOOP
@@ -421,7 +421,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EMFILE
   id: NineP_Protocol_Errno_EMFILE
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L73
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L73
   metadata:
     uid: NineP.Protocol.Errno.EMFILE
     commentId: F:NineP.Protocol.Errno.EMFILE
@@ -434,7 +434,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EMLINK
   id: NineP_Protocol_Errno_EMLINK
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L91
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L91
   metadata:
     uid: NineP.Protocol.Errno.EMLINK
     commentId: F:NineP.Protocol.Errno.EMLINK
@@ -447,7 +447,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EMSGSIZE
   id: NineP_Protocol_Errno_EMSGSIZE
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L166
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L166
   metadata:
     uid: NineP.Protocol.Errno.EMSGSIZE
     commentId: F:NineP.Protocol.Errno.EMSGSIZE
@@ -460,7 +460,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ENAMETOOLONG
   id: NineP_Protocol_Errno_ENAMETOOLONG
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L106
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L106
   metadata:
     uid: NineP.Protocol.Errno.ENAMETOOLONG
     commentId: F:NineP.Protocol.Errno.ENAMETOOLONG
@@ -473,7 +473,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ENETDOWN
   id: NineP_Protocol_Errno_ENETDOWN
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L184
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L184
   metadata:
     uid: NineP.Protocol.Errno.ENETDOWN
     commentId: F:NineP.Protocol.Errno.ENETDOWN
@@ -486,7 +486,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ENETRESET
   id: NineP_Protocol_Errno_ENETRESET
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L190
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L190
   metadata:
     uid: NineP.Protocol.Errno.ENETRESET
     commentId: F:NineP.Protocol.Errno.ENETRESET
@@ -499,7 +499,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ENETUNREACH
   id: NineP_Protocol_Errno_ENETUNREACH
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L187
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L187
   metadata:
     uid: NineP.Protocol.Errno.ENETUNREACH
     commentId: F:NineP.Protocol.Errno.ENETUNREACH
@@ -512,7 +512,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ENFILE
   id: NineP_Protocol_Errno_ENFILE
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L70
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L70
   metadata:
     uid: NineP.Protocol.Errno.ENFILE
     commentId: F:NineP.Protocol.Errno.ENFILE
@@ -525,7 +525,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ENOBUFS
   id: NineP_Protocol_Errno_ENOBUFS
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L199
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L199
   metadata:
     uid: NineP.Protocol.Errno.ENOBUFS
     commentId: F:NineP.Protocol.Errno.ENOBUFS
@@ -538,7 +538,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ENODATA
   id: NineP_Protocol_Errno_ENODATA
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L127
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L127
   metadata:
     uid: NineP.Protocol.Errno.ENODATA
     commentId: F:NineP.Protocol.Errno.ENODATA
@@ -551,7 +551,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ENODEV
   id: NineP_Protocol_Errno_ENODEV
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L58
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L58
   metadata:
     uid: NineP.Protocol.Errno.ENODEV
     commentId: F:NineP.Protocol.Errno.ENODEV
@@ -564,7 +564,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ENOENT
   id: NineP_Protocol_Errno_ENOENT
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L13
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L13
   metadata:
     uid: NineP.Protocol.Errno.ENOENT
     commentId: F:NineP.Protocol.Errno.ENOENT
@@ -577,7 +577,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ENOLCK
   id: NineP_Protocol_Errno_ENOLCK
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L109
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L109
   metadata:
     uid: NineP.Protocol.Errno.ENOLCK
     commentId: F:NineP.Protocol.Errno.ENOLCK
@@ -590,7 +590,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ENOLINK
   id: NineP_Protocol_Errno_ENOLINK
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L139
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L139
   metadata:
     uid: NineP.Protocol.Errno.ENOLINK
     commentId: F:NineP.Protocol.Errno.ENOLINK
@@ -603,7 +603,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ENOMEM
   id: NineP_Protocol_Errno_ENOMEM
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L37
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L37
   metadata:
     uid: NineP.Protocol.Errno.ENOMEM
     commentId: F:NineP.Protocol.Errno.ENOMEM
@@ -616,7 +616,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ENOMSG
   id: NineP_Protocol_Errno_ENOMSG
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L121
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L121
   metadata:
     uid: NineP.Protocol.Errno.ENOMSG
     commentId: F:NineP.Protocol.Errno.ENOMSG
@@ -629,7 +629,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ENONET
   id: NineP_Protocol_Errno_ENONET
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L130
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L130
   metadata:
     uid: NineP.Protocol.Errno.ENONET
     commentId: F:NineP.Protocol.Errno.ENONET
@@ -642,7 +642,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ENOPKG
   id: NineP_Protocol_Errno_ENOPKG
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L133
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L133
   metadata:
     uid: NineP.Protocol.Errno.ENOPKG
     commentId: F:NineP.Protocol.Errno.ENOPKG
@@ -655,7 +655,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ENOPROTOOPT
   id: NineP_Protocol_Errno_ENOPROTOOPT
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L169
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L169
   metadata:
     uid: NineP.Protocol.Errno.ENOPROTOOPT
     commentId: F:NineP.Protocol.Errno.ENOPROTOOPT
@@ -668,7 +668,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ENOSPC
   id: NineP_Protocol_Errno_ENOSPC
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L82
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L82
   metadata:
     uid: NineP.Protocol.Errno.ENOSPC
     commentId: F:NineP.Protocol.Errno.ENOSPC
@@ -681,7 +681,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ENOSYS
   id: NineP_Protocol_Errno_ENOSYS
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L112
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L112
   metadata:
     uid: NineP.Protocol.Errno.ENOSYS
     commentId: F:NineP.Protocol.Errno.ENOSYS
@@ -694,7 +694,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ENOTBLK
   id: NineP_Protocol_Errno_ENOTBLK
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L46
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L46
   metadata:
     uid: NineP.Protocol.Errno.ENOTBLK
     commentId: F:NineP.Protocol.Errno.ENOTBLK
@@ -707,7 +707,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ENOTCONN
   id: NineP_Protocol_Errno_ENOTCONN
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L205
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L205
   metadata:
     uid: NineP.Protocol.Errno.ENOTCONN
     commentId: F:NineP.Protocol.Errno.ENOTCONN
@@ -720,7 +720,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ENOTDIR
   id: NineP_Protocol_Errno_ENOTDIR
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L61
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L61
   metadata:
     uid: NineP.Protocol.Errno.ENOTDIR
     commentId: F:NineP.Protocol.Errno.ENOTDIR
@@ -733,7 +733,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ENOTEMPTY
   id: NineP_Protocol_Errno_ENOTEMPTY
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L115
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L115
   metadata:
     uid: NineP.Protocol.Errno.ENOTEMPTY
     commentId: F:NineP.Protocol.Errno.ENOTEMPTY
@@ -746,7 +746,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ENOTSOCK
   id: NineP_Protocol_Errno_ENOTSOCK
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L163
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L163
   metadata:
     uid: NineP.Protocol.Errno.ENOTSOCK
     commentId: F:NineP.Protocol.Errno.ENOTSOCK
@@ -759,7 +759,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ENXIO
   id: NineP_Protocol_Errno_ENXIO
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L25
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L25
   metadata:
     uid: NineP.Protocol.Errno.ENXIO
     commentId: F:NineP.Protocol.Errno.ENXIO
@@ -775,7 +775,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EOPNOTSUPP
   id: NineP_Protocol_Errno_EOPNOTSUPP
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L178
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L178
   metadata:
     uid: NineP.Protocol.Errno.EOPNOTSUPP
     commentId: F:NineP.Protocol.Errno.EOPNOTSUPP
@@ -788,7 +788,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EOVERFLOW
   id: NineP_Protocol_Errno_EOVERFLOW
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L151
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L151
   metadata:
     uid: NineP.Protocol.Errno.EOVERFLOW
     commentId: F:NineP.Protocol.Errno.EOVERFLOW
@@ -801,7 +801,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EPERM
   id: NineP_Protocol_Errno_EPERM
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L10
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L10
   metadata:
     uid: NineP.Protocol.Errno.EPERM
     commentId: F:NineP.Protocol.Errno.EPERM
@@ -814,7 +814,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EPFNOSUPPORT
   id: NineP_Protocol_Errno_EPFNOSUPPORT
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L181
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L181
   metadata:
     uid: NineP.Protocol.Errno.EPFNOSUPPORT
     commentId: F:NineP.Protocol.Errno.EPFNOSUPPORT
@@ -827,7 +827,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EPIPE
   id: NineP_Protocol_Errno_EPIPE
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L94
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L94
   metadata:
     uid: NineP.Protocol.Errno.EPIPE
     commentId: F:NineP.Protocol.Errno.EPIPE
@@ -840,7 +840,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EPROTO
   id: NineP_Protocol_Errno_EPROTO
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L145
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L145
   metadata:
     uid: NineP.Protocol.Errno.EPROTO
     commentId: F:NineP.Protocol.Errno.EPROTO
@@ -853,7 +853,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EPROTONOSUPPORT
   id: NineP_Protocol_Errno_EPROTONOSUPPORT
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L172
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L172
   metadata:
     uid: NineP.Protocol.Errno.EPROTONOSUPPORT
     commentId: F:NineP.Protocol.Errno.EPROTONOSUPPORT
@@ -866,7 +866,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ERANGE
   id: NineP_Protocol_Errno_ERANGE
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L100
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L100
   metadata:
     uid: NineP.Protocol.Errno.ERANGE
     commentId: F:NineP.Protocol.Errno.ERANGE
@@ -879,7 +879,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EREMOTE
   id: NineP_Protocol_Errno_EREMOTE
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L136
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L136
   metadata:
     uid: NineP.Protocol.Errno.EREMOTE
     commentId: F:NineP.Protocol.Errno.EREMOTE
@@ -892,7 +892,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EREMOTEIO
   id: NineP_Protocol_Errno_EREMOTEIO
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L232
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L232
   metadata:
     uid: NineP.Protocol.Errno.EREMOTEIO
     commentId: F:NineP.Protocol.Errno.EREMOTEIO
@@ -905,7 +905,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EROFS
   id: NineP_Protocol_Errno_EROFS
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L88
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L88
   metadata:
     uid: NineP.Protocol.Errno.EROFS
     commentId: F:NineP.Protocol.Errno.EROFS
@@ -918,7 +918,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ESHUTDOWN
   id: NineP_Protocol_Errno_ESHUTDOWN
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L208
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L208
   metadata:
     uid: NineP.Protocol.Errno.ESHUTDOWN
     commentId: F:NineP.Protocol.Errno.ESHUTDOWN
@@ -931,7 +931,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ESOCKTNOSUPPORT
   id: NineP_Protocol_Errno_ESOCKTNOSUPPORT
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L175
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L175
   metadata:
     uid: NineP.Protocol.Errno.ESOCKTNOSUPPORT
     commentId: F:NineP.Protocol.Errno.ESOCKTNOSUPPORT
@@ -944,7 +944,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ESPIPE
   id: NineP_Protocol_Errno_ESPIPE
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L85
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L85
   metadata:
     uid: NineP.Protocol.Errno.ESPIPE
     commentId: F:NineP.Protocol.Errno.ESPIPE
@@ -957,7 +957,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ESTRPIPE
   id: NineP_Protocol_Errno_ESTRPIPE
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L157
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L157
   metadata:
     uid: NineP.Protocol.Errno.ESTRPIPE
     commentId: F:NineP.Protocol.Errno.ESTRPIPE
@@ -970,7 +970,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ETIMEDOUT
   id: NineP_Protocol_Errno_ETIMEDOUT
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L211
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L211
   metadata:
     uid: NineP.Protocol.Errno.ETIMEDOUT
     commentId: F:NineP.Protocol.Errno.ETIMEDOUT
@@ -983,7 +983,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ETXTBSY
   id: NineP_Protocol_Errno_ETXTBSY
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L76
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L76
   metadata:
     uid: NineP.Protocol.Errno.ETXTBSY
     commentId: F:NineP.Protocol.Errno.ETXTBSY
@@ -996,7 +996,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EUSERS
   id: NineP_Protocol_Errno_EUSERS
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L160
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L160
   metadata:
     uid: NineP.Protocol.Errno.EUSERS
     commentId: F:NineP.Protocol.Errno.EUSERS
@@ -1009,7 +1009,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EXDEV
   id: NineP_Protocol_Errno_EXDEV
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L55
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Errno.cs#L55
   metadata:
     uid: NineP.Protocol.Errno.EXDEV
     commentId: F:NineP.Protocol.Errno.EXDEV

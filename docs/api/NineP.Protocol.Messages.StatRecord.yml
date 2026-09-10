@@ -3,7 +3,7 @@ title: Struct StatRecord
 body:
 - api1: Struct StatRecord
   id: NineP_Protocol_Messages_StatRecord
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/StatRecord.cs#L8
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/StatRecord.cs#L8
   metadata:
     uid: NineP.Protocol.Messages.StatRecord
     commentId: T:NineP.Protocol.Messages.StatRecord
@@ -42,7 +42,7 @@ body:
 - h2: Properties
 - api3: ATime
   id: NineP_Protocol_Messages_StatRecord_ATime
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/StatRecord.cs#L35
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/StatRecord.cs#L35
   metadata:
     uid: NineP.Protocol.Messages.StatRecord.ATime
     commentId: P:NineP.Protocol.Messages.StatRecord.ATime
@@ -55,7 +55,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Dev
   id: NineP_Protocol_Messages_StatRecord_Dev
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/StatRecord.cs#L26
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/StatRecord.cs#L26
   metadata:
     uid: NineP.Protocol.Messages.StatRecord.Dev
     commentId: P:NineP.Protocol.Messages.StatRecord.Dev
@@ -68,7 +68,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: DontTouch
   id: NineP_Protocol_Messages_StatRecord_DontTouch
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/StatRecord.cs#L74
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/StatRecord.cs#L74
   metadata:
     uid: NineP.Protocol.Messages.StatRecord.DontTouch
     commentId: P:NineP.Protocol.Messages.StatRecord.DontTouch
@@ -84,7 +84,7 @@ body:
       url: NineP.Protocol.Messages.StatRecord.html
 - api3: Extension
   id: NineP_Protocol_Messages_StatRecord_Extension
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/StatRecord.cs#L59
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/StatRecord.cs#L59
   metadata:
     uid: NineP.Protocol.Messages.StatRecord.Extension
     commentId: P:NineP.Protocol.Messages.StatRecord.Extension
@@ -101,7 +101,7 @@ body:
     - '?'
 - api3: Gid
   id: NineP_Protocol_Messages_StatRecord_Gid
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/StatRecord.cs#L50
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/StatRecord.cs#L50
   metadata:
     uid: NineP.Protocol.Messages.StatRecord.Gid
     commentId: P:NineP.Protocol.Messages.StatRecord.Gid
@@ -114,7 +114,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.string
 - api3: IsAllDontTouch
   id: NineP_Protocol_Messages_StatRecord_IsAllDontTouch
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/StatRecord.cs#L89
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/StatRecord.cs#L89
   metadata:
     uid: NineP.Protocol.Messages.StatRecord.IsAllDontTouch
     commentId: P:NineP.Protocol.Messages.StatRecord.IsAllDontTouch
@@ -130,7 +130,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.boolean
 - api3: Length
   id: NineP_Protocol_Messages_StatRecord_Length
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/StatRecord.cs#L41
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/StatRecord.cs#L41
   metadata:
     uid: NineP.Protocol.Messages.StatRecord.Length
     commentId: P:NineP.Protocol.Messages.StatRecord.Length
@@ -143,7 +143,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint64
 - api3: MTime
   id: NineP_Protocol_Messages_StatRecord_MTime
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/StatRecord.cs#L38
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/StatRecord.cs#L38
   metadata:
     uid: NineP.Protocol.Messages.StatRecord.MTime
     commentId: P:NineP.Protocol.Messages.StatRecord.MTime
@@ -156,7 +156,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Mode
   id: NineP_Protocol_Messages_StatRecord_Mode
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/StatRecord.cs#L32
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/StatRecord.cs#L32
   metadata:
     uid: NineP.Protocol.Messages.StatRecord.Mode
     commentId: P:NineP.Protocol.Messages.StatRecord.Mode
@@ -169,7 +169,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Muid
   id: NineP_Protocol_Messages_StatRecord_Muid
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/StatRecord.cs#L53
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/StatRecord.cs#L53
   metadata:
     uid: NineP.Protocol.Messages.StatRecord.Muid
     commentId: P:NineP.Protocol.Messages.StatRecord.Muid
@@ -182,7 +182,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.string
 - api3: NGid
   id: NineP_Protocol_Messages_StatRecord_NGid
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/StatRecord.cs#L65
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/StatRecord.cs#L65
   metadata:
     uid: NineP.Protocol.Messages.StatRecord.NGid
     commentId: P:NineP.Protocol.Messages.StatRecord.NGid
@@ -195,7 +195,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: NMuid
   id: NineP_Protocol_Messages_StatRecord_NMuid
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/StatRecord.cs#L68
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/StatRecord.cs#L68
   metadata:
     uid: NineP.Protocol.Messages.StatRecord.NMuid
     commentId: P:NineP.Protocol.Messages.StatRecord.NMuid
@@ -208,7 +208,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: NUid
   id: NineP_Protocol_Messages_StatRecord_NUid
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/StatRecord.cs#L62
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/StatRecord.cs#L62
   metadata:
     uid: NineP.Protocol.Messages.StatRecord.NUid
     commentId: P:NineP.Protocol.Messages.StatRecord.NUid
@@ -221,7 +221,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Name
   id: NineP_Protocol_Messages_StatRecord_Name
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/StatRecord.cs#L44
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/StatRecord.cs#L44
   metadata:
     uid: NineP.Protocol.Messages.StatRecord.Name
     commentId: P:NineP.Protocol.Messages.StatRecord.Name
@@ -234,7 +234,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.string
 - api3: Qid
   id: NineP_Protocol_Messages_StatRecord_Qid
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/StatRecord.cs#L29
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/StatRecord.cs#L29
   metadata:
     uid: NineP.Protocol.Messages.StatRecord.Qid
     commentId: P:NineP.Protocol.Messages.StatRecord.Qid
@@ -247,7 +247,7 @@ body:
       url: NineP.Protocol.Qid.html
 - api3: Type
   id: NineP_Protocol_Messages_StatRecord_Type
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/StatRecord.cs#L23
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/StatRecord.cs#L23
   metadata:
     uid: NineP.Protocol.Messages.StatRecord.Type
     commentId: P:NineP.Protocol.Messages.StatRecord.Type
@@ -260,7 +260,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint16
 - api3: Uid
   id: NineP_Protocol_Messages_StatRecord_Uid
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/StatRecord.cs#L47
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/StatRecord.cs#L47
   metadata:
     uid: NineP.Protocol.Messages.StatRecord.Uid
     commentId: P:NineP.Protocol.Messages.StatRecord.Uid
@@ -274,7 +274,7 @@ body:
 - h2: Methods
 - api3: GetEncodedSize(Dialect)
   id: NineP_Protocol_Messages_StatRecord_GetEncodedSize_NineP_Protocol_Dialect_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/StatRecord.cs#L114
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/StatRecord.cs#L114
   metadata:
     uid: NineP.Protocol.Messages.StatRecord.GetEncodedSize(NineP.Protocol.Dialect)
     commentId: M:NineP.Protocol.Messages.StatRecord.GetEncodedSize(NineP.Protocol.Dialect)

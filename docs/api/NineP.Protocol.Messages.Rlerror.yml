@@ -3,7 +3,7 @@ title: Struct Rlerror
 body:
 - api1: Struct Rlerror
   id: NineP_Protocol_Messages_Rlerror
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rlerror.cs#L10
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Rlerror.cs#L10
   metadata:
     uid: NineP.Protocol.Messages.Rlerror
     commentId: T:NineP.Protocol.Messages.Rlerror
@@ -39,7 +39,7 @@ body:
 - h2: Constructors
 - api3: Rlerror(ushort, int)
   id: NineP_Protocol_Messages_Rlerror__ctor_System_UInt16_System_Int32_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rlerror.cs#L10
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Rlerror.cs#L10
   metadata:
     uid: NineP.Protocol.Messages.Rlerror.#ctor(System.UInt16,System.Int32)
     commentId: M:NineP.Protocol.Messages.Rlerror.#ctor(System.UInt16,System.Int32)
@@ -63,7 +63,7 @@ body:
 - h2: Properties
 - api3: Ecode
   id: NineP_Protocol_Messages_Rlerror_Ecode
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rlerror.cs#L10
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Rlerror.cs#L10
   metadata:
     uid: NineP.Protocol.Messages.Rlerror.Ecode
     commentId: P:NineP.Protocol.Messages.Rlerror.Ecode
@@ -79,7 +79,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: Tag
   id: NineP_Protocol_Messages_Rlerror_Tag
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rlerror.cs#L10
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Rlerror.cs#L10
   metadata:
     uid: NineP.Protocol.Messages.Rlerror.Tag
     commentId: P:NineP.Protocol.Messages.Rlerror.Tag

@@ -3,7 +3,7 @@ title: Enum QidType
 body:
 - api1: Enum QidType
   id: NineP_Protocol_QidType
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/QidType.cs#L7
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/QidType.cs#L7
   metadata:
     uid: NineP.Protocol.QidType
     commentId: T:NineP.Protocol.QidType

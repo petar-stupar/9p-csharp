@@ -377,13 +377,104 @@ public sealed class AttrProjectorTests
         Assert.Equal((int)Errno.EINVAL, refusal.Error.Errno);
     }
 
-    /// <summary>The two textual fields a <c>Tsetattr</c> has no slot for.</summary>
+    /// <summary>
+    /// The two textual fields a <c>Tsetattr</c> has no slot for, and the file flags its POSIX mode
+    /// word has no bit for (reference §8 rule 19).
+    /// </summary>
     /// <returns>One row per field.</returns>
     public static TheoryData<SetAttr> UnsettableInDotL() =>
     [
         new SetAttr { Name = "renamed" },
         new SetAttr { GroupName = "wheel" },
+        new SetAttr { Flags = FileFlags.Append },
     ];
+
+    /// <summary>
+    /// Reference §8 rule 19, the send direction: the file flags travel in the mode word's high
+    /// bits beside the permission bits, and <see cref="AttrProjector.FlagsOf"/> reads them back,
+    /// so what a client sends is what a server judges.
+    /// </summary>
+    /// <param name="flags">The flags the caller asked for.</param>
+    /// <param name="high">The high bits that go out.</param>
+    [Theory]
+    [InlineData(FileFlags.Append, ModeBits.DMAPPEND)]
+    [InlineData(FileFlags.Exclusive, ModeBits.DMEXCL)]
+    [InlineData(FileFlags.Temporary, ModeBits.DMTMP)]
+    [InlineData(FileFlags.Append | FileFlags.Temporary, ModeBits.DMAPPEND | ModeBits.DMTMP)]
+    [InlineData(FileFlags.None, 0u)]
+    public void ToWstatSendsTheFileFlagsInTheModeWord(FileFlags flags, uint high)
+    {
+        StatRecord sent = AttrProjector.ToWstat(new SetAttr { Perm = 0x1ED, Flags = flags }, Dialect.P9_2000);
+
+        Assert.Equal(high | 0x1EDu, sent.Mode);
+        Assert.Equal(flags, AttrProjector.FlagsOf(sent.Mode));
+    }
+
+    /// <summary>
+    /// Rule 19: a <c>Twstat</c> mode word carries the permission bits and the file flags
+    /// together, so an update stating one half and not the other is refused by the projector —
+    /// a zero in the unstated half would be a change the caller never asked for. Neither half
+    /// stated is "don't touch", as before.
+    /// </summary>
+    [Fact]
+    public void AHalfStatedModeWordIsRefused()
+    {
+        NinePException permOnly = Assert.Throws<NinePException>(
+            () => AttrProjector.ToWstat(new SetAttr { Perm = 0x1A4 }, Dialect.P9_2000));
+        NinePException flagsOnly = Assert.Throws<NinePException>(
+            () => AttrProjector.ToWstat(new SetAttr { Flags = FileFlags.Append }, Dialect.P9_2000_u));
+
+        Assert.Equal((int)Errno.EINVAL, permOnly.Error.Errno);
+        Assert.Equal((int)Errno.EINVAL, flagsOnly.Error.Errno);
+        Assert.Equal(uint.MaxValue, AttrProjector.ToWstat(new SetAttr { Size = 0 }, Dialect.P9_2000).Mode);
+    }
+
+    /// <summary>
+    /// Rule 19: <see cref="AttrProjector.CompleteMode"/> fills the unstated half of the mode word
+    /// from the record a <c>Tstat</c> answered — the file's own flags beside a new permission
+    /// value, the file's own permission bits beside new flags — and leaves an update that states
+    /// both, or neither, as it is. In .u the permission bits are read with their setuid spelling.
+    /// </summary>
+    [Fact]
+    public void CompleteModeFillsTheUnstatedHalfFromTheRecord()
+    {
+        StatRecord current = StatRecord.DontTouch with { Mode = ModeBits.DMAPPEND | 0x1ED };
+
+        SetAttr chmod = AttrProjector.CompleteMode(new SetAttr { Perm = 0x1A4 }, current, Dialect.P9_2000);
+        Assert.Equal(0x1A4u, chmod.Perm);
+        Assert.Equal(FileFlags.Append, chmod.Flags);
+
+        SetAttr clearing = AttrProjector.CompleteMode(new SetAttr { Flags = FileFlags.None }, current, Dialect.P9_2000);
+        Assert.Equal(0x1EDu, clearing.Perm);
+        Assert.Equal(FileFlags.None, clearing.Flags);
+
+        SetAttr both = new() { Perm = 0x1A4, Flags = FileFlags.Exclusive };
+        Assert.Same(both, AttrProjector.CompleteMode(both, current, Dialect.P9_2000));
+
+        SetAttr neither = new() { Size = 0 };
+        Assert.Same(neither, AttrProjector.CompleteMode(neither, current, Dialect.P9_2000));
+
+        StatRecord setuid = StatRecord.DontTouch with { Mode = ModeBits.DMSETUID | 0x1ED };
+        Assert.Equal(
+            0x9EDu,
+            AttrProjector.CompleteMode(new SetAttr { Flags = FileFlags.Append }, setuid, Dialect.P9_2000_u).Perm);
+    }
+
+    /// <summary>
+    /// Rule 19: <c>DMAUTH</c> and <c>DMMOUNT</c> are the server's own bits, so an update naming
+    /// either flag is refused before a record is built.
+    /// </summary>
+    /// <param name="flag">The server-owned flag.</param>
+    [Theory]
+    [InlineData(FileFlags.Auth)]
+    [InlineData(FileFlags.Mount)]
+    public void AServerOwnedFlagIsRefusedByTheProjector(FileFlags flag)
+    {
+        NinePException refusal = Assert.Throws<NinePException>(
+            () => AttrProjector.ToWstat(new SetAttr { Perm = 0x1ED, Flags = flag }, Dialect.P9_2000));
+
+        Assert.Equal((int)Errno.EPERM, refusal.Error.Errno);
+    }
 
     /// <summary>
     /// Reference §8 rule 19: the <c>.u</c> <c>DMSETUID</c> / <c>DMSETGID</c> / <c>DMSETVTX</c>
@@ -433,7 +524,7 @@ public sealed class AttrProjectorTests
     [InlineData(0x1EDu, 0x000001EDu)]
     public void ToWstatSendsTheUnixPermissionBitsInDotU(uint perm, uint expected)
     {
-        StatRecord sent = AttrProjector.ToWstat(new SetAttr { Perm = perm }, Dialect.P9_2000_u);
+        StatRecord sent = AttrProjector.ToWstat(new SetAttr { Perm = perm, Flags = FileFlags.None }, Dialect.P9_2000_u);
 
         Assert.Equal(expected, sent.Mode);
         Assert.Equal(perm, AttrProjector.FromWstat(in sent, Dialect.P9_2000_u, null).Perm);
@@ -452,10 +543,12 @@ public sealed class AttrProjectorTests
     public void PlainNineP2000RefusesTheUnixPermissionBits(uint perm)
     {
         NinePException refusal = Assert.Throws<NinePException>(
-            () => AttrProjector.ToWstat(new SetAttr { Perm = perm }, Dialect.P9_2000));
+            () => AttrProjector.ToWstat(new SetAttr { Perm = perm, Flags = FileFlags.None }, Dialect.P9_2000));
 
         Assert.Equal((int)Errno.EINVAL, refusal.Error.Errno);
-        Assert.Equal(0x1EDu, AttrProjector.ToWstat(new SetAttr { Perm = 0x1ED }, Dialect.P9_2000).Mode);
+        Assert.Equal(
+            0x1EDu,
+            AttrProjector.ToWstat(new SetAttr { Perm = 0x1ED, Flags = FileFlags.None }, Dialect.P9_2000).Mode);
     }
 
     /// <summary>An Rgetattr carrying a value in every field, valid for whatever the mask says.</summary>

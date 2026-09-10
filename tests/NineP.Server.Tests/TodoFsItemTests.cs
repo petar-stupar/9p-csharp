@@ -2,6 +2,8 @@
 using System.Text;
 using NineP.Client;
 using NineP.Protocol;
+using NineP.Protocol.Codec.Internal;
+using NineP.Protocol.Messages;
 using NineP.TodoFs.Storage;
 using Xunit;
 using NineP.TestSupport;
@@ -33,6 +35,33 @@ public sealed class TodoFsItemTests
 
         IReadOnlyList<DirEntry> lists = await session.ReadDirAsync("users/glenda", Ct);
         Assert.Equal(["0", "1"], lists.Select(entry => entry.Name).Order(StringComparer.Ordinal));
+    }
+
+    /// <summary>
+    /// Rule 19: an item's flags are derived from the row, so a <c>Tcreate</c> asking for an
+    /// append-only, exclusive or temporary item is refused whole and no item is made.
+    /// </summary>
+    [Fact]
+    public async Task ACreateAskingForAFlagIsRefused()
+    {
+        await using TodoFsHarness harness = await TodoFsHarness.StartAsync();
+        await using NinePSession session = await harness.ConnectAsync("glenda", Dialect.P9_2000);
+
+        await session.MkdirAsync("users/glenda/0", cancellationToken: Ct);
+
+        NinePFid list = await session.WalkAsync("users/glenda/0", Ct);
+        await using (list.ConfigureAwait(false))
+        {
+            NinePException refusal = await Assert.ThrowsAsync<NinePException>(
+                async () => await session.Messages.CreateAsync(
+                    new Tcreate(0, list.Fid, "0", ModeBits.DMDIR | ModeBits.DMEXCL | 0x1ED, 0, null), Ct));
+
+            Assert.Equal(Errno.EOPNOTSUPP, refusal.Error.Errno);
+        }
+
+        Assert.Equal(
+            ["name"],
+            (await session.ReadDirAsync("users/glenda/0", Ct)).Select(entry => entry.Name).Order(StringComparer.Ordinal));
     }
 
     /// <summary>A new list has an empty name file; an item has three files and status "open".</summary>

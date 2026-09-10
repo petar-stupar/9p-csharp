@@ -3,7 +3,7 @@ title: Enum SetAttrMask
 body:
 - api1: Enum SetAttrMask
   id: NineP_Protocol_Messages_SetAttrMask
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/SetAttrMask.cs#L7
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/SetAttrMask.cs#L7
   metadata:
     uid: NineP.Protocol.Messages.SetAttrMask
     commentId: T:NineP.Protocol.Messages.SetAttrMask

@@ -3,7 +3,7 @@ title: Struct Rauth
 body:
 - api1: Struct Rauth
   id: NineP_Protocol_Messages_Rauth
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rauth.cs#L8
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Rauth.cs#L8
   metadata:
     uid: NineP.Protocol.Messages.Rauth
     commentId: T:NineP.Protocol.Messages.Rauth
@@ -39,7 +39,7 @@ body:
 - h2: Constructors
 - api3: Rauth(ushort, Qid)
   id: NineP_Protocol_Messages_Rauth__ctor_System_UInt16_NineP_Protocol_Qid_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rauth.cs#L8
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Rauth.cs#L8
   metadata:
     uid: NineP.Protocol.Messages.Rauth.#ctor(System.UInt16,NineP.Protocol.Qid)
     commentId: M:NineP.Protocol.Messages.Rauth.#ctor(System.UInt16,NineP.Protocol.Qid)
@@ -60,7 +60,7 @@ body:
 - h2: Properties
 - api3: Aqid
   id: NineP_Protocol_Messages_Rauth_Aqid
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rauth.cs#L8
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Rauth.cs#L8
   metadata:
     uid: NineP.Protocol.Messages.Rauth.Aqid
     commentId: P:NineP.Protocol.Messages.Rauth.Aqid
@@ -73,7 +73,7 @@ body:
       url: NineP.Protocol.Qid.html
 - api3: Tag
   id: NineP_Protocol_Messages_Rauth_Tag
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rauth.cs#L8
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Rauth.cs#L8
   metadata:
     uid: NineP.Protocol.Messages.Rauth.Tag
     commentId: P:NineP.Protocol.Messages.Rauth.Tag

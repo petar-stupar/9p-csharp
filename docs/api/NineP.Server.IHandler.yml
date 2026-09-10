@@ -3,7 +3,7 @@ title: Interface IHandler
 body:
 - api1: Interface IHandler
   id: NineP_Server_IHandler
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/IHandler.cs#L10
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Server/IHandler.cs#L10
   metadata:
     uid: NineP.Server.IHandler
     commentId: T:NineP.Server.IHandler
@@ -24,7 +24,7 @@ body:
 - h2: Properties
 - api3: Qid
   id: NineP_Server_IHandler_Qid
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/IHandler.cs#L13
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Server/IHandler.cs#L13
   metadata:
     uid: NineP.Server.IHandler.Qid
     commentId: P:NineP.Server.IHandler.Qid
@@ -38,7 +38,7 @@ body:
 - h2: Methods
 - api3: ClunkAsync(bool, CancellationToken)
   id: NineP_Server_IHandler_ClunkAsync_System_Boolean_System_Threading_CancellationToken_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/IHandler.cs#L31
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Server/IHandler.cs#L31
   metadata:
     uid: NineP.Server.IHandler.ClunkAsync(System.Boolean,System.Threading.CancellationToken)
     commentId: M:NineP.Server.IHandler.ClunkAsync(System.Boolean,System.Threading.CancellationToken)
@@ -65,7 +65,7 @@ body:
     description: A task that completes when the handler has been released.
 - api3: FsyncAsync(bool, CancellationToken)
   id: NineP_Server_IHandler_FsyncAsync_System_Boolean_System_Threading_CancellationToken_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/IHandler.cs#L37
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Server/IHandler.cs#L37
   metadata:
     uid: NineP.Server.IHandler.FsyncAsync(System.Boolean,System.Threading.CancellationToken)
     commentId: M:NineP.Server.IHandler.FsyncAsync(System.Boolean,System.Threading.CancellationToken)
@@ -92,7 +92,7 @@ body:
     description: A task that completes when the data is on stable storage.
 - api3: GetAttrAsync(CancellationToken)
   id: NineP_Server_IHandler_GetAttrAsync_System_Threading_CancellationToken_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/IHandler.cs#L18
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Server/IHandler.cs#L18
   metadata:
     uid: NineP.Server.IHandler.GetAttrAsync(System.Threading.CancellationToken)
     commentId: M:NineP.Server.IHandler.GetAttrAsync(System.Threading.CancellationToken)
@@ -118,7 +118,7 @@ body:
     description: The attributes.
 - api3: SetAttrAsync(SetAttr, CancellationToken)
   id: NineP_Server_IHandler_SetAttrAsync_NineP_Protocol_SetAttr_System_Threading_CancellationToken_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/IHandler.cs#L25
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Server/IHandler.cs#L25
   metadata:
     uid: NineP.Server.IHandler.SetAttrAsync(NineP.Protocol.SetAttr,System.Threading.CancellationToken)
     commentId: M:NineP.Server.IHandler.SetAttrAsync(NineP.Protocol.SetAttr,System.Threading.CancellationToken)

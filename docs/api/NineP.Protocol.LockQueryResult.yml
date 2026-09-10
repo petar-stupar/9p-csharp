@@ -3,7 +3,7 @@ title: Struct LockQueryResult
 body:
 - api1: Struct LockQueryResult
   id: NineP_Protocol_LockQueryResult
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/LockQueryResult.cs#L9
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/LockQueryResult.cs#L9
   metadata:
     uid: NineP.Protocol.LockQueryResult
     commentId: T:NineP.Protocol.LockQueryResult
@@ -37,7 +37,7 @@ body:
 - h2: Constructors
 - api3: LockQueryResult(LockType, ulong, ulong, uint, string)
   id: NineP_Protocol_LockQueryResult__ctor_NineP_Protocol_LockType_System_UInt64_System_UInt64_System_UInt32_System_String_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/LockQueryResult.cs#L9
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/LockQueryResult.cs#L9
   metadata:
     uid: NineP.Protocol.LockQueryResult.#ctor(NineP.Protocol.LockType,System.UInt64,System.UInt64,System.UInt32,System.String)
     commentId: M:NineP.Protocol.LockQueryResult.#ctor(NineP.Protocol.LockType,System.UInt64,System.UInt64,System.UInt32,System.String)
@@ -73,7 +73,7 @@ body:
 - h2: Properties
 - api3: ClientId
   id: NineP_Protocol_LockQueryResult_ClientId
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/LockQueryResult.cs#L10
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/LockQueryResult.cs#L10
   metadata:
     uid: NineP.Protocol.LockQueryResult.ClientId
     commentId: P:NineP.Protocol.LockQueryResult.ClientId
@@ -86,7 +86,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.string
 - api3: Length
   id: NineP_Protocol_LockQueryResult_Length
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/LockQueryResult.cs#L10
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/LockQueryResult.cs#L10
   metadata:
     uid: NineP.Protocol.LockQueryResult.Length
     commentId: P:NineP.Protocol.LockQueryResult.Length
@@ -99,7 +99,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint64
 - api3: ProcId
   id: NineP_Protocol_LockQueryResult_ProcId
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/LockQueryResult.cs#L10
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/LockQueryResult.cs#L10
   metadata:
     uid: NineP.Protocol.LockQueryResult.ProcId
     commentId: P:NineP.Protocol.LockQueryResult.ProcId
@@ -112,7 +112,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Start
   id: NineP_Protocol_LockQueryResult_Start
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/LockQueryResult.cs#L10
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/LockQueryResult.cs#L10
   metadata:
     uid: NineP.Protocol.LockQueryResult.Start
     commentId: P:NineP.Protocol.LockQueryResult.Start
@@ -125,7 +125,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint64
 - api3: Type
   id: NineP_Protocol_LockQueryResult_Type
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/LockQueryResult.cs#L10
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/LockQueryResult.cs#L10
   metadata:
     uid: NineP.Protocol.LockQueryResult.Type
     commentId: P:NineP.Protocol.LockQueryResult.Type

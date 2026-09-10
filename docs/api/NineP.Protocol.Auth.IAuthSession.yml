@@ -3,7 +3,7 @@ title: Interface IAuthSession
 body:
 - api1: Interface IAuthSession
   id: NineP_Protocol_Auth_IAuthSession
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Auth/IAuthSession.cs#L9
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Auth/IAuthSession.cs#L9
   metadata:
     uid: NineP.Protocol.Auth.IAuthSession
     commentId: T:NineP.Protocol.Auth.IAuthSession
@@ -26,7 +26,7 @@ body:
 - h2: Properties
 - api3: Identity
   id: NineP_Protocol_Auth_IAuthSession_Identity
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Auth/IAuthSession.cs#L13
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Auth/IAuthSession.cs#L13
   metadata:
     uid: NineP.Protocol.Auth.IAuthSession.Identity
     commentId: P:NineP.Protocol.Auth.IAuthSession.Identity
@@ -43,7 +43,7 @@ body:
 - h2: Methods
 - api3: ReadAsync(int, CancellationToken)
   id: NineP_Protocol_Auth_IAuthSession_ReadAsync_System_Int32_System_Threading_CancellationToken_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Auth/IAuthSession.cs#L25
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Auth/IAuthSession.cs#L25
   metadata:
     uid: NineP.Protocol.Auth.IAuthSession.ReadAsync(System.Int32,System.Threading.CancellationToken)
     commentId: M:NineP.Protocol.Auth.IAuthSession.ReadAsync(System.Int32,System.Threading.CancellationToken)
@@ -78,7 +78,7 @@ body:
     description: The bytes to send; empty means the end of the exchange.
 - api3: WriteAsync(ReadOnlyMemory<byte>, CancellationToken)
   id: NineP_Protocol_Auth_IAuthSession_WriteAsync_System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Auth/IAuthSession.cs#L19
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Auth/IAuthSession.cs#L19
   metadata:
     uid: NineP.Protocol.Auth.IAuthSession.WriteAsync(System.ReadOnlyMemory{System.Byte},System.Threading.CancellationToken)
     commentId: M:NineP.Protocol.Auth.IAuthSession.WriteAsync(System.ReadOnlyMemory{System.Byte},System.Threading.CancellationToken)

@@ -242,7 +242,12 @@ public sealed class NinePFid : IAsyncDisposable
 
     /// <summary>Creates a file in this directory fid; the fid then refers to the new, open file.</summary>
     /// <param name="name">The name to create.</param>
-    /// <param name="perm">The permission bits; <c>DMDIR</c> creates a directory in 9P2000 and .u.</param>
+    /// <param name="perm">
+    /// The permission bits. In 9P2000 and .u the word is <c>Tcreate.perm</c>: <c>DMDIR</c> creates
+    /// a directory, and <c>DMAPPEND</c>, <c>DMEXCL</c> and <c>DMTMP</c> make the file append-only,
+    /// exclusive-use or temporary (open(2)). In .L only the <c>07777</c> bits have a spelling, so
+    /// any other bit is refused before the <c>Tlcreate</c> is built (reference §8 rules 15 and 19).
+    /// </param>
     /// <param name="mode">The access mode the new fid is opened with.</param>
     /// <param name="flags">Flags accompanying the create.</param>
     /// <param name="cancellationToken">Cancels the create.</param>
@@ -260,6 +265,16 @@ public sealed class NinePFid : IAsyncDisposable
 
         if (_session.Dialect == Dialect.P9_2000_L)
         {
+            // Tlcreate.mode is a POSIX mode word: DMDIR is Tmkdir's job, and the file flags
+            // have no .L spelling at all. The server would mask them off and answer Rlcreate
+            // for a plain file, which is the silent success rule 19 forbids.
+            if ((perm & ~ModeBits.FullPermissions) != 0)
+            {
+                throw new NinePException(new NinePError(
+                    "9P2000.L creates carry only the permission bits; DMDIR is Tmkdir, and DMAPPEND, DMEXCL and DMTMP have no .L spelling",
+                    (int)Errno.EOPNOTSUPP));
+            }
+
             Rlcreate linux = await _session.Messages
                 .LcreateAsync(new Tlcreate(
                     0, Fid, name, ModeBits.ToLinuxFlags(mode, flags), perm, _session.Options.NUname), cancellationToken)
@@ -411,6 +426,20 @@ public sealed class NinePFid : IAsyncDisposable
             await _session.Messages
                 .SetattrAsync(AttrProjector.ToSetattr(0, Fid, update), cancellationToken).ConfigureAwait(false);
             return;
+        }
+
+        // Everything the dialect cannot carry is refused here, before any frame goes out.
+        AttrProjector.ValidateWstat(update, _session.Dialect);
+
+        // Reference §8 rule 19: a Twstat mode word carries the permission bits and the file
+        // flags together. An update stating one half is completed from the file's own record,
+        // which is what Plan 9's chmod and Linux v9fs do, so a chmod never clears DMAPPEND and
+        // setting a flag never zeroes the permissions.
+        if ((update.Perm is null) != (update.Flags is null))
+        {
+            Rstat now = await _session.Messages
+                .StatAsync(new Tstat(0, Fid), cancellationToken).ConfigureAwait(false);
+            update = AttrProjector.CompleteMode(update, now.Stat, _session.Dialect);
         }
 
         StatRecord record = AttrProjector.ToWstat(update, _session.Dialect);

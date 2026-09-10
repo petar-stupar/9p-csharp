@@ -3,7 +3,7 @@ title: Struct NinePAddress
 body:
 - api1: Struct NinePAddress
   id: NineP_Protocol_Transports_NinePAddress
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/NinePAddress.cs#L16
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Transports/NinePAddress.cs#L16
   metadata:
     uid: NineP.Protocol.Transports.NinePAddress
     commentId: T:NineP.Protocol.Transports.NinePAddress
@@ -42,7 +42,7 @@ body:
 - h2: Constructors
 - api3: NinePAddress(NinePScheme, string, int, string)
   id: NineP_Protocol_Transports_NinePAddress__ctor_NineP_Protocol_Transports_NinePScheme_System_String_System_Int32_System_String_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/NinePAddress.cs#L16
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Transports/NinePAddress.cs#L16
   metadata:
     uid: NineP.Protocol.Transports.NinePAddress.#ctor(NineP.Protocol.Transports.NinePScheme,System.String,System.Int32,System.String)
     commentId: M:NineP.Protocol.Transports.NinePAddress.#ctor(NineP.Protocol.Transports.NinePScheme,System.String,System.Int32,System.String)
@@ -80,7 +80,7 @@ body:
 - h2: Properties
 - api3: Host
   id: NineP_Protocol_Transports_NinePAddress_Host
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/NinePAddress.cs#L16
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Transports/NinePAddress.cs#L16
   metadata:
     uid: NineP.Protocol.Transports.NinePAddress.Host
     commentId: P:NineP.Protocol.Transports.NinePAddress.Host
@@ -93,7 +93,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.string
 - api3: IsSecure
   id: NineP_Protocol_Transports_NinePAddress_IsSecure
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/NinePAddress.cs#L22
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Transports/NinePAddress.cs#L22
   metadata:
     uid: NineP.Protocol.Transports.NinePAddress.IsSecure
     commentId: P:NineP.Protocol.Transports.NinePAddress.IsSecure
@@ -106,7 +106,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.boolean
 - api3: Path
   id: NineP_Protocol_Transports_NinePAddress_Path
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/NinePAddress.cs#L16
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Transports/NinePAddress.cs#L16
   metadata:
     uid: NineP.Protocol.Transports.NinePAddress.Path
     commentId: P:NineP.Protocol.Transports.NinePAddress.Path
@@ -119,7 +119,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.string
 - api3: Port
   id: NineP_Protocol_Transports_NinePAddress_Port
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/NinePAddress.cs#L16
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Transports/NinePAddress.cs#L16
   metadata:
     uid: NineP.Protocol.Transports.NinePAddress.Port
     commentId: P:NineP.Protocol.Transports.NinePAddress.Port
@@ -134,7 +134,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: Scheme
   id: NineP_Protocol_Transports_NinePAddress_Scheme
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/NinePAddress.cs#L16
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Transports/NinePAddress.cs#L16
   metadata:
     uid: NineP.Protocol.Transports.NinePAddress.Scheme
     commentId: P:NineP.Protocol.Transports.NinePAddress.Scheme
@@ -148,7 +148,7 @@ body:
 - h2: Methods
 - api3: Parse(string)
   id: NineP_Protocol_Transports_NinePAddress_Parse_System_String_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/NinePAddress.cs#L28
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Transports/NinePAddress.cs#L28
   metadata:
     uid: NineP.Protocol.Transports.NinePAddress.Parse(System.String)
     commentId: M:NineP.Protocol.Transports.NinePAddress.Parse(System.String)
@@ -175,7 +175,7 @@ body:
     description: The text is not an address this workspace speaks.
 - api3: ToString()
   id: NineP_Protocol_Transports_NinePAddress_ToString
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/NinePAddress.cs#L63
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Transports/NinePAddress.cs#L63
   metadata:
     uid: NineP.Protocol.Transports.NinePAddress.ToString
     commentId: M:NineP.Protocol.Transports.NinePAddress.ToString
@@ -189,7 +189,7 @@ body:
     description: The text <xref href="NineP.Protocol.Transports.NinePAddress.Parse(System.String)" data-throw-if-not-resolved="false"></xref> accepts and returns this address for.
 - api3: TryParse(string?, out NinePAddress)
   id: NineP_Protocol_Transports_NinePAddress_TryParse_System_String_NineP_Protocol_Transports_NinePAddress__
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/NinePAddress.cs#L38
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Transports/NinePAddress.cs#L38
   metadata:
     uid: NineP.Protocol.Transports.NinePAddress.TryParse(System.String,NineP.Protocol.Transports.NinePAddress@)
     commentId: M:NineP.Protocol.Transports.NinePAddress.TryParse(System.String,NineP.Protocol.Transports.NinePAddress@)

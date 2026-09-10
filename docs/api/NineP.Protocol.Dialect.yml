@@ -3,7 +3,7 @@ title: Enum Dialect
 body:
 - api1: Enum Dialect
   id: NineP_Protocol_Dialect
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Dialect.cs#L7
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Dialect.cs#L7
   metadata:
     uid: NineP.Protocol.Dialect
     commentId: T:NineP.Protocol.Dialect

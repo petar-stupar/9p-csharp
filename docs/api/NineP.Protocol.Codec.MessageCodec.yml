@@ -3,7 +3,7 @@ title: Class MessageCodec
 body:
 - api1: Class MessageCodec
   id: NineP_Protocol_Codec_MessageCodec
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Codec/MessageCodec.cs#L14
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Codec/MessageCodec.cs#L14
   metadata:
     uid: NineP.Protocol.Codec.MessageCodec
     commentId: T:NineP.Protocol.Codec.MessageCodec
@@ -46,7 +46,7 @@ body:
 - h2: Methods
 - api3: Decode<TMessage>(ReadOnlyMemory<byte>, Dialect)
   id: NineP_Protocol_Codec_MessageCodec_Decode__1_System_ReadOnlyMemory_System_Byte__NineP_Protocol_Dialect_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Codec/MessageCodec.cs#L22
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Codec/MessageCodec.cs#L22
   metadata:
     uid: NineP.Protocol.Codec.MessageCodec.Decode``1(System.ReadOnlyMemory{System.Byte},NineP.Protocol.Dialect)
     commentId: M:NineP.Protocol.Codec.MessageCodec.Decode``1(System.ReadOnlyMemory{System.Byte},NineP.Protocol.Dialect)
@@ -85,7 +85,7 @@ body:
     description: The frame is malformed or illegal.
 - api3: Encode<TMessage>(IBufferWriter<byte>, in TMessage, Dialect)
   id: NineP_Protocol_Codec_MessageCodec_Encode__1_System_Buffers_IBufferWriter_System_Byte____0__NineP_Protocol_Dialect_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Codec/MessageCodec.cs#L54
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Codec/MessageCodec.cs#L54
   metadata:
     uid: NineP.Protocol.Codec.MessageCodec.Encode``1(System.Buffers.IBufferWriter{System.Byte},``0@,NineP.Protocol.Dialect)
     commentId: M:NineP.Protocol.Codec.MessageCodec.Encode``1(System.Buffers.IBufferWriter{System.Byte},``0@,NineP.Protocol.Dialect)
@@ -133,7 +133,7 @@ body:
     description: The message cannot be encoded in this dialect.
 - api3: GetEncodedSize<TMessage>(in TMessage, Dialect)
   id: NineP_Protocol_Codec_MessageCodec_GetEncodedSize__1___0__NineP_Protocol_Dialect_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Codec/MessageCodec.cs#L71
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Codec/MessageCodec.cs#L71
   metadata:
     uid: NineP.Protocol.Codec.MessageCodec.GetEncodedSize``1(``0@,NineP.Protocol.Dialect)
     commentId: M:NineP.Protocol.Codec.MessageCodec.GetEncodedSize``1(``0@,NineP.Protocol.Dialect)
@@ -168,7 +168,7 @@ body:
     description: The message cannot be encoded in this dialect.
 - api3: PeekSize(ReadOnlySpan<byte>)
   id: NineP_Protocol_Codec_MessageCodec_PeekSize_System_ReadOnlySpan_System_Byte__
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Codec/MessageCodec.cs#L79
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Codec/MessageCodec.cs#L79
   metadata:
     uid: NineP.Protocol.Codec.MessageCodec.PeekSize(System.ReadOnlySpan{System.Byte})
     commentId: M:NineP.Protocol.Codec.MessageCodec.PeekSize(System.ReadOnlySpan{System.Byte})
@@ -199,7 +199,7 @@ body:
     description: Fewer than four bytes were supplied.
 - api3: PeekTag(ReadOnlySpan<byte>)
   id: NineP_Protocol_Codec_MessageCodec_PeekTag_System_ReadOnlySpan_System_Byte__
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Codec/MessageCodec.cs#L97
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Codec/MessageCodec.cs#L97
   metadata:
     uid: NineP.Protocol.Codec.MessageCodec.PeekTag(System.ReadOnlySpan{System.Byte})
     commentId: M:NineP.Protocol.Codec.MessageCodec.PeekTag(System.ReadOnlySpan{System.Byte})
@@ -230,7 +230,7 @@ body:
     description: The header is not there.
 - api3: PeekType(ReadOnlySpan<byte>)
   id: NineP_Protocol_Codec_MessageCodec_PeekType_System_ReadOnlySpan_System_Byte__
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Codec/MessageCodec.cs#L88
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Codec/MessageCodec.cs#L88
   metadata:
     uid: NineP.Protocol.Codec.MessageCodec.PeekType(System.ReadOnlySpan{System.Byte})
     commentId: M:NineP.Protocol.Codec.MessageCodec.PeekType(System.ReadOnlySpan{System.Byte})
@@ -261,7 +261,7 @@ body:
     description: The header is not there.
 - api3: TryDecode<TMessage>(ReadOnlyMemory<byte>, Dialect, out TMessage, out ProtocolErrorKind)
   id: NineP_Protocol_Codec_MessageCodec_TryDecode__1_System_ReadOnlyMemory_System_Byte__NineP_Protocol_Dialect___0__NineP_Protocol_ProtocolErrorKind__
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Codec/MessageCodec.cs#L41
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Codec/MessageCodec.cs#L41
   metadata:
     uid: NineP.Protocol.Codec.MessageCodec.TryDecode``1(System.ReadOnlyMemory{System.Byte},NineP.Protocol.Dialect,``0@,NineP.Protocol.ProtocolErrorKind@)
     commentId: M:NineP.Protocol.Codec.MessageCodec.TryDecode``1(System.ReadOnlyMemory{System.Byte},NineP.Protocol.Dialect,``0@,NineP.Protocol.ProtocolErrorKind@)

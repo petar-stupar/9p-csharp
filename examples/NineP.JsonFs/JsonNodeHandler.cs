@@ -91,6 +91,7 @@ internal abstract class JsonNodeHandler : IHandler
         }
 
         if (update.Perm is not null
+            || update.Flags is not null
             || update.Uid is not null
             || update.Gid is not null
             || update.GroupName is not null

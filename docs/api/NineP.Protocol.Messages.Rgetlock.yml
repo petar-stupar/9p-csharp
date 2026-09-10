@@ -3,7 +3,7 @@ title: Struct Rgetlock
 body:
 - api1: Struct Rgetlock
   id: NineP_Protocol_Messages_Rgetlock
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rgetlock.cs#L8
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Rgetlock.cs#L8
   metadata:
     uid: NineP.Protocol.Messages.Rgetlock
     commentId: T:NineP.Protocol.Messages.Rgetlock
@@ -39,7 +39,7 @@ body:
 - h2: Constructors
 - api3: Rgetlock(ushort, LockQueryResult)
   id: NineP_Protocol_Messages_Rgetlock__ctor_System_UInt16_NineP_Protocol_LockQueryResult_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rgetlock.cs#L8
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Rgetlock.cs#L8
   metadata:
     uid: NineP.Protocol.Messages.Rgetlock.#ctor(System.UInt16,NineP.Protocol.LockQueryResult)
     commentId: M:NineP.Protocol.Messages.Rgetlock.#ctor(System.UInt16,NineP.Protocol.LockQueryResult)
@@ -60,7 +60,7 @@ body:
 - h2: Properties
 - api3: Result
   id: NineP_Protocol_Messages_Rgetlock_Result
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rgetlock.cs#L8
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Rgetlock.cs#L8
   metadata:
     uid: NineP.Protocol.Messages.Rgetlock.Result
     commentId: P:NineP.Protocol.Messages.Rgetlock.Result
@@ -73,7 +73,7 @@ body:
       url: NineP.Protocol.LockQueryResult.html
 - api3: Tag
   id: NineP_Protocol_Messages_Rgetlock_Tag
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rgetlock.cs#L8
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Rgetlock.cs#L8
   metadata:
     uid: NineP.Protocol.Messages.Rgetlock.Tag
     commentId: P:NineP.Protocol.Messages.Rgetlock.Tag

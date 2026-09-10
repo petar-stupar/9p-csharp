@@ -3,7 +3,7 @@ title: Struct Rstat
 body:
 - api1: Struct Rstat
   id: NineP_Protocol_Messages_Rstat
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rstat.cs#L9
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Rstat.cs#L9
   metadata:
     uid: NineP.Protocol.Messages.Rstat
     commentId: T:NineP.Protocol.Messages.Rstat
@@ -42,7 +42,7 @@ body:
 - h2: Constructors
 - api3: Rstat(ushort, StatRecord)
   id: NineP_Protocol_Messages_Rstat__ctor_System_UInt16_NineP_Protocol_Messages_StatRecord_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rstat.cs#L9
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Rstat.cs#L9
   metadata:
     uid: NineP.Protocol.Messages.Rstat.#ctor(System.UInt16,NineP.Protocol.Messages.StatRecord)
     commentId: M:NineP.Protocol.Messages.Rstat.#ctor(System.UInt16,NineP.Protocol.Messages.StatRecord)
@@ -66,7 +66,7 @@ body:
 - h2: Properties
 - api3: Stat
   id: NineP_Protocol_Messages_Rstat_Stat
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rstat.cs#L9
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Rstat.cs#L9
   metadata:
     uid: NineP.Protocol.Messages.Rstat.Stat
     commentId: P:NineP.Protocol.Messages.Rstat.Stat
@@ -79,7 +79,7 @@ body:
       url: NineP.Protocol.Messages.StatRecord.html
 - api3: Tag
   id: NineP_Protocol_Messages_Rstat_Tag
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rstat.cs#L9
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Rstat.cs#L9
   metadata:
     uid: NineP.Protocol.Messages.Rstat.Tag
     commentId: P:NineP.Protocol.Messages.Rstat.Tag

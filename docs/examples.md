@@ -91,13 +91,15 @@ Numbers are rendered explicitly, never by a bare `ToString()`, and always throug
 - **A `wstat` / `Tsetattr` is applied whole or refused whole** (reference §8 rule 27). jsonfs keeps
   no attributes of its own — the mode, the owner and the times are all derived — so the two fields
   it can honour are a length of **zero** on a scalar and a **name**. An update naming both performs
-  both; an update that also names a mode, a group, an owner or a time is answered `EOPNOTSUPP` and
+  both; an update that also names a mode, a file flag, a group, an owner or a time is answered `EOPNOTSUPP` and
   changes nothing. A non-zero length on a scalar is `EOPNOTSUPP` (a JSON scalar has no
   representation for "padded out to n bytes"), and any length on a directory is `EISDIR`.
 - **Creates ignore the mode.** `CreateRequest.Perm`, `.Gid` and `.Flags` are dropped: a jsonfs file
   is always `0644` and a directory always `0755`. JSON has nowhere to keep a mode, a group or a
   create flag, and refusing one would break every ordinary `mkdir` from Linux, because v9fs always
-  sends a mode.
+  sends a mode. The file flags are not dropped: a create asking for `DMAPPEND`, `DMEXCL` or
+  `DMTMP` is refused with `EOPNOTSUPP`, since JSON has nowhere to keep one and a create answered
+  with success must make the file it was asked for (rule 19).
 
 `--write-back` **implies `--writable`** — there is nothing to write back from a read-only server,
 so the flag turns writing on rather than being inert without `--writable` beside it, and the usage
@@ -289,8 +291,8 @@ nothing for a truncation to remove, and emptying it by deleting every user is no
 means. Its length is a rendering it computes, not a value a client sets, which is why the `wstat`
 form is refused rather than performed.
 
-**Every other field is derived**, so a `wstat` or `Tsetattr` naming a mode, an owner, a group, a
-time or a name is refused with `EOPNOTSUPP` and changes nothing — including the truncation that was
+**Every other field is derived**, so a `wstat` or `Tsetattr` naming a mode, a file flag, an owner,
+a group, a time or a name is refused with `EOPNOTSUPP` and changes nothing — including the truncation that was
 set beside it, because rule 27 makes the update all-or-nothing. A non-zero length is `EOPNOTSUPP`
 (a database column is text, not a buffer padded out to a byte count) and any length on a directory
 is `EISDIR`.

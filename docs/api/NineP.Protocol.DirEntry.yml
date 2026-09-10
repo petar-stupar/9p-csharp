@@ -3,7 +3,7 @@ title: Struct DirEntry
 body:
 - api1: Struct DirEntry
   id: NineP_Protocol_DirEntry
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/DirEntry.cs#L12
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/DirEntry.cs#L12
   metadata:
     uid: NineP.Protocol.DirEntry
     commentId: T:NineP.Protocol.DirEntry
@@ -42,7 +42,7 @@ body:
 - h2: Constructors
 - api3: DirEntry(string, Qid, FileKind, ulong)
   id: NineP_Protocol_DirEntry__ctor_System_String_NineP_Protocol_Qid_NineP_Protocol_FileKind_System_UInt64_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/DirEntry.cs#L12
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/DirEntry.cs#L12
   metadata:
     uid: NineP.Protocol.DirEntry.#ctor(System.String,NineP.Protocol.Qid,NineP.Protocol.FileKind,System.UInt64)
     commentId: M:NineP.Protocol.DirEntry.#ctor(System.String,NineP.Protocol.Qid,NineP.Protocol.FileKind,System.UInt64)
@@ -78,7 +78,7 @@ body:
 - h2: Properties
 - api3: Cursor
   id: NineP_Protocol_DirEntry_Cursor
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/DirEntry.cs#L12
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/DirEntry.cs#L12
   metadata:
     uid: NineP.Protocol.DirEntry.Cursor
     commentId: P:NineP.Protocol.DirEntry.Cursor
@@ -91,7 +91,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint64
 - api3: DirentType
   id: NineP_Protocol_DirEntry_DirentType
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/DirEntry.cs#L15
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/DirEntry.cs#L15
   metadata:
     uid: NineP.Protocol.DirEntry.DirentType
     commentId: P:NineP.Protocol.DirEntry.DirentType
@@ -104,7 +104,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.byte
 - api3: Kind
   id: NineP_Protocol_DirEntry_Kind
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/DirEntry.cs#L12
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/DirEntry.cs#L12
   metadata:
     uid: NineP.Protocol.DirEntry.Kind
     commentId: P:NineP.Protocol.DirEntry.Kind
@@ -117,7 +117,7 @@ body:
       url: NineP.Protocol.FileKind.html
 - api3: Name
   id: NineP_Protocol_DirEntry_Name
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/DirEntry.cs#L12
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/DirEntry.cs#L12
   metadata:
     uid: NineP.Protocol.DirEntry.Name
     commentId: P:NineP.Protocol.DirEntry.Name
@@ -130,7 +130,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.string
 - api3: Qid
   id: NineP_Protocol_DirEntry_Qid
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/DirEntry.cs#L12
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/DirEntry.cs#L12
   metadata:
     uid: NineP.Protocol.DirEntry.Qid
     commentId: P:NineP.Protocol.DirEntry.Qid
@@ -144,7 +144,7 @@ body:
 - h2: Methods
 - api3: KindOf(byte)
   id: NineP_Protocol_DirEntry_KindOf_System_Byte_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/DirEntry.cs#L40
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/DirEntry.cs#L40
   metadata:
     uid: NineP.Protocol.DirEntry.KindOf(System.Byte)
     commentId: M:NineP.Protocol.DirEntry.KindOf(System.Byte)

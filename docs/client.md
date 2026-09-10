@@ -188,8 +188,16 @@ no frame is written, and no fid or tag is spent.
 | `SetAttr.Uid` on 9P2000 / `.u` | `NinePFid.SetAttrAsync` | `EPERM` — stat(5): the owner may never change through a `wstat` |
 | `SetAttr.ATime` on 9P2000 / `.u` | `NinePFid.SetAttrAsync` | `EPERM` — stat(5) lists `atime` among the fields a `wstat` may not set |
 | `SetAttr.ATimeToNow` / `MTimeToNow` / `CTimeToNow` on 9P2000 / `.u` | `NinePFid.SetAttrAsync` | `EINVAL` — a `Twstat` carries a time *value*; there is no "use the server's clock" |
+| `SetAttr.Flags` on `.L` | `NinePFid.SetAttrAsync` | `EINVAL` — `Tsetattr.mode` is a POSIX word with no bit for `DMAPPEND`, `DMEXCL` or `DMTMP` |
+| `DMDIR`, `DMAPPEND`, `DMEXCL` or `DMTMP` in `perm` on `.L` | `NinePFid.CreateAsync` | `EOPNOTSUPP` — `Tlcreate.mode` has only the `07777` bits; a directory is `MkdirAsync` |
 | a rename across directories on 9P2000 / `.u` | `NinePSession.RenameAsync` | `"cannot rename across directories"` |
 | symlink creation, statfs, locks, xattrs outside `.L` | `NinePSession`, `NinePFid` | `EOPNOTSUPP` |
+
+One update goes out as two messages: a `SetAttr` that states `Perm` without `Flags`, or `Flags`
+without `Perm`, on 9P2000 or `.u`. A `Twstat` mode word carries both halves, so `SetAttrAsync`
+reads the file's record with a `Tstat` and completes the unstated half from it — a chmod keeps the
+file append-only, and setting a flag keeps the permission bits — which is what Plan 9's `chmod` and
+Linux v9fs do (reference §8 rule 19). State both halves to skip the `Tstat`.
 
 The time cases are the sharpest of these, and they are why the rule is worth its cost. A `Twstat`
 whose every field is "don't touch" is not an empty update: stat(5) defines it as **fsync** (§4.2).
