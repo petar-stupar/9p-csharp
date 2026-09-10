@@ -164,7 +164,8 @@ returned, so a directory larger than one message is a sequence of reads and not 
 the 60-second API; when you need the offset, the mode or the fid to live longer than one call, walk
 a `NinePFid` and use that.
 
-`RenameAsync` sends `Trenameat` in `.L` and a `Twstat` carrying a name in 9P2000 and 9P2000.u, which
+`RenameAsync` sends `Trenameat` in `.L`, falling back once to `Trename` when the server answers
+`EOPNOTSUPP` (diod implements only the latter; Linux v9fs falls back the same way), and a `Twstat` carrying a name in 9P2000 and 9P2000.u, which
 is the only rename those dialects have — and it renames **within one directory**, so a move across
 directories in those dialects is refused rather than performed as a rename that ignored the
 destination. `SymlinkAsync` and `ReadlinkAsync` throw on 9P2000, which has no symlinks;

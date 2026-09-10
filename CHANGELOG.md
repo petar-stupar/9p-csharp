@@ -6,6 +6,23 @@ All notable changes to this repository are recorded here. The format follows
 
 ## [Unreleased]
 
+### Interop
+
+- The Linux kernel client (v9fs) mounts `jsonfs` in all three dialects, diod and `p9ufs` serve
+  our cli, and plan9port's `9p` reads our server; every row of `docs/interop.md` is now an opt-in
+  test in `InteropTests`, and `tests/interop/setup.sh` fetches the peers at pinned versions so the
+  results reproduce on another machine.
+
+### Fixed
+
+- Client: a 9P2000.L rename falls back to `Trename` when the server answers `Trenameat` with
+  `EOPNOTSUPP`, as Linux v9fs does; diod 1.0.24 implements only the former. Named test
+  `ClientInteropRegressionTests.RenameFallsBackToTrenameWhenTheServerLacksTrenameat`.
+- Client: an `Rerror` or `Rlerror` carrying `NOTAG` while a `Tversion` is outstanding fails the
+  connection with a `NinePVersionException` that quotes it, instead of terminating the session
+  over "unknown tag 65535"; diod answers a dialect it does not speak that way. Named test
+  `ClientInteropRegressionTests.AnErrorAnsweringTheVersionRequestIsAVersionError`.
+
 ## [0.1.0] — 2026-09-08
 
 First release of `NineP.Protocol`, `NineP.Client` and `NineP.Server`, published to nuget.org from

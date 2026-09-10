@@ -537,6 +537,38 @@ internal sealed class TagMultiplexer : IAsyncDisposable
             return false;
         }
 
+        if (tag == Constants.NOTAG && type is MessageType.Rerror or MessageType.Rlerror
+            && Interlocked.Exchange(ref _versionWaiter, null) is { } refused)
+        {
+            // version(5) answers a dialect the server does not speak with Rversion "unknown";
+            // diod answers it with an Rlerror on NOTAG instead (measured against 1.0.24, see
+            // docs/interop.md). The Tversion is the exchange that error belongs to, so it fails
+            // as a version error the caller can act on, rather than terminating the session over
+            // a tag it never issued. Decoding can fail only on a malformed frame, and that is
+            // the framing violation rule 12 terminates on.
+            NinePError error;
+            try
+            {
+                error = type == MessageType.Rlerror
+                    ? NinePError.FromErrno(MessageCodec.Decode<Rlerror>(frame, Dialect.P9_2000_L).Ecode)
+                    : NinePError.FromEname(MessageCodec.Decode<Rerror>(frame, Dialect.P9_2000).Ename);
+            }
+            catch (NinePProtocolException malformed)
+            {
+                refused.TrySetException(malformed);
+                await TerminateAsync(malformed, CloseReason.ProtocolViolation).ConfigureAwait(false);
+                return false;
+            }
+
+            refused.TrySetException(new NinePVersionException(
+                string.Format(
+                    CultureInfo.InvariantCulture,
+                    "the server answered the version request with an error, \"{0}\" (errno {1}), instead of an Rversion",
+                    UntrustedText.Sanitize(error.Ename),
+                    error.Errno)));
+            return true;
+        }
+
         if (!_pending.TryGetValue(tag, out PendingRequest? pending))
         {
             await TerminateAsync(

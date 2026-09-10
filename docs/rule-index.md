@@ -9,7 +9,8 @@ exit-criterion row has an empty `Task` cell.
 Sources: `Ref §n` is [docs/9p/protocol-reference.md](9p/protocol-reference.md); `Arch §n` is
 [docs/9p/ARCHITECTURE.md](9p/ARCHITECTURE.md); `AC-…` are the ticket's acceptance criteria;
 `Exit n` are the nine exit criteria of Arch §10. A `review` task marks a rule that came out of the
-independent review of 2026-09-08 rather than a ticket task.
+independent review of 2026-09-08 rather than a ticket task; `interop` marks one found by running
+against another implementation (`docs/interop.md`).
 
 Reading the table:
 
@@ -160,3 +161,5 @@ Reading the table:
 | 136 | Ref §8.31 | A slow lookup does not block unrelated clients and revalidates when rename races it | `ServerLifecycleRegressionTests.SlowLookupDoesNotBlockOtherClientsAndRevalidatesAfterRename` | review |
 | 137 | Ref §8.28 | Shutdown retains gates and handlers until inline flush and the reader unwind | `SessionShutdownRegressionTests.ShutdownKeepsFlushGatesAndHandlersAliveUntilInlineReaderUnwinds` | review |
 | 138 | Ref §8.8 | A budget is returned when the reply is queued, so a window reused the instant its reply arrives is never refused | `BackpressureTests.AWindowReusedTheInstantItsReplyArrivesIsNeverRefused` | 31 |
+| 139 | Arch §6 | A 9P2000.L rename falls back to `Trename` when `Trenameat` is `EOPNOTSUPP`, as v9fs does | `ClientInteropRegressionTests.RenameFallsBackToTrenameWhenTheServerLacksTrenameat` | interop |
+| 140 | Ref §5.1 | An error answering the `Tversion` is a version error, not a stray tag | `ClientInteropRegressionTests.AnErrorAnsweringTheVersionRequestIsAVersionError` | interop |

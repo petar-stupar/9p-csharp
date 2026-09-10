@@ -329,10 +329,29 @@ public sealed class NinePSession : IAsyncDisposable
             NinePFid destination = await Root.WalkAsync(newParent, cancellationToken).ConfigureAwait(false);
             await using (destination.ConfigureAwait(false))
             {
-                await Messages
-                    .RenameatAsync(
-                        new Trenameat(0, source.Fid, oldName, destination.Fid, newName), cancellationToken)
-                    .ConfigureAwait(false);
+                try
+                {
+                    await Messages
+                        .RenameatAsync(
+                            new Trenameat(0, source.Fid, oldName, destination.Fid, newName), cancellationToken)
+                        .ConfigureAwait(false);
+                }
+                catch (NinePException refused) when (refused.Error.Errno == Errno.EOPNOTSUPP)
+                {
+                    // diod, the most deployed 9P2000.L server, implements Trename and not
+                    // Trenameat and answers the latter EOPNOTSUPP (measured against 1.0.24, see
+                    // docs/interop.md). Linux v9fs falls back the same way, so a client that did
+                    // not would fail a rename every v9fs mount performs. The fallback names the
+                    // file by a fid of its own and the destination directory by the fid already
+                    // held; it is attempted once, and any other refusal is the caller's.
+                    NinePFid file = await source.WalkAsync([oldName], cancellationToken).ConfigureAwait(false);
+                    await using (file.ConfigureAwait(false))
+                    {
+                        await Messages
+                            .RenameAsync(new Trename(0, file.Fid, destination.Fid, newName), cancellationToken)
+                            .ConfigureAwait(false);
+                    }
+                }
             }
         }
     }

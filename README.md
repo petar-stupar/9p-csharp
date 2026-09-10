@@ -344,6 +344,20 @@ hello, 9P
   carry is refused rather than sent with a field dropped, and every framing violation closes the
   connection with a logged reason.
 
+## Interop
+
+Measured against other implementations, in both directions, on 2026-09-10; every row is an opt-in
+test in the suite that anyone can rerun (`tests/interop/setup.sh` fetches the peers). The detail,
+the commands and what the runs found are in
+[docs/interop.md](https://github.com/petar-stupar/9p-csharp/blob/main/docs/interop.md).
+
+| peer | role | dialects | result |
+| --- | --- | --- | --- |
+| Linux kernel v9fs (6.1, Debian 12) | client, mounts our server | 9P2000, 9P2000.u, 9P2000.L | pass |
+| diod 1.0.24 | server, driven by our client | 9P2000.L | pass |
+| hugelgupf/p9 `p9ufs` v0.4.1 | server, driven by our client | 9P2000.L | pass |
+| plan9port `9p` (2026-08-26) | client, reads our server | 9P2000 | pass |
+
 ## Before you expose a server
 
 A server with no `ServerOptions.Authenticator` accepts a `Tattach` with `afid = NOFID` and runs
