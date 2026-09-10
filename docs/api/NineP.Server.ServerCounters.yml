@@ -46,6 +46,19 @@ body:
   - text: object.ToString()
     url: https://learn.microsoft.com/dotnet/api/system.object.tostring
 - h2: Properties
+- api3: AuthAttemptsThrottled
+  id: NineP_Server_ServerCounters_AuthAttemptsThrottled
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Server/ServerCounters.cs#L42
+  metadata:
+    uid: NineP.Server.ServerCounters.AuthAttemptsThrottled
+    commentId: P:NineP.Server.ServerCounters.AuthAttemptsThrottled
+- markdown: Authentications refused for the per-address budget (reference §8 rule 40).
+- code: public long AuthAttemptsThrottled { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: long
+      url: https://learn.microsoft.com/dotnet/api/system.int64
 - api3: BytesRead
   id: NineP_Server_ServerCounters_BytesRead
   src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Server/ServerCounters.cs#L24
@@ -174,6 +187,19 @@ body:
     - text: long
       url: https://learn.microsoft.com/dotnet/api/system.int64
     - '>'
+- api3: RequestsMetered
+  id: NineP_Server_ServerCounters_RequestsMetered
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Server/ServerCounters.cs#L39
+  metadata:
+    uid: NineP.Server.ServerCounters.RequestsMetered
+    commentId: P:NineP.Server.ServerCounters.RequestsMetered
+- markdown: Requests refused for the rate budget (reference §8 rule 40).
+- code: public long RequestsMetered { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: long
+      url: https://learn.microsoft.com/dotnet/api/system.int64
 languageId: csharp
 metadata:
   description: >-

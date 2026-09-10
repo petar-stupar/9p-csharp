@@ -46,9 +46,22 @@ body:
   - text: object.ToString()
     url: https://learn.microsoft.com/dotnet/api/system.object.tostring
 - h2: Properties
+- api3: AuthFailureWindow
+  id: NineP_Protocol_Limits_AuthFailureWindow
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Limits.cs#L86
+  metadata:
+    uid: NineP.Protocol.Limits.AuthFailureWindow
+    commentId: P:NineP.Protocol.Limits.AuthFailureWindow
+- markdown: The window <xref href="NineP.Protocol.Limits.MaxAuthFailuresPerAddress" data-throw-if-not-resolved="false"></xref> counts in. Default 1 min.
+- code: public TimeSpan AuthFailureWindow { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: TimeSpan
+      url: https://learn.microsoft.com/dotnet/api/system.timespan
 - api3: AuthTimeout
   id: NineP_Protocol_Limits_AuthTimeout
-  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Limits.cs#L64
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Limits.cs#L101
   metadata:
     uid: NineP.Protocol.Limits.AuthTimeout
     commentId: P:NineP.Protocol.Limits.AuthTimeout
@@ -90,7 +103,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: IdleTimeout
   id: NineP_Protocol_Limits_IdleTimeout
-  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Limits.cs#L55
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Limits.cs#L92
   metadata:
     uid: NineP.Protocol.Limits.IdleTimeout
     commentId: P:NineP.Protocol.Limits.IdleTimeout
@@ -103,12 +116,58 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.timespan
 - api3: MaxAuthBytes
   id: NineP_Protocol_Limits_MaxAuthBytes
-  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Limits.cs#L61
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Limits.cs#L98
   metadata:
     uid: NineP.Protocol.Limits.MaxAuthBytes
     commentId: P:NineP.Protocol.Limits.MaxAuthBytes
 - markdown: Bytes an afid exchange may carry in each direction. Default 64 KiB.
 - code: public int MaxAuthBytes { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: MaxAuthFailuresPerAddress
+  id: NineP_Protocol_Limits_MaxAuthFailuresPerAddress
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Limits.cs#L83
+  metadata:
+    uid: NineP.Protocol.Limits.MaxAuthFailuresPerAddress
+    commentId: P:NineP.Protocol.Limits.MaxAuthFailuresPerAddress
+- markdown: >-
+    Authentications one peer address may begin inside <xref href="NineP.Protocol.Limits.AuthFailureWindow" data-throw-if-not-resolved="false"></xref> without
+
+    one of them reaching a successful attach, before its <code>Tauth</code> is refused without asking
+
+    the authenticator at all; 0 disables the budget. A successful attach clears the address, so
+
+    what this bounds is failed and abandoned exchanges. The default is generous enough for a
+
+    client that opens several attaches at once — v9fs <code>access=user</code> does — and still
+
+    leaves a guesser paying for nothing. Default 32.
+- code: public int MaxAuthFailuresPerAddress { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: MaxConnectionsPerAddress
+  id: NineP_Protocol_Limits_MaxConnectionsPerAddress
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Limits.cs#L58
+  metadata:
+    uid: NineP.Protocol.Limits.MaxConnectionsPerAddress
+    commentId: P:NineP.Protocol.Limits.MaxConnectionsPerAddress
+- markdown: >-
+    Live connections one peer address may hold; 0 disables the cap. It bounds the share of
+
+    <xref href="NineP.Protocol.Limits.MaxConnectionsPerListener" data-throw-if-not-resolved="false"></xref> a single host can take, so a flood from one
+
+    machine cannot lock every other client out. Unlike the listener cap, which leaves an
+
+    excess connection in the kernel's backlog, an excess connection here is accepted (the
+
+    address is not known before that) and then closed at once. Default 64.
+- code: public int MaxConnectionsPerAddress { get; init; }
 - h4: Property Value
 - parameters:
   - type:
@@ -185,12 +244,50 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: MaxNameLength
   id: NineP_Protocol_Limits_MaxNameLength
-  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Limits.cs#L58
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Limits.cs#L95
   metadata:
     uid: NineP.Protocol.Limits.MaxNameLength
     commentId: P:NineP.Protocol.Limits.MaxNameLength
 - markdown: The longest legal file-name component in bytes. Default 255.
 - code: public int MaxNameLength { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: MaxRequestsPerSecondPerConnection
+  id: NineP_Protocol_Limits_MaxRequestsPerSecondPerConnection
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Limits.cs#L67
+  metadata:
+    uid: NineP.Protocol.Limits.MaxRequestsPerSecondPerConnection
+    commentId: P:NineP.Protocol.Limits.MaxRequestsPerSecondPerConnection
+- markdown: >-
+    Ordinary requests per second one connection may sustain; 0 disables metering, which is the
+
+    default because only the operator knows what a request costs their handler. The burst is
+
+    the connection's own in-flight budget, so a client inside its window is never refused for
+
+    the rate. Excess requests are answered EAGAIN at once; <code>Tflush</code> and <code>Tversion</code>
+
+    are never metered. Default 0.
+- code: public int MaxRequestsPerSecondPerConnection { get; init; }
+- h4: Property Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: MaxRequestsPerSecondPerListener
+  id: NineP_Protocol_Limits_MaxRequestsPerSecondPerListener
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Limits.cs#L73
+  metadata:
+    uid: NineP.Protocol.Limits.MaxRequestsPerSecondPerListener
+    commentId: P:NineP.Protocol.Limits.MaxRequestsPerSecondPerListener
+- markdown: >-
+    Ordinary requests per second across every connection of one listener; 0 disables metering.
+
+    Default 0.
+- code: public int MaxRequestsPerSecondPerListener { get; init; }
 - h4: Property Value
 - parameters:
   - type:
@@ -232,7 +329,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: ReadHeaderTimeout
   id: NineP_Protocol_Limits_ReadHeaderTimeout
-  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Limits.cs#L52
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Limits.cs#L89
   metadata:
     uid: NineP.Protocol.Limits.ReadHeaderTimeout
     commentId: P:NineP.Protocol.Limits.ReadHeaderTimeout
@@ -246,7 +343,7 @@ body:
 - h2: Methods
 - api3: Validate()
   id: NineP_Protocol_Limits_Validate
-  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Limits.cs#L71
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Limits.cs#L108
   metadata:
     uid: NineP.Protocol.Limits.Validate
     commentId: M:NineP.Protocol.Limits.Validate

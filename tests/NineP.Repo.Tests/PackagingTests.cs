@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.Globalization;
 using System.IO.Compression;
+using System.Text.RegularExpressions;
 using Xunit;
 
 namespace NineP.Repo.Tests;
@@ -14,7 +15,13 @@ namespace NineP.Repo.Tests;
 [Collection(PackagingCollection.Name)]
 public sealed class PackagingTests
 {
-    private const string Version = "0.1.0";
+    /// <summary>
+    /// The version being packed, read from the one place it is stated. <c>docs/releasing.md</c>
+    /// makes <c>Directory.Build.props</c> the single source, so this test must not restate it: a
+    /// hard-coded copy turns every release bump into a failing test whose message says only
+    /// "was not produced".
+    /// </summary>
+    private static readonly string Version = ReadVersion();
 
     private static readonly string[] Packages = ["NineP.Protocol", "NineP.Client", "NineP.Server"];
 
@@ -112,6 +119,16 @@ public sealed class PackagingTests
         {
             TryDelete(work);
         }
+    }
+
+    /// <summary>Reads <c>&lt;Version&gt;</c> out of <c>Directory.Build.props</c>.</summary>
+    /// <returns>The version the packages will carry.</returns>
+    private static string ReadVersion()
+    {
+        string props = File.ReadAllText(RepoLayout.Path("Directory.Build.props"));
+        Match match = Regex.Match(props, @"<Version>([^<]+)</Version>");
+        Assert.True(match.Success, "Directory.Build.props states no <Version>");
+        return match.Groups[1].Value;
     }
 
     /// <summary>A feed with nothing but the local artifacts, so the run proves the packages.</summary>
