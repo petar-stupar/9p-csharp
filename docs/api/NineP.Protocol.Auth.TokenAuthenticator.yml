@@ -3,7 +3,7 @@ title: Class TokenAuthenticator
 body:
 - api1: Class TokenAuthenticator
   id: NineP_Protocol_Auth_TokenAuthenticator
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Auth/TokenAuthenticator.cs#L13
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Auth/TokenAuthenticator.cs#L13
   metadata:
     uid: NineP.Protocol.Auth.TokenAuthenticator
     commentId: T:NineP.Protocol.Auth.TokenAuthenticator
@@ -50,7 +50,7 @@ body:
 - h2: Constructors
 - api3: TokenAuthenticator(ReadOnlyMemory<byte>)
   id: NineP_Protocol_Auth_TokenAuthenticator__ctor_System_ReadOnlyMemory_System_Byte__
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Auth/TokenAuthenticator.cs#L23
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Auth/TokenAuthenticator.cs#L23
   metadata:
     uid: NineP.Protocol.Auth.TokenAuthenticator.#ctor(System.ReadOnlyMemory{System.Byte})
     commentId: M:NineP.Protocol.Auth.TokenAuthenticator.#ctor(System.ReadOnlyMemory{System.Byte})
@@ -75,7 +75,7 @@ body:
     description: The secret is empty.
 - api3: TokenAuthenticator(Func<AuthRequest, ReadOnlyMemory<byte>?>)
   id: NineP_Protocol_Auth_TokenAuthenticator__ctor_System_Func_NineP_Protocol_Auth_AuthRequest_System_Nullable_System_ReadOnlyMemory_System_Byte____
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Auth/TokenAuthenticator.cs#L36
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Auth/TokenAuthenticator.cs#L36
   metadata:
     uid: NineP.Protocol.Auth.TokenAuthenticator.#ctor(System.Func{NineP.Protocol.Auth.AuthRequest,System.Nullable{System.ReadOnlyMemory{System.Byte}}})
     commentId: M:NineP.Protocol.Auth.TokenAuthenticator.#ctor(System.Func{NineP.Protocol.Auth.AuthRequest,System.Nullable{System.ReadOnlyMemory{System.Byte}}})
@@ -110,7 +110,7 @@ body:
 - h2: Properties
 - api3: IsRequired
   id: NineP_Protocol_Auth_TokenAuthenticator_IsRequired
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Auth/TokenAuthenticator.cs#L44
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Auth/TokenAuthenticator.cs#L44
   metadata:
     uid: NineP.Protocol.Auth.TokenAuthenticator.IsRequired
     commentId: P:NineP.Protocol.Auth.TokenAuthenticator.IsRequired
@@ -124,7 +124,7 @@ body:
 - h2: Methods
 - api3: BeginAsync(AuthRequest, PeerIdentity?, CancellationToken)
   id: NineP_Protocol_Auth_TokenAuthenticator_BeginAsync_NineP_Protocol_Auth_AuthRequest_NineP_Protocol_Transports_PeerIdentity_System_Threading_CancellationToken_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Auth/TokenAuthenticator.cs#L51
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Auth/TokenAuthenticator.cs#L51
   metadata:
     uid: NineP.Protocol.Auth.TokenAuthenticator.BeginAsync(NineP.Protocol.Auth.AuthRequest,NineP.Protocol.Transports.PeerIdentity,System.Threading.CancellationToken)
     commentId: M:NineP.Protocol.Auth.TokenAuthenticator.BeginAsync(NineP.Protocol.Auth.AuthRequest,NineP.Protocol.Transports.PeerIdentity,System.Threading.CancellationToken)

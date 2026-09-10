@@ -3,7 +3,7 @@ title: Struct NinePError
 body:
 - api1: Struct NinePError
   id: NineP_Protocol_NinePError
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/NinePError.cs#L12
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/NinePError.cs#L12
   metadata:
     uid: NineP.Protocol.NinePError
     commentId: T:NineP.Protocol.NinePError
@@ -42,7 +42,7 @@ body:
 - h2: Constructors
 - api3: NinePError(string, int)
   id: NineP_Protocol_NinePError__ctor_System_String_System_Int32_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/NinePError.cs#L12
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/NinePError.cs#L12
   metadata:
     uid: NineP.Protocol.NinePError.#ctor(System.String,System.Int32)
     commentId: M:NineP.Protocol.NinePError.#ctor(System.String,System.Int32)
@@ -68,7 +68,7 @@ body:
 - h2: Properties
 - api3: Ename
   id: NineP_Protocol_NinePError_Ename
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/NinePError.cs#L12
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/NinePError.cs#L12
   metadata:
     uid: NineP.Protocol.NinePError.Ename
     commentId: P:NineP.Protocol.NinePError.Ename
@@ -81,7 +81,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.string
 - api3: Errno
   id: NineP_Protocol_NinePError_Errno
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/NinePError.cs#L12
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/NinePError.cs#L12
   metadata:
     uid: NineP.Protocol.NinePError.Errno
     commentId: P:NineP.Protocol.NinePError.Errno
@@ -94,7 +94,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: TruncatedEname
   id: NineP_Protocol_NinePError_TruncatedEname
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/NinePError.cs#L28
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/NinePError.cs#L28
   metadata:
     uid: NineP.Protocol.NinePError.TruncatedEname
     commentId: P:NineP.Protocol.NinePError.TruncatedEname
@@ -111,7 +111,7 @@ body:
 - h2: Methods
 - api3: FromEname(string)
   id: NineP_Protocol_NinePError_FromEname_System_String_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/NinePError.cs#L22
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/NinePError.cs#L22
   metadata:
     uid: NineP.Protocol.NinePError.FromEname(System.String)
     commentId: M:NineP.Protocol.NinePError.FromEname(System.String)
@@ -132,7 +132,7 @@ body:
     description: The error value carrying both projections.
 - api3: FromErrno(int)
   id: NineP_Protocol_NinePError_FromErrno_System_Int32_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/NinePError.cs#L17
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/NinePError.cs#L17
   metadata:
     uid: NineP.Protocol.NinePError.FromErrno(System.Int32)
     commentId: M:NineP.Protocol.NinePError.FromErrno(System.Int32)

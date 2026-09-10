@@ -10,7 +10,8 @@ Sources: `Ref §n` is [docs/9p/protocol-reference.md](9p/protocol-reference.md);
 [docs/9p/ARCHITECTURE.md](9p/ARCHITECTURE.md); `AC-…` are the ticket's acceptance criteria;
 `Exit n` are the nine exit criteria of Arch §10. A `review` task marks a rule that came out of the
 independent review of 2026-09-08 rather than a ticket task; `interop` marks one found by running
-against another implementation (`docs/interop.md`).
+against another implementation (`docs/interop.md`); `flags` marks the owner decision of
+2026-09-10 to honour the settable file flags, as open(2) and stat(5) require.
 
 Reading the table:
 
@@ -113,8 +114,8 @@ Reading the table:
 | 88 | Ref §8.18 | The `Rversion` must answer the offer that drew it; a higher or sideways dialect is a version error | `ClientProjectionTests.AnAnswerThatIsNotTheOfferIsAVersionError` | IR-9 |
 | 89 | Ref §8.18 | The suffix-stripping downgrade to `9P2000` is the only one, and `MinDialect` gates it | `ClientProjectionTests.TheSuffixStrippingDowngradeIsTheOnlyOne` | IR-9 |
 | 90 | Ref §8.18 | An `Rversion` with no `Tversion` outstanding terminates the session | `ClientProjectionTests.AnUnsolicitedRversionTerminatesTheSession` | IR-9 |
-| 91 | Ref §8.19 | `Tcreate.perm` carrying `DMAPPEND`, `DMEXCL` or `DMTMP` is refused with `EPERM`, not masked | `CreateTests.CreateWithAnUnsupportedModeBitIsRefused` | IR-9 |
-| 92 | Ref §8.19 | A `Twstat` that changes `DMAPPEND`, `DMEXCL` or `DMTMP` is refused; a bit echoed back unchanged is a no-op | `WstatTests.ChangingAnUnsupportedModeBitIsRefused` | IR-9 |
+| 91 | Ref §8.19 | `Tcreate.perm` carrying `DMAPPEND`, `DMEXCL` or `DMTMP` reaches the handler as `CreateRequest.FileFlags`, and the created file carries it | `CreateTests.CreateCarriesTheFileFlagsToTheHandler` | flags |
+| 92 | Ref §8.19 | A `Twstat` that changes `DMAPPEND`, `DMEXCL` or `DMTMP` reaches the handler as `SetAttr.Flags`, with the permission bits of the same word | `WstatTests.ChangingAFileFlagReachesTheHandler` | flags |
 | 93 | Ref §8.20 | `Tunlinkat` needs `AT_REMOVEDIR` for a directory (`EISDIR`) and refuses it on anything else (`ENOTDIR`) | `UnlinkatTests.DirectoryWithoutRemovedirIsEisdir` | IR-9 |
 | 94 | Ref §8.20 | Any other `Tunlinkat` flag bit is `EINVAL` | `UnlinkatTests.AnUnknownFlagIsEinval` | IR-9 |
 | 95 | Ref §8.21 | `Txattrcreate` with `attr_size` 0 removes the attribute | `DispatcherTests.XattrcreateWithZeroSizeRemovesTheAttribute` | IR-9 |
@@ -161,5 +162,20 @@ Reading the table:
 | 136 | Ref §8.31 | A slow lookup does not block unrelated clients and revalidates when rename races it | `ServerLifecycleRegressionTests.SlowLookupDoesNotBlockOtherClientsAndRevalidatesAfterRename` | review |
 | 137 | Ref §8.28 | Shutdown retains gates and handlers until inline flush and the reader unwind | `SessionShutdownRegressionTests.ShutdownKeepsFlushGatesAndHandlersAliveUntilInlineReaderUnwinds` | review |
 | 138 | Ref §8.8 | A budget is returned when the reply is queued, so a window reused the instant its reply arrives is never refused | `BackpressureTests.AWindowReusedTheInstantItsReplyArrivesIsNeverRefused` | 31 |
-| 139 | Arch §6 | A 9P2000.L rename falls back to `Trename` when `Trenameat` is `EOPNOTSUPP`, as v9fs does | `ClientInteropRegressionTests.RenameFallsBackToTrenameWhenTheServerLacksTrenameat` | interop |
-| 140 | Ref §5.1 | An error answering the `Tversion` is a version error, not a stray tag | `ClientInteropRegressionTests.AnErrorAnsweringTheVersionRequestIsAVersionError` | interop |
+| 139 | Ref §8.37 | A 9P2000.L rename falls back to `Trename` when `Trenameat` is `EOPNOTSUPP`, as v9fs does | `ClientInteropRegressionTests.RenameFallsBackToTrenameWhenTheServerLacksTrenameat` | interop |
+| 140 | Ref §8.38 | An error answering the `Tversion` is a version error, not a stray tag | `ClientInteropRegressionTests.AnErrorAnsweringTheVersionRequestIsAVersionError` | interop |
+| 141 | Ref §8.19 | A flag echoed back unchanged asks for nothing; only a real change reaches the handler | `WstatTests.AFlagEchoedBackUnchangedIsANoOp` | flags |
+| 142 | Ref §8.19 | `DMAUTH` or `DMMOUNT` in `Tcreate.perm` is refused with `EPERM`, not masked | `CreateTests.CreateWithAServerOwnedBitIsRefused` | flags |
+| 143 | Ref §8.19 | A `Twstat` that would set `DMAUTH` or `DMMOUNT` is refused with `EPERM` | `WstatTests.AServerOwnedBitCannotBeSetByAWstat` | flags |
+| 144 | Ref §8.19 | A created file lacking the flags the create asked for is removed again and the create refused | `CreateTests.ACreateWhoseFlagsTheHandlerDroppedIsRemovedAndRefused` | flags |
+| 145 | Ref §8.19 | A flag update the handler answered without applying is refused | `WstatTests.AFlagUpdateTheHandlerDroppedIsRefused` | flags |
+| 146 | Ref §5.8 | The flags are part of the mode, so only the owner may set one | `WstatTests.OnlyTheOwnerMaySetAFlag` | flags |
+| 147 | Ref §5.5 | A file created `DMEXCL` is held by its creator from the create | `CreateTests.ACreatedExclusiveFileIsHeldByItsCreator` | flags |
+| 148 | Ref §8.15 | Client: `DMDIR`, `DMAPPEND`, `DMEXCL` and `DMTMP` never reach a `.L` create | `ClientProjectionTests.TheFileFlagsNeverReachADotLCreate` | flags |
+| 149 | Ref §8.15 | Client: `SetAttr.Flags` never reaches a `Tsetattr` | `ClientProjectionTests.TheFileFlagsNeverReachADotLSetattr` | flags |
+| 150 | Ref §8.19 | Client: a mode word stating only `Perm` or only `Flags` is completed from a `Tstat`, so a chmod keeps the flags | `ClientProjectionTests.AHalfStatedModeWordIsCompletedFromTheRecord` | flags |
+| 151 | Ref §8.19 | The projector refuses a half-stated mode word rather than guess the other half | `AttrProjectorTests.AHalfStatedModeWordIsRefused` | flags |
+| 152 | Ref §8.19 | The flags travel in the mode word's high bits and read back as the same flags | `AttrProjectorTests.ToWstatSendsTheFileFlagsInTheModeWord` | flags |
+| 153 | Ref §8.27 | jsonfs refuses a create asking for a file flag whole | `JsonFsTests.ACreateAskingForAFlagIsRefused` | flags |
+| 154 | Ref §8.27 | todofs refuses a create asking for a file flag whole | `TodoFsItemTests.ACreateAskingForAFlagIsRefused` | flags |
+| 155 | Ref §8.39 | Every ename sent over 9P2000 is one the Linux kernel maps to that errno | `ErrorTableTests.EverySentEnameIsOneLinuxMapsToThatErrno` | interop |

@@ -3,7 +3,7 @@ title: Enum NinePScheme
 body:
 - api1: Enum NinePScheme
   id: NineP_Protocol_Transports_NinePScheme
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/NinePScheme.cs#L7
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Transports/NinePScheme.cs#L7
   metadata:
     uid: NineP.Protocol.Transports.NinePScheme
     commentId: T:NineP.Protocol.Transports.NinePScheme

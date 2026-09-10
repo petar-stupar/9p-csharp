@@ -6,7 +6,32 @@ All notable changes to this repository are recorded here. The format follows
 
 ## [Unreleased]
 
+### Added
+
+- **The settable file flags reach the handler.** `SetAttr` gains `Flags` and `CreateRequest`
+  gains `FileFlags`: a `Tcreate` whose `perm` carries `DMAPPEND`, `DMEXCL` or `DMTMP`, and a
+  `Twstat` that changes them, now reach `IDirectoryHandler.CreateAsync` and
+  `IHandler.SetAttrAsync` instead of being refused with `EPERM`, as open(2) ("an exclusive-use
+  file if the DMEXCL bit is set, and an append-only file if the DMAPPEND bit is set") and stat(5)
+  ("the directory bit cannot be changed by a wstat; the other defined permission and mode bits
+  can") require. The core reads the file back and refuses with `EOPNOTSUPP` — removing a file it
+  just created — when a handler answered without applying them, so a handler written against
+  0.1.0 that ignores the new member still cannot answer success for a plain file. `DMAUTH` and
+  `DMMOUNT` stay the server's and are refused with `EPERM` rather than masked away. A file
+  created `DMEXCL` is held by its creator from the create. On the client, `NinePFid.SetAttrAsync`
+  completes a mode word that states only `Perm` or only `Flags` from a `Tstat`, so a chmod keeps
+  a file append-only; a `.L` session refuses `Flags` before the wire, whose POSIX mode word has
+  no bit for them, and `NinePFid.CreateAsync` on `.L` refuses a `perm` outside the `07777` bits.
+  jsonfs and todofs refuse a create or an update asking for a flag. Wire-visible for 9P2000 and
+  `.u` peers; `.L` is unchanged. Reference §8 rule 19 rewritten; rule-index rows 91, 92 and
+  141–154. Owner decision of 2026-09-10, conditional on the standard requiring it, which it does.
+
 ### Changed
+
+- Reference §8 gains rules 37–39 — the `Trename` fallback, an error answering the `Tversion`
+  being a version error, and the Linux ename table — promoted from this port's named tests
+  (rule-index rows 139, 140 and 155). `ClientOptions.Dialects` stays by owner decision; the
+  question left open on 2026-09-08 is closed.
 
 - **Error strings match the Linux kernel's 9P table.** Over plain 9P2000 an `Rerror` carries only
   the ename, and v9fs maps it through the exact-match table in `net/9p/error.c`; only six of the

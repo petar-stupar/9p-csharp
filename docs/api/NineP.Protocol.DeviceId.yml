@@ -3,7 +3,7 @@ title: Struct DeviceId
 body:
 - api1: Struct DeviceId
   id: NineP_Protocol_DeviceId
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/DeviceId.cs#L6
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/DeviceId.cs#L6
   metadata:
     uid: NineP.Protocol.DeviceId
     commentId: T:NineP.Protocol.DeviceId
@@ -37,7 +37,7 @@ body:
 - h2: Constructors
 - api3: DeviceId(uint, uint)
   id: NineP_Protocol_DeviceId__ctor_System_UInt32_System_UInt32_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/DeviceId.cs#L6
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/DeviceId.cs#L6
   metadata:
     uid: NineP.Protocol.DeviceId.#ctor(System.UInt32,System.UInt32)
     commentId: M:NineP.Protocol.DeviceId.#ctor(System.UInt32,System.UInt32)
@@ -58,7 +58,7 @@ body:
 - h2: Properties
 - api3: Major
   id: NineP_Protocol_DeviceId_Major
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/DeviceId.cs#L6
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/DeviceId.cs#L6
   metadata:
     uid: NineP.Protocol.DeviceId.Major
     commentId: P:NineP.Protocol.DeviceId.Major
@@ -71,7 +71,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Minor
   id: NineP_Protocol_DeviceId_Minor
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/DeviceId.cs#L6
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/DeviceId.cs#L6
   metadata:
     uid: NineP.Protocol.DeviceId.Minor
     commentId: P:NineP.Protocol.DeviceId.Minor

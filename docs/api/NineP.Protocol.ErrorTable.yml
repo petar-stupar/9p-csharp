@@ -3,7 +3,7 @@ title: Class ErrorTable
 body:
 - api1: Class ErrorTable
   id: NineP_Protocol_ErrorTable
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/ErrorTable.cs#L7
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/ErrorTable.cs#L7
   metadata:
     uid: NineP.Protocol.ErrorTable
     commentId: T:NineP.Protocol.ErrorTable
@@ -44,7 +44,7 @@ body:
 - h2: Properties
 - api3: All
   id: NineP_Protocol_ErrorTable_All
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/ErrorTable.cs#L245
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/ErrorTable.cs#L251
   metadata:
     uid: NineP.Protocol.ErrorTable.All
     commentId: P:NineP.Protocol.ErrorTable.All
@@ -62,7 +62,7 @@ body:
 - h2: Methods
 - api3: EnameFor(int)
   id: NineP_Protocol_ErrorTable_EnameFor_System_Int32_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/ErrorTable.cs#L253
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/ErrorTable.cs#L259
   metadata:
     uid: NineP.Protocol.ErrorTable.EnameFor(System.Int32)
     commentId: M:NineP.Protocol.ErrorTable.EnameFor(System.Int32)
@@ -86,7 +86,7 @@ body:
     description: The ename a 9P2000 or 9P2000.u peer is told.
 - api3: ErrnoFor(string)
   id: NineP_Protocol_ErrorTable_ErrnoFor_System_String_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/ErrorTable.cs#L261
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/ErrorTable.cs#L267
   metadata:
     uid: NineP.Protocol.ErrorTable.ErrnoFor(System.String)
     commentId: M:NineP.Protocol.ErrorTable.ErrnoFor(System.String)

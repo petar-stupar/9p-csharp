@@ -3,7 +3,7 @@ title: Struct Rlcreate
 body:
 - api1: Struct Rlcreate
   id: NineP_Protocol_Messages_Rlcreate
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rlcreate.cs#L9
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Rlcreate.cs#L9
   metadata:
     uid: NineP.Protocol.Messages.Rlcreate
     commentId: T:NineP.Protocol.Messages.Rlcreate
@@ -39,7 +39,7 @@ body:
 - h2: Constructors
 - api3: Rlcreate(ushort, Qid, uint)
   id: NineP_Protocol_Messages_Rlcreate__ctor_System_UInt16_NineP_Protocol_Qid_System_UInt32_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rlcreate.cs#L9
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Rlcreate.cs#L9
   metadata:
     uid: NineP.Protocol.Messages.Rlcreate.#ctor(System.UInt16,NineP.Protocol.Qid,System.UInt32)
     commentId: M:NineP.Protocol.Messages.Rlcreate.#ctor(System.UInt16,NineP.Protocol.Qid,System.UInt32)
@@ -65,7 +65,7 @@ body:
 - h2: Properties
 - api3: Iounit
   id: NineP_Protocol_Messages_Rlcreate_Iounit
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rlcreate.cs#L9
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Rlcreate.cs#L9
   metadata:
     uid: NineP.Protocol.Messages.Rlcreate.Iounit
     commentId: P:NineP.Protocol.Messages.Rlcreate.Iounit
@@ -78,7 +78,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Qid
   id: NineP_Protocol_Messages_Rlcreate_Qid
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rlcreate.cs#L9
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Rlcreate.cs#L9
   metadata:
     uid: NineP.Protocol.Messages.Rlcreate.Qid
     commentId: P:NineP.Protocol.Messages.Rlcreate.Qid
@@ -91,7 +91,7 @@ body:
       url: NineP.Protocol.Qid.html
 - api3: Tag
   id: NineP_Protocol_Messages_Rlcreate_Tag
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rlcreate.cs#L9
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Rlcreate.cs#L9
   metadata:
     uid: NineP.Protocol.Messages.Rlcreate.Tag
     commentId: P:NineP.Protocol.Messages.Rlcreate.Tag

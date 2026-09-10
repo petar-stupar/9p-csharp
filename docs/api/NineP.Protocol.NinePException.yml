@@ -3,7 +3,7 @@ title: Class NinePException
 body:
 - api1: Class NinePException
   id: NineP_Protocol_NinePException
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/NinePException.cs#L8
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/NinePException.cs#L8
   metadata:
     uid: NineP.Protocol.NinePException
     commentId: T:NineP.Protocol.NinePException
@@ -82,7 +82,7 @@ body:
 - h2: Constructors
 - api3: NinePException()
   id: NineP_Protocol_NinePException__ctor
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/NinePException.cs#L11
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/NinePException.cs#L11
   metadata:
     uid: NineP.Protocol.NinePException.#ctor
     commentId: M:NineP.Protocol.NinePException.#ctor
@@ -90,7 +90,7 @@ body:
 - code: public NinePException()
 - api3: NinePException(string)
   id: NineP_Protocol_NinePException__ctor_System_String_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/NinePException.cs#L18
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/NinePException.cs#L18
   metadata:
     uid: NineP.Protocol.NinePException.#ctor(System.String)
     commentId: M:NineP.Protocol.NinePException.#ctor(System.String)
@@ -105,7 +105,7 @@ body:
     description: The message for the developer, never for the wire.
 - api3: NinePException(string, Exception)
   id: NineP_Protocol_NinePException__ctor_System_String_System_Exception_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/NinePException.cs#L24
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/NinePException.cs#L24
   metadata:
     uid: NineP.Protocol.NinePException.#ctor(System.String,System.Exception)
     commentId: M:NineP.Protocol.NinePException.#ctor(System.String,System.Exception)
@@ -125,7 +125,7 @@ body:
     description: The failure being wrapped.
 - api3: NinePException(NinePError)
   id: NineP_Protocol_NinePException__ctor_NineP_Protocol_NinePError_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/NinePException.cs#L29
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/NinePException.cs#L29
   metadata:
     uid: NineP.Protocol.NinePException.#ctor(NineP.Protocol.NinePError)
     commentId: M:NineP.Protocol.NinePException.#ctor(NineP.Protocol.NinePError)
@@ -141,7 +141,7 @@ body:
 - h2: Properties
 - api3: Error
   id: NineP_Protocol_NinePException_Error
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/NinePException.cs#L33
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/NinePException.cs#L33
   metadata:
     uid: NineP.Protocol.NinePException.Error
     commentId: P:NineP.Protocol.NinePException.Error

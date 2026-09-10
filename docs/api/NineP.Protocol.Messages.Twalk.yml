@@ -3,7 +3,7 @@ title: Struct Twalk
 body:
 - api1: Struct Twalk
   id: NineP_Protocol_Messages_Twalk
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Twalk.cs#L11
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Twalk.cs#L11
   metadata:
     uid: NineP.Protocol.Messages.Twalk
     commentId: T:NineP.Protocol.Messages.Twalk
@@ -42,7 +42,7 @@ body:
 - h2: Constructors
 - api3: Twalk(ushort, uint, uint, IReadOnlyList<string>)
   id: NineP_Protocol_Messages_Twalk__ctor_System_UInt16_System_UInt32_System_UInt32_System_Collections_Generic_IReadOnlyList_System_String__
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Twalk.cs#L11
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Twalk.cs#L11
   metadata:
     uid: NineP.Protocol.Messages.Twalk.#ctor(System.UInt16,System.UInt32,System.UInt32,System.Collections.Generic.IReadOnlyList{System.String})
     commentId: M:NineP.Protocol.Messages.Twalk.#ctor(System.UInt16,System.UInt32,System.UInt32,System.Collections.Generic.IReadOnlyList{System.String})
@@ -80,7 +80,7 @@ body:
 - h2: Properties
 - api3: Fid
   id: NineP_Protocol_Messages_Twalk_Fid
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Twalk.cs#L11
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Twalk.cs#L11
   metadata:
     uid: NineP.Protocol.Messages.Twalk.Fid
     commentId: P:NineP.Protocol.Messages.Twalk.Fid
@@ -93,7 +93,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: NewFid
   id: NineP_Protocol_Messages_Twalk_NewFid
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Twalk.cs#L11
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Twalk.cs#L11
   metadata:
     uid: NineP.Protocol.Messages.Twalk.NewFid
     commentId: P:NineP.Protocol.Messages.Twalk.NewFid
@@ -106,7 +106,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Tag
   id: NineP_Protocol_Messages_Twalk_Tag
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Twalk.cs#L11
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Twalk.cs#L11
   metadata:
     uid: NineP.Protocol.Messages.Twalk.Tag
     commentId: P:NineP.Protocol.Messages.Twalk.Tag
@@ -119,7 +119,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint16
 - api3: Wnames
   id: NineP_Protocol_Messages_Twalk_Wnames
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Twalk.cs#L11
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Twalk.cs#L11
   metadata:
     uid: NineP.Protocol.Messages.Twalk.Wnames
     commentId: P:NineP.Protocol.Messages.Twalk.Wnames

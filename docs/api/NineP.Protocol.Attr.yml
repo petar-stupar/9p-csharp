@@ -3,7 +3,7 @@ title: Class Attr
 body:
 - api1: Class Attr
   id: NineP_Protocol_Attr
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Attr.cs#L8
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Attr.cs#L8
   metadata:
     uid: NineP.Protocol.Attr
     commentId: T:NineP.Protocol.Attr
@@ -48,7 +48,7 @@ body:
 - h2: Properties
 - api3: ATime
   id: NineP_Protocol_Attr_ATime
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Attr.cs#L56
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Attr.cs#L56
   metadata:
     uid: NineP.Protocol.Attr.ATime
     commentId: P:NineP.Protocol.Attr.ATime
@@ -61,7 +61,7 @@ body:
       url: NineP.Protocol.TimeSpec.html
 - api3: BTime
   id: NineP_Protocol_Attr_BTime
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Attr.cs#L65
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Attr.cs#L65
   metadata:
     uid: NineP.Protocol.Attr.BTime
     commentId: P:NineP.Protocol.Attr.BTime
@@ -74,7 +74,7 @@ body:
       url: NineP.Protocol.TimeSpec.html
 - api3: BlockSize
   id: NineP_Protocol_Attr_BlockSize
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Attr.cs#L50
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Attr.cs#L50
   metadata:
     uid: NineP.Protocol.Attr.BlockSize
     commentId: P:NineP.Protocol.Attr.BlockSize
@@ -87,7 +87,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint64
 - api3: Blocks
   id: NineP_Protocol_Attr_Blocks
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Attr.cs#L53
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Attr.cs#L53
   metadata:
     uid: NineP.Protocol.Attr.Blocks
     commentId: P:NineP.Protocol.Attr.Blocks
@@ -100,7 +100,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint64
 - api3: CTime
   id: NineP_Protocol_Attr_CTime
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Attr.cs#L62
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Attr.cs#L62
   metadata:
     uid: NineP.Protocol.Attr.CTime
     commentId: P:NineP.Protocol.Attr.CTime
@@ -113,7 +113,7 @@ body:
       url: NineP.Protocol.TimeSpec.html
 - api3: DataVersion
   id: NineP_Protocol_Attr_DataVersion
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Attr.cs#L71
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Attr.cs#L71
   metadata:
     uid: NineP.Protocol.Attr.DataVersion
     commentId: P:NineP.Protocol.Attr.DataVersion
@@ -126,7 +126,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint64
 - api3: Flags
   id: NineP_Protocol_Attr_Flags
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Attr.cs#L20
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Attr.cs#L20
   metadata:
     uid: NineP.Protocol.Attr.Flags
     commentId: P:NineP.Protocol.Attr.Flags
@@ -139,7 +139,7 @@ body:
       url: NineP.Protocol.FileFlags.html
 - api3: Gen
   id: NineP_Protocol_Attr_Gen
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Attr.cs#L68
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Attr.cs#L68
   metadata:
     uid: NineP.Protocol.Attr.Gen
     commentId: P:NineP.Protocol.Attr.Gen
@@ -152,7 +152,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint64
 - api3: Gid
   id: NineP_Protocol_Attr_Gid
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Attr.cs#L38
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Attr.cs#L38
   metadata:
     uid: NineP.Protocol.Attr.Gid
     commentId: P:NineP.Protocol.Attr.Gid
@@ -165,7 +165,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: GroupName
   id: NineP_Protocol_Attr_GroupName
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Attr.cs#L29
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Attr.cs#L29
   metadata:
     uid: NineP.Protocol.Attr.GroupName
     commentId: P:NineP.Protocol.Attr.GroupName
@@ -178,7 +178,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.string
 - api3: Kind
   id: NineP_Protocol_Attr_Kind
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Attr.cs#L14
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Attr.cs#L14
   metadata:
     uid: NineP.Protocol.Attr.Kind
     commentId: P:NineP.Protocol.Attr.Kind
@@ -191,7 +191,7 @@ body:
       url: NineP.Protocol.FileKind.html
 - api3: MTime
   id: NineP_Protocol_Attr_MTime
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Attr.cs#L59
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Attr.cs#L59
   metadata:
     uid: NineP.Protocol.Attr.MTime
     commentId: P:NineP.Protocol.Attr.MTime
@@ -204,7 +204,7 @@ body:
       url: NineP.Protocol.TimeSpec.html
 - api3: ModifierName
   id: NineP_Protocol_Attr_ModifierName
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Attr.cs#L32
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Attr.cs#L32
   metadata:
     uid: NineP.Protocol.Attr.ModifierName
     commentId: P:NineP.Protocol.Attr.ModifierName
@@ -217,7 +217,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.string
 - api3: ModifierUid
   id: NineP_Protocol_Attr_ModifierUid
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Attr.cs#L41
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Attr.cs#L41
   metadata:
     uid: NineP.Protocol.Attr.ModifierUid
     commentId: P:NineP.Protocol.Attr.ModifierUid
@@ -230,7 +230,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: NLink
   id: NineP_Protocol_Attr_NLink
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Attr.cs#L23
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Attr.cs#L23
   metadata:
     uid: NineP.Protocol.Attr.NLink
     commentId: P:NineP.Protocol.Attr.NLink
@@ -243,7 +243,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint64
 - api3: Perm
   id: NineP_Protocol_Attr_Perm
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Attr.cs#L17
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Attr.cs#L17
   metadata:
     uid: NineP.Protocol.Attr.Perm
     commentId: P:NineP.Protocol.Attr.Perm
@@ -256,7 +256,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Qid
   id: NineP_Protocol_Attr_Qid
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Attr.cs#L11
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Attr.cs#L11
   metadata:
     uid: NineP.Protocol.Attr.Qid
     commentId: P:NineP.Protocol.Attr.Qid
@@ -269,7 +269,7 @@ body:
       url: NineP.Protocol.Qid.html
 - api3: Rdev
   id: NineP_Protocol_Attr_Rdev
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Attr.cs#L44
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Attr.cs#L44
   metadata:
     uid: NineP.Protocol.Attr.Rdev
     commentId: P:NineP.Protocol.Attr.Rdev
@@ -283,7 +283,7 @@ body:
     - '?'
 - api3: Size
   id: NineP_Protocol_Attr_Size
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Attr.cs#L47
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Attr.cs#L47
   metadata:
     uid: NineP.Protocol.Attr.Size
     commentId: P:NineP.Protocol.Attr.Size
@@ -296,7 +296,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint64
 - api3: SymlinkTarget
   id: NineP_Protocol_Attr_SymlinkTarget
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Attr.cs#L74
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Attr.cs#L74
   metadata:
     uid: NineP.Protocol.Attr.SymlinkTarget
     commentId: P:NineP.Protocol.Attr.SymlinkTarget
@@ -310,7 +310,7 @@ body:
     - '?'
 - api3: Uid
   id: NineP_Protocol_Attr_Uid
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Attr.cs#L35
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Attr.cs#L35
   metadata:
     uid: NineP.Protocol.Attr.Uid
     commentId: P:NineP.Protocol.Attr.Uid
@@ -323,7 +323,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: UserName
   id: NineP_Protocol_Attr_UserName
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Attr.cs#L26
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Attr.cs#L26
   metadata:
     uid: NineP.Protocol.Attr.UserName
     commentId: P:NineP.Protocol.Attr.UserName

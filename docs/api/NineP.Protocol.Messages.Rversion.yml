@@ -3,7 +3,7 @@ title: Struct Rversion
 body:
 - api1: Struct Rversion
   id: NineP_Protocol_Messages_Rversion
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rversion.cs#L10
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Rversion.cs#L10
   metadata:
     uid: NineP.Protocol.Messages.Rversion
     commentId: T:NineP.Protocol.Messages.Rversion
@@ -42,7 +42,7 @@ body:
 - h2: Constructors
 - api3: Rversion(ushort, uint, string)
   id: NineP_Protocol_Messages_Rversion__ctor_System_UInt16_System_UInt32_System_String_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rversion.cs#L10
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Rversion.cs#L10
   metadata:
     uid: NineP.Protocol.Messages.Rversion.#ctor(System.UInt16,System.UInt32,System.String)
     commentId: M:NineP.Protocol.Messages.Rversion.#ctor(System.UInt16,System.UInt32,System.String)
@@ -71,7 +71,7 @@ body:
 - h2: Properties
 - api3: Msize
   id: NineP_Protocol_Messages_Rversion_Msize
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rversion.cs#L10
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Rversion.cs#L10
   metadata:
     uid: NineP.Protocol.Messages.Rversion.Msize
     commentId: P:NineP.Protocol.Messages.Rversion.Msize
@@ -84,7 +84,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Tag
   id: NineP_Protocol_Messages_Rversion_Tag
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rversion.cs#L10
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Rversion.cs#L10
   metadata:
     uid: NineP.Protocol.Messages.Rversion.Tag
     commentId: P:NineP.Protocol.Messages.Rversion.Tag
@@ -97,7 +97,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint16
 - api3: Version
   id: NineP_Protocol_Messages_Rversion_Version
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rversion.cs#L10
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Rversion.cs#L10
   metadata:
     uid: NineP.Protocol.Messages.Rversion.Version
     commentId: P:NineP.Protocol.Messages.Rversion.Version

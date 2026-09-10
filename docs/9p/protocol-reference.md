@@ -566,7 +566,9 @@ reader on a lock `[D]`. `Rgetlock.type = UNLCK` means no conflicting lock.
   the new, opened file. Owner = implicit user, group = directory's group, perms =
   `perm & (~0666 | (dir.perm & 0666))` (files) or `perm & (~0777 | (dir.perm & 0777))` (dirs).
   Names `.`/`..` and an existing name are errors. `DMDIR` in `perm` creates a directory (then
-  `mode` must be `OREAD`).
+  `mode` must be `OREAD`). `DMAPPEND`, `DMEXCL` and `DMTMP` in `perm` make the file append-only,
+  exclusive-use or temporary (open(2)) and reach the handler as `CreateRequest.file_flags`;
+  `DMAUTH` and `DMMOUNT` are the server's and are refused (§8 rule 19).
 - `iounit` may be 0; if not, it is the max bytes guaranteed to transfer in one message. Our
   servers return `msize − IOHDRSZ` `[D]`.
 - `.u`: `Tcreate.extension` — target for `DMSYMLINK`, `"b maj min"`/`"c maj min"` for `DMDEVICE`,
@@ -603,8 +605,10 @@ reader on a lock `[D]`. `Rgetlock.type = UNLCK` means no conflicting lock.
   must not exist; `length` — write permission on the file, directories must stay 0; `mode`,
   `mtime` — owner or group leader; `gid` — owner who is a member of the new group; **owner (uid)
   cannot change**; the `DMDIR` bit cannot change; `atime`, `muid`, `qid`, `type`, `dev` cannot be
-  set. Atomic: all or nothing. The `DMAPPEND` / `DMEXCL` / `DMTMP` bits of `mode` are settable in
-  Plan 9 but the handler model does not yet carry them: a change to one is refused, §8 rule 19.
+  set. Atomic: all or nothing. The `DMAPPEND` / `DMEXCL` / `DMTMP` bits of `mode` are settable —
+  stat(5): the directory bit is the one mode bit a wstat cannot change — and reach the handler as
+  `SetAttr.flags` when they differ from the file's own; `DMAUTH` / `DMMOUNT` cannot be set; §8
+  rule 19.
 - `.u` `stat` appends `extension n_uid n_gid n_muid`; `Twstat` may set `n_uid`/`n_gid` under the
   same rules as `uid`/`gid`.
 
@@ -776,11 +780,21 @@ that names something the negotiated dialect, the wire or the handler model canno
 18. The `Rversion` dialect must be the one the client offered, or `9P2000` for a suffixed 9P2000
     offer; a higher dialect than offered, or any other string, is a version error. An `Rversion`
     that arrives with no `Tversion` outstanding is an unexpected reply under rule 12.
-19. `Twstat.mode`: a change to `DMAPPEND`, `DMEXCL` or `DMTMP` is refused with `EPERM` while the
-    handler model carries no file flags in `SetAttr` (Decision Log 2026-09-08); the `.u`
-    `DMSETUID` / `DMSETGID` / `DMSETVTX` bits map onto the `07777` permission bits and are honoured.
-    `Tcreate.perm` carrying `DMAPPEND`, `DMEXCL` or `DMTMP` is refused the same way. Neither is
-    masked away and answered with success.
+19. `Twstat.mode` and `Tcreate.perm`: the `DMAPPEND`, `DMEXCL` and `DMTMP` bits are honoured —
+    open(2) makes them a created file's flags and stat(5) makes the directory bit the one mode bit
+    a wstat cannot change — and reach the handler as `CreateRequest.file_flags` and, for a change
+    only, `SetAttr.flags` (a bit echoed back unchanged asks for nothing; the flags are part of the
+    mode, so the owner rule of §5.8 applies). A handler that cannot give a file the flags refuses
+    the whole request; the core reads the file back after the handler answered and refuses with
+    `EOPNOTSUPP` when the flags are not there, removing a file it just created, so a success reply
+    is never sent for a plain file. `DMAUTH` and `DMMOUNT` are the server's: a create or a change
+    asking for either is refused with `EPERM`, never masked away. A file created `DMEXCL` is held
+    by its creator from the create (§5.5). The `.u` `DMSETUID` / `DMSETGID` / `DMSETVTX` bits map
+    onto the `07777` permission bits and are honoured. Client side: a `Twstat` mode word carries
+    the permission bits and the flags together, so a client changing one half reads the record
+    first and sends both, as Plan 9's `chmod` and v9fs do; `.L` has no spelling for the three bits
+    in `Tlcreate.mode` or `Tsetattr.mode`, and a client refuses them there (rule 15). Decision Log
+    2026-09-10; from 2026-09-08 until then the bits were refused with `EPERM`.
 20. `Tunlinkat.flags`: `AT_REMOVEDIR` is required for a directory (`EISDIR` without it) and refused
     for anything else (`ENOTDIR`); any other flag bit is `EINVAL`.
 21. `Txattrcreate` with `attr_size = 0` **removes** the attribute — it is how v9fs and diod spell
@@ -838,6 +852,22 @@ Lifetime and progress (reference review, 2026-09-08):
 36. Custom TLS trust roots retain hostname, chain and application-purpose checks. Require server
     authentication when dialing and client authentication when validating a client certificate;
     a trusted signature does not override a leaf or CA's incompatible extended key usage.
+37. A `.L` client whose `Trenameat` is answered `EOPNOTSUPP` retries the rename as `Trename` on
+    the walked source, as v9fs does (§5.9); a server implementing only `Trename` (diod 1.0.24) is
+    otherwise unusable for renames. A server that refuses both is reported as it answered.
+38. An `Rerror` or `Rlerror` carrying `NOTAG` while the client's `Tversion` is outstanding is the
+    answer to that `Tversion`: the connection fails with a version error quoting the ename and
+    errno, not with the unknown-tag protocol violation of rule 12 (diod answers a dialect it does
+    not speak with an `Rlerror` on `NOTAG`).
+39. Over 9P2000 and `.u`, every ename a server sends for an errno is a string the Linux kernel's
+    `net/9p/error.c` table maps to that errno — the fixture
+    [fixtures/linux-9p-errors.json](fixtures/linux-9p-errors.json), generated from the kernel
+    source at a pinned commit — so a `version=9p2000` v9fs mount recovers the errno rather than
+    `ESERVERFAULT`; every string in that table, and every wording an earlier release of a port
+    sent, is understood on receipt. `EOVERFLOW`, which the table lacks, keeps its `strerror` text,
+    and the enames of this reference that Linux does not list (`authentication not required`,
+    `version not negotiated`) keep their wording. One deliberate override: `authentication failed`
+    is `EACCES` on receipt (§5.2), where Linux files it under `ECONNREFUSED`.
 
 ## 9. Golden vectors
 

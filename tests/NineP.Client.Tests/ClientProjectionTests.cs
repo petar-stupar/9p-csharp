@@ -203,6 +203,110 @@ public sealed class ClientProjectionTests
     }
 
     /// <summary>
+    /// Rules 15 and 19: <c>Tlcreate.mode</c> is a POSIX mode word, in which <c>DMDIR</c>,
+    /// <c>DMAPPEND</c>, <c>DMEXCL</c> and <c>DMTMP</c> have no bit, so a <c>.L</c> create asking
+    /// for one is refused before the message is built. The server would have masked the bit off
+    /// and answered <c>Rlcreate</c> for a plain file.
+    /// </summary>
+    /// <param name="bit">The <c>Tcreate.perm</c> bit that has no .L spelling.</param>
+    /// <returns>The running test.</returns>
+    [Theory]
+    [InlineData(ModeBits.DMAPPEND)]
+    [InlineData(ModeBits.DMEXCL)]
+    [InlineData(ModeBits.DMTMP)]
+    [InlineData(ModeBits.DMDIR)]
+    public async Task TheFileFlagsNeverReachADotLCreate(uint bit)
+    {
+        await using Harness harness = await Harness.StartAsync(Dialect.P9_2000_L);
+        NinePFid fid = harness.Fid();
+
+        NinePException refusal = await Assert.ThrowsAsync<NinePException>(
+            async () => await fid.CreateAsync("flagged", bit | 0x1A4, OpenMode.Write, OpenFlags.None, Ct));
+
+        Assert.Equal(Errno.EOPNOTSUPP, refusal.Error.Errno);
+        await harness.AssertNothingWasSentAsync();
+    }
+
+    /// <summary>
+    /// Rule 19: <c>Tsetattr.mode</c> is a POSIX mode word too, so <see cref="SetAttr.Flags"/> has
+    /// no <c>.L</c> spelling and is refused rather than sent with the only field the caller named
+    /// missing.
+    /// </summary>
+    /// <returns>The running test.</returns>
+    [Fact]
+    public async Task TheFileFlagsNeverReachADotLSetattr()
+    {
+        await using Harness harness = await Harness.StartAsync(Dialect.P9_2000_L);
+        NinePFid fid = harness.Fid();
+
+        NinePException refusal = await Assert.ThrowsAsync<NinePException>(
+            async () => await fid.SetAttrAsync(new SetAttr { Flags = FileFlags.Append }, Ct));
+
+        Assert.Equal(Errno.EINVAL, refusal.Error.Errno);
+        await harness.AssertNothingWasSentAsync();
+    }
+
+    /// <summary>
+    /// Rule 19: a <c>Twstat</c> mode word carries the permission bits and the file flags
+    /// together, so an update stating only one half is completed from the file's own record —
+    /// a <c>Tstat</c> goes out first, as Plan 9's <c>chmod</c> and v9fs do. A chmod therefore
+    /// never clears <c>DMAPPEND</c>, and setting a flag never zeroes the permissions; an update
+    /// stating both halves goes straight out.
+    /// <b>Mutation:</b> drop the <c>Tstat</c> from <c>NinePFid.SetAttrAsync</c> and the projector
+    /// refuses the half-stated word, so both halves of this test fail.
+    /// </summary>
+    /// <returns>The running test.</returns>
+    [Fact]
+    public async Task AHalfStatedModeWordIsCompletedFromTheRecord()
+    {
+        await using Harness harness = await Harness.StartAsync(Dialect.P9_2000);
+        NinePFid fid = harness.Fid();
+
+        // A chmod on an append-only file keeps the file append-only.
+        Task chmod = fid.SetAttrAsync(new SetAttr { Perm = 0x1A4 }, Ct).AsTask();
+        Tstat stat = await harness.Server.ReadAsync<Tstat>(Ct);
+        await harness.Server.WriteAsync(
+            new Rstat(stat.Tag, Record(ModeBits.DMAPPEND | 0x1ED)), Ct);
+        Twstat sent = await harness.Server.ReadAsync<Twstat>(Ct);
+        await harness.Server.WriteAsync(new Rwstat(sent.Tag), Ct);
+        await chmod;
+
+        Assert.Equal(ModeBits.DMAPPEND | 0x1A4u, sent.Stat.Mode);
+
+        // Setting a flag keeps the permission bits, and states the whole flag set.
+        Task flagging = fid.SetAttrAsync(new SetAttr { Flags = FileFlags.Exclusive }, Ct).AsTask();
+        stat = await harness.Server.ReadAsync<Tstat>(Ct);
+        await harness.Server.WriteAsync(
+            new Rstat(stat.Tag, Record(ModeBits.DMAPPEND | 0x1ED)), Ct);
+        sent = await harness.Server.ReadAsync<Twstat>(Ct);
+        await harness.Server.WriteAsync(new Rwstat(sent.Tag), Ct);
+        await flagging;
+
+        Assert.Equal(ModeBits.DMEXCL | 0x1EDu, sent.Stat.Mode);
+
+        // Both halves stated: no Tstat, the Twstat is the next frame.
+        Task whole = fid.SetAttrAsync(new SetAttr { Perm = 0x1B6, Flags = FileFlags.Temporary }, Ct).AsTask();
+        sent = await harness.Server.ReadAsync<Twstat>(Ct);
+        await harness.Server.WriteAsync(new Rwstat(sent.Tag), Ct);
+        await whole;
+
+        Assert.Equal(ModeBits.DMTMP | 0x1B6u, sent.Stat.Mode);
+    }
+
+    /// <summary>A stat record with the given mode word, for the fake server to answer with.</summary>
+    /// <param name="mode">The mode word.</param>
+    /// <returns>The record.</returns>
+    private static StatRecord Record(uint mode) => StatRecord.DontTouch with
+    {
+        Qid = new Qid(QidType.QTFILE, 0, 1),
+        Mode = mode,
+        Name = "f",
+        Uid = "glenda",
+        Gid = "glenda",
+        Muid = "glenda",
+    };
+
+    /// <summary>
     /// Rule 17: a qid marked <c>QTSYMLINK</c> is a symlink whatever the dialect, because
     /// <c>Attr.Kind</c> and the qid type byte must agree. Plain 9P2000 has no extension field, so
     /// the target stays unknown — which is honest, where "a plain file" was not.

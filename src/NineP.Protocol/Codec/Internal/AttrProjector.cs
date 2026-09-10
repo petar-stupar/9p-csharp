@@ -185,7 +185,10 @@ internal static class AttrProjector
     /// <c>.u</c> mount drawing <c>EPERM</c> for an ordinary <c>chmod</c> whose record carries the
     /// <c>uid</c>, <c>muid</c>, <c>type</c> and <c>dev</c> it read a moment ago. A field set to
     /// anything else is refused exactly as before, and with no current record every set field is
-    /// refused, since nothing can be shown to be unchanged.
+    /// refused, since nothing can be shown to be unchanged. The mode word's flag bits are not
+    /// judged here: whether they ask for a change depends on the file's own flags, which the
+    /// server core holds as an <see cref="Attr"/> and compares in every dialect (reference §8
+    /// rule 19), so <see cref="SetAttr.Flags"/> is left null and the core fills it.
     /// </summary>
     /// <param name="stat">The record the client sent.</param>
     /// <param name="dialect">The session dialect, which decides whether n_gid is present.</param>
@@ -313,7 +316,17 @@ internal static class AttrProjector
     private static ulong PackRdev(DeviceId? rdev) =>
         rdev is DeviceId id ? ((ulong)id.Major << 8) | id.Minor : 0;
 
-    private static uint HighFlagBits(FileFlags flags)
+    /// <summary>
+    /// The file flags a client may set, at create and through <c>Twstat</c> (open(2), stat(5);
+    /// reference §8 rule 19). <see cref="FileFlags.Auth"/> and <see cref="FileFlags.Mount"/> are
+    /// the server's own.
+    /// </summary>
+    public const FileFlags SettableFlags = FileFlags.Append | FileFlags.Exclusive | FileFlags.Temporary;
+
+    /// <summary>The <c>DM*</c> high bits of a mode word that a set of file flags projects to.</summary>
+    /// <param name="flags">The flags.</param>
+    /// <returns>The high bits of reference §4.4, with the permission bits zero.</returns>
+    public static uint HighFlagBits(FileFlags flags)
     {
         uint mode = 0;
         if (flags.HasFlag(FileFlags.Append))
@@ -544,6 +557,48 @@ internal static class AttrProjector
     /// <exception cref="NinePException">The update names a field <c>Twstat</c> cannot carry.</exception>
     public static StatRecord ToWstat(SetAttr update, Dialect dialect)
     {
+        ValidateWstat(update, dialect);
+
+        // Reference §8 rule 19: a Twstat mode word carries the permission bits and the file
+        // flags together, so an update that states one half and not the other has no honest
+        // spelling -- a zero in the flag bits would clear DMAPPEND on an append-only file the
+        // caller only meant to chmod, and a zero in the permission bits is a chmod 000. The
+        // client's SetAttrAsync fills the missing half from a Tstat (CompleteMode); the
+        // projector itself refuses the half-stated word rather than guess.
+        if ((update.Perm is null) != (update.Flags is null))
+        {
+            throw new NinePException(new NinePError(
+                "a wstat mode word carries the permission bits and the file flags together; state both",
+                (int)Errno.EINVAL));
+        }
+
+        StatRecord record = StatRecord.DontTouch with
+        {
+            Name = update.Name ?? string.Empty,
+            Mode = update.Perm is uint bits
+                ? ModeOf(bits, dialect) | HighFlagBits(update.Flags ?? FileFlags.None)
+                : uint.MaxValue,
+            MTime = update.MTime is TimeSpec mtime ? (uint)mtime.Seconds : uint.MaxValue,
+            Length = update.Size ?? ulong.MaxValue,
+            Gid = update.GroupName ?? string.Empty,
+        };
+
+        return dialect == Dialect.P9_2000_u
+            ? record with { Extension = string.Empty, NGid = update.Gid ?? Constants.NONUNAME }
+            : record;
+    }
+
+    /// <summary>
+    /// Refuses an update a <c>Twstat</c> in this dialect cannot carry: every check
+    /// <see cref="ToWstat"/> makes except the completeness of the mode word, so that a client can
+    /// refuse before it reads the record it may need to complete that word (reference §8 rules 15
+    /// and 19). Nothing here inspects the file; it is the update alone that is judged.
+    /// </summary>
+    /// <param name="update">The partial update.</param>
+    /// <param name="dialect">The session dialect.</param>
+    /// <exception cref="NinePException">The update names a field <c>Twstat</c> cannot carry.</exception>
+    public static void ValidateWstat(SetAttr update, Dialect dialect)
+    {
         ArgumentNullException.ThrowIfNull(update);
 
         // stat(5): the owner may never change through a wstat, in either dialect. Dropping the
@@ -586,18 +641,38 @@ internal static class AttrProjector
                 (int)Errno.EINVAL));
         }
 
-        StatRecord record = StatRecord.DontTouch with
+        // DMAUTH and DMMOUNT are the server's; stat(5) lets a client set the other three.
+        if (update.Flags is FileFlags asked && (asked & ~SettableFlags) != FileFlags.None)
         {
-            Name = update.Name ?? string.Empty,
-            Mode = update.Perm is uint bits ? ModeOf(bits, dialect) : uint.MaxValue,
-            MTime = update.MTime is TimeSpec mtime ? (uint)mtime.Seconds : uint.MaxValue,
-            Length = update.Size ?? ulong.MaxValue,
-            Gid = update.GroupName ?? string.Empty,
-        };
+            throw new NinePException(new NinePError("wstat cannot set DMAUTH or DMMOUNT", (int)Errno.EPERM));
+        }
+    }
 
-        return dialect == Dialect.P9_2000_u
-            ? record with { Extension = string.Empty, NGid = update.Gid ?? Constants.NONUNAME }
-            : record;
+    /// <summary>
+    /// Fills whichever half of the mode word an update leaves unstated from the record a
+    /// <c>Tstat</c> just answered, so that <see cref="ToWstat"/> sends the file's own permission
+    /// bits beside new flags, or its own flags beside new permission bits (reference §8 rule 19).
+    /// This is what Plan 9's <c>chmod</c> and Linux v9fs do: read the record, change the bits,
+    /// write the whole word back.
+    /// </summary>
+    /// <param name="update">The partial update.</param>
+    /// <param name="current">What the server answered a <c>Tstat</c> with.</param>
+    /// <param name="dialect">The session dialect, which decides how the permission bits are read.</param>
+    /// <returns>The update with both halves of the mode word stated, or the update as it was.</returns>
+    public static SetAttr CompleteMode(SetAttr update, in StatRecord current, Dialect dialect)
+    {
+        ArgumentNullException.ThrowIfNull(update);
+
+        if ((update.Perm is null) == (update.Flags is null))
+        {
+            return update;
+        }
+
+        return update with
+        {
+            Perm = update.Perm ?? PermOf(current.Mode, dialect),
+            Flags = update.Flags ?? (FlagsOf(current.Mode) & SettableFlags),
+        };
     }
 
     /// <summary>Refuses a <c>Twstat</c> that asks for a field reference §5.8 does not let it set.</summary>
@@ -633,6 +708,15 @@ internal static class AttrProjector
         if (update.GroupName is not null)
         {
             throw new NinePException(NinePError.FromErrno(Errno.EINVAL));
+        }
+
+        // Nor the file flags: Tsetattr.mode is a POSIX mode word, in which DMAPPEND, DMEXCL and
+        // DMTMP have no bit at all (reference §4.7 and §8 rule 19). Sending the message with the
+        // flags left out would answer success for a change that never reached the server.
+        if (update.Flags is not null)
+        {
+            throw new NinePException(new NinePError(
+                "9P2000.L has no spelling for DMAPPEND, DMEXCL or DMTMP", (int)Errno.EINVAL));
         }
 
         SetAttrMask valid = SetAttrMask.None;
@@ -745,7 +829,10 @@ internal static class AttrProjector
         return perm;
     }
 
-    private static FileFlags FlagsOf(uint mode)
+    /// <summary>The file flags a 9P2000 / .u mode word carries: the inverse of <see cref="HighFlagBits"/>.</summary>
+    /// <param name="mode">The mode word of a stat record or a <c>Tcreate.perm</c>.</param>
+    /// <returns>The flags its high bits name.</returns>
+    public static FileFlags FlagsOf(uint mode)
     {
         FileFlags flags = FileFlags.None;
         flags |= (mode & ModeBits.DMAPPEND) != 0 ? FileFlags.Append : FileFlags.None;

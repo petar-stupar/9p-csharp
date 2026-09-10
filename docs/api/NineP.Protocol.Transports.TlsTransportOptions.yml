@@ -3,7 +3,7 @@ title: Class TlsTransportOptions
 body:
 - api1: Class TlsTransportOptions
   id: NineP_Protocol_Transports_TlsTransportOptions
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/TlsTransportOptions.cs#L12
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Transports/TlsTransportOptions.cs#L12
   metadata:
     uid: NineP.Protocol.Transports.TlsTransportOptions
     commentId: T:NineP.Protocol.Transports.TlsTransportOptions
@@ -48,7 +48,7 @@ body:
 - h2: Properties
 - api3: AdditionalPeerCheck
   id: NineP_Protocol_Transports_TlsTransportOptions_AdditionalPeerCheck
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/TlsTransportOptions.cs#L47
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Transports/TlsTransportOptions.cs#L47
   metadata:
     uid: NineP.Protocol.Transports.TlsTransportOptions.AdditionalPeerCheck
     commentId: P:NineP.Protocol.Transports.TlsTransportOptions.AdditionalPeerCheck
@@ -73,7 +73,7 @@ body:
     - '?'
 - api3: AllowInsecureCertificates
   id: NineP_Protocol_Transports_TlsTransportOptions_AllowInsecureCertificates
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/TlsTransportOptions.cs#L41
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Transports/TlsTransportOptions.cs#L41
   metadata:
     uid: NineP.Protocol.Transports.TlsTransportOptions.AllowInsecureCertificates
     commentId: P:NineP.Protocol.Transports.TlsTransportOptions.AllowInsecureCertificates
@@ -99,7 +99,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.boolean
 - api3: ClientCertificates
   id: NineP_Protocol_Transports_TlsTransportOptions_ClientCertificates
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/TlsTransportOptions.cs#L18
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Transports/TlsTransportOptions.cs#L18
   metadata:
     uid: NineP.Protocol.Transports.TlsTransportOptions.ClientCertificates
     commentId: P:NineP.Protocol.Transports.TlsTransportOptions.ClientCertificates
@@ -113,7 +113,7 @@ body:
     - '?'
 - api3: HandshakeTimeout
   id: NineP_Protocol_Transports_TlsTransportOptions_HandshakeTimeout
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/TlsTransportOptions.cs#L50
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Transports/TlsTransportOptions.cs#L50
   metadata:
     uid: NineP.Protocol.Transports.TlsTransportOptions.HandshakeTimeout
     commentId: P:NineP.Protocol.Transports.TlsTransportOptions.HandshakeTimeout
@@ -126,7 +126,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.timespan
 - api3: Logger
   id: NineP_Protocol_Transports_TlsTransportOptions_Logger
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/TlsTransportOptions.cs#L56
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Transports/TlsTransportOptions.cs#L56
   metadata:
     uid: NineP.Protocol.Transports.TlsTransportOptions.Logger
     commentId: P:NineP.Protocol.Transports.TlsTransportOptions.Logger
@@ -140,7 +140,7 @@ body:
     - '?'
 - api3: RequireClientCertificate
   id: NineP_Protocol_Transports_TlsTransportOptions_RequireClientCertificate
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/TlsTransportOptions.cs#L24
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Transports/TlsTransportOptions.cs#L24
   metadata:
     uid: NineP.Protocol.Transports.TlsTransportOptions.RequireClientCertificate
     commentId: P:NineP.Protocol.Transports.TlsTransportOptions.RequireClientCertificate
@@ -156,7 +156,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.boolean
 - api3: ServerCertificate
   id: NineP_Protocol_Transports_TlsTransportOptions_ServerCertificate
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/TlsTransportOptions.cs#L15
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Transports/TlsTransportOptions.cs#L15
   metadata:
     uid: NineP.Protocol.Transports.TlsTransportOptions.ServerCertificate
     commentId: P:NineP.Protocol.Transports.TlsTransportOptions.ServerCertificate
@@ -170,7 +170,7 @@ body:
     - '?'
 - api3: TargetHost
   id: NineP_Protocol_Transports_TlsTransportOptions_TargetHost
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/TlsTransportOptions.cs#L30
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Transports/TlsTransportOptions.cs#L30
   metadata:
     uid: NineP.Protocol.Transports.TlsTransportOptions.TargetHost
     commentId: P:NineP.Protocol.Transports.TlsTransportOptions.TargetHost
@@ -184,7 +184,7 @@ body:
     - '?'
 - api3: Tcp
   id: NineP_Protocol_Transports_TlsTransportOptions_Tcp
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/TlsTransportOptions.cs#L53
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Transports/TlsTransportOptions.cs#L53
   metadata:
     uid: NineP.Protocol.Transports.TlsTransportOptions.Tcp
     commentId: P:NineP.Protocol.Transports.TlsTransportOptions.Tcp
@@ -198,7 +198,7 @@ body:
     - '?'
 - api3: TrustedRoots
   id: NineP_Protocol_Transports_TlsTransportOptions_TrustedRoots
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/TlsTransportOptions.cs#L27
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Transports/TlsTransportOptions.cs#L27
   metadata:
     uid: NineP.Protocol.Transports.TlsTransportOptions.TrustedRoots
     commentId: P:NineP.Protocol.Transports.TlsTransportOptions.TrustedRoots

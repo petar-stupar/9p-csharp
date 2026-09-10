@@ -111,6 +111,12 @@ public static class ErrorTable
         ("bad message", Errno.EPROTO),
         ("value too large", Errno.EOVERFLOW),
         ("not supported", Errno.EOPNOTSUPP),
+
+        // Until 2026-09-10 the server refused the settable file flags outright (reference §8
+        // rule 19 as it then read); they now reach the handler, so these are received only from
+        // a server built before that.
+        ("create cannot set DMAPPEND/DMEXCL/DMTMP", Errno.EPERM),
+        ("wstat cannot change DMAPPEND/DMEXCL/DMTMP", Errno.EPERM),
     ];
 
 
@@ -133,13 +139,13 @@ public static class ErrorTable
         ("symlinks not supported", Errno.EOPNOTSUPP),
         ("file exists", Errno.EEXIST),
 
-        // Reference §8 rule 19 and §5.8. These three are refused with an explicit EPERM on the
-        // wire, but a 9P2000 peer is given only the text, and without a row here the ename mapped
-        // back to EIO -- so a client that recovered an errno from it was told the wrong thing
-        // about a refusal that had been perfectly specific.
-        ("create cannot set DMAPPEND/DMEXCL/DMTMP", Errno.EPERM),
-        ("wstat cannot change DMAPPEND/DMEXCL/DMTMP", Errno.EPERM),
+        // Reference §8 rule 19 and §5.8. Refused with an explicit EPERM on the wire, but a
+        // 9P2000 peer is given only the text, and without a row here the ename mapped back to
+        // EIO -- so a client that recovered an errno from it was told the wrong thing about a
+        // refusal that had been perfectly specific.
         ("wstat cannot change DMDIR", Errno.EPERM),
+        ("wstat cannot set DMAUTH or DMMOUNT", Errno.EPERM),
+        ("create cannot set DMAUTH or DMMOUNT", Errno.EPERM),
 
         // The same, for the refusals the projector and the client raise locally. These are built
         // with FromEname, so before this row the *errno the caller saw* was EIO rather than the

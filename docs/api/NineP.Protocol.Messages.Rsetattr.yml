@@ -3,7 +3,7 @@ title: Struct Rsetattr
 body:
 - api1: Struct Rsetattr
   id: NineP_Protocol_Messages_Rsetattr
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rsetattr.cs#L7
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Rsetattr.cs#L7
   metadata:
     uid: NineP.Protocol.Messages.Rsetattr
     commentId: T:NineP.Protocol.Messages.Rsetattr
@@ -39,7 +39,7 @@ body:
 - h2: Constructors
 - api3: Rsetattr(ushort)
   id: NineP_Protocol_Messages_Rsetattr__ctor_System_UInt16_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rsetattr.cs#L7
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Rsetattr.cs#L7
   metadata:
     uid: NineP.Protocol.Messages.Rsetattr.#ctor(System.UInt16)
     commentId: M:NineP.Protocol.Messages.Rsetattr.#ctor(System.UInt16)
@@ -55,7 +55,7 @@ body:
 - h2: Properties
 - api3: Tag
   id: NineP_Protocol_Messages_Rsetattr_Tag
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rsetattr.cs#L7
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Rsetattr.cs#L7
   metadata:
     uid: NineP.Protocol.Messages.Rsetattr.Tag
     commentId: P:NineP.Protocol.Messages.Rsetattr.Tag

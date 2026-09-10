@@ -3,7 +3,7 @@ title: Class Identity
 body:
 - api1: Class Identity
   id: NineP_Protocol_Auth_Identity
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Auth/Identity.cs#L8
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Auth/Identity.cs#L8
   metadata:
     uid: NineP.Protocol.Auth.Identity
     commentId: T:NineP.Protocol.Auth.Identity
@@ -48,7 +48,7 @@ body:
 - h2: Properties
 - api3: Claims
   id: NineP_Protocol_Auth_Identity_Claims
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Auth/Identity.cs#L26
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Auth/Identity.cs#L26
   metadata:
     uid: NineP.Protocol.Auth.Identity.Claims
     commentId: P:NineP.Protocol.Auth.Identity.Claims
@@ -72,7 +72,7 @@ body:
     - '>'
 - api3: Groups
   id: NineP_Protocol_Auth_Identity_Groups
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Auth/Identity.cs#L20
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Auth/Identity.cs#L20
   metadata:
     uid: NineP.Protocol.Auth.Identity.Groups
     commentId: P:NineP.Protocol.Auth.Identity.Groups
@@ -89,7 +89,7 @@ body:
     - '>'
 - api3: IsAuthenticated
   id: NineP_Protocol_Auth_Identity_IsAuthenticated
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Auth/Identity.cs#L37
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Auth/Identity.cs#L37
   metadata:
     uid: NineP.Protocol.Auth.Identity.IsAuthenticated
     commentId: P:NineP.Protocol.Auth.Identity.IsAuthenticated
@@ -113,7 +113,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.boolean
 - api3: Uid
   id: NineP_Protocol_Auth_Identity_Uid
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Auth/Identity.cs#L17
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Auth/Identity.cs#L17
   metadata:
     uid: NineP.Protocol.Auth.Identity.Uid
     commentId: P:NineP.Protocol.Auth.Identity.Uid
@@ -129,7 +129,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: User
   id: NineP_Protocol_Auth_Identity_User
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Auth/Identity.cs#L11
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Auth/Identity.cs#L11
   metadata:
     uid: NineP.Protocol.Auth.Identity.User
     commentId: P:NineP.Protocol.Auth.Identity.User
@@ -143,7 +143,7 @@ body:
 - h2: Methods
 - api3: Anonymous(string, uint)
   id: NineP_Protocol_Auth_Identity_Anonymous_System_String_System_UInt32_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Auth/Identity.cs#L43
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Auth/Identity.cs#L43
   metadata:
     uid: NineP.Protocol.Auth.Identity.Anonymous(System.String,System.UInt32)
     commentId: M:NineP.Protocol.Auth.Identity.Anonymous(System.String,System.UInt32)

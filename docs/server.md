@@ -61,7 +61,7 @@ one answer a server must never give.
 | `type`, `dev` | `EPERM` — kernel fields |
 | `qid` | `EPERM` — identity, not an attribute |
 | the `DMDIR` bit of `mode`, flipped | `EPERM` — judged against what the file actually is |
-| the `DMAPPEND`, `DMEXCL` or `DMTMP` bit of `mode`, changed | `EPERM` — `SetAttr` carries no file flags, so the change cannot be made (reference §8 rule 19) |
+| the `DMAUTH` or `DMMOUNT` bit of `mode`, changed | `EPERM` — the server's own bits (reference §8 rule 19) |
 | every field "don't touch" | `Rwstat`, after `IHandler.FsyncAsync` (§4.2) |
 
 A field counts as set only when it **differs from what the file already has**. The core stats the
@@ -72,6 +72,14 @@ value that would actually change something is refused.
 
 The refusal is atomic with the rest: a record that names one permitted field and one forbidden one
 changes neither.
+
+The `DMAPPEND`, `DMEXCL` and `DMTMP` bits are settable — stat(5) makes the directory bit the one
+mode bit a wstat cannot change — and reach `IHandler.SetAttrAsync` as `SetAttr.Flags`, judged like
+every other field: only a set that differs from the file's own is handed on, and an echoed set is
+"do not touch". The flags are part of the mode, so the owner check applies. After the handler
+answered, the core stats the file again and refuses with `EOPNOTSUPP` when the flags are not there,
+so a handler written before `SetAttr.Flags` existed cannot answer success for a change it ignored
+(rule 19).
 
 ## What an open, a create and a removal may ask for
 
@@ -86,7 +94,7 @@ success reply is a statement that the work was done.
 | `O_DIRECTORY` on anything but a directory | `ENOTDIR` (rule 23) |
 | `O_NOFOLLOW` on a symbolic link | `ELOOP`, the same answer the open draws anyway (rule 23) |
 | `OTRUNC` or `ORCLOSE` on a directory, at open **or** at create | `EISDIR` — a create is judged exactly as the open it performs (rule 25) |
-| `Tcreate.perm` carrying `DMAPPEND`, `DMEXCL` or `DMTMP` | `EPERM` — `CreateRequest` has no file flags to put them in (rule 19) |
+| `Tcreate.perm` carrying `DMAUTH` or `DMMOUNT` | `EPERM` — the server's own bits (rule 19); `DMAPPEND`, `DMEXCL` and `DMTMP` reach the handler as `CreateRequest.FileFlags`, and a created file that lacks them is removed again and the create refused with `EOPNOTSUPP` |
 | a .u `Tcreate` with `DMDEVICE` whose `extension` is not `"b maj min"` / `"c maj min"` | `EINVAL`; a well-formed one reaches the handler as `CreateRequest.Rdev` (rule 24) |
 | `Tunlinkat` of a directory without `AT_REMOVEDIR` | `EISDIR`; of anything else **with** it, `ENOTDIR`; any other flag bit, `EINVAL` (rule 20) |
 

@@ -3,7 +3,7 @@ title: Struct Topen
 body:
 - api1: Struct Topen
   id: NineP_Protocol_Messages_Topen
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Topen.cs#L10
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Topen.cs#L10
   metadata:
     uid: NineP.Protocol.Messages.Topen
     commentId: T:NineP.Protocol.Messages.Topen
@@ -42,7 +42,7 @@ body:
 - h2: Constructors
 - api3: Topen(ushort, uint, byte)
   id: NineP_Protocol_Messages_Topen__ctor_System_UInt16_System_UInt32_System_Byte_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Topen.cs#L10
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Topen.cs#L10
   metadata:
     uid: NineP.Protocol.Messages.Topen.#ctor(System.UInt16,System.UInt32,System.Byte)
     commentId: M:NineP.Protocol.Messages.Topen.#ctor(System.UInt16,System.UInt32,System.Byte)
@@ -71,7 +71,7 @@ body:
 - h2: Properties
 - api3: Fid
   id: NineP_Protocol_Messages_Topen_Fid
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Topen.cs#L10
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Topen.cs#L10
   metadata:
     uid: NineP.Protocol.Messages.Topen.Fid
     commentId: P:NineP.Protocol.Messages.Topen.Fid
@@ -84,7 +84,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Mode
   id: NineP_Protocol_Messages_Topen_Mode
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Topen.cs#L10
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Topen.cs#L10
   metadata:
     uid: NineP.Protocol.Messages.Topen.Mode
     commentId: P:NineP.Protocol.Messages.Topen.Mode
@@ -97,7 +97,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.byte
 - api3: Tag
   id: NineP_Protocol_Messages_Topen_Tag
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Topen.cs#L10
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Topen.cs#L10
   metadata:
     uid: NineP.Protocol.Messages.Topen.Tag
     commentId: P:NineP.Protocol.Messages.Topen.Tag

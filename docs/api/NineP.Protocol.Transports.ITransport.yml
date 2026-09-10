@@ -3,7 +3,7 @@ title: Interface ITransport
 body:
 - api1: Interface ITransport
   id: NineP_Protocol_Transports_ITransport
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/ITransport.cs#L8
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Transports/ITransport.cs#L8
   metadata:
     uid: NineP.Protocol.Transports.ITransport
     commentId: T:NineP.Protocol.Transports.ITransport
@@ -24,7 +24,7 @@ body:
 - h2: Properties
 - api3: Schemes
   id: NineP_Protocol_Transports_ITransport_Schemes
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/ITransport.cs#L11
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Transports/ITransport.cs#L11
   metadata:
     uid: NineP.Protocol.Transports.ITransport.Schemes
     commentId: P:NineP.Protocol.Transports.ITransport.Schemes
@@ -42,7 +42,7 @@ body:
 - h2: Methods
 - api3: ConnectAsync(NinePAddress, CancellationToken)
   id: NineP_Protocol_Transports_ITransport_ConnectAsync_NineP_Protocol_Transports_NinePAddress_System_Threading_CancellationToken_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/ITransport.cs#L17
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Transports/ITransport.cs#L17
   metadata:
     uid: NineP.Protocol.Transports.ITransport.ConnectAsync(NineP.Protocol.Transports.NinePAddress,System.Threading.CancellationToken)
     commentId: M:NineP.Protocol.Transports.ITransport.ConnectAsync(NineP.Protocol.Transports.NinePAddress,System.Threading.CancellationToken)
@@ -73,7 +73,7 @@ body:
     description: The connected connection; the caller disposes it.
 - api3: ListenAsync(NinePAddress, CancellationToken)
   id: NineP_Protocol_Transports_ITransport_ListenAsync_NineP_Protocol_Transports_NinePAddress_System_Threading_CancellationToken_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/ITransport.cs#L23
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Transports/ITransport.cs#L23
   metadata:
     uid: NineP.Protocol.Transports.ITransport.ListenAsync(NineP.Protocol.Transports.NinePAddress,System.Threading.CancellationToken)
     commentId: M:NineP.Protocol.Transports.ITransport.ListenAsync(NineP.Protocol.Transports.NinePAddress,System.Threading.CancellationToken)

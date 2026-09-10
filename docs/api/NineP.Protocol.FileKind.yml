@@ -3,7 +3,7 @@ title: Enum FileKind
 body:
 - api1: Enum FileKind
   id: NineP_Protocol_FileKind
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/FileKind.cs#L4
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/FileKind.cs#L4
   metadata:
     uid: NineP.Protocol.FileKind
     commentId: T:NineP.Protocol.FileKind

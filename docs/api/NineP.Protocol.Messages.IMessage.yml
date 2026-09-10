@@ -3,7 +3,7 @@ title: Interface IMessage
 body:
 - api1: Interface IMessage
   id: NineP_Protocol_Messages_IMessage
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/IMessage.cs#L7
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/IMessage.cs#L7
   metadata:
     uid: NineP.Protocol.Messages.IMessage
     commentId: T:NineP.Protocol.Messages.IMessage
@@ -22,7 +22,7 @@ body:
 - h2: Properties
 - api3: Tag
   id: NineP_Protocol_Messages_IMessage_Tag
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/IMessage.cs#L13
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/IMessage.cs#L13
   metadata:
     uid: NineP.Protocol.Messages.IMessage.Tag
     commentId: P:NineP.Protocol.Messages.IMessage.Tag
@@ -35,7 +35,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint16
 - api3: Type
   id: NineP_Protocol_Messages_IMessage_Type
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/IMessage.cs#L10
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/IMessage.cs#L10
   metadata:
     uid: NineP.Protocol.Messages.IMessage.Type
     commentId: P:NineP.Protocol.Messages.IMessage.Type

@@ -94,6 +94,14 @@ internal sealed class JsonDirectoryHandler : JsonNodeHandler, IDirectoryHandler
             throw new NinePException(NinePError.FromErrno(Errno.EOPNOTSUPP));
         }
 
+        if (request.FileFlags != FileFlags.None)
+        {
+            // Nor an append-only, exclusive or temporary member: JSON has nowhere to keep the
+            // flag, and a create answered with success must make the file it was asked for
+            // (reference §8 rule 19).
+            throw new NinePException(NinePError.FromErrno(Errno.EOPNOTSUPP));
+        }
+
         return ValueTask.FromResult(Context.Mutator.Mutate<IHandler>(() =>
         {
             if (_node.Find(request.Name) is not null)

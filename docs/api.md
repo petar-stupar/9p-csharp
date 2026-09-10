@@ -462,6 +462,7 @@ answered `Rwstat`, which would be a success reply for work that was never done:
 | `type`, `dev` | kernel fields, not settable |
 | `qid` | identity, not an attribute |
 | the `DMDIR` bit of `mode` | a file cannot become a directory or stop being one |
+| the `DMAUTH` or `DMMOUNT` bit of `mode` | the server's own bits |
 
 A field counts as changed only when it **differs from the value the file already has**. A client
 that fills a `Twstat` from the record it just read — which is what Linux v9fs does for an ordinary
@@ -470,8 +471,15 @@ to the server; those ask for nothing and are a no-op, not a refusal. The sentine
 values are of course still the primary way to leave a field alone, and a record where *every* field
 is don't-touch is an fsync request (§4.2).
 
-The client-side inverse refuses the same things before a byte goes out:
-`AttrProjector.ToWstat` throws for a `SetAttr` that sets `Uid`.
+The `DMAPPEND`, `DMEXCL` and `DMTMP` bits are the settable ones — stat(5): the directory bit is
+the one mode bit a wstat cannot change — and arrive in `Flags`, only when they differ from what the
+file has (rule 19); the core reads the file back afterwards and refuses with `EOPNOTSUPP` if a
+handler answered without applying them.
+
+The client-side inverse refuses the same things before a byte goes out: `AttrProjector.ToWstat`
+throws for a `SetAttr` that sets `Uid`, and for one that states `Perm` without `Flags` or `Flags`
+without `Perm` — a `Twstat` mode word carries both halves — so `NinePFid.SetAttrAsync` completes
+the unstated half from a `Tstat` first, as Plan 9's `chmod` and Linux v9fs do.
 
 ```csharp
 public string? Name { get; init; }
@@ -482,6 +490,14 @@ A new name (`Twstat` only; a rename within the same directory).
 public uint? Perm { get; init; }
 ```
 New permission bits (the 07777 mask).
+
+```csharp
+public FileFlags? Flags { get; init; }
+```
+The file flags the file is to have after the update, all three stated together: `Append`,
+`Exclusive` and `Temporary` are the settable ones (stat(5); rule 19). `Twstat` only, since
+`Tsetattr` has no spelling for them. A handler receives a value only when the request would change
+the flags the file has.
 
 ```csharp
 public uint? Uid { get; init; }
@@ -940,7 +956,7 @@ where Linux files the same words under ECONNREFUSED; reference §5.2 wins),
 
 The refusals of §8 rules 15 and 19 are in the same list, so a 9P2000 peer — whose `Rerror` carries
 the text and no errno — recovers the errno the refusal actually meant rather than `EIO`:
-`"create cannot set DMAPPEND/DMEXCL/DMTMP"`, `"wstat cannot change DMAPPEND/DMEXCL/DMTMP"`,
+`"create cannot set DMAUTH or DMMOUNT"`, `"wstat cannot set DMAUTH or DMMOUNT"`,
 `"wstat cannot change DMDIR"`, `"wstat cannot change the owner"`, `"wstat cannot set muid"`,
 `"wstat cannot set atime"`, `"wstat cannot set type"`, `"wstat cannot set dev"` and
 `"wstat cannot set qid"` are all EPERM, and `"cannot rename across directories"` is EOPNOTSUPP.
@@ -2665,7 +2681,7 @@ the dispatcher's own list of routed types.
 | `Twalk` | `IDirectoryHandler.LookupAsync` per element | partial walk, clone, `Edupfid`, `..` |
 | `Topen` | `IFileHandler.OpenAsync` | mode decode, `DMEXCL`, `ORCLOSE`, permissions, `iounit` |
 | `Tlopen` | `IFileHandler.OpenAsync` | flag decode, `DMEXCL`, permissions, `iounit` |
-| `Tcreate` | `IDirectoryHandler.CreateAsync` | perm masking, name rules, open state |
+| `Tcreate` | `IDirectoryHandler.CreateAsync` | perm masking, file flags read back, name rules, open state |
 | `Tlcreate` | `IDirectoryHandler.CreateAsync` | perm masking, name rules, open state |
 | `Tmkdir` | `IDirectoryHandler.CreateAsync` | perm masking, name rules |
 | `Tsymlink` | `IDirectoryHandler.CreateAsync` | name rules |
@@ -2678,7 +2694,7 @@ the dispatcher's own list of routed types.
 | `Tunlinkat` | `IDirectoryHandler.RemoveAsync` | no fid is clunked |
 | `Tstat` | `IHandler.GetAttrAsync` | projection, masks |
 | `Tgetattr` | `IHandler.GetAttrAsync` | projection, masks, 160-byte reply |
-| `Twstat` | `IHandler.SetAttrAsync` | `SetAttr` translation, don't-touch, permissions |
+| `Twstat` | `IHandler.SetAttrAsync` | `SetAttr` translation, don't-touch, file flags read back, permissions |
 | `Tsetattr` | `IHandler.SetAttrAsync` | `SetAttr` translation, server clock, permissions |
 | `Trename` | `IDirectoryHandler.RenameAsync` | name rules, cross-directory checks |
 | `Trenameat` | `IDirectoryHandler.RenameAsync` | name rules, cross-directory checks |
@@ -2819,6 +2835,15 @@ The access mode the new file is opened with; Read for a directory.
 public OpenFlags Flags { get; init; }
 ```
 Open flags accompanying the create.
+
+```csharp
+public FileFlags FileFlags { get; init; }
+```
+The file flags the new file is to carry — `Append`, `Exclusive` and `Temporary`, from the
+`DMAPPEND`, `DMEXCL` and `DMTMP` bits of `Tcreate.perm` (open(2); rule 19) — and `None` for every
+other create message. A handler that cannot give a file these flags refuses the create; the core
+reads the new file back and removes one that lacks them, so a success reply is never sent for a
+plain file.
 
 ```csharp
 public string? Target { get; init; }

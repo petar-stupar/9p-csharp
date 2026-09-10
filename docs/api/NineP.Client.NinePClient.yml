@@ -3,7 +3,7 @@ title: Class NinePClient
 body:
 - api1: Class NinePClient
   id: NineP_Client_NinePClient
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/NinePClient.cs#L26
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePClient.cs#L26
   metadata:
     uid: NineP.Client.NinePClient
     commentId: T:NineP.Client.NinePClient
@@ -58,7 +58,7 @@ body:
 - h2: Methods
 - api3: ConnectAsync(NinePAddress, ClientOptions, CancellationToken)
   id: NineP_Client_NinePClient_ConnectAsync_NineP_Protocol_Transports_NinePAddress_NineP_Client_ClientOptions_System_Threading_CancellationToken_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/NinePClient.cs#L36
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePClient.cs#L36
   metadata:
     uid: NineP.Client.NinePClient.ConnectAsync(NineP.Protocol.Transports.NinePAddress,NineP.Client.ClientOptions,System.Threading.CancellationToken)
     commentId: M:NineP.Client.NinePClient.ConnectAsync(NineP.Protocol.Transports.NinePAddress,NineP.Client.ClientOptions,System.Threading.CancellationToken)
@@ -108,7 +108,7 @@ body:
     description: The transfer window is less than 1.
 - api3: ConnectAsync(ITransport, NinePAddress, ClientOptions, CancellationToken)
   id: NineP_Client_NinePClient_ConnectAsync_NineP_Protocol_Transports_ITransport_NineP_Protocol_Transports_NinePAddress_NineP_Client_ClientOptions_System_Threading_CancellationToken_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/NinePClient.cs#L55
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePClient.cs#L55
   metadata:
     uid: NineP.Client.NinePClient.ConnectAsync(NineP.Protocol.Transports.ITransport,NineP.Protocol.Transports.NinePAddress,NineP.Client.ClientOptions,System.Threading.CancellationToken)
     commentId: M:NineP.Client.NinePClient.ConnectAsync(NineP.Protocol.Transports.ITransport,NineP.Protocol.Transports.NinePAddress,NineP.Client.ClientOptions,System.Threading.CancellationToken)
@@ -159,7 +159,7 @@ body:
     description: The transfer window is less than 1.
 - api3: ConnectAsync(INinePConnection, ClientOptions, CancellationToken)
   id: NineP_Client_NinePClient_ConnectAsync_NineP_Protocol_Transports_INinePConnection_NineP_Client_ClientOptions_System_Threading_CancellationToken_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/NinePClient.cs#L92
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePClient.cs#L92
   metadata:
     uid: NineP.Client.NinePClient.ConnectAsync(NineP.Protocol.Transports.INinePConnection,NineP.Client.ClientOptions,System.Threading.CancellationToken)
     commentId: M:NineP.Client.NinePClient.ConnectAsync(NineP.Protocol.Transports.INinePConnection,NineP.Client.ClientOptions,System.Threading.CancellationToken)

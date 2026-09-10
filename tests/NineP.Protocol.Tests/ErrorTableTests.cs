@@ -114,6 +114,8 @@ public sealed class ErrorTableTests
     [InlineData("bad message", Errno.EPROTO)]
     [InlineData("no such device or address", Errno.ENXIO)]
     [InlineData("try again", Errno.EAGAIN)]
+    [InlineData("create cannot set DMAPPEND/DMEXCL/DMTMP", Errno.EPERM)]
+    [InlineData("wstat cannot change DMAPPEND/DMEXCL/DMTMP", Errno.EPERM)]
     public void AFormerEnameIsStillUnderstoodButNotSent(string former, int errno)
     {
         Assert.Equal(errno, ErrorTable.ErrnoFor(former));
@@ -159,9 +161,9 @@ public sealed class ErrorTableTests
     [InlineData("version not negotiated", Errno.EPROTO)]
     [InlineData("symlinks not supported", Errno.EOPNOTSUPP)]
     [InlineData("file exists", Errno.EEXIST)]
-    [InlineData("create cannot set DMAPPEND/DMEXCL/DMTMP", Errno.EPERM)]
-    [InlineData("wstat cannot change DMAPPEND/DMEXCL/DMTMP", Errno.EPERM)]
     [InlineData("wstat cannot change DMDIR", Errno.EPERM)]
+    [InlineData("wstat cannot set DMAUTH or DMMOUNT", Errno.EPERM)]
+    [InlineData("create cannot set DMAUTH or DMMOUNT", Errno.EPERM)]
     [InlineData("wstat cannot change the owner", Errno.EPERM)]
     [InlineData("wstat cannot set muid", Errno.EPERM)]
     [InlineData("wstat cannot set atime", Errno.EPERM)]
@@ -173,8 +175,8 @@ public sealed class ErrorTableTests
         Assert.Equal(errno, ErrorTable.ErrnoFor(ename));
 
     [Theory]
-    [InlineData("create cannot set DMAPPEND/DMEXCL/DMTMP")]
-    [InlineData("wstat cannot change DMAPPEND/DMEXCL/DMTMP")]
+    [InlineData("create cannot set DMAUTH or DMMOUNT")]
+    [InlineData("wstat cannot set DMAUTH or DMMOUNT")]
     [InlineData("wstat cannot change DMDIR")]
     [InlineData("wstat cannot change the owner")]
     [InlineData("cannot rename across directories")]

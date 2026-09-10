@@ -1217,6 +1217,8 @@ NineP.Protocol.SetAttr.ATimeToNow.init -> void
 NineP.Protocol.SetAttr.CTimeToNow.get -> bool
 NineP.Protocol.SetAttr.CTimeToNow.init -> void
 NineP.Protocol.SetAttr.Equals(NineP.Protocol.SetAttr? other) -> bool
+NineP.Protocol.SetAttr.Flags.get -> NineP.Protocol.FileFlags?
+NineP.Protocol.SetAttr.Flags.init -> void
 NineP.Protocol.SetAttr.Gid.get -> uint?
 NineP.Protocol.SetAttr.Gid.init -> void
 NineP.Protocol.SetAttr.GroupName.get -> string?

@@ -120,7 +120,8 @@ public sealed class TodoFsSetAttrTests
     /// <returns>One update per row.</returns>
     public static TheoryData<SetAttr> UnsupportedUpdates() =>
     [
-        new SetAttr { Size = 0, Perm = 0x1FF },
+        new SetAttr { Size = 0, Perm = 0x1FF, Flags = FileFlags.None },
+        new SetAttr { Size = 0, Perm = 0x1B6, Flags = FileFlags.Append },
         new SetAttr { Size = 0, GroupName = "wheel" },
         new SetAttr { Size = 0, MTime = new TimeSpec(1, 0) },
         new SetAttr { Size = 0, Name = "renamed" },

@@ -3,7 +3,7 @@ title: Enum OpenFlags
 body:
 - api1: Enum OpenFlags
   id: NineP_Protocol_OpenFlags
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/OpenFlags.cs#L7
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/OpenFlags.cs#L7
   metadata:
     uid: NineP.Protocol.OpenFlags
     commentId: T:NineP.Protocol.OpenFlags

@@ -236,23 +236,27 @@ public sealed class WstatTests
     }
 
     /// <summary>
-    /// Rule 19: a <c>Twstat</c> that changes <c>DMAPPEND</c>, <c>DMEXCL</c> or <c>DMTMP</c> is
-    /// refused with <c>EPERM</c>. <c>SetAttr</c> carries no file flags, so <c>FromWstat</c>'s
-    /// <c>0xFFF</c> mask dropped those bits and the client was answered <c>Rwstat</c> — success —
-    /// for a change that never happened.
-    /// <b>Mutation:</b> delete the comparison in <c>Dispatcher.WstatAsync</c> and this fails.
+    /// Rule 19: a <c>Twstat</c> that sets <c>DMAPPEND</c>, <c>DMEXCL</c> or <c>DMTMP</c> reaches
+    /// the handler as <see cref="SetAttr.Flags"/> — stat(5) makes the directory bit the one mode
+    /// bit a wstat cannot change — and the file the client then stats carries it. The bits used
+    /// to be refused, and before that dropped by a <c>0xFFF</c> mask and answered <c>Rwstat</c>.
+    /// The permission bits in the same word are applied with them: the two halves of the mode
+    /// word are one change.
+    /// <b>Mutation:</b> stop setting <c>Flags</c> on the update in <c>Dispatcher.WstatAsync</c>
+    /// and the handler assertion fails.
     /// </summary>
     /// <param name="bit">The high mode bit the record asks for.</param>
+    /// <param name="expected">The flag it names.</param>
     /// <param name="dialect">The dialect the wstat goes out in.</param>
     /// <returns>The running test.</returns>
     [Theory]
-    [InlineData(ModeBits.DMAPPEND, Dialect.P9_2000)]
-    [InlineData(ModeBits.DMEXCL, Dialect.P9_2000)]
-    [InlineData(ModeBits.DMTMP, Dialect.P9_2000)]
-    [InlineData(ModeBits.DMAPPEND, Dialect.P9_2000_u)]
-    [InlineData(ModeBits.DMEXCL, Dialect.P9_2000_u)]
-    [InlineData(ModeBits.DMTMP, Dialect.P9_2000_u)]
-    public async Task ChangingAnUnsupportedModeBitIsRefused(uint bit, Dialect dialect)
+    [InlineData(ModeBits.DMAPPEND, FileFlags.Append, Dialect.P9_2000)]
+    [InlineData(ModeBits.DMEXCL, FileFlags.Exclusive, Dialect.P9_2000)]
+    [InlineData(ModeBits.DMTMP, FileFlags.Temporary, Dialect.P9_2000)]
+    [InlineData(ModeBits.DMAPPEND, FileFlags.Append, Dialect.P9_2000_u)]
+    [InlineData(ModeBits.DMEXCL, FileFlags.Exclusive, Dialect.P9_2000_u)]
+    [InlineData(ModeBits.DMTMP, FileFlags.Temporary, Dialect.P9_2000_u)]
+    public async Task ChangingAFileFlagReachesTheHandler(uint bit, FileFlags expected, Dialect dialect)
     {
         MemoryFilesystem tree = new();
         MemoryFile mine = tree.NewFile("mine", 0x1B6);
@@ -265,32 +269,25 @@ public sealed class WstatTests
         await using (fid.ConfigureAwait(false))
         {
             StatRecord asking = StatRecord.DontTouch with { Mode = bit | 0x1A4 };
+            await session.Messages.WstatAsync(new Twstat(0, fid.Fid, asking), Ct);
 
-            NinePException refusal = await Assert.ThrowsAsync<NinePException>(
-                async () => await session.Messages.WstatAsync(new Twstat(0, fid.Fid, asking), Ct));
+            Assert.Equal(expected, Assert.IsType<SetAttr>(mine.LastUpdate).Flags);
+            Assert.Equal(expected, mine.Flags);
+            Assert.Equal(0x1A4u, mine.Perm);
 
-            // As with the DMDIR refusal, a 9P2000 session carries the ename alone; the errno
-            // reference §8 rule 19 names reaches a .u peer, whose Rerror has an errno[4].
-            Assert.Equal("wstat cannot change DMAPPEND/DMEXCL/DMTMP", refusal.Error.Ename);
-
-            if (dialect == Dialect.P9_2000_u)
-            {
-                Assert.Equal(Errno.EPERM, refusal.Error.Errno);
-            }
-
-            // Atomic, like every other refusal: the permission change in the same record is not
-            // applied either.
-            Assert.Equal(0x1B6u, mine.Perm);
+            StatRecord now = (await session.Messages.StatAsync(new Tstat(0, fid.Fid), Ct)).Stat;
+            Assert.Equal(bit, now.Mode & bit);
         }
     }
 
     /// <summary>
-    /// Rule 19: the bits are judged like every other unsettable field — against what the file
-    /// already is. A client that echoes back the <c>DMEXCL</c> it just read while changing the
-    /// permission bits asks for no change in it, so the wstat is applied rather than refused.
+    /// Rule 19: the bits are judged like every other field — against what the file already is.
+    /// A client that echoes back the <c>DMEXCL</c> it just read while changing the permission
+    /// bits asks for no change in it, so the handler is not asked about the flags at all; only a
+    /// real change, here dropping the bit, reaches it.
     /// </summary>
     [Fact]
-    public async Task AnUnsupportedModeBitEchoedBackUnchangedIsANoOp()
+    public async Task AFlagEchoedBackUnchangedIsANoOp()
     {
         MemoryFilesystem tree = new();
         MemoryFile mine = tree.NewFile("mine", 0x1B6);
@@ -311,20 +308,112 @@ public sealed class WstatTests
 
             Assert.Equal(0x1A4u, mine.Perm);
             Assert.True(mine.Exclusive);
+            Assert.Null(Assert.IsType<SetAttr>(mine.LastUpdate).Flags);
 
-            // Dropping the bit is a change, and is refused.
+            // Dropping the bit is a change, and the handler is told so.
             StatRecord dropping = StatRecord.DontTouch with { Mode = 0x1A4 };
+            await session.Messages.WstatAsync(new Twstat(0, fid.Fid, dropping), Ct);
+
+            Assert.False(mine.Exclusive);
+            Assert.Equal(FileFlags.None, Assert.IsType<SetAttr>(mine.LastUpdate).Flags);
+        }
+    }
+
+    /// <summary>
+    /// Rule 19: the reply says the file now has the flags, so the core reads the file back. A
+    /// handler that answered the update without applying them — one written before
+    /// <see cref="SetAttr.Flags"/> existed — is not answered <c>Rwstat</c> for it.
+    /// <b>Mutation:</b> delete the read-back in <c>Dispatcher.ApplyAsync</c> and this fails.
+    /// </summary>
+    [Fact]
+    public async Task AFlagUpdateTheHandlerDroppedIsRefused()
+    {
+        MemoryFilesystem tree = new();
+        MemoryFile mine = tree.NewFile("mine", 0x1B6);
+        mine.DropsFlagUpdates = true;
+        tree.Root.Add(mine);
+
+        await using ServerHarness harness = await ServerHarness.StartAsync(tree: tree);
+        await using NinePSession session = await harness.ConnectAsync(Dialect.P9_2000);
+
+        NinePFid fid = await session.WalkAsync("mine", Ct);
+        await using (fid.ConfigureAwait(false))
+        {
+            StatRecord asking = StatRecord.DontTouch with { Mode = ModeBits.DMAPPEND | 0x1B6 };
 
             NinePException refusal = await Assert.ThrowsAsync<NinePException>(
-                async () => await session.Messages.WstatAsync(new Twstat(0, fid.Fid, dropping), Ct));
+                async () => await session.Messages.WstatAsync(new Twstat(0, fid.Fid, asking), Ct));
 
-            Assert.Contains("DMAPPEND", refusal.Error.Ename, StringComparison.Ordinal);
+            Assert.Equal(Errno.EOPNOTSUPP, refusal.Error.Errno);
+            Assert.Equal(FileFlags.Append, Assert.IsType<SetAttr>(mine.LastUpdate).Flags);
+            Assert.Equal(FileFlags.None, mine.Flags);
+        }
+    }
 
-            // This session is 9P2000, whose Rerror carries the text and no errno, so the client
-            // recovers the errno from the ename through ErrorTable. Without a row for it the
-            // refusal reached the caller as EIO — an unspecific failure standing in for one
-            // stat(5) is entirely specific about.
+    /// <summary>
+    /// stat(5) and rule 19: the flags are part of the mode, and only the owner may change the
+    /// mode. A record whose permission bits echo the file's own and whose only change is a flag
+    /// is refused for a non-owner before the handler is asked.
+    /// <b>Mutation:</b> drop <c>update.Flags</c> from the owner check in
+    /// <c>Dispatcher.ApplyAsync</c> and this fails.
+    /// </summary>
+    [Fact]
+    public async Task OnlyTheOwnerMaySetAFlag()
+    {
+        MemoryFilesystem tree = new();
+        MemoryFile theirs = tree.NewFile("theirs", 0x1B6);
+        theirs.Owner = "root";
+        theirs.Uid = 0;
+        tree.Root.Add(theirs);
+
+        await using ServerHarness harness = await ServerHarness.StartAsync(tree: tree);
+        await using NinePSession session = await harness.ConnectAsync(Dialect.P9_2000);
+
+        NinePFid fid = await session.WalkAsync("theirs", Ct);
+        await using (fid.ConfigureAwait(false))
+        {
+            StatRecord asking = StatRecord.DontTouch with { Mode = ModeBits.DMAPPEND | 0x1B6 };
+
+            NinePException refusal = await Assert.ThrowsAsync<NinePException>(
+                async () => await session.Messages.WstatAsync(new Twstat(0, fid.Fid, asking), Ct));
+
             Assert.Equal(Errno.EPERM, refusal.Error.Errno);
+            Assert.Equal(FileFlags.None, theirs.Flags);
+            Assert.Null(theirs.LastUpdate);
+        }
+    }
+
+    /// <summary>
+    /// Rule 19: <c>DMAUTH</c> and <c>DMMOUNT</c> are the server's own bits. A record that would
+    /// set one is refused like the other unsettable fields, and the permission change beside it
+    /// is not applied either.
+    /// </summary>
+    /// <param name="bit">The server-owned bit the record asks for.</param>
+    /// <returns>The running test.</returns>
+    [Theory]
+    [InlineData(ModeBits.DMAUTH)]
+    [InlineData(ModeBits.DMMOUNT)]
+    public async Task AServerOwnedBitCannotBeSetByAWstat(uint bit)
+    {
+        MemoryFilesystem tree = new();
+        MemoryFile mine = tree.NewFile("mine", 0x1B6);
+        tree.Root.Add(mine);
+
+        await using ServerHarness harness = await ServerHarness.StartAsync(tree: tree);
+        await using NinePSession session = await harness.ConnectAsync(Dialect.P9_2000);
+
+        NinePFid fid = await session.WalkAsync("mine", Ct);
+        await using (fid.ConfigureAwait(false))
+        {
+            StatRecord asking = StatRecord.DontTouch with { Mode = bit | 0x1A4 };
+
+            NinePException refusal = await Assert.ThrowsAsync<NinePException>(
+                async () => await session.Messages.WstatAsync(new Twstat(0, fid.Fid, asking), Ct));
+
+            Assert.Equal("wstat cannot set DMAUTH or DMMOUNT", refusal.Error.Ename);
+            Assert.Equal(Errno.EPERM, refusal.Error.Errno);
+            Assert.Equal(0x1B6u, mine.Perm);
+            Assert.Null(mine.LastUpdate);
         }
     }
 

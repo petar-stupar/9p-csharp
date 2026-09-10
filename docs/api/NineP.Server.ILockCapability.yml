@@ -3,7 +3,7 @@ title: Interface ILockCapability
 body:
 - api1: Interface ILockCapability
   id: NineP_Server_ILockCapability
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/ILockCapability.cs#L9
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Server/ILockCapability.cs#L9
   metadata:
     uid: NineP.Server.ILockCapability
     commentId: T:NineP.Server.ILockCapability
@@ -22,7 +22,7 @@ body:
 - h2: Methods
 - api3: GetLockAsync(LockRequest, CancellationToken)
   id: NineP_Server_ILockCapability_GetLockAsync_NineP_Protocol_LockRequest_System_Threading_CancellationToken_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/ILockCapability.cs#L21
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Server/ILockCapability.cs#L21
   metadata:
     uid: NineP.Server.ILockCapability.GetLockAsync(NineP.Protocol.LockRequest,System.Threading.CancellationToken)
     commentId: M:NineP.Server.ILockCapability.GetLockAsync(NineP.Protocol.LockRequest,System.Threading.CancellationToken)
@@ -53,7 +53,7 @@ body:
     description: The conflicting lock, or <xref href="NineP.Protocol.LockType.Unlock" data-throw-if-not-resolved="false"></xref> when there is none.
 - api3: LockAsync(LockRequest, CancellationToken)
   id: NineP_Server_ILockCapability_LockAsync_NineP_Protocol_LockRequest_System_Threading_CancellationToken_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/ILockCapability.cs#L15
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Server/ILockCapability.cs#L15
   metadata:
     uid: NineP.Server.ILockCapability.LockAsync(NineP.Protocol.LockRequest,System.Threading.CancellationToken)
     commentId: M:NineP.Server.ILockCapability.LockAsync(NineP.Protocol.LockRequest,System.Threading.CancellationToken)

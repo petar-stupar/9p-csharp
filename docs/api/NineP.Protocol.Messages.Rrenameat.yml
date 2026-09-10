@@ -3,7 +3,7 @@ title: Struct Rrenameat
 body:
 - api1: Struct Rrenameat
   id: NineP_Protocol_Messages_Rrenameat
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rrenameat.cs#L7
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Rrenameat.cs#L7
   metadata:
     uid: NineP.Protocol.Messages.Rrenameat
     commentId: T:NineP.Protocol.Messages.Rrenameat
@@ -39,7 +39,7 @@ body:
 - h2: Constructors
 - api3: Rrenameat(ushort)
   id: NineP_Protocol_Messages_Rrenameat__ctor_System_UInt16_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rrenameat.cs#L7
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Rrenameat.cs#L7
   metadata:
     uid: NineP.Protocol.Messages.Rrenameat.#ctor(System.UInt16)
     commentId: M:NineP.Protocol.Messages.Rrenameat.#ctor(System.UInt16)
@@ -55,7 +55,7 @@ body:
 - h2: Properties
 - api3: Tag
   id: NineP_Protocol_Messages_Rrenameat_Tag
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rrenameat.cs#L7
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Rrenameat.cs#L7
   metadata:
     uid: NineP.Protocol.Messages.Rrenameat.Tag
     commentId: P:NineP.Protocol.Messages.Rrenameat.Tag

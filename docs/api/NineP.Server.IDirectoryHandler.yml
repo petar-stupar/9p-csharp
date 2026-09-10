@@ -3,7 +3,7 @@ title: Interface IDirectoryHandler
 body:
 - api1: Interface IDirectoryHandler
   id: NineP_Server_IDirectoryHandler
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/IDirectoryHandler.cs#L10
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Server/IDirectoryHandler.cs#L10
   metadata:
     uid: NineP.Server.IDirectoryHandler
     commentId: T:NineP.Server.IDirectoryHandler
@@ -28,7 +28,7 @@ body:
 - h2: Methods
 - api3: CreateAsync(CreateRequest, CancellationToken)
   id: NineP_Server_IDirectoryHandler_CreateAsync_NineP_Server_CreateRequest_System_Threading_CancellationToken_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/IDirectoryHandler.cs#L31
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Server/IDirectoryHandler.cs#L31
   metadata:
     uid: NineP.Server.IDirectoryHandler.CreateAsync(NineP.Server.CreateRequest,System.Threading.CancellationToken)
     commentId: M:NineP.Server.IDirectoryHandler.CreateAsync(NineP.Server.CreateRequest,System.Threading.CancellationToken)
@@ -65,7 +65,7 @@ body:
     description: The child could not be created.
 - api3: LookupAsync(string, CancellationToken)
   id: NineP_Server_IDirectoryHandler_LookupAsync_System_String_System_Threading_CancellationToken_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/IDirectoryHandler.cs#L16
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Server/IDirectoryHandler.cs#L16
   metadata:
     uid: NineP.Server.IDirectoryHandler.LookupAsync(System.String,System.Threading.CancellationToken)
     commentId: M:NineP.Server.IDirectoryHandler.LookupAsync(System.String,System.Threading.CancellationToken)
@@ -97,7 +97,7 @@ body:
     description: The child's handler, or null when the name does not exist.
 - api3: ReadDirAsync(ulong, int, CancellationToken)
   id: NineP_Server_IDirectoryHandler_ReadDirAsync_System_UInt64_System_Int32_System_Threading_CancellationToken_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/IDirectoryHandler.cs#L23
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Server/IDirectoryHandler.cs#L23
   metadata:
     uid: NineP.Server.IDirectoryHandler.ReadDirAsync(System.UInt64,System.Int32,System.Threading.CancellationToken)
     commentId: M:NineP.Server.IDirectoryHandler.ReadDirAsync(System.UInt64,System.Int32,System.Threading.CancellationToken)
@@ -133,7 +133,7 @@ body:
     description: The entries, the cursor after them, and whether the directory ended.
 - api3: RemoveAsync(string, FileKind, CancellationToken)
   id: NineP_Server_IDirectoryHandler_RemoveAsync_System_String_NineP_Protocol_FileKind_System_Threading_CancellationToken_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/IDirectoryHandler.cs#L40
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Server/IDirectoryHandler.cs#L40
   metadata:
     uid: NineP.Server.IDirectoryHandler.RemoveAsync(System.String,NineP.Protocol.FileKind,System.Threading.CancellationToken)
     commentId: M:NineP.Server.IDirectoryHandler.RemoveAsync(System.String,NineP.Protocol.FileKind,System.Threading.CancellationToken)
@@ -171,7 +171,7 @@ body:
     description: The child could not be removed.
 - api3: RenameAsync(string, IDirectoryHandler, string, CancellationToken)
   id: NineP_Server_IDirectoryHandler_RenameAsync_System_String_NineP_Server_IDirectoryHandler_System_String_System_Threading_CancellationToken_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/IDirectoryHandler.cs#L49
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Server/IDirectoryHandler.cs#L49
   metadata:
     uid: NineP.Server.IDirectoryHandler.RenameAsync(System.String,NineP.Server.IDirectoryHandler,System.String,System.Threading.CancellationToken)
     commentId: M:NineP.Server.IDirectoryHandler.RenameAsync(System.String,NineP.Server.IDirectoryHandler,System.String,System.Threading.CancellationToken)

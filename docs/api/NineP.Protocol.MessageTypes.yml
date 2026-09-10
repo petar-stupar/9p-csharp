@@ -3,7 +3,7 @@ title: Class MessageTypes
 body:
 - api1: Class MessageTypes
   id: NineP_Protocol_MessageTypes
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/MessageTypes.cs#L11
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/MessageTypes.cs#L11
   metadata:
     uid: NineP.Protocol.MessageTypes
     commentId: T:NineP.Protocol.MessageTypes
@@ -44,7 +44,7 @@ body:
 - h2: Methods
 - api3: GetName(MessageType)
   id: NineP_Protocol_MessageTypes_GetName_NineP_Protocol_MessageType_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/MessageTypes.cs#L51
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/MessageTypes.cs#L51
   metadata:
     uid: NineP.Protocol.MessageTypes.GetName(NineP.Protocol.MessageType)
     commentId: M:NineP.Protocol.MessageTypes.GetName(NineP.Protocol.MessageType)
@@ -65,7 +65,7 @@ body:
     description: The protocol name, or "type &lt;n&gt;" for a number the protocol does not define.
 - api3: IsLegal(MessageType, Dialect)
   id: NineP_Protocol_MessageTypes_IsLegal_NineP_Protocol_MessageType_NineP_Protocol_Dialect_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/MessageTypes.cs#L23
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/MessageTypes.cs#L23
   metadata:
     uid: NineP.Protocol.MessageTypes.IsLegal(NineP.Protocol.MessageType,NineP.Protocol.Dialect)
     commentId: M:NineP.Protocol.MessageTypes.IsLegal(NineP.Protocol.MessageType,NineP.Protocol.Dialect)
@@ -94,7 +94,7 @@ body:
     description: False for an unknown number and for one the dialect does not carry.
 - api3: IsRequest(MessageType)
   id: NineP_Protocol_MessageTypes_IsRequest_NineP_Protocol_MessageType_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/MessageTypes.cs#L31
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/MessageTypes.cs#L31
   metadata:
     uid: NineP.Protocol.MessageTypes.IsRequest(NineP.Protocol.MessageType)
     commentId: M:NineP.Protocol.MessageTypes.IsRequest(NineP.Protocol.MessageType)
@@ -118,7 +118,7 @@ body:
     description: True only for a T-message that may be sent.
 - api3: ReplyOf(MessageType)
   id: NineP_Protocol_MessageTypes_ReplyOf_NineP_Protocol_MessageType_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/MessageTypes.cs#L40
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/MessageTypes.cs#L40
   metadata:
     uid: NineP.Protocol.MessageTypes.ReplyOf(NineP.Protocol.MessageType)
     commentId: M:NineP.Protocol.MessageTypes.ReplyOf(NineP.Protocol.MessageType)

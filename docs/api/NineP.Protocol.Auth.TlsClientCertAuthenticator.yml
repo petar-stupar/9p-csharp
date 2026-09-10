@@ -3,7 +3,7 @@ title: Class TlsClientCertAuthenticator
 body:
 - api1: Class TlsClientCertAuthenticator
   id: NineP_Protocol_Auth_TlsClientCertAuthenticator
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Auth/TlsClientCertAuthenticator.cs#L13
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Auth/TlsClientCertAuthenticator.cs#L13
   metadata:
     uid: NineP.Protocol.Auth.TlsClientCertAuthenticator
     commentId: T:NineP.Protocol.Auth.TlsClientCertAuthenticator
@@ -50,7 +50,7 @@ body:
 - h2: Constructors
 - api3: TlsClientCertAuthenticator(Func<X509Certificate2, Identity?>?)
   id: NineP_Protocol_Auth_TlsClientCertAuthenticator__ctor_System_Func_System_Security_Cryptography_X509Certificates_X509Certificate2_NineP_Protocol_Auth_Identity__
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Auth/TlsClientCertAuthenticator.cs#L19
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Auth/TlsClientCertAuthenticator.cs#L19
   metadata:
     uid: NineP.Protocol.Auth.TlsClientCertAuthenticator.#ctor(System.Func{System.Security.Cryptography.X509Certificates.X509Certificate2,NineP.Protocol.Auth.Identity})
     commentId: M:NineP.Protocol.Auth.TlsClientCertAuthenticator.#ctor(System.Func{System.Security.Cryptography.X509Certificates.X509Certificate2,NineP.Protocol.Auth.Identity})
@@ -77,7 +77,7 @@ body:
 - h2: Properties
 - api3: IsRequired
   id: NineP_Protocol_Auth_TlsClientCertAuthenticator_IsRequired
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Auth/TlsClientCertAuthenticator.cs#L23
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Auth/TlsClientCertAuthenticator.cs#L23
   metadata:
     uid: NineP.Protocol.Auth.TlsClientCertAuthenticator.IsRequired
     commentId: P:NineP.Protocol.Auth.TlsClientCertAuthenticator.IsRequired
@@ -91,7 +91,7 @@ body:
 - h2: Methods
 - api3: BeginAsync(AuthRequest, PeerIdentity?, CancellationToken)
   id: NineP_Protocol_Auth_TlsClientCertAuthenticator_BeginAsync_NineP_Protocol_Auth_AuthRequest_NineP_Protocol_Transports_PeerIdentity_System_Threading_CancellationToken_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Auth/TlsClientCertAuthenticator.cs#L42
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Auth/TlsClientCertAuthenticator.cs#L42
   metadata:
     uid: NineP.Protocol.Auth.TlsClientCertAuthenticator.BeginAsync(NineP.Protocol.Auth.AuthRequest,NineP.Protocol.Transports.PeerIdentity,System.Threading.CancellationToken)
     commentId: M:NineP.Protocol.Auth.TlsClientCertAuthenticator.BeginAsync(NineP.Protocol.Auth.AuthRequest,NineP.Protocol.Transports.PeerIdentity,System.Threading.CancellationToken)
@@ -129,7 +129,7 @@ body:
     description: The session, or null when there is no certificate or the uname disagrees.
 - api3: DefaultMapper(X509Certificate2)
   id: NineP_Protocol_Auth_TlsClientCertAuthenticator_DefaultMapper_System_Security_Cryptography_X509Certificates_X509Certificate2_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Auth/TlsClientCertAuthenticator.cs#L29
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Auth/TlsClientCertAuthenticator.cs#L29
   metadata:
     uid: NineP.Protocol.Auth.TlsClientCertAuthenticator.DefaultMapper(System.Security.Cryptography.X509Certificates.X509Certificate2)
     commentId: M:NineP.Protocol.Auth.TlsClientCertAuthenticator.DefaultMapper(System.Security.Cryptography.X509Certificates.X509Certificate2)

@@ -3,7 +3,7 @@ title: Struct Treaddir
 body:
 - api1: Struct Treaddir
   id: NineP_Protocol_Messages_Treaddir
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Treaddir.cs#L10
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Treaddir.cs#L10
   metadata:
     uid: NineP.Protocol.Messages.Treaddir
     commentId: T:NineP.Protocol.Messages.Treaddir
@@ -39,7 +39,7 @@ body:
 - h2: Constructors
 - api3: Treaddir(ushort, uint, ulong, uint)
   id: NineP_Protocol_Messages_Treaddir__ctor_System_UInt16_System_UInt32_System_UInt64_System_UInt32_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Treaddir.cs#L10
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Treaddir.cs#L10
   metadata:
     uid: NineP.Protocol.Messages.Treaddir.#ctor(System.UInt16,System.UInt32,System.UInt64,System.UInt32)
     commentId: M:NineP.Protocol.Messages.Treaddir.#ctor(System.UInt16,System.UInt32,System.UInt64,System.UInt32)
@@ -70,7 +70,7 @@ body:
 - h2: Properties
 - api3: Count
   id: NineP_Protocol_Messages_Treaddir_Count
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Treaddir.cs#L10
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Treaddir.cs#L10
   metadata:
     uid: NineP.Protocol.Messages.Treaddir.Count
     commentId: P:NineP.Protocol.Messages.Treaddir.Count
@@ -83,7 +83,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Fid
   id: NineP_Protocol_Messages_Treaddir_Fid
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Treaddir.cs#L10
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Treaddir.cs#L10
   metadata:
     uid: NineP.Protocol.Messages.Treaddir.Fid
     commentId: P:NineP.Protocol.Messages.Treaddir.Fid
@@ -96,7 +96,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Offset
   id: NineP_Protocol_Messages_Treaddir_Offset
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Treaddir.cs#L10
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Treaddir.cs#L10
   metadata:
     uid: NineP.Protocol.Messages.Treaddir.Offset
     commentId: P:NineP.Protocol.Messages.Treaddir.Offset
@@ -109,7 +109,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint64
 - api3: Tag
   id: NineP_Protocol_Messages_Treaddir_Tag
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Treaddir.cs#L10
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Treaddir.cs#L10
   metadata:
     uid: NineP.Protocol.Messages.Treaddir.Tag
     commentId: P:NineP.Protocol.Messages.Treaddir.Tag

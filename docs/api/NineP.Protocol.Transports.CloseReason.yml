@@ -3,7 +3,7 @@ title: Enum CloseReason
 body:
 - api1: Enum CloseReason
   id: NineP_Protocol_Transports_CloseReason
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Transports/CloseReason.cs#L8
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Transports/CloseReason.cs#L8
   metadata:
     uid: NineP.Protocol.Transports.CloseReason
     commentId: T:NineP.Protocol.Transports.CloseReason

@@ -543,14 +543,16 @@ internal sealed class Dispatcher(ServerSession session, OpenState openState)
         FileKind kind = KindOfCreatePerm(request.Perm, request.Extension);
         (OpenMode mode, OpenFlags flags) = OpenState.Decode(request.Mode);
 
-        // §8 rule 19: DMAPPEND, DMEXCL and DMTMP are file flags the handler model does not carry,
-        // and MaskAgainstParent used to drop them and answer Rcreate — a plain file where the
-        // client asked for an append-only or exclusive one. The request is refused instead.
-        if ((request.Perm & UnsupportedCreateFlags) != 0)
+        // §8 rule 19: DMAPPEND, DMEXCL and DMTMP are what open(2) lets a create ask for, and
+        // they reach the handler as CreateRequest.FileFlags. DMAUTH and DMMOUNT are the server's
+        // own, and MaskAgainstParent would drop them without a word, so a create asking for
+        // either is refused rather than answered Rcreate for a file that has neither.
+        if ((request.Perm & ModeBits.ServerOwnedFlagBits) != 0)
         {
-            throw new NinePException(new NinePError(
-                "create cannot set DMAPPEND/DMEXCL/DMTMP", Errno.EPERM));
+            throw new NinePException(new NinePError("create cannot set DMAUTH or DMMOUNT", Errno.EPERM));
         }
+
+        FileFlags fileFlags = AttrProjector.FlagsOf(request.Perm) & AttrProjector.SettableFlags;
 
         // open(5): a create that makes a directory must open it for reading.
         if (kind == FileKind.Directory && mode != OpenMode.Read)
@@ -580,7 +582,7 @@ internal sealed class Dispatcher(ServerSession session, OpenState openState)
         }
 
         IHandler created = await CreateChildAsync(
-            request.Fid, request.Name, kind, request.Perm, mode, flags, target, rdev,
+            request.Fid, request.Name, kind, request.Perm, mode, flags, fileFlags, target, rdev,
             Constants.NONUNAME, adopt: true, cancellationToken).ConfigureAwait(false);
 
         await ReplyAsync(pending, new Rcreate(pending.Tag, created.Qid, (uint)session.MaxPayload))
@@ -593,7 +595,8 @@ internal sealed class Dispatcher(ServerSession session, OpenState openState)
         (OpenMode mode, OpenFlags flags) = OpenState.DecodeLinux(request.Flags);
         IHandler created = await CreateChildAsync(
             request.Fid, request.Name, FileKind.File, AttrProjector.MaskCreatePerm(request.Mode),
-            mode, flags, null, null, request.Gid, adopt: true, cancellationToken).ConfigureAwait(false);
+            mode, flags, FileFlags.None, null, null, request.Gid, adopt: true, cancellationToken)
+            .ConfigureAwait(false);
 
         await ReplyAsync(pending, new Rlcreate(pending.Tag, created.Qid, (uint)session.MaxPayload))
             .ConfigureAwait(false);
@@ -603,7 +606,7 @@ internal sealed class Dispatcher(ServerSession session, OpenState openState)
     {
         IHandler created = await CreateChildAsync(
             request.Dfid, request.Name, FileKind.Directory, AttrProjector.MaskCreatePerm(request.Mode),
-            OpenMode.Read, OpenFlags.None, null, null, request.Gid, adopt: false, cancellationToken)
+            OpenMode.Read, OpenFlags.None, FileFlags.None, null, null, request.Gid, adopt: false, cancellationToken)
             .ConfigureAwait(false);
 
         await ReplyAsync(pending, new Rmkdir(pending.Tag, created.Qid)).ConfigureAwait(false);
@@ -614,7 +617,7 @@ internal sealed class Dispatcher(ServerSession session, OpenState openState)
     {
         IHandler created = await CreateChildAsync(
             request.Fid, request.Name, FileKind.Symlink, DirectoryPermMask, OpenMode.Read,
-            OpenFlags.None, request.Symtgt, null, request.Gid, adopt: false, cancellationToken)
+            OpenFlags.None, FileFlags.None, request.Symtgt, null, request.Gid, adopt: false, cancellationToken)
             .ConfigureAwait(false);
 
         await ReplyAsync(pending, new Rsymlink(pending.Tag, created.Qid)).ConfigureAwait(false);
@@ -629,7 +632,7 @@ internal sealed class Dispatcher(ServerSession session, OpenState openState)
 
         IHandler created = await CreateChildAsync(
             request.Dfid, request.Name, kind, AttrProjector.MaskCreatePerm(request.Mode),
-            OpenMode.Read, OpenFlags.None, null, rdev, request.Gid, adopt: false, cancellationToken)
+            OpenMode.Read, OpenFlags.None, FileFlags.None, null, rdev, request.Gid, adopt: false, cancellationToken)
             .ConfigureAwait(false);
 
         await ReplyAsync(pending, new Rmknod(pending.Tag, created.Qid)).ConfigureAwait(false);
@@ -642,6 +645,7 @@ internal sealed class Dispatcher(ServerSession session, OpenState openState)
         uint perm,
         OpenMode mode,
         OpenFlags flags,
+        FileFlags fileFlags,
         string? target,
         DeviceId? rdev,
         uint gid,
@@ -671,6 +675,7 @@ internal sealed class Dispatcher(ServerSession session, OpenState openState)
             Perm = MaskAgainstParent(perm, parent.Perm, kind == FileKind.Directory),
             Mode = mode,
             Flags = flags,
+            FileFlags = fileFlags,
             Target = target,
             Rdev = rdev,
             Gid = gid,
@@ -678,16 +683,52 @@ internal sealed class Dispatcher(ServerSession session, OpenState openState)
         };
 
         IHandler created = await directory.CreateAsync(create, cancellationToken).ConfigureAwait(false);
+        Attr made = await created.GetAttrAsync(cancellationToken).ConfigureAwait(false);
+
+        // §8 rule 19: a success reply is a statement that the file has the flags the create
+        // asked for. A handler that took the request and made a plain file -- one written before
+        // CreateRequest.FileFlags existed, say -- is not answered Rcreate for it: the file is
+        // removed again and the create refused, so the client learns that this tree cannot give
+        // it an append-only, exclusive or temporary file.
+        if ((made.Flags & AttrProjector.SettableFlags) != fileFlags)
+        {
+            await RemoveUnflaggedAsync(directory, name, made.Kind, cancellationToken).ConfigureAwait(false);
+            throw new NinePException(NinePError.FromErrno(Errno.EOPNOTSUPP));
+        }
 
         // §5.5: after a Tcreate or a Tlcreate the same fid represents the new, opened file.
         // Tmkdir, Tsymlink and Tmknod create without opening, so the fid is left alone.
         if (adopt)
         {
-            await AdoptAsync(entry, directory, name, created, kind, mode, flags, cancellationToken)
+            await AdoptAsync(entry, directory, name, created, made, kind, mode, flags, cancellationToken)
                 .ConfigureAwait(false);
         }
 
         return created;
+    }
+
+    /// <summary>
+    /// Removes a file a handler created without the flags the create asked for, before the create
+    /// is refused. A removal that fails is logged and the refusal stands: the client is told the
+    /// truth about the flags either way, and a file left behind is the handler's defect, not a
+    /// reason to answer <c>Rcreate</c>.
+    /// </summary>
+    /// <param name="directory">The parent the file was created in.</param>
+    /// <param name="name">The name it was created under.</param>
+    /// <param name="kind">What the handler made.</param>
+    /// <param name="cancellationToken">Cancels the removal.</param>
+    /// <returns>A task that completes when the removal was attempted.</returns>
+    private async ValueTask RemoveUnflaggedAsync(
+        IDirectoryHandler directory, string name, FileKind kind, CancellationToken cancellationToken)
+    {
+        try
+        {
+            await directory.RemoveAsync(name, kind, cancellationToken).ConfigureAwait(false);
+        }
+        catch (NinePException failure)
+        {
+            session.Options.Logger.CleanupFailedSafely(failure);
+        }
     }
 
     /// <summary>
@@ -702,21 +743,28 @@ internal sealed class Dispatcher(ServerSession session, OpenState openState)
     /// perpetual zero-byte answer. A directory keeps its existing path: it is open, and its reads
     /// go through the directory packer rather than an <c>IOpenFile</c>.
     /// </para>
+    /// <para>
+    /// The open a create performs is an open like any other, so a <c>DMEXCL</c> file created here
+    /// is held exclusively by the creating fid from the moment it exists (§5.5), exactly as
+    /// <see cref="OpenFidAsync"/> would hold it; the lock is released with the fid.
+    /// </para>
     /// </summary>
     /// <param name="entry">The fid that becomes the new file.</param>
     /// <param name="directory">The parent the file was created in.</param>
     /// <param name="name">The name it was created under.</param>
     /// <param name="created">The new handler.</param>
+    /// <param name="made">The attributes the handler answered for the new file.</param>
     /// <param name="kind">The kind the create asked for.</param>
     /// <param name="mode">The access mode the create opens with.</param>
     /// <param name="flags">The flags accompanying it.</param>
     /// <param name="cancellationToken">Cancels the open.</param>
     /// <returns>A task that completes when the fid names the new file.</returns>
-    private static async ValueTask AdoptAsync(
+    private async ValueTask AdoptAsync(
         FidEntry entry,
         IDirectoryHandler directory,
         string name,
         IHandler created,
+        Attr made,
         FileKind kind,
         OpenMode mode,
         OpenFlags flags,
@@ -729,10 +777,23 @@ internal sealed class Dispatcher(ServerSession session, OpenState openState)
 
         if (created is IFileHandler file)
         {
+            bool exclusive = made.Flags.HasFlag(FileFlags.Exclusive);
+            openState.Acquire(made);
+
+            try
+            {
+                entry.Open = await file.OpenAsync(mode, flags, cancellationToken).ConfigureAwait(false);
+            }
+            catch
+            {
+                openState.Release(entry, exclusive);
+                throw;
+            }
+
             entry.State = FidState.Open;
             entry.Mode = mode;
             entry.Flags = flags;
-            entry.Open = await file.OpenAsync(mode, flags, cancellationToken).ConfigureAwait(false);
+            entry.HoldsExclusive = exclusive;
             return;
         }
 
@@ -1053,17 +1114,24 @@ internal sealed class Dispatcher(ServerSession session, OpenState openState)
                 throw new NinePException(new NinePError("wstat cannot change DMDIR", (int)Errno.EPERM));
             }
 
-            // §5.8 and §8 rule 19: DMAPPEND, DMEXCL and DMTMP are settable in Plan 9, but
-            // SetAttr carries no file flags, so FromWstat's 0xFFF mask dropped them and the
-            // client was answered Rwstat for a change that never happened. They are judged
-            // like the other unsettable fields: a value echoed back unchanged asks for
-            // nothing and is a no-op, and only a real change is refused.
-            uint held = asRead is { } record ? record.Mode : FlagBits(current.Flags);
+            // §5.8 and §8 rule 19: DMAPPEND, DMEXCL and DMTMP are settable -- stat(5) says the
+            // directory bit is the one mode bit a wstat cannot change -- and reach the handler as
+            // SetAttr.Flags. They are judged against the file's own flags, in every dialect: a
+            // client that fills a Twstat from the Rstat it just read echoes the bits back and
+            // asks for no change in them, so the handler is given a value only for a real
+            // change. DMAUTH and DMMOUNT are the server's, refused like the other unsettable
+            // fields when they would change.
+            FileFlags asked = AttrProjector.FlagsOf(request.Stat.Mode);
+            FileFlags held = current.Flags;
 
-            if ((request.Stat.Mode & UnsupportedCreateFlags) != (held & UnsupportedCreateFlags))
+            if ((asked & ~AttrProjector.SettableFlags) != (held & ~AttrProjector.SettableFlags))
             {
-                throw new NinePException(new NinePError(
-                    "wstat cannot change DMAPPEND/DMEXCL/DMTMP", (int)Errno.EPERM));
+                throw new NinePException(new NinePError("wstat cannot set DMAUTH or DMMOUNT", (int)Errno.EPERM));
+            }
+
+            if ((asked & AttrProjector.SettableFlags) != (held & AttrProjector.SettableFlags))
+            {
+                update = update with { Flags = asked & AttrProjector.SettableFlags };
             }
         }
 
@@ -1129,8 +1197,9 @@ internal sealed class Dispatcher(ServerSession session, OpenState openState)
         Attr attr = await entry.Handler.GetAttrAsync(cancellationToken).ConfigureAwait(false);
         bool owner = PermissionChecker.IsOwner(attr, entry.Identity);
 
-        if ((update.Perm is not null || update.Gid is not null || update.GroupName is not null
-            || update.Uid is not null || update.MTime is not null || update.MTimeToNow) && !owner)
+        if ((update.Perm is not null || update.Flags is not null || update.Gid is not null
+            || update.GroupName is not null || update.Uid is not null || update.MTime is not null
+            || update.MTimeToNow) && !owner)
         {
             throw new NinePException(NinePError.FromErrno(Errno.EPERM));
         }
@@ -1158,6 +1227,20 @@ internal sealed class Dispatcher(ServerSession session, OpenState openState)
                 openState.Paths.Move(entry.Handler, path.Directory, oldName, path.Directory, renamed, path.Previous);
             }
             entry.Name = renamed;
+        }
+
+        // §8 rule 19: the reply says the file now has these flags, so the file is read back. A
+        // handler that answered the update without applying them -- one written before
+        // SetAttr.Flags existed, say -- has not done the work, and the client is told so rather
+        // than answered Rwstat.
+        if (resolved.Flags is FileFlags wanted)
+        {
+            Attr after = await entry.Handler.GetAttrAsync(cancellationToken).ConfigureAwait(false);
+
+            if ((after.Flags & AttrProjector.SettableFlags) != wanted)
+            {
+                throw new NinePException(NinePError.FromErrno(Errno.EOPNOTSUPP));
+            }
         }
     }
 
@@ -1500,29 +1583,6 @@ internal sealed class Dispatcher(ServerSession session, OpenState openState)
     }
 
     private const uint ModeBitsMask = 0xFFF;
-
-    /// <summary>
-    /// The <c>Tcreate.perm</c> bits reference §8 rule 19 refuses: the handler model has no file
-    /// flags in <c>CreateRequest</c>, so a server that accepted them would answer <c>Rcreate</c>
-    /// for a file it made plain.
-    /// </summary>
-    private const uint UnsupportedCreateFlags = ModeBits.DMAPPEND | ModeBits.DMEXCL | ModeBits.DMTMP;
-
-    /// <summary>
-    /// The <c>DMAPPEND</c>, <c>DMEXCL</c> and <c>DMTMP</c> bits a file's flags project to. It is
-    /// what <c>AttrProjector.ToStat</c> puts in the mode word, computed without a stat record for
-    /// the one caller that has none: a <c>Twstat</c> in a .L session, where there is no stat
-    /// record to project into at all.
-    /// </summary>
-    /// <param name="flags">The file's flags.</param>
-    /// <returns>The three high mode bits reference §8 rule 19 governs.</returns>
-    private static uint FlagBits(FileFlags flags)
-    {
-        uint mode = flags.HasFlag(FileFlags.Append) ? ModeBits.DMAPPEND : 0;
-        mode |= flags.HasFlag(FileFlags.Exclusive) ? ModeBits.DMEXCL : 0;
-        mode |= flags.HasFlag(FileFlags.Temporary) ? ModeBits.DMTMP : 0;
-        return mode;
-    }
 
     /// <summary>
     /// Parses a .u <c>Tcreate.extension</c> of the form <c>"b maj min"</c> or <c>"c maj min"</c>

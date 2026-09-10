@@ -3,7 +3,7 @@ title: Struct Tlink
 body:
 - api1: Struct Tlink
   id: NineP_Protocol_Messages_Tlink
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tlink.cs#L10
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Tlink.cs#L10
   metadata:
     uid: NineP.Protocol.Messages.Tlink
     commentId: T:NineP.Protocol.Messages.Tlink
@@ -39,7 +39,7 @@ body:
 - h2: Constructors
 - api3: Tlink(ushort, uint, uint, string)
   id: NineP_Protocol_Messages_Tlink__ctor_System_UInt16_System_UInt32_System_UInt32_System_String_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tlink.cs#L10
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Tlink.cs#L10
   metadata:
     uid: NineP.Protocol.Messages.Tlink.#ctor(System.UInt16,System.UInt32,System.UInt32,System.String)
     commentId: M:NineP.Protocol.Messages.Tlink.#ctor(System.UInt16,System.UInt32,System.UInt32,System.String)
@@ -70,7 +70,7 @@ body:
 - h2: Properties
 - api3: Dfid
   id: NineP_Protocol_Messages_Tlink_Dfid
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tlink.cs#L10
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Tlink.cs#L10
   metadata:
     uid: NineP.Protocol.Messages.Tlink.Dfid
     commentId: P:NineP.Protocol.Messages.Tlink.Dfid
@@ -83,7 +83,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Fid
   id: NineP_Protocol_Messages_Tlink_Fid
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tlink.cs#L10
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Tlink.cs#L10
   metadata:
     uid: NineP.Protocol.Messages.Tlink.Fid
     commentId: P:NineP.Protocol.Messages.Tlink.Fid
@@ -96,7 +96,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Name
   id: NineP_Protocol_Messages_Tlink_Name
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tlink.cs#L10
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Tlink.cs#L10
   metadata:
     uid: NineP.Protocol.Messages.Tlink.Name
     commentId: P:NineP.Protocol.Messages.Tlink.Name
@@ -109,7 +109,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.string
 - api3: Tag
   id: NineP_Protocol_Messages_Tlink_Tag
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tlink.cs#L10
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Messages/Tlink.cs#L10
   metadata:
     uid: NineP.Protocol.Messages.Tlink.Tag
     commentId: P:NineP.Protocol.Messages.Tlink.Tag

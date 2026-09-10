@@ -49,6 +49,18 @@ internal static class ModeBits
     /// <summary>Sticky (.u, Linux).</summary>
     public const uint DMSETVTX = 0x00010000;
 
+    /// <summary>
+    /// The mode bits a client may set, at create and through <c>Twstat</c> (open(2), stat(5);
+    /// reference §8 rule 19): append-only, exclusive use and temporary.
+    /// </summary>
+    public const uint SettableFlagBits = DMAPPEND | DMEXCL | DMTMP;
+
+    /// <summary>
+    /// The mode bits only a server puts on a file: the authentication file behind an afid and a
+    /// mounted channel. A create or a wstat asking for either is refused (rule 19).
+    /// </summary>
+    public const uint ServerOwnedFlagBits = DMAUTH | DMMOUNT;
+
     /// <summary>The rwx permission bits a 9P2000 stat record carries.</summary>
     public const uint Permissions = 0x000001FF;
 

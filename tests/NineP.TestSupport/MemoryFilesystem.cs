@@ -123,8 +123,22 @@ public abstract class MemoryNode : IHandler
     /// <summary>The numeric group.</summary>
     public uint Gid { get; set; } = 1000;
 
+    /// <summary>The node's file flags: append-only, exclusive use, temporary.</summary>
+    public FileFlags Flags { get; set; }
+
     /// <summary>True for a DMEXCL file: one open fid at a time across every client.</summary>
-    public bool Exclusive { get; set; }
+    public bool Exclusive
+    {
+        get => Flags.HasFlag(FileFlags.Exclusive);
+        set => Flags = value ? Flags | FileFlags.Exclusive : Flags & ~FileFlags.Exclusive;
+    }
+
+    /// <summary>
+    /// Set to answer a <see cref="SetAttr"/> that carries <see cref="SetAttr.Flags"/> with
+    /// success while leaving the flags alone: the handler reference §8 rule 19 guards against,
+    /// one written before the member existed.
+    /// </summary>
+    public bool DropsFlagUpdates { get; set; }
 
     /// <summary>
     /// The creation time, which a tree that does not track one leaves at zero. Reference §8 rule
@@ -147,6 +161,9 @@ public abstract class MemoryNode : IHandler
 
     /// <summary>How many times a handler method was called with an unsupported request.</summary>
     public int Refusals { get; private set; }
+
+    /// <summary>The last update the core handed this node, fsync requests aside.</summary>
+    public SetAttr? LastUpdate { get; private set; }
 
     /// <summary>True once the core has clunked the last fid on this node.</summary>
     public bool WasClunked { get; private set; }
@@ -172,7 +189,7 @@ public abstract class MemoryNode : IHandler
             Qid = Qid,
             Kind = Kind,
             Perm = Perm,
-            Flags = Exclusive ? FileFlags.Exclusive : FileFlags.None,
+            Flags = Flags,
             NLink = 1,
             UserName = Owner,
             GroupName = Group,
@@ -208,6 +225,8 @@ public abstract class MemoryNode : IHandler
             return ValueTask.CompletedTask;
         }
 
+        LastUpdate = update;
+
         // stat(5): a wstat is atomic, so everything is validated before anything is applied.
         if (update.Size is not null && Kind == FileKind.Directory)
         {
@@ -218,6 +237,11 @@ public abstract class MemoryNode : IHandler
         if (update.Perm is uint perm)
         {
             Perm = perm;
+        }
+
+        if (update.Flags is FileFlags flags && !DropsFlagUpdates)
+        {
+            Flags = flags;
         }
 
         if (update.Gid is uint gid)
@@ -332,6 +356,12 @@ public sealed class MemoryDirectory(string name, uint perm, ulong path, MemoryFi
     /// create, say, which reference §8 rule 24 parses out of the .u extension.
     /// </summary>
     public CreateRequest? LastCreate { get; private set; }
+
+    /// <summary>
+    /// Set to create a plain file whatever <see cref="CreateRequest.FileFlags"/> asks for: the
+    /// handler reference §8 rule 19 guards against, one written before the member existed.
+    /// </summary>
+    public bool DropsFileFlags { get; set; }
 
     /// <summary>Adds a child under its own name.</summary>
     /// <typeparam name="TNode">The node type, so a caller keeps the concrete handle.</typeparam>
@@ -450,6 +480,7 @@ public sealed class MemoryDirectory(string name, uint perm, ulong path, MemoryFi
 
         child.Owner = request.Identity.User;
         child.Uid = request.Identity.Uid != Constants.NONUNAME ? request.Identity.Uid : child.Uid;
+        child.Flags = DropsFileFlags ? FileFlags.None : request.FileFlags;
         child.Parent = this;
         Put(request.Name, child);
 

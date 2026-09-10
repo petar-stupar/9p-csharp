@@ -3,7 +3,7 @@ title: Class Limits
 body:
 - api1: Class Limits
   id: NineP_Protocol_Limits
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Limits.cs#L10
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Limits.cs#L10
   metadata:
     uid: NineP.Protocol.Limits
     commentId: T:NineP.Protocol.Limits
@@ -48,7 +48,7 @@ body:
 - h2: Properties
 - api3: AuthTimeout
   id: NineP_Protocol_Limits_AuthTimeout
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Limits.cs#L64
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Limits.cs#L64
   metadata:
     uid: NineP.Protocol.Limits.AuthTimeout
     commentId: P:NineP.Protocol.Limits.AuthTimeout
@@ -61,7 +61,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.timespan
 - api3: Default
   id: NineP_Protocol_Limits_Default
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Limits.cs#L13
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Limits.cs#L13
   metadata:
     uid: NineP.Protocol.Limits.Default
     commentId: P:NineP.Protocol.Limits.Default
@@ -74,7 +74,7 @@ body:
       url: NineP.Protocol.Limits.html
 - api3: FlushReservePerConnection
   id: NineP_Protocol_Limits_FlushReservePerConnection
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Limits.cs#L46
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Limits.cs#L46
   metadata:
     uid: NineP.Protocol.Limits.FlushReservePerConnection
     commentId: P:NineP.Protocol.Limits.FlushReservePerConnection
@@ -90,7 +90,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: IdleTimeout
   id: NineP_Protocol_Limits_IdleTimeout
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Limits.cs#L55
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Limits.cs#L55
   metadata:
     uid: NineP.Protocol.Limits.IdleTimeout
     commentId: P:NineP.Protocol.Limits.IdleTimeout
@@ -103,7 +103,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.timespan
 - api3: MaxAuthBytes
   id: NineP_Protocol_Limits_MaxAuthBytes
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Limits.cs#L61
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Limits.cs#L61
   metadata:
     uid: NineP.Protocol.Limits.MaxAuthBytes
     commentId: P:NineP.Protocol.Limits.MaxAuthBytes
@@ -116,7 +116,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: MaxConnectionsPerListener
   id: NineP_Protocol_Limits_MaxConnectionsPerListener
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Limits.cs#L49
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Limits.cs#L49
   metadata:
     uid: NineP.Protocol.Limits.MaxConnectionsPerListener
     commentId: P:NineP.Protocol.Limits.MaxConnectionsPerListener
@@ -129,7 +129,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: MaxFidsPerConnection
   id: NineP_Protocol_Limits_MaxFidsPerConnection
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Limits.cs#L32
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Limits.cs#L32
   metadata:
     uid: NineP.Protocol.Limits.MaxFidsPerConnection
     commentId: P:NineP.Protocol.Limits.MaxFidsPerConnection
@@ -142,7 +142,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: MaxInFlightPerConnection
   id: NineP_Protocol_Limits_MaxInFlightPerConnection
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Limits.cs#L36
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Limits.cs#L36
   metadata:
     uid: NineP.Protocol.Limits.MaxInFlightPerConnection
     commentId: P:NineP.Protocol.Limits.MaxInFlightPerConnection
@@ -157,7 +157,7 @@ body:
 - markdown: Excess ordinary requests receive EAGAIN; Tflush uses its reserved capacity.
 - api3: MaxInFlightPerListener
   id: NineP_Protocol_Limits_MaxInFlightPerListener
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Limits.cs#L40
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Limits.cs#L40
   metadata:
     uid: NineP.Protocol.Limits.MaxInFlightPerListener
     commentId: P:NineP.Protocol.Limits.MaxInFlightPerListener
@@ -172,7 +172,7 @@ body:
 - markdown: Excess ordinary requests receive EAGAIN; Tflush does not consume this budget.
 - api3: MaxMsize
   id: NineP_Protocol_Limits_MaxMsize
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Limits.cs#L16
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Limits.cs#L16
   metadata:
     uid: NineP.Protocol.Limits.MaxMsize
     commentId: P:NineP.Protocol.Limits.MaxMsize
@@ -185,7 +185,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: MaxNameLength
   id: NineP_Protocol_Limits_MaxNameLength
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Limits.cs#L58
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Limits.cs#L58
   metadata:
     uid: NineP.Protocol.Limits.MaxNameLength
     commentId: P:NineP.Protocol.Limits.MaxNameLength
@@ -198,7 +198,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: MinMsize
   id: NineP_Protocol_Limits_MinMsize
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Limits.cs#L22
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Limits.cs#L22
   metadata:
     uid: NineP.Protocol.Limits.MinMsize
     commentId: P:NineP.Protocol.Limits.MinMsize
@@ -214,7 +214,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: PreNegotiationFrameCap
   id: NineP_Protocol_Limits_PreNegotiationFrameCap
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Limits.cs#L29
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Limits.cs#L29
   metadata:
     uid: NineP.Protocol.Limits.PreNegotiationFrameCap
     commentId: P:NineP.Protocol.Limits.PreNegotiationFrameCap
@@ -232,7 +232,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: ReadHeaderTimeout
   id: NineP_Protocol_Limits_ReadHeaderTimeout
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Limits.cs#L52
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Limits.cs#L52
   metadata:
     uid: NineP.Protocol.Limits.ReadHeaderTimeout
     commentId: P:NineP.Protocol.Limits.ReadHeaderTimeout
@@ -246,7 +246,7 @@ body:
 - h2: Methods
 - api3: Validate()
   id: NineP_Protocol_Limits_Validate
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Limits.cs#L71
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Limits.cs#L71
   metadata:
     uid: NineP.Protocol.Limits.Validate
     commentId: M:NineP.Protocol.Limits.Validate

@@ -3,7 +3,7 @@ title: Interface IFileHandler
 body:
 - api1: Interface IFileHandler
   id: NineP_Server_IFileHandler
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/IFileHandler.cs#L6
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Server/IFileHandler.cs#L6
   metadata:
     uid: NineP.Server.IFileHandler
     commentId: T:NineP.Server.IFileHandler
@@ -23,7 +23,7 @@ body:
 - h2: Methods
 - api3: OpenAsync(OpenMode, OpenFlags, CancellationToken)
   id: NineP_Server_IFileHandler_OpenAsync_NineP_Protocol_OpenMode_NineP_Protocol_OpenFlags_System_Threading_CancellationToken_
-  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/IFileHandler.cs#L14
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Server/IFileHandler.cs#L14
   metadata:
     uid: NineP.Server.IFileHandler.OpenAsync(NineP.Protocol.OpenMode,NineP.Protocol.OpenFlags,System.Threading.CancellationToken)
     commentId: M:NineP.Server.IFileHandler.OpenAsync(NineP.Protocol.OpenMode,NineP.Protocol.OpenFlags,System.Threading.CancellationToken)

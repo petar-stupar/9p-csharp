@@ -40,6 +40,14 @@ public sealed class SetAttrTests
         Assert.False(update.IsFsyncRequest);
     }
 
+    /// <summary>
+    /// A flags-only update is a change (reference §8 rule 19), never mistaken for the fsync an
+    /// all-don't-touch record means (§4.2).
+    /// </summary>
+    [Fact]
+    public void AFlagsOnlyUpdateIsNotAnFsync() =>
+        Assert.False(new SetAttr { Flags = FileFlags.Append }.IsFsyncRequest);
+
     /// <summary>Only the bits the client set are projected; everything else is "don't touch".</summary>
     [Fact]
     public void OnlyMarkedFieldsAreProjected()
