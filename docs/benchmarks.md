@@ -194,3 +194,34 @@ enables local F12. These are resource ceilings and timeout checks, with no throu
 All three full-scale tests are local-only. GitHub Actions runs only the 8 MiB file,
 10000-entry directory and 10000-create versions. The full tests explicitly skip whenever
 `CI` or `GITHUB_ACTIONS` is true or 1, even if their opt-in variables are also set.
+
+## Re-measured for 0.2.0 — 2026-09-10
+
+The abuse budgets of reference §8 rule 40 add a check to the request admission path, so (a), (b)
+and (d) were re-run on the same machine with the release's defaults, where **metering is off** and
+the two address budgets cost one dictionary lookup per connection and per `Tauth`, not per request.
+Everything is inside the 20 % review bound of ARCHITECTURE.md §9.
+
+| Measurement | 0.1.0 | 0.2.0 | Change |
+| --- | --- | --- | --- |
+| (a) 9P2000.L, 1 MiB, read | 1513.6 MiB/s | 1508.2 MiB/s | −0.4 % |
+| (a) 9P2000.L, 1 MiB, write | 1707.3 MiB/s | 1520.8 MiB/s | −10.9 % |
+| (a) 9P2000, 64 KiB, read | 1205.6 MiB/s | 1146.4 MiB/s | −4.9 % |
+| (a) 9P2000, 64 KiB, write | 1104.5 MiB/s | 1156.9 MiB/s | +4.7 % |
+| (b) 100 000 walk + stat + clunk | 5858 ops/s | 5726 ops/s | −2.3 % |
+| (d) `Twalk` decode | 57.82 ns, 200 B | 58.99 ns, 200 B | +2.0 %, allocation unchanged |
+| (d) `Twalk` encode | 37.26 ns, 64 B | 39.12 ns, 64 B | +5.0 %, allocation unchanged |
+| (d) `Rgetattr` decode | 53.44 ns, 0 B | 54.16 ns, 0 B | +1.3 %, still zero |
+| (d) `Rgetattr` encode | 40.88 ns, 0 B | 41.05 ns, 0 B | +0.4 %, still zero |
+
+The 9P2000.L write figure is the one worth a sentence: a −10.9 % move on a single loopback run of
+one gibibyte is within this machine's run-to-run spread and the read on the same dialect moved
+−0.4 %, so it is not read as a regression the budgets caused; a metered run would be, and metering
+is off. The tables above keep their 0.1.0 numbers as the recorded measurement.
+
+(c) peak RSS and the F10–F12 edge-scale numbers were not re-measured. The workloads themselves were
+re-run at their full opt-in sizes (`NINEP_FULL_SCALE=1`, then
+`NINEP_FULL_CREATE_SCALE=1 NINEP_SCALE_MEMORY_MIB=1536 NINEP_SCALE_HEAP_LIMIT=0x40000000`) and
+passed, which asserts every budget those sections state — so the claims still hold even though the
+figures were not re-taken.
+

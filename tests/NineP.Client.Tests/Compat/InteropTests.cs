@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Net;
 using System.Net.Sockets;
+using System.Security.Cryptography;
 using System.Text;
 using NineP.TestSupport;
 using Xunit;
@@ -25,9 +26,25 @@ public sealed class InteropTests
 {
     private const string Unicode = "héllo — 世界 🚀";
 
-    private const string Document = """
-        {"name":"conformance","unicode":"héllo — 世界 🚀","empty":"","dir":{"file.txt":"content of file.txt"},"list":[1,2]}
-        """;
+    /// <summary>
+    /// The length of the file every peer reads in more than one <c>Tread</c>: at msize 4096 the
+    /// payload is 4072 bytes, so this is nine round trips, and plan9port's <c>9p read</c> uses a
+    /// 4096-byte buffer, so it is eight there.
+    /// </summary>
+    private const int ChunkedLength = 32768;
+
+    /// <summary>
+    /// The chunked file's content: every eight-byte block is the zero-padded decimal offset of
+    /// that block, so a chunk delivered out of order, twice or not at all changes the bytes.
+    /// ASCII only, so it is a legal JSON string and the same bytes through every peer.
+    /// </summary>
+    private static readonly string Chunked = BuildChunked();
+
+    private static readonly byte[] ChunkedBytes = Encoding.ASCII.GetBytes(Chunked);
+
+    private static readonly string Document =
+        """{"name":"conformance","unicode":"héllo — 世界 🚀","empty":"","dir":{"file.txt":"content of file.txt"},"list":[1,2],"chunked":"""
+        + "\"" + Chunked + "\"}";
 
     private static CancellationToken Ct => TestDeadlines.Wrap(TestContext.Current.CancellationToken);
 
@@ -49,13 +66,16 @@ public sealed class InteropTests
             string addr = "tcp://127.0.0.1:" + port;
 
             Assert.StartsWith("dialect=9P2000.L", (await Cli(addr, "9P2000.L", "version")).StdoutText, StringComparison.Ordinal);
-            Assert.Equal(["dir/", "empty", "name", "unicode"], Lines((await Cli(addr, "9P2000.L", "ls", "/")).StdoutText).Order(StringComparer.Ordinal));
+            Assert.Equal(["chunked", "dir/", "empty", "name", "unicode"], Lines((await Cli(addr, "9P2000.L", "ls", "/")).StdoutText).Order(StringComparer.Ordinal));
             Assert.Empty((await Cli(addr, "9P2000.L", "cat", "/empty")).Stdout);
             Assert.Equal("conformance", (await Cli(addr, "9P2000.L", "cat", "/name")).StdoutText);
             Assert.Equal(Unicode, (await Cli(addr, "9P2000.L", "cat", "/unicode")).StdoutText);
             Assert.Equal("content of file.txt", (await Cli(addr, "9P2000.L", "cat", "/dir/file.txt")).StdoutText);
             Assert.StartsWith("kind=dir", (await Cli(addr, "9P2000.L", "stat", "/dir")).StdoutText, StringComparison.Ordinal);
             Assert.Equal(["file.txt", "sub/"], Lines((await Cli(addr, "9P2000.L", "ls", "/dir")).StdoutText).Order(StringComparer.Ordinal));
+
+            Assert.Equal("dialect=9P2000.L msize=4096", (await Cli(addr, "9P2000.L", "--msize", "4096", "version")).StdoutText.Trim());
+            Assert.Equal(ChunkedBytes, (await Cli(addr, "9P2000.L", "--msize", "4096", "cat", "/chunked")).Stdout);
         }
         finally
         {
@@ -85,6 +105,7 @@ public sealed class InteropTests
         await RunAsync("docker", [
             "run", "-d", "--name", container, "-p", port + ":5640", .. hosts.Split(' '), image, "sh", "-c",
             "mkdir -p /export/sub && printf 'hello, 9P\\n' > /export/hello.txt && printf 'inner\\n' > /export/sub/inner.txt "
+            + "&& awk 'BEGIN { for (i = 0; i < " + ChunkedLength.ToString(CultureInfo.InvariantCulture) + "; i += 8) printf \"%08d\", i }' > /export/chunked "
             + "&& chmod -R a+rwX /export && exec diod -f -n -l 0.0.0.0:5640 -e /export"]);
         try
         {
@@ -93,10 +114,15 @@ public sealed class InteropTests
             string[] auth = ["--uname", "root", "--aname", "/export"];
 
             Assert.StartsWith("dialect=9P2000.L", (await Cli(addr, "9P2000.L", [.. auth, "version"])).StdoutText, StringComparison.Ordinal);
-            Assert.Equal(["hello.txt", "sub/"], Lines((await Cli(addr, "9P2000.L", [.. auth, "ls", "/"])).StdoutText).Order(StringComparer.Ordinal));
+            Assert.Equal(["chunked", "hello.txt", "sub/"], Lines((await Cli(addr, "9P2000.L", [.. auth, "ls", "/"])).StdoutText).Order(StringComparer.Ordinal));
             Assert.Equal("hello, 9P\n", (await Cli(addr, "9P2000.L", [.. auth, "cat", "/hello.txt"])).StdoutText);
             Assert.Equal("inner\n", (await Cli(addr, "9P2000.L", [.. auth, "cat", "/sub/inner.txt"])).StdoutText);
             Assert.StartsWith("kind=dir", (await Cli(addr, "9P2000.L", [.. auth, "stat", "/sub"])).StdoutText, StringComparison.Ordinal);
+
+            // The peer's own view of the file first, so a defect in the fixture is not blamed on the read.
+            Assert.StartsWith(Sha256(ChunkedBytes), await RunAsync("docker", ["exec", container, "sha256sum", "/export/chunked"]), StringComparison.Ordinal);
+            Assert.Equal("dialect=9P2000.L msize=4096", (await Cli(addr, "9P2000.L", [.. auth, "--msize", "4096", "version"])).StdoutText.Trim());
+            Assert.Equal(ChunkedBytes, (await Cli(addr, "9P2000.L", [.. auth, "--msize", "4096", "cat", "/chunked"])).Stdout);
 
             await Cli(addr, "9P2000.L", [.. auth, "write", "/written.txt"], "from ninep\n"u8.ToArray());
             Assert.Equal("from ninep\n", await RunAsync("docker", ["exec", container, "cat", "/export/written.txt"]));
@@ -107,11 +133,11 @@ public sealed class InteropTests
 
             await Cli(addr, "9P2000.L", [.. auth, "mkdir", "/d1"]);
             await Cli(addr, "9P2000.L", [.. auth, "mv", "/d1", "/d2"]);
-            Assert.Equal(["d2", "hello.txt", "sub", "written.txt"], Lines(await RunAsync("docker", ["exec", container, "ls", "/export"])).Order(StringComparer.Ordinal));
+            Assert.Equal(["chunked", "d2", "hello.txt", "sub", "written.txt"], Lines(await RunAsync("docker", ["exec", container, "ls", "/export"])).Order(StringComparer.Ordinal));
 
             await Cli(addr, "9P2000.L", [.. auth, "rm", "/d2"]);
             await Cli(addr, "9P2000.L", [.. auth, "rm", "/written.txt"]);
-            Assert.Equal(["hello.txt", "sub"], Lines(await RunAsync("docker", ["exec", container, "ls", "/export"])).Order(StringComparer.Ordinal));
+            Assert.Equal(["chunked", "hello.txt", "sub"], Lines(await RunAsync("docker", ["exec", container, "ls", "/export"])).Order(StringComparer.Ordinal));
         }
         finally
         {
@@ -121,6 +147,9 @@ public sealed class InteropTests
 
     /// <summary>
     /// plan9port's <c>9p</c> is a 9P2000 client; it lists, reads and stats our <c>jsonfs</c>.
+    /// <c>9p</c> has no msize flag (<c>usage: 9p [-n] [-a address] [-A aname] cmd args...</c>);
+    /// lib9pclient negotiates 8192 and <c>9p read</c> reads through a 4096-byte buffer, so the
+    /// chunked file is eight <c>Tread</c>s of 4096 bytes.
     /// </summary>
     [Fact]
     public async Task Plan9portClientAgainstOurJsonfs()
@@ -134,19 +163,21 @@ public sealed class InteropTests
         Dictionary<string, string> env = new(StringComparer.Ordinal) { ["PLAN9"] = plan9 };
 
         string listing = await RunAsync(nine, ["-a", dial, "ls", "/"], env);
-        Assert.Equal(["dir", "empty", "list", "name", "unicode"], Lines(listing).Order(StringComparer.Ordinal));
+        Assert.Equal(["chunked", "dir", "empty", "list", "name", "unicode"], Lines(listing).Order(StringComparer.Ordinal));
         Assert.Empty(await RunAsync(nine, ["-a", dial, "read", "/empty"], env));
         Assert.Equal("conformance", await RunAsync(nine, ["-a", dial, "read", "/name"], env));
         Assert.Equal(Unicode, await RunAsync(nine, ["-a", dial, "read", "/unicode"], env));
         Assert.Equal("content of file.txt", await RunAsync(nine, ["-a", dial, "read", "/dir/file.txt"], env));
         Assert.Contains(" d) m 020000000755 ", await RunAsync(nine, ["-a", dial, "stat", "/dir"], env), StringComparison.Ordinal);
         Assert.Equal(["0", "1"], Lines(await RunAsync(nine, ["-a", dial, "ls", "/list"], env)));
+        Assert.Equal(Chunked, await RunAsync(nine, ["-a", dial, "read", "/chunked"], env));
     }
 
     /// <summary>
     /// The Linux kernel's own client, v9fs, mounts our <c>jsonfs</c> from a VM in each dialect and
     /// reads it back byte for byte. The kernel's TCP transport takes a numeric address, so the
-    /// host is named by the address the VM resolves <c>host.lima.internal</c> to.
+    /// host is named by the address the VM resolves <c>host.lima.internal</c> to. A second mount
+    /// with <c>msize=4096</c>, the kernel's minimum, reads the chunked file in nine <c>Tread</c>s.
     /// </summary>
     [Theory]
     [InlineData("9p2000.L")]
@@ -171,23 +202,29 @@ public sealed class InteropTests
 
             string script = string.Format(
                 CultureInfo.InvariantCulture,
-                "set -e; mkdir -p /mnt/ninep-interop; "
+                "set -e; mkdir -p /mnt/ninep-interop /mnt/ninep-interop-4k; "
                 + "mount -t 9p -o trans=tcp,port={0},version={1},access=any,uname=ninep {2} /mnt/ninep-interop; "
                 + "trap 'cd /; umount /mnt/ninep-interop' EXIT; "
                 + "cd /mnt/ninep-interop; test $(wc -c < empty) -eq 0; cat empty; ls; echo ---; cat name; echo; cat unicode; echo; cat dir/file.txt; echo; "
-                + "stat -c '%s %F' name; (echo x > name) 2>&1 || true; cd /",
+                + "stat -c '%s %F' name; (echo x > name) 2>&1 || true; cd /; "
+                + "mount -t 9p -o trans=tcp,port={0},version={1},access=any,uname=ninep,msize=4096 {2} /mnt/ninep-interop-4k; "
+                + "trap 'cd /; umount /mnt/ninep-interop; umount /mnt/ninep-interop-4k' EXIT; "
+                + "cd /mnt/ninep-interop-4k; stat -c '%s' chunked; cat chunked; echo; grep ' /mnt/ninep-interop-4k ' /proc/mounts; cd /",
                 port, version, host);
             string output = await RunAsync("limactl", ["shell", vm, "--", "sudo", "sh", "-c", script]);
             string[] lines = Lines(output);
 
             int separator = Array.IndexOf(lines, "---");
             Assert.True(separator > 0, output);
-            Assert.Equal(["dir", "empty", "list", "name", "unicode"], lines[..separator].Order(StringComparer.Ordinal));
+            Assert.Equal(["chunked", "dir", "empty", "list", "name", "unicode"], lines[..separator].Order(StringComparer.Ordinal));
             Assert.Equal("conformance", lines[separator + 1]);
             Assert.Equal(Unicode, lines[separator + 2]);
             Assert.Equal("content of file.txt", lines[separator + 3]);
             Assert.Equal("11 regular file", lines[separator + 4]);
             Assert.Contains("name", lines[separator + 5], StringComparison.Ordinal);
+            Assert.Equal(ChunkedLength.ToString(CultureInfo.InvariantCulture), lines[separator + 6]);
+            Assert.Equal(Chunked, lines[separator + 7]);
+            Assert.Contains("msize=4096", lines[separator + 8], StringComparison.Ordinal);
         }
         finally
         {
@@ -215,8 +252,22 @@ public sealed class InteropTests
         File.WriteAllText(Path.Combine(root, "unicode"), Unicode);
         File.WriteAllText(Path.Combine(root, "empty"), string.Empty);
         File.WriteAllText(Path.Combine(root, "dir", "file.txt"), "content of file.txt");
+        File.WriteAllBytes(Path.Combine(root, "chunked"), ChunkedBytes);
         return root;
     }
+
+    private static string BuildChunked()
+    {
+        StringBuilder text = new(ChunkedLength);
+        for (int offset = 0; offset < ChunkedLength; offset += 8)
+        {
+            text.Append(offset.ToString("D8", CultureInfo.InvariantCulture));
+        }
+
+        return text.ToString();
+    }
+
+    private static string Sha256(byte[] bytes) => Convert.ToHexStringLower(SHA256.HashData(bytes));
 
     private static Task<CliRun> Cli(string addr, string dialect, params string[] arguments) => Cli(addr, dialect, arguments, null);
 

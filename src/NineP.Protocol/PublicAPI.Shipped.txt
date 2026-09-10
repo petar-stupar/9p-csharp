@@ -162,6 +162,8 @@ NineP.Protocol.FileKind.Socket = 4 -> NineP.Protocol.FileKind
 NineP.Protocol.FileKind.Symlink = 2 -> NineP.Protocol.FileKind
 NineP.Protocol.Limits
 NineP.Protocol.Limits.<Clone>$() -> NineP.Protocol.Limits!
+NineP.Protocol.Limits.AuthFailureWindow.get -> System.TimeSpan
+NineP.Protocol.Limits.AuthFailureWindow.init -> void
 NineP.Protocol.Limits.AuthTimeout.get -> System.TimeSpan
 NineP.Protocol.Limits.AuthTimeout.init -> void
 NineP.Protocol.Limits.Equals(NineP.Protocol.Limits? other) -> bool
@@ -172,6 +174,10 @@ NineP.Protocol.Limits.IdleTimeout.init -> void
 NineP.Protocol.Limits.Limits() -> void
 NineP.Protocol.Limits.MaxAuthBytes.get -> int
 NineP.Protocol.Limits.MaxAuthBytes.init -> void
+NineP.Protocol.Limits.MaxAuthFailuresPerAddress.get -> int
+NineP.Protocol.Limits.MaxAuthFailuresPerAddress.init -> void
+NineP.Protocol.Limits.MaxConnectionsPerAddress.get -> int
+NineP.Protocol.Limits.MaxConnectionsPerAddress.init -> void
 NineP.Protocol.Limits.MaxConnectionsPerListener.get -> int
 NineP.Protocol.Limits.MaxConnectionsPerListener.init -> void
 NineP.Protocol.Limits.MaxFidsPerConnection.get -> int
@@ -184,6 +190,10 @@ NineP.Protocol.Limits.MaxMsize.get -> uint
 NineP.Protocol.Limits.MaxMsize.init -> void
 NineP.Protocol.Limits.MaxNameLength.get -> int
 NineP.Protocol.Limits.MaxNameLength.init -> void
+NineP.Protocol.Limits.MaxRequestsPerSecondPerConnection.get -> int
+NineP.Protocol.Limits.MaxRequestsPerSecondPerConnection.init -> void
+NineP.Protocol.Limits.MaxRequestsPerSecondPerListener.get -> int
+NineP.Protocol.Limits.MaxRequestsPerSecondPerListener.init -> void
 NineP.Protocol.Limits.MinMsize.get -> uint
 NineP.Protocol.Limits.MinMsize.init -> void
 NineP.Protocol.Limits.PreNegotiationFrameCap.get -> uint
@@ -1427,73 +1437,73 @@ const NineP.Protocol.Constants.Version9P2000L = "9P2000.L" -> string!
 const NineP.Protocol.Constants.Version9P2000u = "9P2000.u" -> string!
 const NineP.Protocol.Constants.VersionUnknown = "unknown" -> string!
 const NineP.Protocol.Constants.WebSocketSubprotocol = "9p" -> string!
+const NineP.Protocol.Errno.E2BIG = 7 -> int
 const NineP.Protocol.Errno.EACCES = 13 -> int
 const NineP.Protocol.Errno.EAGAIN = 11 -> int
-const NineP.Protocol.Errno.EBADF = 9 -> int
-const NineP.Protocol.Errno.ECONNREFUSED = 111 -> int
-const NineP.Protocol.Errno.EEXIST = 17 -> int
-const NineP.Protocol.Errno.EFBIG = 27 -> int
-const NineP.Protocol.Errno.EINVAL = 22 -> int
-const NineP.Protocol.Errno.EIO = 5 -> int
-const NineP.Protocol.Errno.EISDIR = 21 -> int
-const NineP.Protocol.Errno.ELOOP = 40 -> int
-const NineP.Protocol.Errno.ENAMETOOLONG = 36 -> int
-const NineP.Protocol.Errno.ENFILE = 23 -> int
-const NineP.Protocol.Errno.ENODATA = 61 -> int
-const NineP.Protocol.Errno.ENOENT = 2 -> int
-const NineP.Protocol.Errno.ENOLCK = 37 -> int
-const NineP.Protocol.Errno.ENOMEM = 12 -> int
-const NineP.Protocol.Errno.ENOSPC = 28 -> int
-const NineP.Protocol.Errno.ENOSYS = 38 -> int
-const NineP.Protocol.Errno.ENOTDIR = 20 -> int
-const NineP.Protocol.Errno.ENOTEMPTY = 39 -> int
-const NineP.Protocol.Errno.ENXIO = 6 -> int
-const NineP.Protocol.Errno.EOPNOTSUPP = 95 -> int
-const NineP.Protocol.Errno.EOVERFLOW = 75 -> int
-const NineP.Protocol.Errno.EPERM = 1 -> int
-const NineP.Protocol.Errno.EPROTO = 71 -> int
-const NineP.Protocol.Errno.ERANGE = 34 -> int
-const NineP.Protocol.Errno.EROFS = 30 -> int
-const NineP.Protocol.Errno.E2BIG = 7 -> int
 const NineP.Protocol.Errno.EALREADY = 114 -> int
+const NineP.Protocol.Errno.EBADF = 9 -> int
 const NineP.Protocol.Errno.EBADFD = 77 -> int
 const NineP.Protocol.Errno.EBADMSG = 74 -> int
 const NineP.Protocol.Errno.EBUSY = 16 -> int
 const NineP.Protocol.Errno.ECOMM = 70 -> int
 const NineP.Protocol.Errno.ECONNABORTED = 103 -> int
+const NineP.Protocol.Errno.ECONNREFUSED = 111 -> int
 const NineP.Protocol.Errno.ECONNRESET = 104 -> int
 const NineP.Protocol.Errno.EDEADLK = 35 -> int
 const NineP.Protocol.Errno.EDOM = 33 -> int
 const NineP.Protocol.Errno.EDQUOT = 122 -> int
+const NineP.Protocol.Errno.EEXIST = 17 -> int
 const NineP.Protocol.Errno.EFAULT = 14 -> int
+const NineP.Protocol.Errno.EFBIG = 27 -> int
 const NineP.Protocol.Errno.EHOSTDOWN = 112 -> int
 const NineP.Protocol.Errno.EHOSTUNREACH = 113 -> int
 const NineP.Protocol.Errno.EIDRM = 43 -> int
 const NineP.Protocol.Errno.EINPROGRESS = 115 -> int
 const NineP.Protocol.Errno.EINTR = 4 -> int
+const NineP.Protocol.Errno.EINVAL = 22 -> int
+const NineP.Protocol.Errno.EIO = 5 -> int
 const NineP.Protocol.Errno.EISCONN = 106 -> int
+const NineP.Protocol.Errno.EISDIR = 21 -> int
 const NineP.Protocol.Errno.EISNAM = 120 -> int
+const NineP.Protocol.Errno.ELOOP = 40 -> int
 const NineP.Protocol.Errno.EMFILE = 24 -> int
 const NineP.Protocol.Errno.EMLINK = 31 -> int
 const NineP.Protocol.Errno.EMSGSIZE = 90 -> int
+const NineP.Protocol.Errno.ENAMETOOLONG = 36 -> int
 const NineP.Protocol.Errno.ENETDOWN = 100 -> int
 const NineP.Protocol.Errno.ENETRESET = 102 -> int
 const NineP.Protocol.Errno.ENETUNREACH = 101 -> int
+const NineP.Protocol.Errno.ENFILE = 23 -> int
 const NineP.Protocol.Errno.ENOBUFS = 105 -> int
+const NineP.Protocol.Errno.ENODATA = 61 -> int
 const NineP.Protocol.Errno.ENODEV = 19 -> int
+const NineP.Protocol.Errno.ENOENT = 2 -> int
+const NineP.Protocol.Errno.ENOLCK = 37 -> int
 const NineP.Protocol.Errno.ENOLINK = 67 -> int
+const NineP.Protocol.Errno.ENOMEM = 12 -> int
 const NineP.Protocol.Errno.ENOMSG = 42 -> int
 const NineP.Protocol.Errno.ENONET = 64 -> int
 const NineP.Protocol.Errno.ENOPKG = 65 -> int
 const NineP.Protocol.Errno.ENOPROTOOPT = 92 -> int
+const NineP.Protocol.Errno.ENOSPC = 28 -> int
+const NineP.Protocol.Errno.ENOSYS = 38 -> int
 const NineP.Protocol.Errno.ENOTBLK = 15 -> int
 const NineP.Protocol.Errno.ENOTCONN = 107 -> int
+const NineP.Protocol.Errno.ENOTDIR = 20 -> int
+const NineP.Protocol.Errno.ENOTEMPTY = 39 -> int
 const NineP.Protocol.Errno.ENOTSOCK = 88 -> int
+const NineP.Protocol.Errno.ENXIO = 6 -> int
+const NineP.Protocol.Errno.EOPNOTSUPP = 95 -> int
+const NineP.Protocol.Errno.EOVERFLOW = 75 -> int
+const NineP.Protocol.Errno.EPERM = 1 -> int
 const NineP.Protocol.Errno.EPFNOSUPPORT = 96 -> int
 const NineP.Protocol.Errno.EPIPE = 32 -> int
+const NineP.Protocol.Errno.EPROTO = 71 -> int
 const NineP.Protocol.Errno.EPROTONOSUPPORT = 93 -> int
+const NineP.Protocol.Errno.ERANGE = 34 -> int
 const NineP.Protocol.Errno.EREMOTE = 66 -> int
 const NineP.Protocol.Errno.EREMOTEIO = 121 -> int
+const NineP.Protocol.Errno.EROFS = 30 -> int
 const NineP.Protocol.Errno.ESHUTDOWN = 108 -> int
 const NineP.Protocol.Errno.ESOCKTNOSUPPORT = 94 -> int
 const NineP.Protocol.Errno.ESPIPE = 29 -> int

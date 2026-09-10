@@ -39,6 +39,8 @@ internal sealed class ServerSession : IAsyncDisposable
     private readonly TagTable _tags = new();
     private readonly Dispatcher _dispatcher;
     private readonly SemaphoreSlim _listenerInFlight;
+    private readonly TokenBucket _listenerRate;
+    private readonly TokenBucket _rate;
     private readonly SemaphoreSlim _general;
     private readonly SemaphoreSlim _flushSlots;
     private readonly WorkerCounter _workers = new();
@@ -62,13 +64,17 @@ internal sealed class ServerSession : IAsyncDisposable
     /// <param name="metrics">The counters this connection contributes to.</param>
     /// <param name="openState">The server-wide open state, which owns the DMEXCL registry.</param>
     /// <param name="listenerInFlight">The listener-wide in-flight budget (reference §8 rule 8).</param>
+    /// <param name="listenerRate">The listener-wide request rate budget (reference §8 rule 40).</param>
+    /// <param name="authThrottle">The server-wide per-address auth budget (reference §8 rule 40).</param>
     public ServerSession(
         INinePConnection connection,
         ServerOptions options,
         IFilesystem filesystem,
         ServerMetrics metrics,
         OpenState openState,
-        SemaphoreSlim? listenerInFlight = null)
+        SemaphoreSlim? listenerInFlight = null,
+        TokenBucket? listenerRate = null,
+        AuthThrottle? authThrottle = null)
     {
         ArgumentNullException.ThrowIfNull(connection);
         ArgumentNullException.ThrowIfNull(options);
@@ -93,6 +99,16 @@ internal sealed class ServerSession : IAsyncDisposable
         _flushSlots = new SemaphoreSlim(
             options.Limits.FlushReservePerConnection, options.Limits.FlushReservePerConnection);
         _listenerInFlight = listenerInFlight ?? new SemaphoreSlim(options.Limits.MaxInFlightPerListener);
+        _listenerRate = listenerRate ?? new TokenBucket(
+            options.Limits.MaxRequestsPerSecondPerListener,
+            options.Limits.MaxInFlightPerListener,
+            options.TimeProvider);
+        _rate = new TokenBucket(
+            options.Limits.MaxRequestsPerSecondPerConnection, GeneralCapacity, options.TimeProvider);
+        AuthThrottle = authThrottle ?? new AuthThrottle(
+            options.Limits.MaxAuthFailuresPerAddress,
+            options.Limits.AuthFailureWindow,
+            options.TimeProvider);
         _frames = new FrameReader(_inbound.Reader, options.Limits, ArrayPool<byte>.Shared);
         _replies = Channel.CreateBounded<PendingReply>(new BoundedChannelOptions(options.Limits.MaxInFlightPerConnection)
         {
@@ -131,11 +147,38 @@ internal sealed class ServerSession : IAsyncDisposable
     /// <summary>What the transport learned about the peer, for an authenticator that wants it.</summary>
     public PeerIdentity? PeerIdentity => _connection.PeerIdentity;
 
+    /// <summary>
+    /// The peer's address for the per-address budgets of reference §8 rule 40, or null when there
+    /// is no untrusted remote to attribute anything to. It is the host alone: the port changes with
+    /// every connection, so a budget keyed on it would be no budget. An in-process endpoint is
+    /// exempt — whoever can dial it already runs inside this process, and capping it would bound
+    /// an embedded host's own connections.
+    /// </summary>
+    public string? PeerAddress => PeerAddressOf(_connection);
+
+    /// <summary>The address budgets are keyed on, or null when the peer is not a network peer.</summary>
+    /// <param name="connection">The connection to read.</param>
+    /// <returns>The host, or null.</returns>
+    public static string? PeerAddressOf(INinePConnection connection)
+    {
+        ArgumentNullException.ThrowIfNull(connection);
+
+        return connection.RemoteAddress.Scheme == NinePScheme.Memory
+            ? null
+            : connection.RemoteAddress.Host is { Length: > 0 } host ? host : null;
+    }
+
     /// <summary>Requests other than <c>Tflush</c> this connection may have in flight at once.</summary>
     public int GeneralCapacity { get; }
 
     /// <summary>Replies waiting behind the writer, for bounded-channel diagnostics.</summary>
     internal int QueuedReplies => _replies.Reader.Count;
+
+    /// <summary>The server-wide per-address authentication budget (reference §8 rule 40).</summary>
+    public AuthThrottle AuthThrottle { get; }
+
+    /// <summary>The counters this connection contributes to.</summary>
+    public ServerMetrics Metrics => _metrics;
 
     /// <summary>General slots still free; excess ordinary requests receive EAGAIN.</summary>
     public int GeneralAvailable => _general.CurrentCount;
@@ -417,6 +460,16 @@ internal sealed class ServerSession : IAsyncDisposable
         }
 
         cancellationToken.ThrowIfCancellationRequested();
+
+        // Reference §8 rule 40: a metered request is refused, never delayed, so the reader stays
+        // free for the Tflush that cancels it. Tflush and Tversion never reach here.
+        if (!_rate.TryTake() || !_listenerRate.TryTake())
+        {
+            _metrics.RequestMetered();
+            await CompleteAsync(pending, NinePError.FromErrno(Errno.EAGAIN)).ConfigureAwait(false);
+            return;
+        }
+
         if (!_general.Wait(0, CancellationToken.None))
         {
             await CompleteAsync(pending, NinePError.FromErrno(Errno.EAGAIN)).ConfigureAwait(false);

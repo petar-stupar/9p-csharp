@@ -218,3 +218,16 @@ writes in jsonfs. Different fids can still execute concurrently.
 ## Setattr boundary policy
 
 After fid validation, a literal `.L` zero valid mask returns success without invoking SetAttr or fsync. ATIME_SET/MTIME_SET require their corresponding base bits; malformed masks fail EINVAL before any field changes. This is the explicit workspace §4.6 policy. Directory size changes are checked after write permission: legacy wstat permits zero to reach the handler and rejects nonzero; `.L` rejects either. All-don't-touch wstat and explicit Tfsync keep their existing semantics.
+
+## Bounding an abusive peer
+
+The core owns the budgets of reference §8 rule 40 — request metering, the per-address connection
+cap and the per-address authentication budget — because only it can refuse one request while
+leaving the reader free for a `Tflush`, and only it sees every listener at once. They are
+configured on `Limits`; see [security.md](security.md) §6 for the defaults and why metering ships
+off.
+
+Storage quotas are the handler's, and policy beyond these three is composed, not inherited: the
+shipped transports are sealed, and the seam is `ITransport` / `INinePConnection` (the test
+support's `FaultyTransport` is a worked decorator), `IAuthenticator.BeginAsync`, which receives the
+`PeerIdentity`, for bespoke credential policy, and `IRequestLogSink` for detection.

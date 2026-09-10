@@ -15,3 +15,6 @@ bin/
 obj/
 artifacts/
 BenchmarkDotNet.Artifacts/
+
+# Agent worktrees are checkouts of this repository, never content of it.
+.claude/worktrees/

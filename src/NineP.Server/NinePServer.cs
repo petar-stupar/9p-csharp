@@ -15,6 +15,7 @@ public sealed class NinePServer : IAsyncDisposable
     private readonly ServerOptions _options;
     private readonly ServerMetrics _metrics = new();
     private readonly OpenState _openState = new();
+    private readonly AuthThrottle _authThrottle;
     private readonly List<ListenerContext> _listeners = [];
     private readonly CancellationTokenSource _stopping = new();
     private readonly TaskCompletionSource _listening =
@@ -43,6 +44,13 @@ public sealed class NinePServer : IAsyncDisposable
 
         options.Limits.Validate();
         _options = options;
+
+        // Server-wide, not per listener: a budget a peer resets by moving from tls:// to tcp://
+        // would be no budget.
+        _authThrottle = new AuthThrottle(
+            options.Limits.MaxAuthFailuresPerAddress,
+            options.Limits.AuthFailureWindow,
+            options.TimeProvider);
     }
 
     /// <summary>Addresses actually bound, with real ports; valid once serving has started.</summary>
@@ -182,7 +190,7 @@ public sealed class NinePServer : IAsyncDisposable
                     nameof(cancellationToken));
 
             INinePListener listener = await transport.ListenAsync(address, cancellationToken).ConfigureAwait(false);
-            ListenerContext context = new(listener, _options, _metrics, _openState);
+            ListenerContext context = new(listener, _options, _metrics, _openState, _authThrottle);
 
             lock (_listeners)
             {

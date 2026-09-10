@@ -1017,6 +1017,26 @@ public int MaxConnectionsPerListener { get; init; } = 1024;
 Accepted connections per listener. Default 1024.
 
 ```csharp
+public int MaxConnectionsPerAddress { get; init; } = 64;
+```
+Live connections one peer address may hold; 0 disables the cap (reference §8 rule 40). Default 64.
+
+```csharp
+public int MaxRequestsPerSecondPerConnection { get; init; }
+public int MaxRequestsPerSecondPerListener { get; init; }
+```
+Ordinary requests per second one connection, and one listener, may sustain; 0 disables metering,
+which is the default. The burst is the corresponding in-flight budget, and `Tversion` and `Tflush`
+are never metered (reference §8 rule 40).
+
+```csharp
+public int MaxAuthFailuresPerAddress { get; init; } = 32;
+public TimeSpan AuthFailureWindow { get; init; } = TimeSpan.FromMinutes(1);
+```
+Authentications one address may begin inside the window without one of them reaching a successful
+attach, before `Tauth` is refused without asking the authenticator; 0 disables the budget.
+
+```csharp
 public TimeSpan ReadHeaderTimeout { get; init; } = TimeSpan.FromSeconds(30);
 ```
 How long a connection may take to deliver a complete frame header. Default 30 s.
@@ -2632,9 +2652,12 @@ Bytes read from and written to transports.
 public long ConnectionsAccepted { get; init; }
 public long ConnectionsOpen { get; init; }
 public long ConnectionsRefused { get; init; }
+public long RequestsMetered { get; init; }
+public long AuthAttemptsThrottled { get; init; }
 ```
 Connections accepted since the server started, currently open, and closed because a limit was
-reached.
+reached; then the requests and the authentications refused for the abuse budgets of reference §8
+rule 40.
 
 ### `RequestLogEntry`
 

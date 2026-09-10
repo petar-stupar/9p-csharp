@@ -23,6 +23,8 @@ internal sealed class Dispatcher(ServerSession session, OpenState openState)
     /// </summary>
     private static readonly NinePError AuthenticationNotRequired = new("authentication not required", Errno.ECONNREFUSED);
 
+    private static readonly NinePError AuthenticationFailed = NinePError.FromEname("authentication failed");
+
     private const uint FilePermMask = 0x1B6;
     private const uint DirectoryPermMask = 0x1FF;
 
@@ -366,6 +368,20 @@ internal sealed class Dispatcher(ServerSession session, OpenState openState)
             throw new NinePException(AuthenticationNotRequired);
         }
 
+        // Reference §8 rule 40: past the budget the exchange is refused before the authenticator
+        // is asked, so the credential check — a PBKDF2 derivation that costs the same for an
+        // unknown user as for a known one — is never paid for by a peer that is guessing.
+        string? peer = session.PeerAddress;
+        if (!session.AuthThrottle.MayAttempt(peer))
+        {
+            session.Metrics.AuthThrottled();
+            session.Options.Logger.AuthAttemptsThrottled(
+                UntrustedText.Sanitize(peer!), session.Options.Limits.MaxAuthFailuresPerAddress);
+            throw new NinePException(AuthenticationFailed);
+        }
+
+        session.AuthThrottle.RecordAttempt(peer);
+
         AuthRequest binding = new(request.Uname, request.NUname, request.Aname);
         IAuthSession? exchange = await authenticator
             .BeginAsync(binding, session.PeerIdentity, cancellationToken).ConfigureAwait(false);
@@ -396,6 +412,10 @@ internal sealed class Dispatcher(ServerSession session, OpenState openState)
         Tattach request, PendingRequest pending, CancellationToken cancellationToken)
     {
         Identity identity = await ResolveIdentityAsync(request).ConfigureAwait(false);
+
+        // Rule 40: an attach that got through is what clears the address's budget. Everything the
+        // budget counts is an exchange that began and did not end here.
+        session.AuthThrottle.RecordSuccess(session.PeerAddress);
         IDirectoryHandler root = await session.Filesystem
             .AttachAsync(identity, request.Aname, cancellationToken).ConfigureAwait(false);
 
@@ -421,7 +441,7 @@ internal sealed class Dispatcher(ServerSession session, OpenState openState)
             // authenticated transport. A server that requires authentication says so instead.
             if (session.Options.Authenticator is { IsRequired: true })
             {
-                throw new NinePException(NinePError.FromEname("authentication failed"));
+                throw new NinePException(AuthenticationFailed);
             }
 
             return ValueTask.FromResult(Identity.Anonymous(request.Uname, request.NUname));
@@ -443,12 +463,12 @@ internal sealed class Dispatcher(ServerSession session, OpenState openState)
 
         if (!unameAgrees || !uidAgrees || !anameAgrees)
         {
-            throw new NinePException(NinePError.FromEname("authentication failed"));
+            throw new NinePException(AuthenticationFailed);
         }
 
         // The session runs as whoever the exchange proved, never as the uname the client claimed.
         return ValueTask.FromResult(afid.AuthSession?.Identity
-            ?? throw new NinePException(NinePError.FromEname("authentication failed")));
+            ?? throw new NinePException(AuthenticationFailed));
     }
 
     private async ValueTask WalkAsync(Twalk request, PendingRequest pending, CancellationToken cancellationToken)

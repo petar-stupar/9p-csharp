@@ -21,7 +21,8 @@ printed line is how you learn it.
 
 ```text
 usage: jsonfs --listen <url> [--listen <url>...] --file <path.json> [--writable]
-              [--write-back] [--dialects 9P2000,9P2000.u,9P2000.L]
+              [--write-back] [--write-back-delay <ms>] [--max-entries <n>]
+              [--dialects 9P2000,9P2000.u,9P2000.L]
               [--auth none|token:<secret>|password-file:<path>]
               [--tls-cert <pem> --tls-key <pem> --tls-client-ca <pem>]
               [--ws-origin <origin>...] [--msize <bytes>] [--log <level>]
@@ -30,9 +31,11 @@ usage: jsonfs --listen <url> [--listen <url>...] --file <path.json> [--writable]
 | Flag | Meaning |
 | --- | --- |
 | `--listen <url>` | `tcp://host:port`, `tls://host:port`, `ws://host:port/path` or `wss://host:port/path`; repeatable |
-| `--file <path.json>` | the document to serve; refused above 64 MiB or 256 levels of nesting |
+| `--file <path.json>` | the document to serve; refused above 64 MiB, 256 levels of nesting or `--max-entries` entries |
 | `--writable` | allow writes, creates, removes and renames in memory; the default is read-only |
 | `--write-back` | **implies `--writable`** (there is nothing to write back from a read-only server), and rewrites the source file atomically after each change |
+| `--write-back-delay <ms>` | **implies `--write-back`**: coalesce every change inside a window of this many milliseconds into one rewrite; `0` (the default) rewrites inside each change, and a graceful stop writes back what the last window still owes |
+| `--max-entries <n>` | the most entries (object keys and array elements, anywhere in the document) the served document may hold, `100000` by default; a create or `mkdir` past it is `ENOSPC`, and a document already past it is refused at startup |
 | `--dialects` | which of `9P2000`, `9P2000.u`, `9P2000.L` to offer; all three by default |
 | `--auth` | the authenticator, see below; `none` by default |
 | `--tls-cert`, `--tls-key` | the server certificate and key, PEM, needed by `tls://` and `wss://` |

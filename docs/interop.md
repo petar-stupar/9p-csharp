@@ -191,3 +191,18 @@ dotnet test --project tests/NineP.Client.Tests -f net10.0 --no-build -- --filter
 ```
 
 An additional exploratory `: > name` probe against `jsonfs --writable` through Linux did **not** pass: this kernel reported Permission denied for 9P2000.u/L and Operation not supported for 9P2000. No successful Linux truncation claim is made, and no extra production fix was included in the approved test-audit change. These three probes are outside the six passing cases. The existing read-only refusal assertions remain intact; an EXIT trap now unmounts the test mount even when a command fails.
+
+## Multi-chunk reads — 2026-09-10
+
+Every peer row now also reads a 32768-byte file whose every eight-byte block is the zero-padded
+decimal offset of that block (`00000000`, `00000008`, …), so a `Tread` answered out of order, twice
+or not at all changes the bytes rather than only the count. Against `p9ufs` and diod our cli runs
+with `--msize 4096`; the test asserts the negotiated `msize=4096` and compares `cat` byte for byte,
+which at a 4072-byte payload is nine `Tread`s, and diod's copy is generated in the container and its
+sha256 checked there first. plan9port's `9p` has no msize flag — lib9pclient negotiates 8192 and
+`9p read` goes through a 4096-byte buffer — so its read is eight `Tread`s, compared to the exact
+text. Linux v9fs mounts a second time with `msize=4096`, the kernel's minimum, in each of the three
+dialects; the test asserts the size, the exact bytes and that `/proc/mounts` reports `msize=4096`
+for that mount. All six cases passed: p9ufs v0.4.1, diod 1.0.24-5, plan9port `b6564bd9`, Linux
+6.1.0-53-arm64 in the `ninep` Lima VM.
+

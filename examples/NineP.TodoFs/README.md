@@ -14,7 +14,7 @@ Every command below is run from the repository root and assumes the .NET 10 SDK 
 ```text
 usage: todofs --listen <url>... --db <path.sqlite> --oidc-issuer <url>
               --oidc-audience <aud> [--admin-role todofs-admin] [--jwks-cache <secs>]
-              [--allow-insecure-issuer]
+              [--allow-insecure-issuer] [--max-lists 1000] [--max-items 10000]
               [--dialects 9P2000,9P2000.u,9P2000.L]
               [--tls-cert <pem> --tls-key <pem> --tls-client-ca <pem>] [--log <level>]
 ```
@@ -28,6 +28,8 @@ usage: todofs --listen <url>... --db <path.sqlite> --oidc-issuer <url>
 | `--admin-role` | the realm role that may read and write `/users/ctl`; `todofs-admin` by default |
 | `--jwks-cache <secs>` | how long the realm's signing keys are cached; five minutes by default, and **raised to five minutes** when a shorter one is asked for |
 | `--allow-insecure-issuer` | fetch discovery and keys over plain HTTP; for a loopback development issuer only |
+| `--max-lists <n>` | the most lists one user may hold, `1000` by default; the `mkdir` that would exceed it is `ENOSPC` and nothing is created |
+| `--max-items <n>` | the most items one list may hold, `10000` by default; the `mkdir` that would exceed it is `ENOSPC` and nothing is created |
 | `--tls-cert`, `--tls-key`, `--tls-client-ca` | as for jsonfs, see [its README](../NineP.JsonFs/README.md#tls) |
 | `--log` | `trace`, `debug`, `info`, `warn` (default), `error` or `none`, to standard error |
 

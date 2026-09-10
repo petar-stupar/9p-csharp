@@ -34,4 +34,10 @@ public sealed record ServerCounters
 
     /// <summary>Connections closed because a limit was reached.</summary>
     public long ConnectionsRefused { get; init; }
+
+    /// <summary>Requests refused for the rate budget (reference §8 rule 40).</summary>
+    public long RequestsMetered { get; init; }
+
+    /// <summary>Authentications refused for the per-address budget (reference §8 rule 40).</summary>
+    public long AuthAttemptsThrottled { get; init; }
 }

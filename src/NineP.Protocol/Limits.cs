@@ -48,6 +48,43 @@ public sealed record Limits
     /// <summary>Accepted connections per listener. Default 1024.</summary>
     public int MaxConnectionsPerListener { get; init; } = 1024;
 
+    /// <summary>
+    /// Live connections one peer address may hold; 0 disables the cap. It bounds the share of
+    /// <see cref="MaxConnectionsPerListener"/> a single host can take, so a flood from one
+    /// machine cannot lock every other client out. Unlike the listener cap, which leaves an
+    /// excess connection in the kernel's backlog, an excess connection here is accepted (the
+    /// address is not known before that) and then closed at once. Default 64.
+    /// </summary>
+    public int MaxConnectionsPerAddress { get; init; } = 64;
+
+    /// <summary>
+    /// Ordinary requests per second one connection may sustain; 0 disables metering, which is the
+    /// default because only the operator knows what a request costs their handler. The burst is
+    /// the connection's own in-flight budget, so a client inside its window is never refused for
+    /// the rate. Excess requests are answered EAGAIN at once; <c>Tflush</c> and <c>Tversion</c>
+    /// are never metered. Default 0.
+    /// </summary>
+    public int MaxRequestsPerSecondPerConnection { get; init; }
+
+    /// <summary>
+    /// Ordinary requests per second across every connection of one listener; 0 disables metering.
+    /// Default 0.
+    /// </summary>
+    public int MaxRequestsPerSecondPerListener { get; init; }
+
+    /// <summary>
+    /// Authentications one peer address may begin inside <see cref="AuthFailureWindow"/> without
+    /// one of them reaching a successful attach, before its <c>Tauth</c> is refused without asking
+    /// the authenticator at all; 0 disables the budget. A successful attach clears the address, so
+    /// what this bounds is failed and abandoned exchanges. The default is generous enough for a
+    /// client that opens several attaches at once — v9fs <c>access=user</c> does — and still
+    /// leaves a guesser paying for nothing. Default 32.
+    /// </summary>
+    public int MaxAuthFailuresPerAddress { get; init; } = 32;
+
+    /// <summary>The window <see cref="MaxAuthFailuresPerAddress"/> counts in. Default 1 min.</summary>
+    public TimeSpan AuthFailureWindow { get; init; } = TimeSpan.FromMinutes(1);
+
     /// <summary>How long a connection may take to deliver a complete frame header. Default 30 s.</summary>
     public TimeSpan ReadHeaderTimeout { get; init; } = TimeSpan.FromSeconds(30);
 
@@ -77,6 +114,10 @@ public sealed record Limits
         Positive(MaxInFlightPerConnection, nameof(MaxInFlightPerConnection));
         Positive(MaxInFlightPerListener, nameof(MaxInFlightPerListener));
         Positive(MaxConnectionsPerListener, nameof(MaxConnectionsPerListener));
+        NotNegative(MaxConnectionsPerAddress, nameof(MaxConnectionsPerAddress));
+        NotNegative(MaxRequestsPerSecondPerConnection, nameof(MaxRequestsPerSecondPerConnection));
+        NotNegative(MaxRequestsPerSecondPerListener, nameof(MaxRequestsPerSecondPerListener));
+        NotNegative(MaxAuthFailuresPerAddress, nameof(MaxAuthFailuresPerAddress));
         Positive(MaxNameLength, nameof(MaxNameLength));
         Positive(MaxAuthBytes, nameof(MaxAuthBytes));
 
@@ -97,11 +138,20 @@ public sealed record Limits
         NotNegative(ReadHeaderTimeout, nameof(ReadHeaderTimeout));
         NotNegative(IdleTimeout, nameof(IdleTimeout));
         NotNegative(AuthTimeout, nameof(AuthTimeout));
+        NotNegative(AuthFailureWindow, nameof(AuthFailureWindow));
 
         if (MaxNameLength > Constants.MaxNameLength)
         {
             throw new ArgumentOutOfRangeException(
                 nameof(MaxNameLength), MaxNameLength, "a name may never exceed 255 bytes");
+        }
+    }
+
+    private static void NotNegative(long value, string name)
+    {
+        if (value < 0)
+        {
+            throw new ArgumentOutOfRangeException(name, value, "must not be negative");
         }
     }
 

@@ -18,6 +18,8 @@ internal sealed class ServerMetrics
     private long _accepted;
     private long _open;
     private long _refused;
+    private long _metered;
+    private long _authThrottled;
 
     /// <summary>Records one received request.</summary>
     /// <param name="type">The T-message type.</param>
@@ -55,6 +57,12 @@ internal sealed class ServerMetrics
     /// <summary>Records a connection refused by a limit.</summary>
     public void ConnectionRefused() => Interlocked.Increment(ref _refused);
 
+    /// <summary>Records one request refused for the rate budget (reference §8 rule 40).</summary>
+    public void RequestMetered() => Interlocked.Increment(ref _metered);
+
+    /// <summary>Records one Tauth refused for the per-address budget (reference §8 rule 40).</summary>
+    public void AuthThrottled() => Interlocked.Increment(ref _authThrottled);
+
     /// <summary>The counters as one consistent record.</summary>
     /// <returns>The snapshot a caller reads.</returns>
     public ServerCounters Snapshot() => new()
@@ -67,5 +75,7 @@ internal sealed class ServerMetrics
         ConnectionsAccepted = Interlocked.Read(ref _accepted),
         ConnectionsOpen = Interlocked.Read(ref _open),
         ConnectionsRefused = Interlocked.Read(ref _refused),
+        RequestsMetered = Interlocked.Read(ref _metered),
+        AuthAttemptsThrottled = Interlocked.Read(ref _authThrottled),
     };
 }

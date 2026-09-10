@@ -6,6 +6,33 @@ All notable changes to this repository are recorded here. The format follows
 
 ## [Unreleased]
 
+### Abuse budgets — 2026-09-10
+
+- **`Limits` gains four bounds and a window** (reference §8 rule 40, ticket 015).
+  `MaxRequestsPerSecondPerConnection` and `MaxRequestsPerSecondPerListener` meter ordinary
+  requests, answering `EAGAIN` at once past the budget and never metering `Tversion` or `Tflush`;
+  both default to 0, which is off, because only the operator knows what a request costs their
+  handler. `MaxConnectionsPerAddress` (64) stops one host holding every slot of
+  `MaxConnectionsPerListener`. `MaxAuthFailuresPerAddress` (32) with `AuthFailureWindow` (1 min)
+  refuses a `Tauth` from an address that keeps beginning exchanges without one reaching a
+  successful attach, **before the authenticator is asked**, so a peer that is guessing stops
+  making the server pay for a PBKDF2 derivation. The in-process transport is exempt from the two
+  address budgets. `ServerCounters` gains `RequestsMetered` and `AuthAttemptsThrottled`.
+
+- **jsonfs bounds its entries and can coalesce write-back.** `--max-entries` (100000) refuses the
+  create or `mkdir` that would exceed it with `ENOSPC`, whole or nothing, beside the existing byte
+  and depth caps, and a document already over the cap is refused at startup. `--write-back-delay`
+  rewrites the document once per window instead of once per change, flushing what it owes on a
+  graceful stop so a change made just before it survives a restart.
+
+- **todofs enforces per-user quotas.** `--max-lists` (1000) and `--max-items` (10000) refuse the
+  `mkdir` that would exceed them with `ENOSPC`, counted and inserted inside one writer
+  transaction so two creates racing at the cap yield exactly one row.
+
+- **Interop reads a multi-chunk file.** Every external peer row now also reads a 32 KiB file whose
+  every eight-byte block encodes its own offset, at `msize 4096` where the peer allows it, so a
+  `Tread` answered out of order, twice or not at all changes the bytes and not only the count.
+
 ### Test audit 002 — 2026-09-10
 
 - **Server:** a `Tsetattr` with `valid = 0` validates the fid and answers `Rsetattr` without calling the handler; `ATIME_SET` / `MTIME_SET` without their base bit are `EINVAL`; a directory length change is refused in the core before the handler (`.L`: any size; 9P2000/.u: a non-zero length, per stat(5)).

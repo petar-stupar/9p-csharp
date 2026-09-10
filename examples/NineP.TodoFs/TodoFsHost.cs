@@ -59,7 +59,8 @@ internal sealed class TodoFsHost : IAsyncDisposable
         ArgumentNullException.ThrowIfNull(options);
 
         ILogger log = logger ?? NullLogger.Instance;
-        TodoStore store = await TodoStore.OpenAsync(options.Database, cancellationToken: cancellationToken)
+        TodoStore store = await TodoStore.OpenAsync(
+            options.Database, quotas: options.Quotas, cancellationToken: cancellationToken)
             .ConfigureAwait(false);
 
         try

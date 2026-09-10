@@ -16,7 +16,7 @@ using NLogLevel = NLog.LogLevel;
 try
 {
     JsonFsOptions options = JsonFsOptions.Parse(args);
-    JsonTree tree = JsonTree.Load(options.File);
+    JsonTree tree = JsonTree.Load(options.File, options.MaxEntries);
 
     // IR-1: the packages log through Microsoft.Extensions.Logging; the example picks the concrete
     // sink, and NLog is this repository's choice. The configuration is built in code rather than
@@ -42,8 +42,14 @@ try
 
     ILogger logger = loggerFactory.CreateLogger("jsonfs");
 
-    JsonFilesystem filesystem = new(
-        tree, options.Writable, options.WriteBack ? options.File : null);
+    // Declared before the server so that it is disposed after it: the server stops taking
+    // requests first, then the filesystem writes back whatever an open --write-back-delay window
+    // still owes. That final rewrite is what keeps a change made just before Ctrl-C on disk.
+    using JsonFilesystem filesystem = new(
+        tree,
+        options.Writable,
+        options.WriteBack ? options.File : null,
+        writeBackDelay: options.WriteBackDelay);
 
     await using NinePServer server = new(new ServerOptions
     {
@@ -103,6 +109,14 @@ catch (DirectoryNotFoundException failure)
 catch (OperationCanceledException)
 {
     return 0;
+}
+catch (NinePException failure)
+{
+    // The one NinePException that reaches here is the final write-back's: the server has
+    // stopped, the document in memory has changes the file does not, and exiting clean would
+    // say otherwise.
+    await Console.Error.WriteLineAsync("jsonfs: the final write-back failed: " + failure.Error.Ename);
+    return 1;
 }
 catch (SocketException failure)
 {
