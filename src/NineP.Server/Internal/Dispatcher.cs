@@ -1176,6 +1176,19 @@ internal sealed class Dispatcher(ServerSession session, OpenState openState)
         Tsetattr request, PendingRequest pending, CancellationToken cancellationToken)
     {
         FidEntry entry = Fid(pending, request.Fid);
+        // Workspace §4.6: modifiers require their base time bit. Refuse the whole update
+        // before a handler can apply another field or mistake an empty projection for fsync.
+        if ((request.Valid.HasFlag(SetAttrMask.ATimeSet) && !request.Valid.HasFlag(SetAttrMask.ATime))
+            || (request.Valid.HasFlag(SetAttrMask.MTimeSet) && !request.Valid.HasFlag(SetAttrMask.MTime)))
+        {
+            throw new NinePException(NinePError.FromErrno(Errno.EINVAL));
+        }
+        // Unlike the all-don't-touch Twstat, a literal zero mask is only a no-change request.
+        if (request.Valid == SetAttrMask.None)
+        {
+            await ReplyAsync(pending, new Rsetattr(pending.Tag)).ConfigureAwait(false);
+            return;
+        }
         SetAttr update = AttrProjector.FromSetattr(in request);
         await ApplyAsync(entry, update, cancellationToken).ConfigureAwait(false);
         await ReplyAsync(pending, new Rsetattr(pending.Tag)).ConfigureAwait(false);
@@ -1207,6 +1220,12 @@ internal sealed class Dispatcher(ServerSession session, OpenState openState)
         if (update.Size is not null)
         {
             PermissionChecker.Require(attr, entry.Identity, Access.Write, session.Dialect);
+            // stat(5) forbids nonzero directory length; .L size uses truncate semantics.
+            // A legacy zero-length update remains subject to the handler's own policy.
+            if (attr.Kind == FileKind.Directory && (session.Dialect == Dialect.P9_2000_L || update.Size != 0))
+            {
+                throw new NinePException(NinePError.FromErrno(Errno.EISDIR));
+            }
         }
 
         if (update.Name is not null)

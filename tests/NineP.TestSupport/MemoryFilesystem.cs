@@ -225,6 +225,10 @@ public abstract class MemoryNode : IHandler
             return ValueTask.CompletedTask;
         }
 
+        if (update.Size is > int.MaxValue)
+        {
+            throw new NinePException(NinePError.FromErrno(Errno.EFBIG));
+        }
         LastUpdate = update;
 
         // stat(5): a wstat is atomic, so everything is validated before anything is applied.
@@ -780,6 +784,14 @@ public sealed class MemoryFile(string name, uint perm, ulong path)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
+            if (data.IsEmpty)
+            {
+                return ValueTask.FromResult(0);
+            }
+            if (offset > int.MaxValue || (ulong)data.Length > (ulong)int.MaxValue - offset)
+            {
+                throw new NinePException(NinePError.FromErrno(Errno.EFBIG));
+            }
             int at = (int)offset;
             int end = at + data.Length;
             if (file.Data.Length < end)

@@ -187,7 +187,7 @@ a separate small regression test. The acceptance allowance is fixed before execu
 DOTNET_PROCESSOR_COUNT=2 NINEP_SCALE_MEMORY_MIB=1536 DOTNET_GCHeapHardLimit=0x40000000 dotnet tests/NineP.Benchmarks/bin/Release/net10.0/NineP.Benchmarks.dll edge-scale create full
 ```
 
-The xunit wrappers (`AdditionalScaleTests`) set the processor and heap limits, own child-process
+The xunit wrappers (`ScaleTests`) set the processor and heap limits, own child-process
 cleanup, and report full runs as skipped unless opted in. `NINEP_FULL_SCALE=1` enables F10/F11;
 `NINEP_FULL_CREATE_SCALE=1 NINEP_SCALE_MEMORY_MIB=1536 NINEP_SCALE_HEAP_LIMIT=0x40000000`
 enables local F12. These are resource ceilings and timeout checks, with no throughput target.

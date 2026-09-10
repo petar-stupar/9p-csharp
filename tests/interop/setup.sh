@@ -5,7 +5,7 @@
 #
 #   tests/interop/setup.sh [<peers dir>]          # default: ~/.ninep-interop
 #   eval "$(tests/interop/setup.sh --env)"         # just print the exports for an existing dir
-#   dotnet test --project tests/NineP.Client.Tests -f net10.0 -- --filter-class NineP.Client.Tests.InteropTests
+#   dotnet test --project tests/NineP.Client.Tests -f net10.0 -- --filter-class NineP.Client.Tests.Compat.InteropTests
 #
 # Needs: go (p9ufs), git + a C toolchain (plan9port), docker (diod), and, for the Linux kernel
 # client, lima (brew install lima) — the VM is created here and needs the full Debian kernel,

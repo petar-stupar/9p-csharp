@@ -69,7 +69,11 @@ jobs:
         # dilute the race each is looking for.
         env:
           NINEP_TAG_STRESS_SECONDS: "45"
-        run: dotnet test --project tests/NineP.Server.Tests -f net10.0 -c Release --no-build -- --filter-method NineP.Server.Tests.TagReuseStressTests.ATagReusedTheInstantItsReplyArrivesIsNeverRefused
+        run: dotnet test --project tests/NineP.Server.Tests -f net10.0 -c Release --no-build -- --filter-method NineP.Server.Tests.Regression.TagReuseStressTests.ATagReusedTheInstantItsReplyArrivesIsNeverRefused
+
+      - name: Suite summary
+        # macOS runners ship python3 only and Windows runners python only.
+        run: ${{ runner.os == 'Windows' && 'python' || 'python3' }} scripts/test-suites.py --configuration Release
 
       - name: Lint
         run: dotnet format --verify-no-changes

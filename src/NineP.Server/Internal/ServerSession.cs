@@ -134,6 +134,9 @@ internal sealed class ServerSession : IAsyncDisposable
     /// <summary>Requests other than <c>Tflush</c> this connection may have in flight at once.</summary>
     public int GeneralCapacity { get; }
 
+    /// <summary>Replies waiting behind the writer, for bounded-channel diagnostics.</summary>
+    internal int QueuedReplies => _replies.Reader.Count;
+
     /// <summary>General slots still free; excess ordinary requests receive EAGAIN.</summary>
     public int GeneralAvailable => _general.CurrentCount;
 

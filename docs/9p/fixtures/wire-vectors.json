@@ -1081,6 +1081,169 @@
         "tag": 38
       },
       "hex": "070000004d2600"
+    },
+    {
+      "name": "Tread (count 0)",
+      "dialect": "9P2000",
+      "type": 116,
+      "size": 23,
+      "fields": {
+        "tag": 40,
+        "fid": 1,
+        "offset": 0,
+        "count": 0
+      },
+      "hex": "1700000074280001000000000000000000000000000000"
+    },
+    {
+      "name": "Rread (count 0)",
+      "dialect": "9P2000",
+      "type": 117,
+      "size": 11,
+      "fields": {
+        "tag": 40,
+        "data": ""
+      },
+      "hex": "0b00000075280000000000"
+    },
+    {
+      "name": "Twrite (count 0)",
+      "dialect": "9P2000",
+      "type": 118,
+      "size": 23,
+      "fields": {
+        "tag": 41,
+        "fid": 1,
+        "offset": 0,
+        "data": ""
+      },
+      "hex": "1700000076290001000000000000000000000000000000"
+    },
+    {
+      "name": "Rwrite (count 0)",
+      "dialect": "9P2000",
+      "type": 119,
+      "size": 11,
+      "fields": {
+        "tag": 41,
+        "count": 0
+      },
+      "hex": "0b00000077290000000000"
+    },
+    {
+      "name": "Rwalk (nwqid 0)",
+      "dialect": "9P2000",
+      "type": 111,
+      "size": 9,
+      "fields": {
+        "tag": 42,
+        "wqid": []
+      },
+      "hex": "090000006f2a000000"
+    },
+    {
+      "name": "Tsetattr (valid 0)",
+      "dialect": "9P2000.L",
+      "type": 26,
+      "size": 67,
+      "fields": {
+        "tag": 43,
+        "fid": 1,
+        "valid": 0,
+        "mode": 0,
+        "uid": 0,
+        "gid": 0,
+        "size": 0,
+        "atime_sec": 0,
+        "atime_nsec": 0,
+        "mtime_sec": 0,
+        "mtime_nsec": 0
+      },
+      "hex": "430000001a2b00010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "name": "Tgetattr (mask 0)",
+      "dialect": "9P2000.L",
+      "type": 24,
+      "size": 19,
+      "fields": {
+        "tag": 44,
+        "fid": 1,
+        "request_mask": 0
+      },
+      "hex": "13000000182c00010000000000000000000000"
+    },
+    {
+      "name": "Rgetattr (valid 0)",
+      "dialect": "9P2000.L",
+      "type": 25,
+      "size": 160,
+      "fields": {
+        "tag": 44,
+        "valid": 0,
+        "qid": {
+          "type": 0,
+          "version": 3,
+          "path": 42
+        },
+        "mode": 0,
+        "uid": 0,
+        "gid": 0,
+        "nlink": 0,
+        "rdev": 0,
+        "size": 0,
+        "blksize": 0,
+        "blocks": 0,
+        "atime_sec": 0,
+        "atime_nsec": 0,
+        "mtime_sec": 0,
+        "mtime_nsec": 0,
+        "ctime_sec": 0,
+        "ctime_nsec": 0,
+        "btime_sec": 0,
+        "btime_nsec": 0,
+        "gen": 0,
+        "data_version": 0
+      },
+      "hex": "a0000000192c00000000000000000000030000002a00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "name": "Rreaddir (count 0)",
+      "dialect": "9P2000.L",
+      "type": 41,
+      "size": 11,
+      "fields": {
+        "tag": 45,
+        "entries": []
+      },
+      "hex": "0b000000292d0000000000"
+    },
+    {
+      "name": "Txattrwalk (list)",
+      "dialect": "9P2000.L",
+      "type": 30,
+      "size": 17,
+      "fields": {
+        "tag": 46,
+        "fid": 1,
+        "newfid": 2,
+        "name": ""
+      },
+      "hex": "110000001e2e0001000000020000000000"
+    },
+    {
+      "name": "Txattrcreate (remove)",
+      "dialect": "9P2000.L",
+      "type": 32,
+      "size": 34,
+      "fields": {
+        "tag": 47,
+        "fid": 1,
+        "name": "user.note",
+        "attr_size": 0,
+        "flags": 0
+      },
+      "hex": "22000000202f00010000000900757365722e6e6f7465000000000000000000000000"
     }
   ]
 }

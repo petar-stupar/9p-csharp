@@ -93,7 +93,7 @@ diod in a container will meet it.
 ```text
 brew install lima go docker            # or the equivalents; git and a C toolchain for plan9port
 eval "$(tests/interop/setup.sh)"       # fetches the peers at the pinned versions, prints the variables
-dotnet test --project tests/NineP.Client.Tests -f net10.0 -- --filter-class NineP.Client.Tests.InteropTests
+dotnet test --project tests/NineP.Client.Tests -f net10.0 -- --filter-class NineP.Client.Tests.Compat.InteropTests
 ```
 
 `setup.sh` installs `p9ufs` v0.4.1 with `go install`, builds plan9port at `b6564bd9` from source,
@@ -176,3 +176,18 @@ The additional F1–F30 cases run as named client/server/doc tests, covering mal
 limits, mutable listings, transfer failure and JSON persistence. Full F10/F11/F12 workloads
 are local-only opt-ins with explicit skips in CI; their smaller versions run in CI.
 See [the conformance requirements](9p/fixtures/conformance.md) and [measured scale costs](benchmarks.md).
+
+
+## Audit 002 boundary checks — 2026-09-10
+
+The final `Compat.InteropTests` run passed **6/6 cases**, with no skips, using the existing local peers: p9ufs v0.4.1 (go1.26.0), plan9port b6564bd, diod 1.0.24-5, and Linux 6.1.0-53-arm64 in the `ninep` Lima VM. This run used the current Debug build on the host described above.
+
+The additions read an empty file through p9ufs, plan9port and each of the three Linux dialects. The diod case writes nonempty content, calls the CLI's empty write, then checks both read output and the independently reported size are zero. This tests truncating-open behavior; it does not claim the CLI sends a zero-count Twrite. The direct wire count-zero cases are in ContentBoundaryTests and JsonFsBoundaryTests.
+
+Reproduce with the peer environment variables described above and:
+
+```sh
+dotnet test --project tests/NineP.Client.Tests -f net10.0 --no-build -- --filter-class NineP.Client.Tests.Compat.InteropTests
+```
+
+An additional exploratory `: > name` probe against `jsonfs --writable` through Linux did **not** pass: this kernel reported Permission denied for 9P2000.u/L and Operation not supported for 9P2000. No successful Linux truncation claim is made, and no extra production fix was included in the approved test-audit change. These three probes are outside the six passing cases. The existing read-only refusal assertions remain intact; an EXIT trap now unmounts the test mount even when a command fails.

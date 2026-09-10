@@ -95,18 +95,14 @@ internal static class TestResolver
     /// <summary>Finds the type by simple name, or null when no built assembly declares it.</summary>
     public static Type? FindType(string simpleName)
     {
-        foreach (Assembly assembly in Assemblies)
+        Type[] matches = Assemblies.SelectMany(SafeTypes)
+            .Where(type => string.Equals(type.Name, simpleName, StringComparison.Ordinal)).ToArray();
+        if (matches.Length > 1)
         {
-            foreach (Type type in SafeTypes(assembly))
-            {
-                if (string.Equals(type.Name, simpleName, StringComparison.Ordinal))
-                {
-                    return type;
-                }
-            }
+            throw new InvalidOperationException("Ambiguous indexed test type " + simpleName + ": "
+                + string.Join(", ", matches.Select(type => type.FullName)));
         }
-
-        return null;
+        return matches.SingleOrDefault();
     }
 
     internal static Assembly RequiredAssembly(string path)

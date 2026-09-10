@@ -94,7 +94,7 @@ public sealed class RepoHygieneTests
         RegexOptions.Multiline);
 
     private const string WireVectorsSha256 =
-        "55C1E684844D764E8A24F9EBBE961EAB386841B7AAB90A332EA93235C42CC42F";
+        "69740D78CA08CFEAFE850889D7D2D04A1DEC76D3A36D8913FA8C15A4A8D15640";
 
     private static readonly string[] BannedInProductionCode =
     [

@@ -256,7 +256,7 @@ is a failure, never an automatic skip.
 For C#, `NINEP_FULL_SCALE=1` opts into full F10/F11 locally. Full F12 requires
 `NINEP_FULL_CREATE_SCALE=1 NINEP_SCALE_MEMORY_MIB=1536 NINEP_SCALE_HEAP_LIMIT=0x40000000`.
 Run `dotnet test --project tests/NineP.Server.Tests -f net10.0 -c Release -- --filter-class
-NineP.Server.Tests.AdditionalScaleTests` as one shell line. Each port records its commands
+NineP.Server.Tests.Chaos.ScaleTests` as one shell line. Each port records its commands
 and measured resource costs in its own `docs/benchmarks.md`.
 
 | CLI id | Expected behavior |
