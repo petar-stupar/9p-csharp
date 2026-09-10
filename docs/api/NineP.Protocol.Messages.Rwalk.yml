@@ -3,6 +3,7 @@ title: Struct Rwalk
 body:
 - api1: Struct Rwalk
   id: NineP_Protocol_Messages_Rwalk
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rwalk.cs#L9
   metadata:
     uid: NineP.Protocol.Messages.Rwalk
     commentId: T:NineP.Protocol.Messages.Rwalk
@@ -41,6 +42,7 @@ body:
 - h2: Constructors
 - api3: Rwalk(ushort, IReadOnlyList<Qid>)
   id: NineP_Protocol_Messages_Rwalk__ctor_System_UInt16_System_Collections_Generic_IReadOnlyList_NineP_Protocol_Qid__
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rwalk.cs#L9
   metadata:
     uid: NineP.Protocol.Messages.Rwalk.#ctor(System.UInt16,System.Collections.Generic.IReadOnlyList{NineP.Protocol.Qid})
     commentId: M:NineP.Protocol.Messages.Rwalk.#ctor(System.UInt16,System.Collections.Generic.IReadOnlyList{NineP.Protocol.Qid})
@@ -68,6 +70,7 @@ body:
 - h2: Properties
 - api3: Tag
   id: NineP_Protocol_Messages_Rwalk_Tag
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rwalk.cs#L9
   metadata:
     uid: NineP.Protocol.Messages.Rwalk.Tag
     commentId: P:NineP.Protocol.Messages.Rwalk.Tag
@@ -80,6 +83,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint16
 - api3: Wqids
   id: NineP_Protocol_Messages_Rwalk_Wqids
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rwalk.cs#L9
   metadata:
     uid: NineP.Protocol.Messages.Rwalk.Wqids
     commentId: P:NineP.Protocol.Messages.Rwalk.Wqids

@@ -41,7 +41,10 @@ body:
   - type:
       text: Errno
       url: NineP.Protocol.Errno.html
-    description: The Linux errno values this workspace's servers use (reference §5.9).
+    description: >-
+      The Linux errno values this workspace's servers use (reference §5.9): every errno the Linux
+
+      kernel's 9P client can name (<code>docs/9p/fixtures/linux-9p-errors.json</code>), plus <code>EOVERFLOW</code>.
   - type:
       text: ErrorTable
       url: NineP.Protocol.ErrorTable.html

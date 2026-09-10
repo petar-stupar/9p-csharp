@@ -3,6 +3,7 @@ title: Interface IAuthenticator
 body:
 - api1: Interface IAuthenticator
   id: NineP_Protocol_Auth_IAuthenticator
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Auth/IAuthenticator.cs#L9
   metadata:
     uid: NineP.Protocol.Auth.IAuthenticator
     commentId: T:NineP.Protocol.Auth.IAuthenticator
@@ -21,6 +22,7 @@ body:
 - h2: Properties
 - api3: IsRequired
   id: NineP_Protocol_Auth_IAuthenticator_IsRequired
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Auth/IAuthenticator.cs#L12
   metadata:
     uid: NineP.Protocol.Auth.IAuthenticator.IsRequired
     commentId: P:NineP.Protocol.Auth.IAuthenticator.IsRequired
@@ -34,6 +36,7 @@ body:
 - h2: Methods
 - api3: BeginAsync(AuthRequest, PeerIdentity?, CancellationToken)
   id: NineP_Protocol_Auth_IAuthenticator_BeginAsync_NineP_Protocol_Auth_AuthRequest_NineP_Protocol_Transports_PeerIdentity_System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Auth/IAuthenticator.cs#L19
   metadata:
     uid: NineP.Protocol.Auth.IAuthenticator.BeginAsync(NineP.Protocol.Auth.AuthRequest,NineP.Protocol.Transports.PeerIdentity,System.Threading.CancellationToken)
     commentId: M:NineP.Protocol.Auth.IAuthenticator.BeginAsync(NineP.Protocol.Auth.AuthRequest,NineP.Protocol.Transports.PeerIdentity,System.Threading.CancellationToken)

@@ -3,6 +3,7 @@ title: Struct Rsymlink
 body:
 - api1: Struct Rsymlink
   id: NineP_Protocol_Messages_Rsymlink
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rsymlink.cs#L8
   metadata:
     uid: NineP.Protocol.Messages.Rsymlink
     commentId: T:NineP.Protocol.Messages.Rsymlink
@@ -38,6 +39,7 @@ body:
 - h2: Constructors
 - api3: Rsymlink(ushort, Qid)
   id: NineP_Protocol_Messages_Rsymlink__ctor_System_UInt16_NineP_Protocol_Qid_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rsymlink.cs#L8
   metadata:
     uid: NineP.Protocol.Messages.Rsymlink.#ctor(System.UInt16,NineP.Protocol.Qid)
     commentId: M:NineP.Protocol.Messages.Rsymlink.#ctor(System.UInt16,NineP.Protocol.Qid)
@@ -58,6 +60,7 @@ body:
 - h2: Properties
 - api3: Qid
   id: NineP_Protocol_Messages_Rsymlink_Qid
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rsymlink.cs#L8
   metadata:
     uid: NineP.Protocol.Messages.Rsymlink.Qid
     commentId: P:NineP.Protocol.Messages.Rsymlink.Qid
@@ -70,6 +73,7 @@ body:
       url: NineP.Protocol.Qid.html
 - api3: Tag
   id: NineP_Protocol_Messages_Rsymlink_Tag
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rsymlink.cs#L8
   metadata:
     uid: NineP.Protocol.Messages.Rsymlink.Tag
     commentId: P:NineP.Protocol.Messages.Rsymlink.Tag

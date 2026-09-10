@@ -3,6 +3,7 @@ title: Interface IOpenFile
 body:
 - api1: Interface IOpenFile
   id: NineP_Server_IOpenFile
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/IOpenFile.cs#L7
   metadata:
     uid: NineP.Server.IOpenFile
     commentId: T:NineP.Server.IOpenFile
@@ -25,6 +26,7 @@ body:
 - h2: Methods
 - api3: GetSizeAsync(CancellationToken)
   id: NineP_Server_IOpenFile_GetSizeAsync_System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/IOpenFile.cs#L28
   metadata:
     uid: NineP.Server.IOpenFile.GetSizeAsync(System.Threading.CancellationToken)
     commentId: M:NineP.Server.IOpenFile.GetSizeAsync(System.Threading.CancellationToken)
@@ -50,6 +52,7 @@ body:
     description: The length in bytes.
 - api3: ReadAsync(ulong, Memory<byte>, CancellationToken)
   id: NineP_Server_IOpenFile_ReadAsync_System_UInt64_System_Memory_System_Byte__System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/IOpenFile.cs#L14
   metadata:
     uid: NineP.Server.IOpenFile.ReadAsync(System.UInt64,System.Memory{System.Byte},System.Threading.CancellationToken)
     commentId: M:NineP.Server.IOpenFile.ReadAsync(System.UInt64,System.Memory{System.Byte},System.Threading.CancellationToken)
@@ -89,6 +92,7 @@ body:
     description: The number of bytes read; 0 at end of file.
 - api3: WriteAsync(ulong, ReadOnlyMemory<byte>, CancellationToken)
   id: NineP_Server_IOpenFile_WriteAsync_System_UInt64_System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/IOpenFile.cs#L22
   metadata:
     uid: NineP.Server.IOpenFile.WriteAsync(System.UInt64,System.ReadOnlyMemory{System.Byte},System.Threading.CancellationToken)
     commentId: M:NineP.Server.IOpenFile.WriteAsync(System.UInt64,System.ReadOnlyMemory{System.Byte},System.Threading.CancellationToken)

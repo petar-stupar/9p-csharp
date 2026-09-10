@@ -3,6 +3,7 @@ title: Struct Tfsync
 body:
 - api1: Struct Tfsync
   id: NineP_Protocol_Messages_Tfsync
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tfsync.cs#L11
   metadata:
     uid: NineP.Protocol.Messages.Tfsync
     commentId: T:NineP.Protocol.Messages.Tfsync
@@ -41,6 +42,7 @@ body:
 - h2: Constructors
 - api3: Tfsync(ushort, uint, uint)
   id: NineP_Protocol_Messages_Tfsync__ctor_System_UInt16_System_UInt32_System_UInt32_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tfsync.cs#L11
   metadata:
     uid: NineP.Protocol.Messages.Tfsync.#ctor(System.UInt16,System.UInt32,System.UInt32)
     commentId: M:NineP.Protocol.Messages.Tfsync.#ctor(System.UInt16,System.UInt32,System.UInt32)
@@ -71,6 +73,7 @@ body:
 - h2: Properties
 - api3: Datasync
   id: NineP_Protocol_Messages_Tfsync_Datasync
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tfsync.cs#L11
   metadata:
     uid: NineP.Protocol.Messages.Tfsync.Datasync
     commentId: P:NineP.Protocol.Messages.Tfsync.Datasync
@@ -85,6 +88,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Fid
   id: NineP_Protocol_Messages_Tfsync_Fid
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tfsync.cs#L11
   metadata:
     uid: NineP.Protocol.Messages.Tfsync.Fid
     commentId: P:NineP.Protocol.Messages.Tfsync.Fid
@@ -97,6 +101,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Tag
   id: NineP_Protocol_Messages_Tfsync_Tag
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tfsync.cs#L11
   metadata:
     uid: NineP.Protocol.Messages.Tfsync.Tag
     commentId: P:NineP.Protocol.Messages.Tfsync.Tag

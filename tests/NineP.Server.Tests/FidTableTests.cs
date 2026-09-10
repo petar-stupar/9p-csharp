@@ -41,7 +41,7 @@ public sealed class FidTableTests
         NinePException overflow = Assert.Throws<NinePException>(() => table.Bind(Entry(4, tree)));
 
         Assert.Equal(Errno.ENFILE, overflow.Error.Errno);
-        Assert.Equal("too many fids", overflow.Error.Ename);
+        Assert.Equal("Too many open files in system", overflow.Error.Ename);
 
         if (dialect == Dialect.P9_2000_L)
         {
@@ -50,7 +50,7 @@ public sealed class FidTableTests
         }
 
         Rerror projected = ErrorProjector.ToRerror(1, overflow.Error, dialect);
-        Assert.Equal("too many fids", projected.Ename);
+        Assert.Equal("Too many open files in system", projected.Ename);
         Assert.Equal(dialect == Dialect.P9_2000_u ? Errno.ENFILE : 0, projected.Errno);
     }
 
@@ -63,7 +63,7 @@ public sealed class FidTableTests
         NinePException unknown = Assert.Throws<NinePException>(() => table.Get(7));
 
         Assert.Equal(Errno.EBADF, unknown.Error.Errno);
-        Assert.Equal("unknown fid", unknown.Error.Ename);
+        Assert.Equal("fid unknown or out of range", unknown.Error.Ename);
     }
 
     /// <summary>A number that must be fresh is refused when it is in use; <c>newfid == fid</c> is not.</summary>

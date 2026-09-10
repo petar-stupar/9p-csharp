@@ -3,6 +3,7 @@ title: Struct Rfsync
 body:
 - api1: Struct Rfsync
   id: NineP_Protocol_Messages_Rfsync
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rfsync.cs#L7
   metadata:
     uid: NineP.Protocol.Messages.Rfsync
     commentId: T:NineP.Protocol.Messages.Rfsync
@@ -38,6 +39,7 @@ body:
 - h2: Constructors
 - api3: Rfsync(ushort)
   id: NineP_Protocol_Messages_Rfsync__ctor_System_UInt16_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rfsync.cs#L7
   metadata:
     uid: NineP.Protocol.Messages.Rfsync.#ctor(System.UInt16)
     commentId: M:NineP.Protocol.Messages.Rfsync.#ctor(System.UInt16)
@@ -53,6 +55,7 @@ body:
 - h2: Properties
 - api3: Tag
   id: NineP_Protocol_Messages_Rfsync_Tag
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rfsync.cs#L7
   metadata:
     uid: NineP.Protocol.Messages.Rfsync.Tag
     commentId: P:NineP.Protocol.Messages.Rfsync.Tag

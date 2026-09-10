@@ -3,6 +3,7 @@ title: Struct Rflush
 body:
 - api1: Struct Rflush
   id: NineP_Protocol_Messages_Rflush
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rflush.cs#L8
   metadata:
     uid: NineP.Protocol.Messages.Rflush
     commentId: T:NineP.Protocol.Messages.Rflush
@@ -41,6 +42,7 @@ body:
 - h2: Constructors
 - api3: Rflush(ushort)
   id: NineP_Protocol_Messages_Rflush__ctor_System_UInt16_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rflush.cs#L8
   metadata:
     uid: NineP.Protocol.Messages.Rflush.#ctor(System.UInt16)
     commentId: M:NineP.Protocol.Messages.Rflush.#ctor(System.UInt16)
@@ -59,6 +61,7 @@ body:
 - h2: Properties
 - api3: Tag
   id: NineP_Protocol_Messages_Rflush_Tag
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rflush.cs#L8
   metadata:
     uid: NineP.Protocol.Messages.Rflush.Tag
     commentId: P:NineP.Protocol.Messages.Rflush.Tag

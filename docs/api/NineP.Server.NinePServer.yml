@@ -3,6 +3,7 @@ title: Class NinePServer
 body:
 - api1: Class NinePServer
   id: NineP_Server_NinePServer
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/NinePServer.cs#L13
   metadata:
     uid: NineP.Server.NinePServer
     commentId: T:NineP.Server.NinePServer
@@ -47,6 +48,7 @@ body:
 - h2: Constructors
 - api3: NinePServer(ServerOptions)
   id: NineP_Server_NinePServer__ctor_NineP_Server_ServerOptions_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/NinePServer.cs#L30
   metadata:
     uid: NineP.Server.NinePServer.#ctor(NineP.Server.ServerOptions)
     commentId: M:NineP.Server.NinePServer.#ctor(NineP.Server.ServerOptions)
@@ -76,6 +78,7 @@ body:
 - h2: Properties
 - api3: Counters
   id: NineP_Server_NinePServer_Counters
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/NinePServer.cs#L61
   metadata:
     uid: NineP.Server.NinePServer.Counters
     commentId: P:NineP.Server.NinePServer.Counters
@@ -88,6 +91,7 @@ body:
       url: NineP.Server.ServerCounters.html
 - api3: Endpoints
   id: NineP_Server_NinePServer_Endpoints
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/NinePServer.cs#L49
   metadata:
     uid: NineP.Server.NinePServer.Endpoints
     commentId: P:NineP.Server.NinePServer.Endpoints
@@ -105,6 +109,7 @@ body:
 - h2: Methods
 - api3: DisposeAsync()
   id: NineP_Server_NinePServer_DisposeAsync
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/NinePServer.cs#L146
   metadata:
     uid: NineP.Server.NinePServer.DisposeAsync
     commentId: M:NineP.Server.NinePServer.DisposeAsync
@@ -118,6 +123,7 @@ body:
     description: A task that completes when everything has closed.
 - api3: ListeningAsync(CancellationToken)
   id: NineP_Server_NinePServer_ListeningAsync_System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/NinePServer.cs#L74
   metadata:
     uid: NineP.Server.NinePServer.ListeningAsync(System.Threading.CancellationToken)
     commentId: M:NineP.Server.NinePServer.ListeningAsync(System.Threading.CancellationToken)
@@ -150,6 +156,7 @@ body:
     description: A configured address could not be bound.
 - api3: ServeAsync(IFilesystem, CancellationToken)
   id: NineP_Server_NinePServer_ServeAsync_NineP_Server_IFilesystem_System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/NinePServer.cs#L83
   metadata:
     uid: NineP.Server.NinePServer.ServeAsync(NineP.Server.IFilesystem,System.Threading.CancellationToken)
     commentId: M:NineP.Server.NinePServer.ServeAsync(NineP.Server.IFilesystem,System.Threading.CancellationToken)
@@ -186,6 +193,7 @@ body:
     description: No transport owns a configured address's scheme.
 - api3: StopAsync(TimeSpan, CancellationToken)
   id: NineP_Server_NinePServer_StopAsync_System_TimeSpan_System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/NinePServer.cs#L116
   metadata:
     uid: NineP.Server.NinePServer.StopAsync(System.TimeSpan,System.Threading.CancellationToken)
     commentId: M:NineP.Server.NinePServer.StopAsync(System.TimeSpan,System.Threading.CancellationToken)

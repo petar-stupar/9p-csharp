@@ -3,6 +3,7 @@ title: Enum LockFlags
 body:
 - api1: Enum LockFlags
   id: NineP_Protocol_LockFlags
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/LockFlags.cs#L4
   metadata:
     uid: NineP.Protocol.LockFlags
     commentId: T:NineP.Protocol.LockFlags

@@ -3,6 +3,7 @@ title: Struct Treadlink
 body:
 - api1: Struct Treadlink
   id: NineP_Protocol_Messages_Treadlink
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Treadlink.cs#L8
   metadata:
     uid: NineP.Protocol.Messages.Treadlink
     commentId: T:NineP.Protocol.Messages.Treadlink
@@ -38,6 +39,7 @@ body:
 - h2: Constructors
 - api3: Treadlink(ushort, uint)
   id: NineP_Protocol_Messages_Treadlink__ctor_System_UInt16_System_UInt32_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Treadlink.cs#L8
   metadata:
     uid: NineP.Protocol.Messages.Treadlink.#ctor(System.UInt16,System.UInt32)
     commentId: M:NineP.Protocol.Messages.Treadlink.#ctor(System.UInt16,System.UInt32)
@@ -58,6 +60,7 @@ body:
 - h2: Properties
 - api3: Fid
   id: NineP_Protocol_Messages_Treadlink_Fid
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Treadlink.cs#L8
   metadata:
     uid: NineP.Protocol.Messages.Treadlink.Fid
     commentId: P:NineP.Protocol.Messages.Treadlink.Fid
@@ -70,6 +73,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Tag
   id: NineP_Protocol_Messages_Treadlink_Tag
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Treadlink.cs#L8
   metadata:
     uid: NineP.Protocol.Messages.Treadlink.Tag
     commentId: P:NineP.Protocol.Messages.Treadlink.Tag

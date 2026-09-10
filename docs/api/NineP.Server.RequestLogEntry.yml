@@ -3,6 +3,7 @@ title: Struct RequestLogEntry
 body:
 - api1: Struct RequestLogEntry
   id: NineP_Server_RequestLogEntry
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/RequestLogEntry.cs#L16
   metadata:
     uid: NineP.Server.RequestLogEntry
     commentId: T:NineP.Server.RequestLogEntry
@@ -39,6 +40,7 @@ body:
 - h2: Constructors
 - api3: RequestLogEntry(Identity?, MessageType, string, MessageType, NinePError?, TimeSpan)
   id: NineP_Server_RequestLogEntry__ctor_NineP_Protocol_Auth_Identity_NineP_Protocol_MessageType_System_String_NineP_Protocol_MessageType_System_Nullable_NineP_Protocol_NinePError__System_TimeSpan_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/RequestLogEntry.cs#L16
   metadata:
     uid: NineP.Server.RequestLogEntry.#ctor(NineP.Protocol.Auth.Identity,NineP.Protocol.MessageType,System.String,NineP.Protocol.MessageType,System.Nullable{NineP.Protocol.NinePError},System.TimeSpan)
     commentId: M:NineP.Server.RequestLogEntry.#ctor(NineP.Protocol.Auth.Identity,NineP.Protocol.MessageType,System.String,NineP.Protocol.MessageType,System.Nullable{NineP.Protocol.NinePError},System.TimeSpan)
@@ -84,6 +86,7 @@ body:
 - h2: Properties
 - api3: Duration
   id: NineP_Server_RequestLogEntry_Duration
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/RequestLogEntry.cs#L22
   metadata:
     uid: NineP.Server.RequestLogEntry.Duration
     commentId: P:NineP.Server.RequestLogEntry.Duration
@@ -96,6 +99,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.timespan
 - api3: Error
   id: NineP_Server_RequestLogEntry_Error
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/RequestLogEntry.cs#L21
   metadata:
     uid: NineP.Server.RequestLogEntry.Error
     commentId: P:NineP.Server.RequestLogEntry.Error
@@ -109,6 +113,7 @@ body:
     - '?'
 - api3: Identity
   id: NineP_Server_RequestLogEntry_Identity
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/RequestLogEntry.cs#L17
   metadata:
     uid: NineP.Server.RequestLogEntry.Identity
     commentId: P:NineP.Server.RequestLogEntry.Identity
@@ -122,6 +127,7 @@ body:
     - '?'
 - api3: Reply
   id: NineP_Server_RequestLogEntry_Reply
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/RequestLogEntry.cs#L20
   metadata:
     uid: NineP.Server.RequestLogEntry.Reply
     commentId: P:NineP.Server.RequestLogEntry.Reply
@@ -134,6 +140,7 @@ body:
       url: NineP.Protocol.MessageType.html
 - api3: Request
   id: NineP_Server_RequestLogEntry_Request
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/RequestLogEntry.cs#L18
   metadata:
     uid: NineP.Server.RequestLogEntry.Request
     commentId: P:NineP.Server.RequestLogEntry.Request
@@ -146,6 +153,7 @@ body:
       url: NineP.Protocol.MessageType.html
 - api3: Summary
   id: NineP_Server_RequestLogEntry_Summary
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/RequestLogEntry.cs#L19
   metadata:
     uid: NineP.Server.RequestLogEntry.Summary
     commentId: P:NineP.Server.RequestLogEntry.Summary

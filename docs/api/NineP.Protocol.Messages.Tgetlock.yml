@@ -3,6 +3,7 @@ title: Struct Tgetlock
 body:
 - api1: Struct Tgetlock
   id: NineP_Protocol_Messages_Tgetlock
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tgetlock.cs#L13
   metadata:
     uid: NineP.Protocol.Messages.Tgetlock
     commentId: T:NineP.Protocol.Messages.Tgetlock
@@ -38,6 +39,7 @@ body:
 - h2: Constructors
 - api3: Tgetlock(ushort, uint, LockType, ulong, ulong, uint, string)
   id: NineP_Protocol_Messages_Tgetlock__ctor_System_UInt16_System_UInt32_NineP_Protocol_LockType_System_UInt64_System_UInt64_System_UInt32_System_String_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tgetlock.cs#L13
   metadata:
     uid: NineP.Protocol.Messages.Tgetlock.#ctor(System.UInt16,System.UInt32,NineP.Protocol.LockType,System.UInt64,System.UInt64,System.UInt32,System.String)
     commentId: M:NineP.Protocol.Messages.Tgetlock.#ctor(System.UInt16,System.UInt32,NineP.Protocol.LockType,System.UInt64,System.UInt64,System.UInt32,System.String)
@@ -83,6 +85,7 @@ body:
 - h2: Properties
 - api3: ClientId
   id: NineP_Protocol_Messages_Tgetlock_ClientId
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tgetlock.cs#L14
   metadata:
     uid: NineP.Protocol.Messages.Tgetlock.ClientId
     commentId: P:NineP.Protocol.Messages.Tgetlock.ClientId
@@ -95,6 +98,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.string
 - api3: Fid
   id: NineP_Protocol_Messages_Tgetlock_Fid
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tgetlock.cs#L14
   metadata:
     uid: NineP.Protocol.Messages.Tgetlock.Fid
     commentId: P:NineP.Protocol.Messages.Tgetlock.Fid
@@ -107,6 +111,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Length
   id: NineP_Protocol_Messages_Tgetlock_Length
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tgetlock.cs#L14
   metadata:
     uid: NineP.Protocol.Messages.Tgetlock.Length
     commentId: P:NineP.Protocol.Messages.Tgetlock.Length
@@ -119,6 +124,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint64
 - api3: ProcId
   id: NineP_Protocol_Messages_Tgetlock_ProcId
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tgetlock.cs#L14
   metadata:
     uid: NineP.Protocol.Messages.Tgetlock.ProcId
     commentId: P:NineP.Protocol.Messages.Tgetlock.ProcId
@@ -131,6 +137,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Start
   id: NineP_Protocol_Messages_Tgetlock_Start
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tgetlock.cs#L14
   metadata:
     uid: NineP.Protocol.Messages.Tgetlock.Start
     commentId: P:NineP.Protocol.Messages.Tgetlock.Start
@@ -143,6 +150,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint64
 - api3: Tag
   id: NineP_Protocol_Messages_Tgetlock_Tag
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tgetlock.cs#L14
   metadata:
     uid: NineP.Protocol.Messages.Tgetlock.Tag
     commentId: P:NineP.Protocol.Messages.Tgetlock.Tag
@@ -155,6 +163,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint16
 - api3: Type
   id: NineP_Protocol_Messages_Tgetlock_Type
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tgetlock.cs#L14
   metadata:
     uid: NineP.Protocol.Messages.Tgetlock.Type
     commentId: P:NineP.Protocol.Messages.Tgetlock.Type

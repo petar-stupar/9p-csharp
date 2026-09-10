@@ -3,6 +3,7 @@ title: Struct Tlopen
 body:
 - api1: Struct Tlopen
   id: NineP_Protocol_Messages_Tlopen
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tlopen.cs#L9
   metadata:
     uid: NineP.Protocol.Messages.Tlopen
     commentId: T:NineP.Protocol.Messages.Tlopen
@@ -38,6 +39,7 @@ body:
 - h2: Constructors
 - api3: Tlopen(ushort, uint, uint)
   id: NineP_Protocol_Messages_Tlopen__ctor_System_UInt16_System_UInt32_System_UInt32_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tlopen.cs#L9
   metadata:
     uid: NineP.Protocol.Messages.Tlopen.#ctor(System.UInt16,System.UInt32,System.UInt32)
     commentId: M:NineP.Protocol.Messages.Tlopen.#ctor(System.UInt16,System.UInt32,System.UInt32)
@@ -63,6 +65,7 @@ body:
 - h2: Properties
 - api3: Fid
   id: NineP_Protocol_Messages_Tlopen_Fid
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tlopen.cs#L9
   metadata:
     uid: NineP.Protocol.Messages.Tlopen.Fid
     commentId: P:NineP.Protocol.Messages.Tlopen.Fid
@@ -75,6 +78,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Flags
   id: NineP_Protocol_Messages_Tlopen_Flags
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tlopen.cs#L9
   metadata:
     uid: NineP.Protocol.Messages.Tlopen.Flags
     commentId: P:NineP.Protocol.Messages.Tlopen.Flags
@@ -87,6 +91,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Tag
   id: NineP_Protocol_Messages_Tlopen_Tag
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tlopen.cs#L9
   metadata:
     uid: NineP.Protocol.Messages.Tlopen.Tag
     commentId: P:NineP.Protocol.Messages.Tlopen.Tag

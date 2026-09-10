@@ -3,6 +3,7 @@ title: Interface INinePMessages
 body:
 - api1: Interface INinePMessages
   id: NineP_Client_INinePMessages
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/INinePMessages.cs#L13
   metadata:
     uid: NineP.Client.INinePMessages
     commentId: T:NineP.Client.INinePMessages
@@ -27,6 +28,7 @@ body:
 - h2: Methods
 - api3: AttachAsync(Tattach, CancellationToken)
   id: NineP_Client_INinePMessages_AttachAsync_NineP_Protocol_Messages_Tattach_System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/INinePMessages.cs#L34
   metadata:
     uid: NineP.Client.INinePMessages.AttachAsync(NineP.Protocol.Messages.Tattach,System.Threading.CancellationToken)
     commentId: M:NineP.Client.INinePMessages.AttachAsync(NineP.Protocol.Messages.Tattach,System.Threading.CancellationToken)
@@ -63,6 +65,7 @@ body:
     description: The server answered with an error.
 - api3: AuthAsync(Tauth, CancellationToken)
   id: NineP_Client_INinePMessages_AuthAsync_NineP_Protocol_Messages_Tauth_System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/INinePMessages.cs#L27
   metadata:
     uid: NineP.Client.INinePMessages.AuthAsync(NineP.Protocol.Messages.Tauth,System.Threading.CancellationToken)
     commentId: M:NineP.Client.INinePMessages.AuthAsync(NineP.Protocol.Messages.Tauth,System.Threading.CancellationToken)
@@ -99,6 +102,7 @@ body:
     description: The server answered with an error.
 - api3: ClunkAsync(Tclunk, CancellationToken)
   id: NineP_Client_INinePMessages_ClunkAsync_NineP_Protocol_Messages_Tclunk_System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/INinePMessages.cs#L83
   metadata:
     uid: NineP.Client.INinePMessages.ClunkAsync(NineP.Protocol.Messages.Tclunk,System.Threading.CancellationToken)
     commentId: M:NineP.Client.INinePMessages.ClunkAsync(NineP.Protocol.Messages.Tclunk,System.Threading.CancellationToken)
@@ -135,6 +139,7 @@ body:
     description: The server answered with an error.
 - api3: CreateAsync(Tcreate, CancellationToken)
   id: NineP_Client_INinePMessages_CreateAsync_NineP_Protocol_Messages_Tcreate_System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/INinePMessages.cs#L62
   metadata:
     uid: NineP.Client.INinePMessages.CreateAsync(NineP.Protocol.Messages.Tcreate,System.Threading.CancellationToken)
     commentId: M:NineP.Client.INinePMessages.CreateAsync(NineP.Protocol.Messages.Tcreate,System.Threading.CancellationToken)
@@ -171,6 +176,7 @@ body:
     description: The server answered with an error.
 - api3: FlushAsync(Tflush, CancellationToken)
   id: NineP_Client_INinePMessages_FlushAsync_NineP_Protocol_Messages_Tflush_System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/INinePMessages.cs#L41
   metadata:
     uid: NineP.Client.INinePMessages.FlushAsync(NineP.Protocol.Messages.Tflush,System.Threading.CancellationToken)
     commentId: M:NineP.Client.INinePMessages.FlushAsync(NineP.Protocol.Messages.Tflush,System.Threading.CancellationToken)
@@ -207,6 +213,7 @@ body:
     description: The server answered with an error.
 - api3: FsyncAsync(Tfsync, CancellationToken)
   id: NineP_Client_INinePMessages_FsyncAsync_NineP_Protocol_Messages_Tfsync_System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/INinePMessages.cs#L195
   metadata:
     uid: NineP.Client.INinePMessages.FsyncAsync(NineP.Protocol.Messages.Tfsync,System.Threading.CancellationToken)
     commentId: M:NineP.Client.INinePMessages.FsyncAsync(NineP.Protocol.Messages.Tfsync,System.Threading.CancellationToken)
@@ -243,6 +250,7 @@ body:
     description: The server answered with an error.
 - api3: GetattrAsync(Tgetattr, CancellationToken)
   id: NineP_Client_INinePMessages_GetattrAsync_NineP_Protocol_Messages_Tgetattr_System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/INinePMessages.cs#L160
   metadata:
     uid: NineP.Client.INinePMessages.GetattrAsync(NineP.Protocol.Messages.Tgetattr,System.Threading.CancellationToken)
     commentId: M:NineP.Client.INinePMessages.GetattrAsync(NineP.Protocol.Messages.Tgetattr,System.Threading.CancellationToken)
@@ -279,6 +287,7 @@ body:
     description: The server answered with an error.
 - api3: GetlockAsync(Tgetlock, CancellationToken)
   id: NineP_Client_INinePMessages_GetlockAsync_NineP_Protocol_Messages_Tgetlock_System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/INinePMessages.cs#L209
   metadata:
     uid: NineP.Client.INinePMessages.GetlockAsync(NineP.Protocol.Messages.Tgetlock,System.Threading.CancellationToken)
     commentId: M:NineP.Client.INinePMessages.GetlockAsync(NineP.Protocol.Messages.Tgetlock,System.Threading.CancellationToken)
@@ -315,6 +324,7 @@ body:
     description: The server answered with an error.
 - api3: LcreateAsync(Tlcreate, CancellationToken)
   id: NineP_Client_INinePMessages_LcreateAsync_NineP_Protocol_Messages_Tlcreate_System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/INinePMessages.cs#L125
   metadata:
     uid: NineP.Client.INinePMessages.LcreateAsync(NineP.Protocol.Messages.Tlcreate,System.Threading.CancellationToken)
     commentId: M:NineP.Client.INinePMessages.LcreateAsync(NineP.Protocol.Messages.Tlcreate,System.Threading.CancellationToken)
@@ -351,6 +361,7 @@ body:
     description: The server answered with an error.
 - api3: LinkAsync(Tlink, CancellationToken)
   id: NineP_Client_INinePMessages_LinkAsync_NineP_Protocol_Messages_Tlink_System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/INinePMessages.cs#L216
   metadata:
     uid: NineP.Client.INinePMessages.LinkAsync(NineP.Protocol.Messages.Tlink,System.Threading.CancellationToken)
     commentId: M:NineP.Client.INinePMessages.LinkAsync(NineP.Protocol.Messages.Tlink,System.Threading.CancellationToken)
@@ -387,6 +398,7 @@ body:
     description: The server answered with an error.
 - api3: LockAsync(Tlock, CancellationToken)
   id: NineP_Client_INinePMessages_LockAsync_NineP_Protocol_Messages_Tlock_System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/INinePMessages.cs#L202
   metadata:
     uid: NineP.Client.INinePMessages.LockAsync(NineP.Protocol.Messages.Tlock,System.Threading.CancellationToken)
     commentId: M:NineP.Client.INinePMessages.LockAsync(NineP.Protocol.Messages.Tlock,System.Threading.CancellationToken)
@@ -423,6 +435,7 @@ body:
     description: The server answered with an error.
 - api3: LopenAsync(Tlopen, CancellationToken)
   id: NineP_Client_INinePMessages_LopenAsync_NineP_Protocol_Messages_Tlopen_System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/INinePMessages.cs#L118
   metadata:
     uid: NineP.Client.INinePMessages.LopenAsync(NineP.Protocol.Messages.Tlopen,System.Threading.CancellationToken)
     commentId: M:NineP.Client.INinePMessages.LopenAsync(NineP.Protocol.Messages.Tlopen,System.Threading.CancellationToken)
@@ -459,6 +472,7 @@ body:
     description: The server answered with an error.
 - api3: MkdirAsync(Tmkdir, CancellationToken)
   id: NineP_Client_INinePMessages_MkdirAsync_NineP_Protocol_Messages_Tmkdir_System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/INinePMessages.cs#L223
   metadata:
     uid: NineP.Client.INinePMessages.MkdirAsync(NineP.Protocol.Messages.Tmkdir,System.Threading.CancellationToken)
     commentId: M:NineP.Client.INinePMessages.MkdirAsync(NineP.Protocol.Messages.Tmkdir,System.Threading.CancellationToken)
@@ -495,6 +509,7 @@ body:
     description: The server answered with an error.
 - api3: MknodAsync(Tmknod, CancellationToken)
   id: NineP_Client_INinePMessages_MknodAsync_NineP_Protocol_Messages_Tmknod_System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/INinePMessages.cs#L139
   metadata:
     uid: NineP.Client.INinePMessages.MknodAsync(NineP.Protocol.Messages.Tmknod,System.Threading.CancellationToken)
     commentId: M:NineP.Client.INinePMessages.MknodAsync(NineP.Protocol.Messages.Tmknod,System.Threading.CancellationToken)
@@ -531,6 +546,7 @@ body:
     description: The server answered with an error.
 - api3: OpenAsync(Topen, CancellationToken)
   id: NineP_Client_INinePMessages_OpenAsync_NineP_Protocol_Messages_Topen_System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/INinePMessages.cs#L55
   metadata:
     uid: NineP.Client.INinePMessages.OpenAsync(NineP.Protocol.Messages.Topen,System.Threading.CancellationToken)
     commentId: M:NineP.Client.INinePMessages.OpenAsync(NineP.Protocol.Messages.Topen,System.Threading.CancellationToken)
@@ -567,6 +583,7 @@ body:
     description: The server answered with an error.
 - api3: ReadAsync(Tread, CancellationToken)
   id: NineP_Client_INinePMessages_ReadAsync_NineP_Protocol_Messages_Tread_System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/INinePMessages.cs#L69
   metadata:
     uid: NineP.Client.INinePMessages.ReadAsync(NineP.Protocol.Messages.Tread,System.Threading.CancellationToken)
     commentId: M:NineP.Client.INinePMessages.ReadAsync(NineP.Protocol.Messages.Tread,System.Threading.CancellationToken)
@@ -603,6 +620,7 @@ body:
     description: The server answered with an error.
 - api3: ReaddirAsync(Treaddir, CancellationToken)
   id: NineP_Client_INinePMessages_ReaddirAsync_NineP_Protocol_Messages_Treaddir_System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/INinePMessages.cs#L188
   metadata:
     uid: NineP.Client.INinePMessages.ReaddirAsync(NineP.Protocol.Messages.Treaddir,System.Threading.CancellationToken)
     commentId: M:NineP.Client.INinePMessages.ReaddirAsync(NineP.Protocol.Messages.Treaddir,System.Threading.CancellationToken)
@@ -639,6 +657,7 @@ body:
     description: The server answered with an error.
 - api3: ReadlinkAsync(Treadlink, CancellationToken)
   id: NineP_Client_INinePMessages_ReadlinkAsync_NineP_Protocol_Messages_Treadlink_System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/INinePMessages.cs#L153
   metadata:
     uid: NineP.Client.INinePMessages.ReadlinkAsync(NineP.Protocol.Messages.Treadlink,System.Threading.CancellationToken)
     commentId: M:NineP.Client.INinePMessages.ReadlinkAsync(NineP.Protocol.Messages.Treadlink,System.Threading.CancellationToken)
@@ -675,6 +694,7 @@ body:
     description: The server answered with an error.
 - api3: RemoveAsync(Tremove, CancellationToken)
   id: NineP_Client_INinePMessages_RemoveAsync_NineP_Protocol_Messages_Tremove_System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/INinePMessages.cs#L90
   metadata:
     uid: NineP.Client.INinePMessages.RemoveAsync(NineP.Protocol.Messages.Tremove,System.Threading.CancellationToken)
     commentId: M:NineP.Client.INinePMessages.RemoveAsync(NineP.Protocol.Messages.Tremove,System.Threading.CancellationToken)
@@ -711,6 +731,7 @@ body:
     description: The server answered with an error.
 - api3: RenameAsync(Trename, CancellationToken)
   id: NineP_Client_INinePMessages_RenameAsync_NineP_Protocol_Messages_Trename_System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/INinePMessages.cs#L146
   metadata:
     uid: NineP.Client.INinePMessages.RenameAsync(NineP.Protocol.Messages.Trename,System.Threading.CancellationToken)
     commentId: M:NineP.Client.INinePMessages.RenameAsync(NineP.Protocol.Messages.Trename,System.Threading.CancellationToken)
@@ -747,6 +768,7 @@ body:
     description: The server answered with an error.
 - api3: RenameatAsync(Trenameat, CancellationToken)
   id: NineP_Client_INinePMessages_RenameatAsync_NineP_Protocol_Messages_Trenameat_System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/INinePMessages.cs#L230
   metadata:
     uid: NineP.Client.INinePMessages.RenameatAsync(NineP.Protocol.Messages.Trenameat,System.Threading.CancellationToken)
     commentId: M:NineP.Client.INinePMessages.RenameatAsync(NineP.Protocol.Messages.Trenameat,System.Threading.CancellationToken)
@@ -783,6 +805,7 @@ body:
     description: The server answered with an error.
 - api3: SetattrAsync(Tsetattr, CancellationToken)
   id: NineP_Client_INinePMessages_SetattrAsync_NineP_Protocol_Messages_Tsetattr_System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/INinePMessages.cs#L167
   metadata:
     uid: NineP.Client.INinePMessages.SetattrAsync(NineP.Protocol.Messages.Tsetattr,System.Threading.CancellationToken)
     commentId: M:NineP.Client.INinePMessages.SetattrAsync(NineP.Protocol.Messages.Tsetattr,System.Threading.CancellationToken)
@@ -819,6 +842,7 @@ body:
     description: The server answered with an error.
 - api3: StatAsync(Tstat, CancellationToken)
   id: NineP_Client_INinePMessages_StatAsync_NineP_Protocol_Messages_Tstat_System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/INinePMessages.cs#L97
   metadata:
     uid: NineP.Client.INinePMessages.StatAsync(NineP.Protocol.Messages.Tstat,System.Threading.CancellationToken)
     commentId: M:NineP.Client.INinePMessages.StatAsync(NineP.Protocol.Messages.Tstat,System.Threading.CancellationToken)
@@ -855,6 +879,7 @@ body:
     description: The server answered with an error.
 - api3: StatfsAsync(Tstatfs, CancellationToken)
   id: NineP_Client_INinePMessages_StatfsAsync_NineP_Protocol_Messages_Tstatfs_System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/INinePMessages.cs#L111
   metadata:
     uid: NineP.Client.INinePMessages.StatfsAsync(NineP.Protocol.Messages.Tstatfs,System.Threading.CancellationToken)
     commentId: M:NineP.Client.INinePMessages.StatfsAsync(NineP.Protocol.Messages.Tstatfs,System.Threading.CancellationToken)
@@ -891,6 +916,7 @@ body:
     description: The server answered with an error.
 - api3: SymlinkAsync(Tsymlink, CancellationToken)
   id: NineP_Client_INinePMessages_SymlinkAsync_NineP_Protocol_Messages_Tsymlink_System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/INinePMessages.cs#L132
   metadata:
     uid: NineP.Client.INinePMessages.SymlinkAsync(NineP.Protocol.Messages.Tsymlink,System.Threading.CancellationToken)
     commentId: M:NineP.Client.INinePMessages.SymlinkAsync(NineP.Protocol.Messages.Tsymlink,System.Threading.CancellationToken)
@@ -927,6 +953,7 @@ body:
     description: The server answered with an error.
 - api3: UnlinkatAsync(Tunlinkat, CancellationToken)
   id: NineP_Client_INinePMessages_UnlinkatAsync_NineP_Protocol_Messages_Tunlinkat_System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/INinePMessages.cs#L237
   metadata:
     uid: NineP.Client.INinePMessages.UnlinkatAsync(NineP.Protocol.Messages.Tunlinkat,System.Threading.CancellationToken)
     commentId: M:NineP.Client.INinePMessages.UnlinkatAsync(NineP.Protocol.Messages.Tunlinkat,System.Threading.CancellationToken)
@@ -963,6 +990,7 @@ body:
     description: The server answered with an error.
 - api3: VersionAsync(Tversion, CancellationToken)
   id: NineP_Client_INinePMessages_VersionAsync_NineP_Protocol_Messages_Tversion_System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/INinePMessages.cs#L20
   metadata:
     uid: NineP.Client.INinePMessages.VersionAsync(NineP.Protocol.Messages.Tversion,System.Threading.CancellationToken)
     commentId: M:NineP.Client.INinePMessages.VersionAsync(NineP.Protocol.Messages.Tversion,System.Threading.CancellationToken)
@@ -999,6 +1027,7 @@ body:
     description: The server answered with an error.
 - api3: WalkAsync(Twalk, CancellationToken)
   id: NineP_Client_INinePMessages_WalkAsync_NineP_Protocol_Messages_Twalk_System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/INinePMessages.cs#L48
   metadata:
     uid: NineP.Client.INinePMessages.WalkAsync(NineP.Protocol.Messages.Twalk,System.Threading.CancellationToken)
     commentId: M:NineP.Client.INinePMessages.WalkAsync(NineP.Protocol.Messages.Twalk,System.Threading.CancellationToken)
@@ -1035,6 +1064,7 @@ body:
     description: The server answered with an error.
 - api3: WriteAsync(Twrite, CancellationToken)
   id: NineP_Client_INinePMessages_WriteAsync_NineP_Protocol_Messages_Twrite_System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/INinePMessages.cs#L76
   metadata:
     uid: NineP.Client.INinePMessages.WriteAsync(NineP.Protocol.Messages.Twrite,System.Threading.CancellationToken)
     commentId: M:NineP.Client.INinePMessages.WriteAsync(NineP.Protocol.Messages.Twrite,System.Threading.CancellationToken)
@@ -1071,6 +1101,7 @@ body:
     description: The server answered with an error.
 - api3: WstatAsync(Twstat, CancellationToken)
   id: NineP_Client_INinePMessages_WstatAsync_NineP_Protocol_Messages_Twstat_System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/INinePMessages.cs#L104
   metadata:
     uid: NineP.Client.INinePMessages.WstatAsync(NineP.Protocol.Messages.Twstat,System.Threading.CancellationToken)
     commentId: M:NineP.Client.INinePMessages.WstatAsync(NineP.Protocol.Messages.Twstat,System.Threading.CancellationToken)
@@ -1107,6 +1138,7 @@ body:
     description: The server answered with an error.
 - api3: XattrcreateAsync(Txattrcreate, CancellationToken)
   id: NineP_Client_INinePMessages_XattrcreateAsync_NineP_Protocol_Messages_Txattrcreate_System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/INinePMessages.cs#L181
   metadata:
     uid: NineP.Client.INinePMessages.XattrcreateAsync(NineP.Protocol.Messages.Txattrcreate,System.Threading.CancellationToken)
     commentId: M:NineP.Client.INinePMessages.XattrcreateAsync(NineP.Protocol.Messages.Txattrcreate,System.Threading.CancellationToken)
@@ -1143,6 +1175,7 @@ body:
     description: The server answered with an error.
 - api3: XattrwalkAsync(Txattrwalk, CancellationToken)
   id: NineP_Client_INinePMessages_XattrwalkAsync_NineP_Protocol_Messages_Txattrwalk_System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Client/INinePMessages.cs#L174
   metadata:
     uid: NineP.Client.INinePMessages.XattrwalkAsync(NineP.Protocol.Messages.Txattrwalk,System.Threading.CancellationToken)
     commentId: M:NineP.Client.INinePMessages.XattrwalkAsync(NineP.Protocol.Messages.Txattrwalk,System.Threading.CancellationToken)

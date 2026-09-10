@@ -138,7 +138,7 @@ public sealed class CliTests
         CliRun run = await harness.RunAsync(["write", "/name"], dialect, "no"u8.ToArray());
 
         run.Expect(2);
-        Assert.Equal("error: read-only file system (errno 30)", run.Stderr.Trim());
+        Assert.Equal("error: Read-only file system (errno 30)", run.Stderr.Trim());
     }
 
     /// <summary>Conformance Part A step 5: <c>..</c> at the root walks to the root.</summary>

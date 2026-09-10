@@ -3,6 +3,7 @@ title: Struct Rgetattr
 body:
 - api1: Struct Rgetattr
   id: NineP_Protocol_Messages_Rgetattr
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rgetattr.cs#L24
   metadata:
     uid: NineP.Protocol.Messages.Rgetattr
     commentId: T:NineP.Protocol.Messages.Rgetattr
@@ -41,6 +42,7 @@ body:
 - h2: Constructors
 - api3: Rgetattr(ushort, GetAttrMask, Qid, uint, uint, uint, ulong, ulong, ulong, ulong, ulong, TimeSpec, TimeSpec, TimeSpec, TimeSpec, ulong, ulong)
   id: NineP_Protocol_Messages_Rgetattr__ctor_System_UInt16_NineP_Protocol_Messages_GetAttrMask_NineP_Protocol_Qid_System_UInt32_System_UInt32_System_UInt32_System_UInt64_System_UInt64_System_UInt64_System_UInt64_System_UInt64_NineP_Protocol_TimeSpec_NineP_Protocol_TimeSpec_NineP_Protocol_TimeSpec_NineP_Protocol_TimeSpec_System_UInt64_System_UInt64_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rgetattr.cs#L24
   metadata:
     uid: NineP.Protocol.Messages.Rgetattr.#ctor(System.UInt16,NineP.Protocol.Messages.GetAttrMask,NineP.Protocol.Qid,System.UInt32,System.UInt32,System.UInt32,System.UInt64,System.UInt64,System.UInt64,System.UInt64,System.UInt64,NineP.Protocol.TimeSpec,NineP.Protocol.TimeSpec,NineP.Protocol.TimeSpec,NineP.Protocol.TimeSpec,System.UInt64,System.UInt64)
     commentId: M:NineP.Protocol.Messages.Rgetattr.#ctor(System.UInt16,NineP.Protocol.Messages.GetAttrMask,NineP.Protocol.Qid,System.UInt32,System.UInt32,System.UInt32,System.UInt64,System.UInt64,System.UInt64,System.UInt64,System.UInt64,NineP.Protocol.TimeSpec,NineP.Protocol.TimeSpec,NineP.Protocol.TimeSpec,NineP.Protocol.TimeSpec,System.UInt64,System.UInt64)
@@ -139,6 +141,7 @@ body:
 - h2: Properties
 - api3: ATime
   id: NineP_Protocol_Messages_Rgetattr_ATime
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rgetattr.cs#L26
   metadata:
     uid: NineP.Protocol.Messages.Rgetattr.ATime
     commentId: P:NineP.Protocol.Messages.Rgetattr.ATime
@@ -151,6 +154,7 @@ body:
       url: NineP.Protocol.TimeSpec.html
 - api3: BTime
   id: NineP_Protocol_Messages_Rgetattr_BTime
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rgetattr.cs#L27
   metadata:
     uid: NineP.Protocol.Messages.Rgetattr.BTime
     commentId: P:NineP.Protocol.Messages.Rgetattr.BTime
@@ -163,6 +167,7 @@ body:
       url: NineP.Protocol.TimeSpec.html
 - api3: BlkSize
   id: NineP_Protocol_Messages_Rgetattr_BlkSize
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rgetattr.cs#L26
   metadata:
     uid: NineP.Protocol.Messages.Rgetattr.BlkSize
     commentId: P:NineP.Protocol.Messages.Rgetattr.BlkSize
@@ -175,6 +180,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint64
 - api3: Blocks
   id: NineP_Protocol_Messages_Rgetattr_Blocks
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rgetattr.cs#L26
   metadata:
     uid: NineP.Protocol.Messages.Rgetattr.Blocks
     commentId: P:NineP.Protocol.Messages.Rgetattr.Blocks
@@ -187,6 +193,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint64
 - api3: CTime
   id: NineP_Protocol_Messages_Rgetattr_CTime
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rgetattr.cs#L26
   metadata:
     uid: NineP.Protocol.Messages.Rgetattr.CTime
     commentId: P:NineP.Protocol.Messages.Rgetattr.CTime
@@ -199,6 +206,7 @@ body:
       url: NineP.Protocol.TimeSpec.html
 - api3: DataVersion
   id: NineP_Protocol_Messages_Rgetattr_DataVersion
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rgetattr.cs#L27
   metadata:
     uid: NineP.Protocol.Messages.Rgetattr.DataVersion
     commentId: P:NineP.Protocol.Messages.Rgetattr.DataVersion
@@ -211,6 +219,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint64
 - api3: Gen
   id: NineP_Protocol_Messages_Rgetattr_Gen
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rgetattr.cs#L27
   metadata:
     uid: NineP.Protocol.Messages.Rgetattr.Gen
     commentId: P:NineP.Protocol.Messages.Rgetattr.Gen
@@ -223,6 +232,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint64
 - api3: Gid
   id: NineP_Protocol_Messages_Rgetattr_Gid
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rgetattr.cs#L25
   metadata:
     uid: NineP.Protocol.Messages.Rgetattr.Gid
     commentId: P:NineP.Protocol.Messages.Rgetattr.Gid
@@ -235,6 +245,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: MTime
   id: NineP_Protocol_Messages_Rgetattr_MTime
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rgetattr.cs#L26
   metadata:
     uid: NineP.Protocol.Messages.Rgetattr.MTime
     commentId: P:NineP.Protocol.Messages.Rgetattr.MTime
@@ -247,6 +258,7 @@ body:
       url: NineP.Protocol.TimeSpec.html
 - api3: Mode
   id: NineP_Protocol_Messages_Rgetattr_Mode
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rgetattr.cs#L25
   metadata:
     uid: NineP.Protocol.Messages.Rgetattr.Mode
     commentId: P:NineP.Protocol.Messages.Rgetattr.Mode
@@ -259,6 +271,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: NLink
   id: NineP_Protocol_Messages_Rgetattr_NLink
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rgetattr.cs#L25
   metadata:
     uid: NineP.Protocol.Messages.Rgetattr.NLink
     commentId: P:NineP.Protocol.Messages.Rgetattr.NLink
@@ -271,6 +284,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint64
 - api3: Qid
   id: NineP_Protocol_Messages_Rgetattr_Qid
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rgetattr.cs#L25
   metadata:
     uid: NineP.Protocol.Messages.Rgetattr.Qid
     commentId: P:NineP.Protocol.Messages.Rgetattr.Qid
@@ -283,6 +297,7 @@ body:
       url: NineP.Protocol.Qid.html
 - api3: Rdev
   id: NineP_Protocol_Messages_Rgetattr_Rdev
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rgetattr.cs#L25
   metadata:
     uid: NineP.Protocol.Messages.Rgetattr.Rdev
     commentId: P:NineP.Protocol.Messages.Rgetattr.Rdev
@@ -295,6 +310,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint64
 - api3: Size
   id: NineP_Protocol_Messages_Rgetattr_Size
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rgetattr.cs#L26
   metadata:
     uid: NineP.Protocol.Messages.Rgetattr.Size
     commentId: P:NineP.Protocol.Messages.Rgetattr.Size
@@ -307,6 +323,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint64
 - api3: Tag
   id: NineP_Protocol_Messages_Rgetattr_Tag
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rgetattr.cs#L25
   metadata:
     uid: NineP.Protocol.Messages.Rgetattr.Tag
     commentId: P:NineP.Protocol.Messages.Rgetattr.Tag
@@ -319,6 +336,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint16
 - api3: Uid
   id: NineP_Protocol_Messages_Rgetattr_Uid
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rgetattr.cs#L25
   metadata:
     uid: NineP.Protocol.Messages.Rgetattr.Uid
     commentId: P:NineP.Protocol.Messages.Rgetattr.Uid
@@ -331,6 +349,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Valid
   id: NineP_Protocol_Messages_Rgetattr_Valid
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rgetattr.cs#L25
   metadata:
     uid: NineP.Protocol.Messages.Rgetattr.Valid
     commentId: P:NineP.Protocol.Messages.Rgetattr.Valid

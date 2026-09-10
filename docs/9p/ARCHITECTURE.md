@@ -57,8 +57,12 @@ Rust, Lua, Perl, PHP. The loop in [loop.md](loop.md) works them serially in that
   protocol-reference §5.1, unit-tested against the table there.
 - **Errors**: one `NinePError` type with `{ename: string, errno: int}`; the codec projects it to
   `Rerror`/`Rerror+errno`/`Rlerror` by dialect. Handlers raise errno-bearing errors; the ename for
-  a bare errno comes from a fixed table (Plan 9 wording where one exists: `"file not found"`,
-  `"permission denied"`, …; otherwise `strerror` text).
+  a bare errno comes from a fixed table whose every string the Linux kernel's 9P client maps to
+  that same errno (`fixtures/linux-9p-errors.json`, generated from `net/9p/error.c`): the Plan 9
+  wording where Linux lists one (`"file not found"`, `"permission denied"`, `"i/o error"`, …),
+  otherwise the `strerror` text (`"Invalid argument"`, `"Read-only file system"`, …). Over plain
+  9P2000 the ename is all a Linux mount gets, and a string outside that table reaches it as error
+  526. Every string in the Linux table is understood on receipt (owner decision, 2026-09-10).
 - **Transport** interface: a dialer (`connect(addr) → Conn`) and a listener
   (`listen(addr) → accept() → Conn`), where `Conn` is a bidirectional byte stream with
   `read`, `write`, `close`, an optional `peerIdentity()` (TLS client certificate, WS headers) and
@@ -106,7 +110,7 @@ XattrHandler?         list() · get(name) · set(name, value, flags) · remove(n
   address to that file type, and the server core maps every T-message onto exactly one handler
   method (table in each repo's `docs/server.md`; the names are fixed by §12). Optional capabilities (`lock`, `xattr`,
   `link`, `statfs`) are separate interfaces; a handler that lacks one gets `EOPNOTSUPP` /
-  `"not supported"` from the core, never a crash.
+  `"Operation not supported"` from the core, never a crash.
 - **The core owns**: version/msize negotiation; the fid table (bounded), tag table (bounded,
   duplicate-tag rejection), `Tflush` semantics, walk element-wise semantics with the partial-walk
   rule, open-state tracking (a fid is open once; `ORCLOSE`; `DMEXCL` exclusivity), directory
@@ -127,7 +131,7 @@ XattrHandler?         list() · get(name) · set(name, value, flags) · remove(n
 - **Limits** (all configurable, defaults): max msize 1 MiB; min msize 4096; **pre-negotiation frame
   cap 8192 bytes** (protocol-reference §8 rule 1 — the negotiated msize does not exist yet and the
   1 MiB maximum must not stand in for it); max fids per connection 65536 (over the cap:
-  `Rerror "too many fids"` / `Rlerror ENFILE`); max outstanding requests 256 per connection and
+  `Rerror "Too many open files in system"` / `Rlerror ENFILE`); max outstanding requests 256 per connection and
   4096 per listener, of which 8 per connection are reserved for `Tflush`; max connections per
   listener 1024; read header timeout 30 s; idle timeout off; max name 255 bytes; `Twalk` ≤ 16
   elements (protocol).

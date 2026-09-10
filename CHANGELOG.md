@@ -6,6 +6,23 @@ All notable changes to this repository are recorded here. The format follows
 
 ## [Unreleased]
 
+### Changed
+
+- **Error strings match the Linux kernel's 9P table.** Over plain 9P2000 an `Rerror` carries only
+  the ename, and v9fs maps it through the exact-match table in `net/9p/error.c`; only six of the
+  27 enames this table sent were in it, so a refused write on a `version=9p2000` mount read as
+  error 526. `ErrorTable` now sends, for every one of the 74 errnos Linux can name, a string Linux
+  maps to that errno (a Plan 9 wording where Linux lists one, `strerror` text otherwise), `Errno`
+  gains the 48 missing constants, and every string in Linux's table plus every wording this
+  table used to send is understood on receipt. Wire-visible for 9P2000 and 9P2000.u peers:
+  `unknown fid` is now `fid unknown or out of range`, `too many fids` is `Too many open files in
+  system`, `bad message` is `protocol botch`, `read-only file system` is `Read-only file system`,
+  and so on; errno values and every `.L` reply are unchanged. One visible consequence for plain
+  9P2000 peers: `EPERM` travels as `Operation not permitted` rather than sharing `permission
+  denied` with `EACCES`, so a 9P2000 client now recovers `EPERM` where it used to recover
+  `EACCES` (conformance E9 and F5 assert it in every dialect). The fixture
+  `docs/9p/fixtures/linux-9p-errors.json` is generated from the kernel source at a pinned commit
+  and `ErrorTableTests` holds the table to it. Owner decision of 2026-09-10 after the interop runs.
 ### Interop
 
 - The Linux kernel client (v9fs) mounts `jsonfs` in all three dialects, diod and `p9ufs` serve

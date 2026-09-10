@@ -3,6 +3,7 @@ title: Struct Tsetattr
 body:
 - api1: Struct Tsetattr
   id: NineP_Protocol_Messages_Tsetattr
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tsetattr.cs#L16
   metadata:
     uid: NineP.Protocol.Messages.Tsetattr
     commentId: T:NineP.Protocol.Messages.Tsetattr
@@ -41,6 +42,7 @@ body:
 - h2: Constructors
 - api3: Tsetattr(ushort, uint, SetAttrMask, uint, uint, uint, ulong, TimeSpec, TimeSpec)
   id: NineP_Protocol_Messages_Tsetattr__ctor_System_UInt16_System_UInt32_NineP_Protocol_Messages_SetAttrMask_System_UInt32_System_UInt32_System_UInt32_System_UInt64_NineP_Protocol_TimeSpec_NineP_Protocol_TimeSpec_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tsetattr.cs#L16
   metadata:
     uid: NineP.Protocol.Messages.Tsetattr.#ctor(System.UInt16,System.UInt32,NineP.Protocol.Messages.SetAttrMask,System.UInt32,System.UInt32,System.UInt32,System.UInt64,NineP.Protocol.TimeSpec,NineP.Protocol.TimeSpec)
     commentId: M:NineP.Protocol.Messages.Tsetattr.#ctor(System.UInt16,System.UInt32,NineP.Protocol.Messages.SetAttrMask,System.UInt32,System.UInt32,System.UInt32,System.UInt64,NineP.Protocol.TimeSpec,NineP.Protocol.TimeSpec)
@@ -99,6 +101,7 @@ body:
 - h2: Properties
 - api3: ATime
   id: NineP_Protocol_Messages_Tsetattr_ATime
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tsetattr.cs#L18
   metadata:
     uid: NineP.Protocol.Messages.Tsetattr.ATime
     commentId: P:NineP.Protocol.Messages.Tsetattr.ATime
@@ -111,6 +114,7 @@ body:
       url: NineP.Protocol.TimeSpec.html
 - api3: Fid
   id: NineP_Protocol_Messages_Tsetattr_Fid
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tsetattr.cs#L17
   metadata:
     uid: NineP.Protocol.Messages.Tsetattr.Fid
     commentId: P:NineP.Protocol.Messages.Tsetattr.Fid
@@ -123,6 +127,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Gid
   id: NineP_Protocol_Messages_Tsetattr_Gid
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tsetattr.cs#L17
   metadata:
     uid: NineP.Protocol.Messages.Tsetattr.Gid
     commentId: P:NineP.Protocol.Messages.Tsetattr.Gid
@@ -135,6 +140,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: MTime
   id: NineP_Protocol_Messages_Tsetattr_MTime
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tsetattr.cs#L18
   metadata:
     uid: NineP.Protocol.Messages.Tsetattr.MTime
     commentId: P:NineP.Protocol.Messages.Tsetattr.MTime
@@ -147,6 +153,7 @@ body:
       url: NineP.Protocol.TimeSpec.html
 - api3: Mode
   id: NineP_Protocol_Messages_Tsetattr_Mode
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tsetattr.cs#L17
   metadata:
     uid: NineP.Protocol.Messages.Tsetattr.Mode
     commentId: P:NineP.Protocol.Messages.Tsetattr.Mode
@@ -159,6 +166,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Size
   id: NineP_Protocol_Messages_Tsetattr_Size
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tsetattr.cs#L17
   metadata:
     uid: NineP.Protocol.Messages.Tsetattr.Size
     commentId: P:NineP.Protocol.Messages.Tsetattr.Size
@@ -171,6 +179,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint64
 - api3: Tag
   id: NineP_Protocol_Messages_Tsetattr_Tag
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tsetattr.cs#L17
   metadata:
     uid: NineP.Protocol.Messages.Tsetattr.Tag
     commentId: P:NineP.Protocol.Messages.Tsetattr.Tag
@@ -183,6 +192,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint16
 - api3: Uid
   id: NineP_Protocol_Messages_Tsetattr_Uid
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tsetattr.cs#L17
   metadata:
     uid: NineP.Protocol.Messages.Tsetattr.Uid
     commentId: P:NineP.Protocol.Messages.Tsetattr.Uid
@@ -195,6 +205,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Valid
   id: NineP_Protocol_Messages_Tsetattr_Valid
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tsetattr.cs#L17
   metadata:
     uid: NineP.Protocol.Messages.Tsetattr.Valid
     commentId: P:NineP.Protocol.Messages.Tsetattr.Valid

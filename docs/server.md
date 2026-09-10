@@ -151,7 +151,7 @@ handler is called. A handler may check more; it can never be reached with less.
 ## Optional capabilities
 
 `ILockCapability`, `IXattrHandler`, `ILinkCapability` and `IStatFsCapability` are separate
-interfaces. A handler that does not implement one is answered `EOPNOTSUPP` (`"not supported"`) by
+interfaces. A handler that does not implement one is answered `EOPNOTSUPP` (`"Operation not supported"`) by
 the core — never a crash, and never a silent success.
 
 `IXattrHandler` has one call the wire does not name: a `Txattrcreate` whose `attr_size` is **zero**

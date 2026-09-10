@@ -3,6 +3,7 @@ title: Class Errno
 body:
 - api1: Class Errno
   id: NineP_Protocol_Errno
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L7
   metadata:
     uid: NineP.Protocol.Errno
     commentId: T:NineP.Protocol.Errno
@@ -13,7 +14,10 @@ body:
       url: NineP.Protocol.html
   - name: Assembly
     value: NineP.Protocol.dll
-- markdown: The Linux errno values this workspace's servers use (reference §5.9).
+- markdown: >-
+    The Linux errno values this workspace's servers use (reference §5.9): every errno the Linux
+
+    kernel's 9P client can name (<code>docs/9p/fixtures/linux-9p-errors.json</code>), plus <code>EOVERFLOW</code>.
 - code: public static class Errno
 - h4: Inheritance
 - inheritance:
@@ -38,8 +42,22 @@ body:
   - text: object.ToString()
     url: https://learn.microsoft.com/dotnet/api/system.object.tostring
 - h2: Fields
+- api3: E2BIG
+  id: NineP_Protocol_Errno_E2BIG
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L28
+  metadata:
+    uid: NineP.Protocol.Errno.E2BIG
+    commentId: F:NineP.Protocol.Errno.E2BIG
+- markdown: Argument list too long.
+- code: public const int E2BIG = 7
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EACCES
   id: NineP_Protocol_Errno_EACCES
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L40
   metadata:
     uid: NineP.Protocol.Errno.EACCES
     commentId: F:NineP.Protocol.Errno.EACCES
@@ -52,6 +70,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EAGAIN
   id: NineP_Protocol_Errno_EAGAIN
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L34
   metadata:
     uid: NineP.Protocol.Errno.EAGAIN
     commentId: F:NineP.Protocol.Errno.EAGAIN
@@ -62,8 +81,22 @@ body:
   - type:
     - text: int
       url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: EALREADY
+  id: NineP_Protocol_Errno_EALREADY
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L223
+  metadata:
+    uid: NineP.Protocol.Errno.EALREADY
+    commentId: F:NineP.Protocol.Errno.EALREADY
+- markdown: Operation already in progress.
+- code: public const int EALREADY = 114
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EBADF
   id: NineP_Protocol_Errno_EBADF
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L31
   metadata:
     uid: NineP.Protocol.Errno.EBADF
     commentId: F:NineP.Protocol.Errno.EBADF
@@ -74,8 +107,74 @@ body:
   - type:
     - text: int
       url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: EBADFD
+  id: NineP_Protocol_Errno_EBADFD
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L154
+  metadata:
+    uid: NineP.Protocol.Errno.EBADFD
+    commentId: F:NineP.Protocol.Errno.EBADFD
+- markdown: File descriptor in bad state.
+- code: public const int EBADFD = 77
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: EBADMSG
+  id: NineP_Protocol_Errno_EBADMSG
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L148
+  metadata:
+    uid: NineP.Protocol.Errno.EBADMSG
+    commentId: F:NineP.Protocol.Errno.EBADMSG
+- markdown: Bad message.
+- code: public const int EBADMSG = 74
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: EBUSY
+  id: NineP_Protocol_Errno_EBUSY
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L49
+  metadata:
+    uid: NineP.Protocol.Errno.EBUSY
+    commentId: F:NineP.Protocol.Errno.EBUSY
+- markdown: Device or resource busy.
+- code: public const int EBUSY = 16
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: ECOMM
+  id: NineP_Protocol_Errno_ECOMM
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L142
+  metadata:
+    uid: NineP.Protocol.Errno.ECOMM
+    commentId: F:NineP.Protocol.Errno.ECOMM
+- markdown: Communication error on send.
+- code: public const int ECOMM = 70
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: ECONNABORTED
+  id: NineP_Protocol_Errno_ECONNABORTED
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L193
+  metadata:
+    uid: NineP.Protocol.Errno.ECONNABORTED
+    commentId: F:NineP.Protocol.Errno.ECONNABORTED
+- markdown: Software caused connection abort.
+- code: public const int ECONNABORTED = 103
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ECONNREFUSED
   id: NineP_Protocol_Errno_ECONNREFUSED
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L214
   metadata:
     uid: NineP.Protocol.Errno.ECONNREFUSED
     commentId: F:NineP.Protocol.Errno.ECONNREFUSED
@@ -86,8 +185,61 @@ body:
   - type:
     - text: int
       url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: ECONNRESET
+  id: NineP_Protocol_Errno_ECONNRESET
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L196
+  metadata:
+    uid: NineP.Protocol.Errno.ECONNRESET
+    commentId: F:NineP.Protocol.Errno.ECONNRESET
+- markdown: Connection reset by peer.
+- code: public const int ECONNRESET = 104
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: EDEADLK
+  id: NineP_Protocol_Errno_EDEADLK
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L103
+  metadata:
+    uid: NineP.Protocol.Errno.EDEADLK
+    commentId: F:NineP.Protocol.Errno.EDEADLK
+- markdown: Resource deadlock avoided.
+- code: public const int EDEADLK = 35
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: EDOM
+  id: NineP_Protocol_Errno_EDOM
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L97
+  metadata:
+    uid: NineP.Protocol.Errno.EDOM
+    commentId: F:NineP.Protocol.Errno.EDOM
+- markdown: Numerical argument out of domain.
+- code: public const int EDOM = 33
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: EDQUOT
+  id: NineP_Protocol_Errno_EDQUOT
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L235
+  metadata:
+    uid: NineP.Protocol.Errno.EDQUOT
+    commentId: F:NineP.Protocol.Errno.EDQUOT
+- markdown: Disk quota exceeded.
+- code: public const int EDQUOT = 122
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EEXIST
   id: NineP_Protocol_Errno_EEXIST
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L52
   metadata:
     uid: NineP.Protocol.Errno.EEXIST
     commentId: F:NineP.Protocol.Errno.EEXIST
@@ -98,8 +250,22 @@ body:
   - type:
     - text: int
       url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: EFAULT
+  id: NineP_Protocol_Errno_EFAULT
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L43
+  metadata:
+    uid: NineP.Protocol.Errno.EFAULT
+    commentId: F:NineP.Protocol.Errno.EFAULT
+- markdown: Bad address.
+- code: public const int EFAULT = 14
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EFBIG
   id: NineP_Protocol_Errno_EFBIG
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L79
   metadata:
     uid: NineP.Protocol.Errno.EFBIG
     commentId: F:NineP.Protocol.Errno.EFBIG
@@ -110,8 +276,74 @@ body:
   - type:
     - text: int
       url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: EHOSTDOWN
+  id: NineP_Protocol_Errno_EHOSTDOWN
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L217
+  metadata:
+    uid: NineP.Protocol.Errno.EHOSTDOWN
+    commentId: F:NineP.Protocol.Errno.EHOSTDOWN
+- markdown: Host is down.
+- code: public const int EHOSTDOWN = 112
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: EHOSTUNREACH
+  id: NineP_Protocol_Errno_EHOSTUNREACH
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L220
+  metadata:
+    uid: NineP.Protocol.Errno.EHOSTUNREACH
+    commentId: F:NineP.Protocol.Errno.EHOSTUNREACH
+- markdown: No route to host.
+- code: public const int EHOSTUNREACH = 113
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: EIDRM
+  id: NineP_Protocol_Errno_EIDRM
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L124
+  metadata:
+    uid: NineP.Protocol.Errno.EIDRM
+    commentId: F:NineP.Protocol.Errno.EIDRM
+- markdown: Identifier removed.
+- code: public const int EIDRM = 43
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: EINPROGRESS
+  id: NineP_Protocol_Errno_EINPROGRESS
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L226
+  metadata:
+    uid: NineP.Protocol.Errno.EINPROGRESS
+    commentId: F:NineP.Protocol.Errno.EINPROGRESS
+- markdown: Operation now in progress.
+- code: public const int EINPROGRESS = 115
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: EINTR
+  id: NineP_Protocol_Errno_EINTR
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L16
+  metadata:
+    uid: NineP.Protocol.Errno.EINTR
+    commentId: F:NineP.Protocol.Errno.EINTR
+- markdown: Interrupted system call.
+- code: public const int EINTR = 4
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EINVAL
   id: NineP_Protocol_Errno_EINVAL
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L67
   metadata:
     uid: NineP.Protocol.Errno.EINVAL
     commentId: F:NineP.Protocol.Errno.EINVAL
@@ -124,6 +356,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EIO
   id: NineP_Protocol_Errno_EIO
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L19
   metadata:
     uid: NineP.Protocol.Errno.EIO
     commentId: F:NineP.Protocol.Errno.EIO
@@ -134,8 +367,22 @@ body:
   - type:
     - text: int
       url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: EISCONN
+  id: NineP_Protocol_Errno_EISCONN
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L202
+  metadata:
+    uid: NineP.Protocol.Errno.EISCONN
+    commentId: F:NineP.Protocol.Errno.EISCONN
+- markdown: Transport endpoint is already connected.
+- code: public const int EISCONN = 106
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EISDIR
   id: NineP_Protocol_Errno_EISDIR
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L64
   metadata:
     uid: NineP.Protocol.Errno.EISDIR
     commentId: F:NineP.Protocol.Errno.EISDIR
@@ -146,8 +393,22 @@ body:
   - type:
     - text: int
       url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: EISNAM
+  id: NineP_Protocol_Errno_EISNAM
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L229
+  metadata:
+    uid: NineP.Protocol.Errno.EISNAM
+    commentId: F:NineP.Protocol.Errno.EISNAM
+- markdown: Is a named type file.
+- code: public const int EISNAM = 120
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ELOOP
   id: NineP_Protocol_Errno_ELOOP
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L118
   metadata:
     uid: NineP.Protocol.Errno.ELOOP
     commentId: F:NineP.Protocol.Errno.ELOOP
@@ -158,8 +419,48 @@ body:
   - type:
     - text: int
       url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: EMFILE
+  id: NineP_Protocol_Errno_EMFILE
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L73
+  metadata:
+    uid: NineP.Protocol.Errno.EMFILE
+    commentId: F:NineP.Protocol.Errno.EMFILE
+- markdown: Too many open files.
+- code: public const int EMFILE = 24
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: EMLINK
+  id: NineP_Protocol_Errno_EMLINK
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L91
+  metadata:
+    uid: NineP.Protocol.Errno.EMLINK
+    commentId: F:NineP.Protocol.Errno.EMLINK
+- markdown: Too many links.
+- code: public const int EMLINK = 31
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: EMSGSIZE
+  id: NineP_Protocol_Errno_EMSGSIZE
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L166
+  metadata:
+    uid: NineP.Protocol.Errno.EMSGSIZE
+    commentId: F:NineP.Protocol.Errno.EMSGSIZE
+- markdown: Message too long.
+- code: public const int EMSGSIZE = 90
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ENAMETOOLONG
   id: NineP_Protocol_Errno_ENAMETOOLONG
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L106
   metadata:
     uid: NineP.Protocol.Errno.ENAMETOOLONG
     commentId: F:NineP.Protocol.Errno.ENAMETOOLONG
@@ -170,8 +471,48 @@ body:
   - type:
     - text: int
       url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: ENETDOWN
+  id: NineP_Protocol_Errno_ENETDOWN
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L184
+  metadata:
+    uid: NineP.Protocol.Errno.ENETDOWN
+    commentId: F:NineP.Protocol.Errno.ENETDOWN
+- markdown: Network is down.
+- code: public const int ENETDOWN = 100
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: ENETRESET
+  id: NineP_Protocol_Errno_ENETRESET
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L190
+  metadata:
+    uid: NineP.Protocol.Errno.ENETRESET
+    commentId: F:NineP.Protocol.Errno.ENETRESET
+- markdown: Network dropped connection on reset.
+- code: public const int ENETRESET = 102
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: ENETUNREACH
+  id: NineP_Protocol_Errno_ENETUNREACH
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L187
+  metadata:
+    uid: NineP.Protocol.Errno.ENETUNREACH
+    commentId: F:NineP.Protocol.Errno.ENETUNREACH
+- markdown: Network is unreachable.
+- code: public const int ENETUNREACH = 101
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ENFILE
   id: NineP_Protocol_Errno_ENFILE
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L70
   metadata:
     uid: NineP.Protocol.Errno.ENFILE
     commentId: F:NineP.Protocol.Errno.ENFILE
@@ -182,8 +523,22 @@ body:
   - type:
     - text: int
       url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: ENOBUFS
+  id: NineP_Protocol_Errno_ENOBUFS
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L199
+  metadata:
+    uid: NineP.Protocol.Errno.ENOBUFS
+    commentId: F:NineP.Protocol.Errno.ENOBUFS
+- markdown: No buffer space available.
+- code: public const int ENOBUFS = 105
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ENODATA
   id: NineP_Protocol_Errno_ENODATA
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L127
   metadata:
     uid: NineP.Protocol.Errno.ENODATA
     commentId: F:NineP.Protocol.Errno.ENODATA
@@ -194,8 +549,22 @@ body:
   - type:
     - text: int
       url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: ENODEV
+  id: NineP_Protocol_Errno_ENODEV
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L58
+  metadata:
+    uid: NineP.Protocol.Errno.ENODEV
+    commentId: F:NineP.Protocol.Errno.ENODEV
+- markdown: No such device.
+- code: public const int ENODEV = 19
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ENOENT
   id: NineP_Protocol_Errno_ENOENT
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L13
   metadata:
     uid: NineP.Protocol.Errno.ENOENT
     commentId: F:NineP.Protocol.Errno.ENOENT
@@ -208,6 +577,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ENOLCK
   id: NineP_Protocol_Errno_ENOLCK
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L109
   metadata:
     uid: NineP.Protocol.Errno.ENOLCK
     commentId: F:NineP.Protocol.Errno.ENOLCK
@@ -218,8 +588,22 @@ body:
   - type:
     - text: int
       url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: ENOLINK
+  id: NineP_Protocol_Errno_ENOLINK
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L139
+  metadata:
+    uid: NineP.Protocol.Errno.ENOLINK
+    commentId: F:NineP.Protocol.Errno.ENOLINK
+- markdown: Link has been severed.
+- code: public const int ENOLINK = 67
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ENOMEM
   id: NineP_Protocol_Errno_ENOMEM
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L37
   metadata:
     uid: NineP.Protocol.Errno.ENOMEM
     commentId: F:NineP.Protocol.Errno.ENOMEM
@@ -230,8 +614,61 @@ body:
   - type:
     - text: int
       url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: ENOMSG
+  id: NineP_Protocol_Errno_ENOMSG
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L121
+  metadata:
+    uid: NineP.Protocol.Errno.ENOMSG
+    commentId: F:NineP.Protocol.Errno.ENOMSG
+- markdown: No message of desired type.
+- code: public const int ENOMSG = 42
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: ENONET
+  id: NineP_Protocol_Errno_ENONET
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L130
+  metadata:
+    uid: NineP.Protocol.Errno.ENONET
+    commentId: F:NineP.Protocol.Errno.ENONET
+- markdown: Machine is not on the network.
+- code: public const int ENONET = 64
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: ENOPKG
+  id: NineP_Protocol_Errno_ENOPKG
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L133
+  metadata:
+    uid: NineP.Protocol.Errno.ENOPKG
+    commentId: F:NineP.Protocol.Errno.ENOPKG
+- markdown: Package not installed.
+- code: public const int ENOPKG = 65
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: ENOPROTOOPT
+  id: NineP_Protocol_Errno_ENOPROTOOPT
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L169
+  metadata:
+    uid: NineP.Protocol.Errno.ENOPROTOOPT
+    commentId: F:NineP.Protocol.Errno.ENOPROTOOPT
+- markdown: Protocol not available.
+- code: public const int ENOPROTOOPT = 92
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ENOSPC
   id: NineP_Protocol_Errno_ENOSPC
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L82
   metadata:
     uid: NineP.Protocol.Errno.ENOSPC
     commentId: F:NineP.Protocol.Errno.ENOSPC
@@ -244,6 +681,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ENOSYS
   id: NineP_Protocol_Errno_ENOSYS
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L112
   metadata:
     uid: NineP.Protocol.Errno.ENOSYS
     commentId: F:NineP.Protocol.Errno.ENOSYS
@@ -254,8 +692,35 @@ body:
   - type:
     - text: int
       url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: ENOTBLK
+  id: NineP_Protocol_Errno_ENOTBLK
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L46
+  metadata:
+    uid: NineP.Protocol.Errno.ENOTBLK
+    commentId: F:NineP.Protocol.Errno.ENOTBLK
+- markdown: Block device required.
+- code: public const int ENOTBLK = 15
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: ENOTCONN
+  id: NineP_Protocol_Errno_ENOTCONN
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L205
+  metadata:
+    uid: NineP.Protocol.Errno.ENOTCONN
+    commentId: F:NineP.Protocol.Errno.ENOTCONN
+- markdown: Transport endpoint is not connected.
+- code: public const int ENOTCONN = 107
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ENOTDIR
   id: NineP_Protocol_Errno_ENOTDIR
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L61
   metadata:
     uid: NineP.Protocol.Errno.ENOTDIR
     commentId: F:NineP.Protocol.Errno.ENOTDIR
@@ -268,6 +733,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ENOTEMPTY
   id: NineP_Protocol_Errno_ENOTEMPTY
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L115
   metadata:
     uid: NineP.Protocol.Errno.ENOTEMPTY
     commentId: F:NineP.Protocol.Errno.ENOTEMPTY
@@ -278,8 +744,22 @@ body:
   - type:
     - text: int
       url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: ENOTSOCK
+  id: NineP_Protocol_Errno_ENOTSOCK
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L163
+  metadata:
+    uid: NineP.Protocol.Errno.ENOTSOCK
+    commentId: F:NineP.Protocol.Errno.ENOTSOCK
+- markdown: Socket operation on non-socket.
+- code: public const int ENOTSOCK = 88
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ENXIO
   id: NineP_Protocol_Errno_ENXIO
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L25
   metadata:
     uid: NineP.Protocol.Errno.ENXIO
     commentId: F:NineP.Protocol.Errno.ENXIO
@@ -295,6 +775,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EOPNOTSUPP
   id: NineP_Protocol_Errno_EOPNOTSUPP
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L178
   metadata:
     uid: NineP.Protocol.Errno.EOPNOTSUPP
     commentId: F:NineP.Protocol.Errno.EOPNOTSUPP
@@ -307,6 +788,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EOVERFLOW
   id: NineP_Protocol_Errno_EOVERFLOW
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L151
   metadata:
     uid: NineP.Protocol.Errno.EOVERFLOW
     commentId: F:NineP.Protocol.Errno.EOVERFLOW
@@ -319,6 +801,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EPERM
   id: NineP_Protocol_Errno_EPERM
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L10
   metadata:
     uid: NineP.Protocol.Errno.EPERM
     commentId: F:NineP.Protocol.Errno.EPERM
@@ -329,8 +812,35 @@ body:
   - type:
     - text: int
       url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: EPFNOSUPPORT
+  id: NineP_Protocol_Errno_EPFNOSUPPORT
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L181
+  metadata:
+    uid: NineP.Protocol.Errno.EPFNOSUPPORT
+    commentId: F:NineP.Protocol.Errno.EPFNOSUPPORT
+- markdown: Protocol family not supported.
+- code: public const int EPFNOSUPPORT = 96
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: EPIPE
+  id: NineP_Protocol_Errno_EPIPE
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L94
+  metadata:
+    uid: NineP.Protocol.Errno.EPIPE
+    commentId: F:NineP.Protocol.Errno.EPIPE
+- markdown: Broken pipe.
+- code: public const int EPIPE = 32
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EPROTO
   id: NineP_Protocol_Errno_EPROTO
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L145
   metadata:
     uid: NineP.Protocol.Errno.EPROTO
     commentId: F:NineP.Protocol.Errno.EPROTO
@@ -341,8 +851,22 @@ body:
   - type:
     - text: int
       url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: EPROTONOSUPPORT
+  id: NineP_Protocol_Errno_EPROTONOSUPPORT
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L172
+  metadata:
+    uid: NineP.Protocol.Errno.EPROTONOSUPPORT
+    commentId: F:NineP.Protocol.Errno.EPROTONOSUPPORT
+- markdown: Protocol not supported.
+- code: public const int EPROTONOSUPPORT = 93
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: ERANGE
   id: NineP_Protocol_Errno_ERANGE
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L100
   metadata:
     uid: NineP.Protocol.Errno.ERANGE
     commentId: F:NineP.Protocol.Errno.ERANGE
@@ -353,8 +877,35 @@ body:
   - type:
     - text: int
       url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: EREMOTE
+  id: NineP_Protocol_Errno_EREMOTE
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L136
+  metadata:
+    uid: NineP.Protocol.Errno.EREMOTE
+    commentId: F:NineP.Protocol.Errno.EREMOTE
+- markdown: Object is remote.
+- code: public const int EREMOTE = 66
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: EREMOTEIO
+  id: NineP_Protocol_Errno_EREMOTEIO
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L232
+  metadata:
+    uid: NineP.Protocol.Errno.EREMOTEIO
+    commentId: F:NineP.Protocol.Errno.EREMOTEIO
+- markdown: Remote I/O error.
+- code: public const int EREMOTEIO = 121
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: EROFS
   id: NineP_Protocol_Errno_EROFS
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L88
   metadata:
     uid: NineP.Protocol.Errno.EROFS
     commentId: F:NineP.Protocol.Errno.EROFS
@@ -365,6 +916,113 @@ body:
   - type:
     - text: int
       url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: ESHUTDOWN
+  id: NineP_Protocol_Errno_ESHUTDOWN
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L208
+  metadata:
+    uid: NineP.Protocol.Errno.ESHUTDOWN
+    commentId: F:NineP.Protocol.Errno.ESHUTDOWN
+- markdown: Cannot send after transport endpoint shutdown.
+- code: public const int ESHUTDOWN = 108
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: ESOCKTNOSUPPORT
+  id: NineP_Protocol_Errno_ESOCKTNOSUPPORT
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L175
+  metadata:
+    uid: NineP.Protocol.Errno.ESOCKTNOSUPPORT
+    commentId: F:NineP.Protocol.Errno.ESOCKTNOSUPPORT
+- markdown: Socket type not supported.
+- code: public const int ESOCKTNOSUPPORT = 94
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: ESPIPE
+  id: NineP_Protocol_Errno_ESPIPE
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L85
+  metadata:
+    uid: NineP.Protocol.Errno.ESPIPE
+    commentId: F:NineP.Protocol.Errno.ESPIPE
+- markdown: Illegal seek.
+- code: public const int ESPIPE = 29
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: ESTRPIPE
+  id: NineP_Protocol_Errno_ESTRPIPE
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L157
+  metadata:
+    uid: NineP.Protocol.Errno.ESTRPIPE
+    commentId: F:NineP.Protocol.Errno.ESTRPIPE
+- markdown: Streams pipe error.
+- code: public const int ESTRPIPE = 86
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: ETIMEDOUT
+  id: NineP_Protocol_Errno_ETIMEDOUT
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L211
+  metadata:
+    uid: NineP.Protocol.Errno.ETIMEDOUT
+    commentId: F:NineP.Protocol.Errno.ETIMEDOUT
+- markdown: Connection timed out.
+- code: public const int ETIMEDOUT = 110
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: ETXTBSY
+  id: NineP_Protocol_Errno_ETXTBSY
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L76
+  metadata:
+    uid: NineP.Protocol.Errno.ETXTBSY
+    commentId: F:NineP.Protocol.Errno.ETXTBSY
+- markdown: Text file busy.
+- code: public const int ETXTBSY = 26
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: EUSERS
+  id: NineP_Protocol_Errno_EUSERS
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L160
+  metadata:
+    uid: NineP.Protocol.Errno.EUSERS
+    commentId: F:NineP.Protocol.Errno.EUSERS
+- markdown: Too many users.
+- code: public const int EUSERS = 87
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
+- api3: EXDEV
+  id: NineP_Protocol_Errno_EXDEV
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Errno.cs#L55
+  metadata:
+    uid: NineP.Protocol.Errno.EXDEV
+    commentId: F:NineP.Protocol.Errno.EXDEV
+- markdown: Invalid cross-device link.
+- code: public const int EXDEV = 18
+- h4: Field Value
+- parameters:
+  - type:
+    - text: int
+      url: https://learn.microsoft.com/dotnet/api/system.int32
 languageId: csharp
 metadata:
-  description: The Linux errno values this workspace's servers use (reference §5.9).
+  description: >-
+    The Linux errno values this workspace's servers use (reference §5.9): every errno the Linux
+
+    kernel's 9P client can name (docs/9p/fixtures/linux-9p-errors.json), plus EOVERFLOW.

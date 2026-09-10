@@ -3,6 +3,7 @@ title: Struct Rmkdir
 body:
 - api1: Struct Rmkdir
   id: NineP_Protocol_Messages_Rmkdir
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rmkdir.cs#L8
   metadata:
     uid: NineP.Protocol.Messages.Rmkdir
     commentId: T:NineP.Protocol.Messages.Rmkdir
@@ -38,6 +39,7 @@ body:
 - h2: Constructors
 - api3: Rmkdir(ushort, Qid)
   id: NineP_Protocol_Messages_Rmkdir__ctor_System_UInt16_NineP_Protocol_Qid_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rmkdir.cs#L8
   metadata:
     uid: NineP.Protocol.Messages.Rmkdir.#ctor(System.UInt16,NineP.Protocol.Qid)
     commentId: M:NineP.Protocol.Messages.Rmkdir.#ctor(System.UInt16,NineP.Protocol.Qid)
@@ -58,6 +60,7 @@ body:
 - h2: Properties
 - api3: Qid
   id: NineP_Protocol_Messages_Rmkdir_Qid
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rmkdir.cs#L8
   metadata:
     uid: NineP.Protocol.Messages.Rmkdir.Qid
     commentId: P:NineP.Protocol.Messages.Rmkdir.Qid
@@ -70,6 +73,7 @@ body:
       url: NineP.Protocol.Qid.html
 - api3: Tag
   id: NineP_Protocol_Messages_Rmkdir_Tag
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Rmkdir.cs#L8
   metadata:
     uid: NineP.Protocol.Messages.Rmkdir.Tag
     commentId: P:NineP.Protocol.Messages.Rmkdir.Tag

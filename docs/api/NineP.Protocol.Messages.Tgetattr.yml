@@ -3,6 +3,7 @@ title: Struct Tgetattr
 body:
 - api1: Struct Tgetattr
   id: NineP_Protocol_Messages_Tgetattr
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tgetattr.cs#L10
   metadata:
     uid: NineP.Protocol.Messages.Tgetattr
     commentId: T:NineP.Protocol.Messages.Tgetattr
@@ -38,6 +39,7 @@ body:
 - h2: Constructors
 - api3: Tgetattr(ushort, uint, GetAttrMask)
   id: NineP_Protocol_Messages_Tgetattr__ctor_System_UInt16_System_UInt32_NineP_Protocol_Messages_GetAttrMask_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tgetattr.cs#L10
   metadata:
     uid: NineP.Protocol.Messages.Tgetattr.#ctor(System.UInt16,System.UInt32,NineP.Protocol.Messages.GetAttrMask)
     commentId: M:NineP.Protocol.Messages.Tgetattr.#ctor(System.UInt16,System.UInt32,NineP.Protocol.Messages.GetAttrMask)
@@ -65,6 +67,7 @@ body:
 - h2: Properties
 - api3: Fid
   id: NineP_Protocol_Messages_Tgetattr_Fid
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tgetattr.cs#L10
   metadata:
     uid: NineP.Protocol.Messages.Tgetattr.Fid
     commentId: P:NineP.Protocol.Messages.Tgetattr.Fid
@@ -77,6 +80,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: RequestMask
   id: NineP_Protocol_Messages_Tgetattr_RequestMask
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tgetattr.cs#L10
   metadata:
     uid: NineP.Protocol.Messages.Tgetattr.RequestMask
     commentId: P:NineP.Protocol.Messages.Tgetattr.RequestMask
@@ -91,6 +95,7 @@ body:
       url: NineP.Protocol.Messages.GetAttrMask.html
 - api3: Tag
   id: NineP_Protocol_Messages_Tgetattr_Tag
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tgetattr.cs#L10
   metadata:
     uid: NineP.Protocol.Messages.Tgetattr.Tag
     commentId: P:NineP.Protocol.Messages.Tgetattr.Tag

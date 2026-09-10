@@ -3,6 +3,7 @@ title: Struct Tauth
 body:
 - api1: Struct Tauth
   id: NineP_Protocol_Messages_Tauth
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tauth.cs#L13
   metadata:
     uid: NineP.Protocol.Messages.Tauth
     commentId: T:NineP.Protocol.Messages.Tauth
@@ -41,6 +42,7 @@ body:
 - h2: Constructors
 - api3: Tauth(ushort, uint, string, string, uint)
   id: NineP_Protocol_Messages_Tauth__ctor_System_UInt16_System_UInt32_System_String_System_String_System_UInt32_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tauth.cs#L13
   metadata:
     uid: NineP.Protocol.Messages.Tauth.#ctor(System.UInt16,System.UInt32,System.String,System.String,System.UInt32)
     commentId: M:NineP.Protocol.Messages.Tauth.#ctor(System.UInt16,System.UInt32,System.String,System.String,System.UInt32)
@@ -81,6 +83,7 @@ body:
 - h2: Properties
 - api3: Afid
   id: NineP_Protocol_Messages_Tauth_Afid
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tauth.cs#L13
   metadata:
     uid: NineP.Protocol.Messages.Tauth.Afid
     commentId: P:NineP.Protocol.Messages.Tauth.Afid
@@ -93,6 +96,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Aname
   id: NineP_Protocol_Messages_Tauth_Aname
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tauth.cs#L13
   metadata:
     uid: NineP.Protocol.Messages.Tauth.Aname
     commentId: P:NineP.Protocol.Messages.Tauth.Aname
@@ -105,6 +109,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.string
 - api3: NUname
   id: NineP_Protocol_Messages_Tauth_NUname
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tauth.cs#L13
   metadata:
     uid: NineP.Protocol.Messages.Tauth.NUname
     commentId: P:NineP.Protocol.Messages.Tauth.NUname
@@ -119,6 +124,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Tag
   id: NineP_Protocol_Messages_Tauth_Tag
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tauth.cs#L13
   metadata:
     uid: NineP.Protocol.Messages.Tauth.Tag
     commentId: P:NineP.Protocol.Messages.Tauth.Tag
@@ -131,6 +137,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint16
 - api3: Uname
   id: NineP_Protocol_Messages_Tauth_Uname
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tauth.cs#L13
   metadata:
     uid: NineP.Protocol.Messages.Tauth.Uname
     commentId: P:NineP.Protocol.Messages.Tauth.Uname

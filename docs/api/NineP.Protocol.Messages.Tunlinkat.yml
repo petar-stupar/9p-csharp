@@ -3,6 +3,7 @@ title: Struct Tunlinkat
 body:
 - api1: Struct Tunlinkat
   id: NineP_Protocol_Messages_Tunlinkat
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tunlinkat.cs#L10
   metadata:
     uid: NineP.Protocol.Messages.Tunlinkat
     commentId: T:NineP.Protocol.Messages.Tunlinkat
@@ -38,6 +39,7 @@ body:
 - h2: Constructors
 - api3: Tunlinkat(ushort, uint, string, uint)
   id: NineP_Protocol_Messages_Tunlinkat__ctor_System_UInt16_System_UInt32_System_String_System_UInt32_
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tunlinkat.cs#L10
   metadata:
     uid: NineP.Protocol.Messages.Tunlinkat.#ctor(System.UInt16,System.UInt32,System.String,System.UInt32)
     commentId: M:NineP.Protocol.Messages.Tunlinkat.#ctor(System.UInt16,System.UInt32,System.String,System.UInt32)
@@ -68,6 +70,7 @@ body:
 - h2: Properties
 - api3: DirFid
   id: NineP_Protocol_Messages_Tunlinkat_DirFid
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tunlinkat.cs#L10
   metadata:
     uid: NineP.Protocol.Messages.Tunlinkat.DirFid
     commentId: P:NineP.Protocol.Messages.Tunlinkat.DirFid
@@ -80,6 +83,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Flags
   id: NineP_Protocol_Messages_Tunlinkat_Flags
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tunlinkat.cs#L10
   metadata:
     uid: NineP.Protocol.Messages.Tunlinkat.Flags
     commentId: P:NineP.Protocol.Messages.Tunlinkat.Flags
@@ -92,6 +96,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Name
   id: NineP_Protocol_Messages_Tunlinkat_Name
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tunlinkat.cs#L10
   metadata:
     uid: NineP.Protocol.Messages.Tunlinkat.Name
     commentId: P:NineP.Protocol.Messages.Tunlinkat.Name
@@ -104,6 +109,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.string
 - api3: Tag
   id: NineP_Protocol_Messages_Tunlinkat_Tag
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/Messages/Tunlinkat.cs#L10
   metadata:
     uid: NineP.Protocol.Messages.Tunlinkat.Tag
     commentId: P:NineP.Protocol.Messages.Tunlinkat.Tag

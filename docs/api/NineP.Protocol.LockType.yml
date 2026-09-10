@@ -3,6 +3,7 @@ title: Enum LockType
 body:
 - api1: Enum LockType
   id: NineP_Protocol_LockType
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Protocol/LockType.cs#L4
   metadata:
     uid: NineP.Protocol.LockType
     commentId: T:NineP.Protocol.LockType

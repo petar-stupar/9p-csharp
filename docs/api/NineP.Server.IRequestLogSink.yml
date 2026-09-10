@@ -3,6 +3,7 @@ title: Interface IRequestLogSink
 body:
 - api1: Interface IRequestLogSink
   id: NineP_Server_IRequestLogSink
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/IRequestLogSink.cs#L10
   metadata:
     uid: NineP.Server.IRequestLogSink
     commentId: T:NineP.Server.IRequestLogSink
@@ -21,6 +22,7 @@ body:
 - h2: Methods
 - api3: Record(in RequestLogEntry)
   id: NineP_Server_IRequestLogSink_Record_NineP_Server_RequestLogEntry__
+  src: https://github.com/petar-stupar/9p-csharp/blob/errors/linux-table/src/NineP.Server/IRequestLogSink.cs#L14
   metadata:
     uid: NineP.Server.IRequestLogSink.Record(NineP.Server.RequestLogEntry@)
     commentId: M:NineP.Server.IRequestLogSink.Record(NineP.Server.RequestLogEntry@)
