@@ -18,6 +18,14 @@ internal sealed partial class JsonTree
     public const int MaxDepth = 256;
 
     /// <summary>
+    /// The most entries — every object key and every array element, anywhere in the document —
+    /// this server holds unless <c>--max-entries</c> says otherwise. The byte cap bounds the
+    /// document's size; this bounds its count, which is what a flood of small creates grows
+    /// fastest, and what every rewrite and every quota check walks.
+    /// </summary>
+    public const long DefaultMaxEntries = 100_000;
+
+    /// <summary>
     /// The largest a scalar file may grow to through a write. A value cannot be larger than the
     /// document that holds it, and §7 refuses a document of <see cref="MaxDocumentBytes"/> or
     /// more, so that is the bound. Without it the length of the buffer a write allocates is
@@ -35,8 +43,13 @@ internal sealed partial class JsonTree
     private const int ParserMaxDepth = 1024;
 
     private ulong _nextPath = 1;
+    private long _entries;
 
-    private JsonTree(JsonDirectoryNode root) => Root = root;
+    private JsonTree(JsonDirectoryNode root, long maxEntries)
+    {
+        Root = root;
+        EntryLimit = maxEntries;
+    }
 
     /// <summary>The document's root, which is always a container.</summary>
     public JsonDirectoryNode Root { get; }
@@ -49,14 +62,15 @@ internal sealed partial class JsonTree
     public ulong NextPath() => _nextPath++;
 
     /// <summary>
-    /// Loads a document, refusing one that is too large or too deeply nested before any of it is
-    /// mapped. Both refusals name their limit, because an operator who hits one needs to know
-    /// which.
+    /// Loads a document, refusing one that is too large, too deeply nested or holding too many
+    /// entries before any of it is served. Every refusal names its limit, because an operator who
+    /// hits one needs to know which.
     /// </summary>
     /// <param name="path">The file to load.</param>
+    /// <param name="maxEntries">The most entries the document may hold, per <c>--max-entries</c>.</param>
     /// <returns>The loaded tree.</returns>
     /// <exception cref="JsonFsStartupException">The document breaks a documented limit.</exception>
-    public static JsonTree Load(string path)
+    public static JsonTree Load(string path, long maxEntries = DefaultMaxEntries)
     {
         long length = new FileInfo(path).Length;
         if (length >= MaxDocumentBytes)
@@ -70,15 +84,16 @@ internal sealed partial class JsonTree
         }
 
         using FileStream stream = File.OpenRead(path);
-        return Parse(stream, path);
+        return Parse(stream, path, maxEntries);
     }
 
     /// <summary>Loads a document from an open stream, for the tests and for stdin.</summary>
     /// <param name="stream">The JSON text.</param>
     /// <param name="origin">What to name in a refusal message.</param>
+    /// <param name="maxEntries">The most entries the document may hold, per <c>--max-entries</c>.</param>
     /// <returns>The loaded tree.</returns>
     /// <exception cref="JsonFsStartupException">The document breaks a documented limit.</exception>
-    public static JsonTree Parse(Stream stream, string origin)
+    public static JsonTree Parse(Stream stream, string origin, long maxEntries = DefaultMaxEntries)
     {
         JsonDocument document;
         try
@@ -103,7 +118,8 @@ internal sealed partial class JsonTree
                     document.RootElement.ValueKind));
             }
 
-            JsonTree tree = new(new JsonDirectoryNode(0, document.RootElement.ValueKind == JsonValueKind.Array));
+            JsonTree tree = new(
+                new JsonDirectoryNode(0, document.RootElement.ValueKind == JsonValueKind.Array), maxEntries);
             tree.Fill(tree.Root, document.RootElement, origin, depth: 1);
             return tree;
         }
@@ -206,6 +222,7 @@ internal sealed partial class JsonTree
             int index = 0;
             foreach (JsonElement item in element.EnumerateArray())
             {
+                CountEntry(origin);
                 string key = index.ToString(CultureInfo.InvariantCulture);
                 container.Add(new JsonChild(key, key, Build(item, origin, depth)));
                 index++;
@@ -216,8 +233,27 @@ internal sealed partial class JsonTree
 
         foreach (JsonProperty property in element.EnumerateObject())
         {
+            CountEntry(origin);
             container.Add(new JsonChild(
                 property.Name, JsonKey.Encode(property.Name), Build(property.Value, origin, depth)));
+        }
+    }
+
+    /// <summary>
+    /// Counts one loaded entry against <see cref="EntryLimit"/>. The refusal fires on the entry
+    /// past the limit rather than after the whole document is mapped, so a hostile file is not
+    /// held in memory before it is turned away.
+    /// </summary>
+    private void CountEntry(string origin)
+    {
+        _entries++;
+        if (_entries > EntryLimit)
+        {
+            throw new JsonFsStartupException(string.Format(
+                CultureInfo.InvariantCulture,
+                "{0} holds more than {1} entries, which jsonfs refuses",
+                origin,
+                EntryLimit));
         }
     }
 

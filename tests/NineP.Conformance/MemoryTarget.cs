@@ -15,6 +15,7 @@ namespace NineP.Conformance;
 internal sealed class MemoryTarget : ConformanceTarget
 {
     private readonly NinePServer _server;
+    private readonly JsonFilesystem _filesystem;
     private readonly MemoryTransport _transport;
 
     private readonly NinePAddress _address;
@@ -23,12 +24,14 @@ internal sealed class MemoryTarget : ConformanceTarget
     private MemoryTarget(
         Dialect dialect,
         NinePServer server,
+        JsonFilesystem filesystem,
         MemoryTransport transport,
         NinePAddress address,
         Task serving)
         : base(dialect, "memory")
     {
         _server = server;
+        _filesystem = filesystem;
         _transport = transport;
         _address = address;
         _serving = serving;
@@ -54,7 +57,8 @@ internal sealed class MemoryTarget : ConformanceTarget
             Dialects = new HashSet<Dialect> { dialect },
         });
 
-        Task serving = server.ServeAsync(new JsonFilesystem(tree, writable), CancellationToken.None);
+        JsonFilesystem filesystem = new(tree, writable);
+        Task serving = server.ServeAsync(filesystem, CancellationToken.None);
 
         // Endpoints is valid once serving has started; the driver waits for the bind rather than
         // racing it.
@@ -63,7 +67,7 @@ internal sealed class MemoryTarget : ConformanceTarget
             await Task.Yield();
         }
 
-        return new MemoryTarget(dialect, server, transport, address, serving);
+        return new MemoryTarget(dialect, server, filesystem, transport, address, serving);
     }
 
     /// <summary>Runs one cli command in process, against a fresh session.</summary>
@@ -105,7 +109,7 @@ internal sealed class MemoryTarget : ConformanceTarget
         }
     }
 
-    /// <summary>Stops the server and the transport.</summary>
+    /// <summary>Stops the server and the transport, then the filesystem behind them.</summary>
     /// <returns>A task that completes when the accept loop has stopped.</returns>
     public override async ValueTask DisposeAsync()
     {
@@ -119,5 +123,7 @@ internal sealed class MemoryTarget : ConformanceTarget
         {
             // The accept loop was stopped on purpose.
         }
+
+        _filesystem.Dispose();
     }
 }
