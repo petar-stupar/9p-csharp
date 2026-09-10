@@ -246,7 +246,7 @@ body:
     description: The new file, open for writing; the caller disposes it.
 - api3: DisposeAsync()
   id: NineP_Client_NinePSession_DisposeAsync
-  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePSession.cs#L484
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePSession.cs#L490
   metadata:
     uid: NineP.Client.NinePSession.DisposeAsync
     commentId: M:NineP.Client.NinePSession.DisposeAsync
@@ -266,6 +266,19 @@ body:
     Whatever the peer has not answered when the deadline passes is abandoned, which loses
 
     nothing: the transport close below makes the server forget every fid on the connection.
+
+
+    <p>
+
+    This never throws because the connection has already died. A peer that crashed or a socket
+
+    closed under the writer is an ordinary way for a session to end, so a clunk that cannot be
+
+    delivered is swallowed whether the failure arrives as a <xref href="NineP.Protocol.NinePException" data-throw-if-not-resolved="false"></xref> or as
+
+    the transport's own <xref href="System.IO.IOException" data-throw-if-not-resolved="false"></xref>; the fids are released either way.
+
+    </p>
 - code: public ValueTask DisposeAsync()
 - h4: Returns
 - parameters:

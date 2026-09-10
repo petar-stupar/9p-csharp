@@ -479,6 +479,12 @@ public sealed class NinePSession : IAsyncDisposable
     /// disposal grew with the number of open fids: twelve minutes at the defaults with five fids.
     /// Whatever the peer has not answered when the deadline passes is abandoned, which loses
     /// nothing: the transport close below makes the server forget every fid on the connection.
+    /// <para>
+    /// This never throws because the connection has already died. A peer that crashed or a socket
+    /// closed under the writer is an ordinary way for a session to end, so a clunk that cannot be
+    /// delivered is swallowed whether the failure arrives as a <see cref="NinePException"/> or as
+    /// the transport's own <see cref="IOException"/>; the fids are released either way.
+    /// </para>
     /// </summary>
     /// <returns>A task that completes when the connection has closed.</returns>
     public async ValueTask DisposeAsync()
