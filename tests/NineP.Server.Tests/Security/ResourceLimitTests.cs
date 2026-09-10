@@ -113,9 +113,12 @@ public sealed class ResourceLimitTests
             }
 
             // Releasing a slot lets the same address back in; the cap is concurrency, not a ban.
+            // The slot comes back when the server finishes tearing its session down, which is a
+            // moment after the client's own socket closes, so the reconnect is retried rather than
+            // demanded at once: what is asserted is that the address is readmitted, not how quickly.
             await held[0].DisposeAsync();
             held.RemoveAt(0);
-            held.Add(await ConnectAsync(transport, bound));
+            held.Add(await ConnectWhenReadmittedAsync(transport, bound));
         }
         finally
         {
@@ -260,6 +263,30 @@ public sealed class ResourceLimitTests
         {
             await server.DisposeAsync();
             await serving.WaitAsync(Ct);
+        }
+    }
+
+    /// <summary>
+    /// Connects, retrying while the address is still over its cap. A refusal arrives as a closed
+    /// connection, which is indistinguishable from any other transport failure, so the retry is
+    /// bounded by the test deadline: if the slot never frees, the loop ends in a timeout rather
+    /// than spinning.
+    /// </summary>
+    private static async Task<NinePSession> ConnectWhenReadmittedAsync(
+        ITransport transport, NinePAddress address)
+    {
+        while (true)
+        {
+            Ct.ThrowIfCancellationRequested();
+            try
+            {
+                return await ConnectAsync(transport, address);
+            }
+            catch (Exception failure) when (failure is NinePProtocolException or IOException
+                or System.Net.Sockets.SocketException)
+            {
+                await Task.Delay(TimeSpan.FromMilliseconds(20), Ct);
+            }
         }
     }
 
