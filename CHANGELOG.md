@@ -22,6 +22,16 @@ All notable changes to this repository are recorded here. The format follows
   index falling behind the suite. `scripts/gen-test-index.py` is the one-off bootstrap that seeded
   the index; from here both files are edited by hand. See CONTRIBUTING.md §Adding a test.
 
+- **CI: the scratch install now restores the packages the build packed.** `dotnet add package X
+  --version 0.1.0` states a *minimum*, and NuGet takes the lowest match across every source, so
+  once 0.1.0 was on nuget.org the step named for the packed packages restored **0.1.0 from
+  nuget.org** instead and compiled the current README against it. It stayed green because the
+  README never needed anything newer, which means **0.2.0 shipped without a real package smoke
+  test**; the breaking API change here is what finally surfaced it. The version now comes from
+  `Directory.Build.props` pinned exactly with `[x]`, the scratch `nuget.config` is written with
+  `<clear />` and the local feed alone, and the step asserts the resolved version of all three
+  packages before it builds.
+
 ### Permission bits are a flags enum — 2026-09-11
 
 - **Breaking: `FilePermissions` replaces the raw `uint` permission word.** `Attr.Perm`,
