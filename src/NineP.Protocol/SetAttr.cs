@@ -10,7 +10,7 @@ public sealed record SetAttr
     public string? Name { get; init; }
 
     /// <summary>New permission bits (the 07777 mask).</summary>
-    public uint? Perm { get; init; }
+    public FilePermissions? Perm { get; init; }
 
     /// <summary>
     /// The file flags the file is to have after the update, all three stated together:

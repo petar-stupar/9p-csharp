@@ -56,7 +56,7 @@ public sealed class NameLimitTests
         await using NinePSession s = await h.ConnectAsync(dialect);
         foreach (string name in new[] { new string('x', 63), new string('x', 64), new string('é', 32) })
         {
-            await s.MkdirAsync(name, 0x1ED, Ct);
+            await s.MkdirAsync(name, Perms.P0755, Ct);
             Assert.Equal(FileKind.Directory, (await s.GetAttrAsync(name, Ct)).Kind);
             await s.RemoveAsync(name, Ct);
         }

@@ -3,6 +3,7 @@ using NineP.Protocol.Codec.Internal;
 using NineP.Protocol.Messages;
 using NineP.Protocol.Tests;
 using NineP.Protocol.Tests.Conformance;
+using NineP.TestSupport;
 using Xunit;
 
 namespace NineP.Protocol.Tests.Conformance;
@@ -60,7 +61,7 @@ public sealed class SetAttrTests
 
         SetAttr update = AttrProjector.FromSetattr(in message);
 
-        Assert.Equal(0x9EDu, update.Perm);
+        Assert.Equal(Perms.P4755, update.Perm);
         Assert.Null(update.Uid);
         Assert.Equal(9u, update.Gid);
         Assert.Equal(4096ul, update.Size);
@@ -96,7 +97,7 @@ public sealed class SetAttrTests
         SetAttr update = AttrProjector.FromWstat(in stat, Dialect.P9_2000);
 
         Assert.Equal("renamed", update.Name);
-        Assert.Equal(0x1FFu, update.Perm);
+        Assert.Equal(Perms.P0777, update.Perm);
         Assert.Equal("wheel", update.GroupName);
         Assert.Equal(64ul, update.Size);
         Assert.Equal(new TimeSpec(1_700_000_002, 0), update.MTime);

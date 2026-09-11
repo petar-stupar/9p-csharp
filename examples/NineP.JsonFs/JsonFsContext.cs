@@ -19,5 +19,5 @@ internal readonly record struct JsonFsContext(
     JsonFsMutator Mutator,
     TimeProvider Clock,
     Identity Identity,
-    uint FilePerm,
-    uint DirectoryPerm);
+    FilePermissions FilePerm,
+    FilePermissions DirectoryPerm);

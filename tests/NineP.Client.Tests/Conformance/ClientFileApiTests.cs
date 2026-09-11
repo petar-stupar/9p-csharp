@@ -47,7 +47,7 @@ public sealed class ClientFileApiTests
         Assert.Equal(FileKind.File, rewritten.Kind);
         Assert.Equal(9ul, rewritten.Size);
 
-        await session.MkdirAsync("sub/deep", 0x1ED, Ct);
+        await session.MkdirAsync("sub/deep", Perms.P0755, Ct);
         Assert.Equal(FileKind.Directory, (await session.GetAttrAsync("sub/deep", Ct)).Kind);
 
         IReadOnlyList<DirEntry> children = await session.ReadDirAsync("sub", Ct);
@@ -77,7 +77,7 @@ public sealed class ClientFileApiTests
             payload[i] = (byte)(i * 31);
         }
 
-        NinePFid created = await harness.Session.CreateFileAsync("sub/big.bin", 0x1A4, Ct);
+        NinePFid created = await harness.Session.CreateFileAsync("sub/big.bin", Perms.P0644, Ct);
         await using (created.ConfigureAwait(false))
         {
             // The payload is several times the iounit this msize allows, so the transfer cannot
@@ -245,7 +245,7 @@ public sealed class ClientFileApiTests
         file.Flags = FileFlags.Append;
         await h.Session.WriteFileAsync("hello.txt", ReadOnlyMemory<byte>.Empty, Ct);
         Assert.Equal(before, await h.Session.ReadFileAsync("hello.txt", Ct));
-        await using NinePFid created = await h.Session.CreateFileAsync("new", 0x1A4, Ct);
+        await using NinePFid created = await h.Session.CreateFileAsync("new", Perms.P0644, Ct);
         Assert.Equal(0ul, (await created.GetAttrAsync(Ct)).Size);
         Assert.Equal(0ul, (await h.Session.GetAttrAsync("/", Ct)).Size);
     }
@@ -259,7 +259,7 @@ public sealed class ClientFileApiTests
         await using Harness h = await Harness.StartAsync(version);
         foreach (string name in new[] { "😀", new string('x', 255), new string('é', 127) + "x" })
         {
-            await using (NinePFid f = await h.Session.CreateFileAsync(name, 0x1A4, Ct))
+            await using (NinePFid f = await h.Session.CreateFileAsync(name, Perms.P0644, Ct))
             {
                 await f.WriteAllAsync("ok"u8.ToArray(), Ct);
             }
@@ -293,10 +293,10 @@ public sealed class ClientFileApiTests
             NinePAddress address = new(NinePScheme.Memory, "c" + Guid.NewGuid().ToString("N"), 0, string.Empty);
 
             MemoryFilesystem tree = new();
-            MemoryFile greeting = tree.NewFile("hello.txt", 0x1B6);
+            MemoryFile greeting = tree.NewFile("hello.txt", Perms.P0666);
             greeting.Data = Encoding.UTF8.GetBytes(Greeting);
             tree.Root.Add(greeting);
-            tree.Root.Add(tree.NewDirectory("sub", 0x1FF));
+            tree.Root.Add(tree.NewDirectory("sub", Perms.P0777));
 
             NinePServer server = new(new ServerOptions { Listen = [address], Transports = [transport] });
             Task serving = server.ServeAsync(tree, CancellationToken.None);

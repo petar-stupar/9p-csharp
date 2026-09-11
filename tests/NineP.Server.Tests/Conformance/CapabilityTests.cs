@@ -109,7 +109,7 @@ public sealed class CapabilityTests
             {
                 Qid = Qid,
                 Kind = FileKind.Directory,
-                Perm = 0x1FF,
+                Perm = Perms.P0777,
                 UserName = "glenda",
                 GroupName = "glenda",
             });
@@ -158,7 +158,7 @@ public sealed class CapabilityTests
             {
                 Qid = Qid,
                 Kind = FileKind.File,
-                Perm = 0x1B6,
+                Perm = Perms.P0666,
                 UserName = "glenda",
                 GroupName = "glenda",
             });

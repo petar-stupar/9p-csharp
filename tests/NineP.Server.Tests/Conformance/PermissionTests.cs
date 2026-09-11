@@ -48,10 +48,10 @@ public sealed class PermissionTests
     public async Task WalkNeedsSearchPermission()
     {
         MemoryFilesystem tree = new();
-        MemoryDirectory closed = tree.NewDirectory("closed", 0x180);
+        MemoryDirectory closed = tree.NewDirectory("closed", Perms.P0600);
         closed.Owner = "root";
         closed.Uid = 0;
-        closed.Add(tree.NewFile("inside", 0x1B6));
+        closed.Add(tree.NewFile("inside", Perms.P0666));
         tree.Root.Add(closed);
 
         await using ServerHarness harness = await ServerHarness.StartAsync(tree: tree);
@@ -71,7 +71,7 @@ public sealed class PermissionTests
     public async Task CreateNeedsWriteOnTheDirectory()
     {
         MemoryFilesystem tree = new();
-        MemoryDirectory readOnly = tree.NewDirectory("ro", 0x16D);
+        MemoryDirectory readOnly = tree.NewDirectory("ro", Perms.P0555);
         readOnly.Owner = "root";
         readOnly.Uid = 0;
         tree.Root.Add(readOnly);
@@ -80,7 +80,7 @@ public sealed class PermissionTests
         await using NinePSession session = await harness.ConnectAsync(Dialect.P9_2000_L);
 
         NinePException denied = await Assert.ThrowsAsync<NinePException>(
-            async () => await session.MkdirAsync("ro/nope", 0x1ED, Ct));
+            async () => await session.MkdirAsync("ro/nope", Perms.P0755, Ct));
 
         Assert.Equal(Errno.EACCES, denied.Error.Errno);
         Assert.Empty(readOnly.Children);
@@ -91,10 +91,10 @@ public sealed class PermissionTests
     public async Task RemoveNeedsWriteInTheParent()
     {
         MemoryFilesystem tree = new();
-        MemoryDirectory guarded = tree.NewDirectory("guarded", 0x16D);
+        MemoryDirectory guarded = tree.NewDirectory("guarded", Perms.P0555);
         guarded.Owner = "root";
         guarded.Uid = 0;
-        guarded.Add(tree.NewFile("kept", 0x1FF));
+        guarded.Add(tree.NewFile("kept", Perms.P0777));
         tree.Root.Add(guarded);
 
         await using ServerHarness harness = await ServerHarness.StartAsync(tree: tree);
@@ -113,7 +113,7 @@ public sealed class PermissionTests
     public async Task OnlyTheOwnerMayChangeMode()
     {
         MemoryFilesystem tree = new();
-        MemoryFile other = tree.NewFile("theirs", 0x1B6);
+        MemoryFile other = tree.NewFile("theirs", Perms.P0666);
         other.Owner = "root";
         other.Uid = 0;
         tree.Root.Add(other);
@@ -125,10 +125,10 @@ public sealed class PermissionTests
         await using (file.ConfigureAwait(false))
         {
             NinePException denied = await Assert.ThrowsAsync<NinePException>(
-                async () => await file.SetAttrAsync(new SetAttr { Perm = 0x1FF }, Ct));
+                async () => await file.SetAttrAsync(new SetAttr { Perm = Perms.P0777 }, Ct));
 
             Assert.Equal(Errno.EPERM, denied.Error.Errno);
-            Assert.Equal(0x1B6u, other.Perm);
+            Assert.Equal(Perms.P0666, other.Perm);
         }
     }
 

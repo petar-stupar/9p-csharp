@@ -81,7 +81,7 @@ public sealed class ServerLifecycleTests
     public async Task DisposalCompletesWhileThePeerHasStoppedReading()
     {
         MemoryFilesystem tree = new();
-        MemoryFile big = tree.NewFile("big", 0x1A4);
+        MemoryFile big = tree.NewFile("big", Perms.P0644);
         big.Data = new byte[64 * 1024];
         tree.Root.Add(big);
 

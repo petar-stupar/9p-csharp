@@ -34,7 +34,7 @@ public sealed class ServerLifecycleRegressionTests
             await session.Messages.XattrwalkAsync(new Txattrwalk(0, fid.Fid, 80, name), Ct));
         Assert.Equal(Errno.EACCES, error.Error.Errno);
         Assert.Equal(0, file.XattrReads);
-        file.Perm = 0x1A4;
+        file.Perm = Perms.P0644;
         await session.Messages.XattrwalkAsync(new Txattrwalk(0, fid.Fid, 80, name), Ct);
         Assert.Equal(1, file.XattrReads);
         await session.Messages.ClunkAsync(new Tclunk(0, 80), Ct);
@@ -42,16 +42,17 @@ public sealed class ServerLifecycleRegressionTests
 
     /// <summary>All applicable Plan 9 permission classes are considered; Unix still selects one.</summary>
     [Theory]
-    [InlineData(Dialect.P9_2000, "owner", 4u, true)]
-    [InlineData(Dialect.P9_2000, "owner", 32u, true)]
-    [InlineData(Dialect.P9_2000, "member", 4u, true)]
-    [InlineData(Dialect.P9_2000, "member", 32u, true)]
-    [InlineData(Dialect.P9_2000, "other", 32u, false)]
-    [InlineData(Dialect.P9_2000_u, "owner", 4u, false)]
-    [InlineData(Dialect.P9_2000_L, "owner", 4u, false)]
-    [InlineData(Dialect.P9_2000_L, "member", 4u, false)]
-    [InlineData(Dialect.P9_2000_L, "other", 4u, true)]
-    public void PermissionClassesFollowTheDialect(Dialect dialect, string user, uint perm, bool allowed)
+    [InlineData(Dialect.P9_2000, "owner", FilePermissions.OtherRead, true)]
+    [InlineData(Dialect.P9_2000, "owner", FilePermissions.GroupRead, true)]
+    [InlineData(Dialect.P9_2000, "member", FilePermissions.OtherRead, true)]
+    [InlineData(Dialect.P9_2000, "member", FilePermissions.GroupRead, true)]
+    [InlineData(Dialect.P9_2000, "other", FilePermissions.GroupRead, false)]
+    [InlineData(Dialect.P9_2000_u, "owner", FilePermissions.OtherRead, false)]
+    [InlineData(Dialect.P9_2000_L, "owner", FilePermissions.OtherRead, false)]
+    [InlineData(Dialect.P9_2000_L, "member", FilePermissions.OtherRead, false)]
+    [InlineData(Dialect.P9_2000_L, "other", FilePermissions.OtherRead, true)]
+    public void PermissionClassesFollowTheDialect(
+        Dialect dialect, string user, FilePermissions perm, bool allowed)
     {
         Attr attr = new() { Qid = default, Kind = FileKind.File, Perm = perm, UserName = "owner", GroupName = "group" };
         Identity identity = new() { User = user, Groups = user == "member" ? ["group"] : [] };
@@ -164,7 +165,7 @@ public sealed class ServerLifecycleRegressionTests
     public async Task VersionResetCommitsACompleteXattrSink()
     {
         MemoryFilesystem tree = new();
-        MemoryFile file = tree.NewFile("observed", 0x1B6);
+        MemoryFile file = tree.NewFile("observed", Perms.P0666);
         tree.Root.Add(file);
         await using ServerHarness harness = await ServerHarness.StartAsync(tree: tree);
         await using WireClient client = await WireClient.ConnectAsync(harness, Dialect.P9_2000_L, 8192, Ct);
@@ -186,7 +187,7 @@ public sealed class ServerLifecycleRegressionTests
     public async Task DisconnectFinalizesOpenState(bool removeOnClose)
     {
         MemoryFilesystem tree = new();
-        MemoryFile file = tree.NewFile("observed", 0x1B6);
+        MemoryFile file = tree.NewFile("observed", Perms.P0666);
         file.Exclusive = true;
         tree.Root.Add(file);
         await using ServerHarness harness = await ServerHarness.StartAsync(tree: tree);
@@ -255,7 +256,7 @@ public sealed class ServerLifecycleRegressionTests
     public async Task ShutdownDefersDisposalUntilAnUncooperativeReadReturns()
     {
         MemoryFilesystem tree = new();
-        MemoryFile file = tree.NewFile("observed", 0x1B6);
+        MemoryFile file = tree.NewFile("observed", Perms.P0666);
         file.Data = "data"u8.ToArray();
         file.DeafReadGate = new(TaskCreationOptions.RunContinuationsAsynchronously);
         tree.Root.Add(file);
@@ -300,7 +301,7 @@ public sealed class ServerLifecycleRegressionTests
         MemoryDirectory current = tree.Root;
         for (int depth = 0; depth < 32; depth++)
         {
-            MemoryDirectory child = tree.NewDirectory("next", 0x1FF);
+            MemoryDirectory child = tree.NewDirectory("next", Perms.P0777);
             current.Add(child);
             current = child;
         }
@@ -368,9 +369,9 @@ public sealed class ServerLifecycleRegressionTests
     public async Task RenamedDirectoryAscendsThroughItsNewParents()
     {
         MemoryFilesystem tree = new();
-        MemoryDirectory source = tree.NewDirectory("source", 0x1FF);
-        MemoryDirectory outer = tree.NewDirectory("outer", 0x1FF);
-        MemoryDirectory destination = tree.NewDirectory("destination", 0x1FF);
+        MemoryDirectory source = tree.NewDirectory("source", Perms.P0777);
+        MemoryDirectory outer = tree.NewDirectory("outer", Perms.P0777);
+        MemoryDirectory destination = tree.NewDirectory("destination", Perms.P0777);
         tree.Root.Add(source);
         tree.Root.Add(outer);
         outer.Add(destination);
@@ -393,9 +394,9 @@ public sealed class ServerLifecycleRegressionTests
     public async Task RenamedAncestorRebasesExistingAliasesAcrossConnections(bool renameAt)
     {
         MemoryFilesystem tree = new();
-        MemoryDirectory source = tree.NewDirectory("source", 0x1FF);
-        MemoryDirectory child = tree.NewDirectory("child", 0x1FF);
-        MemoryDirectory destination = tree.NewDirectory("destination", 0x1FF);
+        MemoryDirectory source = tree.NewDirectory("source", Perms.P0777);
+        MemoryDirectory child = tree.NewDirectory("child", Perms.P0777);
+        MemoryDirectory destination = tree.NewDirectory("destination", Perms.P0777);
         tree.Root.Add(source);
         tree.Root.Add(destination);
         source.Add(child);
@@ -438,9 +439,9 @@ public sealed class ServerLifecycleRegressionTests
     public async Task RenameOutsideRestrictedAttachClampsParentWalkAndKeepsRemovalLocation()
     {
         MemoryFilesystem tree = new();
-        MemoryDirectory jail = tree.NewDirectory("jail", 0x1FF);
-        MemoryDirectory source = tree.NewDirectory("source", 0x1FF);
-        MemoryDirectory destination = tree.NewDirectory("destination", 0x1FF);
+        MemoryDirectory jail = tree.NewDirectory("jail", Perms.P0777);
+        MemoryDirectory source = tree.NewDirectory("source", Perms.P0777);
+        MemoryDirectory destination = tree.NewDirectory("destination", Perms.P0777);
         tree.Root.Add(jail);
         tree.Root.Add(destination);
         jail.Add(source);
@@ -465,9 +466,9 @@ public sealed class ServerLifecycleRegressionTests
     public async Task SlowLookupDoesNotBlockOtherClientsAndRevalidatesAfterRename()
     {
         MemoryFilesystem tree = new();
-        MemoryDirectory backing = tree.NewDirectory("slow", 0x1FF);
-        MemoryDirectory child = tree.NewDirectory("child", 0x1FF);
-        MemoryDirectory destination = tree.NewDirectory("destination", 0x1FF);
+        MemoryDirectory backing = tree.NewDirectory("slow", Perms.P0777);
+        MemoryDirectory child = tree.NewDirectory("child", Perms.P0777);
+        MemoryDirectory destination = tree.NewDirectory("destination", Perms.P0777);
         SlowDirectory slow = new(backing);
         tree.Root.Add(slow);
         tree.Root.Add(destination);
@@ -534,8 +535,8 @@ public sealed class ServerLifecycleRegressionTests
     public async Task IncompleteXattrResetLogsFailureAndContinuesCleanup()
     {
         MemoryFilesystem tree = new();
-        MemoryFile sink = tree.NewFile("sink", 0x1B6);
-        MemoryFile ordinary = tree.NewFile("ordinary", 0x1B6);
+        MemoryFile sink = tree.NewFile("sink", Perms.P0666);
+        MemoryFile ordinary = tree.NewFile("ordinary", Perms.P0666);
         tree.Root.Add(sink);
         tree.Root.Add(ordinary);
         RecordingLogger logger = new();
@@ -562,9 +563,9 @@ public sealed class ServerLifecycleRegressionTests
     public async Task CleanupContinuesWhenReportingAHandlerFailureAlsoThrows()
     {
         MemoryFilesystem tree = new();
-        MemoryFile refusing = tree.NewFile("refusing", 0x1B6);
+        MemoryFile refusing = tree.NewFile("refusing", Perms.P0666);
         refusing.ClunkFailure = NinePError.FromErrno(Errno.EIO);
-        MemoryFile ordinary = tree.NewFile("ordinary", 0x1B6);
+        MemoryFile ordinary = tree.NewFile("ordinary", Perms.P0666);
         tree.Root.Add(refusing);
         tree.Root.Add(ordinary);
         FailingCleanupLogger logger = new();
@@ -603,7 +604,7 @@ public sealed class ServerLifecycleRegressionTests
     }
 
     private sealed class SlowDirectory(MemoryDirectory backing)
-        : MemoryNode(backing.Name, FileKind.Directory, 0x1FF, backing.Qid.Path), IDirectoryHandler
+        : MemoryNode(backing.Name, FileKind.Directory, Perms.P0777, backing.Qid.Path), IDirectoryHandler
     {
         public TaskCompletionSource Entered { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
         public TaskCompletionSource Release { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
@@ -634,9 +635,9 @@ public sealed class ServerLifecycleRegressionTests
     }
 
     private sealed class ObservedFile(ulong path)
-        : MemoryNode("observed", FileKind.File, 0x1B6, path), IFileHandler, IXattrHandler
+        : MemoryNode("observed", FileKind.File, Perms.P0666, path), IFileHandler, IXattrHandler
     {
-        public MemoryFile Backing { get; } = new("observed", 0x1B6, path) { Data = "data"u8.ToArray() };
+        public MemoryFile Backing { get; } = new("observed", Perms.P0666, path) { Data = "data"u8.ToArray() };
         public bool Append { get; init; }
         public bool HoldWrite { get; init; }
         public int XattrReads { get; private set; }
@@ -711,7 +712,7 @@ public sealed class ServerLifecycleRegressionTests
     }
 
     private sealed class FailingDirectory(ulong path)
-        : MemoryNode("failing", FileKind.Directory, 0x1FF, path), IDirectoryHandler
+        : MemoryNode("failing", FileKind.Directory, Perms.P0777, path), IDirectoryHandler
     {
         public ValueTask<IHandler?> LookupAsync(string name, CancellationToken cancellationToken = default) =>
             throw new NinePException(NinePError.FromErrno(Errno.ENOENT));

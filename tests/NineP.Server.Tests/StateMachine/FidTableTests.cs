@@ -131,7 +131,7 @@ public sealed class FidTableTests
     {
         await using FidTable table = new(16);
         MemoryFilesystem tree = new();
-        MemoryFile file = tree.NewFile("a", 0x1A4);
+        MemoryFile file = tree.NewFile("a", Perms.P0644);
 
         // CA2000: ClearAsync releases every entry it removes, which is the whole assertion here.
 #pragma warning disable CA2000

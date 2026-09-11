@@ -4,6 +4,7 @@ using NineP.Protocol.Codec.Internal;
 using NineP.Protocol.Messages;
 using NineP.Protocol.Tests;
 using NineP.Protocol.Tests.Conformance;
+using NineP.TestSupport;
 using Xunit;
 
 namespace NineP.Protocol.Tests.Conformance;
@@ -12,7 +13,7 @@ namespace NineP.Protocol.Tests.Conformance;
 [Trait("Category", "Conformance")]
 public sealed class AttrProjectorTests
 {
-    private static Attr Sample(FileKind kind, uint perm = 0x1A4) => new()
+    private static Attr Sample(FileKind kind, FilePermissions perm = Perms.P0644) => new()
     {
         Qid = new Qid(QidType.QTFILE, 3, 0x0102030405060708),
         Kind = kind,
@@ -60,7 +61,7 @@ public sealed class AttrProjectorTests
     [InlineData(Dialect.P9_2000_u)]
     public void DirectoryLengthIsZero(Dialect dialect)
     {
-        Attr attr = Sample(FileKind.Directory, 0x1ED) with { Size = 8192 };
+        Attr attr = Sample(FileKind.Directory, Perms.P0755) with { Size = 8192 };
         StatRecord stat = AttrProjector.ToStat(attr, "d", dialect);
 
         Assert.Equal(0ul, stat.Length);
@@ -75,7 +76,7 @@ public sealed class AttrProjectorTests
     [InlineData(0x89EDu, 0x9EDu)]
     [InlineData(0xFFFFFFFFu, 0xFFFu)]
     public void CreateModeMaskedTo07777(uint mode, uint expected) =>
-        Assert.Equal(expected, AttrProjector.MaskCreatePerm(mode));
+        Assert.Equal(expected, (uint)AttrProjector.MaskCreatePerm(mode));
 
     /// <summary>A symlink has no 9P2000 shape, so stat refuses rather than lie (RK-34).</summary>
     [Fact]
@@ -120,7 +121,7 @@ public sealed class AttrProjectorTests
     [Fact]
     public void UnixPermissionBitsOnlyExistInDotU()
     {
-        Attr attr = Sample(FileKind.File, 0xDED);
+        Attr attr = Sample(FileKind.File, Perms.P6755);
 
         Assert.Equal(0x1EDu, AttrProjector.ToMode(attr, Dialect.P9_2000));
         Assert.Equal(0x00080000u | 0x00040000u | 0x1EDu, AttrProjector.ToMode(attr, Dialect.P9_2000_u));
@@ -159,7 +160,7 @@ public sealed class AttrProjectorTests
     [Fact]
     public void RgetattrQidIsAlwaysValid()
     {
-        Rgetattr reply = AttrProjector.ToGetattr(7, Sample(FileKind.Directory, 0x1ED), GetAttrMask.None, GetAttrMask.None);
+        Rgetattr reply = AttrProjector.ToGetattr(7, Sample(FileKind.Directory, Perms.P0755), GetAttrMask.None, GetAttrMask.None);
 
         Assert.Equal(QidType.QTDIR, reply.Qid.Type);
         Assert.Equal(0x0102030405060708ul, reply.Qid.Path);
@@ -202,7 +203,7 @@ public sealed class AttrProjectorTests
         Assert.Equal(new TimeSpec(1_700_000_002, 20), attr.MTime);
 
         // Unmarked: the Attr default, not the reply's padding.
-        Assert.Equal(0u, attr.Perm);
+        Assert.Equal(FilePermissions.None, attr.Perm);
         Assert.Equal(1ul, attr.NLink);
         Assert.Equal(Constants.NONUNAME, attr.Uid);
         Assert.Equal(Constants.NONUNAME, attr.Gid);
@@ -225,7 +226,7 @@ public sealed class AttrProjectorTests
         Attr attr = AttrProjector.FromGetattr(in reply);
 
         Assert.Equal(FileKind.CharDevice, attr.Kind);
-        Assert.Equal(0x1A4u, attr.Perm);
+        Assert.Equal(Perms.P0644, attr.Perm);
         Assert.Equal(3ul, attr.NLink);
         Assert.Equal(1000u, attr.Uid);
         Assert.Equal(1001u, attr.Gid);
@@ -407,7 +408,7 @@ public sealed class AttrProjectorTests
     [InlineData(FileFlags.None, 0u)]
     public void ToWstatSendsTheFileFlagsInTheModeWord(FileFlags flags, uint high)
     {
-        StatRecord sent = AttrProjector.ToWstat(new SetAttr { Perm = 0x1ED, Flags = flags }, Dialect.P9_2000);
+        StatRecord sent = AttrProjector.ToWstat(new SetAttr { Perm = Perms.P0755, Flags = flags }, Dialect.P9_2000);
 
         Assert.Equal(high | 0x1EDu, sent.Mode);
         Assert.Equal(flags, AttrProjector.FlagsOf(sent.Mode));
@@ -423,7 +424,7 @@ public sealed class AttrProjectorTests
     public void AHalfStatedModeWordIsRefused()
     {
         NinePException permOnly = Assert.Throws<NinePException>(
-            () => AttrProjector.ToWstat(new SetAttr { Perm = 0x1A4 }, Dialect.P9_2000));
+            () => AttrProjector.ToWstat(new SetAttr { Perm = Perms.P0644 }, Dialect.P9_2000));
         NinePException flagsOnly = Assert.Throws<NinePException>(
             () => AttrProjector.ToWstat(new SetAttr { Flags = FileFlags.Append }, Dialect.P9_2000_u));
 
@@ -443,15 +444,15 @@ public sealed class AttrProjectorTests
     {
         StatRecord current = StatRecord.DontTouch with { Mode = ModeBits.DMAPPEND | 0x1ED };
 
-        SetAttr chmod = AttrProjector.CompleteMode(new SetAttr { Perm = 0x1A4 }, current, Dialect.P9_2000);
-        Assert.Equal(0x1A4u, chmod.Perm);
+        SetAttr chmod = AttrProjector.CompleteMode(new SetAttr { Perm = Perms.P0644 }, current, Dialect.P9_2000);
+        Assert.Equal(Perms.P0644, chmod.Perm);
         Assert.Equal(FileFlags.Append, chmod.Flags);
 
         SetAttr clearing = AttrProjector.CompleteMode(new SetAttr { Flags = FileFlags.None }, current, Dialect.P9_2000);
-        Assert.Equal(0x1EDu, clearing.Perm);
+        Assert.Equal(Perms.P0755, clearing.Perm);
         Assert.Equal(FileFlags.None, clearing.Flags);
 
-        SetAttr both = new() { Perm = 0x1A4, Flags = FileFlags.Exclusive };
+        SetAttr both = new() { Perm = Perms.P0644, Flags = FileFlags.Exclusive };
         Assert.Same(both, AttrProjector.CompleteMode(both, current, Dialect.P9_2000));
 
         SetAttr neither = new() { Size = 0 };
@@ -459,7 +460,7 @@ public sealed class AttrProjectorTests
 
         StatRecord setuid = StatRecord.DontTouch with { Mode = ModeBits.DMSETUID | 0x1ED };
         Assert.Equal(
-            0x9EDu,
+            Perms.P4755,
             AttrProjector.CompleteMode(new SetAttr { Flags = FileFlags.Append }, setuid, Dialect.P9_2000_u).Perm);
     }
 
@@ -474,7 +475,7 @@ public sealed class AttrProjectorTests
     public void AServerOwnedFlagIsRefusedByTheProjector(FileFlags flag)
     {
         NinePException refusal = Assert.Throws<NinePException>(
-            () => AttrProjector.ToWstat(new SetAttr { Perm = 0x1ED, Flags = flag }, Dialect.P9_2000));
+            () => AttrProjector.ToWstat(new SetAttr { Perm = Perms.P0755, Flags = flag }, Dialect.P9_2000));
 
         Assert.Equal((int)Errno.EPERM, refusal.Error.Errno);
     }
@@ -488,12 +489,12 @@ public sealed class AttrProjectorTests
     /// <param name="mode">The <c>Twstat.mode</c> word a .u client sends.</param>
     /// <param name="expected">The 07777 permission value it means.</param>
     [Theory]
-    [InlineData(0x000801EDu, 0x9EDu)]
-    [InlineData(0x000401EDu, 0x5EDu)]
-    [InlineData(0x000101EDu, 0x3EDu)]
-    [InlineData(0x000D01EDu, 0xFEDu)]
-    [InlineData(0x000001EDu, 0x1EDu)]
-    public void WstatCarriesTheUnixPermissionBitsInDotU(uint mode, uint expected)
+    [InlineData(0x000801EDu, Perms.P4755)]
+    [InlineData(0x000401EDu, Perms.P2755)]
+    [InlineData(0x000101EDu, Perms.P1755)]
+    [InlineData(0x000D01EDu, Perms.P7755)]
+    [InlineData(0x000001EDu, Perms.P0755)]
+    public void WstatCarriesTheUnixPermissionBitsInDotU(uint mode, FilePermissions expected)
     {
         StatRecord stat = StatRecord.DontTouch with { Mode = mode };
 
@@ -509,7 +510,7 @@ public sealed class AttrProjectorTests
     {
         StatRecord stat = StatRecord.DontTouch with { Mode = 0x000801EDu };
 
-        Assert.Equal(0x1EDu, AttrProjector.FromWstat(in stat, Dialect.P9_2000, null).Perm);
+        Assert.Equal(Perms.P0755, AttrProjector.FromWstat(in stat, Dialect.P9_2000, null).Perm);
     }
 
     /// <summary>
@@ -520,12 +521,12 @@ public sealed class AttrProjectorTests
     /// <param name="perm">The 07777 permission value the caller asked for.</param>
     /// <param name="expected">The mode word that goes out.</param>
     [Theory]
-    [InlineData(0x9EDu, 0x000801EDu)]
-    [InlineData(0x5EDu, 0x000401EDu)]
-    [InlineData(0x3EDu, 0x000101EDu)]
-    [InlineData(0xFEDu, 0x000D01EDu)]
-    [InlineData(0x1EDu, 0x000001EDu)]
-    public void ToWstatSendsTheUnixPermissionBitsInDotU(uint perm, uint expected)
+    [InlineData(Perms.P4755, 0x000801EDu)]
+    [InlineData(Perms.P2755, 0x000401EDu)]
+    [InlineData(Perms.P1755, 0x000101EDu)]
+    [InlineData(Perms.P7755, 0x000D01EDu)]
+    [InlineData(Perms.P0755, 0x000001EDu)]
+    public void ToWstatSendsTheUnixPermissionBitsInDotU(FilePermissions perm, uint expected)
     {
         StatRecord sent = AttrProjector.ToWstat(new SetAttr { Perm = perm, Flags = FileFlags.None }, Dialect.P9_2000_u);
 
@@ -540,10 +541,10 @@ public sealed class AttrProjectorTests
     /// </summary>
     /// <param name="perm">The permission value the caller asked for.</param>
     [Theory]
-    [InlineData(0x9EDu)]
-    [InlineData(0x5EDu)]
-    [InlineData(0x3EDu)]
-    public void PlainNineP2000RefusesTheUnixPermissionBits(uint perm)
+    [InlineData(Perms.P4755)]
+    [InlineData(Perms.P2755)]
+    [InlineData(Perms.P1755)]
+    public void PlainNineP2000RefusesTheUnixPermissionBits(FilePermissions perm)
     {
         NinePException refusal = Assert.Throws<NinePException>(
             () => AttrProjector.ToWstat(new SetAttr { Perm = perm, Flags = FileFlags.None }, Dialect.P9_2000));
@@ -551,7 +552,7 @@ public sealed class AttrProjectorTests
         Assert.Equal((int)Errno.EINVAL, refusal.Error.Errno);
         Assert.Equal(
             0x1EDu,
-            AttrProjector.ToWstat(new SetAttr { Perm = 0x1ED, Flags = FileFlags.None }, Dialect.P9_2000).Mode);
+            AttrProjector.ToWstat(new SetAttr { Perm = Perms.P0755, Flags = FileFlags.None }, Dialect.P9_2000).Mode);
     }
 
     /// <summary>An Rgetattr carrying a value in every field, valid for whatever the mask says.</summary>

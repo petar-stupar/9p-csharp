@@ -152,16 +152,16 @@ build.
 
 | Namespace | Types | The types |
 | --- | --- | --- |
-| `NineP.Protocol` | 30 | `Dialect`, `MessageType`, `QidType`, `Qid`, `FileKind`, `FileFlags`, `OpenMode`, `OpenFlags`, `MessageTypes`, `TimeSpec`, `DeviceId`, `Attr`, `SetAttr`, `DirEntry`, `StatFs`, `LockType`, `LockFlags`, `LockStatus`, `LockRequest`, `LockQueryResult`, `XattrFlags`, `NinePError`, `NinePException`, `NinePProtocolException`, `NinePVersionException`, `ProtocolErrorKind`, `Constants`, `Errno`, `ErrorTable`, `Limits` |
+| `NineP.Protocol` | 31 | `Dialect`, `MessageType`, `QidType`, `Qid`, `FileKind`, `FilePermissions`, `FileFlags`, `OpenMode`, `OpenFlags`, `MessageTypes`, `TimeSpec`, `DeviceId`, `Attr`, `SetAttr`, `DirEntry`, `StatFs`, `LockType`, `LockFlags`, `LockStatus`, `LockRequest`, `LockQueryResult`, `XattrFlags`, `NinePError`, `NinePException`, `NinePProtocolException`, `NinePVersionException`, `ProtocolErrorKind`, `Constants`, `Errno`, `ErrorTable`, `Limits` |
 | `NineP.Protocol.Messages` | 70 | `IMessage`, `StatRecord`, `GetAttrMask`, `SetAttrMask`, and the 66 message records |
 | `NineP.Protocol.Codec` | 1 | `MessageCodec` |
 | `NineP.Protocol.Negotiation` | 2 | `NegotiationResult`, `Negotiator` |
 | `NineP.Protocol.Transports` | 14 | `NinePScheme`, `NinePAddress`, `CloseReason`, `PeerIdentity`, `INinePConnection`, `INinePListener`, `ITransport`, `TcpTransport`, `TcpTransportOptions`, `TlsTransport`, `TlsTransportOptions`, `WebSocketTransport`, `WebSocketTransportOptions`, `MemoryTransport` |
 | `NineP.Protocol.Auth` | 16 | `Identity`, `AuthRequest`, `IAuthSession`, `IAuthenticator`, `IAuthChannel`, `ICredential`, `TokenAuthenticator`, `PasswordAuthenticator`, `IPasswordStore`, `PasswordFileStore`, `TlsClientCertAuthenticator`, `TokenCredential`, `PasswordCredential`, `BearerTokenCredential`, `CallbackCredential`, `ConstantTime` |
-| **`NineP.Protocol` assembly** | **133** | 30 + 70 + 1 + 2 + 14 + 16 |
+| **`NineP.Protocol` assembly** | **134** | 31 + 70 + 1 + 2 + 14 + 16 |
 | `NineP.Client` | 5 | `NinePClient`, `ClientOptions`, `NinePSession`, `INinePMessages`, `NinePFid` |
 | `NineP.Server` | 17 | `NinePServer`, `ServerOptions`, `ServerCounters`, `RequestLogEntry`, `IRequestLogSink`, `IFilesystem`, `IHandler`, `IDirectoryHandler`, `DirectoryListing`, `CreateRequest`, `IFileHandler`, `IOpenFile`, `ISymlinkHandler`, `ILockCapability`, `IXattrHandler`, `ILinkCapability`, `IStatFsCapability` |
-| **Total** | **155** | of which **66** are message records |
+| **Total** | **156** | of which **66** are message records |
 
 ## `NineP.Protocol`
 
@@ -288,6 +288,42 @@ The 13 bytes this qid occupies on the wire.
 | `CharDevice` | 5 | A character device. |
 | `BlockDevice` | 6 | A block device. |
 
+### `FilePermissions`
+
+`[Flags] enum : uint` — the permission bits of a file: the `0777` rwx triples plus setuid, setgid
+and sticky, the `07777` mask of §4.7. The reference writes these in octal, which C# cannot spell as
+a literal, so every value is named. The numeric values are the POSIX ones, so a cast to `uint` is
+the wire value and nothing else.
+
+| Member | Value | Meaning |
+| --- | --- | --- |
+| `None` | 0 | No permission at all (`0000`). |
+| `OtherExecute` | 0x001 | Anyone may execute the file, or walk into the directory (`0001`). |
+| `OtherWrite` | 0x002 | Anyone may write the file (`0002`). |
+| `OtherRead` | 0x004 | Anyone may read the file, or read the directory (`0004`). |
+| `GroupExecute` | 0x008 | The group may execute the file, or walk into the directory (`0010`). |
+| `GroupWrite` | 0x010 | The group may write the file (`0020`). |
+| `GroupRead` | 0x020 | The group may read the file, or read the directory (`0040`). |
+| `OwnerExecute` | 0x040 | The owner may execute the file, or walk into the directory (`0100`). |
+| `OwnerWrite` | 0x080 | The owner may write the file (`0200`). |
+| `OwnerRead` | 0x100 | The owner may read the file, or read the directory (`0400`). |
+| `Sticky` | 0x200 | The sticky bit (`01000`); .u and .L only. |
+| `SetGid` | 0x400 | Set-group-id on execution (`02000`); .u and .L only. |
+| `SetUid` | 0x800 | Set-user-id on execution (`04000`); .u and .L only. |
+| `OwnerReadWrite` | 0x180 | The owner may read and write (`0600`). |
+| `OwnerReadExecute` | 0x140 | The owner may read and execute or walk (`0500`). |
+| `OwnerAll` | 0x1C0 | The owner may read, write and execute or walk (`0700`). |
+| `GroupReadWrite` | 0x030 | The group may read and write (`0060`). |
+| `GroupReadExecute` | 0x028 | The group may read and execute or walk (`0050`). |
+| `GroupAll` | 0x038 | The group may read, write and execute or walk (`0070`). |
+| `OtherReadWrite` | 0x006 | Anyone may read and write (`0006`). |
+| `OtherReadExecute` | 0x005 | Anyone may read and execute or walk (`0005`). |
+| `OtherAll` | 0x007 | Anyone may read, write and execute or walk (`0007`). |
+| `AllRead` | 0x124 | Everyone may read (`0444`). |
+| `AllWrite` | 0x092 | Everyone may write (`0222`). |
+| `AllExecute` | 0x049 | Everyone may execute the file, or walk into the directory (`0111`). |
+| `Mask` | 0xFFF | Every permission bit this type names: the `07777` mask. |
+
 ### `FileFlags`
 
 `[Flags] enum` — the non-permission mode bits of §4.4, dialect-neutral.
@@ -361,7 +397,7 @@ public required FileKind Kind { get; init; }
 The file type (§7).
 
 ```csharp
-public required uint Perm { get; init; }
+public required FilePermissions Perm { get; init; }
 ```
 Permission bits only: 0777 plus setuid, setgid and sticky (the 07777 mask).
 
@@ -487,7 +523,7 @@ public string? Name { get; init; }
 A new name (`Twstat` only; a rename within the same directory).
 
 ```csharp
-public uint? Perm { get; init; }
+public FilePermissions? Perm { get; init; }
 ```
 New permission bits (the 07777 mask).
 
@@ -2296,13 +2332,21 @@ Lists a directory as unified entries, in both dialect record formats.
 
 ```csharp
 public ValueTask MkdirAsync(
-    string path, uint perm = 0x1ED, CancellationToken cancellationToken = default);
+    string path,
+    FilePermissions perm = FilePermissions.OwnerAll
+        | FilePermissions.GroupReadExecute
+        | FilePermissions.OtherReadExecute,
+    CancellationToken cancellationToken = default);
 ```
 Creates a directory; the default permission is 0755.
 
 ```csharp
 public ValueTask<NinePFid> CreateFileAsync(
-    string path, uint perm = 0x1A4, CancellationToken cancellationToken = default);
+    string path,
+    FilePermissions perm = FilePermissions.OwnerReadWrite
+        | FilePermissions.GroupRead
+        | FilePermissions.OtherRead,
+    CancellationToken cancellationToken = default);
 ```
 Creates an empty regular file and returns it open for writing; the default permission is 0644.
 
@@ -2442,10 +2486,15 @@ Opens this fid: `Topen` in 9P2000 and .u, `Tlopen` in .L.
 
 ```csharp
 public ValueTask CreateAsync(
-    string name, uint perm, OpenMode mode, OpenFlags flags = OpenFlags.None,
+    string name, FileKind kind, FilePermissions perm, OpenMode mode,
+    OpenFlags flags = OpenFlags.None, FileFlags fileFlags = FileFlags.None,
     CancellationToken cancellationToken = default);
 ```
-Creates a file in this directory fid; the fid then refers to the new, open file.
+Creates a file in this directory fid; the fid then refers to the new, open file. `kind` is
+`FileKind.File` or `FileKind.Directory` — a symlink is `SymlinkAsync` and a device is `MknodAsync`,
+because both carry a payload this create has no room for. `.L` refuses a directory (that is
+`MkdirAsync`) and refuses `fileFlags` altogether, which `Tlcreate` cannot spell (§8 rules 15
+and 19).
 
 ```csharp
 public ValueTask<int> ReadAsync(
@@ -2845,7 +2894,7 @@ public required FileKind Kind { get; init; }
 What to create.
 
 ```csharp
-public required uint Perm { get; init; }
+public required FilePermissions Perm { get; init; }
 ```
 Permission bits after the core applied the parent mask and the 07777 mask.
 

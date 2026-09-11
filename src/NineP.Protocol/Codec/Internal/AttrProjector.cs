@@ -39,7 +39,8 @@ internal static class AttrProjector
     /// </summary>
     /// <param name="mode">The mode the client sent.</param>
     /// <returns>The permission bits alone.</returns>
-    public static uint MaskCreatePerm(uint mode) => mode & ModeBits.FullPermissions;
+    public static FilePermissions MaskCreatePerm(uint mode) =>
+        (FilePermissions)(mode & ModeBits.FullPermissions);
 
     /// <summary>The 9P2000 / .u mode word an attribute record projects to.</summary>
     /// <param name="attr">The attributes.</param>
@@ -49,7 +50,7 @@ internal static class AttrProjector
     {
         ArgumentNullException.ThrowIfNull(attr);
 
-        uint mode = attr.Perm & ModeBits.Permissions;
+        uint mode = (uint)attr.Perm & ModeBits.Permissions;
         mode |= HighFlagBits(attr.Flags);
         mode |= KindBits(attr.Kind, dialect);
 
@@ -68,7 +69,7 @@ internal static class AttrProjector
     {
         ArgumentNullException.ThrowIfNull(attr);
 
-        return PosixTypeBits(attr.Kind) | (attr.Perm & ModeBits.FullPermissions);
+        return PosixTypeBits(attr.Kind) | ((uint)attr.Perm & ModeBits.FullPermissions);
     }
 
     /// <summary>
@@ -264,7 +265,9 @@ internal static class AttrProjector
 
         return new SetAttr
         {
-            Perm = valid.HasFlag(SetAttrMask.Mode) ? message.Mode & ModeBits.FullPermissions : null,
+            Perm = valid.HasFlag(SetAttrMask.Mode)
+                ? (FilePermissions)(message.Mode & ModeBits.FullPermissions)
+                : null,
             Uid = valid.HasFlag(SetAttrMask.Uid) ? message.Uid : null,
             Gid = valid.HasFlag(SetAttrMask.Gid) ? message.Gid : null,
             Size = valid.HasFlag(SetAttrMask.Size) ? message.Size : null,
@@ -376,20 +379,20 @@ internal static class AttrProjector
         };
     }
 
-    private static uint UnixPermissionBits(uint perm)
+    private static uint UnixPermissionBits(FilePermissions permissions)
     {
         uint mode = 0;
-        if ((perm & ModeBits.S_ISUID) != 0)
+        if (permissions.HasFlag(FilePermissions.SetUid))
         {
             mode |= ModeBits.DMSETUID;
         }
 
-        if ((perm & ModeBits.S_ISGID) != 0)
+        if (permissions.HasFlag(FilePermissions.SetGid))
         {
             mode |= ModeBits.DMSETGID;
         }
 
-        if ((perm & ModeBits.S_ISVTX) != 0)
+        if (permissions.HasFlag(FilePermissions.Sticky))
         {
             mode |= ModeBits.DMSETVTX;
         }
@@ -475,7 +478,7 @@ internal static class AttrProjector
         {
             Qid = reply.Qid,
             Kind = mode ? PosixKindOf(reply.Mode) : KindOfQidType(reply.Qid.Type),
-            Perm = mode ? reply.Mode & ModeBits.FullPermissions : 0,
+            Perm = mode ? (FilePermissions)(reply.Mode & ModeBits.FullPermissions) : FilePermissions.None,
             NLink = Marked(valid, GetAttrMask.NLink) ? reply.NLink : 1,
             Uid = Marked(valid, GetAttrMask.Uid) ? reply.Uid : Constants.NONUNAME,
             Gid = Marked(valid, GetAttrMask.Gid) ? reply.Gid : Constants.NONUNAME,
@@ -575,7 +578,7 @@ internal static class AttrProjector
         StatRecord record = StatRecord.DontTouch with
         {
             Name = update.Name ?? string.Empty,
-            Mode = update.Perm is uint bits
+            Mode = update.Perm is FilePermissions bits
                 ? ModeOf(bits, dialect) | HighFlagBits(update.Flags ?? FileFlags.None)
                 : uint.MaxValue,
             MTime = update.MTime is TimeSpec mtime ? (uint)mtime.Seconds : uint.MaxValue,
@@ -633,7 +636,7 @@ internal static class AttrProjector
         // DM* high bits and are not spelled in plain 9P2000 at all, whose mode word carries the
         // rwx bits and nothing else. Masking them off there would answer success for a chmod that
         // did not happen.
-        if (update.Perm is uint perm && perm != (perm & ModeBits.Permissions)
+        if (update.Perm is FilePermissions perm && (perm & ~(FilePermissions)ModeBits.Permissions) != FilePermissions.None
             && dialect != Dialect.P9_2000_u)
         {
             throw new NinePException(new NinePError(
@@ -734,7 +737,7 @@ internal static class AttrProjector
             tag,
             fid,
             valid,
-            update.Perm ?? 0,
+            (uint)(update.Perm ?? FilePermissions.None),
             update.Uid ?? 0,
             update.Gid ?? 0,
             update.Size ?? 0,
@@ -808,25 +811,25 @@ internal static class AttrProjector
     /// <see cref="PermOf"/>, so what a client sends and what a server reads back agree bit for bit
     /// (reference §8 rule 19).
     /// </summary>
-    /// <param name="perm">The 07777 permission value.</param>
+    /// <param name="perm">The permission value.</param>
     /// <param name="dialect">The session dialect; only .u has the three high bits.</param>
     /// <returns>The mode word.</returns>
-    private static uint ModeOf(uint perm, Dialect dialect) => dialect == Dialect.P9_2000_u
-        ? (perm & ModeBits.Permissions) | UnixPermissionBits(perm)
-        : perm & ModeBits.Permissions;
+    private static uint ModeOf(FilePermissions perm, Dialect dialect) => dialect == Dialect.P9_2000_u
+        ? ((uint)perm & ModeBits.Permissions) | UnixPermissionBits(perm)
+        : (uint)perm & ModeBits.Permissions;
 
-    private static uint PermOf(uint mode, Dialect dialect)
+    private static FilePermissions PermOf(uint mode, Dialect dialect)
     {
         uint perm = mode & ModeBits.Permissions;
         if (dialect != Dialect.P9_2000_u)
         {
-            return perm;
+            return (FilePermissions)perm;
         }
 
         perm |= (mode & ModeBits.DMSETUID) != 0 ? ModeBits.S_ISUID : 0;
         perm |= (mode & ModeBits.DMSETGID) != 0 ? ModeBits.S_ISGID : 0;
         perm |= (mode & ModeBits.DMSETVTX) != 0 ? ModeBits.S_ISVTX : 0;
-        return perm;
+        return (FilePermissions)perm;
     }
 
     /// <summary>The file flags a 9P2000 / .u mode word carries: the inverse of <see cref="HighFlagBits"/>.</summary>

@@ -17,7 +17,7 @@ NineP.Server.CreateRequest.Mode.get -> NineP.Protocol.OpenMode
 NineP.Server.CreateRequest.Mode.init -> void
 NineP.Server.CreateRequest.Name.get -> string!
 NineP.Server.CreateRequest.Name.init -> void
-NineP.Server.CreateRequest.Perm.get -> uint
+NineP.Server.CreateRequest.Perm.get -> NineP.Protocol.FilePermissions
 NineP.Server.CreateRequest.Perm.init -> void
 NineP.Server.CreateRequest.Rdev.get -> NineP.Protocol.DeviceId?
 NineP.Server.CreateRequest.Rdev.init -> void

@@ -57,7 +57,7 @@ public sealed class JsonFsBoundaryTests
             offset = dialect == Dialect.P9_2000_L ? entries[^1].Cursor : offset + (ulong)bytes.Length;
             if (pages <= 32)
             {
-                await b.MkdirAsync("d/temp", 0x1ED, Ct);
+                await b.MkdirAsync("d/temp", Perms.P0755, Ct);
                 await b.RemoveAsync("d/temp", Ct);
                 await b.RemoveAsync("d/e" + (pages - 1).ToString("D7", CultureInfo.InvariantCulture), Ct);
             }
@@ -86,7 +86,7 @@ public sealed class JsonFsBoundaryTests
         await using NinePSession s = await h.ConnectAsync(dialect);
         await using NinePFid open = await s.OpenFileAsync("a", OpenMode.ReadWrite, OpenFlags.None, Ct);
         Attr original = await open.GetAttrAsync(Ct);
-        await BoundaryTests.Error(Errno.ENOSPC, async () => await s.MkdirAsync("new", 0x1ED, Ct));
+        await BoundaryTests.Error(Errno.ENOSPC, async () => await s.MkdirAsync("new", Perms.P0755, Ct));
         await BoundaryTests.Error(Errno.ENOSPC, async () => await open.WriteAsync(0, "big"u8.ToArray(), Ct));
         await BoundaryTests.Error(Errno.ENOSPC, async () => await s.RenameAsync("a", "longer", Ct));
         // Quotes expand on serialization: a two-byte value can cost more than the old one.
@@ -95,7 +95,7 @@ public sealed class JsonFsBoundaryTests
         Assert.Equal(original.Qid, (await open.GetAttrAsync(Ct)).Qid);
         Assert.Equal("ok", Encoding.UTF8.GetString(await open.ReadAllAsync(Ct)));
         await s.RemoveAsync("keep", Ct);
-        await s.MkdirAsync("new", 0x1ED, Ct);
+        await s.MkdirAsync("new", Perms.P0755, Ct);
         Assert.Contains(await s.ReadDirAsync("/", Ct), e => e.Name == "new");
     }
 
@@ -123,7 +123,7 @@ public sealed class JsonFsBoundaryTests
         await using NinePSession d = await limited.ConnectAsync(dialect);
         async Task<int> Create(NinePSession client, string name)
         {
-            try { await client.MkdirAsync(name, 0x1ED, Ct); return 0; }
+            try { await client.MkdirAsync(name, Perms.P0755, Ct); return 0; }
             catch (NinePException e) { return e.Error.Errno; }
         }
         int[] outcomes = await Task.WhenAll(Create(c, "x"), Create(d, "y"));
@@ -166,7 +166,7 @@ public sealed class JsonFsBoundaryTests
         await using ServerHarness h = await ServerHarness.StartAsync(filesystem: fs);
         await using NinePSession s = await h.ConnectAsync(dialect, o => o with { Msize = 4096 });
         byte[] text = Encoding.UTF8.GetBytes(string.Concat(Enumerable.Repeat("é世🚀", 3000)));
-        await using (NinePFid file = await s.CreateFileAsync("data", 0x1A4, Ct))
+        await using (NinePFid file = await s.CreateFileAsync("data", Perms.P0644, Ct))
         {
             await file.WriteAllAsync(text, Ct);
         }
@@ -199,13 +199,13 @@ public sealed class JsonFsBoundaryTests
         using JsonFilesystem fs = new(tree, writable: true);
         await using ServerHarness h = await ServerHarness.StartAsync(filesystem: fs);
         await using NinePSession s = await h.ConnectAsync(dialect);
-        await BoundaryTests.Error(Errno.ENOSPC, async () => await s.MkdirAsync("a/b/c", 0x1ED, Ct));
+        await BoundaryTests.Error(Errno.ENOSPC, async () => await s.MkdirAsync("a/b/c", Perms.P0755, Ct));
         if (dialect == Dialect.P9_2000_L)
         {
             await BoundaryTests.Error(Errno.ENOSPC, async () => await s.RenameAsync("move", "a/b/move", Ct));
         }
         Assert.Equal(before, Serialize(tree));
-        await s.MkdirAsync("a/allowed", 0x1ED, Ct);
+        await s.MkdirAsync("a/allowed", Perms.P0755, Ct);
         JsonTree reloaded = Parse(Encoding.UTF8.GetString(Serialize(tree)));
         Assert.NotNull(reloaded.Root.Find("a"));
     }
@@ -265,7 +265,7 @@ public sealed class JsonFsBoundaryTests
             {
                 foreach (string name in new[] { "%", "%25", "%2F", "%2E", "%2E%2E", "%252F" })
                 {
-                    await using NinePFid file = await s.CreateFileAsync(name, 0x1A4, Ct);
+                    await using NinePFid file = await s.CreateFileAsync(name, Perms.P0644, Ct);
                     await file.WriteAsync(0, Encoding.UTF8.GetBytes(name), Ct);
                 }
             }

@@ -232,7 +232,7 @@ internal static class EdgeScale
                 {
                     try
                     {
-                        await using NinePFid fid = await s.CreateFileAsync("e" + index.ToString("D7", CultureInfo.InvariantCulture), 0x1A4, ct);
+                        await using NinePFid fid = await s.CreateFileAsync("e" + index.ToString("D7", CultureInfo.InvariantCulture), Perms.P0644, ct);
                         return;
                     }
                     catch (NinePException failure) when (failure.Error.Errno == Errno.EAGAIN)

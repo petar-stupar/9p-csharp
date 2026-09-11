@@ -16,7 +16,7 @@ public sealed class ContentBoundaryTests
     [Fact]
     public async Task TheMemoryHandlerRejectsUnrepresentableUpdatesBeforeMutation()
     {
-        MemoryFile file = new("seed", 0x1B6, 1) { Data = "seed"u8.ToArray() };
+        MemoryFile file = new("seed", Perms.P0666, 1) { Data = "seed"u8.ToArray() };
         await using IOpenFile handle = await file.OpenAsync(OpenMode.ReadWrite, OpenFlags.None, Ct);
         foreach (ulong offset in new ulong[] { int.MaxValue, (ulong)int.MaxValue + 1, ulong.MaxValue })
         {
@@ -24,7 +24,7 @@ public sealed class ContentBoundaryTests
         }
         await BoundaryTests.Error(Errno.EFBIG, async () =>
             await file.SetAttrAsync(new SetAttr { Size = (ulong)int.MaxValue + 1, Perm = 0 }, Ct));
-        Assert.Equal(0x1B6u, file.Perm);
+        Assert.Equal(Perms.P0666, file.Perm);
         Assert.Equal("seed"u8.ToArray(), file.Data);
         Assert.Null(file.LastUpdate);
     }
@@ -65,11 +65,11 @@ public sealed class ContentBoundaryTests
     {
         await using ServerHarness h = await ServerHarness.StartAsync();
         MemoryFile file = (MemoryFile)h.Tree.Root.Children["hello.txt"];
-        file.Perm = 0x124;
+        file.Perm = Perms.P0444;
         await using NinePSession s = await h.ConnectAsync(dialect);
         await BoundaryTests.Error(Errno.EACCES, async () => await s.OpenFileAsync("hello.txt", OpenMode.Read, OpenFlags.Truncate, Ct));
         Assert.NotEmpty(file.Data);
-        file.Perm = 0x1B6;
+        file.Perm = Perms.P0666;
         await using NinePFid f = await s.OpenFileAsync("hello.txt", OpenMode.Read, OpenFlags.Truncate, Ct);
         Assert.Empty((await s.Messages.ReadAsync(new Tread(0, f.Fid, 0, 64), Ct)).Data.ToArray());
         await BoundaryTests.Error(Errno.EACCES, async () => await f.WriteAsync(0, new byte[1], Ct));
@@ -115,7 +115,7 @@ public sealed class ContentBoundaryTests
     {
         await using ServerHarness h = await ServerHarness.StartAsync();
         await using NinePSession s = await h.ConnectAsync(dialect);
-        await using (NinePFid created = await s.CreateFileAsync("empty", 0x1B6, Ct))
+        await using (NinePFid created = await s.CreateFileAsync("empty", Perms.P0666, Ct))
         {
             Assert.Equal(0ul, (await created.GetAttrAsync(Ct)).Size);
         }
@@ -203,7 +203,7 @@ public sealed class ContentBoundaryTests
         MemoryDirectory at = tree.Root;
         for (int i = 0; i < 16; i++)
         {
-            MemoryDirectory next = tree.NewDirectory("d", 0x1FF);
+            MemoryDirectory next = tree.NewDirectory("d", Perms.P0777);
             at.Add(next);
             at = next;
         }

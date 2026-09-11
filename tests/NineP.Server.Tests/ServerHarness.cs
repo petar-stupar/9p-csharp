@@ -101,10 +101,10 @@ internal sealed class ServerHarness : IAsyncDisposable
     /// <returns>The same tree.</returns>
     internal static MemoryFilesystem Populate(MemoryFilesystem tree)
     {
-        MemoryFile greeting = tree.NewFile("hello.txt", 0x1A4);
+        MemoryFile greeting = tree.NewFile("hello.txt", Perms.P0644);
         greeting.Data = "hello, 9P\n"u8.ToArray();
         tree.Root.Add(greeting);
-        tree.Root.Add(tree.NewDirectory("sub", 0x1ED));
+        tree.Root.Add(tree.NewDirectory("sub", Perms.P0755));
         return tree;
     }
 }

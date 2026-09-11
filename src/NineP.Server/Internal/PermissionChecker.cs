@@ -39,18 +39,19 @@ internal static class PermissionChecker
         ArgumentNullException.ThrowIfNull(attr);
         ArgumentNullException.ThrowIfNull(identity);
 
-        uint granted = (attr.Perm >> ShiftFor(attr, identity)) & 7;
+        uint perm = (uint)attr.Perm;
+        uint granted = (perm >> ShiftFor(attr, identity)) & 7;
         if (dialect == Dialect.P9_2000)
         {
             // Plan 9 considers every applicable class; Unix selects exactly one class.
-            granted = attr.Perm & 7;
+            granted = perm & 7;
             if (IsOwner(attr, identity))
             {
-                granted |= ((attr.Perm >> OwnerShift) | (attr.Perm >> GroupShift)) & 7;
+                granted |= ((perm >> OwnerShift) | (perm >> GroupShift)) & 7;
             }
             else if (ShiftFor(attr, identity) == GroupShift)
             {
-                granted |= (attr.Perm >> GroupShift) & 7;
+                granted |= (perm >> GroupShift) & 7;
             }
         }
         return ((uint)access & ~granted & 7) == 0;

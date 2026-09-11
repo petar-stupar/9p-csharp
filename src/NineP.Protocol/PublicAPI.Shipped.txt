@@ -33,7 +33,7 @@ NineP.Protocol.Attr.ModifierUid.get -> uint
 NineP.Protocol.Attr.ModifierUid.init -> void
 NineP.Protocol.Attr.NLink.get -> ulong
 NineP.Protocol.Attr.NLink.init -> void
-NineP.Protocol.Attr.Perm.get -> uint
+NineP.Protocol.Attr.Perm.get -> NineP.Protocol.FilePermissions
 NineP.Protocol.Attr.Perm.init -> void
 NineP.Protocol.Attr.Qid.get -> NineP.Protocol.Qid
 NineP.Protocol.Attr.Qid.init -> void
@@ -160,6 +160,33 @@ NineP.Protocol.FileKind.Fifo = 3 -> NineP.Protocol.FileKind
 NineP.Protocol.FileKind.File = 0 -> NineP.Protocol.FileKind
 NineP.Protocol.FileKind.Socket = 4 -> NineP.Protocol.FileKind
 NineP.Protocol.FileKind.Symlink = 2 -> NineP.Protocol.FileKind
+NineP.Protocol.FilePermissions
+NineP.Protocol.FilePermissions.AllExecute = NineP.Protocol.FilePermissions.OtherExecute | NineP.Protocol.FilePermissions.GroupExecute | NineP.Protocol.FilePermissions.OwnerExecute -> NineP.Protocol.FilePermissions
+NineP.Protocol.FilePermissions.AllRead = NineP.Protocol.FilePermissions.OtherRead | NineP.Protocol.FilePermissions.GroupRead | NineP.Protocol.FilePermissions.OwnerRead -> NineP.Protocol.FilePermissions
+NineP.Protocol.FilePermissions.AllWrite = NineP.Protocol.FilePermissions.OtherWrite | NineP.Protocol.FilePermissions.GroupWrite | NineP.Protocol.FilePermissions.OwnerWrite -> NineP.Protocol.FilePermissions
+NineP.Protocol.FilePermissions.GroupAll = NineP.Protocol.FilePermissions.GroupExecute | NineP.Protocol.FilePermissions.GroupReadWrite -> NineP.Protocol.FilePermissions
+NineP.Protocol.FilePermissions.GroupExecute = 8 -> NineP.Protocol.FilePermissions
+NineP.Protocol.FilePermissions.GroupRead = 32 -> NineP.Protocol.FilePermissions
+NineP.Protocol.FilePermissions.GroupReadExecute = NineP.Protocol.FilePermissions.GroupExecute | NineP.Protocol.FilePermissions.GroupRead -> NineP.Protocol.FilePermissions
+NineP.Protocol.FilePermissions.GroupReadWrite = NineP.Protocol.FilePermissions.GroupWrite | NineP.Protocol.FilePermissions.GroupRead -> NineP.Protocol.FilePermissions
+NineP.Protocol.FilePermissions.GroupWrite = 16 -> NineP.Protocol.FilePermissions
+NineP.Protocol.FilePermissions.Mask = NineP.Protocol.FilePermissions.OtherAll | NineP.Protocol.FilePermissions.GroupAll | NineP.Protocol.FilePermissions.OwnerAll | NineP.Protocol.FilePermissions.Sticky | NineP.Protocol.FilePermissions.SetGid | NineP.Protocol.FilePermissions.SetUid -> NineP.Protocol.FilePermissions
+NineP.Protocol.FilePermissions.None = 0 -> NineP.Protocol.FilePermissions
+NineP.Protocol.FilePermissions.OtherAll = NineP.Protocol.FilePermissions.OtherExecute | NineP.Protocol.FilePermissions.OtherReadWrite -> NineP.Protocol.FilePermissions
+NineP.Protocol.FilePermissions.OtherExecute = 1 -> NineP.Protocol.FilePermissions
+NineP.Protocol.FilePermissions.OtherRead = 4 -> NineP.Protocol.FilePermissions
+NineP.Protocol.FilePermissions.OtherReadExecute = NineP.Protocol.FilePermissions.OtherExecute | NineP.Protocol.FilePermissions.OtherRead -> NineP.Protocol.FilePermissions
+NineP.Protocol.FilePermissions.OtherReadWrite = NineP.Protocol.FilePermissions.OtherWrite | NineP.Protocol.FilePermissions.OtherRead -> NineP.Protocol.FilePermissions
+NineP.Protocol.FilePermissions.OtherWrite = 2 -> NineP.Protocol.FilePermissions
+NineP.Protocol.FilePermissions.OwnerAll = NineP.Protocol.FilePermissions.OwnerExecute | NineP.Protocol.FilePermissions.OwnerReadWrite -> NineP.Protocol.FilePermissions
+NineP.Protocol.FilePermissions.OwnerExecute = 64 -> NineP.Protocol.FilePermissions
+NineP.Protocol.FilePermissions.OwnerRead = 256 -> NineP.Protocol.FilePermissions
+NineP.Protocol.FilePermissions.OwnerReadExecute = NineP.Protocol.FilePermissions.OwnerExecute | NineP.Protocol.FilePermissions.OwnerRead -> NineP.Protocol.FilePermissions
+NineP.Protocol.FilePermissions.OwnerReadWrite = NineP.Protocol.FilePermissions.OwnerWrite | NineP.Protocol.FilePermissions.OwnerRead -> NineP.Protocol.FilePermissions
+NineP.Protocol.FilePermissions.OwnerWrite = 128 -> NineP.Protocol.FilePermissions
+NineP.Protocol.FilePermissions.SetGid = 1024 -> NineP.Protocol.FilePermissions
+NineP.Protocol.FilePermissions.SetUid = 2048 -> NineP.Protocol.FilePermissions
+NineP.Protocol.FilePermissions.Sticky = 512 -> NineP.Protocol.FilePermissions
 NineP.Protocol.Limits
 NineP.Protocol.Limits.<Clone>$() -> NineP.Protocol.Limits!
 NineP.Protocol.Limits.AuthFailureWindow.get -> System.TimeSpan
@@ -1240,7 +1267,7 @@ NineP.Protocol.SetAttr.MTimeToNow.get -> bool
 NineP.Protocol.SetAttr.MTimeToNow.init -> void
 NineP.Protocol.SetAttr.Name.get -> string?
 NineP.Protocol.SetAttr.Name.init -> void
-NineP.Protocol.SetAttr.Perm.get -> uint?
+NineP.Protocol.SetAttr.Perm.get -> NineP.Protocol.FilePermissions?
 NineP.Protocol.SetAttr.Perm.init -> void
 NineP.Protocol.SetAttr.SetAttr() -> void
 NineP.Protocol.SetAttr.Size.get -> ulong?

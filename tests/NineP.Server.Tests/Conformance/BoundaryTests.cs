@@ -104,9 +104,9 @@ public sealed class BoundaryTests
         await using NinePSession s = await h.ConnectAsync(dialect);
         await using NinePFid parent = await s.WalkAsync("/", Ct);
         Qid original = parent.Qid;
-        await Error(Errno.EEXIST, async () => await parent.CreateAsync("hello.txt", 0x1A4, OpenMode.Read, OpenFlags.None, Ct));
-        await Error(Errno.EEXIST, async () => await s.MkdirAsync("hello.txt", 0x1ED, Ct));
-        await Error(Errno.EEXIST, async () => await s.MkdirAsync("sub", 0x1ED, Ct));
+        await Error(Errno.EEXIST, async () => await parent.CreateAsync("hello.txt", FileKind.File, Perms.P0644, OpenMode.Read, OpenFlags.None, cancellationToken: Ct));
+        await Error(Errno.EEXIST, async () => await s.MkdirAsync("hello.txt", Perms.P0755, Ct));
+        await Error(Errno.EEXIST, async () => await s.MkdirAsync("sub", Perms.P0755, Ct));
         if (dialect == Dialect.P9_2000_L)
         {
             await Error(Errno.EEXIST, async () => await s.Messages.SymlinkAsync(new Tsymlink(0, parent.Fid, "hello.txt", "target", 1000), Ct));
@@ -116,7 +116,7 @@ public sealed class BoundaryTests
         }
         Assert.Equal(original, parent.Qid);
         Assert.Equal(2, (await s.ReadDirAsync("/", Ct)).Count);
-        await parent.CreateAsync("new", 0x1A4, OpenMode.Read, OpenFlags.None, Ct);
+        await parent.CreateAsync("new", FileKind.File, Perms.P0644, OpenMode.Read, OpenFlags.None, cancellationToken: Ct);
         Assert.NotEqual(original.Path, parent.Qid.Path);
         Assert.Equal(FileKind.File, (await parent.GetAttrAsync(Ct)).Kind);
     }
@@ -128,7 +128,7 @@ public sealed class BoundaryTests
         await using NinePSession s = await h.ConnectAsync(dialect, o => o with { Msize = 4096 });
         foreach (string name in new[] { new string('x', 254), new string('x', 255), new string('é', 127) + "x", string.Concat(Enumerable.Repeat("🚀", 63)) + "xyz" })
         {
-            await using (NinePFid file = await s.CreateFileAsync(name, 0x1A4, Ct))
+            await using (NinePFid file = await s.CreateFileAsync(name, Perms.P0644, Ct))
             {
                 Assert.Equal(1, await file.WriteAsync(0, "x"u8.ToArray(), Ct));
             }
@@ -137,7 +137,7 @@ public sealed class BoundaryTests
             Assert.Equal("x", Encoding.UTF8.GetString(await s.ReadFileAsync(name, Ct)));
             await s.RemoveAsync(name, Ct);
         }
-        await s.MkdirAsync("é", 0x1ED, Ct);
+        await s.MkdirAsync("é", Perms.P0755, Ct);
         await Error(Errno.ENOENT, async () => await s.GetAttrAsync("e\u0301", Ct));
         Assert.Single(await s.ReadDirAsync("/", Ct), e => e.Name == "é");
     }
@@ -151,7 +151,7 @@ public sealed class BoundaryTests
         await using NinePFid stale = await a.OpenFileAsync("hello.txt", OpenMode.ReadWrite, OpenFlags.None, Ct);
         await using NinePFid unopened = await a.WalkAsync("hello.txt", Ct);
         await b.RemoveAsync("hello.txt", Ct);
-        await using (NinePFid replacement = await b.CreateFileAsync("hello.txt", 0x1B6, Ct))
+        await using (NinePFid replacement = await b.CreateFileAsync("hello.txt", Perms.P0666, Ct))
         {
             await replacement.WriteAsync(0, "replacement"u8.ToArray(), Ct);
             Assert.NotEqual(stale.Qid.Path, replacement.Qid.Path);
@@ -216,9 +216,9 @@ public sealed class BoundaryTests
             string component = new('x', 255);
             for (int i = 0; i < length; i++)
             {
-                parent = parent.Add(tree.NewDirectory(component, 0x1FF));
+                parent = parent.Add(tree.NewDirectory(component, Perms.P0777));
             }
-            parent.Add(tree.NewFile("leaf", 0x1A4));
+            parent.Add(tree.NewFile("leaf", Perms.P0644));
             await using ServerHarness h = await ServerHarness.StartAsync(tree: tree);
             await using NinePSession s = await h.ConnectAsync(dialect, o => o with { Msize = 4096 });
             string path = string.Join('/', Enumerable.Repeat(component, length));
@@ -278,8 +278,8 @@ public sealed class BoundaryTests
     {
         MemoryFilesystem tree = new();
         string name = string.Concat(Enumerable.Repeat("🚀", 63)) + "abc";
-        tree.Root.Add(tree.NewFile(name, 0x1A4));
-        tree.Root.Add(tree.NewFile("second", 0x1A4));
+        tree.Root.Add(tree.NewFile(name, Perms.P0644));
+        tree.Root.Add(tree.NewFile("second", Perms.P0644));
         await using ServerHarness h = await ServerHarness.StartAsync(tree: tree);
         await using NinePSession s = await h.ConnectAsync(dialect);
         await using NinePFid fid = await s.OpenFileAsync("/", OpenMode.Read, OpenFlags.None, Ct);
@@ -312,12 +312,12 @@ public sealed class BoundaryTests
         tree.Root.Capacity = 1;
         await using ServerHarness h = await ServerHarness.StartAsync(tree: tree);
         await using NinePSession s = await h.ConnectAsync(dialect);
-        await s.MkdirAsync("one", 0x1ED, Ct);
+        await s.MkdirAsync("one", Perms.P0755, Ct);
         await using NinePFid parent = await s.WalkAsync("/", Ct);
-        await Error(Errno.ENOSPC, async () => await parent.CreateAsync("two", 0x1A4, OpenMode.Read, OpenFlags.None, Ct));
+        await Error(Errno.ENOSPC, async () => await parent.CreateAsync("two", FileKind.File, Perms.P0644, OpenMode.Read, OpenFlags.None, cancellationToken: Ct));
         Assert.Equal(FileKind.Directory, (await parent.GetAttrAsync(Ct)).Kind);
         await s.RemoveAsync("one", Ct);
-        await parent.CreateAsync("two", 0x1A4, OpenMode.Read, OpenFlags.None, Ct);
+        await parent.CreateAsync("two", FileKind.File, Perms.P0644, OpenMode.Read, OpenFlags.None, cancellationToken: Ct);
         Assert.Equal("two", Assert.Single(await s.ReadDirAsync("/", Ct)).Name);
     }
 
@@ -331,7 +331,7 @@ public sealed class BoundaryTests
         async Task<int> Create(NinePSession s)
         {
             await start.Task;
-            try { await s.MkdirAsync("same", 0x1ED, Ct); return 0; }
+            try { await s.MkdirAsync("same", Perms.P0755, Ct); return 0; }
             catch (NinePException error) { return error.Error.Errno; }
         }
         Task<int> first = Create(a);

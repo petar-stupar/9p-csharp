@@ -67,7 +67,7 @@ NineP.Client.INinePMessages.XattrwalkAsync(NineP.Protocol.Messages.Txattrwalk re
 NineP.Client.NinePClient
 NineP.Client.NinePFid
 NineP.Client.NinePFid.CloneAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Client.NinePFid!>
-NineP.Client.NinePFid.CreateAsync(string! name, uint perm, NineP.Protocol.OpenMode mode, NineP.Protocol.OpenFlags flags = NineP.Protocol.OpenFlags.None, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask
+NineP.Client.NinePFid.CreateAsync(string! name, NineP.Protocol.FileKind kind, NineP.Protocol.FilePermissions perm, NineP.Protocol.OpenMode mode, NineP.Protocol.OpenFlags flags = NineP.Protocol.OpenFlags.None, NineP.Protocol.FileFlags fileFlags = NineP.Protocol.FileFlags.None, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask
 NineP.Client.NinePFid.DisposeAsync() -> System.Threading.Tasks.ValueTask
 NineP.Client.NinePFid.Fid.get -> uint
 NineP.Client.NinePFid.FsyncAsync(bool dataOnly = false, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask
@@ -91,13 +91,13 @@ NineP.Client.NinePFid.WriteAsync(ulong offset, System.ReadOnlyMemory<byte> data,
 NineP.Client.NinePSession
 NineP.Client.NinePSession.AttachAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Client.NinePFid!>
 NineP.Client.NinePSession.AttachAsync(string! uname, string! aname, NineP.Protocol.Auth.ICredential? credential = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Client.NinePFid!>
-NineP.Client.NinePSession.CreateFileAsync(string! path, uint perm = 420, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Client.NinePFid!>
+NineP.Client.NinePSession.CreateFileAsync(string! path, NineP.Protocol.FilePermissions perm = NineP.Protocol.FilePermissions.OtherRead | NineP.Protocol.FilePermissions.GroupRead | NineP.Protocol.FilePermissions.OwnerReadWrite, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Client.NinePFid!>
 NineP.Client.NinePSession.Dialect.get -> NineP.Protocol.Dialect
 NineP.Client.NinePSession.DisposeAsync() -> System.Threading.Tasks.ValueTask
 NineP.Client.NinePSession.GetAttrAsync(string! path, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Protocol.Attr!>
 NineP.Client.NinePSession.MaxPayload.get -> int
 NineP.Client.NinePSession.Messages.get -> NineP.Client.INinePMessages!
-NineP.Client.NinePSession.MkdirAsync(string! path, uint perm = 493, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask
+NineP.Client.NinePSession.MkdirAsync(string! path, NineP.Protocol.FilePermissions perm = NineP.Protocol.FilePermissions.OtherReadExecute | NineP.Protocol.FilePermissions.GroupReadExecute | NineP.Protocol.FilePermissions.OwnerAll, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask
 NineP.Client.NinePSession.Msize.get -> uint
 NineP.Client.NinePSession.OpenFileAsync(string! path, NineP.Protocol.OpenMode mode, NineP.Protocol.OpenFlags flags = NineP.Protocol.OpenFlags.None, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<NineP.Client.NinePFid!>
 NineP.Client.NinePSession.ReadDirAsync(string! path, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<System.Collections.Generic.IReadOnlyList<NineP.Protocol.DirEntry>!>

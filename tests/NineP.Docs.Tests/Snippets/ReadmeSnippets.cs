@@ -85,7 +85,14 @@ sealed class HelloFilesystem : IFilesystem, IDirectoryHandler
         ValueTask.FromResult<IDirectoryHandler>(this);
 
     public ValueTask<Attr> GetAttrAsync(CancellationToken cancellationToken = default) =>
-        ValueTask.FromResult(new Attr { Qid = Qid, Kind = FileKind.Directory, Perm = 0x1ED });
+        ValueTask.FromResult(new Attr
+        {
+            Qid = Qid,
+            Kind = FileKind.Directory,
+            Perm = FilePermissions.OwnerAll                  // 0755
+                 | FilePermissions.GroupReadExecute
+                 | FilePermissions.OtherReadExecute,
+        });
 
     public ValueTask<IHandler?> LookupAsync(string name, CancellationToken cancellationToken = default) =>
         ValueTask.FromResult<IHandler?>(name == "hello.txt" ? File : null);
@@ -127,7 +134,7 @@ sealed class HelloFile(byte[] contents) : IFileHandler, IOpenFile
         {
             Qid = Qid,
             Kind = FileKind.File,
-            Perm = 0x124,
+            Perm = FilePermissions.AllRead,                  // 0444
             Size = (ulong)contents.Length,
         });
 

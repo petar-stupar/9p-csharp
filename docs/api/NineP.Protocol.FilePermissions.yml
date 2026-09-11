@@ -1,0 +1,185 @@
+### YamlMime:ApiPage
+title: Enum FilePermissions
+body:
+- api1: Enum FilePermissions
+  id: NineP_Protocol_FilePermissions
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/FilePermissions.cs#L15
+  metadata:
+    uid: NineP.Protocol.FilePermissions
+    commentId: T:NineP.Protocol.FilePermissions
+- facts:
+  - name: Namespace
+    value:
+      text: NineP.Protocol
+      url: NineP.Protocol.html
+  - name: Assembly
+    value: NineP.Protocol.dll
+- markdown: >-
+    The permission bits of a file: the <code>0777</code> rwx triples plus setuid, setgid and sticky, the
+
+    <code>07777</code> mask reference §4.7 fixes. These are the low bits of a 9P2000 stat record's
+
+    <code>mode</code>, of <code>Tcreate.perm</code> and of a POSIX mode word alike; the non-permission mode
+
+    bits live in <xref href="NineP.Protocol.FileFlags" data-throw-if-not-resolved="false"></xref> and the file type in <xref href="NineP.Protocol.FileKind" data-throw-if-not-resolved="false"></xref>, so no one
+
+    type mixes the three vocabularies.
+- code: >-
+    [Flags]
+
+    public enum FilePermissions : uint
+- h2: Fields
+- parameters:
+  - name: AllExecute
+    default: "73"
+    description: >+
+      Everyone may execute the file, or walk into the directory (<code>0111</code>).
+
+  - name: AllRead
+    default: "292"
+    description: >+
+      Everyone may read (<code>0444</code>).
+
+  - name: AllWrite
+    default: "146"
+    description: >+
+      Everyone may write (<code>0222</code>).
+
+  - name: GroupAll
+    default: "56"
+    description: >+
+      The group may read, write and execute or walk (<code>0070</code>).
+
+  - name: GroupExecute
+    default: "8"
+    description: >+
+      The group may execute the file, or walk into the directory (<code>0010</code>).
+
+  - name: GroupRead
+    default: "32"
+    description: >+
+      The group may read the file, or read the directory (<code>0040</code>).
+
+  - name: GroupReadExecute
+    default: "40"
+    description: >+
+      The group may read and execute or walk (<code>0050</code>).
+
+  - name: GroupReadWrite
+    default: "48"
+    description: >+
+      The group may read and write (<code>0060</code>).
+
+  - name: GroupWrite
+    default: "16"
+    description: >+
+      The group may write the file (<code>0020</code>).
+
+  - name: Mask
+    default: "4095"
+    description: >+
+      Every permission bit this type names: the <code>07777</code> mask. A value outside it is not a
+
+      permission, and the projection masks it away rather than putting it on the wire.
+
+  - name: None
+    default: "0"
+    description: >+
+      No permission at all (<code>0000</code>).
+
+  - name: OtherAll
+    default: "7"
+    description: >+
+      Anyone may read, write and execute or walk (<code>0007</code>).
+
+  - name: OtherExecute
+    default: "1"
+    description: >+
+      Anyone may execute the file, or walk into the directory (<code>0001</code>).
+
+  - name: OtherRead
+    default: "4"
+    description: >+
+      Anyone may read the file, or read the directory (<code>0004</code>).
+
+  - name: OtherReadExecute
+    default: "5"
+    description: >+
+      Anyone may read and execute or walk (<code>0005</code>).
+
+  - name: OtherReadWrite
+    default: "6"
+    description: >+
+      Anyone may read and write (<code>0006</code>).
+
+  - name: OtherWrite
+    default: "2"
+    description: >+
+      Anyone may write the file (<code>0002</code>).
+
+  - name: OwnerAll
+    default: "448"
+    description: >+
+      The owner may read, write and execute or walk (<code>0700</code>).
+
+  - name: OwnerExecute
+    default: "64"
+    description: >+
+      The owner may execute the file, or walk into the directory (<code>0100</code>).
+
+  - name: OwnerRead
+    default: "256"
+    description: >+
+      The owner may read the file, or read the directory (<code>0400</code>).
+
+  - name: OwnerReadExecute
+    default: "320"
+    description: >+
+      The owner may read and execute or walk (<code>0500</code>).
+
+  - name: OwnerReadWrite
+    default: "384"
+    description: >+
+      The owner may read and write (<code>0600</code>).
+
+  - name: OwnerWrite
+    default: "128"
+    description: >+
+      The owner may write the file (<code>0200</code>).
+
+  - name: SetGid
+    default: "1024"
+    description: >+
+      Set-group-id on execution (<code>02000</code>); .u and .L only.
+
+  - name: SetUid
+    default: "2048"
+    description: >+
+      Set-user-id on execution (<code>04000</code>); .u and .L only.
+
+  - name: Sticky
+    default: "512"
+    description: >+
+      The sticky bit (<code>01000</code>): on a directory, only a file's owner may remove it. 9P2000
+
+      has no spelling for it; the projection carries it in .u and .L only (reference §4.4).
+
+- h2: Remarks
+- markdown: >-
+    The reference writes these in octal, which C# cannot spell as a literal — <code>0755</code> has to be
+
+    written <code>0x1ED</code> — so every value is named here instead. The numeric values are the POSIX
+
+    ones, so a cast to <xref href="System.UInt32" data-throw-if-not-resolved="false"></xref> is the wire value and nothing else.
+languageId: csharp
+metadata:
+  description: >-
+    The permission bits of a file: the 0777 rwx triples plus setuid, setgid and sticky, the
+
+    07777 mask reference §4.7 fixes. These are the low bits of a 9P2000 stat record's
+
+    mode, of Tcreate.perm and of a POSIX mode word alike; the non-permission mode
+
+    bits live in  and the file type in , so no one
+
+    type mixes the three vocabularies.

@@ -9,10 +9,10 @@ namespace NineP.TodoFs;
 internal abstract class TodoNode : IHandler
 {
     /// <summary>Permission bits every file in the tree reports.</summary>
-    protected const uint FilePerm = 0x1A4;
+    protected const FilePermissions FilePerm = FilePermissions.OwnerReadWrite | FilePermissions.GroupRead | FilePermissions.OtherRead;
 
     /// <summary>Permission bits every directory in the tree reports.</summary>
-    protected const uint DirectoryPerm = 0x1ED;
+    protected const FilePermissions DirectoryPerm = FilePermissions.OwnerAll | FilePermissions.GroupReadExecute | FilePermissions.OtherReadExecute;
 
     /// <summary>Creates a node of one attach's tree.</summary>
     /// <param name="session">The attach's state.</param>

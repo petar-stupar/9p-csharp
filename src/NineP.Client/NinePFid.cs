@@ -242,42 +242,65 @@ public sealed class NinePFid : IAsyncDisposable
 
     /// <summary>Creates a file in this directory fid; the fid then refers to the new, open file.</summary>
     /// <param name="name">The name to create.</param>
-    /// <param name="perm">
-    /// The permission bits. In 9P2000 and .u the word is <c>Tcreate.perm</c>: <c>DMDIR</c> creates
-    /// a directory, and <c>DMAPPEND</c>, <c>DMEXCL</c> and <c>DMTMP</c> make the file append-only,
-    /// exclusive-use or temporary (open(2)). In .L only the <c>07777</c> bits have a spelling, so
-    /// any other bit is refused before the <c>Tlcreate</c> is built (reference §8 rules 15 and 19).
+    /// <param name="kind">
+    /// What to create: <see cref="FileKind.File"/> or <see cref="FileKind.Directory"/>. A
+    /// symlink is <c>SymlinkAsync</c> and a device is <c>Tmknod</c>; both carry a payload
+    /// <c>Tcreate</c> has no room for here, so asking for one is refused rather than sent as a
+    /// create with the payload missing (reference §8 rule 15).
     /// </param>
+    /// <param name="perm">The permission bits; the <c>07777</c> mask and nothing else.</param>
     /// <param name="mode">The access mode the new fid is opened with.</param>
     /// <param name="flags">Flags accompanying the create.</param>
+    /// <param name="fileFlags">
+    /// The file flags the new file is to carry: <see cref="FileFlags.Append"/>,
+    /// <see cref="FileFlags.Exclusive"/> and <see cref="FileFlags.Temporary"/> are the settable
+    /// ones (open(2); reference §8 rule 19). 9P2000 and .u spell them in <c>Tcreate.perm</c>;
+    /// .L has no spelling at all, so a .L create that asks for one is refused.
+    /// </param>
     /// <param name="cancellationToken">Cancels the create.</param>
     /// <returns>A task that completes once the fid names the new file.</returns>
-    /// <exception cref="NinePException">The server refused the create.</exception>
+    /// <exception cref="NinePException">The server refused the create, or the dialect cannot carry what was asked for.</exception>
     public async ValueTask CreateAsync(
         string name,
-        uint perm,
+        FileKind kind,
+        FilePermissions perm,
         OpenMode mode,
         OpenFlags flags = OpenFlags.None,
+        FileFlags fileFlags = FileFlags.None,
         CancellationToken cancellationToken = default)
     {
         using OperationLease operation = AcquireOperation();
         RequireName(name);
+        RequireCreatable(kind);
+        RequirePermissions(perm);
+        RequireSettableFlags(fileFlags);
 
         if (_session.Dialect == Dialect.P9_2000_L)
         {
-            // Tlcreate.mode is a POSIX mode word: DMDIR is Tmkdir's job, and the file flags
-            // have no .L spelling at all. The server would mask them off and answer Rlcreate
-            // for a plain file, which is the silent success rule 19 forbids.
-            if ((perm & ~ModeBits.FullPermissions) != 0)
+            // Tlcreate.mode is a POSIX mode word for a plain file: a directory is Tmkdir's job,
+            // and the file flags have no .L spelling at all. The server would mask them off and
+            // answer Rlcreate for a plain file, which is the silent success rule 19 forbids.
+            if (kind == FileKind.Directory)
             {
                 throw new NinePException(new NinePError(
-                    "9P2000.L creates carry only the permission bits; DMDIR is Tmkdir, and DMAPPEND, DMEXCL and DMTMP have no .L spelling",
+                    "9P2000.L creates a directory with Tmkdir, not Tlcreate; use MkdirAsync",
                     (int)Errno.EOPNOTSUPP));
+            }
+
+            if (fileFlags != FileFlags.None)
+            {
+                throw new NinePException(new NinePError(
+                    "9P2000.L has no spelling for DMAPPEND, DMEXCL or DMTMP", (int)Errno.EOPNOTSUPP));
             }
 
             Rlcreate linux = await _session.Messages
                 .LcreateAsync(new Tlcreate(
-                    0, Fid, name, ModeBits.ToLinuxFlags(mode, flags), perm, _session.Options.NUname), cancellationToken)
+                    0,
+                    Fid,
+                    name,
+                    ModeBits.ToLinuxFlags(mode, flags),
+                    (uint)perm,
+                    _session.Options.NUname), cancellationToken)
                 .ConfigureAwait(false);
 
             MarkOpened(linux.Qid, linux.Iounit, flags);
@@ -289,7 +312,7 @@ public sealed class NinePFid : IAsyncDisposable
                 0,
                 Fid,
                 name,
-                perm,
+                CreatePerm(kind, perm, fileFlags),
                 ModeBits.ToOpenByte(mode, flags),
                 _session.Dialect == Dialect.P9_2000_u ? string.Empty : null), cancellationToken)
             .ConfigureAwait(false);
@@ -737,6 +760,66 @@ public sealed class NinePFid : IAsyncDisposable
                 string.Format(CultureInfo.InvariantCulture, "'{0}' is not a legal name", UntrustedText.Sanitize(name)));
         }
     }
+
+    /// <summary>
+    /// Refuses a create of something <c>Tcreate</c> cannot carry here. A symlink's target and a
+    /// device's numbers travel in the <c>.u</c> extension field, which this create does not send,
+    /// so asking for one is refused rather than sent with the payload missing (reference §8
+    /// rule 15).
+    /// </summary>
+    /// <param name="kind">What the caller asked to create.</param>
+    /// <exception cref="NinePException">The kind is neither a regular file nor a directory.</exception>
+    private static void RequireCreatable(FileKind kind)
+    {
+        if (kind is not (FileKind.File or FileKind.Directory))
+        {
+            throw new NinePException(new NinePError(
+                "a create through a fid makes a regular file or a directory; a symlink is SymlinkAsync and a device is MknodAsync",
+                (int)Errno.EOPNOTSUPP));
+        }
+    }
+
+    /// <summary>
+    /// Refuses a permission value carrying a bit outside the <c>07777</c> mask, which can only
+    /// reach here through a cast. Masking it away would answer success for a create the caller
+    /// did not ask for.
+    /// </summary>
+    /// <param name="perm">The permission value.</param>
+    /// <exception cref="NinePException">The value carries a bit that is not a permission.</exception>
+    private static void RequirePermissions(FilePermissions perm)
+    {
+        if ((perm & ~FilePermissions.Mask) != FilePermissions.None)
+        {
+            throw new NinePException(new NinePError(
+                "a create carries the 07777 permission bits and nothing else", (int)Errno.EINVAL));
+        }
+    }
+
+    /// <summary>
+    /// Refuses <see cref="FileFlags.Auth"/> or <see cref="FileFlags.Mount"/> on a create: those
+    /// are the server's own and stat(5) lets a client set only the other three (reference §8
+    /// rule 19).
+    /// </summary>
+    /// <param name="fileFlags">The flags asked for.</param>
+    /// <exception cref="NinePException">A server-owned flag was asked for.</exception>
+    private static void RequireSettableFlags(FileFlags fileFlags)
+    {
+        if ((fileFlags & ~AttrProjector.SettableFlags) != FileFlags.None)
+        {
+            throw new NinePException(new NinePError(
+                "a create cannot ask for DMAUTH or DMMOUNT", (int)Errno.EPERM));
+        }
+    }
+
+    /// <summary>The <c>Tcreate.perm</c> word: the permission bits, DMDIR, and the file flags.</summary>
+    /// <param name="kind">What is being created.</param>
+    /// <param name="perm">The permission bits.</param>
+    /// <param name="fileFlags">The file flags the new file is to carry.</param>
+    /// <returns>The word to send.</returns>
+    private static uint CreatePerm(FileKind kind, FilePermissions perm, FileFlags fileFlags) =>
+        (uint)perm
+        | (kind == FileKind.Directory ? ModeBits.DMDIR : 0)
+        | AttrProjector.HighFlagBits(fileFlags);
 
     private static Qid Landing(in Rwalk reply, string[] step, Qid current)
     {

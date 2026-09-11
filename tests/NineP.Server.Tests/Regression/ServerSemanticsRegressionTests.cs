@@ -19,8 +19,8 @@ public sealed class ServerSemanticsRegressionTests
     public async Task SeparateDotDotWalksReachTheRealRoot()
     {
         MemoryFilesystem tree = new();
-        MemoryDirectory a = tree.NewDirectory("a", 0x1FF);
-        MemoryDirectory b = tree.NewDirectory("b", 0x1FF);
+        MemoryDirectory a = tree.NewDirectory("a", Perms.P0777);
+        MemoryDirectory b = tree.NewDirectory("b", Perms.P0777);
         tree.Root.Add(a);
         a.Add(b);
         await using ServerHarness harness = await ServerHarness.StartAsync(tree: tree);
@@ -62,7 +62,7 @@ public sealed class ServerSemanticsRegressionTests
     public async Task VersionResetRemovesOrcloseFiles()
     {
         MemoryFilesystem tree = new();
-        tree.Root.Add(tree.NewFile("scratch", 0x1B6));
+        tree.Root.Add(tree.NewFile("scratch", Perms.P0666));
         await using ServerHarness harness = await ServerHarness.StartAsync(tree: tree);
         await using WireClient client = await WireClient.ConnectAsync(harness, Dialect.P9_2000, 8192, Ct);
         await client.AttachAsync(1, Ct);
@@ -79,7 +79,7 @@ public sealed class ServerSemanticsRegressionTests
     public async Task VersionResetReleasesExclusiveOpen()
     {
         MemoryFilesystem tree = new();
-        MemoryFile file = tree.NewFile("exclusive", 0x1B6);
+        MemoryFile file = tree.NewFile("exclusive", Perms.P0666);
         file.Exclusive = true;
         tree.Root.Add(file);
         await using ServerHarness harness = await ServerHarness.StartAsync(tree: tree);
@@ -100,7 +100,7 @@ public sealed class ServerSemanticsRegressionTests
     public async Task PlainPlan9OwnerCanUseOtherReadPermission()
     {
         MemoryFilesystem tree = new();
-        tree.Root.Add(tree.NewFile("readable", 4));
+        tree.Root.Add(tree.NewFile("readable", FilePermissions.OtherRead));
         await using ServerHarness harness = await ServerHarness.StartAsync(tree: tree);
         await using NinePSession session = await harness.ConnectAsync(Dialect.P9_2000);
         await using NinePFid opened = await session.OpenFileAsync("readable", OpenMode.Read, OpenFlags.None, Ct);
@@ -145,7 +145,7 @@ public sealed class ServerSemanticsRegressionTests
     public async Task ClunkDoesNotDisposeAnInFlightRead()
     {
         MemoryFilesystem tree = new();
-        MemoryFile file = tree.NewFile("gated", 0x1B6);
+        MemoryFile file = tree.NewFile("gated", Perms.P0666);
         file.Data = "data"u8.ToArray();
         file.ReadGate = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         tree.Root.Add(file);
@@ -182,9 +182,9 @@ public sealed class ServerSemanticsRegressionTests
     }
 
     private sealed class AppendFile(ulong path)
-        : MemoryNode("append", FileKind.File, 0x1B6, path), IFileHandler
+        : MemoryNode("append", FileKind.File, Perms.P0666, path), IFileHandler
     {
-        public MemoryFile Backing { get; } = new("append", 0x1B6, path) { Data = "data"u8.ToArray() };
+        public MemoryFile Backing { get; } = new("append", Perms.P0666, path) { Data = "data"u8.ToArray() };
 
         Qid IHandler.Qid => Backing.Qid with { Type = QidType.QTAPPEND };
 

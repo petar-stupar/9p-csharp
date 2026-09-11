@@ -62,6 +62,8 @@
     href: NineP.Protocol.FileFlags.yml
   - name: FileKind
     href: NineP.Protocol.FileKind.yml
+  - name: FilePermissions
+    href: NineP.Protocol.FilePermissions.yml
   - name: LockFlags
     href: NineP.Protocol.LockFlags.yml
   - name: LockStatus

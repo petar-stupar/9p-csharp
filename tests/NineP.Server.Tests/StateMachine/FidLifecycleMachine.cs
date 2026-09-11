@@ -36,10 +36,10 @@ public sealed class FidLifecycleMachine
     private static async Task ExecuteAsync(Dialect dialect, IReadOnlyList<uint> commands)
     {
         MemoryFilesystem tree = new();
-        MemoryFile seed = tree.NewFile("seed", 0x1B6);
+        MemoryFile seed = tree.NewFile("seed", Perms.P0666);
         seed.Data = "abc"u8.ToArray();
         tree.Root.Add(seed);
-        tree.Root.Add(tree.NewDirectory("sub", 0x1FF));
+        tree.Root.Add(tree.NewDirectory("sub", Perms.P0777));
         Node root = new("/", true);
         Dictionary<string, Node> names = new(StringComparer.Ordinal)
         {

@@ -222,7 +222,7 @@ internal static class CliCommands
                 "kind={0} size={1} perm={2} qid={3}.{4}.{5}",
                 KindOf(attr.Kind),
                 attr.Size,
-                Convert.ToString(attr.Perm & 0xFFF, 8),
+                Convert.ToString((long)(attr.Perm & FilePermissions.Mask), 8),
                 (byte)attr.Qid.Type,
                 attr.Qid.Version,
                 attr.Qid.Path),

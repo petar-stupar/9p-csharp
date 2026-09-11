@@ -14,8 +14,8 @@ namespace NineP.JsonFs;
 /// </summary>
 internal sealed class JsonFilesystem : IFilesystem, IDisposable
 {
-    private const uint FilePerm = 0x1A4;
-    private const uint DirectoryPerm = 0x1ED;
+    private const FilePermissions FilePerm = FilePermissions.OwnerReadWrite | FilePermissions.GroupRead | FilePermissions.OtherRead;
+    private const FilePermissions DirectoryPerm = FilePermissions.OwnerAll | FilePermissions.GroupReadExecute | FilePermissions.OtherReadExecute;
 
     internal JsonFsMutator Persistence => _mutator;
 

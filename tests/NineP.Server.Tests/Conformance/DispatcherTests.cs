@@ -240,10 +240,10 @@ public sealed class DispatcherTests
     private static MemoryFilesystem Populated()
     {
         MemoryFilesystem tree = new();
-        MemoryFile greeting = tree.NewFile("hello.txt", 0x1B6);
+        MemoryFile greeting = tree.NewFile("hello.txt", Perms.P0666);
         greeting.Data = "hello, 9P\n"u8.ToArray();
         tree.Root.Add(greeting);
-        tree.Root.Add(tree.NewDirectory("sub", 0x1FF));
+        tree.Root.Add(tree.NewDirectory("sub", Perms.P0777));
         return tree;
     }
 }

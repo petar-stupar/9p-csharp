@@ -20,6 +20,14 @@ namespace NineP.Client;
 /// </summary>
 public sealed class NinePSession : IAsyncDisposable
 {
+    /// <summary>The default permission of a directory <see cref="MkdirAsync"/> creates: <c>0755</c>.</summary>
+    private const FilePermissions DefaultDirectoryPermissions =
+        FilePermissions.OwnerAll | FilePermissions.GroupReadExecute | FilePermissions.OtherReadExecute;
+
+    /// <summary>The default permission of a file <see cref="CreateFileAsync"/> creates: <c>0644</c>.</summary>
+    private const FilePermissions DefaultFilePermissions =
+        FilePermissions.OwnerReadWrite | FilePermissions.GroupRead | FilePermissions.OtherRead;
+
     private readonly TagMultiplexer _multiplexer;
     private readonly INinePConnection _connection;
     private readonly ClientOptions _options;
@@ -229,11 +237,13 @@ public sealed class NinePSession : IAsyncDisposable
 
     /// <summary>Creates a directory.</summary>
     /// <param name="path">The directory to create; its parent must exist.</param>
-    /// <param name="perm">The permission bits.</param>
+    /// <param name="perm">The permission bits; 0755 by default.</param>
     /// <param name="cancellationToken">Cancels the request.</param>
     /// <returns>A task that completes when the directory exists.</returns>
     public async ValueTask MkdirAsync(
-        string path, uint perm = 0x1ED, CancellationToken cancellationToken = default)
+        string path,
+        FilePermissions perm = DefaultDirectoryPermissions,
+        CancellationToken cancellationToken = default)
     {
         (string[] parent, string name) = SplitParent(path);
         NinePFid directory = await Root.WalkAsync(parent, cancellationToken).ConfigureAwait(false);
@@ -243,7 +253,7 @@ public sealed class NinePSession : IAsyncDisposable
             if (Dialect == Dialect.P9_2000_L)
             {
                 await Messages
-                    .MkdirAsync(new Tmkdir(0, directory.Fid, name, perm, _options.NUname), cancellationToken)
+                    .MkdirAsync(new Tmkdir(0, directory.Fid, name, (uint)perm, _options.NUname), cancellationToken)
                     .ConfigureAwait(false);
                 return;
             }
@@ -251,18 +261,27 @@ public sealed class NinePSession : IAsyncDisposable
             // 9P2000 and .u have no Tmkdir: DMDIR in the create permission is what makes a
             // directory, and open(5) then requires the mode to be OREAD.
             await directory
-                .CreateAsync(name, perm | 0x80000000u, OpenMode.Read, OpenFlags.None, cancellationToken)
+                .CreateAsync(
+                    name,
+                    FileKind.Directory,
+                    perm,
+                    OpenMode.Read,
+                    OpenFlags.None,
+                    FileFlags.None,
+                    cancellationToken)
                 .ConfigureAwait(false);
         }
     }
 
     /// <summary>Creates an empty regular file and returns it open for writing.</summary>
     /// <param name="path">The file to create; its parent must exist.</param>
-    /// <param name="perm">The permission bits.</param>
+    /// <param name="perm">The permission bits; 0644 by default.</param>
     /// <param name="cancellationToken">Cancels the request.</param>
     /// <returns>The new file, open for writing; the caller disposes it.</returns>
     public async ValueTask<NinePFid> CreateFileAsync(
-        string path, uint perm = 0x1A4, CancellationToken cancellationToken = default)
+        string path,
+        FilePermissions perm = DefaultFilePermissions,
+        CancellationToken cancellationToken = default)
     {
         (string[] parent, string name) = SplitParent(path);
         NinePFid fid = await Root.WalkAsync(parent, cancellationToken).ConfigureAwait(false);
@@ -271,7 +290,14 @@ public sealed class NinePSession : IAsyncDisposable
         {
             // Tcreate turns the directory fid into the new, open file, so the walk above is
             // already the fid the caller gets back.
-            await fid.CreateAsync(name, perm, OpenMode.Write, OpenFlags.None, cancellationToken)
+            await fid.CreateAsync(
+                    name,
+                    FileKind.File,
+                    perm,
+                    OpenMode.Write,
+                    OpenFlags.None,
+                    FileFlags.None,
+                    cancellationToken)
                 .ConfigureAwait(false);
             return fid;
         }

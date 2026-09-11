@@ -175,7 +175,7 @@ public sealed class BackpressureTests
         int general, int listener)
     {
         MemoryFilesystem tree = new();
-        MemoryFile gated = tree.NewFile("slow", 0x1A4);
+        MemoryFile gated = tree.NewFile("slow", Perms.P0644);
         gated.Data = "content"u8.ToArray();
         gated.ReadGate = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         tree.Root.Add(gated);

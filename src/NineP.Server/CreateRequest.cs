@@ -16,7 +16,7 @@ public sealed record CreateRequest
     public required FileKind Kind { get; init; }
 
     /// <summary>Permission bits after the core applied the parent mask and the 07777 mask.</summary>
-    public required uint Perm { get; init; }
+    public required FilePermissions Perm { get; init; }
 
     /// <summary>The access mode the new file is opened with; Read for a directory.</summary>
     public OpenMode Mode { get; init; }

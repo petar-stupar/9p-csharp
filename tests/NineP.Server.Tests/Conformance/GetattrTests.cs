@@ -28,7 +28,7 @@ public sealed class GetattrTests
     public async Task FieldsTheHandlerLeftZeroAreNotMarkedValid()
     {
         MemoryFilesystem tree = new();
-        tree.Root.Add(tree.NewFile("hello.txt", 0x1B6));
+        tree.Root.Add(tree.NewFile("hello.txt", Perms.P0666));
 
         await using ServerHarness harness = await ServerHarness.StartAsync(tree: tree);
         await using WireClient client = await WireClient.ConnectAsync(harness, Dialect.P9_2000_L, cancellationToken: Ct);
@@ -65,7 +65,7 @@ public sealed class GetattrTests
     public async Task FieldsTheHandlerSuppliedAreMarkedValid()
     {
         MemoryFilesystem tree = new();
-        MemoryFile file = tree.NewFile("hello.txt", 0x1B6);
+        MemoryFile file = tree.NewFile("hello.txt", Perms.P0666);
         file.BTime = new TimeSpec(1_600_000_000, 7);
         file.Gen = 42;
         file.DataVersion = 99;
@@ -100,7 +100,7 @@ public sealed class GetattrTests
     public async Task ValidIsTheIntersectionWithTheRequestMask()
     {
         MemoryFilesystem tree = new();
-        MemoryFile file = tree.NewFile("hello.txt", 0x1B6);
+        MemoryFile file = tree.NewFile("hello.txt", Perms.P0666);
         file.Gen = 42;
         tree.Root.Add(file);
 

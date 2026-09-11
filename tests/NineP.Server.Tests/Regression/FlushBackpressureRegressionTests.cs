@@ -16,7 +16,7 @@ public sealed class FlushBackpressureRegressionTests
         using CancellationTokenSource budget = new(TimeSpan.FromSeconds(10));
         CancellationToken ct = budget.Token;
         MemoryFilesystem tree = new();
-        MemoryFile file = tree.NewFile("slow", 0x1A4);
+        MemoryFile file = tree.NewFile("slow", Perms.P0644);
         file.Data = "content"u8.ToArray();
         file.ReadGate = new(TaskCreationOptions.RunContinuationsAsynchronously);
         tree.Root.Add(file);

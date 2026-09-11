@@ -48,7 +48,7 @@ body:
 - h2: Properties
 - api3: Dialect
   id: NineP_Client_NinePSession_Dialect
-  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePSession.cs#L44
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePSession.cs#L52
   metadata:
     uid: NineP.Client.NinePSession.Dialect
     commentId: P:NineP.Client.NinePSession.Dialect
@@ -61,7 +61,7 @@ body:
       url: NineP.Protocol.Dialect.html
 - api3: MaxPayload
   id: NineP_Client_NinePSession_MaxPayload
-  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePSession.cs#L50
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePSession.cs#L58
   metadata:
     uid: NineP.Client.NinePSession.MaxPayload
     commentId: P:NineP.Client.NinePSession.MaxPayload
@@ -74,7 +74,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.int32
 - api3: Messages
   id: NineP_Client_NinePSession_Messages
-  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePSession.cs#L58
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePSession.cs#L66
   metadata:
     uid: NineP.Client.NinePSession.Messages
     commentId: P:NineP.Client.NinePSession.Messages
@@ -87,7 +87,7 @@ body:
       url: NineP.Client.INinePMessages.html
 - api3: Msize
   id: NineP_Client_NinePSession_Msize
-  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePSession.cs#L47
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePSession.cs#L55
   metadata:
     uid: NineP.Client.NinePSession.Msize
     commentId: P:NineP.Client.NinePSession.Msize
@@ -100,7 +100,7 @@ body:
       url: https://learn.microsoft.com/dotnet/api/system.uint32
 - api3: Root
   id: NineP_Client_NinePSession_Root
-  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePSession.cs#L54
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePSession.cs#L62
   metadata:
     uid: NineP.Client.NinePSession.Root
     commentId: P:NineP.Client.NinePSession.Root
@@ -120,7 +120,7 @@ body:
 - h2: Methods
 - api3: AttachAsync(CancellationToken)
   id: NineP_Client_NinePSession_AttachAsync_System_Threading_CancellationToken_
-  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePSession.cs#L76
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePSession.cs#L84
   metadata:
     uid: NineP.Client.NinePSession.AttachAsync(System.Threading.CancellationToken)
     commentId: M:NineP.Client.NinePSession.AttachAsync(System.Threading.CancellationToken)
@@ -155,7 +155,7 @@ body:
     description: The server refused the auth or the attach.
 - api3: AttachAsync(string, string, ICredential?, CancellationToken)
   id: NineP_Client_NinePSession_AttachAsync_System_String_System_String_NineP_Protocol_Auth_ICredential_System_Threading_CancellationToken_
-  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePSession.cs#L90
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePSession.cs#L98
   metadata:
     uid: NineP.Client.NinePSession.AttachAsync(System.String,System.String,NineP.Protocol.Auth.ICredential,System.Threading.CancellationToken)
     commentId: M:NineP.Client.NinePSession.AttachAsync(System.String,System.String,NineP.Protocol.Auth.ICredential,System.Threading.CancellationToken)
@@ -207,14 +207,14 @@ body:
     - text: NinePException
       url: NineP.Protocol.NinePException.html
     description: The server refused the auth or the attach.
-- api3: CreateFileAsync(string, uint, CancellationToken)
-  id: NineP_Client_NinePSession_CreateFileAsync_System_String_System_UInt32_System_Threading_CancellationToken_
-  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePSession.cs#L264
+- api3: CreateFileAsync(string, FilePermissions, CancellationToken)
+  id: NineP_Client_NinePSession_CreateFileAsync_System_String_NineP_Protocol_FilePermissions_System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePSession.cs#L281
   metadata:
-    uid: NineP.Client.NinePSession.CreateFileAsync(System.String,System.UInt32,System.Threading.CancellationToken)
-    commentId: M:NineP.Client.NinePSession.CreateFileAsync(System.String,System.UInt32,System.Threading.CancellationToken)
+    uid: NineP.Client.NinePSession.CreateFileAsync(System.String,NineP.Protocol.FilePermissions,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.NinePSession.CreateFileAsync(System.String,NineP.Protocol.FilePermissions,System.Threading.CancellationToken)
 - markdown: Creates an empty regular file and returns it open for writing.
-- code: public ValueTask<NinePFid> CreateFileAsync(string path, uint perm = 420, CancellationToken cancellationToken = default)
+- code: public ValueTask<NinePFid> CreateFileAsync(string path, FilePermissions perm = FilePermissions.OtherRead | FilePermissions.GroupRead | FilePermissions.OwnerReadWrite, CancellationToken cancellationToken = default)
 - h4: Parameters
 - parameters:
   - name: path
@@ -224,9 +224,9 @@ body:
     description: The file to create; its parent must exist.
   - name: perm
     type:
-    - text: uint
-      url: https://learn.microsoft.com/dotnet/api/system.uint32
-    description: The permission bits.
+    - text: FilePermissions
+      url: NineP.Protocol.FilePermissions.html
+    description: The permission bits; 0644 by default.
     optional: true
   - name: cancellationToken
     type:
@@ -246,7 +246,7 @@ body:
     description: The new file, open for writing; the caller disposes it.
 - api3: DisposeAsync()
   id: NineP_Client_NinePSession_DisposeAsync
-  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePSession.cs#L490
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePSession.cs#L516
   metadata:
     uid: NineP.Client.NinePSession.DisposeAsync
     commentId: M:NineP.Client.NinePSession.DisposeAsync
@@ -288,7 +288,7 @@ body:
     description: A task that completes when the connection has closed.
 - api3: GetAttrAsync(string, CancellationToken)
   id: NineP_Client_NinePSession_GetAttrAsync_System_String_System_Threading_CancellationToken_
-  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePSession.cs#L363
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePSession.cs#L389
   metadata:
     uid: NineP.Client.NinePSession.GetAttrAsync(System.String,System.Threading.CancellationToken)
     commentId: M:NineP.Client.NinePSession.GetAttrAsync(System.String,System.Threading.CancellationToken)
@@ -317,14 +317,14 @@ body:
       url: NineP.Protocol.Attr.html
     - '>'
     description: The attributes.
-- api3: MkdirAsync(string, uint, CancellationToken)
-  id: NineP_Client_NinePSession_MkdirAsync_System_String_System_UInt32_System_Threading_CancellationToken_
-  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePSession.cs#L235
+- api3: MkdirAsync(string, FilePermissions, CancellationToken)
+  id: NineP_Client_NinePSession_MkdirAsync_System_String_NineP_Protocol_FilePermissions_System_Threading_CancellationToken_
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePSession.cs#L243
   metadata:
-    uid: NineP.Client.NinePSession.MkdirAsync(System.String,System.UInt32,System.Threading.CancellationToken)
-    commentId: M:NineP.Client.NinePSession.MkdirAsync(System.String,System.UInt32,System.Threading.CancellationToken)
+    uid: NineP.Client.NinePSession.MkdirAsync(System.String,NineP.Protocol.FilePermissions,System.Threading.CancellationToken)
+    commentId: M:NineP.Client.NinePSession.MkdirAsync(System.String,NineP.Protocol.FilePermissions,System.Threading.CancellationToken)
 - markdown: Creates a directory.
-- code: public ValueTask MkdirAsync(string path, uint perm = 493, CancellationToken cancellationToken = default)
+- code: public ValueTask MkdirAsync(string path, FilePermissions perm = FilePermissions.OtherReadExecute | FilePermissions.GroupReadExecute | FilePermissions.OwnerAll, CancellationToken cancellationToken = default)
 - h4: Parameters
 - parameters:
   - name: path
@@ -334,9 +334,9 @@ body:
     description: The directory to create; its parent must exist.
   - name: perm
     type:
-    - text: uint
-      url: https://learn.microsoft.com/dotnet/api/system.uint32
-    description: The permission bits.
+    - text: FilePermissions
+      url: NineP.Protocol.FilePermissions.html
+    description: The permission bits; 0755 by default.
     optional: true
   - name: cancellationToken
     type:
@@ -352,7 +352,7 @@ body:
     description: A task that completes when the directory exists.
 - api3: OpenFileAsync(string, OpenMode, OpenFlags, CancellationToken)
   id: NineP_Client_NinePSession_OpenFileAsync_System_String_NineP_Protocol_OpenMode_NineP_Protocol_OpenFlags_System_Threading_CancellationToken_
-  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePSession.cs#L155
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePSession.cs#L163
   metadata:
     uid: NineP.Client.NinePSession.OpenFileAsync(System.String,NineP.Protocol.OpenMode,NineP.Protocol.OpenFlags,System.Threading.CancellationToken)
     commentId: M:NineP.Client.NinePSession.OpenFileAsync(System.String,NineP.Protocol.OpenMode,NineP.Protocol.OpenFlags,System.Threading.CancellationToken)
@@ -400,7 +400,7 @@ body:
     description: The path did not resolve, or the open was refused.
 - api3: ReadDirAsync(string, CancellationToken)
   id: NineP_Client_NinePSession_ReadDirAsync_System_String_System_Threading_CancellationToken_
-  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePSession.cs#L212
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePSession.cs#L220
   metadata:
     uid: NineP.Client.NinePSession.ReadDirAsync(System.String,System.Threading.CancellationToken)
     commentId: M:NineP.Client.NinePSession.ReadDirAsync(System.String,System.Threading.CancellationToken)
@@ -435,7 +435,7 @@ body:
     description: The entries, in the order the server packed them.
 - api3: ReadFileAsync(string, CancellationToken)
   id: NineP_Client_NinePSession_ReadFileAsync_System_String_System_Threading_CancellationToken_
-  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePSession.cs#L179
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePSession.cs#L187
   metadata:
     uid: NineP.Client.NinePSession.ReadFileAsync(System.String,System.Threading.CancellationToken)
     commentId: M:NineP.Client.NinePSession.ReadFileAsync(System.String,System.Threading.CancellationToken)
@@ -468,7 +468,7 @@ body:
     description: Everything the file held.
 - api3: ReadlinkAsync(string, CancellationToken)
   id: NineP_Client_NinePSession_ReadlinkAsync_System_String_System_Threading_CancellationToken_
-  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePSession.cs#L422
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePSession.cs#L448
   metadata:
     uid: NineP.Client.NinePSession.ReadlinkAsync(System.String,System.Threading.CancellationToken)
     commentId: M:NineP.Client.NinePSession.ReadlinkAsync(System.String,System.Threading.CancellationToken)
@@ -505,7 +505,7 @@ body:
     description: The session is 9P2000, which cannot represent a link.
 - api3: RemoveAsync(string, CancellationToken)
   id: NineP_Client_NinePSession_RemoveAsync_System_String_System_Threading_CancellationToken_
-  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePSession.cs#L289
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePSession.cs#L315
   metadata:
     uid: NineP.Client.NinePSession.RemoveAsync(System.String,System.Threading.CancellationToken)
     commentId: M:NineP.Client.NinePSession.RemoveAsync(System.String,System.Threading.CancellationToken)
@@ -532,7 +532,7 @@ body:
     description: A task that completes when the server answered.
 - api3: RenameAsync(string, string, CancellationToken)
   id: NineP_Client_NinePSession_RenameAsync_System_String_System_String_System_Threading_CancellationToken_
-  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePSession.cs#L301
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePSession.cs#L327
   metadata:
     uid: NineP.Client.NinePSession.RenameAsync(System.String,System.String,System.Threading.CancellationToken)
     commentId: M:NineP.Client.NinePSession.RenameAsync(System.String,System.String,System.Threading.CancellationToken)
@@ -570,7 +570,7 @@ body:
     description: A 9P2000 or .u session was asked to move across directories.
 - api3: SetAttrAsync(string, SetAttr, CancellationToken)
   id: NineP_Client_NinePSession_SetAttrAsync_System_String_NineP_Protocol_SetAttr_System_Threading_CancellationToken_
-  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePSession.cs#L378
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePSession.cs#L404
   metadata:
     uid: NineP.Client.NinePSession.SetAttrAsync(System.String,NineP.Protocol.SetAttr,System.Threading.CancellationToken)
     commentId: M:NineP.Client.NinePSession.SetAttrAsync(System.String,NineP.Protocol.SetAttr,System.Threading.CancellationToken)
@@ -602,7 +602,7 @@ body:
     description: A task that completes when the server answered.
 - api3: StatFsAsync(string, CancellationToken)
   id: NineP_Client_NinePSession_StatFsAsync_System_String_System_Threading_CancellationToken_
-  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePSession.cs#L454
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePSession.cs#L480
   metadata:
     uid: NineP.Client.NinePSession.StatFsAsync(System.String,System.Threading.CancellationToken)
     commentId: M:NineP.Client.NinePSession.StatFsAsync(System.String,System.Threading.CancellationToken)
@@ -639,7 +639,7 @@ body:
     description: The session is not .L.
 - api3: SymlinkAsync(string, string, CancellationToken)
   id: NineP_Client_NinePSession_SymlinkAsync_System_String_System_String_System_Threading_CancellationToken_
-  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePSession.cs#L395
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePSession.cs#L421
   metadata:
     uid: NineP.Client.NinePSession.SymlinkAsync(System.String,System.String,System.Threading.CancellationToken)
     commentId: M:NineP.Client.NinePSession.SymlinkAsync(System.String,System.String,System.Threading.CancellationToken)
@@ -677,7 +677,7 @@ body:
     description: The session is not .L.
 - api3: WalkAsync(string, CancellationToken)
   id: NineP_Client_NinePSession_WalkAsync_System_String_System_Threading_CancellationToken_
-  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePSession.cs#L145
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePSession.cs#L153
   metadata:
     uid: NineP.Client.NinePSession.WalkAsync(System.String,System.Threading.CancellationToken)
     commentId: M:NineP.Client.NinePSession.WalkAsync(System.String,System.Threading.CancellationToken)
@@ -714,7 +714,7 @@ body:
     description: The path did not resolve.
 - api3: WriteFileAsync(string, ReadOnlyMemory<byte>, CancellationToken)
   id: NineP_Client_NinePSession_WriteFileAsync_System_String_System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_
-  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePSession.cs#L196
+  src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Client/NinePSession.cs#L204
   metadata:
     uid: NineP.Client.NinePSession.WriteFileAsync(System.String,System.ReadOnlyMemory{System.Byte},System.Threading.CancellationToken)
     commentId: M:NineP.Client.NinePSession.WriteFileAsync(System.String,System.ReadOnlyMemory{System.Byte},System.Threading.CancellationToken)
