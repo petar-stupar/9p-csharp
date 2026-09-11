@@ -151,4 +151,110 @@ public sealed class PermissionTests
 
         Assert.Equal(Errno.EACCES, refused.Error.Errno);
     }
+
+    /// <summary>
+    /// Rule 43: a timestamp the client asks the server to fill from its own clock is granted on
+    /// write permission, not ownership -- utimensat(2) makes ownership sufficient, not necessary.
+    /// This is the shape a truncating redirect arrives in: opening with <c>O_TRUNC</c> updates
+    /// mtime, and v9fs sends size and an unset-valued mtime as one <c>Tsetattr</c>. Folding "to
+    /// now" in with the owner-only fields refused every <c>&gt;</c> by a non-owner, and on a
+    /// default v9fs mount -- which attaches as <c>nobody</c> with uid -1, an identity that can
+    /// never equal any owner -- that is every client on the mount.
+    /// <b>Mutation:</b> putting <c>update.MTimeToNow</c> back into the owner-only condition in
+    /// <c>Dispatcher.ApplyAsync</c> makes this fail with EPERM.
+    /// </summary>
+    [Fact]
+    public async Task ANonOwnerWithWritePermissionMayTruncateAndStampTheTime()
+    {
+        MemoryFilesystem tree = new();
+        MemoryFile shared = tree.NewFile("ctl", Perms.P0666);
+        shared.Owner = "root";
+        shared.Uid = 0;
+        shared.Data = [1, 2, 3, 4];
+        tree.Root.Add(shared);
+
+        await using ServerHarness harness = await ServerHarness.StartAsync(tree: tree);
+        await using NinePSession session = await harness.ConnectAsync(Dialect.P9_2000_L);
+        await using NinePFid fid = await session.WalkAsync("ctl", Ct);
+
+        await session.Messages.SetattrAsync(
+            new Tsetattr(0, fid.Fid, SetAttrMask.Size | SetAttrMask.MTime, 0, 0, 0, 0, default, default), Ct);
+
+        Assert.True(shared.LastUpdate?.MTimeToNow);
+        Assert.Equal(0ul, shared.LastUpdate?.Size);
+        Assert.Empty(shared.Data);
+    }
+
+    /// <summary>
+    /// Rule 43's other half: write permission is what grants it, so an identity without the write
+    /// bit is still refused -- and refused EACCES, the errno utimensat(2) names for this case,
+    /// rather than the EPERM it reserves for an explicit time.
+    /// </summary>
+    [Fact]
+    public async Task AServerStampedTimeStillNeedsTheWriteBit()
+    {
+        MemoryFilesystem tree = new();
+        MemoryFile readOnly = tree.NewFile("ro", Perms.P0444);
+        readOnly.Owner = "root";
+        readOnly.Uid = 0;
+        tree.Root.Add(readOnly);
+
+        await using ServerHarness harness = await ServerHarness.StartAsync(tree: tree);
+        await using NinePSession session = await harness.ConnectAsync(Dialect.P9_2000_L);
+        await using NinePFid fid = await session.WalkAsync("ro", Ct);
+
+        NinePException denied = await Assert.ThrowsAsync<NinePException>(
+            async () => await session.Messages.SetattrAsync(
+                new Tsetattr(0, fid.Fid, SetAttrMask.MTime, 0, 0, 0, 0, default, default), Ct));
+
+        Assert.Equal(Errno.EACCES, denied.Error.Errno);
+        Assert.Null(readOnly.LastUpdate);
+    }
+
+    /// <summary>
+    /// Rule 43 moves only the server-stamped times. An <b>explicit</b> time is the file's identity
+    /// the way its mode is, utimensat(2) reserves it to the owner, and a mode as open as 0666 does
+    /// not buy it -- otherwise any writer could backdate a file it does not own.
+    /// </summary>
+    [Theory]
+    [InlineData(SetAttrMask.MTime | SetAttrMask.MTimeSet)]
+    [InlineData(SetAttrMask.ATime | SetAttrMask.ATimeSet)]
+    public async Task AnExplicitTimeStaysTheOwnersAloneHoweverOpenTheModeIs(SetAttrMask mask)
+    {
+        MemoryFilesystem tree = new();
+        MemoryFile shared = tree.NewFile("open", Perms.P0666);
+        shared.Owner = "root";
+        shared.Uid = 0;
+        tree.Root.Add(shared);
+
+        await using ServerHarness harness = await ServerHarness.StartAsync(tree: tree);
+        await using NinePSession session = await harness.ConnectAsync(Dialect.P9_2000_L);
+        await using NinePFid fid = await session.WalkAsync("open", Ct);
+
+        NinePException denied = await Assert.ThrowsAsync<NinePException>(
+            async () => await session.Messages.SetattrAsync(new Tsetattr(
+                0, fid.Fid, mask, 0, 0, 0, 0, new TimeSpec(1, 0), new TimeSpec(1, 0)), Ct));
+
+        Assert.Equal(Errno.EPERM, denied.Error.Errno);
+        Assert.Null(shared.LastUpdate);
+    }
+
+    /// <summary>The owner keeps every one of them, which is what rule 43 widens rather than moves.</summary>
+    [Fact]
+    public async Task TheOwnerMayStillSetAnExplicitTime()
+    {
+        MemoryFilesystem tree = new();
+        MemoryFile mine = tree.NewFile("mine", Perms.P0600);
+        tree.Root.Add(mine);
+
+        await using ServerHarness harness = await ServerHarness.StartAsync(tree: tree);
+        await using NinePSession session = await harness.ConnectAsync(Dialect.P9_2000_L);
+        await using NinePFid fid = await session.WalkAsync("mine", Ct);
+
+        await session.Messages.SetattrAsync(new Tsetattr(
+            0, fid.Fid, SetAttrMask.MTime | SetAttrMask.MTimeSet, 0, 0, 0, 0, default,
+            new TimeSpec(1_700_000_000, 0)), Ct);
+
+        Assert.Equal(new TimeSpec(1_700_000_000, 0), mine.LastUpdate?.MTime);
+    }
 }

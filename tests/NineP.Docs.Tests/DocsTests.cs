@@ -31,6 +31,7 @@ public sealed class DocsTests
         ("docs/benchmarks.md", 2000, 41),
         ("docs/security.md", 2000, 42),
         ("docs/interop.md", 500, 43),
+        ("docs/mounting.md", 4000, 43),
         ("docs/api.md", 4000, 45),
     ];
 

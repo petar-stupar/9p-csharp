@@ -153,7 +153,7 @@ handler is called. A handler may check more; it can never be reached with less.
 | `Topen` / `Tlopen` | read, write or both by access mode; write as well for `OTRUNC`; write in the parent for `ORCLOSE` |
 | create of any kind | write on the directory |
 | `Tremove` / `Tunlinkat` | write in the parent |
-| `Twstat` / `Tsetattr` | owner for mode, group and times; write on the file for a length change; write in the parent for a rename |
+| `Twstat` / `Tsetattr` | owner for mode, group and an **explicit** time; write on the file for a length change or a time stamped from the server's clock (reference §8 rule 43); write in the parent for a rename |
 | `Tstat` / `Tgetattr` | none |
 
 ## Optional capabilities
@@ -161,6 +161,15 @@ handler is called. A handler may check more; it can never be reached with less.
 `ILockCapability`, `IXattrHandler`, `ILinkCapability` and `IStatFsCapability` are separate
 interfaces. A handler that does not implement one is answered `EOPNOTSUPP` (`"Operation not supported"`) by
 the core — never a crash, and never a silent success.
+
+> **`IStatFsCapability` stops being optional the moment the tree is re-exported.** Samba calls
+> `disk_free` when a client connects to a share, so a server without it fails the tree connect, and
+> the host reports `mount_smbfs: … Operation not supported` with nothing pointing at 9P — only the
+> Samba log names the cause (`sys_disk_free: VFS disk_free failed. Error was : Not supported`). The
+> numbers need not be interesting; the message must be answered. Re-export is not an edge case:
+> it is the **only** way a macOS or Windows host can reach a 9P tree. See
+> [docs/mounting.md](mounting.md), which carries the other five things a server owes a kernel
+> client and the mount options that make them work.
 
 `IXattrHandler` has one call the wire does not name: a `Txattrcreate` whose `attr_size` is **zero**
 is `removexattr(2)` — that is how v9fs and diod spell it — so the core calls `RemoveXattrAsync` when

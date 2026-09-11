@@ -12,6 +12,12 @@ Every row below is reproducible: it is a test in `InteropTests` (`tests/NineP.Cl
 opt-in through one environment variable per peer, and `tests/interop/setup.sh` fetches the peers at
 the pinned versions and prints those variables. See [Reproducing these runs](#reproducing-these-runs).
 
+> **Mounting, as opposed to interoperating.** This page is about 9P peers talking to each other.
+> Getting a tree into an operating system's namespace is a separate question with a platform-shaped
+> answer — Linux mounts 9P natively, macOS and Windows cannot mount it at all and need a bridge —
+> and it is in [docs/mounting.md](mounting.md), along with what a server must provide before a
+> kernel client and a re-exporting SMB server will accept it.
+
 ## The machine these runs were made on
 
 | | |

@@ -23,6 +23,16 @@ Both halves are exercised: *our client vs their server* and *their client vs our
 
 Exit codes: 0 success, 1 protocol/transport error, 2 server error (`Rerror`/`Rlerror`), 3 usage.
 
+**`write` creates what is not there yet** — Part B step 2 writes straight after a `mkdir` — and
+that recovery **must not replace the server's own refusal**. `ENOENT` is also an ordinary answer a
+handler writes for its own reasons (a control file rejecting a name it does not hold), and then the
+file *is* present, so the create that follows fails for a wholly unrelated reason — most often the
+parent's permissions, reported as `EACCES` / `permission denied`. A cli that lets the second error
+out has told the user about a mode bit when the server was talking about a name. It reports the
+first refusal instead. Note what makes this expensive to find: 9P2000 carries no errno, so the
+unknown ename maps to `EIO`, the recovery never runs, and the bug is invisible in exactly the
+dialect a developer tries first — it appears only in `.u` and `.L`.
+
 ## Part A — read-only walk (all dialects, all transports)
 
 For each dialect `d ∈ {9P2000, 9P2000.u, 9P2000.L}` and each transport `t ∈ {tcp, tls, ws}`

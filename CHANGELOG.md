@@ -6,6 +6,123 @@ All notable changes to this repository are recorded here. The format follows
 
 ## [Unreleased]
 
+## [0.4.0] — 2026-09-11
+
+Four reports from `dotnetdocfs`, a downstream consumer of the published 0.3.0 packages, which
+mounted a `NineP.Server` tree on macOS through a container bridge and drove it from a Linux v9fs
+kernel mount. Three were defects and are fixed; the fourth was traced to the conformance cli rather
+than to the library. All four were found from **outside** the loop, exercising a published package
+the way a stranger would, and none of them was reachable from the suite as it stood — which is why
+each fix lands with a named test and an obligation every port now owes.
+
+### Fixed
+
+- **A `.L` `Rgetattr` no longer carries the "unknown owner" sentinel as an id** (reference §8
+  rule 42). `Attr.Uid` and `Attr.Gid` default to `Constants.NONUNAME`, meaning *"this handler did
+  not state an owner"*. 9P2000 and `.u` can say that, because ownership travels there as a name
+  with the number beside it optional; **`.L` cannot** — `uid` and `gid` are plain required numbers,
+  and `0xFFFFFFFF` is `(uid_t)-1`, which Linux refuses to map. It showed every file as `nobody` and
+  answered `EOVERFLOW` to anything needing the real owner:
+
+  ```text
+  -r--r--r--  1 nobody nobody  12705 Compare.md
+  rm: can't remove 'Compare.md': Value too large for data type
+  ```
+
+  The client decided that **locally**: no `Tunlinkat` ever arrived, so there was nothing in a server
+  log, nothing to refuse honestly, and no error the server could improve. A port could be
+  wire-correct, pass its whole suite, and still produce a mount on which `rm` reports a data-type
+  overflow. The sentinel is now coerced to `0` at the `.L` projection boundary. `.u` and 9P2000 are
+  untouched, where `NONUNAME` remains correct.
+
+- **A non-owner with write permission may now truncate a file** (reference §8 rule 43).
+  `Tsetattr` refused mtime changes to anyone but the owner, where `utimensat(2)` makes ownership
+  *sufficient* rather than *necessary*: setting a timestamp to the current time is granted to the
+  owner **or** to write access. This bit far harder than it looks. Opening with `O_TRUNC` updates
+  mtime, and v9fs sends that as one `Tsetattr` carrying the size **and** an unset-valued mtime, so
+  the refusal blocked not just `touch` but every `>` redirect, on any file, by any non-owner,
+  however open that file's mode bits were — and on a default v9fs mount "non-owner" is *everyone*,
+  since v9fs attaches as `uname=nobody` with uid `-1`, an identity that can never equal any owner.
+  A `0666` control file owned by uid 0 answered:
+
+  ```text
+  $ echo refresh > /m/ctl
+  sh: can't create /m/ctl: Operation not permitted
+  ```
+
+  A time stamped from the server's clock now needs write permission, refused `EACCES` when it is
+  missing. An **explicit** time stays the owner's alone, refused `EPERM`, which is the split
+  `utimensat(2)` draws. 9P2000 and `.u` are unaffected: a `Twstat` mtime is always an explicit
+  value, which stat(5) already reserves to the owner.
+
+- **`ninep write` reports the server's own refusal rather than the error its recovery provokes.**
+  The verb creates what is not there yet, which is what the conformance scenario does straight
+  after a `mkdir`. But `ENOENT` is also an ordinary answer a handler writes for its own reasons —
+  a control file rejecting a name it does not hold — and then the file *is* present, the create
+  fails on the parent's permissions, and **that** error was the one reported. One refusal produced
+  three answers:
+
+  | Dialect | Before | After |
+  | --- | --- | --- |
+  | `9P2000` | the handler's sentence, errno 5 | unchanged |
+  | `9P2000.u` | `permission denied (errno 13)` | the handler's sentence, errno 2 |
+  | `9P2000.L` | `permission denied (errno 13)` | `file not found (errno 2)` |
+
+  Note which row was already right: 9P2000 carries no errno, so the unknown ename mapped to `EIO`,
+  the recovery never ran, and **the bug was invisible in the dialect a developer tries first**. The
+  library's error projection was correct throughout — a handler's ename and errno both reach `.u`
+  unchanged, and `.L` gets the errno — and this was the cli masking it. The fallback still runs;
+  it just no longer replaces what the server said. (`.L` reports the table's wording because
+  `Rlerror` carries an errno alone; that is the dialect, not a defect.)
+
+### Changed
+
+- **`Tsetattr` now requires ownership for an explicit `atime`.** Explicit `mtime` always did;
+  `atime` was checked nowhere, so any identity could set it to any value. `utimensat(2)` reserves
+  explicit times of either kind to the owner, and a rule that treated the two differently would
+  have gone out to thirteen further ports as the reference. This is the one **tightening** in this
+  release: a client that was setting an explicit `atime` on a file it does not own is now refused
+  `EPERM`. Setting `atime` to the server's clock is unaffected and, like `mtime`, now needs only
+  write permission.
+
+### Added
+
+- **[docs/mounting.md](https://github.com/petar-stupar/9p-csharp/blob/main/docs/mounting.md) — how
+  to mount a tree, and what a server owes a kernel client.** **Linux mounts 9P natively; macOS and
+  Windows cannot mount it at all** — macOS's `/sbin/mount_9p` mounts a Virtualization.framework
+  share by tag from inside a guest and cannot address a TCP server, and Windows has no v9fs. On
+  both, the only route is a bridge: a Linux container mounts the tree over 9P and re-exports it
+  over SMB. Since most .NET developers are on one of those two, that is the common case, and it
+  drives a server through a kernel client *and* a file-sharing server, which ask for things a
+  hand-written 9P client never does. The page has the bridge recipe, the six traps — each of which
+  presents as a broken tool rather than a missing feature — the mount options that are not
+  optional, the SMB caveats, and a checklist. The headline ones:
+
+  - `IStatFsCapability` **stops being optional**: Samba calls `disk_free` on tree connect, and a
+    server that answers `EOPNOTSUPP` fails the mount with `Operation not supported` and nothing
+    naming 9P.
+  - A **write-only file cannot be opened at all**, because `Txattrwalk` needs read permission and
+    Samba asks for xattrs on open. Mode `0222` — the Plan 9 convention — is refused `EACCES`.
+  - `trans=tcp` takes an **IP address**, not a host name; given a name it fails `Invalid argument`,
+    which reads as a bad option rather than a bad device.
+  - A share exported `read only = yes` **strips write bits from everything**, however the 9P server
+    presents it.
+  - macOS gates network volumes **per application**; a terminal started by another program is
+    refused `EPERM` with no prompt and no log entry, so a correct mount reads as a broken one.
+
+  The README gained a "Before you mount a tree" section pointing at it, `docs/server.md` says
+  beside `IStatFsCapability` why re-export needs it, and `docs/interop.md` distinguishes
+  interoperating from mounting.
+
+- **Nine test-index obligations and rule-index rows 192–200**, so the two protocol rules and the
+  cli contract propagate to every port rather than staying this one's patch. Workspace reference
+  §8 gains rules 42 and 43, ARCHITECTURE.md gains §14 (what a server owes a kernel client, and the
+  `docs/mounting.md` requirement for every port), `fixtures/conformance.md` states the `write`
+  recovery contract, and `backports.md` gains rows B-8 and B-9.
+
+- `MemoryFile.WriteFailure` in `NineP.TestSupport`, which models a control file refusing a command
+  it does not recognise.
+
 ## [0.3.0] — 2026-09-11
 
 ### The shared test suite — 2026-09-11

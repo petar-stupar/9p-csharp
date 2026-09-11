@@ -372,6 +372,24 @@ the commands and what the runs found are in
 | hugelgupf/p9 `p9ufs` v0.4.1 | server, driven by our client | 9P2000.L | pass |
 | plan9port `9p` (2026-08-26) | client, reads our server | 9P2000 | pass |
 
+## Before you mount a tree
+
+**Linux mounts 9P natively. macOS and Windows cannot mount it at all** — macOS has no client
+(`/sbin/mount_9p` mounts a Virtualization.framework share by tag from inside a guest and cannot
+address a TCP server), and Windows has no v9fs. On both, the route is a bridge: a Linux container
+mounts the tree over 9P and re-exports it over SMB. Since most .NET developers are on one of those
+two, this is the common case rather than an exotic one.
+
+That path drives a server through a kernel client *and* a file-sharing server, and it asks for
+things a hand-written 9P client never asks for. Six of them present as a broken tool rather than as
+a missing feature — a server that does not answer `Tstatfs` fails the SMB mount with
+`Operation not supported` and nothing naming 9P; a write-only file at mode `0222` cannot be opened
+at all; `trans=tcp` given a host name fails `Invalid argument`; a share exported `read only = yes`
+strips write bits from everything. Read
+[docs/mounting.md](https://github.com/petar-stupar/9p-csharp/blob/main/docs/mounting.md) **before**
+you debug a mount. It has the bridge recipe, the mount options that are not optional, the SMB
+caveats, and a checklist.
+
 ## Before you expose a server
 
 A server with no `ServerOptions.Authenticator` accepts a `Tattach` with `afid = NOFID` and runs
@@ -397,6 +415,7 @@ obtained.
 | [docs/security.md](https://github.com/petar-stupar/9p-csharp/blob/main/docs/security.md) | the caps, the validation rules, and what is out of scope |
 | [docs/benchmarks.md](https://github.com/petar-stupar/9p-csharp/blob/main/docs/benchmarks.md) | measured throughput, latency, peak RSS and codec ns/op |
 | [docs/interop.md](https://github.com/petar-stupar/9p-csharp/blob/main/docs/interop.md) | what this implementation has been run against, and what it has not |
+| [docs/mounting.md](https://github.com/petar-stupar/9p-csharp/blob/main/docs/mounting.md) | mounting a tree — natively on Linux, through a bridge on macOS and Windows |
 | [docs/releasing.md](https://github.com/petar-stupar/9p-csharp/blob/main/docs/releasing.md) | how a version reaches nuget.org: tag, checks, Trusted Publishing |
 | [`docs/api/`](https://github.com/petar-stupar/9p-csharp/tree/main/docs/api) | the generated API reference (`dotnet tool restore && dotnet docfx metadata && dotnet docfx build`) |
 
