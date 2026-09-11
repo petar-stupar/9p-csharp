@@ -454,7 +454,7 @@ public sealed class JsonFsTests
         Assert.Equal(Errno.ENOSPC, create.Error.Errno);
 
         NinePException mkdir = await Assert.ThrowsAsync<NinePException>(
-            async () => await session.MkdirAsync("d", 0x1ED, Ct));
+            async () => await session.MkdirAsync("d", Perms.P0755, Ct));
         Assert.Equal(Errno.ENOSPC, mkdir.Error.Errno);
 
         NinePException append = await Assert.ThrowsAsync<NinePException>(
@@ -478,7 +478,7 @@ public sealed class JsonFsTests
 
         Assert.Equal(["b", "list"], await NamesAsync(session, "/"));
         NinePException again = await Assert.ThrowsAsync<NinePException>(
-            async () => await session.MkdirAsync("d", 0x1ED, Ct));
+            async () => await session.MkdirAsync("d", Perms.P0755, Ct));
         Assert.Equal(Errno.ENOSPC, again.Error.Errno);
 
         // Startup: the flag sets the cap, and a document already past it is refused before it is
@@ -540,11 +540,11 @@ public sealed class JsonFsTests
 
                 // Several mutations inside one window: one window open, nothing on disk yet.
                 await WriteAsync(session, "name", "after");
-                await using (await session.CreateFileAsync("added", 0x1A4, Ct))
+                await using (await session.CreateFileAsync("added", Perms.P0644, Ct))
                 {
                 }
 
-                await session.MkdirAsync("dir", 0x1ED, Ct);
+                await session.MkdirAsync("dir", Perms.P0755, Ct);
 
                 Assert.Equal(0, rewrites);
                 Assert.Equal(1, clock.Arms);
@@ -567,7 +567,7 @@ public sealed class JsonFsTests
                 // A rewrite the window cannot make: the old document stays whole, the temp file
                 // is gone, the document stays dirty and the window is armed again for a retry.
                 filesystem.Persistence.BeforeReplace = () => throw new IOException("injected replacement failure");
-                await session.MkdirAsync("late", 0x1ED, Ct);
+                await session.MkdirAsync("late", Perms.P0755, Ct);
                 Assert.Equal(2, clock.Arms);
                 clock.Fire();
 
@@ -607,12 +607,12 @@ public sealed class JsonFsTests
                 await using ServerHarness harness = await ServerHarness.StartAsync(filesystem: immediate);
                 await using NinePSession session = await harness.ConnectAsync(Dialect.P9_2000_L);
 
-                await using (await session.CreateFileAsync("one", 0x1A4, Ct))
+                await using (await session.CreateFileAsync("one", Perms.P0644, Ct))
                 {
                 }
 
                 Assert.Equal(1, rewrites);
-                await session.MkdirAsync("two", 0x1ED, Ct);
+                await session.MkdirAsync("two", Perms.P0755, Ct);
                 Assert.Equal(2, rewrites);
                 await session.RemoveAsync("one", Ct);
                 Assert.Equal(3, rewrites);
@@ -833,8 +833,8 @@ public sealed class JsonFsTests
     /// <returns>One update per row.</returns>
     public static TheoryData<SetAttr> UnsupportedUpdates() =>
     [
-        new SetAttr { Size = 0, Name = "salutation", Perm = 0x1FF, Flags = FileFlags.None },
-        new SetAttr { Size = 0, Name = "salutation", Perm = 0x1A4, Flags = FileFlags.Append },
+        new SetAttr { Size = 0, Name = "salutation", Perm = Perms.P0777, Flags = FileFlags.None },
+        new SetAttr { Size = 0, Name = "salutation", Perm = Perms.P0644, Flags = FileFlags.Append },
         new SetAttr { Size = 0, Name = "salutation", GroupName = "wheel" },
         new SetAttr { Size = 0, Name = "salutation", MTime = new TimeSpec(1, 0) },
     ];

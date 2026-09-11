@@ -56,8 +56,8 @@ public sealed class DirectoryReadTests
     public async Task RecordNeverSplit()
     {
         MemoryFilesystem tree = new();
-        tree.Root.Add(tree.NewFile("one", 0x1A4));
-        tree.Root.Add(tree.NewFile("two", 0x1A4));
+        tree.Root.Add(tree.NewFile("one", Perms.P0644));
+        tree.Root.Add(tree.NewFile("two", Perms.P0644));
 
         await using ServerHarness harness = await ServerHarness.StartAsync(tree: tree);
         await using NinePSession session = await harness.ConnectAsync(Dialect.P9_2000);
@@ -153,7 +153,7 @@ public sealed class DirectoryReadTests
         MemoryFilesystem tree = new();
         for (int i = 0; i < 6; i++)
         {
-            tree.Root.Add(tree.NewFile("f" + i.ToString(System.Globalization.CultureInfo.InvariantCulture), 0x1A4));
+            tree.Root.Add(tree.NewFile("f" + i.ToString(System.Globalization.CultureInfo.InvariantCulture), Perms.P0644));
         }
 
         await using ServerHarness harness = await ServerHarness.StartAsync(tree: tree);

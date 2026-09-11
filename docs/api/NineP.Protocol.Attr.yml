@@ -248,12 +248,12 @@ body:
     uid: NineP.Protocol.Attr.Perm
     commentId: P:NineP.Protocol.Attr.Perm
 - markdown: 'Permission bits only: 0777 plus setuid, setgid and sticky (the 07777 mask).'
-- code: public required uint Perm { get; init; }
+- code: public required FilePermissions Perm { get; init; }
 - h4: Property Value
 - parameters:
   - type:
-    - text: uint
-      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    - text: FilePermissions
+      url: NineP.Protocol.FilePermissions.html
 - api3: Qid
   id: NineP_Protocol_Attr_Qid
   src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Protocol/Attr.cs#L11

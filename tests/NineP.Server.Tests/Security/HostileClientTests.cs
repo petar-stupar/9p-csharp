@@ -158,13 +158,13 @@ public sealed class HostileClientTests
         const int Fids = 16;
 
         MemoryFilesystem tree = new();
-        MemoryFile gated = tree.NewFile("slow", 0x1A4);
+        MemoryFile gated = tree.NewFile("slow", Perms.P0644);
         gated.Data = "content"u8.ToArray();
         gated.ReadGate = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         tree.Root.Add(gated);
 
         // The healthy connection reads this one, so it must exist beside the gated file.
-        MemoryFile greeting = tree.NewFile("hello.txt", 0x1A4);
+        MemoryFile greeting = tree.NewFile("hello.txt", Perms.P0644);
         greeting.Data = "hello, 9P\n"u8.ToArray();
         tree.Root.Add(greeting);
 
@@ -298,7 +298,7 @@ public sealed class HostileClientTests
             contents[i] = (byte)i;
         }
 
-        MemoryFile large = harness.Tree.NewFile("large.bin", 0x1A4);
+        MemoryFile large = harness.Tree.NewFile("large.bin", Perms.P0644);
         large.Data = contents;
         harness.Tree.Root.Add(large);
 

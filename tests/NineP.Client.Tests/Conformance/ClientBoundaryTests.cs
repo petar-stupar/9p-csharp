@@ -34,10 +34,10 @@ public sealed class ClientBoundaryTests
         await using Harness h = await Harness.StartAsync(new ClientOptions { Limits = Limits.Default with { MaxNameLength = 64 } });
         foreach (string name in new[] { new string('x', 256), new string('é', 128) })
         {
-            await Assert.ThrowsAsync<NinePProtocolException>(async () => await h.Fid.CreateAsync(name, 0x1A4, OpenMode.Read, OpenFlags.None, Ct));
+            await Assert.ThrowsAsync<NinePProtocolException>(async () => await h.Fid.CreateAsync(name, FileKind.File, Perms.P0644, OpenMode.Read, OpenFlags.None, cancellationToken: Ct));
         }
         await Error(Errno.ENAMETOOLONG, async () => await h.Fid.WalkAsync([new string('é', 32) + "x"], Ct));
-        await Error(Errno.ENAMETOOLONG, async () => await h.Fid.CreateAsync(new string('x', 65), 0x1A4, OpenMode.Read, OpenFlags.None, Ct));
+        await Error(Errno.ENAMETOOLONG, async () => await h.Fid.CreateAsync(new string('x', 65), FileKind.File, Perms.P0644, OpenMode.Read, OpenFlags.None, cancellationToken: Ct));
         await Error(Errno.ENAMETOOLONG, async () => await h.Session.Messages.RenameatAsync(new Trenameat(0, 1, "old", 1, new string('x', 65)), Ct));
         await h.SentinelAsync();
         Assert.Equal(1, h.Session.LiveFids);

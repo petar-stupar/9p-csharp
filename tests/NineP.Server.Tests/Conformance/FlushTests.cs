@@ -168,7 +168,7 @@ public sealed class FlushTests
     public async Task ATagReusedTheInstantItsRflushArrivesIsServed()
     {
         MemoryFilesystem tree = new();
-        MemoryFile stuck = tree.NewFile("stuck", 0x1A4);
+        MemoryFile stuck = tree.NewFile("stuck", Perms.P0644);
         stuck.Data = "content"u8.ToArray();
         stuck.DeafReadGate = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         tree.Root.Add(stuck);
@@ -223,7 +223,7 @@ public sealed class FlushTests
         Func<ServerOptions, ServerOptions>? tune = null)
     {
         MemoryFilesystem tree = new();
-        MemoryFile gated = tree.NewFile("slow", 0x1A4);
+        MemoryFile gated = tree.NewFile("slow", Perms.P0644);
         gated.Data = "content"u8.ToArray();
         gated.ReadGate = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         tree.Root.Add(gated);

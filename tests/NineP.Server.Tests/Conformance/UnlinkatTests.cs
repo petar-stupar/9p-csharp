@@ -113,8 +113,8 @@ public sealed class UnlinkatTests
     private static MemoryFilesystem Tree()
     {
         MemoryFilesystem tree = new();
-        tree.Root.Add(tree.NewFile("hello.txt", 0x1B6));
-        tree.Root.Add(tree.NewDirectory("sub", 0x1FF));
+        tree.Root.Add(tree.NewFile("hello.txt", Perms.P0666));
+        tree.Root.Add(tree.NewDirectory("sub", Perms.P0777));
         return tree;
     }
 }

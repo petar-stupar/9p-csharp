@@ -160,6 +160,19 @@ body:
       url: NineP.Protocol.FileKind.html
     description: The dialect-neutral file type a handler declares (reference §7).
   - type:
+      text: FilePermissions
+      url: NineP.Protocol.FilePermissions.html
+    description: >-
+      The permission bits of a file: the <code>0777</code> rwx triples plus setuid, setgid and sticky, the
+
+      <code>07777</code> mask reference §4.7 fixes. These are the low bits of a 9P2000 stat record's
+
+      <code>mode</code>, of <code>Tcreate.perm</code> and of a POSIX mode word alike; the non-permission mode
+
+      bits live in <xref href="NineP.Protocol.FileFlags" data-throw-if-not-resolved="false"></xref> and the file type in <xref href="NineP.Protocol.FileKind" data-throw-if-not-resolved="false"></xref>, so no one
+
+      type mixes the three vocabularies.
+  - type:
       text: LockFlags
       url: NineP.Protocol.LockFlags.html
     description: <code>Tlock</code> flags (reference §4.8). RECLAIM is reserved and never honoured.

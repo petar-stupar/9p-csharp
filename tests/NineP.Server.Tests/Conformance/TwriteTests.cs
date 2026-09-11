@@ -110,7 +110,7 @@ public sealed class TwriteTests
     private static MemoryFilesystem Populated()
     {
         MemoryFilesystem tree = new();
-        tree.Root.Add(tree.NewFile("target", 0x1B6));
+        tree.Root.Add(tree.NewFile("target", Perms.P0666));
         return tree;
     }
 }

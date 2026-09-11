@@ -115,7 +115,7 @@ public sealed class OpenStateTests
     public async Task DmexclSecondOpenFails()
     {
         MemoryFilesystem tree = new();
-        MemoryFile guarded = tree.NewFile("locked", 0x1A4);
+        MemoryFile guarded = tree.NewFile("locked", Perms.P0644);
         guarded.Exclusive = true;
         tree.Root.Add(guarded);
 
@@ -140,7 +140,7 @@ public sealed class OpenStateTests
     public async Task OrcloseRemovesOnClunk()
     {
         MemoryFilesystem tree = new();
-        tree.Root.Add(tree.NewFile("scratch", 0x1B6));
+        tree.Root.Add(tree.NewFile("scratch", Perms.P0666));
 
         await using ServerHarness harness = await ServerHarness.StartAsync(tree: tree);
         await using NinePSession session = await harness.ConnectAsync(Dialect.P9_2000);
@@ -170,7 +170,7 @@ public sealed class OpenStateTests
     public async Task OpenOfASymlinkIsEloop(Dialect dialect)
     {
         MemoryFilesystem tree = new();
-        tree.Root.Add(tree.NewFile("hello.txt", 0x1B6));
+        tree.Root.Add(tree.NewFile("hello.txt", Perms.P0666));
         tree.Root.Add(tree.NewSymlink("link", "hello.txt"));
 
         await using ServerHarness harness = await ServerHarness.StartAsync(tree: tree);
@@ -228,7 +228,7 @@ public sealed class OpenStateTests
     public async Task OpenOfAFifoIsEnxio(Dialect dialect, int errno)
     {
         MemoryFilesystem tree = new();
-        tree.Root.Add(new MemoryFifo("pipe", 0x1B6, 4242));
+        tree.Root.Add(new MemoryFifo("pipe", Perms.P0666, 4242));
 
         await using ServerHarness harness = await ServerHarness.StartAsync(tree: tree);
         await using NinePSession session = await harness.ConnectAsync(dialect);
@@ -319,6 +319,6 @@ public sealed class OpenStateTests
     /// <param name="name">The node's name.</param>
     /// <param name="perm">Its permission bits.</param>
     /// <param name="path">Its qid path.</param>
-    private sealed class MemoryFifo(string name, uint perm, ulong path)
+    private sealed class MemoryFifo(string name, FilePermissions perm, ulong path)
         : MemoryNode(name, FileKind.Fifo, perm, path);
 }

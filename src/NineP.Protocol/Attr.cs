@@ -14,7 +14,7 @@ public sealed record Attr
     public required FileKind Kind { get; init; }
 
     /// <summary>Permission bits only: 0777 plus setuid, setgid and sticky (the 07777 mask).</summary>
-    public required uint Perm { get; init; }
+    public required FilePermissions Perm { get; init; }
 
     /// <summary>Non-permission mode bits: append, exclusive, temporary, auth.</summary>
     public FileFlags Flags { get; init; }

@@ -197,7 +197,10 @@ no frame is written, and no fid or tag is spent.
 | `SetAttr.ATime` on 9P2000 / `.u` | `NinePFid.SetAttrAsync` | `EPERM` — stat(5) lists `atime` among the fields a `wstat` may not set |
 | `SetAttr.ATimeToNow` / `MTimeToNow` / `CTimeToNow` on 9P2000 / `.u` | `NinePFid.SetAttrAsync` | `EINVAL` — a `Twstat` carries a time *value*; there is no "use the server's clock" |
 | `SetAttr.Flags` on `.L` | `NinePFid.SetAttrAsync` | `EINVAL` — `Tsetattr.mode` is a POSIX word with no bit for `DMAPPEND`, `DMEXCL` or `DMTMP` |
-| `DMDIR`, `DMAPPEND`, `DMEXCL` or `DMTMP` in `perm` on `.L` | `NinePFid.CreateAsync` | `EOPNOTSUPP` — `Tlcreate.mode` has only the `07777` bits; a directory is `MkdirAsync` |
+| `FileKind.Directory` on `.L` | `NinePFid.CreateAsync` | `EOPNOTSUPP` — `Tlcreate` makes a plain file; a directory is `Tmkdir`, so `MkdirAsync` |
+| `fileFlags` other than `FileFlags.None` on `.L` | `NinePFid.CreateAsync` | `EOPNOTSUPP` — `Tlcreate.mode` has only the `07777` bits, and no bit for `DMAPPEND`, `DMEXCL` or `DMTMP` |
+| a kind other than `File` or `Directory` | `NinePFid.CreateAsync` | `EOPNOTSUPP` — a symlink's target and a device's numbers travel in the `.u` extension field, which this create does not send; use `SymlinkAsync` or `Tmknod` (rule 15) |
+| `FileFlags.Auth` or `FileFlags.Mount` in `fileFlags` | `NinePFid.CreateAsync` | `EPERM` — the server's own bits; stat(5) lets a client set only the other three (rule 19) |
 | a rename across directories on 9P2000 / `.u` | `NinePSession.RenameAsync` | `"cannot rename across directories"` |
 | symlink creation, statfs, locks, xattrs outside `.L` | `NinePSession`, `NinePFid` | `EOPNOTSUPP` |
 

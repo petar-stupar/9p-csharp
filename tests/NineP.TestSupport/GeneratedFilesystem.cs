@@ -58,7 +58,7 @@ public static class OffsetPattern
 }
 
 public sealed class GeneratedFile(string name, ulong length)
-    : MemoryNode(name, FileKind.File, 0x1B6, 2), IFileHandler
+    : MemoryNode(name, FileKind.File, Perms.P0666, 2), IFileHandler
 {
     public ulong Length { get; set; } = length;
     public ulong? ReportedSize { get; set; }
@@ -114,7 +114,7 @@ public sealed class GeneratedFile(string name, ulong length)
 }
 
 public sealed class GeneratedDirectory(GeneratedFile file, int count, int nameBytes)
-    : MemoryNode("/", FileKind.Directory, 0x1FF, 1), IDirectoryHandler
+    : MemoryNode("/", FileKind.Directory, Perms.P0777, 1), IDirectoryHandler
 {
     public int Pages { get; private set; }
     public int LargestPage { get; private set; }
@@ -132,7 +132,7 @@ public sealed class GeneratedDirectory(GeneratedFile file, int count, int nameBy
         if (name.Length >= 8 && int.TryParse(name.AsSpan(1, 7), NumberStyles.None, CultureInfo.InvariantCulture, out int index)
             && index < count && string.Equals(name, NameAt(index), StringComparison.Ordinal))
         {
-            return ValueTask.FromResult<IHandler?>(new MemoryFile(name, 0x1A4, (ulong)index + 3));
+            return ValueTask.FromResult<IHandler?>(new MemoryFile(name, Perms.P0644, (ulong)index + 3));
         }
         return ValueTask.FromResult<IHandler?>(null);
     }

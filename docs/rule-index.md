@@ -172,7 +172,7 @@ Reading the table:
 | 145 | Ref §8.19 | A flag update the handler answered without applying is refused | `WstatTests.AFlagUpdateTheHandlerDroppedIsRefused` | flags |
 | 146 | Ref §5.8 | The flags are part of the mode, so only the owner may set one | `WstatTests.OnlyTheOwnerMaySetAFlag` | flags |
 | 147 | Ref §5.5 | A file created `DMEXCL` is held by its creator from the create | `CreateTests.ACreatedExclusiveFileIsHeldByItsCreator` | flags |
-| 148 | Ref §8.15 | Client: `DMDIR`, `DMAPPEND`, `DMEXCL` and `DMTMP` never reach a `.L` create | `ClientProjectionTests.TheFileFlagsNeverReachADotLCreate` | flags |
+| 148 | Ref §8.15 | Client: a directory and the file flags never reach a `.L` create | `ClientProjectionTests.TheFileFlagsNeverReachADotLCreate` | flags |
 | 149 | Ref §8.15 | Client: `SetAttr.Flags` never reaches a `Tsetattr` | `ClientProjectionTests.TheFileFlagsNeverReachADotLSetattr` | flags |
 | 150 | Ref §8.19 | Client: a mode word stating only `Perm` or only `Flags` is completed from a `Tstat`, so a chmod keeps the flags | `ClientProjectionTests.AHalfStatedModeWordIsCompletedFromTheRecord` | flags |
 | 151 | Ref §8.19 | The projector refuses a half-stated mode word rather than guess the other half | `AttrProjectorTests.AHalfStatedModeWordIsRefused` | flags |
@@ -212,3 +212,5 @@ Reading the table:
 | 185 | Ref §8.40 | jsonfs refuses a create past its entry cap with ENOSPC and changes nothing | `JsonFsTests.CreateBeyondMaxEntriesIsEnospc` | limits |
 | 186 | Ref §8.40 | A coalescing write-back rewrites once per window and flushes what it owes on shutdown | `JsonFsTests.WriteBackIsCoalescedAndFlushedOnShutdown` | limits |
 | 187 | Ref §8.41 | Releasing a session whose connection died reports no error for the clunks it could not deliver | `ClientLifetimeRegressionTests.DisposingASessionWhoseServerIsGoneIsQuiet` | release-gate |
+| 188 | Ref §8.15 | Client: a create through a fid of a kind whose payload needs the `.u` extension field is refused, not sent with the field empty | `ClientProjectionTests.ACreateOfAKindWithNoExtensionFieldIsRefused` | perms |
+| 189 | Ref §8.19 | Client: a create asking for `DMAUTH` or `DMMOUNT` is refused before a `Tcreate` is built | `ClientProjectionTests.ACreateAskingForAServerOwnedFlagIsRefused` | perms |

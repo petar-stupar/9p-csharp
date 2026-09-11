@@ -204,12 +204,12 @@ body:
     uid: NineP.Protocol.SetAttr.Perm
     commentId: P:NineP.Protocol.SetAttr.Perm
 - markdown: New permission bits (the 07777 mask).
-- code: public uint? Perm { get; init; }
+- code: public FilePermissions? Perm { get; init; }
 - h4: Property Value
 - parameters:
   - type:
-    - text: uint
-      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    - text: FilePermissions
+      url: NineP.Protocol.FilePermissions.html
     - '?'
 - api3: Size
   id: NineP_Protocol_SetAttr_Size

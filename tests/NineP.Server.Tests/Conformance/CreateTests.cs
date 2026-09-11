@@ -338,7 +338,7 @@ public sealed class CreateTests
     private static MemoryFilesystem Tree()
     {
         MemoryFilesystem tree = new();
-        tree.Root.Add(tree.NewDirectory("sub", 0x1FF));
+        tree.Root.Add(tree.NewDirectory("sub", Perms.P0777));
         return tree;
     }
 }

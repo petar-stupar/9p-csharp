@@ -14,7 +14,7 @@ public sealed class MemoryFilesystem : IFilesystem, IStatFsCapability
     private ulong _nextPath = 1;
 
     /// <summary>Creates a tree with an empty root owned by "glenda".</summary>
-    public MemoryFilesystem() => Root = NewDirectory("/", 0x1FF);
+    public MemoryFilesystem() => Root = NewDirectory("/", Perms.P0777);
 
     /// <summary>The root every attach resolves to.</summary>
     public MemoryDirectory Root { get; }
@@ -62,14 +62,14 @@ public sealed class MemoryFilesystem : IFilesystem, IStatFsCapability
     /// <param name="name">The directory's name.</param>
     /// <param name="perm">Its permission bits.</param>
     /// <returns>The new directory.</returns>
-    public MemoryDirectory NewDirectory(string name, uint perm) =>
+    public MemoryDirectory NewDirectory(string name, FilePermissions perm) =>
         new(name, perm, _nextPath++, this);
 
     /// <summary>Creates a file node belonging to this tree.</summary>
     /// <param name="name">The file's name.</param>
     /// <param name="perm">Its permission bits.</param>
     /// <returns>The new file.</returns>
-    public MemoryFile NewFile(string name, uint perm) => new(name, perm, _nextPath++);
+    public MemoryFile NewFile(string name, FilePermissions perm) => new(name, perm, _nextPath++);
 
     /// <summary>Creates a symbolic link belonging to this tree.</summary>
     /// <param name="name">The link's name.</param>
@@ -88,7 +88,7 @@ public abstract class MemoryNode : IHandler
     /// <param name="kind">What kind of file it is.</param>
     /// <param name="perm">Its permission bits.</param>
     /// <param name="path">Its qid path, unique in the tree.</param>
-    protected MemoryNode(string name, FileKind kind, uint perm, ulong path)
+    protected MemoryNode(string name, FileKind kind, FilePermissions perm, ulong path)
     {
         Name = name;
         Kind = kind;
@@ -106,7 +106,7 @@ public abstract class MemoryNode : IHandler
     public FileKind Kind { get; }
 
     /// <summary>The permission bits; the core checks them before calling a handler.</summary>
-    public uint Perm { get; set; }
+    public FilePermissions Perm { get; set; }
 
     /// <summary>The qid path: this node's identity for the life of the tree.</summary>
     public ulong Path { get; }
@@ -238,7 +238,7 @@ public abstract class MemoryNode : IHandler
             throw new NinePException(NinePError.FromErrno(Errno.EISDIR));
         }
 
-        if (update.Perm is uint perm)
+        if (update.Perm is FilePermissions perm)
         {
             Perm = perm;
         }
@@ -314,7 +314,7 @@ public abstract class MemoryNode : IHandler
 }
 
 /// <summary>A directory in a <see cref="MemoryFilesystem"/>.</summary>
-public sealed class MemoryDirectory(string name, uint perm, ulong path, MemoryFilesystem tree)
+public sealed class MemoryDirectory(string name, FilePermissions perm, ulong path, MemoryFilesystem tree)
     : MemoryNode(name, FileKind.Directory, perm, path), IDirectoryHandler, ILinkCapability
 {
     private readonly Dictionary<string, MemoryNode> _children = new(StringComparer.Ordinal);
@@ -572,7 +572,7 @@ public sealed class MemoryDirectory(string name, uint perm, ulong path, MemoryFi
 }
 
 /// <summary>A regular file in a <see cref="MemoryFilesystem"/>.</summary>
-public sealed class MemoryFile(string name, uint perm, ulong path)
+public sealed class MemoryFile(string name, FilePermissions perm, ulong path)
     : MemoryNode(name, FileKind.File, perm, path), IFileHandler, IXattrHandler, ILockCapability
 {
     private readonly Dictionary<string, byte[]> _xattrs = new(StringComparer.Ordinal);
@@ -822,7 +822,7 @@ public sealed class MemoryFile(string name, uint perm, ulong path)
 
 /// <summary>A symbolic link in a <see cref="MemoryFilesystem"/>.</summary>
 public sealed class MemorySymlink(string name, string target, ulong path)
-    : MemoryNode(name, FileKind.Symlink, 0x1FF, path), ISymlinkHandler
+    : MemoryNode(name, FileKind.Symlink, Perms.P0777, path), ISymlinkHandler
 {
     /// <summary>What the link points at.</summary>
     public string Target { get; } = target;

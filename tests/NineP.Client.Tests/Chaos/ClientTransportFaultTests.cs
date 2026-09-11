@@ -138,7 +138,7 @@ public sealed class ClientTransportFaultTests
             {
                 content[i] = (byte)(i * 31);
             }
-            await using (NinePFid file = await s.CreateFileAsync("data", 0x1B6, Ct))
+            await using (NinePFid file = await s.CreateFileAsync("data", Perms.P0666, Ct))
             {
                 await file.WriteAllAsync(content, Ct);
             }

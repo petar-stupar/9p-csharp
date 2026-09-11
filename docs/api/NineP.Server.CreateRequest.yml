@@ -155,12 +155,12 @@ body:
     uid: NineP.Server.CreateRequest.Perm
     commentId: P:NineP.Server.CreateRequest.Perm
 - markdown: Permission bits after the core applied the parent mask and the 07777 mask.
-- code: public required uint Perm { get; init; }
+- code: public required FilePermissions Perm { get; init; }
 - h4: Property Value
 - parameters:
   - type:
-    - text: uint
-      url: https://learn.microsoft.com/dotnet/api/system.uint32
+    - text: FilePermissions
+      url: NineP.Protocol.FilePermissions.html
 - api3: Rdev
   id: NineP_Server_CreateRequest_Rdev
   src: https://github.com/petar-stupar/9p-csharp/blob/main/src/NineP.Server/CreateRequest.cs#L42

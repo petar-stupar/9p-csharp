@@ -51,7 +51,7 @@ public sealed class ClientProjectionTests
         NinePFid fid = harness.Fid();
 
         NinePException refusal = await Assert.ThrowsAsync<NinePException>(
-            async () => await fid.CreateAsync("scratch", 0x1A4, OpenMode.Write, OpenFlags.RemoveOnClose, Ct));
+            async () => await fid.CreateAsync("scratch", FileKind.File, Perms.P0644, OpenMode.Write, OpenFlags.RemoveOnClose, cancellationToken: Ct));
 
         Assert.Equal(Errno.EOPNOTSUPP, refusal.Error.Errno);
         await harness.AssertNothingWasSentAsync();
@@ -211,22 +211,78 @@ public sealed class ClientProjectionTests
     /// for one is refused before the message is built. The server would have masked the bit off
     /// and answered <c>Rlcreate</c> for a plain file.
     /// </summary>
-    /// <param name="bit">The <c>Tcreate.perm</c> bit that has no .L spelling.</param>
+    /// <param name="kind">What the caller asked to create; a directory is <c>Tmkdir</c>'s job.</param>
+    /// <param name="fileFlags">The file flag that has no .L spelling.</param>
     /// <returns>The running test.</returns>
     [Theory]
-    [InlineData(ModeBits.DMAPPEND)]
-    [InlineData(ModeBits.DMEXCL)]
-    [InlineData(ModeBits.DMTMP)]
-    [InlineData(ModeBits.DMDIR)]
-    public async Task TheFileFlagsNeverReachADotLCreate(uint bit)
+    [InlineData(FileKind.File, FileFlags.Append)]
+    [InlineData(FileKind.File, FileFlags.Exclusive)]
+    [InlineData(FileKind.File, FileFlags.Temporary)]
+    [InlineData(FileKind.Directory, FileFlags.None)]
+    public async Task TheFileFlagsNeverReachADotLCreate(FileKind kind, FileFlags fileFlags)
     {
         await using Harness harness = await Harness.StartAsync(Dialect.P9_2000_L);
         NinePFid fid = harness.Fid();
 
         NinePException refusal = await Assert.ThrowsAsync<NinePException>(
-            async () => await fid.CreateAsync("flagged", bit | 0x1A4, OpenMode.Write, OpenFlags.None, Ct));
+            async () => await fid.CreateAsync(
+                "flagged", kind, Perms.P0644, OpenMode.Write, OpenFlags.None, fileFlags, Ct));
 
         Assert.Equal(Errno.EOPNOTSUPP, refusal.Error.Errno);
+        await harness.AssertNothingWasSentAsync();
+    }
+
+    /// <summary>
+    /// Rule 15: a symlink's target and a device's numbers travel in the <c>.u</c> extension field,
+    /// which a create through a fid does not send. Before the kind was a parameter the caller
+    /// spelled this as <c>DMSYMLINK</c> or <c>DMDEVICE</c> in the perm word, and the create went
+    /// out with the extension empty — a symlink to nowhere, answered <c>Rcreate</c>. It is refused
+    /// in every dialect now; <c>SymlinkAsync</c> and <c>Tmknod</c> are what carry the payload.
+    /// </summary>
+    /// <param name="dialect">The session dialect; the refusal does not depend on it.</param>
+    /// <param name="kind">The kind that has no spelling in this create.</param>
+    /// <returns>The running test.</returns>
+    [Theory]
+    [InlineData(Dialect.P9_2000_u, FileKind.Symlink)]
+    [InlineData(Dialect.P9_2000_u, FileKind.CharDevice)]
+    [InlineData(Dialect.P9_2000_u, FileKind.BlockDevice)]
+    [InlineData(Dialect.P9_2000_u, FileKind.Fifo)]
+    [InlineData(Dialect.P9_2000_u, FileKind.Socket)]
+    [InlineData(Dialect.P9_2000, FileKind.Symlink)]
+    [InlineData(Dialect.P9_2000_L, FileKind.Symlink)]
+    public async Task ACreateOfAKindWithNoExtensionFieldIsRefused(Dialect dialect, FileKind kind)
+    {
+        await using Harness harness = await Harness.StartAsync(dialect);
+        NinePFid fid = harness.Fid();
+
+        NinePException refusal = await Assert.ThrowsAsync<NinePException>(
+            async () => await fid.CreateAsync(
+                "payload", kind, Perms.P0644, OpenMode.Write, cancellationToken: Ct));
+
+        Assert.Equal(Errno.EOPNOTSUPP, refusal.Error.Errno);
+        await harness.AssertNothingWasSentAsync();
+    }
+
+    /// <summary>
+    /// Rule 19: <c>DMAUTH</c> and <c>DMMOUNT</c> are the server's own bits, so a client that asks
+    /// for one on a create is refused before a <c>Tcreate</c> is built — the same refusal the
+    /// server makes on receipt, made one hop earlier so nothing goes out.
+    /// </summary>
+    /// <param name="fileFlags">The server-owned flag the caller asked for.</param>
+    /// <returns>The running test.</returns>
+    [Theory]
+    [InlineData(FileFlags.Auth)]
+    [InlineData(FileFlags.Mount)]
+    public async Task ACreateAskingForAServerOwnedFlagIsRefused(FileFlags fileFlags)
+    {
+        await using Harness harness = await Harness.StartAsync(Dialect.P9_2000_u);
+        NinePFid fid = harness.Fid();
+
+        NinePException refusal = await Assert.ThrowsAsync<NinePException>(
+            async () => await fid.CreateAsync(
+                "owned", FileKind.File, Perms.P0644, OpenMode.Write, OpenFlags.None, fileFlags, Ct));
+
+        Assert.Equal(Errno.EPERM, refusal.Error.Errno);
         await harness.AssertNothingWasSentAsync();
     }
 
@@ -266,7 +322,7 @@ public sealed class ClientProjectionTests
         NinePFid fid = harness.Fid();
 
         // A chmod on an append-only file keeps the file append-only.
-        Task chmod = fid.SetAttrAsync(new SetAttr { Perm = 0x1A4 }, Ct).AsTask();
+        Task chmod = fid.SetAttrAsync(new SetAttr { Perm = Perms.P0644 }, Ct).AsTask();
         Tstat stat = await harness.Server.ReadAsync<Tstat>(Ct);
         await harness.Server.WriteAsync(
             new Rstat(stat.Tag, Record(ModeBits.DMAPPEND | 0x1ED)), Ct);
@@ -288,7 +344,7 @@ public sealed class ClientProjectionTests
         Assert.Equal(ModeBits.DMEXCL | 0x1EDu, sent.Stat.Mode);
 
         // Both halves stated: no Tstat, the Twstat is the next frame.
-        Task whole = fid.SetAttrAsync(new SetAttr { Perm = 0x1B6, Flags = FileFlags.Temporary }, Ct).AsTask();
+        Task whole = fid.SetAttrAsync(new SetAttr { Perm = Perms.P0666, Flags = FileFlags.Temporary }, Ct).AsTask();
         sent = await harness.Server.ReadAsync<Twstat>(Ct);
         await harness.Server.WriteAsync(new Rwstat(sent.Tag), Ct);
         await whole;
@@ -417,7 +473,7 @@ public sealed class ClientProjectionTests
 
         // Unmarked, so the Attr default — and the kind comes from the qid, which is always valid.
         Assert.Equal(FileKind.Directory, attr.Kind);
-        Assert.Equal(0u, attr.Perm);
+        Assert.Equal(FilePermissions.None, attr.Perm);
         Assert.Equal(1ul, attr.NLink);
         Assert.Equal(Constants.NONUNAME, attr.Uid);
         Assert.Equal(Constants.NONUNAME, attr.Gid);

@@ -48,8 +48,8 @@ public sealed class DirectoryPackerTests
     public async Task NoDotOrDotDotEntries()
     {
         MemoryFilesystem tree = Populated();
-        tree.Root.Add(tree.NewFile(".", 0x1A4));
-        tree.Root.Add(tree.NewFile("..", 0x1A4));
+        tree.Root.Add(tree.NewFile(".", Perms.P0644));
+        tree.Root.Add(tree.NewFile("..", Perms.P0644));
 
         byte[] payload = await Dirents(tree, 0, 4096);
         Assert.True(DirEntryCodec.TryReadAll(payload, out IReadOnlyList<DirEntry> entries, out _));
@@ -118,9 +118,9 @@ public sealed class DirectoryPackerTests
     private static MemoryFilesystem Populated()
     {
         MemoryFilesystem tree = new();
-        tree.Root.Add(tree.NewFile("alpha", 0x1A4));
-        tree.Root.Add(tree.NewFile("bravo", 0x1A4));
-        tree.Root.Add(tree.NewDirectory("charlie", 0x1ED));
+        tree.Root.Add(tree.NewFile("alpha", Perms.P0644));
+        tree.Root.Add(tree.NewFile("bravo", Perms.P0644));
+        tree.Root.Add(tree.NewDirectory("charlie", Perms.P0755));
         return tree;
     }
 

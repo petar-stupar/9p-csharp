@@ -22,8 +22,8 @@ public sealed class ClunkRemoveTests
     public async Task FidGoneEvenWhenRemoveFails()
     {
         MemoryFilesystem tree = new();
-        MemoryDirectory full = tree.NewDirectory("full", 0x1ED);
-        full.Add(tree.NewFile("child", 0x1A4));
+        MemoryDirectory full = tree.NewDirectory("full", Perms.P0755);
+        full.Add(tree.NewFile("child", Perms.P0644));
         tree.Root.Add(full);
 
         await using ServerHarness harness = await ServerHarness.StartAsync(tree: tree);
@@ -54,7 +54,7 @@ public sealed class ClunkRemoveTests
     public async Task OrcloseFailureStillFreesTheFid()
     {
         MemoryFilesystem tree = new();
-        tree.Root.Add(tree.NewFile("vanishing", 0x1B6));
+        tree.Root.Add(tree.NewFile("vanishing", Perms.P0666));
 
         // 9P2000: ORCLOSE is a mode bit there, and .L has no open(2) flag that means it.
         await using ServerHarness harness = await ServerHarness.StartAsync(tree: tree);
@@ -81,7 +81,7 @@ public sealed class ClunkRemoveTests
     public async Task RemoveTakesTheFileAndTheFid()
     {
         MemoryFilesystem tree = new();
-        tree.Root.Add(tree.NewFile("doomed", 0x1B6));
+        tree.Root.Add(tree.NewFile("doomed", Perms.P0666));
 
         await using ServerHarness harness = await ServerHarness.StartAsync(tree: tree);
         await using NinePSession session = await harness.ConnectAsync(Dialect.P9_2000_L);
@@ -107,7 +107,7 @@ public sealed class ClunkRemoveTests
     public async Task AHandlersClunkErrorIsTheReply(Dialect dialect)
     {
         MemoryFilesystem tree = new();
-        MemoryFile file = tree.NewFile("unflushable", 0x1B6);
+        MemoryFile file = tree.NewFile("unflushable", Perms.P0666);
         file.ClunkFailure = NinePError.FromErrno(Errno.EIO);
         tree.Root.Add(file);
 
@@ -138,7 +138,7 @@ public sealed class ClunkRemoveTests
     public async Task AHandlersClunkErrorSurvivesARemove()
     {
         MemoryFilesystem tree = new();
-        MemoryFile file = tree.NewFile("doomed", 0x1B6);
+        MemoryFile file = tree.NewFile("doomed", Perms.P0666);
         file.ClunkFailure = NinePError.FromErrno(Errno.EIO);
         tree.Root.Add(file);
 
@@ -169,10 +169,10 @@ public sealed class ClunkRemoveTests
     public async Task ARefusedClunkDuringASessionResetDoesNotStrandTheRest()
     {
         MemoryFilesystem tree = new();
-        MemoryFile refusing = tree.NewFile("refusing", 0x1B6);
+        MemoryFile refusing = tree.NewFile("refusing", Perms.P0666);
         refusing.ClunkFailure = NinePError.FromErrno(Errno.EIO);
         tree.Root.Add(refusing);
-        MemoryFile ordinary = tree.Root.Add(tree.NewFile("ordinary", 0x1B6));
+        MemoryFile ordinary = tree.Root.Add(tree.NewFile("ordinary", Perms.P0666));
 
         await using ServerHarness harness = await ServerHarness.StartAsync(tree: tree);
         await using WireClient client = await WireClient

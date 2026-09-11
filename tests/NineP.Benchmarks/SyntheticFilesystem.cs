@@ -1,6 +1,7 @@
 using NineP.Protocol;
 using NineP.Protocol.Auth;
 using NineP.Server;
+using NineP.TestSupport;
 
 namespace NineP.Benchmarks;
 
@@ -39,7 +40,7 @@ internal sealed class SyntheticFilesystem(ulong length) : IFilesystem, IDirector
         {
             Qid = Qid,
             Kind = FileKind.Directory,
-            Perm = 0x1FF,
+            Perm = Perms.P0777,
             UserName = "bench",
             GroupName = "bench",
             ATime = Epoch,
@@ -145,7 +146,7 @@ internal sealed class SyntheticFile(ulong length) : IFileHandler
         {
             Qid = Qid,
             Kind = FileKind.File,
-            Perm = 0x1B6,
+            Perm = Perms.P0666,
             Size = length,
             Blocks = (length + 511) / 512,
             UserName = "bench",

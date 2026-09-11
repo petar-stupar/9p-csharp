@@ -27,7 +27,7 @@ public sealed class WstatTests
     public async Task AllOrNothing()
     {
         MemoryFilesystem tree = new();
-        MemoryFile theirs = tree.NewFile("theirs", 0x1B6);
+        MemoryFile theirs = tree.NewFile("theirs", Perms.P0666);
         theirs.Owner = "root";
         theirs.Uid = 0;
         theirs.Group = "wheel";
@@ -47,7 +47,7 @@ public sealed class WstatTests
             await Assert.ThrowsAsync<NinePException>(
                 async () => await session.Messages.WstatAsync(new Twstat(0, file.Fid, both), Ct));
 
-            Assert.Equal(0x1B6u, theirs.Perm);
+            Assert.Equal(Perms.P0666, theirs.Perm);
             Assert.Equal(5, theirs.Data.Length);
         }
     }
@@ -57,7 +57,7 @@ public sealed class WstatTests
     public async Task AllDontTouchIsAnFsync()
     {
         MemoryFilesystem tree = new();
-        MemoryFile file = tree.NewFile("mine", 0x1B6);
+        MemoryFile file = tree.NewFile("mine", Perms.P0666);
         tree.Root.Add(file);
 
         await using ServerHarness harness = await ServerHarness.StartAsync(tree: tree);
@@ -106,7 +106,7 @@ public sealed class WstatTests
     public async Task AnUnsettableFieldIsRefused(string field)
     {
         MemoryFilesystem tree = new();
-        MemoryFile mine = tree.NewFile("mine", 0x1B6);
+        MemoryFile mine = tree.NewFile("mine", Perms.P0666);
         tree.Root.Add(mine);
 
         await using ServerHarness harness = await ServerHarness.StartAsync(tree: tree);
@@ -170,7 +170,7 @@ public sealed class WstatTests
     public async Task AFieldEchoedBackUnchangedIsANoOp(string field)
     {
         MemoryFilesystem tree = new();
-        MemoryFile mine = tree.NewFile("mine", 0x1B6);
+        MemoryFile mine = tree.NewFile("mine", Perms.P0666);
         tree.Root.Add(mine);
 
         await using ServerHarness harness = await ServerHarness.StartAsync(tree: tree);
@@ -217,7 +217,7 @@ public sealed class WstatTests
     public async Task DmdirCannotChange()
     {
         MemoryFilesystem tree = new();
-        MemoryFile mine = tree.NewFile("mine", 0x1B6);
+        MemoryFile mine = tree.NewFile("mine", Perms.P0666);
         tree.Root.Add(mine);
 
         await using ServerHarness harness = await ServerHarness.StartAsync(tree: tree);
@@ -234,7 +234,7 @@ public sealed class WstatTests
             // A 9P2000 session carries the ename alone, so that is what is asserted here; the
             // .u and .L projections of the same value carry errno EPERM.
             Assert.Contains("DMDIR", refusal.Error.Ename, StringComparison.Ordinal);
-            Assert.Equal(0x1B6u, mine.Perm);
+            Assert.Equal(Perms.P0666, mine.Perm);
         }
     }
 
@@ -262,7 +262,7 @@ public sealed class WstatTests
     public async Task ChangingAFileFlagReachesTheHandler(uint bit, FileFlags expected, Dialect dialect)
     {
         MemoryFilesystem tree = new();
-        MemoryFile mine = tree.NewFile("mine", 0x1B6);
+        MemoryFile mine = tree.NewFile("mine", Perms.P0666);
         tree.Root.Add(mine);
 
         await using ServerHarness harness = await ServerHarness.StartAsync(tree: tree);
@@ -276,7 +276,7 @@ public sealed class WstatTests
 
             Assert.Equal(expected, Assert.IsType<SetAttr>(mine.LastUpdate).Flags);
             Assert.Equal(expected, mine.Flags);
-            Assert.Equal(0x1A4u, mine.Perm);
+            Assert.Equal(Perms.P0644, mine.Perm);
 
             StatRecord now = (await session.Messages.StatAsync(new Tstat(0, fid.Fid), Ct)).Stat;
             Assert.Equal(bit, now.Mode & bit);
@@ -293,7 +293,7 @@ public sealed class WstatTests
     public async Task AFlagEchoedBackUnchangedIsANoOp()
     {
         MemoryFilesystem tree = new();
-        MemoryFile mine = tree.NewFile("mine", 0x1B6);
+        MemoryFile mine = tree.NewFile("mine", Perms.P0666);
         mine.Exclusive = true;
         tree.Root.Add(mine);
 
@@ -309,7 +309,7 @@ public sealed class WstatTests
             StatRecord chmod = StatRecord.DontTouch with { Mode = (now.Mode & ~0x1FFu) | 0x1A4 };
             await session.Messages.WstatAsync(new Twstat(0, fid.Fid, chmod), Ct);
 
-            Assert.Equal(0x1A4u, mine.Perm);
+            Assert.Equal(Perms.P0644, mine.Perm);
             Assert.True(mine.Exclusive);
             Assert.Null(Assert.IsType<SetAttr>(mine.LastUpdate).Flags);
 
@@ -332,7 +332,7 @@ public sealed class WstatTests
     public async Task AFlagUpdateTheHandlerDroppedIsRefused()
     {
         MemoryFilesystem tree = new();
-        MemoryFile mine = tree.NewFile("mine", 0x1B6);
+        MemoryFile mine = tree.NewFile("mine", Perms.P0666);
         mine.DropsFlagUpdates = true;
         tree.Root.Add(mine);
 
@@ -364,7 +364,7 @@ public sealed class WstatTests
     public async Task OnlyTheOwnerMaySetAFlag()
     {
         MemoryFilesystem tree = new();
-        MemoryFile theirs = tree.NewFile("theirs", 0x1B6);
+        MemoryFile theirs = tree.NewFile("theirs", Perms.P0666);
         theirs.Owner = "root";
         theirs.Uid = 0;
         tree.Root.Add(theirs);
@@ -399,7 +399,7 @@ public sealed class WstatTests
     public async Task AServerOwnedBitCannotBeSetByAWstat(uint bit)
     {
         MemoryFilesystem tree = new();
-        MemoryFile mine = tree.NewFile("mine", 0x1B6);
+        MemoryFile mine = tree.NewFile("mine", Perms.P0666);
         tree.Root.Add(mine);
 
         await using ServerHarness harness = await ServerHarness.StartAsync(tree: tree);
@@ -415,7 +415,7 @@ public sealed class WstatTests
 
             Assert.Equal("wstat cannot set DMAUTH or DMMOUNT", refusal.Error.Ename);
             Assert.Equal(Errno.EPERM, refusal.Error.Errno);
-            Assert.Equal(0x1B6u, mine.Perm);
+            Assert.Equal(Perms.P0666, mine.Perm);
             Assert.Null(mine.LastUpdate);
         }
     }
@@ -431,13 +431,13 @@ public sealed class WstatTests
     /// <param name="expected">The 07777 permission the handler must end up holding.</param>
     /// <returns>A task that completes when the round trip has been observed.</returns>
     [Theory]
-    [InlineData(ModeBits.DMSETUID, 0x9B6u)]
-    [InlineData(ModeBits.DMSETGID, 0x5B6u)]
-    [InlineData(ModeBits.DMSETVTX, 0x3B6u)]
-    public async Task TheDotUPermissionBitsRoundTripThroughWstat(uint dmBit, uint expected)
+    [InlineData(ModeBits.DMSETUID, Perms.P0666 | FilePermissions.SetUid)]
+    [InlineData(ModeBits.DMSETGID, Perms.P0666 | FilePermissions.SetGid)]
+    [InlineData(ModeBits.DMSETVTX, Perms.P0666 | FilePermissions.Sticky)]
+    public async Task TheDotUPermissionBitsRoundTripThroughWstat(uint dmBit, FilePermissions expected)
     {
         MemoryFilesystem tree = new();
-        MemoryFile mine = tree.NewFile("mine", 0x1B6);
+        MemoryFile mine = tree.NewFile("mine", Perms.P0666);
         tree.Root.Add(mine);
 
         await using ServerHarness harness = await ServerHarness.StartAsync(tree: tree);
@@ -473,7 +473,7 @@ public sealed class WstatTests
     public async Task ASetuidChmodIsRefusedOnPlain9P2000()
     {
         MemoryFilesystem tree = new();
-        MemoryFile mine = tree.NewFile("mine", 0x1B6);
+        MemoryFile mine = tree.NewFile("mine", Perms.P0666);
         tree.Root.Add(mine);
 
         await using ServerHarness harness = await ServerHarness.StartAsync(tree: tree);
@@ -483,10 +483,10 @@ public sealed class WstatTests
         await using (fid.ConfigureAwait(false))
         {
             NinePException refusal = await Assert.ThrowsAsync<NinePException>(
-                async () => await fid.SetAttrAsync(new SetAttr { Perm = 0x9B6 }, Ct));
+                async () => await fid.SetAttrAsync(new SetAttr { Perm = Perms.P4666 }, Ct));
 
             Assert.Equal(Errno.EINVAL, refusal.Error.Errno);
-            Assert.Equal(0x1B6u, mine.Perm);
+            Assert.Equal(Perms.P0666, mine.Perm);
         }
     }
 
@@ -495,7 +495,7 @@ public sealed class WstatTests
     public async Task TheOwnerMayChangeModeAndLength()
     {
         MemoryFilesystem tree = new();
-        MemoryFile mine = tree.NewFile("mine", 0x1B6);
+        MemoryFile mine = tree.NewFile("mine", Perms.P0666);
         mine.Data = "12345"u8.ToArray();
         tree.Root.Add(mine);
 
@@ -508,7 +508,7 @@ public sealed class WstatTests
             StatRecord change = StatRecord.DontTouch with { Mode = 0x1A4, Length = 2 };
             await session.Messages.WstatAsync(new Twstat(0, fid.Fid, change), Ct);
 
-            Assert.Equal(0x1A4u, mine.Perm);
+            Assert.Equal(Perms.P0644, mine.Perm);
             Assert.Equal(2, mine.Data.Length);
         }
     }

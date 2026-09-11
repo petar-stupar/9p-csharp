@@ -414,12 +414,12 @@ public sealed class RepoHygieneTests
     }
 
     /// <summary>
-    /// §5.10's inventory, exactly: 133 public types in <c>NineP.Protocol</c>, 5 in
+    /// §5.10's inventory, exactly: 134 public types in <c>NineP.Protocol</c>, 5 in
     /// <c>NineP.Client</c>, 17 in <c>NineP.Server</c>. A type added or removed without updating
     /// the table in <c>docs/api.md</c> and the spec fails here.
     /// </summary>
     [Theory]
-    [InlineData("NineP.Protocol", 133)]
+    [InlineData("NineP.Protocol", 134)]
     [InlineData("NineP.Client", 5)]
     [InlineData("NineP.Server", 17)]
     public void PublicTypeCountMatchesSpec(string assembly, int expected)

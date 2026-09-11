@@ -20,7 +20,7 @@ public sealed class SessionShutdownRegressionTests
         using CancellationTokenSource budget = new(TimeSpan.FromSeconds(15));
         CancellationToken ct = budget.Token;
         MemoryFilesystem tree = new();
-        MemoryFile file = tree.Root.Add(tree.NewFile("open", 0x1B6));
+        MemoryFile file = tree.Root.Add(tree.NewFile("open", Perms.P0666));
         RecordingLogger logger = new();
         (INinePConnection clientWire, INinePConnection serverWire) = MemoryTransport.CreatePair();
         await using FakeNinePServer client = FakeNinePServer.Wrap(clientWire);

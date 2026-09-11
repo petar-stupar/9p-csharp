@@ -35,7 +35,7 @@ public sealed class StatFsTests
     public async Task TheFilesystemAnswersWhenTheHandlerDoesNot()
     {
         MemoryFilesystem tree = new();
-        tree.Root.Add(tree.NewFile("plain", 0x1B6));
+        tree.Root.Add(tree.NewFile("plain", Perms.P0666));
 
         await using ServerHarness harness = await ServerHarness.StartAsync(tree: tree);
         await using NinePSession session = await harness.ConnectAsync(Dialect.P9_2000_L);

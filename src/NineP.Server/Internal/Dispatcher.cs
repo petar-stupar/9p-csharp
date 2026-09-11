@@ -25,8 +25,9 @@ internal sealed class Dispatcher(ServerSession session, OpenState openState)
 
     private static readonly NinePError AuthenticationFailed = NinePError.FromEname("authentication failed");
 
-    private const uint FilePermMask = 0x1B6;
-    private const uint DirectoryPermMask = 0x1FF;
+    private const FilePermissions FilePermMask = FilePermissions.AllRead | FilePermissions.AllWrite;
+    private const FilePermissions DirectoryPermMask =
+        FilePermissions.OwnerAll | FilePermissions.GroupAll | FilePermissions.OtherAll;
 
     /// <summary>
     /// Every T-message this dispatcher routes, in the order of the table published as
@@ -602,7 +603,8 @@ internal sealed class Dispatcher(ServerSession session, OpenState openState)
         }
 
         IHandler created = await CreateChildAsync(
-            request.Fid, request.Name, kind, request.Perm, mode, flags, fileFlags, target, rdev,
+            request.Fid, request.Name, kind, AttrProjector.MaskCreatePerm(request.Perm), mode, flags,
+            fileFlags, target, rdev,
             Constants.NONUNAME, adopt: true, cancellationToken).ConfigureAwait(false);
 
         await ReplyAsync(pending, new Rcreate(pending.Tag, created.Qid, (uint)session.MaxPayload))
@@ -662,7 +664,7 @@ internal sealed class Dispatcher(ServerSession session, OpenState openState)
         uint fid,
         string name,
         FileKind kind,
-        uint perm,
+        FilePermissions perm,
         OpenMode mode,
         OpenFlags flags,
         FileFlags fileFlags,
@@ -1614,14 +1616,13 @@ internal sealed class Dispatcher(ServerSession session, OpenState openState)
         public ValueTask DisposeAsync() => ValueTask.CompletedTask;
     }
 
-    private static uint MaskAgainstParent(uint requested, uint parentPerm, bool directory)
+    private static FilePermissions MaskAgainstParent(
+        FilePermissions requested, FilePermissions parentPerm, bool directory)
     {
         // §5.5: perm & (~0777 | (dir.perm & 0777)) for a directory, and the 0666 form for a file.
-        uint mask = directory ? DirectoryPermMask : FilePermMask;
-        return requested & (~mask | (parentPerm & mask)) & ModeBitsMask;
+        FilePermissions mask = directory ? DirectoryPermMask : FilePermMask;
+        return requested & (~mask | (parentPerm & mask)) & FilePermissions.Mask;
     }
-
-    private const uint ModeBitsMask = 0xFFF;
 
     /// <summary>
     /// Parses a .u <c>Tcreate.extension</c> of the form <c>"b maj min"</c> or <c>"c maj min"</c>

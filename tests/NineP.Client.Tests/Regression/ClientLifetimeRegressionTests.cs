@@ -74,7 +74,7 @@ public sealed class ClientLifetimeRegressionTests
             async () => await stale.CloneAsync(Ct),
             async () => await stale.WalkAsync(["child"], Ct),
             async () => await stale.OpenAsync(OpenMode.Read, cancellationToken: Ct),
-            async () => await stale.CreateAsync("child", 0x1B6, OpenMode.Write, cancellationToken: Ct),
+            async () => await stale.CreateAsync("child", FileKind.File, Perms.P0666, OpenMode.Write, cancellationToken: Ct),
             async () => await stale.ReadAsync(0, new byte[1], Ct),
             async () => await stale.WriteAsync(0, new byte[1], Ct),
             async () => await stale.ReadAllAsync(Ct),
@@ -482,7 +482,7 @@ public sealed class ClientLifetimeRegressionTests
     }
 
     private sealed class RefusingXattrFile(int errno)
-        : MemoryNode("refusing", FileKind.File, 0x1B6, 20), IXattrHandler
+        : MemoryNode("refusing", FileKind.File, Perms.P0666, 20), IXattrHandler
     {
         public int Commits { get; private set; }
         public ValueTask<ReadOnlyMemory<byte>> ListXattrAsync(CancellationToken cancellationToken = default) =>

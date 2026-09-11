@@ -6,6 +6,39 @@ All notable changes to this repository are recorded here. The format follows
 
 ## [Unreleased]
 
+## [0.3.0] — 2026-09-11
+
+### Permission bits are a flags enum — 2026-09-11
+
+- **Breaking: `FilePermissions` replaces the raw `uint` permission word.** `Attr.Perm`,
+  `SetAttr.Perm` and `CreateRequest.Perm` are now `NineP.Protocol.FilePermissions`, a
+  `[Flags] enum : uint` naming every bit of the `07777` mask (reference §4.7) plus the combinations
+  a handler actually writes. The reference spells these in octal and C# has no octal literal, so
+  `Perm = 0x1ED` had to be decoded by hand; it is now
+  `Perm = FilePermissions.OwnerAll | FilePermissions.GroupReadExecute | FilePermissions.OtherReadExecute`.
+  The numeric values are the POSIX ones, so `(uint)perm` is the wire value and a cast is the whole
+  migration for a caller that already had the bits right. Nothing on the wire changed.
+
+- **Breaking: `NinePFid.CreateAsync` takes a kind and file flags instead of a raw `Tcreate.perm`
+  word.** It was the one client method whose `perm` was not a permission: `DMDIR` in it made a
+  directory and `DMAPPEND` / `DMEXCL` / `DMTMP` set the file flags, which is why `MkdirAsync` had
+  to write `perm | 0x80000000u`. The signature is now
+  `CreateAsync(name, kind, perm, mode, flags, fileFlags, cancellationToken)`, mirroring
+  `CreateRequest` on the server side, so what used to be a bit test is a type. A create of a
+  symlink or a device through it is refused rather than sent with the `.u` extension field empty
+  (§8 rule 15); `SymlinkAsync` and `Tmknod` carry those. `.L` refuses a directory (that is
+  `MkdirAsync`) and refuses `fileFlags` as before. `MkdirAsync` and `CreateFileAsync` keep their
+  0755 and 0644 defaults, now spelled as enum values.
+
+- **Two refusals the old signature could not make** (reference §8 rules 15 and 19, rule-index rows
+  188 and 189). A create through a fid naming a symlink, device, fifo or socket is refused with
+  `EOPNOTSUPP`: their payload travels in the `.u` extension field, which this create does not send,
+  so the old spelling — `DMSYMLINK` in the perm word — went out as a `Tcreate` with the field empty
+  and was answered `Rcreate`, a symlink to nowhere. `SymlinkAsync` and `Tmknod` carry those. And a
+  create asking for `FileFlags.Auth` or `FileFlags.Mount` is refused with `EPERM` before a
+  `Tcreate` is built, the same refusal the server makes on receipt, one hop earlier.
+
+
 ## [0.2.0] — 2026-09-10
 
 ### Abuse budgets — 2026-09-10

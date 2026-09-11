@@ -66,7 +66,7 @@ public sealed class ServerSetattrTests
         {
             if (dialect == Dialect.P9_2000_L)
             {
-                await fid.SetAttrAsync(new SetAttr { Size = size, Perm = 0x180 }, Ct);
+                await fid.SetAttrAsync(new SetAttr { Size = size, Perm = Perms.P0600 }, Ct);
             }
             else
             {

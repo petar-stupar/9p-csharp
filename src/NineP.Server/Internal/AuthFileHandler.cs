@@ -122,7 +122,7 @@ internal sealed class AuthFileHandler : IHandler
         {
             Qid = Qid,
             Kind = FileKind.File,
-            Perm = 0x180,
+            Perm = FilePermissions.OwnerReadWrite,
             Flags = FileFlags.Auth,
         });
 

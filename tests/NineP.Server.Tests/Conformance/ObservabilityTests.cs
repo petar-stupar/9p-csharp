@@ -211,7 +211,7 @@ public sealed class ObservabilityTests
     public async Task AReplyTooLongToEncodeIsAnErrorReplyRatherThanSilence()
     {
         MemoryFilesystem tree = new();
-        MemoryFile unstatable = tree.NewFile("unstatable", 0x1A4);
+        MemoryFile unstatable = tree.NewFile("unstatable", Perms.P0644);
         unstatable.Owner = new string('u', 70_000);
         tree.Root.Add(unstatable);
 
