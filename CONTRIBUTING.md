@@ -32,7 +32,35 @@ includes the repository hygiene suites, which check among other things that:
 - every public member appears in [docs/api.md](docs/api.md) and the generated `docs/api/`
   (regenerate with `dotnet tool restore && dotnet docfx metadata && dotnet docfx build`);
 - every rule in [docs/rule-index.md](docs/rule-index.md) resolves to a test that exists;
+- every test is classified against the shared test index (see below);
 - the README snippets compile and print what the README says they print.
+
+## Adding a test
+
+This port is the reference implementation, so its suite is the workspace's shared test suite
+(workspace [ARCHITECTURE.md](docs/9p/ARCHITECTURE.md) §13). Every test in `NineP.Protocol.Tests`,
+`NineP.Client.Tests` and `NineP.Server.Tests` is therefore either an obligation every port owes or
+this port's own, and **a new test fails the gate until you say which**:
+
+```
+these tests are neither mapped to a shared obligation nor declared local in docs/test-map.json
+```
+
+- **It proves protocol behaviour** — anything another language would have to get right too. Add an
+  entry to [docs/9p/fixtures/test-index.json](docs/9p/fixtures/test-index.json) with an id naming
+  the *behaviour* (`create/server-owned-flag-refused`, never the C# method name), tier `required`,
+  and the `rules` it proves if any; then map the id to your method in
+  [docs/test-map.json](docs/test-map.json). The vendored copy is regenerated at the workspace
+  (`node scripts/9p-loop/setup-repo.mjs vendor csharp`) — edit the workspace copy, not this one —
+  and `node docs/9p/fixtures/gen-test-index-md.mjs` refreshes the readable table.
+- **It needs a facility not every ecosystem has** — property testing, an external peer, an OIDC
+  issuer, a scale budget — tier it `recommended` instead.
+- **It is about C# or .NET itself** — a buffer pool, a target framework, a GC measurement — add the
+  method to the `local` list in `docs/test-map.json`. Being local is a decision someone makes, not
+  a default.
+
+A regression test for a bug found here is almost always `required`: that is the whole point, and a
+fix in one port is meant to put a test in the other thirteen.
 
 ## Dependencies
 

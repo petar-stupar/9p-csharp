@@ -8,6 +8,20 @@ All notable changes to this repository are recorded here. The format follows
 
 ## [0.3.0] — 2026-09-11
 
+### The shared test suite — 2026-09-11
+
+- **This port's suite becomes the workspace's shared test suite** (workspace ARCHITECTURE.md §13,
+  exit criterion 10). `docs/9p/fixtures/test-index.json` lists **785 obligations** over 43 areas —
+  744 `required`, 41 `recommended` — seeded from the 808 test methods of `NineP.Protocol.Tests`,
+  `NineP.Client.Tests` and `NineP.Server.Tests`, with 23 declared this port's own. An id names a
+  behaviour (`create/server-owned-flag-refused`), never a method name, so every port maps the same
+  obligations onto its own naming convention.
+
+- **`docs/test-map.json` and `TestIndexTests` keep the two honest, in both directions.** An
+  obligation nobody discharged fails; a test nobody classified fails too, which is what stops the
+  index falling behind the suite. `scripts/gen-test-index.py` is the one-off bootstrap that seeded
+  the index; from here both files are edited by hand. See CONTRIBUTING.md §Adding a test.
+
 ### Permission bits are a flags enum — 2026-09-11
 
 - **Breaking: `FilePermissions` replaces the raw `uint` permission word.** `Attr.Perm`,

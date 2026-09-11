@@ -8,7 +8,7 @@ exit-criterion row has an empty `Task` cell.
 
 Sources: `Ref §n` is [docs/9p/protocol-reference.md](9p/protocol-reference.md); `Arch §n` is
 [docs/9p/ARCHITECTURE.md](9p/ARCHITECTURE.md); `AC-…` are the ticket's acceptance criteria;
-`Exit n` are the nine exit criteria of Arch §10. A `review` task marks a rule that came out of the
+`Exit n` are the ten exit criteria of Arch §10. A `review` task marks a rule that came out of the
 independent review of 2026-09-08 rather than a ticket task; `interop` marks one found by running
 against another implementation (`docs/interop.md`); `flags` marks the owner decision of
 2026-09-10 to honour the settable file flags, as open(2) and stat(5) require; `limits` marks
@@ -214,3 +214,5 @@ Reading the table:
 | 187 | Ref §8.41 | Releasing a session whose connection died reports no error for the clunks it could not deliver | `ClientLifetimeRegressionTests.DisposingASessionWhoseServerIsGoneIsQuiet` | release-gate |
 | 188 | Ref §8.15 | Client: a create through a fid of a kind whose payload needs the `.u` extension field is refused, not sent with the field empty | `ClientProjectionTests.ACreateOfAKindWithNoExtensionFieldIsRefused` | perms |
 | 189 | Ref §8.19 | Client: a create asking for `DMAUTH` or `DMMOUNT` is refused before a `Tcreate` is built | `ClientProjectionTests.ACreateAskingForAServerOwnedFlagIsRefused` | perms |
+| 190 | Arch §13 | Every `required` obligation of the shared test index is discharged here, and every test here is an obligation or declared local | `TestIndexTests.EveryObligationIsDischargedOrRecorded` | test-index |
+| 191 | Arch §13 | A test written here is classified before it can pass: mapped to a shared obligation or recorded as this port's own | `TestIndexTests.EveryTestIsAnObligationOrDeclaredLocal` | test-index |

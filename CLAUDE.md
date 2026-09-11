@@ -29,6 +29,11 @@ start work that is not in a spec; outside the loop, follow [CONTRIBUTING.md](CON
 - **Handlers never see dialect types.** Only `protocol` knows `Tstat` from `Tgetattr`.
 - **Every rule in `docs/9p/protocol-reference.md` §8 is a named test**, and the security-relevant
   ones are mutation-tested (delete the check, watch the named test fail).
+- **Every test is classified against the shared test index** (workspace ARCHITECTURE.md §13). A new
+  test in the three layer suites fails `TestIndexTests` until it is either mapped to an obligation
+  in `docs/9p/fixtures/test-index.json` or listed as local in `docs/test-map.json`. See
+  [CONTRIBUTING.md](CONTRIBUTING.md) §Adding a test. This port seeds the index for all fourteen
+  ports, so prefer `required` and reserve `local` for genuine C#/.NET plumbing.
 - **Golden vectors** in `docs/9p/fixtures/wire-vectors.json` are decoded, re-encoded and compared
   byte-for-byte; the mutation matrix of §9 yields typed errors.
 - **Honest failure semantics.** Nothing silent maps to success; unrecoverable framing errors
