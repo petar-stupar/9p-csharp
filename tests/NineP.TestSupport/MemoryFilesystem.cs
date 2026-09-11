@@ -617,6 +617,13 @@ public sealed class MemoryFile(string name, FilePermissions perm, ulong path)
     /// <summary>How many reads have entered the handler, gate included.</summary>
     public int ReadsStarted => Volatile.Read(ref _readsStarted);
 
+    /// <summary>
+    /// When set, every write is refused with it. It models the control file that rejects a command
+    /// it does not recognise: a refusal a handler writes for its own reasons, with its own sentence
+    /// and an errno it chose, which is the case a client must not paper over with its own recovery.
+    /// </summary>
+    public NinePError? WriteFailure { get; set; }
+
     /// <summary>Opens the file; the core has already checked permissions and open state.</summary>
     /// <param name="mode">The access mode.</param>
     /// <param name="flags">The flags accompanying the open.</param>
@@ -783,6 +790,11 @@ public sealed class MemoryFile(string name, FilePermissions perm, ulong path)
             ulong offset, ReadOnlyMemory<byte> data, CancellationToken cancellationToken = default)
         {
             cancellationToken.ThrowIfCancellationRequested();
+
+            if (file.WriteFailure is { } refusal)
+            {
+                throw new NinePException(refusal);
+            }
 
             if (data.IsEmpty)
             {

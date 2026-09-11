@@ -906,6 +906,38 @@ Lifetime and progress (reference review, 2026-09-08):
     the caller, who is by definition unwinding from a failure, is not handed a second one that
     replaces the first.
 
+42. **A `.L` reply never carries an unmappable owner id** `[D]`. The optional numeric owner fields
+    of 9P2000 and `.u` have a sentinel — `NONUNAME` (`0xFFFFFFFF`), "this server did not state an
+    owner" — and those dialects can afford one because ownership travels there as a *name*, with
+    the number beside it the optional half. **`.L` has no such affordance**: `uid` and `gid` in an
+    `Rgetattr` are plain required numbers, and `0xFFFFFFFF` is `(uid_t)-1`, a value Linux refuses
+    to map. It substitutes the overflow uid, shows every file as `nobody`, and answers `EOVERFLOW`
+    to any operation needing the real owner. So a projection that passes the sentinel through takes
+    a value meaning *"not stated"* in one dialect and emits it as *a specific, invalid id* in
+    another, which is what rules 15–27 exist to forbid. A server projecting into `.L` therefore
+    sends zero where it holds the sentinel. Nothing is lost: no client can act on `(uid_t)-1`
+    either. What is gained is that the failure stops being invisible — the client decides
+    `EOVERFLOW` locally, so no request reaches the server, nothing appears in any log, and there is
+    no error the server can improve. A port can be wire-correct, pass its whole suite against a
+    userspace client, and still produce a mount on which `rm` reports a data-type overflow.
+
+43. **A timestamp stamped from the server's clock is granted on write permission, not ownership**
+    `[D]`. `utimensat(2)` splits the two cases and an implementation must too: setting a time to an
+    **explicit value** requires ownership, while setting it to **the current time** requires that
+    the caller "either have write access to the file, or be the file's owner, or have privileges" —
+    write access alone is enough. Folding both into one owner-only check makes ownership necessary
+    where the specification makes it merely sufficient. The distinction is not academic. Opening a
+    file with `O_TRUNC` updates its modification time, and a kernel client sends that as **one**
+    request carrying the size and a mtime with no explicit value, so an owner-only check refuses
+    not just `touch` but every `>` redirect, on any file, by any non-owner, however open that
+    file's permission bits are. And on a default v9fs mount "non-owner" is *everyone*: v9fs
+    attaches as `uname=nobody` with uid `-1` unless the mount options say otherwise, and an
+    identity of `-1` can never equal any owner. The refusal for a server-stamped time an identity
+    has no write bit for is `EACCES`, which is what `utimensat(2)` names for it; `EPERM` stays the
+    answer for an explicit time by a non-owner. In 9P2000 and `.u` the question does not arise: a
+    `Twstat` mtime is always an explicit value, which stat(5) reserves to the owner, and rule 43
+    changes nothing there.
+
 
 ## 9. Golden vectors
 

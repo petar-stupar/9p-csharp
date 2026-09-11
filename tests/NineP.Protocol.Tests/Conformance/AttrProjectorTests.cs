@@ -217,6 +217,54 @@ public sealed class AttrProjectorTests
         Assert.Equal(0ul, attr.DataVersion);
     }
 
+    /// <summary>
+    /// Rule 42: a <c>.L</c> <c>Rgetattr</c> never carries the "unknown owner" sentinel as an id.
+    /// <see cref="Constants.NONUNAME"/> is <c>(uid_t)-1</c>, which Linux refuses to map: it shows
+    /// the file as the overflow user and answers <c>EOVERFLOW</c> to anything needing the real
+    /// owner, and it decides that locally so no request ever reaches the server. 9P2000 and .u are
+    /// untouched -- ownership travels there as a name, and the number beside it may say "unknown".
+    /// <b>Mutation:</b> dropping either <c>Mappable</c> call from <c>AttrProjector.ToGetattr</c>
+    /// puts <c>0xFFFFFFFF</c> back on the wire and this test fails.
+    /// </summary>
+    [Fact]
+    public void AnUnstatedOwnerIsNotProjectedAsAnIdInDotL()
+    {
+        Attr unowned = Sample(FileKind.File) with { Uid = Constants.NONUNAME, Gid = Constants.NONUNAME };
+
+        Rgetattr reply = AttrProjector.ToGetattr(0, unowned, GetAttrMask.All, GetAttrMask.All);
+
+        Assert.Equal(0u, reply.Uid);
+        Assert.Equal(0u, reply.Gid);
+        Assert.True(reply.Valid.HasFlag(GetAttrMask.Uid));
+        Assert.True(reply.Valid.HasFlag(GetAttrMask.Gid));
+    }
+
+    /// <summary>An owner the handler did state reaches .L unchanged; only the sentinel is coerced.</summary>
+    [Fact]
+    public void AStatedOwnerReachesDotLUnchanged()
+    {
+        Rgetattr reply = AttrProjector.ToGetattr(
+            0, Sample(FileKind.File) with { Uid = 4_294_967_294, Gid = 7 }, GetAttrMask.All, GetAttrMask.All);
+
+        Assert.Equal(4_294_967_294u, reply.Uid);
+        Assert.Equal(7u, reply.Gid);
+    }
+
+    /// <summary>
+    /// The sentinel still means "unknown" in .u, where <c>n_uid</c> sits beside a name that carries
+    /// the meaning. Rule 42 is about .L alone, and coercing here would invent an owner.
+    /// </summary>
+    [Fact]
+    public void AnUnstatedOwnerIsStillTheSentinelInDotU()
+    {
+        Attr unowned = Sample(FileKind.File) with { Uid = Constants.NONUNAME, Gid = Constants.NONUNAME };
+
+        StatRecord stat = AttrProjector.ToStat(unowned, "f", Dialect.P9_2000_u);
+
+        Assert.Equal(Constants.NONUNAME, stat.NUid);
+        Assert.Equal(Constants.NONUNAME, stat.NGid);
+    }
+
     /// <summary>Every field the mask does mark is read, so honouring the mask loses nothing.</summary>
     [Fact]
     public void GetattrReadsEveryMarkedField()

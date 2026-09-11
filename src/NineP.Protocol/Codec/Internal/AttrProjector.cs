@@ -129,6 +129,8 @@ internal static class AttrProjector
     /// the handler did not supply, or that the client did not ask for, carries zero, and the qid is
     /// valid whatever the mask says (reference §4.6). The mask has no bit of its own for
     /// <c>blksize</c>, which therefore travels with <c>BLOCKS</c>, the count it multiplies.
+    /// An owner left at <see cref="Constants.NONUNAME"/> is one the handler did not state, and
+    /// <c>.L</c> has no way to say that, so it carries zero here too (reference §8 rule 42).
     /// </summary>
     /// <param name="tag">The tag of the request being answered.</param>
     /// <param name="attr">The attributes.</param>
@@ -147,8 +149,8 @@ internal static class AttrProjector
             valid,
             attr.Qid with { Type = QidTypeFromPosixMode(mode) },
             Marked(valid, GetAttrMask.Mode) ? mode : 0,
-            Marked(valid, GetAttrMask.Uid) ? attr.Uid : 0,
-            Marked(valid, GetAttrMask.Gid) ? attr.Gid : 0,
+            Marked(valid, GetAttrMask.Uid) ? Mappable(attr.Uid) : 0,
+            Marked(valid, GetAttrMask.Gid) ? Mappable(attr.Gid) : 0,
             Marked(valid, GetAttrMask.NLink) ? attr.NLink : 0,
             Marked(valid, GetAttrMask.Rdev) ? PackRdev(attr.Rdev) : 0,
             Marked(valid, GetAttrMask.Size) ? attr.Size : 0,
@@ -315,6 +317,15 @@ internal static class AttrProjector
     }
 
     private static bool Marked(GetAttrMask valid, GetAttrMask bit) => (valid & bit) != 0;
+
+    // Reference §8 rule 42. NONUNAME is this library's "the handler did not state an owner", and
+    // 9P2000 and .u can say that because ownership travels there as a name with the number beside
+    // it optional. .L cannot: uid and gid are plain required numbers with no sentinel, and
+    // 0xFFFFFFFF is (uid_t)-1, which Linux refuses to map -- it shows the file as the overflow
+    // user and answers EOVERFLOW to anything needing the real owner, deciding that locally so no
+    // request reaches the server to be refused honestly. Nothing is lost by sending zero instead:
+    // no client can act on (uid_t)-1 either.
+    private static uint Mappable(uint id) => id == Constants.NONUNAME ? 0 : id;
 
     private static ulong PackRdev(DeviceId? rdev) =>
         rdev is DeviceId id ? ((ulong)id.Major << 8) | id.Minor : 0;

@@ -12,7 +12,8 @@ Sources: `Ref §n` is [docs/9p/protocol-reference.md](9p/protocol-reference.md);
 independent review of 2026-09-08 rather than a ticket task; `interop` marks one found by running
 against another implementation (`docs/interop.md`); `flags` marks the owner decision of
 2026-09-10 to honour the settable file flags, as open(2) and stat(5) require; `limits` marks
-ticket 015, the abuse budgets of §8 rule 40.
+ticket 015, the abuse budgets of §8 rule 40; `bugs` marks a defect found from **outside** the
+loop, by a downstream consumer of a published package (`docs/9p/bugs/`).
 
 Reading the table:
 
@@ -216,3 +217,12 @@ Reading the table:
 | 189 | Ref §8.19 | Client: a create asking for `DMAUTH` or `DMMOUNT` is refused before a `Tcreate` is built | `ClientProjectionTests.ACreateAskingForAServerOwnedFlagIsRefused` | perms |
 | 190 | Arch §13 | Every `required` obligation of the shared test index is discharged here, and every test here is an obligation or declared local | `TestIndexTests.EveryObligationIsDischargedOrRecorded` | test-index |
 | 191 | Arch §13 | A test written here is classified before it can pass: mapped to a shared obligation or recorded as this port's own | `TestIndexTests.EveryTestIsAnObligationOrDeclaredLocal` | test-index |
+| 192 | Ref §8.42 | A `.L` `Rgetattr` never carries the "unknown owner" sentinel as an id: `NONUNAME` is coerced to zero, which Linux can map | `AttrProjectorTests.AnUnstatedOwnerIsNotProjectedAsAnIdInDotL` | bugs |
+| 193 | Ref §8.42 | An owner the handler did state reaches `.L` unchanged; only the sentinel is coerced | `AttrProjectorTests.AStatedOwnerReachesDotLUnchanged` | bugs |
+| 194 | Ref §8.42 | The sentinel still means "unknown" in `.u`, where the name beside it carries the meaning | `AttrProjectorTests.AnUnstatedOwnerIsStillTheSentinelInDotU` | bugs |
+| 195 | Ref §8.43 | A non-owner with write permission may truncate and have the time stamped from the server's clock | `PermissionTests.ANonOwnerWithWritePermissionMayTruncateAndStampTheTime` | bugs |
+| 196 | Ref §8.43 | A server-stamped time is still refused, `EACCES`, to an identity without the write bit | `PermissionTests.AServerStampedTimeStillNeedsTheWriteBit` | bugs |
+| 197 | Ref §8.43 | An explicit time stays the owner's alone, `EPERM`, however open the file's mode is | `PermissionTests.AnExplicitTimeStaysTheOwnersAloneHoweverOpenTheModeIs` | bugs |
+| 198 | Ref §8.43 | The owner keeps every time change rule 43 widens for others | `PermissionTests.TheOwnerMayStillSetAnExplicitTime` | bugs |
+| 199 | Arch §12 | `ninep write`'s create-on-`ENOENT` recovery reports the server's own refusal, not the error the create provokes | `CliWriteRefusalTests.AServerRefusalIsNotReplacedByTheCreateItProvokes` | bugs |
+| 200 | Arch §12 | That recovery still creates a file that is genuinely absent | `CliWriteRefusalTests.WriteStillCreatesAFileThatIsGenuinelyAbsent` | bugs |

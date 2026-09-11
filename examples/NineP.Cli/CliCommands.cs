@@ -242,8 +242,22 @@ internal static class CliCommands
         }
         catch (NinePException failure) when (failure.Error.Errno == Errno.ENOENT)
         {
+            // ENOENT is also an ordinary answer a handler writes about something other than the
+            // path -- a control file rejecting a name it does not hold. The file is then there,
+            // the create below would fail for a wholly unrelated reason (the parent is not
+            // writable, most often, which reads as "permission denied"), and the user would be
+            // shown that instead, for a refusal that was never about permissions. So the recovery
+            // runs only for a path that really is absent; otherwise the handler's own refusal
+            // stands.
+            if (!await IsAbsentAsync(session, path, cancellationToken).ConfigureAwait(false))
+            {
+                throw;
+            }
+
             // "write" creates what is not there yet, which is what conformance Part B step 2 does
-            // straight after a mkdir.
+            // straight after a mkdir. When the create is refused in turn, *its* refusal is the
+            // informative one -- E14's read-only tree answers EROFS, E16's bad array index EINVAL
+            // -- so it is left to propagate.
             NinePFid created = await session.CreateFileAsync(path, cancellationToken: cancellationToken)
                 .ConfigureAwait(false);
             await using (created.ConfigureAwait(false))
@@ -271,6 +285,26 @@ internal static class CliCommands
         FileKind.Symlink => "symlink",
         _ => "file",
     };
+
+    /// <summary>
+    /// Whether the path is not there, which is the only condition <c>write</c> recovers from by
+    /// creating. A walk that fails for any other reason -- no permission to search the parent,
+    /// say -- is not an absence either, and answers false so the original refusal stands.
+    /// </summary>
+    private static async Task<bool> IsAbsentAsync(
+        NinePSession session, string path, CancellationToken cancellationToken)
+    {
+        try
+        {
+            NinePFid found = await session.WalkAsync(path, cancellationToken).ConfigureAwait(false);
+            await found.DisposeAsync().ConfigureAwait(false);
+            return false;
+        }
+        catch (NinePException failure)
+        {
+            return failure.Error.Errno == Errno.ENOENT;
+        }
+    }
 
     private static async Task WriteLineAsync(
         Stream output, string line, CancellationToken cancellationToken)

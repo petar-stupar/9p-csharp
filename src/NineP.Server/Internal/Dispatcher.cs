@@ -1218,8 +1218,10 @@ internal sealed class Dispatcher(ServerSession session, OpenState openState)
 
     /// <summary>
     /// Applies one update after the checks stat(5) requires: the owner may change mode, group and
-    /// times; a length change needs write permission; a rename needs write permission in the
-    /// parent. The whole update is checked before any of it is applied, because a wstat is atomic.
+    /// the explicit times; a time stamped from the server's clock, a length change and a rename
+    /// need write permission -- on the file for the first two, in the parent for the third
+    /// (reference §8 rule 43). The whole update is checked before any of it is applied, because a
+    /// wstat is atomic.
     /// </summary>
     /// <param name="entry">The fid being changed.</param>
     /// <param name="update">The fields to change.</param>
@@ -1234,9 +1236,20 @@ internal sealed class Dispatcher(ServerSession session, OpenState openState)
 
         if ((update.Perm is not null || update.Flags is not null || update.Gid is not null
             || update.GroupName is not null || update.Uid is not null || update.MTime is not null
-            || update.MTimeToNow) && !owner)
+            || update.ATime is not null) && !owner)
         {
             throw new NinePException(NinePError.FromErrno(Errno.EPERM));
+        }
+
+        // Reference §8 rule 43. utimensat(2) splits the two cases and so does this: stamping a
+        // time with the server's own clock is granted to the owner *or* to write permission,
+        // while the explicit times above stay the owner's alone. The split is not academic --
+        // opening with O_TRUNC updates mtime, and v9fs sends that as one Tsetattr carrying the
+        // size and an unset-valued mtime, so folding "to now" in with the owner-only fields
+        // refuses every `>` redirect by a non-owner however open the file's mode bits are.
+        if ((update.MTimeToNow || update.ATimeToNow) && !owner)
+        {
+            PermissionChecker.Require(attr, entry.Identity, Access.Write, session.Dialect);
         }
 
         if (update.Size is not null)

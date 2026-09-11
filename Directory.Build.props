@@ -35,7 +35,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="package metadata">
-    <Version>0.3.0</Version>
+    <Version>0.4.0</Version>
     <Authors>Petar Stupar</Authors>
     <Copyright>Copyright (c) Petar Stupar 2026</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
