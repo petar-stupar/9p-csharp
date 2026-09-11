@@ -107,15 +107,32 @@ jobs:
             | sed -n '/^```text$/,/^```$/p' | sed '1d;$d' > "$work/expected.txt"
           test -s "$work/Program.cs" || { echo "README.md has no ci:snippet block"; exit 1; }
           test -s "$work/expected.txt" || { echo "README.md has no ci:expected block"; exit 1; }
+          version="$(sed -n 's:.*<Version>\(.*\)</Version>.*:\1:p' Directory.Build.props | head -1)"
+          test -n "$version" || { echo "no <Version> in Directory.Build.props"; exit 1; }
           dotnet new console -o "$work/scratch" -f net10.0
           rm -f "$work/scratch/Program.cs"
           mv "$work/Program.cs" "$work/scratch/Program.cs"
           cd "$work/scratch"
-          # `dotnet nuget add source --configfile` refuses a file that does not exist yet.
-          dotnet new nugetconfig > /dev/null
-          dotnet nuget add source "$feed" --name ninep-local --configfile ./nuget.config
-          dotnet add package NineP.Client --version 0.1.0
-          dotnet add package NineP.Server --version 0.1.0
+          # The local feed and nothing else. A plain `--version X` is a *minimum*, and NuGet
+          # takes the lowest match across every source, so with nuget.org in the list this step
+          # silently restored the oldest published release instead of the packages this build
+          # just produced. `[x]` pins the version exactly; the cleared config pins the source.
+          cat > nuget.config <<XML
+          <?xml version="1.0" encoding="utf-8"?>
+          <configuration>
+            <packageSources>
+              <clear />
+              <add key="ninep-local" value="$feed" />
+            </packageSources>
+          </configuration>
+          XML
+          dotnet add package NineP.Client --version "[$version]"
+          dotnet add package NineP.Server --version "[$version]"
+          # The step is named for the packed packages, so prove that is what it restored.
+          for pkg in NineP.Protocol NineP.Client NineP.Server; do
+            grep -q "\"$pkg/$version\"" obj/project.assets.json \
+              || { echo "scratch restored something other than $pkg/$version"; exit 1; }
+          done
           dotnet run > actual.txt
           # Console output carries CRLF on Windows; the README's expected block is LF.
           diff -u --strip-trailing-cr "$work/expected.txt" actual.txt
