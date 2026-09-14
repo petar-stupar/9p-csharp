@@ -52,20 +52,20 @@
         "dependencies": {
           "NLog": "[6.2.0, )",
           "NLog.Extensions.Logging": "[6.2.0, )",
-          "NineP.Server": "[0.1.0, )"
+          "NineP.Server": "[0.4.0, )"
         }
       },
       "ninep": {
         "type": "Project",
         "dependencies": {
-          "NineP.Client": "[0.1.0, )"
+          "NineP.Client": "[0.4.0, )"
         }
       },
       "ninep.client": {
         "type": "Project",
         "dependencies": {
           "Microsoft.Extensions.Logging.Abstractions": "[8.0.3, )",
-          "NineP.Protocol": "[0.1.0, )"
+          "NineP.Protocol": "[0.4.0, )"
         }
       },
       "ninep.protocol": {
@@ -78,15 +78,15 @@
         "type": "Project",
         "dependencies": {
           "Microsoft.Extensions.Logging.Abstractions": "[8.0.3, )",
-          "NineP.Protocol": "[0.1.0, )"
+          "NineP.Protocol": "[0.4.0, )"
         }
       },
       "ninep.testsupport": {
         "type": "Project",
         "dependencies": {
-          "NineP.Client": "[0.1.0, )",
-          "NineP.Protocol": "[0.1.0, )",
-          "NineP.Server": "[0.1.0, )"
+          "NineP.Client": "[0.4.0, )",
+          "NineP.Protocol": "[0.4.0, )",
+          "NineP.Server": "[0.4.0, )"
         }
       },
       "Microsoft.Extensions.Logging.Abstractions": {
