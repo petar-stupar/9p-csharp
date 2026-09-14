@@ -49,8 +49,8 @@
       },
       "Microsoft.Data.Sqlite.Core": {
         "type": "Transitive",
-        "resolved": "10.0.11",
-        "contentHash": "hubA20AGenQ4Sx0ElWaPpB8DISjXpdx463+1zOGRslsT0e/t/06ITv+pHsop8CcJ0d8PZLfgnT7juCDVD79Dkw==",
+        "resolved": "10.0.12",
+        "contentHash": "2aL9eL5HQr0V4b8V909SD+jQAx6qnTTl7sT/v3D8dIvmr2UGdpZIQxqm1pj2Js3e4EYTvpw0oMH7DjapJJuPPw==",
         "dependencies": {
           "SQLitePCLRaw.core": "2.1.12"
         }
@@ -293,20 +293,20 @@
         "dependencies": {
           "NLog": "[6.2.0, )",
           "NLog.Extensions.Logging": "[6.2.0, )",
-          "NineP.Server": "[0.1.0, )"
+          "NineP.Server": "[0.4.0, )"
         }
       },
       "ninep": {
         "type": "Project",
         "dependencies": {
-          "NineP.Client": "[0.1.0, )"
+          "NineP.Client": "[0.4.0, )"
         }
       },
       "ninep.client": {
         "type": "Project",
         "dependencies": {
           "Microsoft.Extensions.Logging.Abstractions": "[8.0.3, )",
-          "NineP.Protocol": "[0.1.0, )"
+          "NineP.Protocol": "[0.4.0, )"
         }
       },
       "ninep.protocol": {
@@ -319,35 +319,35 @@
         "type": "Project",
         "dependencies": {
           "Microsoft.Extensions.Logging.Abstractions": "[8.0.3, )",
-          "NineP.Protocol": "[0.1.0, )"
+          "NineP.Protocol": "[0.4.0, )"
         }
       },
       "ninep.testsupport": {
         "type": "Project",
         "dependencies": {
-          "NineP.Client": "[0.1.0, )",
-          "NineP.Protocol": "[0.1.0, )",
-          "NineP.Server": "[0.1.0, )"
+          "NineP.Client": "[0.4.0, )",
+          "NineP.Protocol": "[0.4.0, )",
+          "NineP.Server": "[0.4.0, )"
         }
       },
       "todofs": {
         "type": "Project",
         "dependencies": {
-          "Microsoft.Data.Sqlite": "[10.0.11, )",
+          "Microsoft.Data.Sqlite": "[10.0.12, )",
           "Microsoft.IdentityModel.JsonWebTokens": "[8.22.0, )",
           "Microsoft.IdentityModel.Protocols.OpenIdConnect": "[8.22.0, )",
           "NLog": "[6.2.0, )",
           "NLog.Extensions.Logging": "[6.2.0, )",
-          "NineP.Server": "[0.1.0, )"
+          "NineP.Server": "[0.4.0, )"
         }
       },
       "Microsoft.Data.Sqlite": {
         "type": "CentralTransitive",
-        "requested": "[10.0.11, )",
-        "resolved": "10.0.11",
-        "contentHash": "7je7UELzm131GiLYc4PpZvfKXIgIyzPM+v+tjcd/nbnuWRfgcONYKzDTqJlURxwVCFsVnlpmq6y6yn4qvR8QXQ==",
+        "requested": "[10.0.12, )",
+        "resolved": "10.0.12",
+        "contentHash": "xUq9xUc653ue7ac2rMfCaf8UQN+U3zS8poWYlugycpvJllplMM0Mk7v/+MM0CTlu9zGvbGML4BPH8YWhrUOfGw==",
         "dependencies": {
-          "Microsoft.Data.Sqlite.Core": "10.0.11",
+          "Microsoft.Data.Sqlite.Core": "10.0.12",
           "SQLitePCLRaw.bundle_e_sqlite3": "2.1.12",
           "SQLitePCLRaw.core": "2.1.12"
         }
@@ -574,7 +574,7 @@
         "type": "Project",
         "dependencies": {
           "Microsoft.Extensions.Logging.Abstractions": "[8.0.3, )",
-          "NineP.Protocol": "[0.1.0, )"
+          "NineP.Protocol": "[0.4.0, )"
         }
       },
       "ninep.protocol": {
@@ -588,15 +588,15 @@
         "type": "Project",
         "dependencies": {
           "Microsoft.Extensions.Logging.Abstractions": "[8.0.3, )",
-          "NineP.Protocol": "[0.1.0, )"
+          "NineP.Protocol": "[0.4.0, )"
         }
       },
       "ninep.testsupport": {
         "type": "Project",
         "dependencies": {
-          "NineP.Client": "[0.1.0, )",
-          "NineP.Protocol": "[0.1.0, )",
-          "NineP.Server": "[0.1.0, )"
+          "NineP.Client": "[0.4.0, )",
+          "NineP.Protocol": "[0.4.0, )",
+          "NineP.Server": "[0.4.0, )"
         }
       },
       "Microsoft.Extensions.Logging.Abstractions": {
