@@ -6,6 +6,16 @@ All notable changes to this repository are recorded here. The format follows
 
 ## [Unreleased]
 
+### Documented
+
+- **`cache=none`, or a fid cap sized to the tree** — `docs/mounting.md` gains the mount option and
+  the mechanism behind it, and `Limits.MaxFidsPerConnection` gains the same in its remarks. A v9fs
+  mount in any caching mode pins one fid per cached dentry and releases it only under memory
+  pressure, one mount is one connection and one fid table, so a recursive walk of a tree larger than
+  the cap is answered `ENFILE` and every open after it fails until the mount is remade. Measured on
+  2026-09-16 against 0.4.0 through `dotnetdocfs`: 72,282 directories walked at `cache=none` over the
+  SMB bridge in 168 s, no error and no refusal.
+
 ## [0.4.0] — 2026-09-11
 
 Four reports from `dotnetdocfs`, a downstream consumer of the published 0.3.0 packages, which
