@@ -57,7 +57,8 @@ Inside the container:
 
 ```sh
 # 1. Mount the 9P tree. trans=tcp takes an IP ADDRESS, never a host name.
-mount -t 9p -o trans=tcp,port=5640,version=9p2000.L,uname=root,dfltuid=0,dfltgid=0,access=any \
+#    cache=none, or a walk of a large tree runs the server out of fids; see the mount options below.
+mount -t 9p -o trans=tcp,port=5640,version=9p2000.L,cache=none,uname=root,dfltuid=0,dfltgid=0,access=any \
       192.168.65.254 /mnt/tree
 
 # 2. Re-export it. Do NOT use "read only = yes"; see SMB caveats below.
@@ -194,6 +195,23 @@ the command line. Resolve the name yourself and pass the address.
 **`version=9p2000.L`** unless you have a reason not to. It is the dialect v9fs exercises most and
 the one the POSIX-shaped operations live in.
 
+**`cache=none` for any tree larger than the fid cap.** In every metadata-caching mode — `cache=loose`
+included — v9fs pins one 9P fid per cached dentry and clunks it only when the dentry is released,
+which the kernel does only under memory pressure. One mount is one connection and therefore one fid
+table, `Limits.MaxFidsPerConnection` caps that table at 65536 by default, and past the cap the
+server answers `ENFILE` — `Rlerror 23`, "Too many open files in system"; `Rerror "too many fids"` in
+9P2000 and `.u`. That refusal is correct and it is permanent: every subsequent open on the
+connection fails too, on the host it reads `Too many open files`, and nothing recovers the mount but
+a remount, since `drop_caches` is not writable inside a container. One recursive `find` is enough to
+reach it. With `cache=none` v9fs uses the uncached dentry operations, dentries are deleted on
+release and the fids go with them; measured on 2026-09-16 against `NineP.Server` 0.4.0 through
+`dotnetdocfs`, a tree of 72,282 directories at one depth: a 64-way parallel walk of 12,089
+directories in the container finished in 23 s with zero failures against 10 s and 616 failures at
+`cache=loose`, and `find -maxdepth 4` across the whole tree from the host over SMB answered all
+72,282 in 168 s with no error and no refusal from the server. If you want the caching, the other
+option is to raise `MaxFidsPerConnection` past the number of entries a walk can pin — each fid holds
+a handler object, so that number is a memory decision, not a free one.
+
 ## SMB caveats
 
 **Never export the share `read only = yes`.** Samba strips the write bits from **everything** it
@@ -230,6 +248,7 @@ Before you mount a tree through a bridge:
 - [ ] `Attr.Uid` and `Attr.Gid` are set, or you accept that the mount shows `nobody`.
 - [ ] The mount carries `uname=`, `dfltuid=`, `dfltgid=` matching the owner your server reports.
 - [ ] The mount carries `access=any` if another local user will read it.
+- [ ] The kernel mount uses `cache=none`, or `MaxFidsPerConnection` is sized to the tree.
 - [ ] `trans=tcp` is given an IP address, not a host name.
 - [ ] The SMB share is **not** `read only = yes`.
 - [ ] On macOS, the terminal you are using has Network Volumes permission.
