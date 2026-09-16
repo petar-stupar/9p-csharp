@@ -563,7 +563,7 @@ most of these ports are on one of those two platforms, the bridge is the common 
 one — and it drives a server through a kernel client *and* a file-sharing server, which together
 ask for things a hand-written 9P client never asks for.
 
-Four of those are language-neutral, so they belong here rather than in one port's documentation.
+Five of those are language-neutral, so they belong here rather than in one port's documentation.
 Each presents as a **broken tool rather than as a missing feature**, which is what makes them
 expensive:
 
@@ -582,6 +582,13 @@ expensive:
    client owns anything and every ownership-gated operation fails. A bridge mounts with
    `uname=`/`dfltuid=` matching the reported owner, and `access=any` when another local user reads
    the mount.
+5. **A caching mount pins one fid per cached dentry.** v9fs clunks that fid only when the dentry is
+   released, which the kernel does under memory pressure and not before, and one mount is one
+   connection and therefore one fid table. So a server exporting a tree with more entries than its
+   own fid cap sees a single recursive walk exhaust the cap, after which *every* open on that
+   connection is refused `ENFILE` — `Too many open files` on the host — and nothing recovers it
+   short of a remount. The bridge recipe mounts `cache=none`, where a dentry and its fid are
+   released together; a server that wants the mount to cache sizes its fid cap to the tree instead.
 
 The platform recipe around them — the container, the Samba share, `trans=tcp` taking an IP address
 and not a host name, a share exported `read only = yes` stripping write bits from everything, and
@@ -592,6 +599,7 @@ every port's users meet it, so `docs/mounting.md` carries it too. The C# port's 
 
 | Date | Decision | Notes |
 | --- | --- | --- |
+| 2026-09-16 | §14 obligation 5: a caching kernel mount pins one fid per cached dentry, so the bridge recipe mounts `cache=none` and a server that wants caching sizes its fid cap to the tree | Bug [bugs/006](bugs/006-descriptor-budget-under-traversal.md). The fid cap is not the defect — refusing past it is honest, and the server process held under 210 real descriptors throughout. The defect is that a caching mount never gives a fid back, so a recursive walk of a tree larger than the cap wedges the mount permanently and the symptom on the host, `Too many open files`, names neither 9P nor the walk. Measured 2026-09-16 on a 72,282-directory tree: zero refusals at `cache=none`, and a full walk over SMB in 168 s. |
 | 2026-09-11 | Ref §8 rule 42: a `.L` reply never carries `NONUNAME` as an owner id — the sentinel is coerced to zero at the projection boundary, rather than refused | Bug [bugs/003](bugs/003-dot-l-projects-nonuname-as-an-id.md), found by a downstream consumer of the published 0.3.0 packages. `(uid_t)-1` is decided by the client: it shows `nobody`, answers `EOVERFLOW`, and sends **nothing** to the server, so no port can find this from its own logs. Coercion over refusal because most synthetic trees have no ownership to state, and refusing would make the common case the error case. |
 | 2026-09-11 | Ref §8 rule 43: a timestamp stamped from the server's clock is granted on write permission; an explicit time stays the owner's | Bug [bugs/004](bugs/004-setattr-mtime-requires-ownership.md). `utimensat(2)` makes ownership sufficient, not necessary, for "set to now". Folding it in with the owner-only fields refused every `>` redirect by a non-owner — which, on a default v9fs mount, is every client. `EACCES` for the server-stamped case and `EPERM` for the explicit one, as `utimensat(2)` names them. 9P2000/`.u` are unaffected: a `Twstat` mtime is always explicit. |
 | 2026-09-11 | The conformance cli's `write` recovery reports the server's refusal, not the create it provokes ([fixtures/conformance.md](fixtures/conformance.md)) | Bug [bugs/001](bugs/001-server-ename-with-enoent.md), reported as an error-projection defect and traced to the cli instead: the library's projection was correct throughout. The create-on-`ENOENT` fallback ran on a handler's own `ENOENT`, failed on the parent's mode, and reported *that*. Invisible in 9P2000, which carries no errno — the dialect a developer tries first. |
