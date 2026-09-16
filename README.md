@@ -24,7 +24,7 @@ packing, permissions, and every one of the wire-level rules a hostile peer would
 | [`NineP.Client`](https://github.com/petar-stupar/9p-csharp/tree/main/src/NineP.Client) | `NinePClient`, `NinePSession`, `NinePFid`: a pipelined client with a path-shaped file API and a one-method-per-message API underneath |
 | [`NineP.Server`](https://github.com/petar-stupar/9p-csharp/tree/main/src/NineP.Server) | `NinePServer` and the handler interfaces: you implement one class per file type and the server core does the rest |
 
-Targets `net8.0` and `net10.0`. MIT licensed. Version `0.1.0`; the history is in
+Targets `net8.0` and `net10.0`. MIT licensed. Version `0.4.1`; the history is in
 [CHANGELOG.md](https://github.com/petar-stupar/9p-csharp/blob/main/CHANGELOG.md). Two example servers, `jsonfs` and `todofs`, and a conformance
 `ninep` command-line tool live in the repository and are not published.
 

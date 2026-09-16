@@ -84,6 +84,16 @@ internal static class Sources
 /// <summary>Repository-wide invariants that no single package owns.</summary>
 public sealed class RepoHygieneTests
 {
+    private static readonly Regex BuildVersion = new(
+        @"<Version>(?<version>[^<]+)</Version>",
+        RegexOptions.None,
+        TimeSpan.FromSeconds(5));
+
+    private static readonly Regex ReadmeVersion = new(
+        @"Version `(?<version>[^`]+)`",
+        RegexOptions.None,
+        TimeSpan.FromSeconds(5));
+
     private static readonly Regex InternalType = new(
         @"^internal[A-Za-z ]*\b(?:class|struct|interface|enum|record)\s+(?<name>[A-Za-z0-9_]+)",
         RegexOptions.Multiline);
@@ -637,4 +647,26 @@ public sealed class RepoHygieneTests
         Assert.True(misplaced.Count == 0, string.Join(Environment.NewLine, misplaced));
     }
 
+    /// <summary>
+    /// The version the README states is the version the build produces.
+    /// </summary>
+    /// <remarks>
+    /// The README is the first thing a reader sees and the page nuget.org shows, and its version
+    /// is written by hand where every other copy is derived from
+    /// <c>Directory.Build.props</c>. Nothing made the two agree, so the line sat at 0.1.0 through
+    /// four releases — wrong on the front page of three published packages, and invisible because
+    /// no step of a release reads it. This is that step.
+    /// </remarks>
+    [Fact]
+    public void TheReadmeStatesTheVersionTheBuildProduces()
+    {
+        Match built = BuildVersion.Match(File.ReadAllText(RepoLayout.Path("Directory.Build.props")));
+
+        Assert.True(built.Success, "Directory.Build.props states no <Version>");
+
+        Match stated = ReadmeVersion.Match(File.ReadAllText(RepoLayout.Path("README.md")));
+
+        Assert.True(stated.Success, "README.md states no version");
+        Assert.Equal(built.Groups["version"].Value, stated.Groups["version"].Value);
+    }
 }
