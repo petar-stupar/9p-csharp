@@ -6,6 +6,12 @@ All notable changes to this repository are recorded here. The format follows
 
 ## [Unreleased]
 
+## [0.4.1] — 2026-09-16
+
+A documentation release. Nothing in the three packages behaves differently and the public API is
+unchanged; what changes is that the one trap a downstream consumer fell into is now written down
+where the next one will look.
+
 ### Documented
 
 - **`cache=none`, or a fid cap sized to the tree** — `docs/mounting.md` gains the mount option and
@@ -15,6 +21,12 @@ All notable changes to this repository are recorded here. The format follows
   the cap is answered `ENFILE` and every open after it fails until the mount is remade. Measured on
   2026-09-16 against 0.4.0 through `dotnetdocfs`: 72,282 directories walked at `cache=none` over the
   SMB bridge in 168 s, no error and no refusal.
+
+### Changed
+
+- Test and tooling dependencies moved forward: `Microsoft.NET.Test.Sdk` 18.9.0 → 18.10.0 and the
+  rest of the test-and-tooling group. `Microsoft.Data.Sqlite` 10.0.11 → 10.0.12, which is
+  example-only and in no published package. The three packages' own dependency set is untouched.
 
 ## [0.4.0] — 2026-09-11
 
