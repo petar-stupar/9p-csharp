@@ -29,6 +29,13 @@ public sealed record Limits
     public uint PreNegotiationFrameCap { get; init; } = 8192;
 
     /// <summary>Fids one connection may hold; beyond it "too many fids" / ENFILE. Default 65536.</summary>
+    /// <remarks>
+    /// A Linux v9fs mount in any caching mode pins one fid per cached dentry and clunks it only when
+    /// the dentry is released, which the kernel does only under memory pressure — so a recursive
+    /// walk of a tree with more entries than this cap wedges the mount: every open after it is
+    /// refused ENFILE until the dentries are pruned. Size this to the tree, remembering that each
+    /// fid holds a handler object, or have the mount carry <c>cache=none</c>. See docs/mounting.md.
+    /// </remarks>
     public int MaxFidsPerConnection { get; init; } = 65536;
 
     /// <summary>Requests in flight per connection, including the flush reserve. Default 256.</summary>
