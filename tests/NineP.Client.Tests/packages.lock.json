@@ -293,20 +293,20 @@
         "dependencies": {
           "NLog": "[6.2.0, )",
           "NLog.Extensions.Logging": "[6.2.0, )",
-          "NineP.Server": "[0.4.0, )"
+          "NineP.Server": "[0.4.1, )"
         }
       },
       "ninep": {
         "type": "Project",
         "dependencies": {
-          "NineP.Client": "[0.4.0, )"
+          "NineP.Client": "[0.4.1, )"
         }
       },
       "ninep.client": {
         "type": "Project",
         "dependencies": {
           "Microsoft.Extensions.Logging.Abstractions": "[8.0.3, )",
-          "NineP.Protocol": "[0.4.0, )"
+          "NineP.Protocol": "[0.4.1, )"
         }
       },
       "ninep.protocol": {
@@ -319,15 +319,15 @@
         "type": "Project",
         "dependencies": {
           "Microsoft.Extensions.Logging.Abstractions": "[8.0.3, )",
-          "NineP.Protocol": "[0.4.0, )"
+          "NineP.Protocol": "[0.4.1, )"
         }
       },
       "ninep.testsupport": {
         "type": "Project",
         "dependencies": {
-          "NineP.Client": "[0.4.0, )",
-          "NineP.Protocol": "[0.4.0, )",
-          "NineP.Server": "[0.4.0, )"
+          "NineP.Client": "[0.4.1, )",
+          "NineP.Protocol": "[0.4.1, )",
+          "NineP.Server": "[0.4.1, )"
         }
       },
       "todofs": {
@@ -338,7 +338,7 @@
           "Microsoft.IdentityModel.Protocols.OpenIdConnect": "[8.22.0, )",
           "NLog": "[6.2.0, )",
           "NLog.Extensions.Logging": "[6.2.0, )",
-          "NineP.Server": "[0.4.0, )"
+          "NineP.Server": "[0.4.1, )"
         }
       },
       "Microsoft.Data.Sqlite": {
@@ -574,7 +574,7 @@
         "type": "Project",
         "dependencies": {
           "Microsoft.Extensions.Logging.Abstractions": "[8.0.3, )",
-          "NineP.Protocol": "[0.4.0, )"
+          "NineP.Protocol": "[0.4.1, )"
         }
       },
       "ninep.protocol": {
@@ -588,15 +588,15 @@
         "type": "Project",
         "dependencies": {
           "Microsoft.Extensions.Logging.Abstractions": "[8.0.3, )",
-          "NineP.Protocol": "[0.4.0, )"
+          "NineP.Protocol": "[0.4.1, )"
         }
       },
       "ninep.testsupport": {
         "type": "Project",
         "dependencies": {
-          "NineP.Client": "[0.4.0, )",
-          "NineP.Protocol": "[0.4.0, )",
-          "NineP.Server": "[0.4.0, )"
+          "NineP.Client": "[0.4.1, )",
+          "NineP.Protocol": "[0.4.1, )",
+          "NineP.Server": "[0.4.1, )"
         }
       },
       "Microsoft.Extensions.Logging.Abstractions": {

@@ -11,7 +11,7 @@
         "type": "Project",
         "dependencies": {
           "Microsoft.Extensions.Logging.Abstractions": "[8.0.3, )",
-          "NineP.Protocol": "[0.4.0, )"
+          "NineP.Protocol": "[0.4.1, )"
         }
       },
       "ninep.protocol": {
