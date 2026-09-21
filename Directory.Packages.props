@@ -30,8 +30,8 @@
   <ItemGroup Label="examples runtime">
     <!-- The concrete logger the examples configure; referenced by the examples only, so no
          published package acquires it (S-30). -->
-    <PackageVersion Include="NLog" Version="6.2.0" />
-    <PackageVersion Include="NLog.Extensions.Logging" Version="6.2.0" />
+    <PackageVersion Include="NLog" Version="6.2.1" />
+    <PackageVersion Include="NLog.Extensions.Logging" Version="6.2.1" />
   </ItemGroup>
 
   <ItemGroup Label="todofs runtime">
@@ -43,7 +43,7 @@
   <ItemGroup Label="tests">
     <PackageVersion Include="xunit.v3" Version="4.0.1" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="4.0.0" />
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.10.0" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.10.1" />
     <PackageVersion Include="FsCheck" Version="3.4.0" />
     <PackageVersion Include="FsCheck.Xunit" Version="3.4.0" />
     <PackageVersion Include="SharpFuzz" Version="2.3.0" />
